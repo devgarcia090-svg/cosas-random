@@ -517,6 +517,9 @@
       catch (e) { renderWithingsStatus(window.Withings.errorMessage(e), 'error'); }
     });
     $('withingsImportBtn').addEventListener('click', importWithings);
+
+    // Báscula Bluetooth
+    $('btReadBtn').addEventListener('click', readBluetoothScale);
     $('withingsDisconnectBtn').addEventListener('click', () => {
       window.Withings.disconnect();
       renderWithingsStatus();
@@ -640,6 +643,41 @@
       toast(`${rows.length} mediciones importadas`);
     } catch (err) {
       renderWithingsStatus(window.Withings.errorMessage(err), 'error');
+    } finally {
+      btn.disabled = false;
+    }
+  }
+
+  // --- Báscula Bluetooth (Xiaomi Mi 2) ---
+
+  async function readBluetoothScale() {
+    const btn = $('btReadBtn');
+    const status = $('btStatus');
+    if (!window.MiScale.bluetoothAvailable()) {
+      status.textContent = window.MiScale.errorMessage(new Error('NO_BT'));
+      status.style.color = 'var(--danger)';
+      return;
+    }
+    btn.disabled = true;
+    status.textContent = 'Selecciona tu báscula y súbete a ella…';
+    status.style.color = 'var(--text-muted)';
+    try {
+      const reading = await window.MiScale.readOnce({
+        heightCm: state.profile.heightCm,
+        age: window.Calc.ageFromBirthDate(state.profile.birthDate),
+        sex: state.profile.sex,
+      });
+      // Rellenamos el formulario para que el usuario revise y guarde
+      $('mDate').value = todayISO();
+      $('mWeight').value = reading.weightKg;
+      if (reading.bodyFatPct != null) $('mFat').value = reading.bodyFatPct;
+      if (reading.muscleMassKg != null) $('mMuscle').value = reading.muscleMassKg;
+      status.textContent = `✅ Leído: ${reading.weightKg} kg${reading.bodyFatPct != null ? ` · ${reading.bodyFatPct}% grasa` : ''}. Revisa y pulsa "Guardar medición".`;
+      status.style.color = 'var(--accent-2)';
+      toast('Báscula leída');
+    } catch (err) {
+      status.textContent = window.MiScale.errorMessage(err);
+      status.style.color = 'var(--danger)';
     } finally {
       btn.disabled = false;
     }
