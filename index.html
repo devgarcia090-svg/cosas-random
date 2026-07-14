@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0f1218">
+  <title>NutriTrack — Seguimiento de nutrición y composición corporal</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💪</text></svg>">
+</head>
+<body>
+  <header class="app-header">
+    <h1><span class="logo">💪</span> NutriTrack</h1>
+    <span class="goal-badge" id="goalBadge">Ganar músculo</span>
+  </header>
+
+  <main class="container">
+    <!-- ================= HOY ================= -->
+    <section class="tab-panel active" id="tab-today">
+      <div class="callout" id="welcomeCallout" style="display:none">
+        👋 <strong>¡Bienvenido!</strong> Empieza rellenando tu perfil en la pestaña <strong>Perfil</strong> para calcular tus objetivos personalizados.
+      </div>
+
+      <div class="card">
+        <h2>Objetivos de hoy <span class="hint" id="todayDateLabel"></span></h2>
+        <div class="rings" id="macroRings"></div>
+        <div class="mt" id="calorieBar"></div>
+      </div>
+
+      <div class="card">
+        <h2>Añadir comida</h2>
+        <div class="form-grid">
+          <div style="grid-column: 1 / -1;">
+            <label>Buscar alimento</label>
+            <input type="text" id="foodSearch" placeholder="Ej. pollo, arroz, huevo, proteína…" autocomplete="off">
+            <div class="food-search-results" id="foodResults" style="display:none"></div>
+          </div>
+        </div>
+        <div class="form-grid mt" id="mealForm">
+          <div>
+            <label>Alimento / comida</label>
+            <input type="text" id="mealName" placeholder="Nombre">
+          </div>
+          <div>
+            <label>Cantidad</label>
+            <input type="number" id="mealAmount" placeholder="g / ud / ml" min="0" step="1">
+            <small class="help" id="amountHint"></small>
+          </div>
+          <div>
+            <label>Calorías (kcal)</label>
+            <input type="number" id="mealCalories" min="0" step="1">
+          </div>
+          <div>
+            <label>Proteína (g)</label>
+            <input type="number" id="mealProtein" min="0" step="0.1">
+          </div>
+          <div>
+            <label>Carbos (g)</label>
+            <input type="number" id="mealCarbs" min="0" step="0.1">
+          </div>
+          <div>
+            <label>Grasa (g)</label>
+            <input type="number" id="mealFat" min="0" step="0.1">
+          </div>
+        </div>
+        <div class="btn-row">
+          <button class="btn" id="addMealBtn">+ Añadir al día</button>
+          <button class="btn secondary" id="saveCustomFoodBtn">Guardar como alimento</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Comidas de hoy</h2>
+        <ul class="list" id="todayMeals"></ul>
+      </div>
+    </section>
+
+    <!-- ================= BÁSCULA ================= -->
+    <section class="tab-panel" id="tab-scale">
+      <div class="card">
+        <h2>Panel corporal <span class="hint" id="scaleLatestDate"></span></h2>
+        <div class="metric-grid" id="bodyMetrics"></div>
+      </div>
+
+      <div class="card">
+        <h2>Registrar medición</h2>
+        <p class="muted mt" style="margin-top:0">Introduce los datos que te da tu báscula tras pesarte. Solo el peso es obligatorio.</p>
+        <div class="form-grid mt">
+          <div>
+            <label>Fecha</label>
+            <input type="date" id="mDate">
+          </div>
+          <div>
+            <label>Peso (kg) *</label>
+            <input type="number" id="mWeight" step="0.1" min="0">
+          </div>
+          <div>
+            <label>Grasa corporal (%)</label>
+            <input type="number" id="mFat" step="0.1" min="0">
+          </div>
+          <div>
+            <label>Masa muscular (kg)</label>
+            <input type="number" id="mMuscle" step="0.1" min="0">
+          </div>
+          <div>
+            <label>Agua corporal (%)</label>
+            <input type="number" id="mWater" step="0.1" min="0">
+          </div>
+          <div>
+            <label>Masa ósea (kg)</label>
+            <input type="number" id="mBone" step="0.1" min="0">
+          </div>
+          <div>
+            <label>Grasa visceral</label>
+            <input type="number" id="mVisceral" step="1" min="0">
+          </div>
+          <div>
+            <label>BMR báscula (kcal)</label>
+            <input type="number" id="mBmr" step="1" min="0">
+          </div>
+        </div>
+        <div class="btn-row">
+          <button class="btn" id="addMeasurementBtn">Guardar medición</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Historial de mediciones</h2>
+        <ul class="list" id="measurementList"></ul>
+      </div>
+    </section>
+
+    <!-- ================= PROGRESO ================= -->
+    <section class="tab-panel" id="tab-progress">
+      <div class="card">
+        <h2>Peso <span class="hint">kg</span></h2>
+        <div class="chart-wrap" id="chartWeight"></div>
+      </div>
+      <div class="card">
+        <h2>Grasa vs. Músculo <span class="hint">🔴 grasa % · 🟢 músculo kg</span></h2>
+        <div class="chart-wrap" id="chartComposition"></div>
+        <p class="muted mt" id="compositionInsight"></p>
+      </div>
+      <div class="card">
+        <h2>Calorías diarias <span class="hint">kcal ingeridas</span></h2>
+        <div class="chart-wrap" id="chartCalories"></div>
+      </div>
+    </section>
+
+    <!-- ================= PERFIL ================= -->
+    <section class="tab-panel" id="tab-profile">
+      <div class="card">
+        <h2>Tu perfil</h2>
+        <div class="form-grid">
+          <div>
+            <label>Nombre</label>
+            <input type="text" id="pName">
+          </div>
+          <div>
+            <label>Sexo</label>
+            <select id="pSex">
+              <option value="male">Hombre</option>
+              <option value="female">Mujer</option>
+            </select>
+          </div>
+          <div>
+            <label>Fecha de nacimiento</label>
+            <input type="date" id="pBirth">
+          </div>
+          <div>
+            <label>Altura (cm)</label>
+            <input type="number" id="pHeight" min="0" step="1">
+          </div>
+          <div>
+            <label>Nivel de actividad</label>
+            <select id="pActivity"></select>
+          </div>
+          <div>
+            <label>Objetivo</label>
+            <select id="pGoal">
+              <option value="gain_muscle">Ganar músculo</option>
+              <option value="lose_fat">Perder grasa</option>
+              <option value="recomp">Recomposición / mantener</option>
+            </select>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button class="btn" id="saveProfileBtn">Guardar perfil</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Tus objetivos calculados</h2>
+        <div id="targetsExplain"></div>
+      </div>
+
+      <div class="card">
+        <h2>Datos (import / export)</h2>
+        <p class="muted" style="margin-top:0">Tus datos se guardan solo en este navegador. Exporta una copia de seguridad de vez en cuando.</p>
+        <div class="btn-row">
+          <button class="btn secondary" id="exportCsvBtn">⬇ Exportar mediciones CSV</button>
+          <button class="btn secondary" id="importCsvBtn">⬆ Importar mediciones CSV</button>
+        </div>
+        <div class="btn-row">
+          <button class="btn secondary" id="exportBackupBtn">⬇ Copia de seguridad (JSON)</button>
+          <button class="btn secondary" id="importBackupBtn">⬆ Restaurar copia (JSON)</button>
+        </div>
+        <input type="file" id="fileInput" accept=".csv,.json,.txt" style="display:none">
+      </div>
+    </section>
+  </main>
+
+  <nav class="tabs">
+    <button data-tab="today" class="active"><span class="icon">🍽️</span>Hoy</button>
+    <button data-tab="scale"><span class="icon">⚖️</span>Báscula</button>
+    <button data-tab="progress"><span class="icon">📈</span>Progreso</button>
+    <button data-tab="profile"><span class="icon">👤</span>Perfil</button>
+  </nav>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="js/calc.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/food-db.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
