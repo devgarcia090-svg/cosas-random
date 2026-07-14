@@ -485,6 +485,100 @@
     $('fileInput').addEventListener('change', e => {
       if (e.target.files[0]) handleFile(e.target.files[0]);
     });
+
+    // Coach IA
+    $('coachAnalyzeBtn').addEventListener('click', runCoach);
+    $('saveKeyBtn').addEventListener('click', () => {
+      const key = $('apiKeyInput').value.trim();
+      if (!key) { toast('Pega tu API key primero'); return; }
+      window.AICoach.setApiKey(key);
+      $('apiKeyInput').value = '';
+      renderApiKeyStatus();
+      toast('API key guardada');
+    });
+    $('clearKeyBtn').addEventListener('click', () => {
+      window.AICoach.setApiKey('');
+      $('apiKeyInput').value = '';
+      renderApiKeyStatus();
+      toast('API key borrada');
+    });
+  }
+
+  // --- Coach IA ---
+
+  function renderApiKeyStatus() {
+    const has = window.AICoach.hasApiKey();
+    const el = $('apiKeyStatus');
+    if (has) {
+      el.textContent = '✅ Key guardada. El coach está activo.';
+      el.style.color = 'var(--accent-2)';
+    } else {
+      el.textContent = 'Sin key: el coach no puede analizar todavía.';
+      el.style.color = 'var(--text-muted)';
+    }
+  }
+
+  function coachContext() {
+    const c = getComputedTargets();
+    const date = todayISO();
+    const day = state.nutrition.find(d => d.date === date);
+    return {
+      profile: state.profile,
+      latest: window.Storage.latestMeasurement(state),
+      targets: c ? c.targets : null,
+      age: c ? c.age : window.Calc.ageFromBirthDate(state.profile.birthDate),
+      eatenToday: window.Calc.sumMeals(day ? day.meals : []),
+    };
+  }
+
+  async function runCoach() {
+    const text = $('coachInput').value.trim();
+    const resultEl = $('coachResult');
+    if (!text) { toast('Escribe qué has comido'); return; }
+    if (!window.AICoach.hasApiKey()) {
+      resultEl.innerHTML = '<div class="coach-error">Configura tu API key de Anthropic en la pestaña <strong>Perfil</strong> para activar el coach.</div>';
+      return;
+    }
+
+    const btn = $('coachAnalyzeBtn');
+    btn.disabled = true;
+    resultEl.innerHTML = '<div class="coach-loading"><span class="spinner"></span> Analizando tu comida…</div>';
+
+    try {
+      const r = await window.AICoach.analyzeMeal(text, coachContext());
+
+      // Añadir los alimentos detectados al día
+      const foods = Array.isArray(r.foods) ? r.foods : [];
+      foods.forEach(f => {
+        window.Storage.addMeal(state, todayISO(), {
+          name: f.name,
+          calories: Math.round(Number(f.calories) || 0),
+          protein: Number(f.protein) || 0,
+          carbs: Number(f.carbs) || 0,
+          fat: Number(f.fat) || 0,
+        });
+      });
+      persist();
+
+      const verdict = (r.verdict || 'buena').toLowerCase();
+      const proteinLabel = { baja: '🔴 Proteína baja', correcta: '🟢 Proteína correcta', alta: '🟢 Proteína alta' }[r.protein_status] || '';
+      const suggestions = Array.isArray(r.suggestions) ? r.suggestions : [];
+
+      resultEl.innerHTML = `
+        <div class="coach-result">
+          <span class="coach-verdict ${escapeHtml(verdict)}">Comida ${escapeHtml(verdict)}</span>
+          ${proteinLabel ? `<span class="coach-verdict" style="background:var(--surface-2);color:var(--text-muted)">${proteinLabel}</span>` : ''}
+          <div class="coach-assessment">${escapeHtml(r.assessment || '')}</div>
+          ${suggestions.length ? `<ul class="coach-suggestions">${suggestions.map(s => `<li>${escapeHtml(s)}</li>`).join('')}</ul>` : ''}
+          <div class="coach-foods muted">Añadido a tu día: ${foods.map(f => escapeHtml(f.name)).join(', ') || '—'}</div>
+        </div>`;
+      $('coachInput').value = '';
+      renderToday();
+    } catch (err) {
+      resultEl.innerHTML = `<div class="coach-error">${escapeHtml(window.AICoach.errorMessage(err))}</div>`;
+    } finally {
+      btn.disabled = false;
+    }
   }
 
   // --- Init ---
@@ -494,6 +588,7 @@
     setupTabs();
     setupFoodSearch();
     setupEvents();
+    renderApiKeyStatus();
     renderAll();
   }
 
