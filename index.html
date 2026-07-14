@@ -207,6 +207,24 @@
       </div>
 
       <div class="card">
+        <h2>⚖️ Vincular báscula Withings</h2>
+        <p class="muted" style="margin-top:0">Sincroniza automáticamente peso, grasa, músculo, agua y hueso desde tu cuenta de Withings. Necesitas desplegar el Worker (ver <code>WITHINGS_SETUP.md</code>) y pegar aquí su URL.</p>
+        <div class="form-grid mt">
+          <div style="grid-column: 1 / -1;">
+            <label>URL de tu Worker</label>
+            <input type="text" id="withingsWorkerInput" placeholder="https://nutritrack-withings.tu-usuario.workers.dev" autocomplete="off">
+          </div>
+        </div>
+        <div class="btn-row">
+          <button class="btn secondary" id="saveWorkerBtn">Guardar URL</button>
+          <button class="btn" id="withingsConnectBtn">Conectar con Withings</button>
+          <button class="btn secondary" id="withingsImportBtn">⬇ Importar mediciones</button>
+          <button class="btn danger" id="withingsDisconnectBtn">Desconectar</button>
+        </div>
+        <small class="help" id="withingsStatus"></small>
+      </div>
+
+      <div class="card">
         <h2>🤖 Coach IA (Anthropic)</h2>
         <p class="muted" style="margin-top:0">Para que el coach analice tus comidas necesitas una API key de Anthropic (<a href="https://console.anthropic.com/" target="_blank" rel="noopener" style="color:var(--accent)">console.anthropic.com</a>). Se guarda solo en este navegador y las peticiones van directas a Claude.</p>
         <div class="form-grid mt">
@@ -252,6 +270,7 @@
   <script src="js/food-db.js"></script>
   <script src="js/charts.js"></script>
   <script src="js/ai-coach.js"></script>
+  <script src="js/withings.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

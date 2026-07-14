@@ -502,6 +502,26 @@
       renderApiKeyStatus();
       toast('API key borrada');
     });
+
+    // Withings
+    $('saveWorkerBtn').addEventListener('click', () => {
+      const url = $('withingsWorkerInput').value.trim();
+      if (!url) { toast('Pega la URL del Worker'); return; }
+      window.Withings.setWorkerUrl(url);
+      renderWithingsStatus();
+      toast('URL del Worker guardada');
+    });
+    $('withingsConnectBtn').addEventListener('click', () => {
+      if (!window.Withings.isConfigured()) { toast('Guarda primero la URL del Worker'); return; }
+      try { window.Withings.connect(); }
+      catch (e) { renderWithingsStatus(window.Withings.errorMessage(e), 'error'); }
+    });
+    $('withingsImportBtn').addEventListener('click', importWithings);
+    $('withingsDisconnectBtn').addEventListener('click', () => {
+      window.Withings.disconnect();
+      renderWithingsStatus();
+      toast('Withings desconectado');
+    });
   }
 
   // --- Coach IA ---
@@ -581,6 +601,50 @@
     }
   }
 
+  // --- Withings ---
+
+  function renderWithingsStatus(msg, kind) {
+    const el = $('withingsStatus');
+    if (msg) {
+      el.textContent = msg;
+      el.style.color = kind === 'error' ? 'var(--danger)' : kind === 'ok' ? 'var(--accent-2)' : 'var(--text-muted)';
+      return;
+    }
+    if (window.Withings.isConnected()) {
+      el.textContent = '✅ Cuenta de Withings conectada. Pulsa "Importar mediciones".';
+      el.style.color = 'var(--accent-2)';
+    } else if (window.Withings.isConfigured()) {
+      el.textContent = 'Worker configurado. Pulsa "Conectar con Withings" para autorizar.';
+      el.style.color = 'var(--text-muted)';
+    } else {
+      el.textContent = 'Sin configurar. Pega la URL de tu Worker y guarda.';
+      el.style.color = 'var(--text-muted)';
+    }
+    $('withingsWorkerInput').value = window.Withings.getWorkerUrl();
+  }
+
+  async function importWithings() {
+    const btn = $('withingsImportBtn');
+    btn.disabled = true;
+    renderWithingsStatus('Importando de Withings…', 'neutral');
+    try {
+      const rows = await window.Withings.importMeasurements();
+      if (!rows.length) {
+        renderWithingsStatus('No se encontraron mediciones nuevas en Withings.', 'neutral');
+        return;
+      }
+      rows.forEach(r => window.Storage.addMeasurement(state, r));
+      persist();
+      renderAll();
+      renderWithingsStatus(`✅ ${rows.length} mediciones importadas de Withings.`, 'ok');
+      toast(`${rows.length} mediciones importadas`);
+    } catch (err) {
+      renderWithingsStatus(window.Withings.errorMessage(err), 'error');
+    } finally {
+      btn.disabled = false;
+    }
+  }
+
   // --- Init ---
   function init() {
     $('mDate').value = todayISO();
@@ -589,7 +653,17 @@
     setupFoodSearch();
     setupEvents();
     renderApiKeyStatus();
+
+    // Procesa la vuelta del login de Withings, si la hay
+    const cb = window.Withings.consumeCallback();
+    if (cb === 'connected') toast('Withings conectado');
+    else if (cb && cb.startsWith('error:')) toast('Error de Withings: ' + cb.slice(6));
+    renderWithingsStatus();
+
     renderAll();
+
+    // Si acabamos de conectar, importamos automáticamente
+    if (cb === 'connected') importWithings();
   }
 
   init();

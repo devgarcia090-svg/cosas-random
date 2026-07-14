@@ -1,0 +1,16 @@
+# Configuración del Cloudflare Worker para la integración con Withings.
+# Despliegue:  cd backend && npx wrangler deploy
+# Ver WITHINGS_SETUP.md para los pasos completos.
+
+name = "nutritrack-withings"
+main = "withings-worker.js"
+compatibility_date = "2024-11-01"
+
+[vars]
+# Client ID de tu app de Withings (no es secreto).
+WITHINGS_CLIENT_ID = "PON_AQUI_TU_CLIENT_ID"
+# URL de tu app publicada en GitHub Pages (para volver tras el login).
+APP_URL = "https://devgarcia090-svg.github.io/cosas-random/"
+
+# El WITHINGS_CLIENT_SECRET NO va aquí. Se configura como secreto con:
+#   npx wrangler secret put WITHINGS_CLIENT_SECRET
