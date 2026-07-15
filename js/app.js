@@ -111,12 +111,27 @@
         window.Charts.progressRing(eaten.carbs, t.carbs, 'var(--carbs)', 'Carbos', 'g') +
         window.Charts.progressRing(eaten.fat, t.fat, 'var(--fat)', 'Grasa', 'g');
 
-      const remaining = t.calories - eaten.calories;
-      const pct = Math.min(100, Math.round(eaten.calories / t.calories * 100));
-      const color = eaten.calories > t.calories ? 'var(--danger)' : 'var(--accent-2)';
+      // Desglose claro por macro: llevas / objetivo · te faltan
+      const macroRow = (emoji, label, val, target, unit, color) => {
+        const left = Math.round((target - val) * 10) / 10;
+        const over = left < 0;
+        const pct = Math.min(100, target > 0 ? Math.round(val / target * 100) : 0);
+        return `<div class="mt-row">
+          <div class="mt-head">
+            <span class="mt-label">${emoji} ${label}</span>
+            <span class="mt-val"><strong>${Math.round(val)}</strong> / ${Math.round(target)} ${unit}</span>
+          </div>
+          <div class="progress-bar-track"><div class="progress-bar-fill" style="width:${pct}%;background:${over ? 'var(--danger)' : color}"></div></div>
+          <div class="mt-left ${over ? 'over' : ''}">${over ? `Te has pasado ${-left} ${unit}` : `Te faltan <strong>${left} ${unit}</strong> para tu objetivo`}</div>
+        </div>`;
+      };
       $('calorieBar').innerHTML = `
-        <div class="muted">${remaining >= 0 ? `Te quedan <strong style="color:var(--text)">${remaining} kcal</strong> para tu objetivo` : `Te has pasado <strong style="color:var(--danger)">${-remaining} kcal</strong>`}</div>
-        <div class="progress-bar-track"><div class="progress-bar-fill" style="width:${pct}%;background:${color}"></div></div>`;
+        <div class="macro-targets">
+          ${macroRow('🔥', 'Calorías', eaten.calories, t.calories, 'kcal', 'var(--accent-2)')}
+          ${macroRow('🥩', 'Proteína', eaten.protein, t.protein, 'g', 'var(--protein)')}
+          ${macroRow('🍚', 'Carbos', eaten.carbs, t.carbs, 'g', 'var(--carbs)')}
+          ${macroRow('🥑', 'Grasa', eaten.fat, t.fat, 'g', 'var(--fat)')}
+        </div>`;
     } else {
       ringsEl.innerHTML = '<p class="empty">Configura tu perfil y registra tu peso para ver tus objetivos diarios.</p>';
       $('calorieBar').innerHTML = '';
