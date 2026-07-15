@@ -187,49 +187,16 @@ input, select, textarea {
 textarea { resize: vertical; line-height: 1.5; }
 input:focus, select:focus, textarea:focus { outline: 2px solid var(--accent); border-color: var(--accent); }
 
-/* Resultado del coach IA */
-.coach-result { margin-top: 16px; }
-.coach-verdict {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 13px;
+/* Etiqueta de origen "Open Food Facts" en resultados de búsqueda */
+.src-tag {
+  font-size: 9px;
   font-weight: 700;
-  padding: 5px 12px;
-  border-radius: 999px;
-  margin-bottom: 10px;
-}
-.coach-verdict.excelente { background: color-mix(in srgb, var(--accent-2) 20%, transparent); color: var(--accent-2); }
-.coach-verdict.buena { background: color-mix(in srgb, var(--accent) 20%, transparent); color: var(--accent); }
-.coach-verdict.mejorable { background: color-mix(in srgb, var(--carbs) 20%, transparent); color: var(--carbs); }
-.coach-verdict.floja { background: color-mix(in srgb, var(--danger) 18%, transparent); color: var(--danger); }
-.coach-assessment { font-size: 14px; line-height: 1.55; margin-bottom: 12px; }
-.coach-suggestions { list-style: none; margin: 10px 0; }
-.coach-suggestions li {
-  font-size: 13px;
-  padding: 7px 0 7px 22px;
-  position: relative;
-  border: none;
-}
-.coach-suggestions li::before { content: '💡'; position: absolute; left: 0; }
-.coach-foods { margin-top: 10px; }
-.coach-loading { color: var(--text-muted); font-size: 14px; padding: 12px 0; display: flex; align-items: center; gap: 8px; }
-.spinner {
-  width: 16px; height: 16px;
-  border: 2px solid var(--border);
-  border-top-color: var(--accent);
-  border-radius: 50%;
-  animation: spin .7s linear infinite;
-}
-@keyframes spin { to { transform: rotate(360deg); } }
-.coach-error {
-  background: color-mix(in srgb, var(--danger) 10%, transparent);
-  border: 1px solid color-mix(in srgb, var(--danger) 30%, transparent);
-  color: var(--danger);
-  border-radius: 10px;
-  padding: 12px 14px;
-  font-size: 13px;
-  margin-top: 14px;
+  letter-spacing: .5px;
+  color: var(--accent-2);
+  background: color-mix(in srgb, var(--accent-2) 15%, transparent);
+  padding: 1px 5px;
+  border-radius: 4px;
+  vertical-align: middle;
 }
 
 .btn {

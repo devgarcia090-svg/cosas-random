@@ -161,23 +161,42 @@
   function setupFoodSearch() {
     const input = $('foodSearch');
     const results = $('foodResults');
+    let seq = 0;
+    let debounce;
 
-    input.addEventListener('input', () => {
-      const q = input.value.trim().toLowerCase();
-      if (!q) { results.style.display = 'none'; return; }
-      const matches = window.FoodDB.allFoods()
-        .filter(f => f.name.toLowerCase().includes(q))
-        .slice(0, 12);
+    function render(matches) {
       if (!matches.length) { results.style.display = 'none'; return; }
       results.innerHTML = matches.map((f, i) =>
         `<div data-food="${i}">
-          <div>${escapeHtml(f.name)} <span class="muted">(${f.per} ${f.unit})</span></div>
+          <div>${escapeHtml(f.name)} <span class="muted">(${f.per} ${f.unit})</span>${f.source === 'off' ? ' <span class="src-tag">OFF</span>' : ''}</div>
           <div class="fr-macros">${f.calories} kcal · P ${f.protein} · C ${f.carbs} · G ${f.fat}</div>
         </div>`).join('');
       results.style.display = 'block';
       results.querySelectorAll('[data-food]').forEach((div, i) => {
         div.addEventListener('click', () => pickFood(matches[i]));
       });
+    }
+
+    input.addEventListener('input', () => {
+      const q = input.value.trim();
+      clearTimeout(debounce);
+      if (!q) { results.style.display = 'none'; return; }
+      const mySeq = ++seq;
+
+      // 1) Resultados de la lista local (instantáneo)
+      const local = window.FoodDB.allFoods()
+        .filter(f => f.name.toLowerCase().includes(q.toLowerCase()))
+        .slice(0, 8);
+      render(local);
+
+      // 2) Open Food Facts (con debounce; base de datos enorme)
+      debounce = setTimeout(async () => {
+        const online = await window.FoodAPI.search(q);
+        if (mySeq !== seq) return; // hay una búsqueda más reciente
+        const seen = new Set(local.map(f => f.name.toLowerCase()));
+        const merged = local.concat(online.filter(f => !seen.has(f.name.toLowerCase()))).slice(0, 20);
+        render(merged);
+      }, 350);
     });
   }
 
@@ -486,166 +505,8 @@
       if (e.target.files[0]) handleFile(e.target.files[0]);
     });
 
-    // Coach IA
-    $('coachAnalyzeBtn').addEventListener('click', runCoach);
-    $('saveKeyBtn').addEventListener('click', () => {
-      const key = $('apiKeyInput').value.trim();
-      if (!key) { toast('Pega tu API key primero'); return; }
-      window.AICoach.setApiKey(key);
-      $('apiKeyInput').value = '';
-      renderApiKeyStatus();
-      toast('API key guardada');
-    });
-    $('clearKeyBtn').addEventListener('click', () => {
-      window.AICoach.setApiKey('');
-      $('apiKeyInput').value = '';
-      renderApiKeyStatus();
-      toast('API key borrada');
-    });
-
-    // Withings
-    $('saveWorkerBtn').addEventListener('click', () => {
-      const url = $('withingsWorkerInput').value.trim();
-      if (!url) { toast('Pega la URL del Worker'); return; }
-      window.Withings.setWorkerUrl(url);
-      renderWithingsStatus();
-      toast('URL del Worker guardada');
-    });
-    $('withingsConnectBtn').addEventListener('click', () => {
-      if (!window.Withings.isConfigured()) { toast('Guarda primero la URL del Worker'); return; }
-      try { window.Withings.connect(); }
-      catch (e) { renderWithingsStatus(window.Withings.errorMessage(e), 'error'); }
-    });
-    $('withingsImportBtn').addEventListener('click', importWithings);
-
     // Báscula Bluetooth
     $('btReadBtn').addEventListener('click', readBluetoothScale);
-    $('withingsDisconnectBtn').addEventListener('click', () => {
-      window.Withings.disconnect();
-      renderWithingsStatus();
-      toast('Withings desconectado');
-    });
-  }
-
-  // --- Coach IA ---
-
-  function renderApiKeyStatus() {
-    const has = window.AICoach.hasApiKey();
-    const el = $('apiKeyStatus');
-    if (has) {
-      el.textContent = '✅ Key guardada. El coach está activo.';
-      el.style.color = 'var(--accent-2)';
-    } else {
-      el.textContent = 'Sin key: el coach no puede analizar todavía.';
-      el.style.color = 'var(--text-muted)';
-    }
-  }
-
-  function coachContext() {
-    const c = getComputedTargets();
-    const date = todayISO();
-    const day = state.nutrition.find(d => d.date === date);
-    return {
-      profile: state.profile,
-      latest: window.Storage.latestMeasurement(state),
-      targets: c ? c.targets : null,
-      age: c ? c.age : window.Calc.ageFromBirthDate(state.profile.birthDate),
-      eatenToday: window.Calc.sumMeals(day ? day.meals : []),
-    };
-  }
-
-  async function runCoach() {
-    const text = $('coachInput').value.trim();
-    const resultEl = $('coachResult');
-    if (!text) { toast('Escribe qué has comido'); return; }
-    if (!window.AICoach.hasApiKey()) {
-      resultEl.innerHTML = '<div class="coach-error">Configura tu API key de Anthropic en la pestaña <strong>Perfil</strong> para activar el coach.</div>';
-      return;
-    }
-
-    const btn = $('coachAnalyzeBtn');
-    btn.disabled = true;
-    resultEl.innerHTML = '<div class="coach-loading"><span class="spinner"></span> Analizando tu comida…</div>';
-
-    try {
-      const r = await window.AICoach.analyzeMeal(text, coachContext());
-
-      // Añadir los alimentos detectados al día
-      const foods = Array.isArray(r.foods) ? r.foods : [];
-      foods.forEach(f => {
-        window.Storage.addMeal(state, todayISO(), {
-          name: f.name,
-          calories: Math.round(Number(f.calories) || 0),
-          protein: Number(f.protein) || 0,
-          carbs: Number(f.carbs) || 0,
-          fat: Number(f.fat) || 0,
-        });
-      });
-      persist();
-
-      const verdict = (r.verdict || 'buena').toLowerCase();
-      const proteinLabel = { baja: '🔴 Proteína baja', correcta: '🟢 Proteína correcta', alta: '🟢 Proteína alta' }[r.protein_status] || '';
-      const suggestions = Array.isArray(r.suggestions) ? r.suggestions : [];
-
-      resultEl.innerHTML = `
-        <div class="coach-result">
-          <span class="coach-verdict ${escapeHtml(verdict)}">Comida ${escapeHtml(verdict)}</span>
-          ${proteinLabel ? `<span class="coach-verdict" style="background:var(--surface-2);color:var(--text-muted)">${proteinLabel}</span>` : ''}
-          <div class="coach-assessment">${escapeHtml(r.assessment || '')}</div>
-          ${suggestions.length ? `<ul class="coach-suggestions">${suggestions.map(s => `<li>${escapeHtml(s)}</li>`).join('')}</ul>` : ''}
-          <div class="coach-foods muted">Añadido a tu día: ${foods.map(f => escapeHtml(f.name)).join(', ') || '—'}</div>
-        </div>`;
-      $('coachInput').value = '';
-      renderToday();
-    } catch (err) {
-      resultEl.innerHTML = `<div class="coach-error">${escapeHtml(window.AICoach.errorMessage(err))}</div>`;
-    } finally {
-      btn.disabled = false;
-    }
-  }
-
-  // --- Withings ---
-
-  function renderWithingsStatus(msg, kind) {
-    const el = $('withingsStatus');
-    if (msg) {
-      el.textContent = msg;
-      el.style.color = kind === 'error' ? 'var(--danger)' : kind === 'ok' ? 'var(--accent-2)' : 'var(--text-muted)';
-      return;
-    }
-    if (window.Withings.isConnected()) {
-      el.textContent = '✅ Cuenta de Withings conectada. Pulsa "Importar mediciones".';
-      el.style.color = 'var(--accent-2)';
-    } else if (window.Withings.isConfigured()) {
-      el.textContent = 'Worker configurado. Pulsa "Conectar con Withings" para autorizar.';
-      el.style.color = 'var(--text-muted)';
-    } else {
-      el.textContent = 'Sin configurar. Pega la URL de tu Worker y guarda.';
-      el.style.color = 'var(--text-muted)';
-    }
-    $('withingsWorkerInput').value = window.Withings.getWorkerUrl();
-  }
-
-  async function importWithings() {
-    const btn = $('withingsImportBtn');
-    btn.disabled = true;
-    renderWithingsStatus('Importando de Withings…', 'neutral');
-    try {
-      const rows = await window.Withings.importMeasurements();
-      if (!rows.length) {
-        renderWithingsStatus('No se encontraron mediciones nuevas en Withings.', 'neutral');
-        return;
-      }
-      rows.forEach(r => window.Storage.addMeasurement(state, r));
-      persist();
-      renderAll();
-      renderWithingsStatus(`✅ ${rows.length} mediciones importadas de Withings.`, 'ok');
-      toast(`${rows.length} mediciones importadas`);
-    } catch (err) {
-      renderWithingsStatus(window.Withings.errorMessage(err), 'error');
-    } finally {
-      btn.disabled = false;
-    }
   }
 
   // --- Báscula Bluetooth ---
@@ -702,18 +563,7 @@
     setupTabs();
     setupFoodSearch();
     setupEvents();
-    renderApiKeyStatus();
-
-    // Procesa la vuelta del login de Withings, si la hay
-    const cb = window.Withings.consumeCallback();
-    if (cb === 'connected') toast('Withings conectado');
-    else if (cb && cb.startsWith('error:')) toast('Error de Withings: ' + cb.slice(6));
-    renderWithingsStatus();
-
     renderAll();
-
-    // Si acabamos de conectar, importamos automáticamente
-    if (cb === 'connected') importWithings();
   }
 
   init();

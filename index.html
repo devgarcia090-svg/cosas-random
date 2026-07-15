@@ -28,23 +28,12 @@
       </div>
 
       <div class="card">
-        <h2>🤖 Coach IA <span class="hint">escribe lo que comes</span></h2>
-        <p class="muted" style="margin-top:0">Cuéntame qué has comido con tus palabras y lo analizo: estimo los macros, lo añado al día y te digo si vas bien para tu objetivo.</p>
-        <div class="mt">
-          <textarea id="coachInput" rows="3" placeholder="Ej. dos huevos revueltos, 150g de arroz y una pechuga a la plancha con aceite de oliva"></textarea>
-        </div>
-        <div class="btn-row">
-          <button class="btn" id="coachAnalyzeBtn">✨ Analizar y añadir</button>
-        </div>
-        <div id="coachResult"></div>
-      </div>
-
-      <div class="card">
-        <h2>Añadir comida <span class="hint">manual</span></h2>
+        <h2>Añadir comida</h2>
         <div class="form-grid">
           <div style="grid-column: 1 / -1;">
             <label>Buscar alimento</label>
-            <input type="text" id="foodSearch" placeholder="Ej. pollo, arroz, huevo, proteína…" autocomplete="off">
+            <input type="text" id="foodSearch" placeholder="Ej. huevo, arroz, pechuga de pollo, plátano…" autocomplete="off">
+            <small class="help">Busca cualquier alimento y se rellenan los macros solos (base de datos Open Food Facts). Ajusta los gramos y se recalcula.</small>
             <div class="food-search-results" id="foodResults" style="display:none"></div>
           </div>
         </div>
@@ -216,40 +205,6 @@
       </div>
 
       <div class="card">
-        <h2>⚖️ Vincular báscula Withings</h2>
-        <p class="muted" style="margin-top:0">Sincroniza automáticamente peso, grasa, músculo, agua y hueso desde tu cuenta de Withings. Necesitas desplegar el Worker (ver <code>WITHINGS_SETUP.md</code>) y pegar aquí su URL.</p>
-        <div class="form-grid mt">
-          <div style="grid-column: 1 / -1;">
-            <label>URL de tu Worker</label>
-            <input type="text" id="withingsWorkerInput" placeholder="https://nutritrack-withings.tu-usuario.workers.dev" autocomplete="off">
-          </div>
-        </div>
-        <div class="btn-row">
-          <button class="btn secondary" id="saveWorkerBtn">Guardar URL</button>
-          <button class="btn" id="withingsConnectBtn">Conectar con Withings</button>
-          <button class="btn secondary" id="withingsImportBtn">⬇ Importar mediciones</button>
-          <button class="btn danger" id="withingsDisconnectBtn">Desconectar</button>
-        </div>
-        <small class="help" id="withingsStatus"></small>
-      </div>
-
-      <div class="card">
-        <h2>🤖 Coach IA (Anthropic)</h2>
-        <p class="muted" style="margin-top:0">Para que el coach analice tus comidas necesitas una API key de Anthropic (<a href="https://console.anthropic.com/" target="_blank" rel="noopener" style="color:var(--accent)">console.anthropic.com</a>). Se guarda solo en este navegador y las peticiones van directas a Claude.</p>
-        <div class="form-grid mt">
-          <div style="grid-column: 1 / -1;">
-            <label>API key</label>
-            <input type="password" id="apiKeyInput" placeholder="sk-ant-..." autocomplete="off">
-            <small class="help" id="apiKeyStatus"></small>
-          </div>
-        </div>
-        <div class="btn-row">
-          <button class="btn" id="saveKeyBtn">Guardar key</button>
-          <button class="btn secondary" id="clearKeyBtn">Borrar key</button>
-        </div>
-      </div>
-
-      <div class="card">
         <h2>Datos (import / export)</h2>
         <p class="muted" style="margin-top:0">Tus datos se guardan solo en este navegador. Exporta una copia de seguridad de vez en cuando.</p>
         <div class="btn-row">
@@ -277,9 +232,8 @@
   <script src="js/calc.js"></script>
   <script src="js/storage.js"></script>
   <script src="js/food-db.js"></script>
+  <script src="js/food-api.js"></script>
   <script src="js/charts.js"></script>
-  <script src="js/ai-coach.js"></script>
-  <script src="js/withings.js"></script>
   <script src="js/miscale.js"></script>
   <script src="js/bcs-parser.js"></script>
   <script src="js/native-ble.js"></script>
