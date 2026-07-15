@@ -485,14 +485,15 @@
     btn.disabled = true;
     try {
       const code = await window.NativeExtras.scanBarcode();
-      if (!code) { toast('No se leyó ningún código'); return; }
+      if (!code) { toast('No se leyó ningún código de barras'); return; }
       toast('Buscando producto…');
       const food = await window.FoodAPI.getByBarcode(code);
-      if (!food) { toast('Producto no encontrado en Open Food Facts'); return; }
+      if (!food) { toast(`Código ${code}: no está en Open Food Facts. Búscalo por nombre.`); return; }
       pickFood(food);
       toast('Cargado: ' + food.name);
     } catch (e) {
-      toast('No se pudo escanear');
+      // Mostramos el motivo real para poder diagnosticar
+      toast(e && e.message ? e.message : 'No se pudo escanear');
     } finally {
       btn.disabled = false;
     }

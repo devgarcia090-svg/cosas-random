@@ -21,6 +21,23 @@ const BUILTIN_FOODS = [
   { name: 'Tofu', unit: 'g', per: 100, calories: 76, protein: 8, carbs: 1.9, fat: 4.8 },
   { name: 'Lentejas cocidas', unit: 'g', per: 100, calories: 116, protein: 9, carbs: 20, fat: 0.4 },
   { name: 'Garbanzos cocidos', unit: 'g', per: 100, calories: 164, protein: 9, carbs: 27, fat: 2.6 },
+  { name: 'Alubias cocidas', unit: 'g', per: 100, calories: 127, protein: 8.7, carbs: 22, fat: 0.5 },
+  { name: 'Gambas / langostinos', unit: 'g', per: 100, calories: 99, protein: 21, carbs: 0, fat: 1.7 },
+  { name: 'Sardinas', unit: 'g', per: 100, calories: 208, protein: 25, carbs: 0, fat: 11 },
+  { name: 'Cerdo (lomo)', unit: 'g', per: 100, calories: 143, protein: 21, carbs: 0, fat: 6 },
+
+  // Embutidos y quesos (España)
+  { name: 'Jamón ibérico', unit: 'g', per: 100, calories: 375, protein: 43, carbs: 0, fat: 22 },
+  { name: 'Jamón serrano', unit: 'g', per: 100, calories: 241, protein: 31, carbs: 0.5, fat: 13 },
+  { name: 'Jamón york / cocido', unit: 'g', per: 100, calories: 110, protein: 18, carbs: 1.5, fat: 3.5 },
+  { name: 'Pavo (fiambre)', unit: 'g', per: 100, calories: 104, protein: 17, carbs: 1.5, fat: 3 },
+  { name: 'Lomo embuchado', unit: 'g', per: 100, calories: 250, protein: 45, carbs: 0, fat: 8 },
+  { name: 'Chorizo', unit: 'g', per: 100, calories: 455, protein: 24, carbs: 2, fat: 38 },
+  { name: 'Salchichón', unit: 'g', per: 100, calories: 420, protein: 26, carbs: 1, fat: 34 },
+  { name: 'Queso manchego curado', unit: 'g', per: 100, calories: 430, protein: 26, carbs: 1, fat: 35 },
+  { name: 'Queso semicurado', unit: 'g', per: 100, calories: 375, protein: 25, carbs: 1, fat: 30 },
+  { name: 'Queso fresco', unit: 'g', per: 100, calories: 174, protein: 12, carbs: 4, fat: 12 },
+  { name: 'Mozzarella', unit: 'g', per: 100, calories: 280, protein: 22, carbs: 2, fat: 21 },
 
   // Carbohidratos
   { name: 'Arroz blanco cocido', unit: 'g', per: 100, calories: 130, protein: 2.7, carbs: 28, fat: 0.3 },
@@ -33,6 +50,14 @@ const BUILTIN_FOODS = [
   { name: 'Quinoa cocida', unit: 'g', per: 100, calories: 120, protein: 4.4, carbs: 21, fat: 1.9 },
   { name: 'Plátano', unit: 'ud', per: 120, calories: 107, protein: 1.3, carbs: 27, fat: 0.4 },
   { name: 'Manzana', unit: 'ud', per: 180, calories: 94, protein: 0.5, carbs: 25, fat: 0.3 },
+  { name: 'Naranja', unit: 'ud', per: 200, calories: 94, protein: 1.8, carbs: 24, fat: 0.2 },
+  { name: 'Pan blanco', unit: 'g', per: 100, calories: 265, protein: 9, carbs: 49, fat: 3.2 },
+  { name: 'Tortilla de patata', unit: 'g', per: 100, calories: 165, protein: 6, carbs: 14, fat: 9 },
+
+  // Lácteos
+  { name: 'Leche entera', unit: 'ml', per: 100, calories: 63, protein: 3.2, carbs: 4.7, fat: 3.6 },
+  { name: 'Yogur natural', unit: 'ud', per: 125, calories: 79, protein: 5.5, carbs: 6, fat: 3.8 },
+  { name: 'Requesón / cottage', unit: 'g', per: 100, calories: 98, protein: 11, carbs: 3.4, fat: 4.3 },
 
   // Grasas
   { name: 'Aceite de oliva', unit: 'ml', per: 10, calories: 88, protein: 0, carbs: 0, fat: 10 },

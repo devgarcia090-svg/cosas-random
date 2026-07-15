@@ -13,14 +13,36 @@ const PROTEIN_NOTIF_ID = 7001;
 
 // --- Escáner de código de barras ---
 async function scanBarcode() {
-  const perm = await BarcodeScanner.requestPermissions();
-  if (perm.camera !== 'granted' && perm.camera !== 'limited') throw new Error('NO_CAM');
+  // ¿Soporta el dispositivo el escaneo?
+  try {
+    const s = await BarcodeScanner.isSupported();
+    if (s && s.supported === false) throw new Error('Tu dispositivo no soporta el escáner.');
+  } catch (e) {
+    if (e && /no soporta/.test(e.message)) throw e;
+    // isSupported no disponible en esta versión: seguimos
+  }
 
-  // En algunos Android el módulo de escaneo de Google se instala bajo demanda
+  const perm = await BarcodeScanner.requestPermissions();
+  if (perm.camera !== 'granted' && perm.camera !== 'limited') {
+    throw new Error('Permiso de cámara denegado. Actívalo en los ajustes.');
+  }
+
+  // El escáner de Google (método scan) necesita un módulo que se descarga
+  // la primera vez; esperamos a que termine la instalación.
   try {
     const { available } = await BarcodeScanner.isGoogleBarcodeScannerModuleAvailable();
-    if (!available) await BarcodeScanner.installGoogleBarcodeScannerModule();
-  } catch { /* si no aplica, seguimos */ }
+    if (!available) {
+      await new Promise((resolve) => {
+        let done = false;
+        const finish = () => { if (!done) { done = true; resolve(); } };
+        BarcodeScanner.addListener('googleBarcodeScannerModuleInstallProgress', (p) => {
+          if (p && (p.state === 4 /* COMPLETED */ || p.state === 'COMPLETED')) finish();
+        });
+        BarcodeScanner.installGoogleBarcodeScannerModule().catch(finish);
+        setTimeout(finish, 20000); // por si no llega el evento
+      });
+    }
+  } catch { /* si no aplica este método, seguimos al scan */ }
 
   const { barcodes } = await BarcodeScanner.scan();
   if (!barcodes || !barcodes.length) return null;
