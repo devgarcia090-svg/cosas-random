@@ -138,6 +138,30 @@ const BUILTIN_FOODS = [
   { name: 'Hummus', unit: 'g', per: 100, calories: 177, protein: 8, carbs: 14, fat: 10 },
   { name: 'Salsa de tomate', unit: 'g', per: 100, calories: 35, protein: 1.5, carbs: 6, fat: 0.5 },
   { name: 'Mayonesa', unit: 'g', per: 15, calories: 100, protein: 0.2, carbs: 0.3, fat: 11 },
+
+  // Mercadona / Hacendado (valores aproximados; mira la etiqueta para exactos)
+  { name: 'Pechuga de pavo lonchas (Hacendado)', unit: 'g', per: 100, calories: 100, protein: 17, carbs: 1.5, fat: 2.8 },
+  { name: 'Fiambre de pollo (Hacendado)', unit: 'g', per: 100, calories: 104, protein: 16, carbs: 2, fat: 3.5 },
+  { name: 'Jamón cocido extra (Hacendado)', unit: 'g', per: 100, calories: 110, protein: 18, carbs: 1.5, fat: 3.5 },
+  { name: 'Atún claro al natural (Hacendado)', unit: 'g', per: 100, calories: 116, protein: 26, carbs: 0, fat: 1 },
+  { name: 'Atún claro en aceite de oliva (Hacendado)', unit: 'g', per: 100, calories: 190, protein: 25, carbs: 0, fat: 10 },
+  { name: 'Yogur proteínas natural (Hacendado)', unit: 'g', per: 100, calories: 59, protein: 10, carbs: 4, fat: 0.2 },
+  { name: 'Skyr natural (Hacendado)', unit: 'g', per: 100, calories: 63, protein: 11, carbs: 4, fat: 0.2 },
+  { name: 'Queso batido 0% (Hacendado)', unit: 'g', per: 100, calories: 48, protein: 8, carbs: 4, fat: 0.2 },
+  { name: 'Requesón (Hacendado)', unit: 'g', per: 100, calories: 96, protein: 11, carbs: 3.5, fat: 4.3 },
+  { name: 'Bebida de avena (Hacendado)', unit: 'ml', per: 100, calories: 45, protein: 0.8, carbs: 7, fat: 1.4 },
+  { name: 'Copos de avena (Hacendado)', unit: 'g', per: 100, calories: 375, protein: 12, carbs: 60, fat: 7 },
+  { name: 'Crema de cacahuete (Hacendado)', unit: 'g', per: 15, calories: 93, protein: 4, carbs: 1.8, fat: 7.8 },
+  { name: 'Tortitas de maíz (Hacendado)', unit: 'ud', per: 8, calories: 30, protein: 0.7, carbs: 6.5, fat: 0.2 },
+  { name: 'Pan de molde integral (Hacendado)', unit: 'ud', per: 30, calories: 72, protein: 3, carbs: 11, fat: 1.3 },
+  { name: 'Whey proteína (Hacendado)', unit: 'g', per: 30, calories: 116, protein: 22, carbs: 3, fat: 1.7 },
+  { name: 'Barrita proteica (Hacendado)', unit: 'ud', per: 35, calories: 130, protein: 12, carbs: 10, fat: 4.5 },
+  { name: 'Palitos de mar / surimi (Hacendado)', unit: 'g', per: 100, calories: 95, protein: 8, carbs: 13, fat: 0.5 },
+  { name: 'Gulas (Hacendado)', unit: 'g', per: 100, calories: 130, protein: 12, carbs: 3, fat: 8 },
+  { name: 'Hamburguesa de vacuno (Hacendado)', unit: 'ud', per: 100, calories: 250, protein: 18, carbs: 1, fat: 20 },
+  { name: 'Pizza (Hacendado)', unit: 'g', per: 100, calories: 250, protein: 11, carbs: 30, fat: 9 },
+  { name: 'Queso lonchas ligero (Hacendado)', unit: 'ud', per: 20, calories: 45, protein: 4, carbs: 1, fat: 3 },
+  { name: 'Chocolate negro 85% (Hacendado)', unit: 'g', per: 100, calories: 592, protein: 9.6, carbs: 30, fat: 46 },
 ];
 
 const CUSTOM_KEY = 'nutritrack_custom_foods_v1';
