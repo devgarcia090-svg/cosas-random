@@ -173,6 +173,11 @@
 
   // --- Buscador de alimentos ---
 
+  // Normaliza para buscar sin importar tildes ni mayúsculas ("jamon" = "Jamón")
+  function normText(s) {
+    return String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+  }
+
   function setupFoodSearch() {
     const input = $('foodSearch');
     const results = $('foodResults');
@@ -198,9 +203,10 @@
       if (!q) { results.style.display = 'none'; return; }
       const mySeq = ++seq;
 
-      // 1) Resultados de la lista local (instantáneo)
+      // 1) Resultados de la lista local (instantáneo, sin importar tildes)
+      const nq = normText(q);
       const local = window.FoodDB.allFoods()
-        .filter(f => f.name.toLowerCase().includes(q.toLowerCase()))
+        .filter(f => normText(f.name).includes(nq))
         .slice(0, 8);
       render(local);
 
@@ -208,8 +214,8 @@
       debounce = setTimeout(async () => {
         const online = await window.FoodAPI.search(q);
         if (mySeq !== seq) return; // hay una búsqueda más reciente
-        const seen = new Set(local.map(f => f.name.toLowerCase()));
-        const merged = local.concat(online.filter(f => !seen.has(f.name.toLowerCase()))).slice(0, 20);
+        const seen = new Set(local.map(f => normText(f.name)));
+        const merged = local.concat(online.filter(f => !seen.has(normText(f.name)))).slice(0, 20);
         render(merged);
       }, 350);
     });
