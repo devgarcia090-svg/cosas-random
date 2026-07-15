@@ -1,0 +1,65 @@
+name: Build Android APK
+
+# Genera un APK instalable de NutriTrack.
+# Se ejecuta al hacer push (si cambian los archivos de la app) o manualmente
+# desde la pestaña Actions → "Build Android APK" → Run workflow.
+# El APK queda como "artifact" descargable al final de cada ejecución.
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [claude/nutrition-app-scale-integration-laz7vc]
+    paths:
+      - 'index.html'
+      - 'css/**'
+      - 'js/**'
+      - 'src/**'
+      - 'scripts/**'
+      - 'package.json'
+      - 'capacitor.config.json'
+      - '.github/workflows/build-apk.yml'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Setup Java (JDK 17)
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build web + bundle native BLE
+        run: npm run build
+
+      - name: Add Android platform
+        run: npx cap add android
+
+      - name: Sync Capacitor
+        run: npx cap sync android
+
+      - name: Build debug APK
+        run: |
+          cd android
+          chmod +x ./gradlew
+          ./gradlew assembleDebug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: nutritrack-apk
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error

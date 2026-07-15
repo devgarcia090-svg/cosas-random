@@ -1,0 +1,12 @@
+# Dependencias
+node_modules/
+package-lock.json
+
+# Artefactos de build (se regeneran)
+www/
+android/
+ios/
+
+# Varios
+.DS_Store
+*.log

@@ -1,0 +1,22 @@
+{
+  "name": "nutritrack",
+  "version": "1.0.0",
+  "description": "NutriTrack — nutrición, composición corporal y báscula Bluetooth",
+  "private": true,
+  "scripts": {
+    "build:web": "node scripts/build-web.mjs",
+    "bundle:native": "esbuild src/native-ble.mjs --bundle --format=iife --outfile=www/js/native-ble.js",
+    "build": "npm run build:web && npm run bundle:native",
+    "sync": "npm run build && cap sync android",
+    "add:android": "cap add android"
+  },
+  "dependencies": {
+    "@capacitor-community/bluetooth-le": "^6.1.0",
+    "@capacitor/android": "^6.2.0",
+    "@capacitor/core": "^6.2.1"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^6.2.0",
+    "esbuild": "^0.24.2"
+  }
+}

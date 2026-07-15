@@ -1,0 +1,15 @@
+{
+  "appId": "com.nutritrack.app",
+  "appName": "NutriTrack",
+  "webDir": "www",
+  "plugins": {
+    "BluetoothLe": {
+      "displayStrings": {
+        "scanning": "Buscando báscula…",
+        "cancel": "Cancelar",
+        "availableDevices": "Básculas disponibles",
+        "noDeviceFound": "No se encontró ninguna báscula"
+      }
+    }
+  }
+}

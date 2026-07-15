@@ -648,13 +648,22 @@
     }
   }
 
-  // --- Báscula Bluetooth (Xiaomi Mi 2) ---
+  // --- Báscula Bluetooth ---
+  // Prioriza el lector NATIVO (APK, básculas estándar tipo Beurer BF500);
+  // si no está, usa Web Bluetooth (Xiaomi Mi 2 en Chrome Android/PC).
+
+  function pickScaleReader() {
+    if (window.ScaleBLE && window.ScaleBLE.native) return window.ScaleBLE;
+    if (window.MiScale && window.MiScale.bluetoothAvailable()) return window.MiScale;
+    return null;
+  }
 
   async function readBluetoothScale() {
     const btn = $('btReadBtn');
     const status = $('btStatus');
-    if (!window.MiScale.bluetoothAvailable()) {
-      status.textContent = window.MiScale.errorMessage(new Error('NO_BT'));
+    const reader = pickScaleReader();
+    if (!reader) {
+      status.textContent = 'Bluetooth no disponible aquí. Instala la app (APK) en tu Android, o usa Chrome en Android/PC.';
       status.style.color = 'var(--danger)';
       return;
     }
@@ -662,21 +671,24 @@
     status.textContent = 'Selecciona tu báscula y súbete a ella…';
     status.style.color = 'var(--text-muted)';
     try {
-      const reading = await window.MiScale.readOnce({
+      const reading = await reader.readOnce({
         heightCm: state.profile.heightCm,
         age: window.Calc.ageFromBirthDate(state.profile.birthDate),
         sex: state.profile.sex,
       });
+      if (!reading || reading.weightKg == null) throw new Error('EMPTY');
       // Rellenamos el formulario para que el usuario revise y guarde
       $('mDate').value = todayISO();
       $('mWeight').value = reading.weightKg;
       if (reading.bodyFatPct != null) $('mFat').value = reading.bodyFatPct;
       if (reading.muscleMassKg != null) $('mMuscle').value = reading.muscleMassKg;
+      if (reading.waterPct != null) $('mWater').value = reading.waterPct;
+      if (reading.bmr != null) $('mBmr').value = reading.bmr;
       status.textContent = `✅ Leído: ${reading.weightKg} kg${reading.bodyFatPct != null ? ` · ${reading.bodyFatPct}% grasa` : ''}. Revisa y pulsa "Guardar medición".`;
       status.style.color = 'var(--accent-2)';
       toast('Báscula leída');
     } catch (err) {
-      status.textContent = window.MiScale.errorMessage(err);
+      status.textContent = reader.errorMessage(err);
       status.style.color = 'var(--danger)';
     } finally {
       btn.disabled = false;
