@@ -18,6 +18,8 @@ const DEFAULT_STATE = {
   measurements: [], // { id, date, weightKg, bodyFatPct, muscleMassKg, waterPct, boneMassKg, visceralFat, bmr }
   // Registros de nutrición por día
   nutrition: [],    // { date, meals: [{ id, name, calories, protein, carbs, fat }] }
+  // Comidas rápidas (recientes + favoritas) para re-añadir con un toque
+  recentMeals: [],  // { id, name, calories, protein, carbs, fat, fav, ts }
 };
 
 function load() {
@@ -30,6 +32,7 @@ function load() {
       profile: { ...DEFAULT_STATE.profile, ...(parsed.profile || {}) },
       measurements: Array.isArray(parsed.measurements) ? parsed.measurements : [],
       nutrition: Array.isArray(parsed.nutrition) ? parsed.nutrition : [],
+      recentMeals: Array.isArray(parsed.recentMeals) ? parsed.recentMeals : [],
     };
   } catch (e) {
     console.error('Error cargando datos, se reinicia el estado', e);
@@ -87,6 +90,51 @@ function deleteMeal(state, date, mealId) {
   if (day) day.meals = day.meals.filter(m => m.id !== mealId);
 }
 
+// --- Comidas rápidas (recientes + favoritas) ---
+
+function mealKey(m) {
+  return `${(m.name || '').toLowerCase()}|${m.calories}|${m.protein}|${m.carbs}|${m.fat}`;
+}
+
+// Recuerda una comida para poder re-añadirla con un toque.
+function rememberMeal(state, meal) {
+  if (!state.recentMeals) state.recentMeals = [];
+  const k = mealKey(meal);
+  const existing = state.recentMeals.find(m => mealKey(m) === k);
+  if (existing) { existing.ts = Date.now(); return; }
+  state.recentMeals.unshift({
+    id: genId(),
+    name: meal.name,
+    calories: meal.calories,
+    protein: meal.protein,
+    carbs: meal.carbs,
+    fat: meal.fat,
+    fav: false,
+    ts: Date.now(),
+  });
+  // Mantener todas las favoritas + hasta 15 recientes no favoritas
+  const favs = state.recentMeals.filter(m => m.fav);
+  const recents = state.recentMeals.filter(m => !m.fav).slice(0, 15);
+  state.recentMeals = favs.concat(recents);
+}
+
+function toggleFavMeal(state, id) {
+  const m = (state.recentMeals || []).find(x => x.id === id);
+  if (m) m.fav = !m.fav;
+}
+
+function deleteRecentMeal(state, id) {
+  state.recentMeals = (state.recentMeals || []).filter(m => m.id !== id);
+}
+
+// Lista para mostrar: favoritas primero, luego recientes por fecha.
+function quickMeals(state, limit = 10) {
+  return (state.recentMeals || [])
+    .slice()
+    .sort((a, b) => (Number(b.fav) - Number(a.fav)) || (b.ts - a.ts))
+    .slice(0, limit);
+}
+
 // --- CSV import/export de mediciones ---
 
 const CSV_FIELDS = ['date', 'weightKg', 'bodyFatPct', 'muscleMassKg', 'waterPct', 'boneMassKg', 'visceralFat', 'bmr'];
@@ -133,6 +181,7 @@ function importBackup(text) {
     profile: { ...DEFAULT_STATE.profile, ...(parsed.profile || {}) },
     measurements: Array.isArray(parsed.measurements) ? parsed.measurements : [],
     nutrition: Array.isArray(parsed.nutrition) ? parsed.nutrition : [],
+    recentMeals: Array.isArray(parsed.recentMeals) ? parsed.recentMeals : [],
   };
 }
 
@@ -147,6 +196,10 @@ window.Storage = {
   getDayLog,
   addMeal,
   deleteMeal,
+  rememberMeal,
+  toggleFavMeal,
+  deleteRecentMeal,
+  quickMeals,
   exportMeasurementsCSV,
   parseMeasurementsCSV,
   exportBackup,

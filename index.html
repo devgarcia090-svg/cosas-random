@@ -27,12 +27,20 @@
         <div class="mt" id="calorieBar"></div>
       </div>
 
+      <div class="card" id="quickMealsCard" style="display:none">
+        <h2>⚡ Comidas rápidas <span class="hint">toca para añadir</span></h2>
+        <div class="quick-meals" id="quickMeals"></div>
+      </div>
+
       <div class="card">
         <h2>Añadir comida</h2>
         <div class="form-grid">
           <div style="grid-column: 1 / -1;">
             <label>Buscar alimento</label>
-            <input type="text" id="foodSearch" placeholder="Ej. huevo, arroz, pechuga de pollo, plátano…" autocomplete="off">
+            <div class="search-row">
+              <input type="text" id="foodSearch" placeholder="Ej. huevo, arroz, pechuga de pollo, plátano…" autocomplete="off">
+              <button class="btn secondary scan-btn" id="scanBtn" style="display:none" title="Escanear código de barras">📷</button>
+            </div>
             <small class="help">Busca cualquier alimento y se rellenan los macros solos (base de datos Open Food Facts). Ajusta los gramos y se recalcula.</small>
             <div class="food-search-results" id="foodResults" style="display:none"></div>
           </div>
@@ -143,6 +151,10 @@
     <!-- ================= PROGRESO ================= -->
     <section class="tab-panel" id="tab-progress">
       <div class="card">
+        <h2>📅 Resumen de la semana</h2>
+        <div id="weeklySummary"></div>
+      </div>
+      <div class="card">
         <h2>Peso <span class="hint">kg</span></h2>
         <div class="chart-wrap" id="chartWeight"></div>
       </div>
@@ -204,6 +216,22 @@
         <div id="targetsExplain"></div>
       </div>
 
+      <div class="card" id="reminderCard" style="display:none">
+        <h2>🔔 Recordatorio de proteína</h2>
+        <p class="muted" style="margin-top:0">Recibe cada día una notificación para no quedarte corto de proteína (clave para ganar músculo). Solo en la app instalada (APK).</p>
+        <div class="form-grid mt">
+          <div>
+            <label>Hora del aviso</label>
+            <input type="time" id="reminderTime" value="20:00">
+          </div>
+        </div>
+        <div class="btn-row">
+          <button class="btn" id="reminderOnBtn">Activar recordatorio</button>
+          <button class="btn secondary" id="reminderOffBtn">Desactivar</button>
+        </div>
+        <small class="help" id="reminderStatus"></small>
+      </div>
+
       <div class="card">
         <h2>Datos (import / export)</h2>
         <p class="muted" style="margin-top:0">Tus datos se guardan solo en este navegador. Exporta una copia de seguridad de vez en cuando.</p>
@@ -237,6 +265,7 @@
   <script src="js/miscale.js"></script>
   <script src="js/bcs-parser.js"></script>
   <script src="js/native-ble.js"></script>
+  <script src="js/native-extras.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

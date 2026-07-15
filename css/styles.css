@@ -315,6 +315,30 @@ input:focus, select:focus, textarea:focus { outline: 2px solid var(--accent); bo
 .mt-left strong { color: var(--accent-2); }
 .mt-left.over { color: var(--danger); }
 
+/* Buscador con botón de escanear */
+.search-row { display: flex; gap: 8px; align-items: stretch; }
+.search-row input { flex: 1; }
+.scan-btn { flex: 0 0 auto; font-size: 18px; padding: 0 14px; }
+
+/* Comidas rápidas (chips) */
+.quick-meals { display: flex; flex-wrap: wrap; gap: 8px; }
+.qm-chip {
+  display: flex;
+  align-items: stretch;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.qm-chip button { background: none; border: none; cursor: pointer; color: var(--text); font-family: inherit; }
+.qm-star { padding: 6px 4px 6px 10px; color: var(--text-muted); font-size: 15px; }
+.qm-star.on { color: #f5b301; }
+.qm-add { display: flex; flex-direction: column; align-items: flex-start; padding: 6px 8px; text-align: left; }
+.qm-name { font-size: 13px; font-weight: 600; max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.qm-macros { font-size: 11px; color: var(--text-muted); }
+.qm-del { padding: 6px 10px 6px 4px; color: var(--text-muted); font-size: 12px; }
+.qm-del:hover { color: var(--danger); }
+
 .muted { color: var(--text-muted); font-size: 13px; }
 .mt { margin-top: 14px; }
 small.help { display: block; color: var(--text-muted); font-size: 11px; margin-top: 4px; }

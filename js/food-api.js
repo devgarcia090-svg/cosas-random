@@ -79,5 +79,21 @@
     }
   }
 
-  window.FoodAPI = { search };
+  // Busca un producto por su código de barras (para el escáner de la APK).
+  async function getByBarcode(code) {
+    const c = String(code || '').replace(/\D/g, '');
+    if (!c) return null;
+    const url = `https://world.openfoodfacts.org/api/v2/product/${c}.json?fields=${FIELDS}`;
+    try {
+      const res = await fetch(url, { headers: { 'Accept': 'application/json' } });
+      if (!res.ok) return null;
+      const data = await res.json();
+      if (data.status !== 1 || !data.product) return null;
+      return normalize(data.product);
+    } catch {
+      return null;
+    }
+  }
+
+  window.FoodAPI = { search, getByBarcode };
 })();

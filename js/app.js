@@ -327,6 +327,7 @@
   // --- Pestaña PROGRESO ---
 
   function renderProgress() {
+    renderWeeklySummary();
     const ms = state.measurements;
     window.Charts.lineChart($('chartWeight'), [
       { label: 'Peso', color: 'var(--accent)', points: ms.filter(m => m.weightKg != null).map(m => ({ x: m.date, y: m.weightKg })) },
@@ -433,10 +434,160 @@
 
   function renderAll() {
     renderToday();
+    renderQuickMeals();
     renderBodyMetrics();
     renderMeasurementList();
     renderTargetsExplain();
     if ($('tab-progress').classList.contains('active')) renderProgress();
+  }
+
+  // --- Comidas rápidas (recientes/favoritas) ---
+
+  function renderQuickMeals() {
+    const card = $('quickMealsCard');
+    const el = $('quickMeals');
+    const list = window.Storage.quickMeals(state, 10);
+    if (!list.length) { card.style.display = 'none'; return; }
+    card.style.display = 'block';
+    el.innerHTML = list.map(m => `
+      <div class="qm-chip">
+        <button class="qm-star ${m.fav ? 'on' : ''}" data-fav="${m.id}" title="Favorito">${m.fav ? '★' : '☆'}</button>
+        <button class="qm-add" data-add="${m.id}">
+          <span class="qm-name">${escapeHtml(m.name)}</span>
+          <span class="qm-macros">${m.calories} kcal · P ${m.protein}g</span>
+        </button>
+        <button class="qm-del" data-del="${m.id}" title="Quitar">✕</button>
+      </div>`).join('');
+    el.querySelectorAll('[data-add]').forEach(b => b.addEventListener('click', () => quickAdd(b.dataset.add)));
+    el.querySelectorAll('[data-fav]').forEach(b => b.addEventListener('click', () => {
+      window.Storage.toggleFavMeal(state, b.dataset.fav); persist(); renderQuickMeals();
+    }));
+    el.querySelectorAll('[data-del]').forEach(b => b.addEventListener('click', () => {
+      window.Storage.deleteRecentMeal(state, b.dataset.del); persist(); renderQuickMeals();
+    }));
+  }
+
+  function quickAdd(id) {
+    const m = (state.recentMeals || []).find(x => x.id === id);
+    if (!m) return;
+    const meal = { name: m.name, calories: m.calories, protein: m.protein, carbs: m.carbs, fat: m.fat };
+    window.Storage.addMeal(state, todayISO(), meal);
+    window.Storage.rememberMeal(state, meal); // sube su posición (más reciente)
+    persist(); renderToday(); renderQuickMeals();
+    toast('Añadido: ' + m.name);
+  }
+
+  // --- Escáner de código de barras (APK) ---
+
+  async function scanFood() {
+    if (!(window.NativeExtras && window.NativeExtras.available)) return;
+    const btn = $('scanBtn');
+    btn.disabled = true;
+    try {
+      const code = await window.NativeExtras.scanBarcode();
+      if (!code) { toast('No se leyó ningún código'); return; }
+      toast('Buscando producto…');
+      const food = await window.FoodAPI.getByBarcode(code);
+      if (!food) { toast('Producto no encontrado en Open Food Facts'); return; }
+      pickFood(food);
+      toast('Cargado: ' + food.name);
+    } catch (e) {
+      toast('No se pudo escanear');
+    } finally {
+      btn.disabled = false;
+    }
+  }
+
+  // --- Resumen semanal (pestaña Progreso) ---
+
+  function last7Dates() {
+    const out = [];
+    const t = new Date();
+    for (let i = 0; i < 7; i++) {
+      const d = new Date(t);
+      d.setDate(d.getDate() - i);
+      out.push(d.toISOString().slice(0, 10));
+    }
+    return out;
+  }
+
+  function renderWeeklySummary() {
+    const el = $('weeklySummary');
+    const set = new Set(last7Dates());
+    const daysWithFood = state.nutrition
+      .filter(d => set.has(d.date))
+      .filter(d => window.Calc.sumMeals(d.meals).calories > 0);
+
+    if (!daysWithFood.length) {
+      el.innerHTML = '<p class="muted">Aún no hay comidas registradas esta semana.</p>';
+      return;
+    }
+    const tot = daysWithFood.reduce((a, d) => {
+      const s = window.Calc.sumMeals(d.meals);
+      return { cal: a.cal + s.calories, p: a.p + s.protein, c: a.c + s.carbs, f: a.f + s.fat };
+    }, { cal: 0, p: 0, c: 0, f: 0 });
+    const n = daysWithFood.length;
+    const avg = k => Math.round(tot[k] / n);
+
+    const wm = state.measurements.filter(m => set.has(m.date));
+    let weightCard = '';
+    if (wm.length >= 2) {
+      const ch = Math.round((wm[wm.length - 1].weightKg - wm[0].weightKg) * 10) / 10;
+      weightCard = `<div class="metric"><div class="value">${ch > 0 ? '+' : ''}${ch}<span class="unit"> kg</span></div><div class="label">Peso (esta semana)</div></div>`;
+    }
+
+    el.innerHTML = `
+      <div class="metric-grid">
+        <div class="metric"><div class="value">${avg('cal')}<span class="unit"> kcal</span></div><div class="label">Calorías/día (media)</div></div>
+        <div class="metric"><div class="value">${avg('p')}<span class="unit"> g</span></div><div class="label">Proteína/día (media)</div></div>
+        <div class="metric"><div class="value">${avg('c')}<span class="unit"> g</span></div><div class="label">Carbos/día (media)</div></div>
+        <div class="metric"><div class="value">${avg('f')}<span class="unit"> g</span></div><div class="label">Grasa/día (media)</div></div>
+        ${weightCard}
+      </div>
+      <p class="muted mt">Media de ${n} día(s) con comidas registradas en los últimos 7 días.</p>`;
+  }
+
+  // --- Recordatorio de proteína (APK) ---
+
+  const REMINDER_KEY = 'nutritrack_reminder_v1';
+  function getReminderSetting() {
+    try { return JSON.parse(localStorage.getItem(REMINDER_KEY)) || {}; } catch { return {}; }
+  }
+  function setReminderSetting(s) { localStorage.setItem(REMINDER_KEY, JSON.stringify(s)); }
+
+  function renderReminderUI() {
+    const card = $('reminderCard');
+    if (!(window.NativeExtras && window.NativeExtras.available)) { card.style.display = 'none'; return; }
+    card.style.display = 'block';
+    const s = getReminderSetting();
+    if (s.time) $('reminderTime').value = s.time;
+    const st = $('reminderStatus');
+    st.textContent = s.enabled ? `✅ Activo cada día a las ${s.time}` : 'Desactivado.';
+    st.style.color = s.enabled ? 'var(--accent-2)' : 'var(--text-muted)';
+  }
+
+  async function enableReminder() {
+    const time = $('reminderTime').value || '20:00';
+    const [h, m] = time.split(':').map(Number);
+    const c = getComputedTargets();
+    const proteinTarget = c ? c.targets.protein : null;
+    try {
+      await window.NativeExtras.scheduleProteinReminder(h, m, proteinTarget);
+      setReminderSetting({ enabled: true, time });
+      renderReminderUI();
+      toast('Recordatorio activado');
+    } catch (e) {
+      const st = $('reminderStatus');
+      st.textContent = e && e.message === 'NO_NOTIF' ? 'Permiso de notificaciones denegado.' : 'No se pudo activar el recordatorio.';
+      st.style.color = 'var(--danger)';
+    }
+  }
+
+  async function disableReminder() {
+    try { await window.NativeExtras.cancelProteinReminder(); } catch { /* ignore */ }
+    setReminderSetting({ enabled: false, time: $('reminderTime').value });
+    renderReminderUI();
+    toast('Recordatorio desactivado');
   }
 
   // --- Eventos ---
@@ -462,14 +613,16 @@
       const name = $('mealName').value.trim();
       const calories = num($('mealCalories').value);
       if (!name || calories == null) { toast('Pon al menos nombre y calorías'); return; }
-      window.Storage.addMeal(state, todayISO(), {
+      const meal = {
         name,
         calories,
         protein: num($('mealProtein').value) || 0,
         carbs: num($('mealCarbs').value) || 0,
         fat: num($('mealFat').value) || 0,
-      });
-      persist(); clearMealForm(); renderToday();
+      };
+      window.Storage.addMeal(state, todayISO(), meal);
+      window.Storage.rememberMeal(state, meal);
+      persist(); clearMealForm(); renderToday(); renderQuickMeals();
       toast('Comida añadida');
     });
 
@@ -522,6 +675,11 @@
 
     // Báscula Bluetooth
     $('btReadBtn').addEventListener('click', readBluetoothScale);
+
+    // Escáner de código de barras + recordatorio (APK)
+    $('scanBtn').addEventListener('click', scanFood);
+    $('reminderOnBtn').addEventListener('click', enableReminder);
+    $('reminderOffBtn').addEventListener('click', disableReminder);
   }
 
   // --- Báscula Bluetooth ---
@@ -578,6 +736,11 @@
     setupTabs();
     setupFoodSearch();
     setupEvents();
+    // Funciones solo disponibles en la APK
+    if (window.NativeExtras && window.NativeExtras.available) {
+      $('scanBtn').style.display = '';
+    }
+    renderReminderUI();
     renderAll();
   }
 
