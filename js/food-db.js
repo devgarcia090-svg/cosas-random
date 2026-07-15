@@ -71,6 +71,73 @@ const BUILTIN_FOODS = [
   { name: 'Espinacas', unit: 'g', per: 100, calories: 23, protein: 2.9, carbs: 3.6, fat: 0.4 },
   { name: 'Ensalada mixta', unit: 'g', per: 100, calories: 20, protein: 1.5, carbs: 3, fat: 0.2 },
   { name: 'Tomate', unit: 'g', per: 100, calories: 18, protein: 0.9, carbs: 3.9, fat: 0.2 },
+  { name: 'Lechuga', unit: 'g', per: 100, calories: 15, protein: 1.4, carbs: 2.9, fat: 0.2 },
+  { name: 'Zanahoria', unit: 'g', per: 100, calories: 41, protein: 0.9, carbs: 10, fat: 0.2 },
+  { name: 'Pimiento', unit: 'g', per: 100, calories: 31, protein: 1, carbs: 6, fat: 0.3 },
+  { name: 'Cebolla', unit: 'g', per: 100, calories: 40, protein: 1.1, carbs: 9, fat: 0.1 },
+  { name: 'Calabacín', unit: 'g', per: 100, calories: 17, protein: 1.2, carbs: 3.1, fat: 0.3 },
+  { name: 'Champiñones', unit: 'g', per: 100, calories: 22, protein: 3.1, carbs: 3.3, fat: 0.3 },
+  { name: 'Judías verdes', unit: 'g', per: 100, calories: 31, protein: 1.8, carbs: 7, fat: 0.2 },
+  { name: 'Guisantes', unit: 'g', per: 100, calories: 81, protein: 5, carbs: 14, fat: 0.4 },
+  { name: 'Maíz dulce', unit: 'g', per: 100, calories: 86, protein: 3.2, carbs: 19, fat: 1.2 },
+
+  // Más carnes y pescados
+  { name: 'Pollo (muslo)', unit: 'g', per: 100, calories: 209, protein: 26, carbs: 0, fat: 11 },
+  { name: 'Filete de ternera', unit: 'g', per: 100, calories: 217, protein: 26, carbs: 0, fat: 12 },
+  { name: 'Carne picada mixta', unit: 'g', per: 100, calories: 250, protein: 18, carbs: 0, fat: 20 },
+  { name: 'Hamburguesa de ternera', unit: 'g', per: 100, calories: 254, protein: 17, carbs: 1, fat: 20 },
+  { name: 'Bacalao', unit: 'g', per: 100, calories: 82, protein: 18, carbs: 0, fat: 0.7 },
+  { name: 'Dorada / lubina', unit: 'g', per: 100, calories: 121, protein: 20, carbs: 0, fat: 4.5 },
+  { name: 'Atún fresco', unit: 'g', per: 100, calories: 144, protein: 23, carbs: 0, fat: 5 },
+  { name: 'Salmón ahumado', unit: 'g', per: 100, calories: 117, protein: 25, carbs: 0, fat: 4.3 },
+  { name: 'Mejillones', unit: 'g', per: 100, calories: 86, protein: 12, carbs: 3.7, fat: 2.2 },
+  { name: 'Pulpo', unit: 'g', per: 100, calories: 82, protein: 15, carbs: 2, fat: 1 },
+
+  // Fruta
+  { name: 'Fresas', unit: 'g', per: 100, calories: 32, protein: 0.7, carbs: 7.7, fat: 0.3 },
+  { name: 'Uvas', unit: 'g', per: 100, calories: 69, protein: 0.7, carbs: 18, fat: 0.2 },
+  { name: 'Sandía', unit: 'g', per: 100, calories: 30, protein: 0.6, carbs: 7.6, fat: 0.2 },
+  { name: 'Melón', unit: 'g', per: 100, calories: 34, protein: 0.8, carbs: 8, fat: 0.2 },
+  { name: 'Piña', unit: 'g', per: 100, calories: 50, protein: 0.5, carbs: 13, fat: 0.1 },
+  { name: 'Kiwi', unit: 'ud', per: 75, calories: 45, protein: 0.8, carbs: 11, fat: 0.4 },
+  { name: 'Pera', unit: 'ud', per: 170, calories: 96, protein: 0.6, carbs: 25, fat: 0.2 },
+  { name: 'Mandarina', unit: 'ud', per: 90, calories: 47, protein: 0.7, carbs: 12, fat: 0.3 },
+  { name: 'Arándanos', unit: 'g', per: 100, calories: 57, protein: 0.7, carbs: 14, fat: 0.3 },
+  { name: 'Dátiles', unit: 'g', per: 100, calories: 282, protein: 2.5, carbs: 75, fat: 0.4 },
+
+  // Cereales, pan y desayuno
+  { name: 'Copos de maíz (cereales)', unit: 'g', per: 100, calories: 378, protein: 7, carbs: 84, fat: 0.9 },
+  { name: 'Muesli', unit: 'g', per: 100, calories: 363, protein: 10, carbs: 66, fat: 6 },
+  { name: 'Tostada de pan', unit: 'ud', per: 30, calories: 80, protein: 2.7, carbs: 15, fat: 1 },
+  { name: 'Pan de molde', unit: 'ud', per: 30, calories: 80, protein: 2.5, carbs: 14, fat: 1.2 },
+  { name: 'Galletas María', unit: 'ud', per: 8, calories: 35, protein: 0.6, carbs: 6, fat: 1 },
+  { name: 'Tortitas de arroz', unit: 'ud', per: 8, calories: 30, protein: 0.6, carbs: 6.5, fat: 0.2 },
+  { name: 'Miel', unit: 'g', per: 20, calories: 61, protein: 0.1, carbs: 16, fat: 0 },
+  { name: 'Mermelada', unit: 'g', per: 20, calories: 50, protein: 0.1, carbs: 12, fat: 0 },
+
+  // Snacks y dulces
+  { name: 'Chocolate negro 85%', unit: 'g', per: 100, calories: 592, protein: 9.6, carbs: 30, fat: 46 },
+  { name: 'Chocolate con leche', unit: 'g', per: 100, calories: 535, protein: 7.6, carbs: 59, fat: 30 },
+  { name: 'Patatas fritas (bolsa)', unit: 'g', per: 100, calories: 536, protein: 6.6, carbs: 53, fat: 34 },
+  { name: 'Barrita de proteína', unit: 'ud', per: 60, calories: 210, protein: 20, carbs: 20, fat: 6 },
+  { name: 'Cacahuetes', unit: 'g', per: 30, calories: 170, protein: 7.7, carbs: 4.8, fat: 14 },
+  { name: 'Pistachos', unit: 'g', per: 30, calories: 170, protein: 6, carbs: 8, fat: 13 },
+
+  // Bebidas
+  { name: 'Cerveza', unit: 'ml', per: 330, calories: 145, protein: 1.6, carbs: 11, fat: 0 },
+  { name: 'Refresco de cola', unit: 'ml', per: 330, calories: 139, protein: 0, carbs: 35, fat: 0 },
+  { name: 'Zumo de naranja', unit: 'ml', per: 200, calories: 90, protein: 1.4, carbs: 21, fat: 0.4 },
+  { name: 'Bebida de avena', unit: 'ml', per: 100, calories: 45, protein: 0.8, carbs: 7, fat: 1.5 },
+  { name: 'Café solo', unit: 'ml', per: 100, calories: 2, protein: 0.1, carbs: 0, fat: 0 },
+
+  // Platos y varios
+  { name: 'Arroz con pollo', unit: 'g', per: 100, calories: 140, protein: 9, carbs: 18, fat: 3.5 },
+  { name: 'Pasta con tomate', unit: 'g', per: 100, calories: 130, protein: 4, carbs: 24, fat: 2 },
+  { name: 'Pizza', unit: 'g', per: 100, calories: 266, protein: 11, carbs: 33, fat: 10 },
+  { name: 'Ensaladilla rusa', unit: 'g', per: 100, calories: 150, protein: 3.5, carbs: 9, fat: 11 },
+  { name: 'Hummus', unit: 'g', per: 100, calories: 177, protein: 8, carbs: 14, fat: 10 },
+  { name: 'Salsa de tomate', unit: 'g', per: 100, calories: 35, protein: 1.5, carbs: 6, fat: 0.5 },
+  { name: 'Mayonesa', unit: 'g', per: 15, calories: 100, protein: 0.2, carbs: 0.3, fat: 11 },
 ];
 
 const CUSTOM_KEY = 'nutritrack_custom_foods_v1';

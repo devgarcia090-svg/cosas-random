@@ -42,23 +42,18 @@
     };
   }
 
-  // Busca alimentos. Devuelve [] si falla (sin romper el buscador local).
-  async function search(query, { limit = 15, signal } = {}) {
-    const q = (query || '').trim();
-    if (q.length < 2) return [];
+  function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
+  // Una petición al buscador de OFF. Devuelve array (posiblemente []) o lanza.
+  async function fetchSearch(q, limit) {
     const url = `${ENDPOINT}?search_terms=${encodeURIComponent(q)}`
-      + `&search_simple=1&action=process&json=1&page_size=25&fields=${FIELDS}`;
-
-    // Timeout propio (además del signal externo si lo hay)
+      + `&search_simple=1&action=process&json=1&page_size=20&fields=${FIELDS}`;
     const ctrl = new AbortController();
-    const timer = setTimeout(() => ctrl.abort(), 8000);
-    if (signal) signal.addEventListener('abort', () => ctrl.abort());
-
+    const timer = setTimeout(() => ctrl.abort(), 9000);
     try {
       const res = await fetch(url, { signal: ctrl.signal, headers: { 'Accept': 'application/json' } });
-      if (!res.ok) return [];
-      const data = await res.json();
+      if (!res.ok) throw new Error('HTTP ' + res.status); // 503, etc → reintentar
+      const data = await res.json(); // si viene HTML (error), lanza → reintentar
       const products = Array.isArray(data.products) ? data.products : [];
       const out = [];
       const seen = new Set();
@@ -72,11 +67,24 @@
         if (out.length >= limit) break;
       }
       return out;
-    } catch {
-      return []; // sin conexión o cancelado
     } finally {
       clearTimeout(timer);
     }
+  }
+
+  // Busca alimentos. El servidor de OFF a veces devuelve 503; reintentamos un
+  // par de veces. Devuelve [] si sigue fallando (el buscador local no se rompe).
+  async function search(query, { limit = 15 } = {}) {
+    const q = (query || '').trim();
+    if (q.length < 2) return [];
+    for (let attempt = 0; attempt < 3; attempt++) {
+      try {
+        return await fetchSearch(q, limit);
+      } catch {
+        if (attempt < 2) await sleep(500 * (attempt + 1));
+      }
+    }
+    return [];
   }
 
   // Busca un producto por su código de barras (para el escáner de la APK).
