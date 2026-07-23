@@ -1,0 +1,10 @@
+# robots.txt — mayarottweiler.com
+# Buscadores e IA pueden rastrear y CITAR el contenido.
+# Se reservan los derechos de entrenamiento de modelos (ai-train=no).
+
+User-agent: *
+Content-Signal: search=yes, ai-input=yes, ai-train=no, use=reference
+Allow: /
+
+# Sitemap
+Sitemap: https://mayarottweiler.com/sitemap.xml
