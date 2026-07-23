@@ -1,0 +1,157 @@
+/* ── MAYA ROTTWEILER · TEMA GLOBAL v2 ── */
+:root {
+  --negro: #0D0B09;
+  --fuego: #C8722A;
+  --blanco: #F2EDE6;
+  --gris: #171310;
+  --ember: #E0571A;
+  --oro: #F2A65A;
+  --ash: rgba(242,237,230,0.52);
+  --ease: cubic-bezier(.22,1,.36,1);
+}
+
+/* ── BASE GLOBAL ─────────────────────────────────────── */
+::selection { background: var(--fuego); color: var(--negro); }
+::-webkit-scrollbar { width: 11px; }
+::-webkit-scrollbar-track { background: #0A0806; }
+::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--fuego), #7A431A); border-radius: 6px; border: 2px solid #0A0806; }
+::-webkit-scrollbar-thumb:hover { background: var(--ember); }
+
+/* Grain cinematográfico sutil */
+body::after {
+  content: ''; position: fixed; inset: 0; pointer-events: none; z-index: 1001;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+  opacity: .045; mix-blend-mode: overlay;
+}
+
+/* Barra de progreso de lectura */
+#scrollProgress {
+  position: fixed; top: 0; left: 0; height: 3px; width: 0; z-index: 1002;
+  background: linear-gradient(90deg, var(--fuego), var(--ember), var(--oro));
+  box-shadow: 0 0 14px rgba(224,87,26,.7);
+}
+
+/* ── NAV: transparente arriba, frosted glass al hacer scroll ── */
+nav {
+  background: transparent;
+  backdrop-filter: blur(0);
+  border-bottom-color: transparent;
+  transition: background 0.4s var(--ease), backdrop-filter 0.4s, border-color 0.4s;
+}
+nav.scrolled {
+  background: rgba(13,11,9,0.96);
+  backdrop-filter: blur(16px);
+  border-bottom-color: rgba(200,114,42,0.18);
+}
+
+/* ── HERO INTERIOR (.hero-h en todas las páginas de contenido) ── */
+.hero-h {
+  padding: 10rem 2rem 5.5rem;
+  background: linear-gradient(160deg, #0D0B09 0%, #1E1008 55%, #0D0B09 100%);
+  position: relative; overflow: hidden;
+}
+.hero-h::before {
+  content: ''; position: absolute; bottom: -10%; left: 50%; transform: translateX(-50%);
+  width: 140%; height: 70%;
+  background: radial-gradient(ellipse at 50% 100%, rgba(200,114,42,.26) 0%, rgba(224,87,26,.08) 32%, transparent 65%);
+  pointer-events: none;
+  animation: floorGlowT 5s ease-in-out infinite;
+}
+@keyframes floorGlowT { 0%,100% { opacity: .8; } 50% { opacity: 1.1; } }
+.hero-h-content { position: relative; z-index: 1; }
+.hero-h h1 {
+  font-size: clamp(2.4rem, 5vw, 4rem) !important;
+  font-weight: 900; line-height: 1.05; letter-spacing: -.025em;
+  animation: riseInT .9s var(--ease) .15s backwards;
+}
+.hero-h p { color: var(--ash); animation: riseInT .9s var(--ease) .35s backwards; }
+.hero-h img, .hero-h .intro-img { animation: riseInT 1s var(--ease) .25s backwards; }
+@keyframes riseInT { from { opacity: 0; transform: translateY(30px); filter: blur(8px); } to { opacity: 1; transform: translateY(0); filter: blur(0); } }
+
+/* ── BOTONES: estilo editorial sharp con destello ── */
+.btn, .btn-cta, .nav-back, .btn-lista, .btn-quiz, .btn-start, .btn-share, .btn-retry {
+  border-radius: 4px !important;
+  font-weight: 800; letter-spacing: 1.5px;
+  transition: all 0.25s var(--ease);
+  position: relative; overflow: hidden;
+}
+.btn::after, .btn-cta::after {
+  content: ''; position: absolute; top: 0; left: -85%; width: 50%; height: 100%;
+  background: linear-gradient(105deg, transparent, rgba(255,255,255,.32), transparent);
+  transform: skewX(-20deg); transition: left .55s var(--ease);
+}
+.btn:hover::after, .btn-cta:hover::after { left: 135%; }
+.btn-primary { background: var(--fuego); color: var(--negro); border: 2px solid var(--fuego); }
+.btn-primary:hover {
+  background: var(--ember); border-color: var(--ember);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(200,114,42,0.4);
+}
+.btn-secondary { background: transparent; border: 2px solid rgba(242,237,230,0.2); color: var(--blanco); }
+.btn-secondary:hover { border-color: var(--fuego); color: var(--fuego); transform: translateY(-2px); }
+.btn-cta:hover, .btn-start:hover { transform: translateY(-3px); box-shadow: 0 14px 36px rgba(200,114,42,.42); }
+.nav-back:hover { transform: translateY(-1px); }
+
+/* ── TIPOGRAFÍA DE ARTÍCULOS ── */
+article h2 {
+  font-size: clamp(1.7rem, 3vw, 2.2rem) !important;
+  letter-spacing: -.015em; line-height: 1.15;
+}
+article h3 { letter-spacing: -.01em; }
+article img { border-radius: 8px !important; border-color: rgba(200,114,42,.2) !important; }
+
+/* ── CARDS: esquinas afiladas + hover con vida ── */
+.path-card    { border-radius: 8px; }
+.video-card   { border-radius: 6px; }
+.growth-item  { border-radius: 8px; }
+.social-btn   { border-radius: 4px; }
+.about-frame  { border-radius: 8px; }
+.about-badge  { border-radius: 6px; }
+.mission-card { border-radius: 4px; }
+.hero-badge   { border-radius: 4px; }
+.lang-btn     { border-radius: 4px; }
+.badge-tienda { border-radius: 4px; }
+.quiz-option  { border-radius: 6px; }
+.why-card     { border-radius: 8px; }
+.stat-card    { border-radius: 8px; }
+.colaboracion-card { border-radius: 8px; }
+.guia-card    { border-radius: 8px; }
+.faq-item     { border-radius: 6px; }
+.guide-card   { border-radius: 8px; }
+.etapa-card, .info-box, .warning-box { border-radius: 8px; }
+
+.guide-card {
+  transition: transform .3s var(--ease), border-color .3s, box-shadow .3s;
+}
+.guide-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--fuego) !important;
+  box-shadow: 0 24px 52px rgba(0,0,0,.5), 0 0 50px rgba(200,114,42,.07);
+}
+.etapa-card, .toxico, .info-box, .warning-box, .highlight-box, .related-link {
+  transition: transform .3s var(--ease), border-color .3s, background .3s;
+}
+.etapa-card:hover, .related-link:hover { transform: translateY(-5px); border-color: var(--fuego); }
+.social-btn:hover   { transform: translateY(-2px); box-shadow: 0 10px 28px rgba(200,114,42,0.35); }
+.mission-card:hover { background: rgba(200,114,42,0.06); }
+.growth-item:hover  { background: rgba(200,114,42,0.09); }
+.video-card:hover   { box-shadow: 0 20px 48px rgba(0,0,0,0.4), 0 0 40px rgba(200,114,42,0.06); }
+
+/* ── REVEAL AL HACER SCROLL (elementos etiquetados por tema.js) ── */
+html.tjs [data-tr] {
+  opacity: 0; transform: translateY(26px);
+  transition: opacity .8s var(--ease), transform .8s var(--ease);
+}
+html.tjs [data-tr].tv { opacity: 1; transform: translateY(0); }
+
+/* ── CANVAS de brasas en el hero ── */
+.hero-canvas {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  pointer-events: none; z-index: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-h h1, .hero-h p, .hero-h img { animation: none !important; }
+  html.tjs [data-tr] { opacity: 1 !important; transform: none !important; transition: none !important; }
+}

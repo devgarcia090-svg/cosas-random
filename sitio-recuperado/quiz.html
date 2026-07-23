@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>¿Estás listo para adoptar un perro? | Test con Maya Rottweiler</title>
+    <meta name="description" content="Descubre si estás preparado para adoptar un perro con este test de 8 preguntas. Maya, la Rottweiler influencer, te da el veredicto. ¡Compártelo en stories!">
+    <meta name="keywords" content="adoptar perro test, estoy listo para tener un perro, quiz adopción perro, puedo tener un perro, adoptar perro españa, maya rottweiler quiz">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Maya | El Rottweiler Peluche">
+    <link rel="canonical" href="quiz.html">
+
+    <meta property="og:title" content="¿Estás listo para adoptar un perro? | Test de Maya">
+    <meta property="og:description" content="8 preguntas para saber si estás preparado para adoptar un perro. Maya te da el veredicto. ¡Compártelo!">
+    <meta property="og:image" content="https://mayarottweiler.com/fotos/Maya-piscina.jpg"><meta property="og:image:type" content="image/jpeg">
+    <meta property="og:url" content="https://mayarottweiler.com/quiz.html">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_ES">
+    <meta property="og:site_name" content="Maya | El Rottweiler Peluche">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="¿Estás listo para adoptar un perro? | Test de Maya">
+    <meta name="twitter:description" content="8 preguntas para saber si estás preparado para adoptar un perro. Maya te da el veredicto. ¡Compártelo en stories!">
+    <meta name="twitter:image" content="https://mayarottweiler.com/fotos/Maya-piscina.jpg">
+
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"¿Estás listo para adoptar un perro? | Test con Maya Rottweiler","description":"Test interactivo de 8 preguntas para saber si estás preparado para adoptar un perro. Maya te da el veredicto.","url":"https://mayarottweiler.com/quiz.html"}</script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://mayarottweiler.com"},
+            {"@type": "ListItem", "position": 2, "name": "Test: ¿Estás listo para adoptar?", "item": "https://mayarottweiler.com/quiz.html"}
+        ]
+    }
+    </script>
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com/">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="icon" id="favicon" type="image/png" href="quiz.html">
+    <script>
+        const canvas = document.createElement('canvas');
+        canvas.width = 64; canvas.height = 64;
+        const ctx = canvas.getContext('2d');
+        ctx.font = '52px serif';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('🐕', 32, 36);
+        window.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('favicon').href = canvas.toDataURL('image/png');
+        });
+    </script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --negro: #0D0B09; --fuego: #C8722A; --blanco: #F2EDE6; --gris: #171310;
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--negro); color: var(--blanco);
+            min-height: 100vh; overflow-x: hidden;
+        }
+
+        /* NAV */
+        nav {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            padding: 1rem 2rem; display: flex; justify-content: space-between; align-items: center;
+            background: rgba(13,11,9,0.96); backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(200,114,42,0.2);
+        }
+        .nav-logo {
+            font-size: 0.9rem; font-weight: 900; color: var(--fuego);
+            text-decoration: none; letter-spacing: 1px; text-transform: uppercase;
+            display: flex; align-items: center; gap: 0.6rem;
+        }
+        .nav-logo span { color: var(--blanco); font-weight: 400; }
+        .nav-back {
+            color: var(--blanco); text-decoration: none; font-weight: 600;
+            font-size: 0.78rem; letter-spacing: 1px; text-transform: uppercase;
+            border: 1px solid rgba(200,114,42,0.4); padding: 0.5rem 1.2rem; border-radius: 4px;
+            transition: all 0.3s;
+        }
+        .nav-back:hover { background: var(--fuego); color: var(--negro); border-color: var(--fuego); }
+
+        /* CONTENEDOR QUIZ */
+        .quiz-wrapper {
+            min-height: 100vh; display: flex; align-items: center;
+            justify-content: center; padding: 6rem 1.5rem 3rem;
+        }
+        .quiz-box {
+            background: var(--gris); border-radius: 10px;
+            padding: 3rem 2.5rem; max-width: 680px; width: 100%;
+            border: 1px solid rgba(200,114,42,0.2);
+            box-shadow: 0 20px 80px rgba(0,0,0,0.4);
+            overflow: hidden;
+        }
+
+        /* INTRO */
+        .intro { text-align: center; }
+        /* Foto banner a sangre que se funde con la tarjeta */
+        .intro-img {
+            display: block; max-width: none;
+            width: calc(100% + 5rem); height: 250px;
+            margin: -3rem -2.5rem 1.8rem;
+            border-radius: 0; border: none; box-shadow: none;
+            object-fit: cover; object-position: center 40%;
+            -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+                    mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+        }
+        .intro h1 { font-size: 2rem; font-weight: 900; line-height: 1.2; margin-bottom: 1rem; }
+        .intro h1 span { color: var(--fuego); }
+        .intro p { font-size: 0.95rem; color: rgba(242,237,230,0.7); line-height: 1.7; margin-bottom: 2rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+        .btn-start {
+            background: var(--fuego); color: var(--negro); border: none;
+            padding: 1rem 2.5rem; border-radius: 4px; font-family: 'Montserrat', sans-serif;
+            font-weight: 800; font-size: 1rem; letter-spacing: 1px; text-transform: uppercase;
+            cursor: pointer; transition: all 0.3s;
+        }
+        .btn-start:hover { background: #E0571A; transform: translateY(-2px); }
+
+        /* PROGRESO */
+        .progress-bar {
+            height: 6px; background: rgba(242,237,230,0.1);
+            border-radius: 3px; margin-bottom: 2rem; overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%; background: var(--fuego); border-radius: 3px;
+            transition: width 0.4s ease;
+        }
+        .progress-text {
+            font-size: 0.72rem; color: rgba(242,237,230,0.4);
+            letter-spacing: 1px; text-transform: uppercase; margin-bottom: 0.8rem;
+        }
+
+        /* PREGUNTA */
+        .question-num {
+            font-size: 0.72rem; font-weight: 700; color: var(--fuego);
+            letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.8rem;
+        }
+        .question-text {
+            font-size: 1.3rem; font-weight: 800; line-height: 1.4; margin-bottom: 2rem;
+        }
+        .options { display: flex; flex-direction: column; gap: 0.8rem; }
+        .option-btn {
+            background: rgba(242,237,230,0.05); border: 2px solid rgba(242,237,230,0.1);
+            color: var(--blanco); padding: 1rem 1.5rem; border-radius: 14px;
+            font-family: 'Montserrat', sans-serif; font-size: 0.92rem; font-weight: 600;
+            cursor: pointer; transition: all 0.25s; text-align: left;
+        }
+        .option-btn:hover { border-color: var(--fuego); background: rgba(200,114,42,0.1); }
+        .option-btn.selected { border-color: var(--fuego); background: rgba(200,114,42,0.15); color: var(--fuego); }
+        .option-btn.correct { border-color: #27ae60; background: rgba(39,174,96,0.15); color: #2ecc71; }
+        .option-btn.wrong { border-color: #e74c3c; background: rgba(231,76,60,0.1); color: #e74c3c; }
+
+        /* RESULTADO */
+        .result { text-align: center; }
+        .result-emoji { font-size: 5rem; margin-bottom: 1rem; display: block; }
+        .result-title { font-size: 2rem; font-weight: 900; color: var(--fuego); margin-bottom: 0.8rem; }
+        .result-sub { font-size: 1rem; font-weight: 700; margin-bottom: 1rem; }
+        .result-desc { font-size: 0.92rem; color: rgba(242,237,230,0.7); line-height: 1.8; margin-bottom: 2rem; }
+        .result-img {
+            display: block; max-width: none;
+            width: calc(100% + 5rem); height: 230px;
+            margin: -3rem -2.5rem 1.8rem;
+            border-radius: 0; border: none; box-shadow: none;
+            object-fit: cover; object-position: center 35%;
+            -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+                    mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+        }
+        .result-score {
+            background: rgba(200,114,42,0.1); border: 1px solid rgba(200,114,42,0.3);
+            padding: 1rem 1.5rem; border-radius: 14px; margin-bottom: 2rem;
+            font-size: 0.9rem; color: rgba(242,237,230,0.8);
+        }
+        .result-score strong { color: var(--fuego); font-size: 1.2rem; }
+        .result-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.5rem; }
+        .btn-share {
+            background: var(--fuego); color: var(--negro); border: none;
+            padding: 0.9rem 1.8rem; border-radius: 4px; font-family: 'Montserrat', sans-serif;
+            font-weight: 800; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase;
+            cursor: pointer; transition: all 0.3s; text-decoration: none; display: inline-block;
+        }
+        .btn-share:hover { background: #E0571A; transform: translateY(-2px); }
+        .btn-retry {
+            background: transparent; color: var(--blanco);
+            border: 2px solid rgba(242,237,230,0.25); padding: 0.9rem 1.8rem;
+            border-radius: 4px; font-family: 'Montserrat', sans-serif;
+            font-weight: 700; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase;
+            cursor: pointer; transition: all 0.3s;
+        }
+        .btn-retry:hover { border-color: var(--fuego); color: var(--fuego); }
+
+        .hidden { display: none; }
+
+        @media (max-width: 600px) {
+            .quiz-box { padding: 2rem 1.5rem; border-radius: 10px; }
+            .intro-img, .result-img { width: calc(100% + 3rem); margin: -2rem -1.5rem 1.5rem; height: 200px; }
+            .intro h1 { font-size: 1.6rem; }
+            .question-text { font-size: 1.1rem; }
+            .nav-logo span { display: none; }
+        }
+    
+        .nav-right { display:flex; align-items:center; gap:0.8rem; }
+        .lang-switcher { display:flex; gap:0.3rem; }
+        .lang-btn { background:transparent; border:1px solid rgba(200,114,42,0.4); color:rgba(242,237,230,0.5); padding:0.3rem 0.6rem; border-radius:6px; font-family:'Montserrat',sans-serif; font-size:0.7rem; font-weight:700; cursor:pointer; transition:all 0.2s; letter-spacing:1px; }
+        .lang-btn.active { background:var(--fuego); border-color:var(--fuego); color:var(--negro); }
+        .lang-btn:hover:not(.active) { border-color:var(--fuego); color:var(--fuego); }
+        .hamburger { display:none; flex-direction:column; cursor:pointer; gap:5px; }
+        .hamburger span { width:25px; height:2px; background:var(--blanco); transition:0.3s; display:block; }
+        .nav-mobile { display:none; position:absolute; top:60px; left:0; width:100%; background:rgba(13,11,9,0.98); padding:1.5rem 2rem; list-style:none; flex-direction:column; gap:1.2rem; border-bottom:1px solid rgba(200,114,42,0.2); z-index:999; }
+        .nav-mobile.open { display:flex !important; }
+        .nav-mobile li a { color:var(--blanco); text-decoration:none; font-weight:600; font-size:0.9rem; }
+        .mobile-lang-row { display:flex; gap:0.5rem; padding-top:0.5rem; border-top:1px solid rgba(200,114,42,0.15); }
+        @media(max-width:700px) { .lang-switcher { display:none; } .hamburger { display:flex; } .nav-right .nav-back { display:none; } }
+    
+    </style>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MM2BMHMG18"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-MM2BMHMG18');
+</script>
+    <link rel="stylesheet" href="tema.css">
+    <script src="tema.js" defer></script>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="nav-logo">MAYA <span>| El Rottweiler Peluche 🐻</span></a>
+    <div class="nav-right">
+        <a href="index.html" class="nav-back" id="nav-back-btn">← Volver al inicio</a>
+        <div class="lang-switcher">
+            <button id="btn-es" class="lang-btn active" onclick="setLang('es')">ES</button>
+            <button id="btn-en" class="lang-btn" onclick="setLang('en')">EN</button>
+        </div>
+        <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+            <span></span><span></span><span></span>
+        </div>
+    </div>
+    <ul class="nav-mobile" id="navMobile" style="display:none;">
+        <li><a href="index.html" id="nav-back-mobile">← Volver al inicio</a></li>
+        <li><a href="guias.html">Guías →</a></li>
+        <li class="mobile-lang-row">
+            <button class="lang-btn active" onclick="setLang('es')">ES</button>
+            <button class="lang-btn" onclick="setLang('en')">EN</button>
+        </li>
+    </ul>
+</nav>
+
+<div class="quiz-wrapper">
+    <div class="quiz-box">
+
+        <!-- INTRO -->
+        <div id="intro" class="intro">
+            <img loading="eager" src="fotos/Maya-piscina.jpg" alt="Maya Rottweiler" class="intro-img">
+            <h1 id="quiz-main-title">¿Estás listo para<br><span>adoptar un perro?</span></h1>
+            <p id="quiz-main-sub">Soy Maya, y he visto de todo. Dueños increíbles... y dueños que claramente no estaban preparados. 8 preguntas para saber en qué grupo estás. Sin trampa, sin piedad. 🐾</p>
+            <button id="quiz-start-btn" class="btn-start" onclick="startQuiz()">Empezar el test →</button>
+        </div>
+
+        <!-- QUIZ -->
+        <div id="quiz" class="hidden">
+            <div class="progress-text" id="progress-text">Pregunta 1 de 8</div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill" style="width:12.5%"></div>
+            </div>
+            <div class="question-num" id="question-num">PREGUNTA 1</div>
+            <div class="question-text" id="question-text"></div>
+            <div class="options" id="options"></div>
+        </div>
+
+        <!-- RESULTADO -->
+        <div id="result" class="result hidden">
+            <img loading="lazy" class="result-img" id="result-img" src="fotos/Maya5.webp" alt="Maya">
+            <span class="result-emoji" id="result-emoji"></span>
+            <div class="result-title" id="result-title"></div>
+            <div class="result-sub" id="result-sub"></div>
+            <div class="result-score" id="result-score"></div>
+            <div class="result-desc" id="result-desc"></div>
+            <div class="result-btns">
+                <a href="https://www.instagram.com/maya.rottweiler13" target="_blank" class="btn-share">🐾 Seguir a Maya</a>
+                <button class="btn-retry" onclick="resetQuiz()">Repetir test</button>
+            </div>
+            <div style="font-size:0.75rem;color:rgba(242,237,230,0.35);text-align:center;">
+                Comparte tu resultado en stories y etiqueta a <strong style="color:var(--fuego);">@maya.rottweiler13</strong>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+const questions = [
+    {
+        text: "Son las 7 de la mañana, llueve, hace frío y tienes resaca. El perro necesita salir. ¿Qué haces?",
+        options: [
+            { text: "Me levanto sin pensarlo, el perro es mi responsabilidad 🐕", points: 3 },
+            { text: "Me levanto refunfuñando pero salgo", points: 2 },
+            { text: "Le abro la puerta del jardín y vuelvo a la cama", points: 1 },
+            { text: "Le pongo una alfombrilla y ya está... ¿no?", points: 0 }
+        ]
+    },
+    {
+        text: "Tienes una semana de vacaciones con los amigos en Ibiza. ¿Qué pasa con el perro?",
+        options: [
+            { text: "Ya tengo persona de confianza para cuidarlo, llevo meses organizándolo", points: 3 },
+            { text: "Mis padres o alguien de la familia se quedan con él", points: 2 },
+            { text: "Buscaré algo cuando llegue el momento...", points: 1 },
+            { text: "Oye, los perros se quedan solos, tampoco es para tanto", points: 0 }
+        ]
+    },
+    {
+        text: "Llevas 8 horas en el trabajo y tu perro lleva solo en casa desde las 8 de la mañana. ¿Cómo tienes esto resuelto?",
+        options: [
+            { text: "Tengo paseador o alguien que viene a mediodía", points: 3 },
+            { text: "Trabajo cerca y me paso en el descanso", points: 2 },
+            { text: "Pues... normalmente aguanta hasta que llego", points: 1 },
+            { text: "¿Y qué problema hay? Los perros duermen mucho", points: 0 }
+        ]
+    },
+    {
+        text: "El veterinario te dice que tu perro necesita una operación urgente. El presupuesto: 800€. ¿Qué haces?",
+        options: [
+            { text: "Lo tengo cubierto, para eso está el seguro o el ahorro", points: 3 },
+            { text: "Me las apañaré, aunque tenga que pedir prestado", points: 2 },
+            { text: "A ver si hay opciones más baratas...", points: 1 },
+            { text: "No tenía ni idea de que los perros costaban tanto", points: 0 }
+        ]
+    },
+    {
+        text: "Tu perro se ha destrozado los zapatos nuevos, ha volcado el cubo de basura y ha ladrado 3 horas mientras no estabas. ¿Tu reacción?",
+        options: [
+            { text: "Necesita más ejercicio y estimulación, es mi responsabilidad trabajarlo", points: 3 },
+            { text: "Lo reto pero entiendo que está aburrido", points: 2 },
+            { text: "Me pongo de los nervios, la verdad", points: 1 },
+            { text: "A lo mejor el perro no es para mí...", points: 0 }
+        ]
+    },
+    {
+        text: "¿Con qué frecuencia estás dispuesto a salir a pasear?",
+        options: [
+            { text: "3 veces al día mínimo, lo que necesite", points: 3 },
+            { text: "Mañana y noche seguro, a mediodía cuando pueda", points: 2 },
+            { text: "Una vez larga al día debería bastar ¿no?", points: 1 },
+            { text: "Tengo jardín, ¿cuenta eso?", points: 0 }
+        ]
+    },
+    {
+        text: "¿Has investigado qué raza encaja con tu estilo de vida antes de adoptar?",
+        options: [
+            { text: "Sí, llevo meses investigando razas, tamaños, energía y carácter", points: 3 },
+            { text: "He mirado algo, pero tampoco demasiado", points: 2 },
+            { text: "Me gustan los que salen en Instagram", points: 1 },
+            { text: "Me da igual la raza, todos los perros son iguales", points: 0 }
+        ]
+    },
+    {
+        text: "Tu pareja, familia o compañeros de piso, ¿están de acuerdo con tener un perro?",
+        options: [
+            { text: "Sí, todos de acuerdo y con ganas", points: 3 },
+            { text: "La mayoría sí, hay alguna duda pero se puede hablar", points: 2 },
+            { text: "Aún no lo he comentado del todo...", points: 1 },
+            { text: "Será una sorpresa 😅", points: 0 }
+        ]
+    }
+];
+
+const results = [
+    {
+        min: 0, max: 8,
+        emoji: "😅",
+        title: "Todavía no, amigo",
+        sub: "Maya dice: 'Agradezco la honestidad, pero... no.'",
+        img: "fotos/Maya2.webp",
+        desc: "Tener un perro es una responsabilidad enorme: tiempo, dinero, energía y compromiso durante 10-15 años. Ahora mismo hay algunas cosas que trabajar antes de dar ese paso. No te rindas — infórmate, prepárate y cuando estés listo, hay miles de perros esperando un buen hogar. 🐾"
+    },
+    {
+        min: 9, max: 14,
+        emoji: "🤔",
+        title: "Casi, pero no del todo",
+        sub: "Maya dice: 'Veo potencial... pero me preocupas un poco.'",
+        img: "fotos/Maya3.webp",
+        desc: "Tienes buena disposición pero hay aspectos prácticos que necesitas resolver antes de adoptar: el tema económico, la organización del día a día, o hablarlo con quienes convives. Un perro no perdona la improvisación. Solucionas esas dudas y tienes todas las papeletas para ser un dueño increíble. 💪"
+    },
+    {
+        min: 15, max: 19,
+        emoji: "🐾",
+        title: "Preparado con matices",
+        sub: "Maya dice: 'Me convences, aunque con alguna reserva.'",
+        img: "fotos/Maya1.webp",
+        desc: "Tienes la actitud correcta y la mayoría de las bases bien puestas. Hay algún detalle que pulir, pero en general estás en buen camino. Mi consejo: antes de adoptar, visita protectoras, infórmate sobre la raza que más encaja contigo y ten todo organizado. ¡Los perros que esperan hogar te lo agradecerán! 🏡"
+    },
+    {
+        min: 20, max: 24,
+        emoji: "🏆",
+        title: "¡Dueño de 10!",
+        sub: "Maya dice: '¿Cuándo vienes a buscarme a mí?'",
+        img: "fotos/Maya4.webp",
+        desc: "Eres exactamente el tipo de persona que los perros necesitan. Tienes todo claro: la responsabilidad, el tiempo, el dinero y la actitud. Si aún no tienes perro, ¿a qué esperas? Miles de perros en protectoras están esperando a alguien como tú. Dale una segunda oportunidad a quien más lo necesita. 🐕❤️"
+    }
+];
+
+let currentQ = 0;
+let score = 0;
+
+function startQuiz() {
+    document.getElementById('intro').classList.add('hidden');
+    document.getElementById('quiz').classList.remove('hidden');
+    renderQuestion();
+}
+
+function renderQuestion() {
+    const q = questions[currentQ];
+    document.getElementById('question-num').textContent = `PREGUNTA ${currentQ + 1}`;
+    document.getElementById('question-text').textContent = q.text;
+    document.getElementById('progress-text').textContent = `Pregunta ${currentQ + 1} de ${questions.length}`;
+    document.getElementById('progress-fill').style.width = `${((currentQ + 1) / questions.length) * 100}%`;
+
+    const optionsEl = document.getElementById('options');
+    optionsEl.innerHTML = '';
+    q.options.forEach((opt, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'option-btn';
+        btn.textContent = opt.text;
+        btn.onclick = () => selectOption(btn, opt.points, i);
+        optionsEl.appendChild(btn);
+    });
+}
+
+function selectOption(btn, points, idx) {
+    const buttons = document.querySelectorAll('.option-btn');
+    buttons.forEach(b => b.disabled = true);
+    btn.classList.add('selected');
+    score += points;
+
+    setTimeout(() => {
+        currentQ++;
+        if (currentQ < questions.length) {
+            renderQuestion();
+        } else {
+            showResult();
+        }
+    }, 600);
+}
+
+function showResult() {
+    document.getElementById('quiz').classList.add('hidden');
+    document.getElementById('result').classList.remove('hidden');
+
+    const result = results.find(r => score >= r.min && score <= r.max);
+    document.getElementById('result-emoji').textContent = result.emoji;
+    document.getElementById('result-title').textContent = result.title;
+    document.getElementById('result-sub').textContent = result.sub;
+    document.getElementById('result-img').src = result.img;
+    document.getElementById('result-score').innerHTML = `Tu puntuación: <strong>${score} / 24</strong>`;
+    document.getElementById('result-desc').textContent = result.desc;
+}
+
+function resetQuiz() {
+    currentQ = 0;
+    score = 0;
+    document.getElementById('result').classList.add('hidden');
+    document.getElementById('intro').classList.remove('hidden');
+}
+
+    // === IDIOMAS ===
+    let currentLang = 'es';
+    const QUIZ_LANGS = {
+        es: {
+            navBack: '← Volver al inicio',
+            footer: '© 2026 <span>Maya | El Rottweiler Peluche</span> · Gestionado por <span>MTS23 Talent</span> · Hecho con <span>❤️</span><br><a href="mailto:hola@mayarottweiler.com" style="color:var(--fuego);text-decoration:none;font-size:.75rem;">hola@mayarottweiler.com</a>'
+        },
+        en: {
+            navBack: '← Back to home',
+            footer: '© 2026 <span>Maya | The Teddy Bear Rottweiler</span> · Managed by <span>MTS23 Talent</span> · Made with <span>❤️</span><br><a href="mailto:hola@mayarottweiler.com" style="color:var(--fuego);text-decoration:none;font-size:.75rem;">hola@mayarottweiler.com</a>'
+        }
+    };
+
+    function setLang(lang) {
+        currentLang = lang;
+        const l = QUIZ_LANGS[lang];
+        document.getElementById('btn-es').style.background = lang === 'es' ? 'var(--fuego)' : 'transparent';
+        document.getElementById('btn-es').style.color = lang === 'es' ? 'var(--negro)' : 'var(--blanco)';
+        document.getElementById('btn-en').style.background = lang === 'en' ? 'var(--fuego)' : 'transparent';
+        document.getElementById('btn-en').style.color = lang === 'en' ? 'var(--negro)' : 'var(--blanco)';
+        document.getElementById('nav-back-btn').textContent = l.navBack;
+        const mobileBack = document.getElementById('nav-back-mobile');
+        if (mobileBack) mobileBack.textContent = l.navBack;
+        const titleEl = document.getElementById('quiz-main-title');
+        if (titleEl) titleEl.innerHTML = lang === 'en' ? 'Are you ready to<br><span class="quiz-hl">adopt a dog?</span>' : '¿Estás listo para<br><span class="quiz-hl">adoptar un perro?</span>';
+        const subEl = document.getElementById('quiz-main-sub');
+        if (subEl) subEl.textContent = lang === 'en' ? 'Maya has 8 questions for you. Be honest — your answer could change a dog\'s life.' : 'Maya tiene 8 preguntas para ti. Sé honesto — tu respuesta puede cambiar la vida de un perro.';
+        const startEl = document.getElementById('quiz-start-btn');
+        if (startEl && !startEl.disabled) startEl.textContent = lang === 'en' ? 'Start the quiz 🐾' : 'Empezar el test 🐾';
+        const footerEl = document.getElementById('footer-text');
+        if (footerEl) footerEl.innerHTML = l.footer;
+        document.documentElement.lang = lang;
+        // Sincronizar botones del menú móvil
+        document.querySelectorAll('.mobile-lang-row .lang-btn').forEach(b => {
+            b.classList.toggle('active', b.textContent === lang.toUpperCase());
+            b.style.background = b.textContent === lang.toUpperCase() ? 'var(--fuego)' : 'transparent';
+            b.style.color = b.textContent === lang.toUpperCase() ? 'var(--negro)' : 'var(--blanco)';
+        });
+        // nav-back-btn en menú móvil también se actualiza por ID
+    }
+
+
+    function toggleMenu() {
+        const nav = document.getElementById('navMobile');
+        nav.classList.toggle('open');
+    }
+
+</script>
+
+<footer style="background:#090705;padding:2rem;text-align:center;border-top:1px solid rgba(200,114,42,.15);">
+    <p id="footer-text" style="font-size:.78rem;color:rgba(242,237,230,.35);">© 2026 <span style="color:#C8722A">Maya | El Rottweiler Peluche</span> · Gestionado por <span style="color:#C8722A">MTS23 Talent</span> · Hecho con <span style="color:#C8722A">❤️</span></p>
+</footer>
+
+
+<!-- BANNER COOKIES -->
+<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;width:100%;z-index:9999;background:#0D0B09;border-top:2px solid rgba(200,114,42,0.4);padding:1.2rem 2rem;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;box-shadow:0 -4px 20px rgba(0,0,0,0.5);">
+    <p style="margin:0;font-size:.82rem;color:rgba(242,237,230,.75);max-width:700px;font-family:'Montserrat',sans-serif;line-height:1.6;">
+        🍪 Usamos cookies propias y de terceros (Google Analytics) para analizar el tráfico y mejorar la web.
+        <a href="privacidad.html" style="color:#C8722A;font-weight:700;">Más información</a>
+    </p>
+    <div style="display:flex;gap:.8rem;flex-shrink:0;">
+        <button onclick="acceptCookies()" style="background:#C8722A;color:#0D0B09;border:none;padding:.6rem 1.4rem;border-radius:4px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.78rem;cursor:pointer;letter-spacing:.5px;text-transform:uppercase;">Aceptar</button>
+        <button onclick="rejectCookies()" style="background:transparent;color:rgba(242,237,230,.6);border:1px solid rgba(242,237,230,.2);padding:.6rem 1.4rem;border-radius:4px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.78rem;cursor:pointer;letter-spacing:.5px;text-transform:uppercase;">Rechazar</button>
+    </div>
+</div>
+<script>
+function acceptCookies() {
+    localStorage.setItem('cookieConsent', 'accepted');
+    document.getElementById('cookie-banner').style.display = 'none';
+}
+function rejectCookies() {
+    localStorage.setItem('cookieConsent', 'rejected');
+    window['ga-disable-G-MM2BMHMG18'] = true;
+    document.getElementById('cookie-banner').style.display = 'none';
+}
+document.addEventListener('DOMContentLoaded', function() {
+    var consent = localStorage.getItem('cookieConsent');
+    if (!consent) {
+        document.getElementById('cookie-banner').style.display = 'flex';
+    } else if (consent === 'rejected') {
+        window['ga-disable-G-MM2BMHMG18'] = true;
+    }
+});
+</script>
+</body>
+</html>
