@@ -1,11 +1,31 @@
 # Recuperar la web de Maya desde Cloudflare
 
-El código fuente en local se perdió (el PC se rompió), pero el Worker sigue
-desplegado en Cloudflare, así que se puede descargar el código tal como quedó
-publicado.
+El código fuente en local se perdió (el PC se rompió), pero el sitio sigue
+desplegado en Cloudflare, así que se puede recuperar.
 
 - **Cuenta (account_id):** `c21d634c54dbb741978cf0efd1135bc8`
 - **Worker:** `mayarottweiler` (entorno `production`)
+
+## ⭐ La web es ESTÁTICA → usa esto (lo más fácil y completo)
+
+Como es una web estática, todo (HTML/CSS/JS/imágenes) se está sirviendo
+público, así que la forma más fiable es **descargar el sitio publicado tal cual**:
+
+```bash
+./mirror-maya-site.sh https://TU-URL-DE-LA-WEB
+```
+
+La URL sale al pulsar **"Visit"** en el dashboard del Worker (será algo tipo
+`https://mayarottweiler.TU-SUBDOMINIO.workers.dev` o tu dominio propio).
+
+Los ficheros quedan en `sitio-recuperado/`. Esto recupera el HTML, CSS,
+imágenes y JS ya listos para editar. Es la mejor opción para un sitio estático.
+
+---
+
+> Las opciones de abajo (API / Quick edit) descargan **solo el código JS del
+> Worker**, que en una web estática normalmente NO contiene tus páginas. Úsalas
+> únicamente si el mirror de arriba no bastara.
 
 ## Opción A — Rápida, desde el navegador (sin instalar nada)
 
