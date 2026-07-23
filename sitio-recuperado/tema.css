@@ -181,3 +181,7 @@ html.tjs [data-tr].tv { opacity: 1; transform: translateY(0); }
 .faqv-item summary::after{content:'+';color:var(--fuego);font-size:1.4rem;font-weight:400;flex-shrink:0}
 .faqv-item[open] summary::after{content:'\2212'}
 .faqv-item .faqv-a{padding:0 1.4rem 1.2rem;color:rgba(242,237,230,.72);font-size:.9rem;line-height:1.7}
+
+/* Aviso divulgativo (E-E-A-T salud) */
+.aviso-medico{max-width:760px;margin:2.5rem auto 0;padding:1.2rem 1.5rem;background:rgba(200,114,42,.06);border:1px solid rgba(200,114,42,.2);border-radius:8px;font-size:.83rem;color:rgba(242,237,230,.62);line-height:1.65}
+.aviso-medico strong{color:rgba(242,237,230,.82)}
