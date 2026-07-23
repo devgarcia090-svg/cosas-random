@@ -207,3 +207,18 @@ html.tjs [data-tr].tv { opacity: 1; transform: translateY(0); }
 .ml-newsletter .nl-consent{display:flex;align-items:flex-start;gap:.5rem;font-size:.75rem;color:rgba(242,237,230,.55);margin:.9rem 0 0;line-height:1.5;text-align:left}
 .ml-newsletter .nl-consent input{margin-top:.15rem;accent-color:#C8722A;flex-shrink:0}
 .ml-newsletter .nl-consent a{color:rgba(242,237,230,.75)}
+
+/* Checklist imprimible */
+.checklist{background:var(--gris);border:1px solid rgba(200,114,42,.25);border-radius:8px;padding:1.5rem 1.8rem;margin:2rem 0}
+.checklist h3{color:var(--fuego);font-size:1.1rem;font-weight:800;margin:0 0 1rem}
+.checklist label{display:flex;align-items:flex-start;gap:.6rem;font-size:.92rem;color:rgba(242,237,230,.85);margin-bottom:.7rem;cursor:pointer;line-height:1.5}
+.checklist input{margin-top:.2rem;accent-color:var(--fuego);width:18px;height:18px;flex-shrink:0}
+.checklist button{margin-top:.6rem;background:transparent;color:var(--fuego);border:1px solid var(--fuego);border-radius:4px;padding:.6rem 1.2rem;font-weight:700;font-size:.8rem;cursor:pointer;font-family:inherit;transition:all .2s}
+.checklist button:hover{background:var(--fuego);color:var(--negro)}
+@media print{
+  nav,footer,.cta-quiz,.adopta-band,.ml-newsletter,#cookie-banner,#scrollProgress,.relacionadas,.faqv{display:none!important}
+  body,article,article *{background:#fff!important;color:#000!important}
+  .checklist,.info-box,.warning-box{border:1px solid #999!important;background:#fff!important}
+  .checklist button{display:none!important}
+  a{color:#000!important}
+}
