@@ -15,7 +15,7 @@ if(localStorage.getItem('cookieConsent') === 'rejected' || !localStorage.getItem
 </script>
 <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-MM2BMHMG18"></script>
-    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-MM2BMHMG18');</script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied'});gtag('js',new Date());gtag('config','G-MM2BMHMG18');</script>
     <link rel="dns-prefetch" href="https://www.googletagmanager.com/">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -86,15 +86,19 @@ if(localStorage.getItem('cookieConsent') === 'rejected' || !localStorage.getItem
     <h3>2.3 Datos de navegación (Analytics)</h3>
     <p>Este sitio utiliza <strong>Google Analytics 4</strong> para recoger datos de navegación de forma anónima: páginas visitadas, tiempo de permanencia, dispositivo utilizado, país de origen y fuente de la visita. Google Analytics no recoge datos personales identificables.</p>
 
+    <h3>2.4 Suscripción a la newsletter</h3>
+    <p>Si te suscribes a nuestra newsletter, recogemos tu <strong>dirección de email</strong> con tu consentimiento expreso. La gestión de la lista de suscriptores y el envío de correos se realiza a través de <strong>MailerLite</strong>. Puedes darte de baja en cualquier momento desde el enlace incluido en cada email.</p>
+
     <h2>3. Finalidad del tratamiento</h2>
     <ul>
         <li>Gestionar solicitudes de colaboración de marcas</li>
         <li>Responder consultas recibidas por email</li>
         <li>Analizar el tráfico del sitio web para mejorar su contenido (Analytics)</li>
+        <li>Enviar nuestra newsletter a las personas que se han suscrito voluntariamente</li>
     </ul>
 
     <h2>4. Base legal</h2>
-    <p>El tratamiento de datos se basa en el <strong>consentimiento del interesado</strong> (art. 6.1.a RGPD) al rellenar el formulario o enviarnos un email, y en el <strong>interés legítimo</strong> (art. 6.1.f RGPD) para el análisis estadístico de tráfico web.</p>
+    <p>El tratamiento de datos se basa en el <strong>consentimiento del interesado</strong> (art. 6.1.a RGPD): al rellenar el formulario de contacto, suscribirte a la newsletter, enviarnos un email o aceptar las cookies analíticas mediante el banner de cookies. Las cookies de Google Analytics <strong>solo se activan tras tu aceptación</strong>.</p>
 
     <h2>5. Conservación de datos</h2>
     <p>Los datos del formulario de contacto se conservan el tiempo necesario para gestionar la solicitud y un máximo de 12 meses adicionales. Los datos de Analytics son anónimos y se conservan según la configuración de Google Analytics (por defecto, 14 meses).</p>
@@ -119,6 +123,7 @@ if(localStorage.getItem('cookieConsent') === 'rejected' || !localStorage.getItem
         <li><strong>Google Analytics (_ga, _gid, _ga_*):</strong> cookies analíticas de terceros que recogen información anónima sobre el uso del sitio. Duración: de 24 horas a 2 años. Puedes desactivarlas en <a href="https://tools.google.com/dlpage/gaoptout" target="_blank">tools.google.com/dlpage/gaoptout</a></li>
     </ul>
     <p>Este sitio no utiliza cookies de publicidad, seguimiento comercial ni cookies de redes sociales propias.</p>
+    <p>Las cookies analíticas <strong>solo se activan si las aceptas</strong> en el banner que aparece al entrar en la web. Mientras no las aceptes, Google Analytics funciona en modo restringido, sin instalar cookies (Google Consent Mode).</p>
 
     <h3>Cómo gestionar las cookies</h3>
     <p>Puedes configurar tu navegador para rechazar o eliminar cookies en cualquier momento. Ten en cuenta que desactivar cookies puede afectar al funcionamiento de algunos sitios web.</p>
@@ -130,6 +135,7 @@ if(localStorage.getItem('cookieConsent') === 'rejected' || !localStorage.getItem
     <ul>
         <li><strong>Formspree:</strong> gestión del formulario de contacto. <a href="https://formspree.io/legal/privacy-policy" target="_blank">Política de privacidad de Formspree</a></li>
         <li><strong>Google Analytics:</strong> análisis de tráfico web. <a href="https://policies.google.com/privacy" target="_blank">Política de privacidad de Google</a></li>
+        <li><strong>MailerLite:</strong> gestión de la newsletter y envío de emails (empresa con sede en la UE). <a href="https://www.mailerlite.com/legal/privacy-policy" target="_blank">Política de privacidad de MailerLite</a></li>
     </ul>
 
     <h2>10. Cambios en esta política</h2>
@@ -140,35 +146,5 @@ if(localStorage.getItem('cookieConsent') === 'rejected' || !localStorage.getItem
     <p>© 2026 <span>Maya | El Rottweiler Peluche</span> · Gestionado por <span>MTS23 Talent</span> · Hecho con <span>❤️</span><br><a href="mailto:hola@mayarottweiler.com">hola@mayarottweiler.com</a></p>
 </footer>
 
-<!-- BANNER COOKIES -->
-<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;width:100%;z-index:9999;background:#0D0B09;border-top:2px solid rgba(200,114,42,0.4);padding:1.2rem 2rem;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;box-shadow:0 -4px 20px rgba(0,0,0,0.5);">
-    <p style="margin:0;font-size:.82rem;color:rgba(242,237,230,.75);max-width:700px;font-family:'Montserrat',sans-serif;line-height:1.6;">
-        🍪 Usamos cookies propias y de terceros (Google Analytics) para analizar el tráfico y mejorar la web.
-        <a href="privacidad.html" style="color:#C8722A;font-weight:700;">Más información</a>
-    </p>
-    <div style="display:flex;gap:.8rem;flex-shrink:0;">
-        <button onclick="acceptCookies()" style="background:#C8722A;color:#0D0B09;border:none;padding:.6rem 1.4rem;border-radius:4px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.78rem;cursor:pointer;letter-spacing:.5px;text-transform:uppercase;">Aceptar</button>
-        <button onclick="rejectCookies()" style="background:transparent;color:rgba(242,237,230,.6);border:1px solid rgba(242,237,230,.2);padding:.6rem 1.4rem;border-radius:4px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.78rem;cursor:pointer;letter-spacing:.5px;text-transform:uppercase;">Rechazar</button>
-    </div>
-</div>
-<script>
-function acceptCookies() {
-    localStorage.setItem('cookieConsent', 'accepted');
-    document.getElementById('cookie-banner').style.display = 'none';
-}
-function rejectCookies() {
-    localStorage.setItem('cookieConsent', 'rejected');
-    window['ga-disable-G-MM2BMHMG18'] = true;
-    document.getElementById('cookie-banner').style.display = 'none';
-}
-document.addEventListener('DOMContentLoaded', function() {
-    var consent = localStorage.getItem('cookieConsent');
-    if (!consent) {
-        document.getElementById('cookie-banner').style.display = 'flex';
-    } else if (consent === 'rejected') {
-        window['ga-disable-G-MM2BMHMG18'] = true;
-    }
-});
-</script>
 </body>
 </html>

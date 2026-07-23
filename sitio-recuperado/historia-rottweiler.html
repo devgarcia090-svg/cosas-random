@@ -81,6 +81,7 @@
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied'});
   gtag('js', new Date());
   gtag('config', 'G-MM2BMHMG18');
 </script>
@@ -184,7 +185,7 @@
                 <input aria-label="email" type="email" name="fields[email]" placeholder="Tu email" autocomplete="email" required>
                 <button type="submit">Suscribirme</button>
               </div>
-              <p class="nl-legal">Puedes darte de baja cuando quieras. Consulta nuestra <a href="privacidad.html">política de privacidad</a>.</p>
+              <label class="nl-consent"><input type="checkbox" required> He leído y acepto la <a href="privacidad.html">política de privacidad</a> y doy mi consentimiento para recibir comunicaciones por email.</label>
               <input type="hidden" name="ml-submit" value="1">
               <input type="hidden" name="anticsrf" value="true">
             </form>

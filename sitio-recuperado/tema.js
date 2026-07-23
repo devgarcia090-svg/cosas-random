@@ -134,3 +134,33 @@ document.documentElement.classList.add('tjs');
   }
   loop();
 })();
+
+// ── Banner de cookies + Google Consent Mode (RGPD / LSSI) ──────────
+(function () {
+  function gt() { if (window.gtag) window.gtag.apply(window, arguments); }
+  function grant() {
+    gt('consent', 'update', {
+      'ad_storage': 'granted', 'ad_user_data': 'granted',
+      'ad_personalization': 'granted', 'analytics_storage': 'granted'
+    });
+  }
+  function hide() { var b = document.getElementById('cookie-banner'); if (b) b.parentNode.removeChild(b); }
+  window.acceptCookies = function () { try { localStorage.setItem('cookieConsent', 'accepted'); } catch (e) {} grant(); hide(); };
+  window.rejectCookies = function () { try { localStorage.setItem('cookieConsent', 'rejected'); } catch (e) {} hide(); };
+
+  var consent = null;
+  try { consent = localStorage.getItem('cookieConsent'); } catch (e) {}
+  if (consent === 'accepted') { grant(); return; }
+  if (consent === 'rejected') { return; }
+
+  // Sin decisión previa: mostramos el banner (GA sigue "denegado" mientras tanto)
+  var b = document.createElement('div');
+  b.id = 'cookie-banner';
+  b.setAttribute('style', 'position:fixed;bottom:0;left:0;width:100%;z-index:9999;background:#0D0B09;border-top:1px solid rgba(200,114,42,0.35);padding:1.2rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;box-shadow:0 -4px 20px rgba(0,0,0,0.5);');
+  b.innerHTML = '<p style="margin:0;font-size:.82rem;color:rgba(242,237,230,.75);max-width:700px;line-height:1.6;font-family:inherit;">🍪 Usamos cookies propias y de terceros (Google Analytics) para analizar el tráfico y mejorar la web. Puedes aceptarlas o rechazarlas libremente. <a href="privacidad.html" style="color:#C8722A;font-weight:700;">Más información</a></p>' +
+    '<div style="display:flex;gap:.8rem;flex-shrink:0;">' +
+    '<button type="button" onclick="acceptCookies()" style="background:#C8722A;color:#0D0B09;border:none;padding:.6rem 1.4rem;border-radius:4px;font-family:inherit;font-weight:800;font-size:.72rem;cursor:pointer;letter-spacing:1px;text-transform:uppercase;">Aceptar</button>' +
+    '<button type="button" onclick="rejectCookies()" style="background:transparent;color:rgba(242,237,230,.55);border:1px solid rgba(242,237,230,.18);padding:.6rem 1.4rem;border-radius:4px;font-family:inherit;font-weight:700;font-size:.72rem;cursor:pointer;letter-spacing:1px;text-transform:uppercase;">Rechazar</button>' +
+    '</div>';
+  if (document.body) document.body.appendChild(b);
+})();

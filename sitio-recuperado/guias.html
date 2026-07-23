@@ -111,6 +111,7 @@
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
+  gtag('consent', 'default', {'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied'});
   gtag('js', new Date());
   gtag('config', 'G-MM2BMHMG18');
 </script>
@@ -428,7 +429,7 @@
                 <input aria-label="email" type="email" name="fields[email]" placeholder="Tu email" autocomplete="email" required>
                 <button type="submit">Suscribirme</button>
               </div>
-              <p class="nl-legal">Puedes darte de baja cuando quieras. Consulta nuestra <a href="privacidad.html">política de privacidad</a>.</p>
+              <label class="nl-consent"><input type="checkbox" required> He leído y acepto la <a href="privacidad.html">política de privacidad</a> y doy mi consentimiento para recibir comunicaciones por email.</label>
               <input type="hidden" name="ml-submit" value="1">
               <input type="hidden" name="anticsrf" value="true">
             </form>
@@ -447,35 +448,5 @@
     <p>© 2026 <span>Maya | El Rottweiler Peluche</span> · Gestionado por <span>MTS23 Talent</span> · Hecho con <span>❤️</span><br><a href="mailto:hola@mayarottweiler.com" style="color:var(--fuego);text-decoration:none;font-size:.75rem;">hola@mayarottweiler.com</a><br><a href="privacidad.html" style="color:rgba(242,237,230,.4);font-size:.72rem;text-decoration:none;">Privacidad</a> · <a href="aviso-legal.html" style="color:rgba(242,237,230,.4);font-size:.72rem;text-decoration:none;">Aviso legal</a> · <a href="descargo-responsabilidad.html" style="color:rgba(242,237,230,.4);font-size:.72rem;text-decoration:none;">Descargo</a></p>
 </footer>
 
-<!-- BANNER COOKIES -->
-<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;width:100%;z-index:9999;background:#0D0B09;border-top:2px solid rgba(200,114,42,0.4);padding:1.2rem 2rem;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;box-shadow:0 -4px 20px rgba(0,0,0,0.5);">
-    <p style="margin:0;font-size:.82rem;color:rgba(242,237,230,.75);max-width:700px;font-family:'Montserrat',sans-serif;line-height:1.6;">
-        🍪 Usamos cookies propias y de terceros (Google Analytics) para analizar el tráfico y mejorar la web.
-        <a href="privacidad.html" style="color:#C8722A;font-weight:700;">Más información</a>
-    </p>
-    <div style="display:flex;gap:.8rem;flex-shrink:0;">
-        <button onclick="acceptCookies()" style="background:#C8722A;color:#0D0B09;border:none;padding:.6rem 1.4rem;border-radius:4px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.78rem;cursor:pointer;letter-spacing:.5px;text-transform:uppercase;">Aceptar</button>
-        <button onclick="rejectCookies()" style="background:transparent;color:rgba(242,237,230,.6);border:1px solid rgba(242,237,230,.2);padding:.6rem 1.4rem;border-radius:4px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.78rem;cursor:pointer;letter-spacing:.5px;text-transform:uppercase;">Rechazar</button>
-    </div>
-</div>
-<script>
-function acceptCookies() {
-    localStorage.setItem('cookieConsent', 'accepted');
-    document.getElementById('cookie-banner').style.display = 'none';
-}
-function rejectCookies() {
-    localStorage.setItem('cookieConsent', 'rejected');
-    window['ga-disable-G-MM2BMHMG18'] = true;
-    document.getElementById('cookie-banner').style.display = 'none';
-}
-document.addEventListener('DOMContentLoaded', function() {
-    var consent = localStorage.getItem('cookieConsent');
-    if (!consent) {
-        document.getElementById('cookie-banner').style.display = 'flex';
-    } else if (consent === 'rejected') {
-        window['ga-disable-G-MM2BMHMG18'] = true;
-    }
-});
-</script>
 </body>
 </html>

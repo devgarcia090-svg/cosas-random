@@ -14,7 +14,7 @@ if(localStorage.getItem('cookieConsent') === 'rejected' || !localStorage.getItem
 }
 </script>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-MM2BMHMG18"></script>
-    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-MM2BMHMG18');</script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied'});gtag('js',new Date());gtag('config','G-MM2BMHMG18');</script>
     <link rel="dns-prefetch" href="https://www.googletagmanager.com/">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -67,35 +67,5 @@ if(localStorage.getItem('cookieConsent') === 'rejected' || !localStorage.getItem
     <a href="privacidad.html">Política de privacidad</a> · <a href="aviso-legal.html">Aviso legal</a> · <a href="descargo-responsabilidad.html">Descargo de responsabilidad</a></p>
 </footer>
 
-<!-- BANNER COOKIES -->
-<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;width:100%;z-index:9999;background:#0D0B09;border-top:2px solid rgba(200,114,42,0.4);padding:1.2rem 2rem;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;box-shadow:0 -4px 20px rgba(0,0,0,0.5);">
-    <p style="margin:0;font-size:.82rem;color:rgba(242,237,230,.75);max-width:700px;font-family:'Montserrat',sans-serif;line-height:1.6;">
-        🍪 Usamos cookies propias y de terceros (Google Analytics) para analizar el tráfico y mejorar la web.
-        <a href="privacidad.html" style="color:#C8722A;font-weight:700;">Más información</a>
-    </p>
-    <div style="display:flex;gap:.8rem;flex-shrink:0;">
-        <button onclick="acceptCookies()" style="background:#C8722A;color:#0D0B09;border:none;padding:.6rem 1.4rem;border-radius:4px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.78rem;cursor:pointer;letter-spacing:.5px;text-transform:uppercase;">Aceptar</button>
-        <button onclick="rejectCookies()" style="background:transparent;color:rgba(242,237,230,.6);border:1px solid rgba(242,237,230,.2);padding:.6rem 1.4rem;border-radius:4px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:.78rem;cursor:pointer;letter-spacing:.5px;text-transform:uppercase;">Rechazar</button>
-    </div>
-</div>
-<script>
-function acceptCookies() {
-    localStorage.setItem('cookieConsent', 'accepted');
-    document.getElementById('cookie-banner').style.display = 'none';
-}
-function rejectCookies() {
-    localStorage.setItem('cookieConsent', 'rejected');
-    window['ga-disable-G-MM2BMHMG18'] = true;
-    document.getElementById('cookie-banner').style.display = 'none';
-}
-document.addEventListener('DOMContentLoaded', function() {
-    var consent = localStorage.getItem('cookieConsent');
-    if (!consent) {
-        document.getElementById('cookie-banner').style.display = 'flex';
-    } else if (consent === 'rejected') {
-        window['ga-disable-G-MM2BMHMG18'] = true;
-    }
-});
-</script>
 </body>
 </html>
