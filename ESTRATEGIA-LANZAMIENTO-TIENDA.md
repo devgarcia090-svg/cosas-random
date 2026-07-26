@@ -4,9 +4,15 @@
 
 - Tienda Shopify **ya conectada** en `tienda.html` (botón de compra real, no
   simulado). Producto: "Camiseta Exclusiva PPP".
-- Página tras contraseña (`MAYAPPP`) — vista previa privada, correcto para
-  no enseñar algo a medio hacer.
-- Sección de lista de espera (email → aviso el día del lanzamiento).
+- **Parte pública** (sin contraseña): hero, teaser y lista de espera → ya se
+  puede compartir el enlace en redes para captar suscriptores.
+- **Parte privada** (ficha de producto + roadmap): oculta. Para verla, entrar
+  con `?preview` en la URL e introducir el código `MAYAPPP`.
+- Lista de espera **conectada a MailerLite** (grupo "Tienda", separado del
+  newsletter general) → el día del lanzamiento se le envía la campaña solo a
+  ese grupo.
+- Página en `noindex`: Google no la indexa mientras esté en preparación.
+  **Recordar quitar el `noindex` el día del lanzamiento.**
 - Roadmap de "próximos productos": colección de ropa, accesorios PPP,
   objetos lifestyle, Pack Fundadores.
 - +41.000 seguidores en Instagram + TikTok, +4,5M visualizaciones/mes.
