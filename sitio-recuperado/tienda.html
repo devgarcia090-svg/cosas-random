@@ -268,8 +268,7 @@ document.addEventListener('DOMContentLoaded', function(){
     <div class="container" style="max-width:640px;text-align:center">
         <span class="s-label">Estamos preparando algo</span>
         <h2 class="s-title">La colección está en camino 🐾</h2>
-        <p class="s-sub">Diseño exclusivo, causa real. Apúntate abajo para ser de los primeros en verla y comprarla.</p>
-        <a href="tienda.html#lista-espera" class="btn-lista" style="margin-top:1rem">🐾 &nbsp; Apuntarme a la lista</a>
+        <p class="s-sub" style="margin-bottom:0">Diseño exclusivo, causa real. Déjanos tu email aquí abajo y serás de los primeros en verla.</p>
     </div>
 </section>
 
@@ -593,29 +592,52 @@ document.addEventListener('DOMContentLoaded', function(){
     <h2>Sé el <span>primero</span> en saber<br>cuándo abrimos</h2>
     <p>Deja tu email y te avisamos el día del lanzamiento. Sin spam. Solo una notificación cuando llegue el momento.</p>
 
-    <div id="mlb2-44143960" class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-44143960">
-      <div class="ml-form-embedWrapper">
-        <div id="form-wrapper" class="ml-form-embedBody row-form">
-            <form class="ml-block-form form-lista" action="https://assets.mailerlite.com/jsonp/2528243/forms/194057809673848120/subscribe" data-code="" method="post" target="_blank">
-                <input aria-label="email" type="email" name="fields[email]" placeholder="tu@email.com" autocomplete="email" required>
-                <button type="submit">Avísame 🐾</button>
-                <input type="hidden" name="ml-submit" value="1">
-                <input type="hidden" name="anticsrf" value="true">
-            </form>
-            <p class="form-nota">Sin spam. Solo un aviso cuando abramos. Puedes darte de baja cuando quieras.</p>
-        </div>
+    <div id="form-wrapper">
+        <form class="form-lista" id="form-espera"
+              action="https://assets.mailerlite.com/jsonp/2528243/forms/194057809673848120/subscribe"
+              method="post" target="_blank">
+            <input aria-label="email" type="email" name="fields[email]" placeholder="tu@email.com" autocomplete="email" required>
+            <button type="submit" id="btn-espera">Avísame 🐾</button>
+            <input type="hidden" name="ml-submit" value="1">
+            <input type="hidden" name="anticsrf" value="true">
+        </form>
+        <p class="form-nota">Sin spam. Solo un aviso cuando abramos. Puedes darte de baja cuando quieras.</p>
+        <p class="form-nota" id="form-error" style="display:none;color:#e05252">No hemos podido apuntarte. Inténtalo de nuevo o escríbenos a hola@mayarottweiler.com</p>
+    </div>
 
-        <div class="ml-form-successBody row-success gracias-msg" id="gracias-msg" style="display:none">
-            <span class="icon">🐾</span>
-            <h3>¡Apuntado!</h3>
-            <p>Te avisaremos cuando la tienda abra. Mientras tanto, sigue el día a día de Maya en Instagram y TikTok.</p>
-        </div>
-      </div>
+    <div class="gracias-msg" id="gracias-msg">
+        <span class="icon">🐾</span>
+        <h3>¡Apuntado!</h3>
+        <p>Te avisaremos cuando la tienda abra. Mientras tanto, sigue el día a día de Maya en Instagram y TikTok.</p>
     </div>
 </section>
-<script>function ml_webform_success_44143960(){var $=ml_jQuery||jQuery;$('.ml-subscribe-form-44143960 .row-success').addClass('visible');$('.ml-subscribe-form-44143960 .row-form').hide();}</script>
-<script src="https://groot.mailerlite.com/js/w/webforms.min.js?v83147fa8ce2d95cb73ece7f28b469519" type="text/javascript"></script>
-<script>fetch("https://assets.mailerlite.com/jsonp/2528243/forms/194057809673848120/takel")</script>
+<script>
+(function(){
+    var form = document.getElementById('form-espera');
+    if(!form) return;
+    var btn = document.getElementById('btn-espera');
+
+    form.addEventListener('submit', function(e){
+        e.preventDefault();               // no abrimos pestaña nueva
+        var data = new FormData(form);
+        btn.disabled = true;
+        btn.textContent = 'Enviando...';
+
+        // Envío directo al endpoint de MailerLite. Con no-cors no podemos leer
+        // la respuesta, pero la suscripción se registra igualmente.
+        fetch(form.action, { method: 'POST', body: data, mode: 'no-cors' })
+            .then(function(){
+                document.getElementById('form-wrapper').style.display = 'none';
+                document.getElementById('gracias-msg').classList.add('visible');
+            })
+            .catch(function(){
+                btn.disabled = false;
+                btn.textContent = 'Avísame 🐾';
+                document.getElementById('form-error').style.display = 'block';
+            });
+    });
+})();
+</script>
 
 <!-- MIENTRAS TANTO -->
 <section class="mientras-section">
