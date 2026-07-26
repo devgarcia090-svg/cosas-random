@@ -563,24 +563,25 @@
     <h2>Sé el <span>primero</span> en saber<br>cuándo abrimos</h2>
     <p>Deja tu email y te avisamos el día del lanzamiento. Sin spam. Solo una notificación cuando llegue el momento.</p>
 
-    <div id="form-wrapper">
-        <form class="form-lista" action="https://formsubmit.co/hola@mayarottweiler.com" method="POST" id="form-espera">
-            <input type="hidden" name="_subject" value="Nueva inscripción lista de espera — Tienda Maya">
-            <input type="hidden" name="_captcha" value="false">
-            <input type="hidden" name="_template" value="box">
-            <input type="hidden" name="_next" value="https://mayarottweiler.com/tienda.html?gracias=1">
-            <input type="email" name="email" placeholder="tu@email.com" required>
+    <div id="form-wrapper" class="ml-subscribe-form ml-subscribe-form-44143960">
+        <form class="form-lista row-form" action="https://assets.mailerlite.com/jsonp/2528243/forms/194057809673848120/subscribe" data-code="" method="post" target="_blank">
+            <input aria-label="email" type="email" name="fields[email]" placeholder="tu@email.com" autocomplete="email" required>
             <button type="submit">Avísame 🐾</button>
+            <input type="hidden" name="ml-submit" value="1">
+            <input type="hidden" name="anticsrf" value="true">
         </form>
         <p class="form-nota">Sin spam. Solo un aviso cuando abramos. Puedes darte de baja cuando quieras.</p>
     </div>
 
-    <div class="gracias-msg" id="gracias-msg">
+    <div class="gracias-msg row-success" id="gracias-msg">
         <span class="icon">🐾</span>
         <h3>¡Apuntado!</h3>
         <p>Te avisaremos cuando la tienda abra. Mientras tanto, sigue el día a día de Maya en Instagram y TikTok.</p>
     </div>
 </section>
+<script>function ml_webform_success_44143960(){var $=ml_jQuery||jQuery;$('.ml-subscribe-form-44143960 .row-success').addClass('visible');$('.ml-subscribe-form-44143960 .row-form').hide();}</script>
+<script src="https://groot.mailerlite.com/js/w/webforms.min.js?v83147fa8ce2d95cb73ece7f28b469519" type="text/javascript"></script>
+<script>fetch("https://assets.mailerlite.com/jsonp/2528243/forms/194057809673848120/takel")</script>
 
 <!-- MIENTRAS TANTO -->
 <section class="mientras-section">
@@ -601,12 +602,5 @@
     <a href="mailto:hola@mayarottweiler.com" style="color:var(--fuego);text-decoration:none;font-size:.75rem;">hola@mayarottweiler.com</a></p>
 </footer>
 
-<script>
-    // Show thank you message if redirected after form submission
-    if (window.location.search.includes('gracias=1')) {
-        document.getElementById('form-wrapper').style.display = 'none';
-        document.getElementById('gracias-msg').classList.add('visible');
-    }
-</script>
 </body>
 </html>
