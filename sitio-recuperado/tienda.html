@@ -167,11 +167,11 @@
 </head>
 <body>
 
-<!-- ===== PROTECCIÓN POR CONTRASEÑA ===== -->
+<!-- ===== VISTA PREVIA DEL EQUIPO (añade ?preview a la URL) ===== -->
 <div id="pwd-overlay" style="
     position:fixed;inset:0;z-index:99999;
     background:#0D0B09;
-    display:flex;align-items:center;justify-content:center;
+    display:none;align-items:center;justify-content:center;
     font-family:'Montserrat',sans-serif;
 ">
     <div style="text-align:center;padding:2rem;max-width:420px;width:90%;">
@@ -204,27 +204,43 @@
 </div>
 
 <script>
-(function(){
-    // Cambia 'MAYAPPP' por la contraseña que quieras
+document.addEventListener('DOMContentLoaded', function(){
+    // Cambia 'MAYAPPP' por la contraseña que quieras.
+    // La ficha de producto y el roadmap solo se muestran si ya se desbloqueó
+    // antes, o si se visita con ?preview en la URL (para el equipo).
     var PASSWORD = 'MAYAPPP';
-    if(sessionStorage.getItem('tienda_ok')==='1'){
-        document.getElementById('pwd-overlay').style.display='none';
+    var isPreview = window.location.search.indexOf('preview') !== -1;
+    var unlocked = sessionStorage.getItem('tienda_ok') === '1';
+
+    function reveal(){
+        document.getElementById('tienda-privada').style.display = 'block';
+        document.getElementById('teaser-privado').style.display = 'none';
+        document.getElementById('pwd-overlay').style.display = 'none';
     }
+
+    if(unlocked){
+        reveal();
+    } else if(isPreview){
+        document.getElementById('pwd-overlay').style.display = 'flex';
+    }
+    // Visitante normal (sin ?preview y sin desbloquear): se queda con el
+    // teaser público visible y la zona privada oculta. Sin overlay.
+
     window.checkPwd = function(){
         var val = document.getElementById('pwd-input').value;
         var err = document.getElementById('pwd-error');
         if(val === PASSWORD){
             sessionStorage.setItem('tienda_ok','1');
-            document.getElementById('pwd-overlay').style.display='none';
+            reveal();
         } else {
             err.style.display='block';
             document.getElementById('pwd-input').value='';
             document.getElementById('pwd-input').focus();
         }
     };
-})();
+});
 </script>
-<!-- ===== FIN PROTECCIÓN ===== -->
+<!-- ===== FIN VISTA PREVIA ===== -->
 
 <nav>
     <a href="index.html" class="nav-logo">MAYA <span>| El Rottweiler Peluche 🐻</span></a>
@@ -236,9 +252,9 @@
     <canvas class="hero-canvas" id="heroCanvas"></canvas>
     <div class="hero-content">
         <span class="badge-tienda">🛍️ Maya Merch</span>
-        <h1>Ya está<br><span>aquí</span> 🐾</h1>
-        <p class="sub">La tienda oficial de Maya. El primer producto ya disponible — más llegan pronto.</p>
-        <a href="tienda.html#producto" class="btn-lista">🛍️ &nbsp; Ver producto</a>
+        <h1>Muy<br><span>pronto</span> 🐾</h1>
+        <p class="sub">La tienda oficial de Maya está en camino. Apúntate y sé el primero en saberlo.</p>
+        <a href="tienda.html#lista-espera" class="btn-lista">🐾 &nbsp; Avísame</a>
         <div class="hero-stats">
             <div class="hero-stat"><span>+41K</span><p>en la comunidad</p></div>
             <div class="hero-stat"><span>+4.5M</span><p>views al mes</p></div>
@@ -247,6 +263,18 @@
     </div>
 </header>
 
+<!-- TEASER PÚBLICO (mientras el producto está en preparación) -->
+<section class="section" id="teaser-privado">
+    <div class="container" style="max-width:640px;text-align:center">
+        <span class="s-label">Estamos preparando algo</span>
+        <h2 class="s-title">La colección está en camino 🐾</h2>
+        <p class="s-sub">Diseño exclusivo, causa real. Apúntate abajo para ser de los primeros en verla y comprarla.</p>
+        <a href="tienda.html#lista-espera" class="btn-lista" style="margin-top:1rem">🐾 &nbsp; Apuntarme a la lista</a>
+    </div>
+</section>
+
+<!-- ZONA PRIVADA (equipo): añade ?preview a la URL para desbloquear -->
+<div id="tienda-privada" style="display:none">
 <!-- PRODUCTO DISPONIBLE AHORA -->
 <section class="section" id="producto" style="border-bottom:1px solid rgba(200,114,42,.15)">
     <div class="container" style="max-width:1100px">
@@ -557,6 +585,8 @@
         </div>
     </div>
 </section>
+</div>
+
 
 <!-- LISTA DE ESPERA -->
 <section class="lista-section" id="lista-espera">
