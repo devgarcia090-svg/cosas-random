@@ -593,20 +593,24 @@ document.addEventListener('DOMContentLoaded', function(){
     <h2>Sé el <span>primero</span> en saber<br>cuándo abrimos</h2>
     <p>Deja tu email y te avisamos el día del lanzamiento. Sin spam. Solo una notificación cuando llegue el momento.</p>
 
-    <div id="form-wrapper" class="ml-subscribe-form ml-subscribe-form-44143960">
-        <form class="form-lista row-form" action="https://assets.mailerlite.com/jsonp/2528243/forms/194057809673848120/subscribe" data-code="" method="post" target="_blank">
-            <input aria-label="email" type="email" name="fields[email]" placeholder="tu@email.com" autocomplete="email" required>
-            <button type="submit">Avísame 🐾</button>
-            <input type="hidden" name="ml-submit" value="1">
-            <input type="hidden" name="anticsrf" value="true">
-        </form>
-        <p class="form-nota">Sin spam. Solo un aviso cuando abramos. Puedes darte de baja cuando quieras.</p>
-    </div>
+    <div id="mlb2-44143960" class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-44143960">
+      <div class="ml-form-embedWrapper">
+        <div id="form-wrapper" class="ml-form-embedBody row-form">
+            <form class="ml-block-form form-lista" action="https://assets.mailerlite.com/jsonp/2528243/forms/194057809673848120/subscribe" data-code="" method="post" target="_blank">
+                <input aria-label="email" type="email" name="fields[email]" placeholder="tu@email.com" autocomplete="email" required>
+                <button type="submit">Avísame 🐾</button>
+                <input type="hidden" name="ml-submit" value="1">
+                <input type="hidden" name="anticsrf" value="true">
+            </form>
+            <p class="form-nota">Sin spam. Solo un aviso cuando abramos. Puedes darte de baja cuando quieras.</p>
+        </div>
 
-    <div class="gracias-msg row-success" id="gracias-msg">
-        <span class="icon">🐾</span>
-        <h3>¡Apuntado!</h3>
-        <p>Te avisaremos cuando la tienda abra. Mientras tanto, sigue el día a día de Maya en Instagram y TikTok.</p>
+        <div class="ml-form-successBody row-success gracias-msg" id="gracias-msg" style="display:none">
+            <span class="icon">🐾</span>
+            <h3>¡Apuntado!</h3>
+            <p>Te avisaremos cuando la tienda abra. Mientras tanto, sigue el día a día de Maya en Instagram y TikTok.</p>
+        </div>
+      </div>
     </div>
 </section>
 <script>function ml_webform_success_44143960(){var $=ml_jQuery||jQuery;$('.ml-subscribe-form-44143960 .row-success').addClass('visible');$('.ml-subscribe-form-44143960 .row-form').hide();}</script>
