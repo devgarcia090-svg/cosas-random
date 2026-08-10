@@ -91,7 +91,7 @@ veneciaburger/
 ├── data/menu.json        ← la carta entera (única fuente de datos)
 ├── build.py              ← genera el HTML a partir del JSON
 ├── tools/fotos.py        ← descarga y recorta las fotos de los platos
-├── tools/artifact.py     ← empaqueta la carta en un HTML suelto para enseñarla
+├── tools/artifact.py     ← empaqueta el sitio entero en un HTML suelto para enseñarlo
 ├── assets/
 │   ├── css/styles.css    ← incluye la dirección de diseño documentada arriba
 │   ├── fonts/            ← Fraunces y Archivo, subconjunto propio (68 KB)
@@ -148,6 +148,17 @@ Es HTML plano: vale cualquier hosting.
 ```bash
 python3 -m http.server 8000
 # http://localhost:8000
+```
+
+### Enseñarlo sin desplegar
+
+`tools/artifact.py` mete las cinco páginas, el CSS, las fuentes y las fotos en **un solo archivo
+HTML** que se abre desde cualquier sitio, sin servidor. Un router de diez líneas cambia de página,
+así que la barra, el botón «Ver la carta» y los enlaces del pie funcionan igual que en el sitio
+real. Es solo para enseñarlo: lo que se publica son las páginas de `build.py`.
+
+```bash
+python3 tools/artifact.py /tmp/venecia.html
 ```
 
 ## SEO
