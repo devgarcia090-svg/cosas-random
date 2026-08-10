@@ -61,7 +61,8 @@
     ]
   },
   "avisos": {
-    "alergenos": "Si tienes alguna alergia o intolerancia, avísanos antes de pedir: te informamos de los alérgenos de cada plato."
+    "alergenos": "Si tienes alguna alergia o intolerancia, avísanos antes de pedir: te informamos de los alérgenos de cada plato.",
+    "cierre": null
   },
   "secciones": [
     {
@@ -771,5 +772,63 @@
         "bebidas"
       ]
     }
+  ],
+  "alergenos": [
+    [
+      "Cereales con gluten",
+      "Trigo, centeno, cebada, avena, espelta y derivados: pan, rebozados, masas y salsas espesadas con harina."
+    ],
+    [
+      "Crustáceos",
+      "Gambas, langostinos, cangrejo y derivados."
+    ],
+    [
+      "Huevos",
+      "Huevo y derivados: mayonesas, rebozados, masas y salsas."
+    ],
+    [
+      "Pescado",
+      "Pescado y derivados, incluidos los usados como ingrediente de salsas."
+    ],
+    [
+      "Cacahuetes",
+      "Cacahuete y derivados: cremas, aceites y toppings."
+    ],
+    [
+      "Soja",
+      "Soja y derivados, habituales en salsas y panes."
+    ],
+    [
+      "Leche",
+      "Leche y derivados, incluida la lactosa: quesos, cremas, mantequilla y salsas."
+    ],
+    [
+      "Frutos de cáscara",
+      "Almendra, avellana, nuez, anacardo, pistacho, macadamia y derivados."
+    ],
+    [
+      "Apio",
+      "Apio y derivados, presentes en caldos y condimentos."
+    ],
+    [
+      "Mostaza",
+      "Mostaza y derivados, habitual en salsas y aliños."
+    ],
+    [
+      "Granos de sésamo",
+      "Sésamo y derivados: panes, toppings y salsas."
+    ],
+    [
+      "Dióxido de azufre y sulfitos",
+      "En concentraciones superiores a 10 mg/kg o 10 mg/l; habitual en vinos y encurtidos."
+    ],
+    [
+      "Altramuces",
+      "Altramuz y derivados, usados en algunas harinas."
+    ],
+    [
+      "Moluscos",
+      "Almeja, mejillón, calamar, pulpo y derivados."
+    ]
   ]
 }

@@ -1,7 +1,7 @@
 # Redirecciones 301 de las URLs antiguas a la carta única
 /inicio                                          /                    301
 /cerrado-por-vacaciones                          /                    301
-/alergenos                                       /menu                301
+/carta-de-alergenos                              /alergenos           301
 /burgers                                         /menu#burgers        301
 /entrantes                                       /menu#entrantes      301
 /sandwiches-briche                               /menu#sandwiches     301

@@ -128,7 +128,7 @@ def pie() -> str:
     </div>
   </div>
   <div class="contenedor pie__legal">
-    <p>© {datetime.date.today().year} {e(NEG['nombre'])} · <a href="/politica-de-privacidad">Política de privacidad</a></p>
+    <p>© {datetime.date.today().year} {e(NEG['nombre'])} · <a href="/alergenos">Alérgenos</a> · <a href="/politica-de-privacidad">Política de privacidad</a></p>
   </div>
 </footer>
 <script src="/assets/js/venecia.js" defer></script>
@@ -322,6 +322,14 @@ def render_bebidas(sec) -> str:
     return out + "</div>"
 
 
+def banner_cierre() -> str:
+    """Aviso de cierre temporal. Se activa poniendo `avisos.cierre` en el JSON."""
+    texto = DATOS["avisos"].get("cierre")
+    if not texto:
+        return ""
+    return f'<div class="contenedor"><p class="cierre">{e(texto)}</p></div>'
+
+
 def pagina_menu() -> str:
     chips = "".join(
         f'<a href="#{s["id"]}">{e(s["titulo"])}</a>' for s in DATOS["secciones"]
@@ -362,6 +370,7 @@ def pagina_menu() -> str:
         cabecera("Carta y precios | Burger Bar Venecia — Beniel (Murcia)", desc, "/menu",
                  extra_head=bloque_jsonld(schema_restaurante(), schema_menu(), migas))
         + f"""
+{banner_cierre()}
 <div class="contenedor carta-cab">
   <h1>Nuestra carta</h1>
   <p>{n_platos} platos con todos sus ingredientes y precios. Actualizada a {HOY[8:10]}/{HOY[5:7]}/{HOY[0:4]}.</p>
@@ -381,7 +390,7 @@ def pagina_menu() -> str:
 
 <div class="contenedor">
   <div class="aviso">
-    <p>{e(DATOS['avisos']['alergenos'])}</p>
+    <p>{e(DATOS['avisos']['alergenos'])} <a href="/alergenos">Ver los 14 alérgenos</a>.</p>
   </div>
 
   <p id="sin-resultados" class="sin-resultados" hidden>No hay ningún plato con ese nombre o ingrediente.</p>
@@ -440,6 +449,7 @@ def pagina_inicio() -> str:
         cabecera(f"Hamburguesería en Beniel (Murcia) | {NEG['nombre']}", desc, "/",
                  extra_head=bloque_jsonld(schema_restaurante()))
         + f"""
+{banner_cierre()}
 <div class="contenedor">
   <div class="hero">
     <img class="hero__logo" src="/assets/img/logo-noche.webp" width="416" height="269" fetchpriority="high" alt="{e(NEG['nombre'])}">
@@ -532,7 +542,8 @@ def escribir(ruta: str, contenido: str) -> None:
 
 
 def sitemap() -> str:
-    urls = [("/", "1.0", "weekly"), ("/menu", "0.9", "weekly"), ("/nosotros", "0.5", "monthly")]
+    urls = [("/", "1.0", "weekly"), ("/menu", "0.9", "weekly"),
+            ("/alergenos", "0.6", "monthly"), ("/nosotros", "0.5", "monthly")]
     cuerpo = "".join(
         f"<url><loc>{BASE}{u}</loc><lastmod>{HOY}</lastmod>"
         f"<changefreq>{c}</changefreq><priority>{p}</priority></url>"
@@ -541,6 +552,48 @@ def sitemap() -> str:
     return ('<?xml version="1.0" encoding="UTF-8"?>\n'
             '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'
             + cuerpo + "</urlset>\n")
+
+
+def pagina_alergenos() -> str:
+    filas = "".join(
+        f'<li><h2>{e(nombre)}</h2><p>{e(desc)}</p></li>'
+        for nombre, desc in DATOS["alergenos"]
+    )
+    migas = {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Inicio", "item": BASE + "/"},
+            {"@type": "ListItem", "position": 2, "name": "Carta", "item": BASE + "/menu"},
+            {"@type": "ListItem", "position": 3, "name": "Alérgenos", "item": BASE + "/alergenos"},
+        ],
+    }
+    desc = ("Los 14 alérgenos de declaración obligatoria en Burger Bar Venecia (Beniel, Murcia). "
+            "Pregúntanos antes de pedir y te decimos cuáles lleva cada plato.")
+    return (
+        cabecera(f"Alérgenos | {NEG['nombre']}", desc, "/alergenos",
+                 extra_head=bloque_jsonld(schema_restaurante(), migas))
+        + f"""
+<div class="contenedor">
+  <div class="carta-cab">
+    <h1>Alérgenos</h1>
+    <p>Estos son los 14 alérgenos de declaración obligatoria. Dinos cuál te afecta y te
+    confirmamos qué platos puedes tomar.</p>
+  </div>
+
+  <div class="aviso">
+    <p><strong>Pregunta siempre antes de pedir.</strong> Cocinamos en una cocina donde se manipulan
+    todos estos ingredientes, así que no podemos garantizar la ausencia total de trazas. Si tienes
+    una alergia grave, avísanos al pedir o llámanos antes de venir al
+    <a href="tel:+34{NEG['telefono']}">{e(NEG['telefonoTexto'])}</a>.</p>
+  </div>
+
+  <ol class="alergenos">{filas}</ol>
+
+  <p class="volver-carta"><a class="btn btn--fantasma" href="/menu">Volver a la carta</a></p>
+</div>
+"""
+        + pie()
+    )
 
 
 def pagina_privacidad() -> str:
@@ -595,7 +648,7 @@ def pagina_privacidad() -> str:
 REDIRECCIONES = [
     ("/inicio", "/"),
     ("/cerrado-por-vacaciones", "/"),
-    ("/alergenos", "/menu"),
+    ("/carta-de-alergenos", "/alergenos"),
     ("/burgers", "/menu#burgers"),
     ("/entrantes", "/menu#entrantes"),
     ("/sandwiches-briche", "/menu#sandwiches"),
@@ -664,6 +717,7 @@ def main() -> None:
     escribir("index.html", pagina_inicio())
     escribir("menu/index.html", pagina_menu())
     escribir("nosotros/index.html", pagina_nosotros())
+    escribir("alergenos/index.html", pagina_alergenos())
     escribir("politica-de-privacidad/index.html", pagina_privacidad())
     escribir("sitemap.xml", sitemap())
     escribir("_redirects", redirecciones_netlify())

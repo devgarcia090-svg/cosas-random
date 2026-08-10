@@ -43,7 +43,8 @@ def main() -> None:
     cuerpo = re.sub(r'<nav class="barra__nav".*?</nav>', "", cuerpo, flags=re.S)
     cuerpo = re.sub(r'<a class="barra__logo"[^>]*>', '<span class="barra__logo">', cuerpo)
     cuerpo = cuerpo.replace("</a>\n    \n", "</span>\n", 1)
-    cuerpo = re.sub(r' · <a href="/politica-de-privacidad">[^<]*</a>', "", cuerpo)
+    cuerpo = re.sub(r' · <a href="/(politica-de-privacidad|alergenos)">[^<]*</a>', "", cuerpo)
+    cuerpo = re.sub(r' <a href="/alergenos">[^<]*</a>\.', "", cuerpo)
     cuerpo = re.sub(r'<script src="[^"]*"[^>]*></script>', "", cuerpo)
 
     # Con todo embebido no tiene sentido llevar dos tamaños de cada foto: se

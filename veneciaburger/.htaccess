@@ -2,7 +2,7 @@
 # Redirecciones 301 de las URLs del sitio antiguo
 Redirect 301 /inicio https://veneciaburger.es/
 Redirect 301 /cerrado-por-vacaciones https://veneciaburger.es/
-Redirect 301 /alergenos https://veneciaburger.es/menu
+Redirect 301 /carta-de-alergenos https://veneciaburger.es/alergenos
 Redirect 301 /burgers https://veneciaburger.es/menu#burgers
 Redirect 301 /entrantes https://veneciaburger.es/menu#entrantes
 Redirect 301 /sandwiches-briche https://veneciaburger.es/menu#sandwiches

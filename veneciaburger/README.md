@@ -73,11 +73,14 @@ Además:
 
 | Página | Rendimiento | Accesibilidad | Buenas prácticas | SEO |
 |---|---|---|---|---|
-| `/menu` | 100 | 100 | 100 | 100 |
-| `/` | 97 | 100 | 100 | 100 |
+| `/menu` | 96–99 | 100 | 100 | 100 |
+| `/` | 96–99 | 100 | 100 | 100 |
+| `/alergenos` | 99 | 100 | 100 | 100 |
 
-`axe-core` (WCAG 2.1 A + AA + best-practice): **0 violaciones** en las tres páginas.
-Contrastes ≥ 4,5:1 en todo el texto y objetivos táctiles ≥ 44 px en los botones.
+El rendimiento oscila un par de puntos entre pasadas según cuándo entren las fuentes; el resto es
+estable. `axe-core` (WCAG 2.1 A + AA + best-practice): **0 violaciones** en las cinco páginas.
+Contrastes ≥ 4,5:1 en todo el texto, ≥ 3:1 en los contornos de los controles y objetivos táctiles
+≥ 44 px en los botones.
 
 ---
 
@@ -96,6 +99,7 @@ veneciaburger/
 │   └── img/              ← fotos en WebP: nombre.webp (miniatura) y nombre-g.webp (ampliada)
 ├── index.html            ← generados por build.py
 ├── menu/index.html
+├── alergenos/index.html
 ├── nosotros/index.html
 ├── politica-de-privacidad/index.html
 ├── sitemap.xml
@@ -167,6 +171,38 @@ python3 -m http.server 8000
 
 ---
 
+## Qué se trajo del sitio antiguo y qué no
+
+| Del sitio original | Aquí |
+|---|---|
+| Portada | Rehecha |
+| `/nosotros` | Rehecha |
+| `/menu` + 6 páginas de categoría + ~44 fichas de plato | Fundidas en una sola carta |
+| `/politica-de-privacidad` | Reescrita para ajustarse a esta web |
+| `/alergenos` (una imagen genérica con los 14 símbolos) | Página propia, en texto y accesible |
+| `/cerrado-por-vacaciones` | Sustituida por un aviso configurable |
+| Formulario de contacto | **No traído** (ver abajo) |
+| ★★★★★ decorativas de la portada | **No traídas** (ver abajo) |
+| Banner de cookies | Innecesario: esta web no usa cookies |
+| Tres fotos de burger de la portada | Ya salen en «Las más pedidas» |
+
+**Aviso de cierre temporal.** El sitio antiguo tenía una página suelta que seguía publicada con
+unas vacaciones ya pasadas. Aquí es un campo: se pone `avisos.cierre` en `data/menu.json`, se
+ejecuta `build.py` y el aviso sale en la portada y en la carta. Se quita dejándolo en `null`.
+
+**Formulario de contacto.** No se ha traído a propósito. Era el formulario de Zyro y depende de su
+servidor: al mover el sitio a hosting estático dejaría de funcionar, y un formulario que traga
+mensajes en silencio es peor que no tenerlo. Para una hamburguesería el contacto real es el
+teléfono y el Instagram, que están en el pie y en la barra. Si aun así queréis formulario, se
+resuelve sin backend con Formspree o Netlify Forms — decidlo y se añade.
+
+**Las estrellas ★★★★★.** Eran decorativas: no había ninguna valoración detrás. No se han traído
+porque dan a entender una puntuación que no existe, y marcarlas como reseñas en los datos
+estructurados es motivo de penalización por parte de Google. Lo que sí suma es enlazar las reseñas
+reales del Perfil de Empresa.
+
+---
+
 ## Datos: incoherencias que traía el sitio original
 
 Todo el contenido (nombres, ingredientes, descripciones, precios) está copiado del sitio original.
@@ -217,10 +253,12 @@ donde tocarlo, así que el problema no se puede repetir.
   Se ha mantenido, pero convendría una foto propia.
 - **Aviso "Cerrado por vacaciones" (13 julio – 7 agosto)**: era una página suelta ya caducada.
   No se ha trasladado. Si volvéis a cerrar, lo suyo es un aviso en la portada, no una página.
-- **Alérgenos**: el original solo enlazaba a una imagen genérica con los 14 alérgenos, sin decir
-  cuáles lleva cada plato. He puesto un aviso claro para que el cliente pregunte, pero lo correcto
-  es marcar los alérgenos plato a plato. El JSON ya está preparado para ello: solo hay que añadir
-  un campo `alergenos` a cada plato y pintarlo en `render_plato()`.
+- **Alérgenos**: el original solo enlazaba a una imagen genérica con los 14 símbolos, sin decir
+  cuáles lleva cada plato. Ahora hay una página propia (`/alergenos`) en texto, accesible e
+  indexable, con un aviso claro de que se pregunte antes de pedir. Falta lo importante: **marcar
+  los alérgenos plato a plato**, que es lo que exige el Reglamento (UE) 1169/2011. Está preparado
+  para ello: basta con añadir un campo `alergenos` a cada plato en el JSON y pintarlo en
+  `render_plato()`. Hace falta que la cocina aporte ese dato.
 - **Textos legales**: la política de privacidad se ha reescrito para que se ajuste a esta web (que
   no usa cookies ni analítica). La anterior hablaba de Google Analytics y cookies de terceros que
   aquí ya no existen. Convendría que un asesor le eche un ojo, y añadir un aviso legal con el
