@@ -18,26 +18,56 @@
     "facebook": "https://www.facebook.com/cafeteriavenecia30130/",
     "rangoPrecios": "€€",
     "horario": [
-      { "dia": "Lunes", "codigo": "Monday", "cerrado": true },
-      { "dia": "Martes", "codigo": "Tuesday", "cerrado": true },
-      { "dia": "Miércoles", "codigo": "Wednesday", "abre": "19:30", "cierra": "23:00" },
-      { "dia": "Jueves", "codigo": "Thursday", "abre": "19:30", "cierra": "23:00" },
-      { "dia": "Viernes", "codigo": "Friday", "abre": "19:30", "cierra": "23:30" },
-      { "dia": "Sábado", "codigo": "Saturday", "abre": "19:30", "cierra": "23:30" },
-      { "dia": "Domingo", "codigo": "Sunday", "abre": "19:30", "cierra": "23:00" }
+      {
+        "dia": "Lunes",
+        "codigo": "Monday",
+        "cerrado": true
+      },
+      {
+        "dia": "Martes",
+        "codigo": "Tuesday",
+        "cerrado": true
+      },
+      {
+        "dia": "Miércoles",
+        "codigo": "Wednesday",
+        "abre": "19:30",
+        "cierra": "23:00"
+      },
+      {
+        "dia": "Jueves",
+        "codigo": "Thursday",
+        "abre": "19:30",
+        "cierra": "23:00"
+      },
+      {
+        "dia": "Viernes",
+        "codigo": "Friday",
+        "abre": "19:30",
+        "cierra": "23:30"
+      },
+      {
+        "dia": "Sábado",
+        "codigo": "Saturday",
+        "abre": "19:30",
+        "cierra": "23:30"
+      },
+      {
+        "dia": "Domingo",
+        "codigo": "Sunday",
+        "abre": "19:30",
+        "cierra": "23:00"
+      }
     ]
   },
-
   "avisos": {
     "burgersExtra": "Todas nuestras burgers pueden llevar patatas Dip Canoe y salsa por +1,50 €.",
     "alergenos": "Si tienes alguna alergia o intolerancia, avísanos antes de pedir: te informamos de los alérgenos de cada plato."
   },
-
   "secciones": [
     {
       "id": "burgers",
       "titulo": "Burgers",
-      "emoji": "🍔",
       "intro": "Carne de 200 g de vacuno 100% nacional y pan brioche de Juanito Baker. Puedes añadir patatas Dip Canoe y salsa por +1,50 €.",
       "items": [
         {
@@ -363,13 +393,15 @@
             "Suave crema de queso Camembert"
           ]
         }
+      ],
+      "unidad": [
+        "burger",
+        "burgers"
       ]
     },
-
     {
       "id": "entrantes",
       "titulo": "Entrantes",
-      "emoji": "🍟",
       "intro": "Para compartir antes de la burger. Las patatas gratinadas son de tamaño para 2 personas.",
       "items": [
         {
@@ -501,13 +533,15 @@
           "img": "croquetas-jamon",
           "descripcion": "Doradas y crujientes, con un interior suave y aterciopelado. La cecina aporta un toque ahumado y salado que las hace irresistibles. Perfectas para compartir (o no)."
         }
+      ],
+      "unidad": [
+        "entrante",
+        "entrantes"
       ]
     },
-
     {
       "id": "sandwiches",
       "titulo": "Sándwiches brioche",
-      "emoji": "🥪",
       "intro": "Todos vienen acompañados de patatas fritas Canoe.",
       "items": [
         {
@@ -562,13 +596,15 @@
             "Patatas fritas paja"
           ]
         }
+      ],
+      "unidad": [
+        "sándwich",
+        "sándwiches"
       ]
     },
-
     {
       "id": "kids",
       "titulo": "Menú Kids",
-      "emoji": "🧒",
       "intro": "Menú completo para los más peques, con patatas y bebida incluidas.",
       "items": [
         {
@@ -593,13 +629,15 @@
             "Refresco a elegir: Fanta, cola, Nestea, Aquarius, agua o zumo"
           ]
         }
+      ],
+      "unidad": [
+        "menú",
+        "menús"
       ]
     },
-
     {
       "id": "postres",
       "titulo": "Postres",
-      "emoji": "🍰",
       "intro": "Hacemos tartas caseras a diario en cantidad limitada: pregunta por la disponibilidad del día.",
       "items": [
         {
@@ -626,49 +664,112 @@
           "img": "tarta-pistacho",
           "descripcion": "Nuestra tarta de queso casera en edición pistacho. ¡Increíblemente deliciosa!"
         },
-        { "nombre": "Helado artesanal de Oreo", "precio": 3.8, "img": "helado-oreo" },
-        { "nombre": "Helado artesanal Quinder", "precio": 3.8, "img": "helado-quinder" },
-        { "nombre": "Helado artesanal de chocolate blanco y pistacho", "precio": 3.8, "img": "helado-pistacho" }
+        {
+          "nombre": "Helado artesanal de Oreo",
+          "precio": 3.8,
+          "img": "helado-oreo"
+        },
+        {
+          "nombre": "Helado artesanal Quinder",
+          "precio": 3.8,
+          "img": "helado-quinder"
+        },
+        {
+          "nombre": "Helado artesanal de chocolate blanco y pistacho",
+          "precio": 3.8,
+          "img": "helado-pistacho"
+        }
+      ],
+      "unidad": [
+        "postre",
+        "postres"
       ]
     },
-
     {
       "id": "bebidas",
       "titulo": "Bebidas",
-      "emoji": "🥤",
       "intro": "",
       "listaSimple": true,
       "grupos": [
         {
           "titulo": "Refrescos y agua",
           "items": [
-            { "nombre": "Refrescos", "precio": 2.0 },
-            { "nombre": "Agua 0,5 L Solán", "precio": 1.8 },
-            { "nombre": "Agua con gas", "precio": 2.0 },
-            { "nombre": "Tónica Schweppes", "precio": 2.5 },
-            { "nombre": "Zumo de piña", "precio": 2.0 },
-            { "nombre": "Red Bull", "precio": 2.5 }
+            {
+              "nombre": "Refrescos",
+              "precio": 2.0
+            },
+            {
+              "nombre": "Agua 0,5 L Solán",
+              "precio": 1.8
+            },
+            {
+              "nombre": "Agua con gas",
+              "precio": 2.0
+            },
+            {
+              "nombre": "Tónica Schweppes",
+              "precio": 2.5
+            },
+            {
+              "nombre": "Zumo de piña",
+              "precio": 2.0
+            },
+            {
+              "nombre": "Red Bull",
+              "precio": 2.5
+            }
           ]
         },
         {
           "titulo": "Cervezas",
           "items": [
-            { "nombre": "Caña de barril Alhambra", "precio": 1.5 },
-            { "nombre": "Tanque de barril Alhambra", "precio": 3.0 },
-            { "nombre": "Radler", "precio": 2.0 },
-            { "nombre": "Alhambra 1925 Reserva (verde)", "precio": 2.9 },
-            { "nombre": "Cerveza sin 0,0 San Miguel tercio", "precio": null },
-            { "nombre": "Paulaner 0,5 L", "precio": 3.5 }
+            {
+              "nombre": "Caña de barril Alhambra",
+              "precio": 1.5
+            },
+            {
+              "nombre": "Tanque de barril Alhambra",
+              "precio": 3.0
+            },
+            {
+              "nombre": "Radler",
+              "precio": 2.0
+            },
+            {
+              "nombre": "Alhambra 1925 Reserva (verde)",
+              "precio": 2.9
+            },
+            {
+              "nombre": "Cerveza sin 0,0 San Miguel tercio",
+              "precio": null
+            },
+            {
+              "nombre": "Paulaner 0,5 L",
+              "precio": 3.5
+            }
           ]
         },
         {
           "titulo": "Vinos",
           "items": [
-            { "nombre": "Tinto de verano La Casera", "precio": 2.5 },
-            { "nombre": "Vino blanco (copa)", "precio": 3.0 },
-            { "nombre": "Vino tinto (copa)", "precio": 3.0 }
+            {
+              "nombre": "Tinto de verano La Casera",
+              "precio": 2.5
+            },
+            {
+              "nombre": "Vino blanco (copa)",
+              "precio": 3.0
+            },
+            {
+              "nombre": "Vino tinto (copa)",
+              "precio": 3.0
+            }
           ]
         }
+      ],
+      "unidad": [
+        "bebida",
+        "bebidas"
       ]
     }
   ]

@@ -7,8 +7,7 @@
 <meta name="description" content="Hamburguesería en Beniel (Murcia). Burgers artesanales de 200 g de vacuno 100% nacional y pan brioche. Consulta la carta completa con ingredientes y precios.">
 <link rel="canonical" href="https://veneciaburger.es/">
 <meta name="robots" content="index, follow, max-image-preview:large">
-<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#101216" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#12100e">
 <meta name="geo.region" content="ES-MC">
 <meta name="geo.placename" content="Beniel, Murcia">
 
@@ -24,6 +23,8 @@
 <link rel="icon" href="/assets/img/favicon.png" sizes="any">
 <link rel="apple-touch-icon" href="/assets/img/favicon.png">
 <link rel="manifest" href="/site.webmanifest">
+<link rel="preload" href="/assets/fonts/fraunces-600.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/archivo-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/styles.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Restaurant","@id":"https://veneciaburger.es/#restaurante","name":"Burger Bar Venecia","description":"Hamburguesería artesanal en Beniel (Murcia). Carne 100% vacuno nacional, pan brioche de Juanito Baker y recetas propias desde 2017.","url":"https://veneciaburger.es/","telephone":"+34612272384","image":"https://veneciaburger.es/assets/img/og.jpg","logo":"https://veneciaburger.es/assets/img/logo.webp","priceRange":"€€","servesCuisine":["Hamburguesas","Americana","Comida rápida"],"acceptsReservations":"False","currenciesAccepted":"EUR","address":{"@type":"PostalAddress","streetAddress":"Plaza Ramón y Cajal, 7","postalCode":"30130","addressLocality":"Beniel","addressRegion":"Murcia","addressCountry":"ES"},"areaServed":["Beniel","Murcia","Santomera","Zeneta"],"hasMap":"https://www.google.com/maps/search/?api=1&query=Plaza+Ram%C3%B3n+y+Cajal+7%2C+30130+Beniel%2C+Murcia","sameAs":["https://www.instagram.com/venecia_beniel/","https://www.facebook.com/cafeteriavenecia30130/"],"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":"https://schema.org/Wednesday","opens":"19:30","closes":"23:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":"https://schema.org/Thursday","opens":"19:30","closes":"23:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":"https://schema.org/Friday","opens":"19:30","closes":"23:30"},{"@type":"OpeningHoursSpecification","dayOfWeek":"https://schema.org/Saturday","opens":"19:30","closes":"23:30"},{"@type":"OpeningHoursSpecification","dayOfWeek":"https://schema.org/Sunday","opens":"19:30","closes":"23:00"}],"hasMenu":"https://veneciaburger.es/menu"}]}</script>
 </head>
@@ -32,19 +33,19 @@
 <header class="barra">
   <div class="contenedor barra__int">
     <a class="barra__logo" href="/" aria-label="Burger Bar Venecia — inicio">
-      <img class="logo-img" src="/assets/img/logo-barra.webp" width="416" height="169" alt="Burger Bar Venecia">
+      <img src="/assets/img/logo-barra-noche.webp" width="416" height="169" alt="Burger Bar Venecia">
     </a>
     <nav class="barra__nav" aria-label="Principal"><a href="/" class="secundario" aria-current="page">Inicio</a><a href="/menu" class="">Carta</a><a href="/nosotros" class="secundario">Nosotros</a></nav>
-    <a class="btn btn--sm" href="tel:+34612272384" aria-label="Llamar al 612 272 384">Llamar</a>
+    <a class="btn btn--sm btn--linea" href="tel:+34612272384" aria-label="Llamar al 612 272 384">Llamar</a>
   </div>
 </header>
 <main id="contenido">
 
 <div class="contenedor">
   <div class="hero">
-    <img class="hero__logo logo-img" src="/assets/img/logo.webp" width="200" height="129" fetchpriority="high" alt="Burger Bar Venecia">
+    <img class="hero__logo" src="/assets/img/logo-noche.webp" width="416" height="269" fetchpriority="high" alt="Burger Bar Venecia">
     <h1>Hamburguesería artesanal en Beniel</h1>
-    <p>Calidad, frescura y pasión en cada hamburguesa.</p>
+    <p class="hero__claim">Calidad, frescura y pasión en cada hamburguesa.</p>
     <span class="estado" data-estado data-horario='[{"dia": "Lunes", "abre": null, "cierra": null}, {"dia": "Martes", "abre": null, "cierra": null}, {"dia": "Miércoles", "abre": "19:30", "cierra": "23:00"}, {"dia": "Jueves", "abre": "19:30", "cierra": "23:00"}, {"dia": "Viernes", "abre": "19:30", "cierra": "23:30"}, {"dia": "Sábado", "abre": "19:30", "cierra": "23:30"}, {"dia": "Domingo", "abre": "19:30", "cierra": "23:00"}]' hidden></span>
     <div class="hero__acciones">
       <a class="btn" href="/menu">Ver la carta</a>
@@ -52,22 +53,23 @@
     </div>
   </div>
 
-  <h2>Las más pedidas</h2>
-  <div class="destacados"><a class="destacado" href="/menu#burgers"><img src="/assets/img/clasica.webp" width="200" height="200" loading="lazy" decoding="async" alt="Hamburguesa Clásica"><span>Clásica<b>10,50 €</b></span></a><a class="destacado" href="/menu#burgers"><img src="/assets/img/tio-jack.webp" width="200" height="200" loading="lazy" decoding="async" alt="Hamburguesa Tío Jack"><span>Tío Jack<b>12 €</b></span></a><a class="destacado" href="/menu#burgers"><img src="/assets/img/pistagocha.webp" width="200" height="200" loading="lazy" decoding="async" alt="Hamburguesa Pistagocha"><span>Pistagocha<b>12 €</b></span></a><a class="destacado" href="/menu#burgers"><img src="/assets/img/fire-fox.webp" width="200" height="200" loading="lazy" decoding="async" alt="Hamburguesa Fire Fox"><span>Fire Fox<b>11 €</b></span></a></div>
+  <div class="regla"><span>Las más pedidas</span></div>
+  <div class="destacados"><a class="destacado" href="/menu#burgers"><img src="/assets/img/clasica.webp" width="320" height="400" loading="lazy" decoding="async" alt="Hamburguesa Clásica"><span>Clásica<b>10,50 €</b></span></a><a class="destacado" href="/menu#burgers"><img src="/assets/img/tio-jack.webp" width="320" height="400" loading="lazy" decoding="async" alt="Hamburguesa Tío Jack"><span>Tío Jack<b>12 €</b></span></a><a class="destacado" href="/menu#burgers"><img src="/assets/img/pistagocha.webp" width="320" height="400" loading="lazy" decoding="async" alt="Hamburguesa Pistagocha"><span>Pistagocha<b>12 €</b></span></a><a class="destacado" href="/menu#burgers"><img src="/assets/img/fire-fox.webp" width="320" height="400" loading="lazy" decoding="async" alt="Hamburguesa Fire Fox"><span>Fire Fox<b>11 €</b></span></a></div>
 
-  <div class="tarjetas">
-    <div class="tarjeta">
+  <div class="regla"><span>La casa</span></div>
+  <div class="datos">
+    <div>
       <h2>Dónde estamos</h2>
       <p>Plaza Ramón y Cajal, 7<br>30130 Beniel (Murcia)</p>
       <p><a class="btn btn--fantasma btn--sm" href="https://www.google.com/maps/search/?api=1&amp;query=Plaza+Ram%C3%B3n+y+Cajal+7%2C+30130+Beniel%2C+Murcia" rel="noopener">Cómo llegar</a></p>
     </div>
-    <div class="tarjeta">
+    <div>
       <h2>Horario</h2>
       <table class="horario"><tbody><tr data-hoy="1"><th scope="row">Lunes</th><td>Cerrado</td></tr><tr><th scope="row">Martes</th><td>Cerrado</td></tr><tr><th scope="row">Miércoles</th><td>19:30 – 23:00</td></tr><tr><th scope="row">Jueves</th><td>19:30 – 23:00</td></tr><tr><th scope="row">Viernes</th><td>19:30 – 23:30</td></tr><tr><th scope="row">Sábado</th><td>19:30 – 23:30</td></tr><tr><th scope="row">Domingo</th><td>19:30 – 23:00</td></tr></tbody></table>
     </div>
   </div>
 
-  <div class="tarjeta">
+  <div class="manifiesto">
     <h2>Carne 100% vacuno nacional, pan brioche y salsas propias</h2>
     <p>Desde 2017 en la Plaza Ramón y Cajal de Beniel. Empezamos como cafetería y acabamos
     encontrando lo que de verdad nos apasiona: las hamburguesas. Cada burger lleva 200 g de carne
@@ -80,7 +82,7 @@
 <footer class="pie">
   <div class="contenedor pie__grid">
     <div>
-      <p class="pie__logo"><img class="logo-img" src="/assets/img/logo-barra.webp" width="416" height="169" alt="Burger Bar Venecia"></p>
+      <p class="pie__logo"><img src="/assets/img/logo-barra-noche.webp" width="416" height="169" alt="Burger Bar Venecia"></p>
       <p>Calidad, frescura y pasión en cada hamburguesa.</p>
     </div>
     <div>

@@ -53,8 +53,7 @@ def cabecera(titulo, descripcion, ruta, *, og_img="/assets/img/og.jpg", extra_he
 <meta name="description" content="{e(descripcion)}">
 <link rel="canonical" href="{e(url)}">
 <meta name="robots" content="index, follow, max-image-preview:large">
-<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#101216" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#12100e">
 <meta name="geo.region" content="ES-MC">
 <meta name="geo.placename" content="Beniel, Murcia">
 
@@ -70,6 +69,8 @@ def cabecera(titulo, descripcion, ruta, *, og_img="/assets/img/og.jpg", extra_he
 <link rel="icon" href="/assets/img/favicon.png" sizes="any">
 <link rel="apple-touch-icon" href="/assets/img/favicon.png">
 <link rel="manifest" href="/site.webmanifest">
+<link rel="preload" href="/assets/fonts/fraunces-600.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/archivo-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/styles.css">
 {extra_head}
 </head>
@@ -92,10 +93,10 @@ def barra(ruta) -> str:
     return f"""<header class="barra">
   <div class="contenedor barra__int">
     <a class="barra__logo" href="/" aria-label="{e(NEG['nombre'])} — inicio">
-      <img class="logo-img" src="/assets/img/logo-barra.webp" width="416" height="169" alt="{e(NEG['nombre'])}">
+      <img src="/assets/img/logo-barra-noche.webp" width="416" height="169" alt="{e(NEG['nombre'])}">
     </a>
     <nav class="barra__nav" aria-label="Principal">{items}</nav>
-    <a class="btn btn--sm" href="tel:+34{NEG['telefono']}" aria-label="Llamar al {e(NEG['telefonoTexto'])}">Llamar</a>
+    <a class="btn btn--sm btn--linea" href="tel:+34{NEG['telefono']}" aria-label="Llamar al {e(NEG['telefonoTexto'])}">Llamar</a>
   </div>
 </header>"""
 
@@ -110,7 +111,7 @@ def pie() -> str:
 <footer class="pie">
   <div class="contenedor pie__grid">
     <div>
-      <p class="pie__logo"><img class="logo-img" src="/assets/img/logo-barra.webp" width="416" height="169" alt="{e(NEG['nombre'])}"></p>
+      <p class="pie__logo"><img src="/assets/img/logo-barra-noche.webp" width="416" height="169" alt="{e(NEG['nombre'])}"></p>
       <p>{e(NEG['claim'])}.</p>
     </div>
     <div>
@@ -243,7 +244,7 @@ def total_platos() -> int:
 def render_plato(it) -> str:
     etiquetas = ""
     if it.get("picante"):
-        etiquetas += '<span class="etiqueta etiqueta--picante">🌶 Picante</span>'
+        etiquetas += '<span class="etiqueta etiqueta--picante">Picante</span>'
     if it.get("para2"):
         etiquetas += '<span class="etiqueta etiqueta--dos">Para 2 personas</span>'
     if it.get("conPatatas"):
@@ -274,7 +275,7 @@ def render_plato(it) -> str:
             f'data-precio="{e(precio(it.get("precio")))}" '
             f'aria-label="Ver la foto de {e(it["nombre"])} más grande">'
             f'<img class="plato__foto" src="/assets/img/{it["img"]}.webp" '
-            f'width="96" height="96" loading="lazy" decoding="async" '
+            f'width="104" height="128" loading="lazy" decoding="async" '
             f'alt="{e(it["nombre"])}">'
             f'<span class="plato__lupa" aria-hidden="true">'
             f'<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
@@ -323,8 +324,7 @@ def render_bebidas(sec) -> str:
 
 def pagina_menu() -> str:
     chips = "".join(
-        f'<a href="#{s["id"]}">{s.get("emoji","")} {e(s["titulo"])}</a>'
-        for s in DATOS["secciones"]
+        f'<a href="#{s["id"]}">{e(s["titulo"])}</a>' for s in DATOS["secciones"]
     )
 
     secciones = ""
@@ -334,8 +334,12 @@ def pagina_menu() -> str:
             cuerpo = render_bebidas(s)
         else:
             cuerpo = '<ul class="platos">' + "".join(render_plato(i) for i in s["items"]) + "</ul>"
+        cuenta = len(s.get("items", [])) + sum(len(g["items"]) for g in s.get("grupos", []))
         secciones += f"""<section class="seccion" id="{s['id']}" aria-labelledby="t-{s['id']}">
-  <h2 id="t-{s['id']}"><span aria-hidden="true">{s.get('emoji','')}</span> {e(s['titulo'])}</h2>
+  <div class="seccion__cab">
+    <h2 id="t-{s['id']}">{e(s['titulo'])}</h2>
+    <span class="seccion__cuenta">{cuenta} {s['unidad'][0] if cuenta == 1 else s['unidad'][1]}</span>
+  </div>
   {intro}
   {cuerpo}
 </section>"""
@@ -377,7 +381,6 @@ def pagina_menu() -> str:
 
 <div class="contenedor">
   <div class="aviso">
-    <span aria-hidden="true">🍟</span>
     <p>{e(DATOS['avisos']['burgersExtra'])} {e(DATOS['avisos']['alergenos'])}</p>
   </div>
 
@@ -424,7 +427,7 @@ def pagina_inicio() -> str:
     ]
     cards = "".join(
         f'<a class="destacado" href="/menu#burgers">'
-        f'<img src="/assets/img/{img}.webp" width="200" height="200" loading="lazy" decoding="async" alt="Hamburguesa {e(n)}">'
+        f'<img src="/assets/img/{img}.webp" width="320" height="400" loading="lazy" decoding="async" alt="Hamburguesa {e(n)}">'
         f'<span>{e(n)}<b>{e(p)}</b></span></a>'
         for img, n, p in destacadas
     )
@@ -439,9 +442,9 @@ def pagina_inicio() -> str:
         + f"""
 <div class="contenedor">
   <div class="hero">
-    <img class="hero__logo logo-img" src="/assets/img/logo.webp" width="200" height="129" fetchpriority="high" alt="{e(NEG['nombre'])}">
+    <img class="hero__logo" src="/assets/img/logo-noche.webp" width="416" height="269" fetchpriority="high" alt="{e(NEG['nombre'])}">
     <h1>Hamburguesería artesanal en Beniel</h1>
-    <p>{e(NEG['claim'])}.</p>
+    <p class="hero__claim">{e(NEG['claim'])}.</p>
     <span class="estado" data-estado data-horario='{horario_js}' hidden></span>
     <div class="hero__acciones">
       <a class="btn" href="/menu">Ver la carta</a>
@@ -449,22 +452,23 @@ def pagina_inicio() -> str:
     </div>
   </div>
 
-  <h2>Las más pedidas</h2>
+  <div class="regla"><span>Las más pedidas</span></div>
   <div class="destacados">{cards}</div>
 
-  <div class="tarjetas">
-    <div class="tarjeta">
+  <div class="regla"><span>La casa</span></div>
+  <div class="datos">
+    <div>
       <h2>Dónde estamos</h2>
       <p>{e(dir_['calle'])}<br>{e(dir_['cp'])} {e(dir_['localidad'])} ({e(dir_['provincia'])})</p>
       <p><a class="btn btn--fantasma btn--sm" href="{e(NEG['mapa'])}" rel="noopener">Cómo llegar</a></p>
     </div>
-    <div class="tarjeta">
+    <div>
       <h2>Horario</h2>
       <table class="horario"><tbody>{filas}</tbody></table>
     </div>
   </div>
 
-  <div class="tarjeta">
+  <div class="manifiesto">
     <h2>Carne 100% vacuno nacional, pan brioche y salsas propias</h2>
     <p>Desde 2017 en la Plaza Ramón y Cajal de Beniel. Empezamos como cafetería y acabamos
     encontrando lo que de verdad nos apasiona: las hamburguesas. Cada burger lleva 200 g de carne
@@ -507,8 +511,8 @@ def pagina_nosotros() -> str:
   <p>Cada día trabajamos para mejorar nuestro espacio, desarrollar nuevas recetas e ideas y seguir
   sorprendiendo. Crecemos gracias a vosotros. ¡Gracias por elegirnos!</p>
 
-  <div class="tarjeta">
-    <h2>Ven a probarnos</h2>
+  <div class="manifiesto">
+    <div class="regla"><span>Ven a probarnos</span></div>
     <p>{e(NEG['direccion']['calle'])}, {e(NEG['direccion']['cp'])} {e(NEG['direccion']['localidad'])} ({e(NEG['direccion']['provincia'])})</p>
     <p><a class="btn" href="/menu">Ver la carta</a></p>
   </div>

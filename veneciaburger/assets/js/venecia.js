@@ -15,7 +15,7 @@
 
     if (hoy && hoy.abre && mins >= aMin(hoy.abre) && mins < aMin(hoy.cierra)) {
       estado.dataset.abierto = 'si';
-      estado.textContent = 'Abierto ahora · hasta las ' + hoy.cierra;
+      estado.textContent = 'Abierto · hasta las ' + hoy.cierra;
     } else {
       var i, d, prox = null;
       for (i = 1; i <= 7; i++) {
@@ -25,8 +25,8 @@
       if (hoy && hoy.abre && mins < aMin(hoy.abre)) prox = hoy;
       estado.dataset.abierto = 'no';
       estado.textContent = prox
-        ? 'Cerrado ahora · abrimos ' + (prox === hoy ? 'hoy' : 'el ' + prox.dia.toLowerCase()) + ' a las ' + prox.abre
-        : 'Cerrado ahora';
+        ? 'Cerrado · abre ' + (prox === hoy ? 'hoy' : prox.dia.toLowerCase()) + ' ' + prox.abre
+        : 'Cerrado';
     }
     estado.hidden = false;
   }

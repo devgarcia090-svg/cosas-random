@@ -6,6 +6,31 @@ móvil** (el caso real: el cliente escanea un QR en la mesa) y en **posicionar e
 Sitio estático: HTML + una hoja de estilos + 3 KB de JavaScript. Sin frameworks, sin peticiones a
 servidores externos, sin cookies.
 
+## La dirección de diseño: servicio de noche
+
+El local abre de 19:30 a 23:30 y cierra lunes y martes: **nunca se ve a la luz del día**. De ahí
+sale todo lo demás. La carta se compone en oscuro por decisión, no por moda — es el ambiente real
+de la sala y lo que menos deslumbra cuando alguien escanea el QR en la mesa. Las fotos de los
+platos son la única fuente de color; el fondo es carbón cálido, del tono del papel de estraza y la
+madera sobre la que están hechas.
+
+- **Color.** Carbón cálido `#12100E`, tinta crema `#F4EFE8` y un único acento: el azul del propio
+  logo (`#5CC2F2`), reservado para filetes, precios señalados y el botón de llamar. El naranja
+  brasa aparece solo para marcar los platos picantes, porque ahí el color significa algo.
+- **Tipografía.** **Fraunces** para los nombres de los platos y los títulos: un serif de contraste
+  alto con carácter, que hace que cada burger se lea como una entrada de carta y no como el título
+  de una tarjeta. **Archivo** para ingredientes, etiquetas y precios, que aguanta bien el cuerpo
+  pequeño en pantalla. Ambas van incrustadas en el sitio (68 KB en total, subconjunto con solo los
+  caracteres que usa la carta): no se pide nada a Google Fonts, así que no hay ni una petición
+  externa ni cookies de terceros.
+- **Trazado.** Carta impresa, no rejilla de tarjetas: filas separadas por filete fino, precios a la
+  derecha con cifras tabulares, encabezados de sección con su recuento («23 burgers»), rótulos en
+  versalita espaciada y márgenes amplios. Sin emojis, sin cajas redondeadas y sin sombras.
+
+El logo original es negro sobre blanco, así que sobre el fondo oscuro desaparecía: se generó una
+versión nocturna (`logo-noche.webp`) que pasa la letra a crema y conserva el trazo azul y el
+amarillo del icono.
+
 ---
 
 ## El problema del sitio anterior
@@ -37,7 +62,7 @@ Además:
   descarga al pulsar, así que no penaliza la carga inicial. Se cierra con Esc, con la aspa o
   tocando fuera, y el foco vuelve donde estaba.
 - **Fotos diferidas** (`loading="lazy"`) con tamaño reservado: no hay saltos de maquetación (CLS 0).
-- **Modo oscuro** automático y **hoja de impresión** (la carta sale en papel sin menús ni fotos).
+- **Hoja de impresión**: en papel sale en blanco y negro, sin menús ni fotos, aprovechando la hoja.
 - **Aviso de abierto/cerrado** en la portada, calculado en el navegador con el horario real.
 - Funciona **sin JavaScript**: la carta completa está en el HTML. El JS solo añade buscador,
   categoría activa y el aviso de horario.
@@ -63,7 +88,8 @@ veneciaburger/
 ├── tools/fotos.py        ← descarga y recorta las fotos de los platos
 ├── tools/artifact.py     ← empaqueta la carta en un HTML suelto para enseñarla
 ├── assets/
-│   ├── css/styles.css
+│   ├── css/styles.css    ← incluye la dirección de diseño documentada arriba
+│   ├── fonts/            ← Fraunces y Archivo, subconjunto propio (68 KB)
 │   ├── js/venecia.js
 │   └── img/              ← fotos en WebP: nombre.webp (miniatura) y nombre-g.webp (ampliada)
 ├── index.html            ← generados por build.py
