@@ -381,7 +381,7 @@ def pagina_menu() -> str:
 
 <div class="contenedor">
   <div class="aviso">
-    <p>{e(DATOS['avisos']['burgersExtra'])} {e(DATOS['avisos']['alergenos'])}</p>
+    <p>{e(DATOS['avisos']['alergenos'])}</p>
   </div>
 
   <p id="sin-resultados" class="sin-resultados" hidden>No hay ningún plato con ese nombre o ingrediente.</p>

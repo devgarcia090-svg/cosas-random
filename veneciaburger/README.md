@@ -58,6 +58,8 @@ Los ingredientes existían, pero estaban **escondidos detrás de un clic por pla
 Además:
 
 - **Chips de categoría fijos** arriba que se marcan solos según por dónde vas scrolleando.
+- El aviso de las patatas por +1,50 € aparece **una sola vez**, en la entradilla de Burgers, que es
+  donde aplica. El aviso general de la cabecera queda solo para los alérgenos.
 - **Pulsar la foto la abre en grande** con el nombre y el precio. La versión grande solo se
   descarga al pulsar, así que no penaliza la carga inicial. Se cierra con Esc, con la aspa o
   tocando fuera, y el foco vuelve donde estaba.
