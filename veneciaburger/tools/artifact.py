@@ -102,11 +102,16 @@ def main() -> None:
     cuerpo = re.sub(r' · <a href="/politica-de-privacidad">[^<]*</a>', "", cuerpo)
     cuerpo = re.sub(r'<script src="[^"]*"[^>]*></script>', "", cuerpo)
 
-    # Imágenes embebidas
-    for ruta in sorted((RAIZ / "assets" / "img").iterdir()):
+    # Con todo embebido no tiene sentido llevar dos tamaños de cada foto: se
+    # deja solo la grande y el navegador la escala para la miniatura.
+    cuerpo = re.sub(r' data-grande="[^"]*"', "", cuerpo)
+    img = RAIZ / "assets" / "img"
+    for ruta in sorted(img.iterdir()):
         marcador = f"/assets/img/{ruta.name}"
-        if marcador in cuerpo:
-            cuerpo = cuerpo.replace(marcador, datauri(ruta))
+        if marcador not in cuerpo:
+            continue
+        grande = ruta.with_name(ruta.stem + "-g" + ruta.suffix)
+        cuerpo = cuerpo.replace(marcador, datauri(grande if grande.exists() else ruta))
 
     destino.write_text(
         "<title>Carta de Burger Bar Venecia — Beniel (Murcia)</title>\n"

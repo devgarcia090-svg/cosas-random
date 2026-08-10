@@ -95,6 +95,37 @@
     document.querySelectorAll('.seccion').forEach(function (s) { obs.observe(s); });
   }
 
+  /* ------------------------------------------- Ampliar la foto de un plato */
+  var lupa = document.querySelector('#lupa');
+  if (lupa) {
+    var foto = lupa.querySelector('#lupa-foto');
+    var nombre = lupa.querySelector('#lupa-nombre');
+    var precioEl = lupa.querySelector('#lupa-precio');
+
+    document.addEventListener('click', function (ev) {
+      var boton = ev.target.closest && ev.target.closest('.plato__zoom');
+      if (!boton) return;
+      // sin data-grande (versión de un solo archivo) se reutiliza la propia foto
+      var grande = boton.getAttribute('data-grande') || boton.querySelector('img').src;
+
+      // Navegadores sin <dialog>: la foto se abre a pantalla completa
+      if (typeof lupa.showModal !== 'function') {
+        window.location.href = grande;
+        return;
+      }
+      foto.src = grande;
+      foto.alt = boton.getAttribute('data-nombre');
+      nombre.textContent = boton.getAttribute('data-nombre');
+      precioEl.textContent = boton.getAttribute('data-precio');
+      lupa.showModal();
+    });
+
+    // Cerrar al pulsar fuera de la foto o en la aspa
+    lupa.addEventListener('click', function (ev) {
+      if (ev.target === lupa || ev.target.closest('.lupa__cerrar')) lupa.close();
+    });
+  }
+
   /* --------------------------------------------------------- Volver arriba */
   var arriba = document.querySelector('.volver-arriba');
   if (arriba) {

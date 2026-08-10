@@ -26,12 +26,16 @@ Los ingredientes existían, pero estaban **escondidos detrás de un clic por pla
 | Ver los ingredientes de un plato | 1 clic + volver, por plato | Visibles en la propia lista |
 | Recorrer la carta entera | ~44 páginas | 1 página |
 | Buscar "trufa" | No se podía | Buscador que filtra por nombre e ingrediente |
+| Ver la foto en grande | No se podía | Se pulsa la foto y se abre a pantalla completa |
 | Peso de la carta | ~300 KB de HTML por página | 80 KB (≈12 KB comprimidos) + fotos diferidas |
 | Datos para Google | Ninguno | `Restaurant` + `Menu` + `BreadcrumbList` (JSON-LD) |
 
 Además:
 
 - **Chips de categoría fijos** arriba que se marcan solos según por dónde vas scrolleando.
+- **Pulsar la foto la abre en grande** con el nombre y el precio. La versión grande solo se
+  descarga al pulsar, así que no penaliza la carga inicial. Se cierra con Esc, con la aspa o
+  tocando fuera, y el foco vuelve donde estaba.
 - **Fotos diferidas** (`loading="lazy"`) con tamaño reservado: no hay saltos de maquetación (CLS 0).
 - **Modo oscuro** automático y **hoja de impresión** (la carta sale en papel sin menús ni fotos).
 - **Aviso de abierto/cerrado** en la portada, calculado en el navegador con el horario real.
@@ -56,10 +60,12 @@ Contrastes ≥ 4,5:1 en todo el texto y objetivos táctiles ≥ 44 px en los bot
 veneciaburger/
 ├── data/menu.json        ← la carta entera (única fuente de datos)
 ├── build.py              ← genera el HTML a partir del JSON
+├── tools/fotos.py        ← descarga y recorta las fotos de los platos
+├── tools/artifact.py     ← empaqueta la carta en un HTML suelto para enseñarla
 ├── assets/
 │   ├── css/styles.css
 │   ├── js/venecia.js
-│   └── img/              ← fotos optimizadas a WebP (~17 KB cada una)
+│   └── img/              ← fotos en WebP: nombre.webp (miniatura) y nombre-g.webp (ampliada)
 ├── index.html            ← generados por build.py
 ├── menu/index.html
 ├── nosotros/index.html
@@ -80,6 +86,22 @@ python3 build.py
 
 No hace falta instalar nada (Python 3 y ya). Eso regenera las cuatro páginas y el `sitemap.xml`,
 y de paso mantiene sincronizados los datos que lee Google.
+
+## Cambiar o añadir fotos
+
+`tools/fotos.py` descarga los originales, les quita el marco decorativo negro y genera los dos
+tamaños que usa la carta (miniatura y ampliada). Necesita Pillow:
+
+```bash
+pip install Pillow && python3 tools/fotos.py
+```
+
+Para una foto nueva basta con añadirla al diccionario `FOTOS` del script, o dejar los dos
+archivos (`nombre.webp` y `nombre-g.webp`) directamente en `assets/img/`.
+
+**Aviso sobre la calidad:** las fotos del sitio original son de 768×768 px y buena parte de eso
+era marco, así que la foto real ronda los 500–700 px. Se ve bien en el móvil, pero si tenéis los
+originales de la cámara, sustituirlos mejoraría bastante la vista ampliada.
 
 ## Publicar
 
@@ -184,6 +206,6 @@ Que apunte directamente a `https://veneciaburger.es/menu` (no a la portada: el c
 quiere la carta, no la historia del local). La página está pensada para eso:
 
 - Carga en ~1,2 s con datos móviles y pesa unos 12 KB comprimidos antes de las fotos.
-- Las fotos se descargan solo según se van viendo.
+- Las fotos se descargan solo según se van viendo, y la versión grande solo si se pulsa.
 - El buscador está a mano nada más entrar.
 - Se puede añadir a la pantalla de inicio como app (`site.webmanifest`, arranca en `/menu`).

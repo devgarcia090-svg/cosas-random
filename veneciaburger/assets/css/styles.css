@@ -263,6 +263,51 @@ p { margin: 0 0 1em; }
   object-fit: cover; border-radius: 10px;
   background: var(--fondo-2);
 }
+/* La foto es un botón: al pulsarla se abre en grande */
+.plato__zoom {
+  position: relative;
+  display: block; padding: 0; border: 0; background: none;
+  border-radius: 10px; cursor: zoom-in;
+  -webkit-tap-highlight-color: transparent;
+}
+.plato__lupa {
+  position: absolute; right: 4px; bottom: 4px;
+  display: flex; align-items: center; justify-content: center;
+  width: 22px; height: 22px; border-radius: 50%;
+  background: color-mix(in srgb, var(--tinta) 78%, transparent);
+  color: #fff;
+}
+.plato__zoom:hover .plato__lupa { background: var(--tinta); }
+
+.lupa {
+  margin: auto; padding: 0; border: 0; background: none;
+  max-width: 100vw; max-height: 100vh; overflow: visible;
+  color: #fff;
+}
+.lupa::backdrop { background: rgba(8, 10, 14, .86); }
+.lupa figure { margin: 0; display: grid; gap: 12px; justify-items: center; }
+.lupa img {
+  width: auto; height: auto;
+  max-width: min(92vw, 520px); max-height: 68vh;
+  border-radius: 14px;
+}
+/* Superficie propia: el pie se lee igual aunque quede sobre la foto */
+.lupa figcaption {
+  text-align: center; font-size: 1.05rem;
+  background: rgba(8, 10, 14, .92);
+  padding: 9px 18px; border-radius: 12px;
+}
+.lupa figcaption strong { display: block; font-size: 1.2rem; color: #fff; }
+.lupa figcaption span { color: #dfe4ea; font-variant-numeric: tabular-nums; }
+.lupa__cerrar {
+  position: absolute; top: -46px; right: 0;
+  width: 40px; height: 40px; border: 0; border-radius: 50%;
+  background: rgba(255, 255, 255, .16); color: #fff;
+  font-size: 26px; line-height: 1; cursor: pointer;
+}
+.lupa__cerrar:hover { background: rgba(255, 255, 255, .28); }
+@media (max-width: 430px) { .lupa__cerrar { top: -44px; } }
+
 .plato__cab {
   display: flex; align-items: baseline; gap: 10px;
   justify-content: space-between;

@@ -266,9 +266,22 @@ def render_plato(it) -> str:
         cuerpo += f'<p class="plato__nota">{e(it["nota"])}</p>'
 
     if it.get("img"):
-        foto = (f'<img class="plato__foto" src="/assets/img/{it["img"]}.webp" '
-                f'width="96" height="96" loading="lazy" decoding="async" '
-                f'alt="{e(it["nombre"])}">')
+        # La foto grande solo se descarga al pulsar (data-grande, no src).
+        foto = (
+            f'<button class="plato__zoom" type="button" '
+            f'data-grande="/assets/img/{it["img"]}-g.webp" '
+            f'data-nombre="{e(it["nombre"])}" '
+            f'data-precio="{e(precio(it.get("precio")))}" '
+            f'aria-label="Ver la foto de {e(it["nombre"])} más grande">'
+            f'<img class="plato__foto" src="/assets/img/{it["img"]}.webp" '
+            f'width="96" height="96" loading="lazy" decoding="async" '
+            f'alt="{e(it["nombre"])}">'
+            f'<span class="plato__lupa" aria-hidden="true">'
+            f'<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" '
+            f'stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="7"/>'
+            f'<path d="m20 20-3.5-3.5M11 8v6M8 11h6"/></svg></span>'
+            f'</button>'
+        )
         clase = "plato"
     else:
         foto = ""
@@ -374,6 +387,17 @@ def pagina_menu() -> str:
 </div>
 
 <a class="btn btn--fantasma volver-arriba" href="#contenido">↑ Categorías</a>
+
+<dialog class="lupa" id="lupa" aria-label="Foto del plato">
+  <button class="lupa__cerrar" type="button" aria-label="Cerrar la foto">&times;</button>
+  <figure>
+    <img id="lupa-foto" alt="">
+    <figcaption>
+      <strong id="lupa-nombre"></strong>
+      <span id="lupa-precio"></span>
+    </figcaption>
+  </figure>
+</dialog>
 """
         + pie()
     )
