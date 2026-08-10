@@ -1,0 +1,14 @@
+{
+  "name": "Burger Bar Venecia",
+  "short_name": "Venecia",
+  "description": "Carta de Burger Bar Venecia, hamburguesería en Beniel (Murcia).",
+  "start_url": "/menu",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1f9fe0",
+  "lang": "es",
+  "icons": [
+    { "src": "/assets/img/favicon.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}

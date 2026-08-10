@@ -1,0 +1,675 @@
+{
+  "negocio": {
+    "nombre": "Burger Bar Venecia",
+    "claim": "Calidad, frescura y pasión en cada hamburguesa",
+    "descripcion": "Hamburguesería artesanal en Beniel (Murcia). Carne 100% vacuno nacional, pan brioche de Juanito Baker y recetas propias desde 2017.",
+    "telefono": "612272384",
+    "telefonoTexto": "612 272 384",
+    "direccion": {
+      "calle": "Plaza Ramón y Cajal, 7",
+      "cp": "30130",
+      "localidad": "Beniel",
+      "provincia": "Murcia",
+      "pais": "ES"
+    },
+    "mapa": "https://www.google.com/maps/search/?api=1&query=Plaza+Ram%C3%B3n+y+Cajal+7%2C+30130+Beniel%2C+Murcia",
+    "web": "https://veneciaburger.es",
+    "instagram": "https://www.instagram.com/venecia_beniel/",
+    "facebook": "https://www.facebook.com/cafeteriavenecia30130/",
+    "rangoPrecios": "€€",
+    "horario": [
+      { "dia": "Lunes", "codigo": "Monday", "cerrado": true },
+      { "dia": "Martes", "codigo": "Tuesday", "cerrado": true },
+      { "dia": "Miércoles", "codigo": "Wednesday", "abre": "19:30", "cierra": "23:00" },
+      { "dia": "Jueves", "codigo": "Thursday", "abre": "19:30", "cierra": "23:00" },
+      { "dia": "Viernes", "codigo": "Friday", "abre": "19:30", "cierra": "23:30" },
+      { "dia": "Sábado", "codigo": "Saturday", "abre": "19:30", "cierra": "23:30" },
+      { "dia": "Domingo", "codigo": "Sunday", "abre": "19:30", "cierra": "23:00" }
+    ]
+  },
+
+  "avisos": {
+    "burgersExtra": "Todas nuestras burgers pueden llevar patatas Dip Canoe y salsa por +1,50 €.",
+    "alergenos": "Si tienes alguna alergia o intolerancia, avísanos antes de pedir: te informamos de los alérgenos de cada plato."
+  },
+
+  "secciones": [
+    {
+      "id": "burgers",
+      "titulo": "Burgers",
+      "emoji": "🍔",
+      "intro": "Carne de 200 g de vacuno 100% nacional y pan brioche de Juanito Baker. Puedes añadir patatas Dip Canoe y salsa por +1,50 €.",
+      "items": [
+        {
+          "nombre": "Big Gublins",
+          "precio": 12.0,
+          "img": "big-gublins",
+          "ingredientes": [
+            "Carne de 200 g, 100% vacuno nacional",
+            "Pan brioche Juanito Baker",
+            "Queso Edam",
+            "Queso cremoso Camembert",
+            "Nuestra salsa estilo Big M.",
+            "Toque de mermelada de bacon",
+            "Gublins sabor queso triturados y crujientes"
+          ]
+        },
+        {
+          "nombre": "Águila Dorada",
+          "precio": 12.0,
+          "img": "aguila-dorada",
+          "ingredientes": [
+            "Carne de 200 g, 100% vacuno nacional",
+            "Pan brioche Juanito Baker",
+            "Queso de vaca ahumado",
+            "Mayonesa de lima y cilantro",
+            "Crema de cacahuetes Eagle (suave y aromática, con equilibrio entre dulce y salado)",
+            "Cacahuetes Eagle triturados y crujientes",
+            "Dos lonchas de bacon ligeramente ahumado"
+          ]
+        },
+        {
+          "nombre": "La Yucatana",
+          "precio": 11.4,
+          "img": "la-yucatana",
+          "ingredientes": [
+            "Carne de 200 g, 100% vacuno nacional",
+            "Pan brioche Juanito Baker",
+            "Queso ahumado",
+            "Mayonesa de chipotle ahumado (ligeramente picante)",
+            "Cochinita pibil (carne marinada en achiote y jugo de naranja agria)",
+            "Cebolleta morada picada",
+            "Patatas paja"
+          ],
+          "picante": true
+        },
+        {
+          "nombre": "Hannibal",
+          "precio": 11.5,
+          "img": "hannibal",
+          "ingredientes": [
+            "Carne de 200 g, 100% vacuno nacional",
+            "Pan brioche Juanito Baker",
+            "Pastrami ahumado",
+            "Queso Gouda fundido",
+            "Cebolla crispy",
+            "Salsa Hannibal"
+          ],
+          "nota": "El pastrami es uno de los ingredientes estrella de la gastronomía de Estados Unidos y parte fundamental de la historia culinaria de Nueva York: carne de ternera especiada, sometida a un proceso de salmuera y ahumada, con un sabor característico e intenso."
+        },
+        {
+          "nombre": "Bad Bro",
+          "precio": 11.5,
+          "img": "bad-bro",
+          "ingredientes": [
+            "Carne de 200 g, 100% vacuno nacional",
+            "Pan brioche Juanito Baker",
+            "Queso cheddar",
+            "Cebolla caramelizada",
+            "Dos lonchas de bacon ligeramente ahumado",
+            "Salsa barbacoa especial al estilo americano",
+            "Suave crema de queso Camembert"
+          ]
+        },
+        {
+          "nombre": "Amor Prohibido",
+          "precio": 12.0,
+          "img": "amor-prohibido",
+          "ingredientes": [
+            "Carne 100% vacuno nacional",
+            "Pan brioche Juanito Baker",
+            "Queso ahumado con madera de abedul",
+            "Costillar de cerdo desmenuzado, cocinado a baja temperatura con salsa BBQ",
+            "Mayonesa ahumada",
+            "Coronada con lluvia de baconeras"
+          ],
+          "nota": "¡Va a ser tu Amor Prohibido!"
+        },
+        {
+          "nombre": "Emmily",
+          "precio": 11.5,
+          "img": "emmily",
+          "ingredientes": [
+            "Carne de 200 g, 100% vacuno nacional",
+            "Pan brioche Juanito Baker",
+            "Queso ahumado con madera de abedul",
+            "Cebolla caramelizada",
+            "Dos lonchas de bacon ligeramente ahumado",
+            "Pepinillo marinado",
+            "Nuestra versión de la famosa salsa neoyorquina «Emmy», a base de pasta coreana: ligeramente dulce con un punto picante final"
+          ],
+          "picante": true
+        },
+        {
+          "nombre": "Presumida",
+          "precio": 11.0,
+          "img": "presumida",
+          "ingredientes": [
+            "Carne de 200 g, 100% vacuno nacional",
+            "Pan brioche Juanito Baker",
+            "Queso Brie francés pasado por plancha",
+            "Dos lonchas de bacon ligeramente ahumado",
+            "Salsa semidulce de pimiento y tomate",
+            "Patatas paja"
+          ]
+        },
+        {
+          "nombre": "Pistagocha",
+          "precio": 12.0,
+          "img": "pistagocha",
+          "ingredientes": [
+            "Carne de 200 g, 100% vacuno nacional",
+            "Pan brioche Juanito Baker",
+            "Queso Gouda fundido",
+            "Dos lonchas de bacon ligeramente ahumado",
+            "Crema de pistacho italiano",
+            "Mayonesa de trufa negra",
+            "Pistacho tostado triturado"
+          ]
+        },
+        {
+          "nombre": "Cheese-Bacon",
+          "precio": 11.0,
+          "img": "cheese-bacon",
+          "ingredientes": [
+            "Carne de 200 g, 100% vacuno nacional",
+            "Pan brioche Juanito Baker",
+            "Queso cheddar",
+            "Cebolla caramelizada",
+            "Dos lonchas de bacon ligeramente ahumado",
+            "Un toque de pepinillos marinados",
+            "Salsa de bacon ahumada"
+          ]
+        },
+        {
+          "nombre": "Camelot",
+          "precio": 11.0,
+          "img": "camelot",
+          "ingredientes": [
+            "Carne de 200 g, 100% vacuno nacional",
+            "Pan brioche Juanito Baker",
+            "Cebolla morada marinada al estilo inglés",
+            "Dos lonchas de queso cheddar",
+            "Dos lonchas de bacon a la plancha ligeramente ahumadas",
+            "Nuestra salsa de mango inglesa con sésamo negro y curry"
+          ]
+        },
+        {
+          "nombre": "Ibérica",
+          "precio": 10.9,
+          "img": "iberica",
+          "ingredientes": [
+            "Carne de 200 g, 100% vacuno nacional",
+            "Pan brioche Juanito Baker",
+            "Mayonesa rosa",
+            "Pepinillos encurtidos",
+            "Dos lonchas de queso cheddar",
+            "Dos lonchas de bacon a la plancha ligeramente ahumadas",
+            "Crema de sobrasada murciana con suave queso Philadelphia",
+            "Cebolla crispy",
+            "Un toque de miel de flores"
+          ]
+        },
+        {
+          "nombre": "Trufada",
+          "precio": 12.0,
+          "img": "trufada",
+          "ingredientes": [
+            "Carne de 200 g, 100% vacuno nacional",
+            "Pan brioche Juanito Baker",
+            "Queso Edam holandés",
+            "Queso parmesano en escamas",
+            "Champiñones portobello a la plancha",
+            "Nuestra crema de trufa negra"
+          ]
+        },
+        {
+          "nombre": "Mamba",
+          "precio": 11.0,
+          "img": "mamba",
+          "ingredientes": [
+            "Carne de 200 g, 100% vacuno nacional",
+            "Pan brioche Juanito Baker",
+            "Doble de queso cheddar",
+            "Salsa de queso parmesano con toque de mostaza de Dijon",
+            "Dos lonchas de bacon ligeramente ahumado",
+            "Doritos con sabor a queso"
+          ]
+        },
+        {
+          "nombre": "Marty",
+          "precio": 10.0,
+          "img": "marty",
+          "ingredientes": [
+            "Carne de 200 g, 100% vacuno nacional",
+            "Pan brioche Juanito Baker",
+            "Queso cheddar",
+            "Dos lonchas de bacon",
+            "Salsa al estilo argentino «Gaucha», ligeramente picante",
+            "Patatas fritas paja"
+          ],
+          "picante": true
+        },
+        {
+          "nombre": "Lotus",
+          "precio": 11.0,
+          "img": "lotus",
+          "ingredientes": [
+            "Carne de 200 g, 100% vacuno nacional",
+            "Pan brioche Juanito Baker",
+            "Queso cheddar",
+            "Crema de galleta Lotus",
+            "Galleta Lotus triturada y crujiente",
+            "Dos lonchas de bacon ligeramente ahumado"
+          ]
+        },
+        {
+          "nombre": "Clásica",
+          "precio": 10.5,
+          "img": "clasica",
+          "ingredientes": [
+            "Carne de 200 g, 100% vacuno nacional",
+            "Pan brioche Juanito Baker",
+            "Queso cheddar",
+            "Mix de lechuga",
+            "Tomate",
+            "Pepinillos marinados",
+            "Cebolla crispy",
+            "Salsa burger"
+          ]
+        },
+        {
+          "nombre": "Tío Jack",
+          "precio": 12.0,
+          "img": "tio-jack",
+          "ingredientes": [
+            "Carne de 200 g, 100% vacuno nacional",
+            "Pulled pork asado a baja temperatura en salsa BBQ Jack",
+            "Pan brioche Juanito Baker",
+            "Queso Gouda",
+            "Doritos Bits",
+            "Salsa barbacoa especial de whiskey Jack Daniel's®"
+          ]
+        },
+        {
+          "nombre": "Lady Goat",
+          "precio": 12.0,
+          "img": "lady-goat",
+          "ingredientes": [
+            "Carne de 200 g, 100% vacuno nacional",
+            "Pan brioche Juanito Baker",
+            "Dos lonchas de bacon ahumado",
+            "Dos discos de queso de cabra artesanal pasados por la plancha",
+            "Mermelada de tomates raf",
+            "Cebolla caramelizada"
+          ]
+        },
+        {
+          "nombre": "Fire Fox",
+          "precio": 11.0,
+          "img": "fire-fox",
+          "picante": true,
+          "ingredientes": [
+            "Carne de 200 g, 100% vacuno nacional",
+            "Pan brioche Juanito Baker",
+            "Dos lonchas de bacon ligeramente ahumado",
+            "Doble de queso cheddar",
+            "Salsa picante de chiles ahumados",
+            "Salsa picante samurái",
+            "Cebolla crispy",
+            "Rodajas de jalapeño marinado"
+          ]
+        },
+        {
+          "nombre": "Cryspy Pollo",
+          "precio": 9.9,
+          "img": "cryspy-pollo",
+          "pollo": true,
+          "ingredientes": [
+            "Pollo cryspy (crujiente por fuera y jugoso por dentro)",
+            "Pan brioche Juanito Baker",
+            "Salsa burger",
+            "Mix de lechuga",
+            "Rodaja de tomate fresco",
+            "Deliciosa salsa cheddar"
+          ]
+        },
+        {
+          "nombre": "Cryspy César",
+          "precio": 10.9,
+          "img": "cryspy-cesar",
+          "pollo": true,
+          "ingredientes": [
+            "Pollo cryspy",
+            "Pan brioche Juanito Baker",
+            "Salsa césar",
+            "Mix de lechuga",
+            "Rodaja de tomate fresco",
+            "Cebolla morada marinada al estilo inglés",
+            "Queso parmesano en escamas"
+          ]
+        },
+        {
+          "nombre": "Bad Chicken",
+          "precio": 9.9,
+          "img": "bad-chicken",
+          "pollo": true,
+          "ingredientes": [
+            "Pollo cryspy (crujiente por fuera y jugoso por dentro)",
+            "Pan brioche Juanito Baker",
+            "Cebolla caramelizada",
+            "Dos lonchas de bacon ligeramente ahumado",
+            "Salsa barbacoa especial al estilo americano",
+            "Suave crema de queso Camembert"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "entrantes",
+      "titulo": "Entrantes",
+      "emoji": "🍟",
+      "intro": "Para compartir antes de la burger. Las patatas gratinadas son de tamaño para 2 personas.",
+      "items": [
+        {
+          "nombre": "Patatas Lotus",
+          "precio": 11.5,
+          "img": "patatas-lotus",
+          "para2": true,
+          "descripcion": "Patatas gratinadas al estilo Dip con trocitos de pulled pork cocinados a baja temperatura al estilo Tennessee. Cubiertas con mezcla de salsa de galleta Lotus y nuestra salsa blanca con un toque de lima. Lleva tres quesos fundidos (Edam, mozzarella y cheddar) y va coronada con galleta Lotus triturada para ese crunch característico."
+        },
+        {
+          "nombre": "Patatas de Bacon y Queso",
+          "precio": 10.5,
+          "img": "patatas-bacon",
+          "para2": true,
+          "descripcion": "Patatas gratinadas estilo Dip mezcladas con nuestra suave salsa blanca casera y trocitos de bacon ligeramente ahumado, coronadas con una mezcla de tres quesos (Edam, mozzarella y cheddar)."
+        },
+        {
+          "nombre": "Patatas Pulled Pork",
+          "precio": 10.5,
+          "img": "patatas-pulled-pork",
+          "para2": true,
+          "descripcion": "Patatas fritas al estilo Dip con trocitos de pulled pork cocinados a baja temperatura al estilo Tennessee. Cubiertas con salsa de queso y nuestra salsa BBQ americana favorita, coronadas con un toque de crispy onion."
+        },
+        {
+          "nombre": "Patatas Trufadas",
+          "precio": 10.5,
+          "img": "patatas-trufadas",
+          "para2": true,
+          "descripcion": "Patatas fritas estilo Dip mezcladas con nuestra salsa de trufa y coronadas con queso parmesano."
+        },
+        {
+          "nombre": "Patatas Volcano",
+          "precio": 10.5,
+          "img": "patatas-volcano",
+          "para2": true,
+          "picante": true,
+          "descripcion": "Patatas gratinadas al estilo Dip con carne mechada pulled pork estilo Tennessee cocinada a baja temperatura. Cubiertas con nuestra salsa estilo Emmy con sésamo negro, ligeramente picante, y mezcla de tres quesos fundidos (Edam, mozzarella y cheddar)."
+        },
+        {
+          "nombre": "Bocaditos de Pulled Pork (8 uds.)",
+          "precio": 6.6,
+          "img": "bocaditos-pulled-pork",
+          "descripcion": "Crujientes por fuera y jugosos por dentro, con tiernas hebras de cerdo desmenuzado ahumado que se deshacen en la boca. Acompañados de salsa BBQ dulce y ahumada."
+        },
+        {
+          "nombre": "Bocaditos Italianos (5 uds.)",
+          "precio": 5.6,
+          "img": "bocaditos-italianos",
+          "descripcion": "Porciones triangulares que combinan la suavidad del jamón cocido con la cremosidad de la mozzarella, con un toque especial de tomate seco italiano y orégano."
+        },
+        {
+          "nombre": "Bocaditos de trufa y carbonara (5 uds.)",
+          "precio": 5.6,
+          "img": "bocaditos-trufa",
+          "descripcion": "Porciones triangulares de queso mozzarella y Gouda con empanado crujiente y dorado. Dentro, una explosión de cremosidad con salsa carbonara y el aroma de la trufa. Acompañados de mayonesa trufada."
+        },
+        {
+          "nombre": "Medallones de queso Camembert (8 uds.)",
+          "precio": 5.6,
+          "img": null,
+          "descripcion": "Deliciosos medallones de suave queso Camembert servidos con mermelada de tomate."
+        },
+        {
+          "nombre": "Tequeños de queso (6 uds.)",
+          "precio": 7.1,
+          "img": "tequenos",
+          "descripcion": "Uno de los aperitivos más típicos de la cocina venezolana: rollitos de masa rellenos de queso que al freírse quedan crujientes por fuera y muy suaves por dentro. Con nuestra salsa gourmet de miel y mostaza."
+        },
+        {
+          "nombre": "Nachos fritos rellenos de queso cheddar (8 uds.)",
+          "precio": 5.6,
+          "img": "nachos-cheddar",
+          "descripcion": "Con un corazón relleno de suave crema de cheddar ligeramente especiado y un fino empanado de maíz y arroz con nachos triturados. Un auténtico snack, ideal para compartir."
+        },
+        {
+          "nombre": "Nachos Pulled Pork",
+          "precio": 10.5,
+          "img": "nachos-pulled-pork",
+          "picante": true,
+          "ingredientes": [
+            "Nachos de maíz con sabor a queso",
+            "Carne mechada pulled pork estilo Tennessee cocinada a baja temperatura",
+            "Salsa de queso",
+            "Salsa mexicana ligeramente picante",
+            "Salsa casera semiagria",
+            "Rodajas de chile jalapeño marinado"
+          ]
+        },
+        {
+          "nombre": "Pollo crujiente estilo Cajun",
+          "precio": 6.5,
+          "img": "pollo-cajun",
+          "descripcion": "Preparación tradicional del sur de Estados Unidos, del estado de Luisiana: pollo muy especiado con un rebozado muy crujiente. Acompañado de una deliciosa salsa tailandesa."
+        },
+        {
+          "nombre": "Solomillo de pollo Kentucky",
+          "precio": 5.9,
+          "img": "solomillo-kentucky",
+          "descripcion": "Auténtico solomillo natural de pollo con doble rebozado crujiente e intenso sabor al estilo original Kentucky. Acompañado de nuestra salsa BBQ ligeramente ahumada."
+        },
+        {
+          "nombre": "Bolitas de cheddar con jalapeño (14 uds.)",
+          "precio": 5.6,
+          "img": "bolitas-cheddar",
+          "picante": true,
+          "descripcion": "Pequeñas bolitas de queso cheddar con un suave toque picante de jalapeño y un rebozado extra crujiente."
+        },
+        {
+          "nombre": "Nuggets de pollo (10 uds.)",
+          "precio": 5.5,
+          "img": "nuggets",
+          "descripcion": "Nuestros nuggets con rebozado extra crujiente, rellenos de 100% tierna pechuga."
+        },
+        {
+          "nombre": "Mini croquetas de jamón ibérico (6 uds.)",
+          "precio": 5.0,
+          "img": "croquetas-jamon",
+          "descripcion": "Mini croquetas rellenas de jamón ibérico y suave bechamel, con rebozado extra crujiente. Acompañadas de una deliciosa mayonesa casera."
+        },
+        {
+          "nombre": "Mini croquetas de boletus y trufa (6 uds.)",
+          "precio": 5.0,
+          "img": "croquetas-setas",
+          "descripcion": "Mini croquetas rellenas de boletus con un ligero toque de trufa. Extra crujientes por fuera y suaves por dentro."
+        },
+        {
+          "nombre": "Mini croquetas de cecina (6 uds.)",
+          "precio": 5.0,
+          "img": "croquetas-jamon",
+          "descripcion": "Doradas y crujientes, con un interior suave y aterciopelado. La cecina aporta un toque ahumado y salado que las hace irresistibles. Perfectas para compartir (o no)."
+        }
+      ]
+    },
+
+    {
+      "id": "sandwiches",
+      "titulo": "Sándwiches brioche",
+      "emoji": "🥪",
+      "intro": "Todos vienen acompañados de patatas fritas Canoe.",
+      "items": [
+        {
+          "nombre": "Sándwich Pollo Kentucky",
+          "precio": 8.5,
+          "img": "sandwich-kentucky",
+          "conPatatas": true,
+          "ingredientes": [
+            "Crujiente solomillo de pollo en tiras rebozadas en copos de maíz",
+            "Salsa BBQ ligeramente ahumada",
+            "Mix de lechuga",
+            "Tomate en rodajas",
+            "Salsa cheddar"
+          ]
+        },
+        {
+          "nombre": "Sándwich de queso de cabra",
+          "precio": 8.5,
+          "img": "sandwich-cabra",
+          "conPatatas": true,
+          "ingredientes": [
+            "Dos discos de queso de cabra pasados por la plancha",
+            "Mermelada de tomate",
+            "Mix de lechuga",
+            "Tomate en rodajas"
+          ]
+        },
+        {
+          "nombre": "Sándwich de bacon",
+          "precio": 8.5,
+          "img": "sandwich-bacon",
+          "conPatatas": true,
+          "ingredientes": [
+            "Tres rodajas de bacon ligeramente ahumado",
+            "Nuestra deliciosa salsa de bacon ahumado",
+            "Mix de lechuga",
+            "Tomate en rodajas",
+            "Salsa de queso cheddar",
+            "Cebolla crispy"
+          ]
+        },
+        {
+          "nombre": "Sándwich de queso Brie",
+          "precio": 8.5,
+          "img": "sandwich-brie",
+          "conPatatas": true,
+          "ingredientes": [
+            "Tres lonchas de queso Brie pasadas por la plancha",
+            "Chutney de pimiento y tomate asado",
+            "Mix de lechuga",
+            "Tomate en rodajas",
+            "Patatas fritas paja"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "kids",
+      "titulo": "Menú Kids",
+      "emoji": "🧒",
+      "intro": "Menú completo para los más peques, con patatas y bebida incluidas.",
+      "items": [
+        {
+          "nombre": "Menú burger de pollo crispy",
+          "precio": 7.0,
+          "img": "kids-crispy",
+          "ingredientes": [
+            "Hamburguesa de pollo crispy chicken (130 g)",
+            "Ketchup",
+            "Pan",
+            "Ración de patatas fritas",
+            "Refresco a elegir: Fanta, cola, Nestea, Aquarius, agua o zumo"
+          ]
+        },
+        {
+          "nombre": "Menú nuggets de pollo",
+          "precio": 6.5,
+          "img": "kids-nuggets",
+          "ingredientes": [
+            "Nuggets de pollo",
+            "Ración de patatas fritas",
+            "Refresco a elegir: Fanta, cola, Nestea, Aquarius, agua o zumo"
+          ]
+        }
+      ]
+    },
+
+    {
+      "id": "postres",
+      "titulo": "Postres",
+      "emoji": "🍰",
+      "intro": "Hacemos tartas caseras a diario en cantidad limitada: pregunta por la disponibilidad del día.",
+      "items": [
+        {
+          "nombre": "Tarta de queso estilo Dubái",
+          "precio": 6.0,
+          "img": "tarta-dubai",
+          "descripcion": "Una creación que combina la riqueza de la repostería árabe con los sabores frescos y delicados del Mediterráneo. Más que un postre, un pequeño viaje entre la opulencia de Dubái y la sencillez elegante de las recetas mediterráneas."
+        },
+        {
+          "nombre": "Tarta de queso al horno casera",
+          "precio": 4.5,
+          "img": "tarta-casera",
+          "descripcion": "Nuestra tarta de queso al horno de toda la vida.",
+          "extras": [
+            "Chocolate blanco",
+            "Sirope de fresa",
+            "Crema de cacahuete salado Eagle (+1 €)",
+            "Salsa de galleta Lotus (+0,50 €)"
+          ]
+        },
+        {
+          "nombre": "Tarta de queso de pistacho",
+          "precio": 5.0,
+          "img": "tarta-pistacho",
+          "descripcion": "Nuestra tarta de queso casera en edición pistacho. ¡Increíblemente deliciosa!"
+        },
+        { "nombre": "Helado artesanal de Oreo", "precio": 3.8, "img": "helado-oreo" },
+        { "nombre": "Helado artesanal Quinder", "precio": 3.8, "img": "helado-quinder" },
+        { "nombre": "Helado artesanal de chocolate blanco y pistacho", "precio": 3.8, "img": "helado-pistacho" }
+      ]
+    },
+
+    {
+      "id": "bebidas",
+      "titulo": "Bebidas",
+      "emoji": "🥤",
+      "intro": "",
+      "listaSimple": true,
+      "grupos": [
+        {
+          "titulo": "Refrescos y agua",
+          "items": [
+            { "nombre": "Refrescos", "precio": 2.0 },
+            { "nombre": "Agua 0,5 L Solán", "precio": 1.8 },
+            { "nombre": "Agua con gas", "precio": 2.0 },
+            { "nombre": "Tónica Schweppes", "precio": 2.5 },
+            { "nombre": "Zumo de piña", "precio": 2.0 },
+            { "nombre": "Red Bull", "precio": 2.5 }
+          ]
+        },
+        {
+          "titulo": "Cervezas",
+          "items": [
+            { "nombre": "Caña de barril Alhambra", "precio": 1.5 },
+            { "nombre": "Tanque de barril Alhambra", "precio": 3.0 },
+            { "nombre": "Radler", "precio": 2.0 },
+            { "nombre": "Alhambra 1925 Reserva (verde)", "precio": 2.9 },
+            { "nombre": "Cerveza sin 0,0 San Miguel tercio", "precio": null },
+            { "nombre": "Paulaner 0,5 L", "precio": 3.5 }
+          ]
+        },
+        {
+          "titulo": "Vinos",
+          "items": [
+            { "nombre": "Tinto de verano La Casera", "precio": 2.5 },
+            { "nombre": "Vino blanco (copa)", "precio": 3.0 },
+            { "nombre": "Vino tinto (copa)", "precio": 3.0 }
+          ]
+        }
+      ]
+    }
+  ]
+}

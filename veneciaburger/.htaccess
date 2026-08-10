@@ -1,0 +1,77 @@
+# Burger Bar Venecia — configuración Apache
+# Redirecciones 301 de las URLs del sitio antiguo
+Redirect 301 /inicio https://veneciaburger.es/
+Redirect 301 /cerrado-por-vacaciones https://veneciaburger.es/
+Redirect 301 /alergenos https://veneciaburger.es/menu
+Redirect 301 /burgers https://veneciaburger.es/menu#burgers
+Redirect 301 /entrantes https://veneciaburger.es/menu#entrantes
+Redirect 301 /sandwiches-briche https://veneciaburger.es/menu#sandwiches
+Redirect 301 /menu-kids https://veneciaburger.es/menu#kids
+Redirect 301 /postres https://veneciaburger.es/menu#postres
+Redirect 301 /bebidas https://veneciaburger.es/menu#bebidas
+Redirect 301 /big-gublins1 https://veneciaburger.es/menu#burgers
+Redirect 301 /agila-dorada https://veneciaburger.es/menu#burgers
+Redirect 301 /la-yucatana https://veneciaburger.es/menu#burgers
+Redirect 301 /hannibal https://veneciaburger.es/menu#burgers
+Redirect 301 /bad-bro https://veneciaburger.es/menu#burgers
+Redirect 301 /amor-prohibido https://veneciaburger.es/menu#burgers
+Redirect 301 /emmily https://veneciaburger.es/menu#burgers
+Redirect 301 /presumida https://veneciaburger.es/menu#burgers
+Redirect 301 /pistagocha https://veneciaburger.es/menu#burgers
+Redirect 301 /chees-bacon https://veneciaburger.es/menu#burgers
+Redirect 301 /camelot https://veneciaburger.es/menu#burgers
+Redirect 301 /iberica https://veneciaburger.es/menu#burgers
+Redirect 301 /trufada https://veneciaburger.es/menu#burgers
+Redirect 301 /mamba https://veneciaburger.es/menu#burgers
+Redirect 301 /marty https://veneciaburger.es/menu#burgers
+Redirect 301 /lotus https://veneciaburger.es/menu#burgers
+Redirect 301 /clasica https://veneciaburger.es/menu#burgers
+Redirect 301 /tio-jack https://veneciaburger.es/menu#burgers
+Redirect 301 /lady-goat https://veneciaburger.es/menu#burgers
+Redirect 301 /fire-fox https://veneciaburger.es/menu#burgers
+Redirect 301 /cryspy-pollo https://veneciaburger.es/menu#burgers
+Redirect 301 /cryspy-cesar https://veneciaburger.es/menu#burgers
+Redirect 301 /bad-chicken https://veneciaburger.es/menu#burgers
+Redirect 301 /patatas-lotus https://veneciaburger.es/menu#entrantes
+Redirect 301 /patatas-de-bacon https://veneciaburger.es/menu#entrantes
+Redirect 301 /patatas-pulled-pork https://veneciaburger.es/menu#entrantes
+Redirect 301 /patatas-trufadas https://veneciaburger.es/menu#entrantes
+Redirect 301 /patatas-vulcano https://veneciaburger.es/menu#entrantes
+Redirect 301 /bocaditos-de-pulled-pork https://veneciaburger.es/menu#entrantes
+Redirect 301 /bocaditos-italianos https://veneciaburger.es/menu#entrantes
+Redirect 301 /bocaditos-de-trufa https://veneciaburger.es/menu#entrantes
+Redirect 301 /medallones-de-queso-camembert https://veneciaburger.es/menu#entrantes
+Redirect 301 /tequenos-de-queso https://veneciaburger.es/menu#entrantes
+Redirect 301 /nachos-fritos-rellenos-de-queso-cheddar https://veneciaburger.es/menu#entrantes
+Redirect 301 /nachos-pulled-pork https://veneciaburger.es/menu#entrantes
+Redirect 301 /pollo-cajun https://veneciaburger.es/menu#entrantes
+Redirect 301 /solomillo-de-pollo-kentucky https://veneciaburger.es/menu#entrantes
+Redirect 301 /bolitas-de-chedar-con-jalapeno https://veneciaburger.es/menu#entrantes
+Redirect 301 /nuggets-de-pollo https://veneciaburger.es/menu#entrantes
+Redirect 301 /croquetas-de-jamon https://veneciaburger.es/menu#entrantes
+Redirect 301 /croquetas-de-setas https://veneciaburger.es/menu#entrantes
+Redirect 301 /croquetas-de-cecina https://veneciaburger.es/menu#entrantes
+
+# Compresión
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript image/svg+xml application/json
+</IfModule>
+
+# Caché de estáticos
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/png  "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType text/css   "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+  ExpiresByType text/html  "access plus 1 hour"
+</IfModule>
+
+# URLs limpias sin /index.html
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME}/index.html -f
+  RewriteRule ^(.*)$ /$1/index.html [L]
+</IfModule>
