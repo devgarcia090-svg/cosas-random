@@ -1,0 +1,38 @@
+services:
+  jellyfin:
+    image: jellyfin/jellyfin:latest
+    container_name: jellyfin
+    restart: unless-stopped
+    user: ${PUID:-1000}:${PGID:-1000}
+    # Acceso a la GPU integrada del i3 para transcodificar por hardware
+    # (Quick Sync). Sin esto, convertir un vídeo 4K consume la CPU entera y solo
+    # aguanta un stream; con esto, tres o cuatro sin que se note.
+    #
+    # Requiere i3 de 6ª generación o posterior. Comprueba que existe:
+    #   ls -l /dev/dri     → debe listar renderD128
+    # Si no existe, borra el bloque 'devices' y el 'group_add'.
+    devices:
+      - /dev/dri:/dev/dri
+    group_add:
+      # GID del grupo 'render', que es dueño de /dev/dri/renderD128.
+      # Comprueba el tuyo con:  getent group render
+      # En Debian 12/13 suele ser 993 o 104. Si no coincide, el transcode falla
+      # con "Permission denied" en los logs.
+      - "993"
+    environment:
+      TZ: ${TZ:-Europe/Madrid}
+    volumes:
+      - /srv/data/jellyfin/config:/config
+      # La caché puede crecer varios GB con las miniaturas y los fragmentos de
+      # transcodificación. Está fuera de /srv/data/jellyfin/config a propósito
+      # para poder excluirla del backup.
+      - /srv/data/jellyfin/cache:/cache
+      # Solo lectura: Jellyfin no tiene ningún motivo para poder borrar tu media,
+      # y un bug o un botón mal pulsado no debería poder hacerlo.
+      - /srv/media/jellyfin:/media:ro
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true

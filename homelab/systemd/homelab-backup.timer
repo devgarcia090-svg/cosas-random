@@ -1,0 +1,16 @@
+[Unit]
+Description=Disparar el backup del homelab a diario
+
+[Timer]
+# Todos los días a las 3:30. Hora local, según la zona del sistema.
+OnCalendar=*-*-* 03:30:00
+# Reparto aleatorio de hasta 30 min: irrelevante en una máquina, pero es buena
+# costumbre para no golpear el proveedor de backup en el mismo segundo cada día.
+RandomizedDelaySec=30m
+# Si la máquina estaba apagada a esa hora, ejecutarlo al arrancar en lugar de
+# saltarse el día. Sin esto, un mini PC que se apaga por la noche nunca copia
+# nada, y no te enteras hasta que necesitas el backup.
+Persistent=true
+
+[Install]
+WantedBy=timers.target

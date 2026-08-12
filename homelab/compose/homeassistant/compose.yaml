@@ -1,0 +1,36 @@
+# IMPORTANTE tras el primer arranque: Home Assistant rechaza con "400 Bad
+# Request" cualquier petición que llegue por un proxy si no se lo dices
+# explícitamente. Añade esto a /srv/data/homeassistant/configuration.yaml y
+# reinicia el contenedor, o casa.<DOMAIN> no funcionará:
+#
+#   http:
+#     use_x_forwarded_for: true
+#     trusted_proxies:
+#       - 172.16.0.0/12     # rango de las redes de Docker
+#       - 127.0.0.1
+#
+services:
+  homeassistant:
+    image: ghcr.io/home-assistant/home-assistant:stable
+    container_name: homeassistant
+    restart: unless-stopped
+    # Home Assistant necesita la red del host, no una red de Docker: descubre los
+    # dispositivos por multicast y broadcast (mDNS, SSDP, DHCP), y eso no
+    # atraviesa el NAT de un bridge de Docker. Sin esto, no encuentra el Chromecast,
+    # ni las bombillas, ni la impresora.
+    #
+    # Consecuencia: escucha en el puerto 8123 del host y no tiene nombre dentro de
+    # Docker. Caddy le llega por host.docker.internal:8123.
+    network_mode: host
+    privileged: true
+    environment:
+      TZ: ${TZ:-Europe/Madrid}
+    volumes:
+      - /srv/data/homeassistant:/config
+      - /run/dbus:/run/dbus:ro
+    # Descomenta si usas un adaptador USB Zigbee (Sonoff, ConBee) o Z-Wave.
+    # Comprueba la ruta real con: ls -l /dev/serial/by-id/
+    # Usa SIEMPRE /dev/serial/by-id/... y no /dev/ttyUSB0: el número cambia de
+    # orden entre reinicios y un día te despiertas sin domótica.
+    # devices:
+    #   - /dev/serial/by-id/usb-XXXX:/dev/ttyUSB0

@@ -1,0 +1,20 @@
+[Unit]
+Description=Backup del homelab con restic
+# No arrancar hasta que haya red y Docker esté listo: el script necesita
+# 'docker exec' para volcar las bases de datos.
+After=network-online.target docker.service
+Wants=network-online.target
+Requires=docker.service
+
+[Service]
+Type=oneshot
+ExecStart=/srv/homelab/homelab/scripts/backup.sh
+# Si el backup se queda colgado (red mala, B2 caído), cortar a las 4 horas en
+# lugar de dejarlo bloqueado hasta el siguiente disparo.
+TimeoutStartSec=4h
+# Baja prioridad de CPU y disco: que el backup no haga que Immich vaya a pedales
+# mientras alguien navega por las fotos.
+Nice=10
+IOSchedulingClass=idle
+StandardOutput=journal
+StandardError=journal

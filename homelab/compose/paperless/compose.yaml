@@ -1,0 +1,47 @@
+services:
+  paperless-broker:
+    image: redis:7-alpine
+    container_name: paperless-broker
+    restart: unless-stopped
+    volumes:
+      - /srv/data/paperless/redis:/data
+
+  paperless:
+    image: ghcr.io/paperless-ngx/paperless-ngx:latest
+    container_name: paperless
+    restart: unless-stopped
+    depends_on:
+      - paperless-broker
+    environment:
+      PAPERLESS_REDIS: redis://paperless-broker:6379
+      PAPERLESS_URL: https://papel.${DOMAIN:?falta DOMAIN en .env}
+      PAPERLESS_SECRET_KEY: ${PAPERLESS_SECRET_KEY:?falta PAPERLESS_SECRET_KEY en .env}
+      PAPERLESS_TIME_ZONE: ${TZ:-Europe/Madrid}
+      # OCR en español + inglés: reconoce el texto de los PDF escaneados y los
+      # vuelve buscables. Es lo que convierte una carpeta de escaneos en un
+      # archivo consultable.
+      PAPERLESS_OCR_LANGUAGE: spa+eng
+      PAPERLESS_OCR_LANGUAGES: spa eng
+      # Organiza los ficheros en disco por año y corresponsal, de forma que
+      # siguen teniendo sentido aunque algún día dejes de usar Paperless.
+      PAPERLESS_FILENAME_FORMAT: "{created_year}/{correspondent}/{title}"
+      PAPERLESS_ADMIN_USER: ${PAPERLESS_ADMIN_USER:-admin}
+      PAPERLESS_ADMIN_PASSWORD: ${PAPERLESS_ADMIN_PASSWORD:?falta PAPERLESS_ADMIN_PASSWORD en .env}
+      USERMAP_UID: ${PUID:-1000}
+      USERMAP_GID: ${PGID:-1000}
+      # Sin PAPERLESS_DBHOST usa SQLite. Para uso personal (miles de documentos)
+      # va perfecto y ahorra ~300 MB de RAM frente a levantar otro Postgres.
+    volumes:
+      - /srv/data/paperless/data:/usr/src/paperless/data
+      - /srv/data/paperless/media:/usr/src/paperless/media
+      # Todo lo que dejes caer en esta carpeta se importa solo: escaneas al
+      # directorio (o lo copias por SMB desde la impresora) y aparece en
+      # Paperless con el OCR hecho.
+      - /srv/data/paperless/consume:/usr/src/paperless/consume
+    networks:
+      - default
+      - proxy
+
+networks:
+  proxy:
+    external: true

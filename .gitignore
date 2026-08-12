@@ -1,0 +1,7 @@
+# Secretos: tokens, contraseñas de BD, clave de cifrado de los backups.
+homelab/.env
+homelab/compose/*/.env
+
+# Compose oficial de Immich, descargado por compose/immich/pull.sh
+homelab/compose/immich/docker-compose.yml
+homelab/compose/immich/docker-compose.yml.anterior

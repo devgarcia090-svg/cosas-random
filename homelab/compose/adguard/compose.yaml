@@ -1,0 +1,23 @@
+services:
+  adguard:
+    image: adguard/adguardhome:latest
+    container_name: adguard
+    restart: unless-stopped
+    ports:
+      # DNS. Estos sí van publicados en el host: los dispositivos de casa
+      # preguntan directamente aquí, no pasan por Caddy.
+      - "53:53/tcp"
+      - "53:53/udp"
+      # Asistente de instalación inicial. BORRA estas dos líneas y haz
+      # 'docker compose up -d' cuando hayas terminado el setup: después se entra
+      # por https://adguard.<DOMAIN>
+      - "3000:3000/tcp"
+    volumes:
+      - /srv/data/adguard/work:/opt/adguardhome/work
+      - /srv/data/adguard/conf:/opt/adguardhome/conf
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true

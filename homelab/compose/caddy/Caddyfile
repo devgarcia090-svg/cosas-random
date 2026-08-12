@@ -1,0 +1,85 @@
+# Caddy: único punto de entrada HTTP de la máquina.
+#
+# Todo entra por aquí (puertos 80/443) y Caddy decide a qué contenedor va cada
+# nombre. Los contenedores NO publican puertos: solo son alcanzables desde la
+# red interna 'proxy'. Eso significa que un servicio mal configurado no queda
+# accesible por error.
+
+{
+	email {$ACME_EMAIL}
+	# Descomenta para probar contra el entorno de staging de Let's Encrypt
+	# mientras depuras certificados: no gasta el límite de 50/semana, pero los
+	# certificados que emite no son válidos para los navegadores.
+	# acme_ca https://acme-staging-v02.api.letsencrypt.org/directory
+}
+
+# Reto ACME por DNS-01: Caddy crea un registro TXT temporal en Cloudflare para
+# demostrar que controla el dominio. No requiere que Let's Encrypt alcance esta
+# máquina, así que funciona sin abrir puertos en el router.
+(tls_dns) {
+	tls {
+		dns cloudflare {$CLOUDFLARE_API_TOKEN}
+		# Resolvers públicos: si preguntáramos a AdGuard, que corre en esta
+		# misma máquina, tendríamos una dependencia circular al arrancar.
+		resolvers 1.1.1.1 8.8.8.8
+	}
+}
+
+# Cabeceras de seguridad y logs. Se importa en cada servicio.
+(comun) {
+	import tls_dns
+	encode zstd gzip
+	header {
+		Strict-Transport-Security "max-age=31536000;"
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "SAMEORIGIN"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		-Server
+	}
+	log {
+		output file /data/access.log {
+			roll_size 10MiB
+			roll_keep 3
+		}
+	}
+}
+
+# ── Servicios ─────────────────────────────────────────────────────────────
+# Para añadir uno nuevo: copia un bloque, cambia el nombre y el destino.
+# El destino es "nombre-del-contenedor:puerto-interno".
+
+adguard.{$DOMAIN} {
+	import comun
+	reverse_proxy adguard:8080
+}
+
+immich.{$DOMAIN} {
+	import comun
+	# Los vídeos y las subidas masivas desde el móvil pueden ser de GB.
+	request_body {
+		max_size 50GB
+	}
+	reverse_proxy immich-server:2283
+}
+
+vault.{$DOMAIN} {
+	import comun
+	reverse_proxy vaultwarden:80
+}
+
+casa.{$DOMAIN} {
+	import comun
+	# Home Assistant corre en network_mode: host, así que no tiene nombre en la
+	# red de Docker. Se le llega por la puerta de enlace del bridge.
+	reverse_proxy host.docker.internal:8123
+}
+
+jellyfin.{$DOMAIN} {
+	import comun
+	reverse_proxy jellyfin:8096
+}
+
+papel.{$DOMAIN} {
+	import comun
+	reverse_proxy paperless:8000
+}

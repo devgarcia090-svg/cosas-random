@@ -1,0 +1,24 @@
+# Se fusiona encima del docker-compose.yml oficial que descarga ./pull.sh.
+#
+# Docker Compose lee los dos ficheros y los combina: lo de aquí manda. La ventaja
+# es que el fichero oficial se puede reemplazar por el de una versión nueva sin
+# perder nuestra configuración.
+#
+# Las RUTAS de datos no se tocan aquí: el compose oficial ya las toma de las
+# variables UPLOAD_LOCATION y DB_DATA_LOCATION, que apuntamos a /srv en el .env.
+# Aquí solo cambiamos la parte de red:
+#   1. Quitar los puertos publicados → nada escucha en el host, solo Caddy entra.
+#   2. Meter el server en la red 'proxy' para que Caddy lo alcance por nombre.
+
+services:
+  immich-server:
+    # !override reemplaza la lista entera en vez de añadirse a ella.
+    # (requiere Docker Compose 2.24 o superior)
+    ports: !override []
+    networks:
+      - default
+      - proxy
+
+networks:
+  proxy:
+    external: true

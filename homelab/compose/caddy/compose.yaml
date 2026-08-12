@@ -1,0 +1,29 @@
+services:
+  caddy:
+    build: .
+    image: homelab/caddy-cloudflare:2
+    container_name: caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      DOMAIN: ${DOMAIN:?falta DOMAIN en .env}
+      ACME_EMAIL: ${ACME_EMAIL:?falta ACME_EMAIL en .env}
+      CLOUDFLARE_API_TOKEN: ${CLOUDFLARE_API_TOKEN:?falta CLOUDFLARE_API_TOKEN en .env}
+    # Necesario para llegar a Home Assistant, que corre en la red del host y por
+    # tanto no tiene nombre dentro de Docker.
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      # Aquí viven los certificados. Si se pierde, Caddy los pide otra vez,
+      # pero Let's Encrypt limita a 50 por semana: mejor no perderlo.
+      - /srv/data/caddy/data:/data
+      - /srv/data/caddy/config:/config
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true

@@ -1,0 +1,24 @@
+services:
+  vaultwarden:
+    image: vaultwarden/server:latest
+    container_name: vaultwarden
+    restart: unless-stopped
+    environment:
+      DOMAIN: https://vault.${DOMAIN:?falta DOMAIN en .env}
+      # Ponlo a false en .env en cuanto tengas tu cuenta creada, y recrea el
+      # contenedor. Si no, cualquiera con acceso a la red puede registrarse.
+      SIGNUPS_ALLOWED: ${VAULTWARDEN_SIGNUPS_ALLOWED:-false}
+      ADMIN_TOKEN: ${VAULTWARDEN_ADMIN_TOKEN:?falta VAULTWARDEN_ADMIN_TOKEN en .env}
+      # Sin acceso desde internet no hace falta servidor de correo; el registro
+      # y la recuperación se hacen a mano desde el panel de administración.
+      SIGNUPS_VERIFY: "false"
+      WEBSOCKET_ENABLED: "true"
+    volumes:
+      # SQLite. Son unos pocos MB: cabe entero en cada backup sin problema.
+      - /srv/data/vaultwarden:/data
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true
