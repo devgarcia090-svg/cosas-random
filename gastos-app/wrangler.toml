@@ -13,7 +13,7 @@ binding = "ASSETS"
 [[d1_databases]]
 binding = "DB"
 database_name = "gastos"
-database_id = "PEGA_AQUI_EL_ID"
+database_id = "09882219-c52a-4edd-b1b1-d1916dbb7cce"
 
 # El token NO va aquí. Se guarda como secreto:
 #   npx wrangler secret put API_TOKEN
