@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d1117">
+<title>Mis gastos</title>
+<link rel="icon" href="/icono.svg">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="apple-touch-icon" href="/icono.svg">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Gastos">
+<style>
+  :root {
+    --fondo: #0d1117; --panel: #161b22; --panel2: #1c232c; --borde: #2a313c;
+    --texto: #e6edf3; --suave: #8b949e; --acento: #4c8dff; --hormiga: #f0a13c;
+    --bien: #3fb950; --mal: #f85149; --radio: 14px;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --fondo: #f6f8fa; --panel: #fff; --panel2: #f0f3f6; --borde: #d8dee4;
+      --texto: #1f2328; --suave: #656d76; --acento: #0969da; --hormiga: #bc7000;
+      --bien: #1a7f37; --mal: #cf222e;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--fondo); color: var(--texto);
+    font: 16px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    padding: max(12px, env(safe-area-inset-top)) 12px max(24px, env(safe-area-inset-bottom));
+    -webkit-text-size-adjust: 100%;
+  }
+  .app { max-width: 780px; margin: 0 auto; }
+  h1 { font-size: 20px; margin: 0; }
+  h2 { font-size: 15px; margin: 0 0 10px; color: var(--suave); font-weight: 600;
+       text-transform: uppercase; letter-spacing: .05em; }
+  .panel { background: var(--panel); border: 1px solid var(--borde);
+           border-radius: var(--radio); padding: 16px; margin-bottom: 14px; }
+  .fila { display: flex; gap: 10px; align-items: center; }
+  .entre { justify-content: space-between; }
+  button, select, input {
+    font: inherit; color: var(--texto); background: var(--panel2);
+    border: 1px solid var(--borde); border-radius: 10px; padding: 9px 12px;
+  }
+  button { cursor: pointer; }
+  button:active { transform: scale(.98); }
+  button.principal { background: var(--acento); border-color: var(--acento); color: #fff; font-weight: 600; }
+  button.chip { padding: 5px 10px; border-radius: 99px; font-size: 13px; }
+  button.chip.on { background: var(--acento); border-color: var(--acento); color: #fff; }
+  button.icono { padding: 6px 9px; background: none; border: none; color: var(--suave); font-size: 15px; }
+  .tarjetas { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+  .tarjeta { background: var(--panel); border: 1px solid var(--borde);
+             border-radius: var(--radio); padding: 14px; }
+  .tarjeta .etiqueta { font-size: 12px; color: var(--suave); text-transform: uppercase; letter-spacing: .04em; }
+  .tarjeta .valor { font-size: 26px; font-weight: 700; margin-top: 4px; letter-spacing: -.02em; }
+  .tarjeta .pie { font-size: 12px; color: var(--suave); margin-top: 2px; }
+  .tarjeta.hormigas { border-color: color-mix(in srgb, var(--hormiga) 45%, var(--borde)); }
+  .tarjeta.hormigas .valor { color: var(--hormiga); }
+  .barra { height: 8px; background: var(--panel2); border-radius: 99px; overflow: hidden; margin-top: 8px; }
+  .barra > i { display: block; height: 100%; background: var(--acento); border-radius: 99px; }
+  .cat { display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; margin-bottom: 10px; font-size: 14px; }
+  .cat .n { color: var(--suave); font-size: 12px; }
+  .lista { list-style: none; margin: 0; padding: 0; }
+  .lista li { display: flex; gap: 10px; align-items: center; padding: 10px 0;
+              border-top: 1px solid var(--borde); }
+  .lista li:first-child { border-top: none; }
+  .lista .info { flex: 1; min-width: 0; }
+  .lista .nombre { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .lista .meta { font-size: 12px; color: var(--suave); }
+  .lista .importe { font-variant-numeric: tabular-nums; font-weight: 600; white-space: nowrap; }
+  #listaRevisar li { flex-wrap: wrap; }
+  #listaRevisar .ponerCat { flex: 1 0 100%; }
+  .tag { font-size: 11px; padding: 2px 7px; border-radius: 99px; background: var(--panel2);
+         border: 1px solid var(--borde); color: var(--suave); }
+  .tag.hormiga { color: var(--hormiga); border-color: color-mix(in srgb, var(--hormiga) 45%, var(--borde)); }
+  .aviso { background: color-mix(in srgb, var(--hormiga) 12%, var(--panel));
+           border-color: color-mix(in srgb, var(--hormiga) 45%, var(--borde)); }
+  form.alta { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  form.alta input, form.alta select { width: 100%; }
+  form.alta .ancho { grid-column: 1 / -1; }
+  svg.dias { width: 100%; height: 70px; display: block; }
+  .vacio { color: var(--suave); font-size: 14px; }
+  code { background: var(--panel2); padding: 2px 6px; border-radius: 6px; font-size: 13px;
+         word-break: break-all; }
+  details summary { cursor: pointer; color: var(--suave); font-size: 14px; }
+  #entrar { max-width: 400px; margin: 15vh auto; }
+  .oculto { display: none !important; }
+  .aviso-flotante { position: fixed; left: 50%; transform: translateX(-50%);
+    bottom: max(16px, env(safe-area-inset-bottom)); background: var(--texto); color: var(--fondo);
+    padding: 10px 16px; border-radius: 99px; font-size: 14px; font-weight: 600;
+    box-shadow: 0 6px 24px rgba(0,0,0,.3); z-index: 9; }
+</style>
+</head>
+<body>
+
+<!-- ------------------------------- login ------------------------------- -->
+<section id="entrar" class="panel">
+  <h1>Mis gastos</h1>
+  <p class="vacio">Pega el token del Worker para entrar. Se guarda solo en este dispositivo.</p>
+  <form id="formEntrar" class="fila">
+    <input id="token" type="password" placeholder="token" autocomplete="current-password" style="flex:1">
+    <button class="principal" type="submit">Entrar</button>
+  </form>
+  <p id="errorEntrar" class="vacio"></p>
+</section>
+
+<!-- ------------------------------- app -------------------------------- -->
+<main class="app oculto" id="app">
+
+  <div class="fila entre" style="margin-bottom:14px">
+    <h1>Mis gastos</h1>
+    <div class="fila">
+      <select id="mes"></select>
+      <button class="icono" id="salir" title="Salir">⏻</button>
+    </div>
+  </div>
+
+  <div class="tarjetas" style="margin-bottom:14px">
+    <div class="tarjeta">
+      <div class="etiqueta">Gastado este mes</div>
+      <div class="valor" id="kTotal">–</div>
+      <div class="pie" id="kTotalPie"></div>
+      <div class="barra oculto" id="kBarra"><i></i></div>
+    </div>
+    <div class="tarjeta hormigas">
+      <div class="etiqueta">Gastos hormiga 🐜</div>
+      <div class="valor" id="kHormiga">–</div>
+      <div class="pie" id="kHormigaPie"></div>
+    </div>
+    <div class="tarjeta">
+      <div class="etiqueta">Media al día</div>
+      <div class="valor" id="kMedia">–</div>
+      <div class="pie" id="kMediaPie"></div>
+    </div>
+  </div>
+
+  <section class="panel aviso oculto" id="panelRevisar">
+    <h2>Por revisar (llegaron del móvil sin categoría)</h2>
+    <ul class="lista" id="listaRevisar"></ul>
+  </section>
+
+  <section class="panel">
+    <h2>Apuntar un gasto</h2>
+    <form class="alta" id="formAlta">
+      <input name="importe" inputmode="decimal" placeholder="Importe €" required>
+      <input name="comercio" placeholder="Dónde / qué">
+      <select name="categoria" id="selCategoria"></select>
+      <input name="fecha" type="date">
+      <label class="fila ancho" style="font-size:14px;color:var(--suave)">
+        <input type="checkbox" name="hormiga" style="width:auto"> Marcar como gasto hormiga
+      </label>
+      <button class="principal ancho" type="submit">Guardar</button>
+    </form>
+  </section>
+
+  <section class="panel">
+    <h2>Por categoría</h2>
+    <div id="categorias"></div>
+  </section>
+
+  <section class="panel">
+    <h2>Día a día</h2>
+    <svg class="dias" id="dias" preserveAspectRatio="none"></svg>
+  </section>
+
+  <section class="panel">
+    <h2>Movimientos</h2>
+    <div class="fila" id="filtros" style="flex-wrap:wrap;margin-bottom:12px">
+      <button class="chip on" data-filtro="">Todos</button>
+      <button class="chip" data-filtro="hormiga">Solo hormiga 🐜</button>
+    </div>
+    <ul class="lista" id="lista"></ul>
+  </section>
+
+  <section class="panel">
+    <h2>Meses anteriores</h2>
+    <div id="historico"></div>
+  </section>
+
+  <section class="panel">
+    <h2>Ajustes</h2>
+    <form class="alta" id="formConfig">
+      <label style="font-size:13px;color:var(--suave)">Umbral hormiga (€)
+        <input name="umbral_hormiga" inputmode="decimal">
+      </label>
+      <label style="font-size:13px;color:var(--suave)">Presupuesto del mes (€)
+        <input name="presupuesto_mes" inputmode="decimal">
+      </label>
+      <button class="ancho" type="submit">Guardar ajustes</button>
+    </form>
+    <details style="margin-top:14px">
+      <summary>Datos para el Atajo de Apple</summary>
+      <p style="font-size:14px">URL: <code id="urlApi"></code><br>
+      Cabecera <code>X-Token</code>: <code id="tokenApi"></code></p>
+      <button id="copiar">Copiar URL con token</button>
+    </details>
+  </section>
+</main>
+
+<script>
+const CATEGORIAS = ['super','restaurante','cafe','transporte','ocio','suscripciones',
+  'salud','hogar','ropa','caprichos','regalos','otros','sin-categoria'];
+const ICONOS = { super:'🛒', restaurante:'🍽️', cafe:'☕', transporte:'🚇', ocio:'🎬',
+  suscripciones:'🔁', salud:'💊', hogar:'🏠', ropa:'👕', caprichos:'🛍️', regalos:'🎁',
+  otros:'•', 'sin-categoria':'❓' };
+
+let token = localStorage.getItem('gastos_token') || '';
+let mesSel = '';
+let filtro = '';
+let umbral = 10;
+
+const $ = (sel) => document.querySelector(sel);
+const eur = (n) => (Number(n) || 0).toLocaleString('es-ES',
+  { style: 'currency', currency: 'EUR', maximumFractionDigits: 2 });
+
+async function api(ruta, opciones = {}) {
+  const res = await fetch('/api' + ruta, {
+    ...opciones,
+    headers: { 'content-type': 'application/json', 'x-token': token, ...(opciones.headers || {}) },
+  });
+  const datos = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(datos.error || 'Error ' + res.status);
+  return datos;
+}
+
+function aviso(texto) {
+  const el = document.createElement('div');
+  el.className = 'aviso-flotante';
+  el.textContent = texto;
+  document.body.appendChild(el);
+  setTimeout(() => el.remove(), 2200);
+}
+
+/* --------------------------------- login --------------------------------- */
+
+$('#formEntrar').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  token = $('#token').value.trim();
+  try {
+    const { mes } = await api('/ping');
+    localStorage.setItem('gastos_token', token);
+    mesSel = mes;
+    arrancar();
+  } catch (err) {
+    $('#errorEntrar').textContent = 'No ha entrado: ' + err.message;
+  }
+});
+
+$('#salir').addEventListener('click', () => {
+  localStorage.removeItem('gastos_token');
+  location.reload();
+});
+
+/* --------------------------------- pintar -------------------------------- */
+
+function pintarResumen(r) {
+  umbral = r.config.umbral_hormiga;
+  $('#kTotal').textContent = eur(r.total);
+  $('#kTotalPie').textContent = `${r.n} gasto${r.n === 1 ? '' : 's'} · proyección ${eur(r.proyeccion_mes)}`;
+
+  const barra = $('#kBarra');
+  if (r.presupuesto) {
+    const pct = Math.min((r.total / r.presupuesto) * 100, 100);
+    barra.classList.remove('oculto');
+    barra.firstElementChild.style.width = pct + '%';
+    barra.firstElementChild.style.background = r.total > r.presupuesto ? 'var(--mal)' : 'var(--bien)';
+    $('#kTotalPie').textContent += ` · presupuesto ${eur(r.presupuesto)}`;
+  } else {
+    barra.classList.add('oculto');
+  }
+
+  const h = r.hormigas;
+  $('#kHormiga').textContent = eur(h.total);
+  $('#kHormigaPie').textContent =
+    `${h.n} pagos de ${eur(umbral)} o menos · ${h.porcentaje.toFixed(0)}% del mes · ` +
+    `a este ritmo ${eur(h.proyeccion_anual)} al año`;
+
+  $('#kMedia').textContent = eur(r.media_dia);
+  $('#kMediaPie').textContent = h.top.length
+    ? 'Top hormiga: ' + h.top.slice(0, 2).map((t) => `${t.nombre} (${eur(t.total)})`).join(', ')
+    : '';
+
+  // categorías
+  const max = Math.max(...r.por_categoria.map((c) => c.total), 0.01);
+  $('#categorias').innerHTML = r.por_categoria.length ? r.por_categoria.map((c) => `
+    <div class="cat">
+      <span>${ICONOS[c.categoria] || '•'} ${c.categoria}</span>
+      <span class="importe">${eur(c.total)}</span>
+      <span class="n">${c.n} gasto${c.n === 1 ? '' : 's'} · ${((c.total / r.total) * 100).toFixed(0)}%</span>
+      <span></span>
+      <div class="barra ancho" style="grid-column:1/-1"><i style="width:${(c.total / max) * 100}%"></i></div>
+    </div>`).join('') : '<p class="vacio">Nada este mes.</p>';
+
+  pintarDias(r.mes, r.por_dia);
+
+  // histórico
+  const maxMes = Math.max(...r.meses.map((m) => m.total), 0.01);
+  $('#historico').innerHTML = r.meses.length ? r.meses.map((m) => `
+    <div class="cat">
+      <span>${m.mes}</span><span class="importe">${eur(m.total)}</span>
+      <span class="n">hormiga ${eur(m.total_hormiga)}</span><span></span>
+      <div style="grid-column:1/-1" class="barra"><i style="width:${(m.total / maxMes) * 100}%"></i></div>
+    </div>`).join('') : '<p class="vacio">Aún no hay historia.</p>';
+
+  // selector de meses
+  const meses = [...new Set([r.mes, ...r.meses.map((m) => m.mes)])].sort().reverse();
+  $('#mes').innerHTML = meses.map((m) =>
+    `<option value="${m}" ${m === r.mes ? 'selected' : ''}>${m}</option>`).join('');
+}
+
+function pintarDias(mes, porDia) {
+  const dias = new Date(+mes.slice(0, 4), +mes.slice(5, 7), 0).getDate();
+  const valores = Array(dias).fill(0);
+  for (const d of porDia) valores[+d.fecha.slice(8, 10) - 1] = d.total;
+  const max = Math.max(...valores, 0.01);
+  const ancho = 100 / dias;
+  const barras = valores.map((v, i) => {
+    const alto = (v / max) * 100;
+    const color = v > 0 ? 'var(--acento)' : 'var(--borde)';
+    return `<rect x="${i * ancho + ancho * 0.15}%" y="${100 - Math.max(alto, 2)}%"
+      width="${ancho * 0.7}%" height="${Math.max(alto, 2)}%" rx="1.5" fill="${color}">
+      <title>día ${i + 1}: ${eur(v)}</title></rect>`;
+  }).join('');
+  $('#dias').innerHTML = barras;
+}
+
+function itemGasto(g, conRevisar = false) {
+  const cuando = new Date(g.ts).toLocaleDateString('es-ES', { day: 'numeric', month: 'short' });
+  const nombre = g.comercio || g.descripcion || 'Gasto';
+  return `<li data-id="${g.id}">
+    <div class="info">
+      <div class="nombre">${ICONOS[g.categoria] || '•'} ${escapar(nombre)}</div>
+      <div class="meta">${cuando} · ${g.categoria}${g.origen === 'atajo' ? ' · atajo' : ''}</div>
+    </div>
+    ${g.hormiga ? '<span class="tag hormiga">🐜</span>' : ''}
+    <span class="importe">${eur(g.importe)}</span>
+    ${conRevisar
+      ? `<select class="ponerCat"><option value="" selected>Elegir categoría…</option>${CATEGORIAS.filter((c) => c !== 'sin-categoria')
+          .map((c) => `<option value="${c}">${ICONOS[c]} ${c}</option>`).join('')}</select>`
+      : `<button class="icono cambiarHormiga" title="Marcar/desmarcar hormiga">🐜</button>
+         <button class="icono borrar" title="Borrar">✕</button>`}
+  </li>`;
+}
+
+const escapar = (s) => String(s).replace(/[<>&"]/g, (c) =>
+  ({ '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;' }[c]));
+
+async function cargar() {
+  const [r, lista, revisar] = await Promise.all([
+    api('/resumen?mes=' + mesSel),
+    api(`/gastos?mes=${mesSel}&limite=300${filtro === 'hormiga' ? '&hormiga=1' : ''}`),
+    api('/gastos?revisado=0&limite=50'),
+  ]);
+  pintarResumen(r);
+
+  $('#lista').innerHTML = lista.gastos.length
+    ? lista.gastos.map((g) => itemGasto(g)).join('')
+    : '<li class="vacio">Sin movimientos.</li>';
+
+  $('#panelRevisar').classList.toggle('oculto', revisar.gastos.length === 0);
+  $('#listaRevisar').innerHTML = revisar.gastos.map((g) => itemGasto(g, true)).join('');
+
+  const c = r.config;
+  $('#formConfig').umbral_hormiga.value = c.umbral_hormiga;
+  $('#formConfig').presupuesto_mes.value = c.presupuesto_mes ?? '';
+}
+
+/* -------------------------------- acciones ------------------------------- */
+
+$('#mes').addEventListener('change', (e) => { mesSel = e.target.value; cargar(); });
+
+$('#filtros').addEventListener('click', (e) => {
+  const boton = e.target.closest('button[data-filtro]');
+  if (!boton) return;
+  filtro = boton.dataset.filtro;
+  [...$('#filtros').children].forEach((b) => b.classList.toggle('on', b === boton));
+  cargar();
+});
+
+$('#formAlta').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const f = e.target;
+  const cuerpo = {
+    importe: f.importe.value,
+    comercio: f.comercio.value,
+    categoria: f.categoria.value || undefined,
+    origen: 'web',
+  };
+  if (f.fecha.value) cuerpo.fecha = f.fecha.value + 'T12:00:00';
+  if (f.hormiga.checked) cuerpo.hormiga = 1;
+  try {
+    await api('/gastos', { method: 'POST', body: JSON.stringify(cuerpo) });
+    f.reset();
+    aviso('Gasto guardado');
+    cargar();
+  } catch (err) { aviso(err.message); }
+});
+
+document.body.addEventListener('click', async (e) => {
+  const li = e.target.closest('li[data-id]');
+  if (!li) return;
+  const id = li.dataset.id;
+  try {
+    if (e.target.classList.contains('borrar')) {
+      if (!confirm('¿Borrar este gasto?')) return;
+      await api('/gastos/' + id, { method: 'DELETE' });
+      cargar();
+    } else if (e.target.classList.contains('cambiarHormiga')) {
+      const esHormiga = li.querySelector('.tag.hormiga');
+      await api('/gastos/' + id, { method: 'PATCH', body: JSON.stringify({ hormiga: esHormiga ? 0 : 1 }) });
+      cargar();
+    }
+  } catch (err) { aviso(err.message); }
+});
+
+document.body.addEventListener('change', async (e) => {
+  if (!e.target.classList.contains('ponerCat') || !e.target.value) return;
+  const id = e.target.closest('li[data-id]').dataset.id;
+  try {
+    await api('/gastos/' + id, {
+      method: 'PATCH',
+      body: JSON.stringify({ categoria: e.target.value, revisado: 1 }),
+    });
+    aviso('Categorizado');
+    cargar();
+  } catch (err) { aviso(err.message); }
+});
+
+$('#formConfig').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const f = e.target;
+  try {
+    await api('/config', {
+      method: 'PUT',
+      body: JSON.stringify({
+        umbral_hormiga: f.umbral_hormiga.value,
+        presupuesto_mes: f.presupuesto_mes.value,
+      }),
+    });
+    aviso('Ajustes guardados');
+    cargar();
+  } catch (err) { aviso(err.message); }
+});
+
+$('#copiar').addEventListener('click', async () => {
+  const url = location.origin + '/api/gastos?token=' + encodeURIComponent(token);
+  try { await navigator.clipboard.writeText(url); aviso('Copiado'); }
+  catch { prompt('Copia esta URL:', url); }
+});
+
+/* -------------------------------- arranque ------------------------------- */
+
+function arrancar() {
+  $('#entrar').classList.add('oculto');
+  $('#app').classList.remove('oculto');
+  $('#selCategoria').innerHTML = '<option value="">Categoría (auto)</option>' +
+    CATEGORIAS.filter((c) => c !== 'sin-categoria')
+      .map((c) => `<option value="${c}">${ICONOS[c]} ${c}</option>`).join('');
+  $('#urlApi').textContent = location.origin + '/api/gastos';
+  $('#tokenApi').textContent = token;
+  cargar().catch((err) => aviso(err.message));
+}
+
+(async () => {
+  if (!token) return;
+  try {
+    const { mes } = await api('/ping');
+    mesSel = mes;
+    arrancar();
+  } catch {
+    localStorage.removeItem('gastos_token');
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+name = "gastos"
+main = "src/index.js"
+compatibility_date = "2025-06-01"
+
+# La web (public/) la sirve Cloudflare como ficheros estáticos; el Worker solo
+# atiende /api/*.
+[assets]
+directory = "./public"
+binding = "ASSETS"
+
+# Rellena database_id con el que te devuelva:
+#   npx wrangler d1 create gastos
+[[d1_databases]]
+binding = "DB"
+database_name = "gastos"
+database_id = "PEGA_AQUI_EL_ID"
+
+# El token NO va aquí. Se guarda como secreto:
+#   npx wrangler secret put API_TOKEN
