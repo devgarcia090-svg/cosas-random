@@ -9,10 +9,13 @@
  *   GET    /api/resumen       totales del mes, por categoría, hormigas, proyección
  *   GET    /api/config        lee ajustes
  *   PUT    /api/config        guarda ajustes
+ *   POST   /api/entrar        valida el token y deja una cookie de sesión (web)
+ *   POST   /api/salir         borra la cookie
  *   GET    /api/ping          comprueba token (para el login de la web)
  *
  * El token va en la cabecera `X-Token`, en `Authorization: Bearer ...`
- * o en `?token=` (cómodo para Atajos).
+ * o en `?token=` (cómodo para Atajos). La web usa además una cookie de sesión
+ * que pone el servidor al entrar, para no tener que pedir el token cada vez.
  */
 
 const ZONA = 'Europe/Madrid';
@@ -62,14 +65,49 @@ function tokenValido(recibido, esperado) {
   return dif === 0;
 }
 
-function autorizado(request, url, env) {
+const COOKIE = 'gastos_sesion';
+
+function leerCookie(request, nombre) {
+  const crudo = request.headers.get('cookie') || '';
+  for (const trozo of crudo.split(';')) {
+    const i = trozo.indexOf('=');
+    if (i < 0) continue;
+    if (trozo.slice(0, i).trim() === nombre) return decodeURIComponent(trozo.slice(i + 1).trim());
+  }
+  return null;
+}
+
+/** El token de la petición: cabecera, Bearer, ?token= o la cookie de sesión. */
+function tokenDe(request, url) {
   const cabecera = request.headers.get('authorization') || '';
-  const recibido =
+  return (
     request.headers.get('x-token') ||
     (cabecera.toLowerCase().startsWith('bearer ') ? cabecera.slice(7).trim() : '') ||
     url.searchParams.get('token') ||
-    '';
-  return tokenValido(recibido, env.API_TOKEN);
+    leerCookie(request, COOKIE) ||
+    ''
+  );
+}
+
+function autorizado(request, url, env) {
+  return tokenValido(tokenDe(request, url), env.API_TOKEN);
+}
+
+/**
+ * Cookie de sesión para la web. La pone el servidor (no el JavaScript) porque
+ * Safari en iOS borra a los 7 días todo lo que guarda el JS —localStorage
+ * incluido—, y por eso la web pedía el token una y otra vez. Va HttpOnly, así
+ * que el JS de la página tampoco puede leerla, y SameSite=Lax evita que otra
+ * web la use para escribir en tus gastos.
+ */
+function ponerCookie(respuesta, valor, url, borrar = false) {
+  const seguro = url.protocol === 'https:' ? ' Secure;' : '';
+  respuesta.headers.append(
+    'set-cookie',
+    `${COOKIE}=${borrar ? '' : encodeURIComponent(valor)}; Path=/; HttpOnly;${seguro}` +
+      ` SameSite=Lax; Max-Age=${borrar ? 0 : 60 * 60 * 24 * 400}`,
+  );
+  return respuesta;
 }
 
 /** YYYY-MM-DD en la zona local configurada (no en UTC). */
@@ -371,61 +409,75 @@ async function resumen(url, env) {
 
 /* --------------------------------- router -------------------------------- */
 
+async function router(request, env) {
+  const url = new URL(request.url);
+  const ruta = url.pathname.replace(/\/+$/, '');
+  const metodo = request.method;
+
+  if (!env.API_TOKEN) {
+    return error('Falta el secreto API_TOKEN en el Worker. Ver README.', 500);
+  }
+
+  // Entrar: valida el token y deja la sesión guardada en una cookie.
+  if (ruta === '/api/entrar' && metodo === 'POST') {
+    const datos = await leerCuerpo(request, url);
+    const recibido = tokenDe(request, url) || (datos.token || '').toString().trim();
+    if (!tokenValido(recibido, env.API_TOKEN)) return error('Token no válido.', 401);
+    return ponerCookie(json({ ok: true, mes: mesActual((await leerConfig(env)).zona) }), recibido, url);
+  }
+
+  if (ruta === '/api/salir' && metodo === 'POST') {
+    return ponerCookie(json({ ok: true }), '', url, true);
+  }
+
+  if (!autorizado(request, url, env)) return error('Token no válido.', 401);
+
+  if (ruta === '/api/ping') return json({ ok: true, mes: mesActual((await leerConfig(env)).zona) });
+
+  if (ruta === '/api/gastos') {
+    if (metodo === 'POST') return crearGasto(request, url, env);
+    if (metodo === 'GET') return listarGastos(url, env);
+    return error('Método no permitido.', 405);
+  }
+
+  const m = ruta.match(/^\/api\/gastos\/(\d+)$/);
+  if (m) {
+    const id = Number(m[1]);
+    if (metodo === 'PATCH' || metodo === 'POST') return editarGasto(id, request, url, env);
+    if (metodo === 'DELETE') return borrarGasto(id, env);
+    if (metodo === 'GET') {
+      const gasto = await env.DB.prepare('SELECT * FROM gastos WHERE id = ?').bind(id).first();
+      return gasto
+        ? json({ ok: true, gasto: { ...gasto, hormiga: !!gasto.hormiga, revisado: !!gasto.revisado } })
+        : error('No existe ese gasto.', 404);
+    }
+    return error('Método no permitido.', 405);
+  }
+
+  if (ruta === '/api/resumen' && metodo === 'GET') return resumen(url, env);
+
+  if (ruta === '/api/config') {
+    if (metodo === 'GET') return json({ ok: true, config: await leerConfig(env), categorias: CATEGORIAS });
+    if (metodo === 'PUT' || metodo === 'POST') {
+      return json({ ok: true, config: await guardarConfig(env, await leerCuerpo(request, url)) });
+    }
+    return error('Método no permitido.', 405);
+  }
+
+  return error('Ruta no encontrada.', 404);
+}
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
 
     if (request.method === 'OPTIONS') return json({ ok: true });
 
-    // lo que no sea /api/* lo sirven los assets estáticos (public/)
-    if (!url.pathname.startsWith('/api/')) {
-      return env.ASSETS.fetch(request);
-    }
-
-    if (!env.API_TOKEN) {
-      return error('Falta el secreto API_TOKEN en el Worker. Ver README.', 500);
-    }
-    if (!autorizado(request, url, env)) {
-      return error('Token no válido.', 401);
-    }
-
-    const ruta = url.pathname.replace(/\/+$/, '');
-    const metodo = request.method;
+    // lo que no sea /api/* lo sirven los ficheros estáticos (public/)
+    if (!url.pathname.startsWith('/api/')) return env.ASSETS.fetch(request);
 
     try {
-      if (ruta === '/api/ping') return json({ ok: true, mes: mesActual((await leerConfig(env)).zona) });
-
-      if (ruta === '/api/gastos') {
-        if (metodo === 'POST') return crearGasto(request, url, env);
-        if (metodo === 'GET') return listarGastos(url, env);
-        return error('Método no permitido.', 405);
-      }
-
-      const m = ruta.match(/^\/api\/gastos\/(\d+)$/);
-      if (m) {
-        const id = Number(m[1]);
-        if (metodo === 'PATCH' || metodo === 'POST') return editarGasto(id, request, url, env);
-        if (metodo === 'DELETE') return borrarGasto(id, env);
-        if (metodo === 'GET') {
-          const gasto = await env.DB.prepare('SELECT * FROM gastos WHERE id = ?').bind(id).first();
-          return gasto
-            ? json({ ok: true, gasto: { ...gasto, hormiga: !!gasto.hormiga, revisado: !!gasto.revisado } })
-            : error('No existe ese gasto.', 404);
-        }
-        return error('Método no permitido.', 405);
-      }
-
-      if (ruta === '/api/resumen' && metodo === 'GET') return resumen(url, env);
-
-      if (ruta === '/api/config') {
-        if (metodo === 'GET') return json({ ok: true, config: await leerConfig(env), categorias: CATEGORIAS });
-        if (metodo === 'PUT' || metodo === 'POST') {
-          return json({ ok: true, config: await guardarConfig(env, await leerCuerpo(request, url)) });
-        }
-        return error('Método no permitido.', 405);
-      }
-
-      return error('Ruta no encontrada.', 404);
+      return await router(request, env);
     } catch (e) {
       return error(`Error del servidor: ${e.message}`, 500);
     }

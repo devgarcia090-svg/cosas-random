@@ -40,14 +40,17 @@
   .entre { justify-content: space-between; }
   button, select, input {
     font: inherit; color: var(--texto); background: var(--panel2);
-    border: 1px solid var(--borde); border-radius: 10px; padding: 9px 12px;
+    border: 1px solid var(--borde); border-radius: 10px; padding: 11px 12px;
+    /* 16px como mínimo: por debajo, Safari en iOS hace zoom al tocar el campo */
+    font-size: 16px; min-height: 44px;
   }
   button { cursor: pointer; }
   button:active { transform: scale(.98); }
   button.principal { background: var(--acento); border-color: var(--acento); color: #fff; font-weight: 600; }
-  button.chip { padding: 5px 10px; border-radius: 99px; font-size: 13px; }
+  button.chip { padding: 9px 14px; border-radius: 99px; font-size: 14px; min-height: 40px; }
   button.chip.on { background: var(--acento); border-color: var(--acento); color: #fff; }
-  button.icono { padding: 6px 9px; background: none; border: none; color: var(--suave); font-size: 15px; }
+  button.icono { background: none; border: none; color: var(--suave); font-size: 17px;
+                 min-width: 44px; min-height: 44px; padding: 0; }
   .tarjetas { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
   .tarjeta { background: var(--panel); border: 1px solid var(--borde);
              border-radius: var(--radio); padding: 14px; }
@@ -61,22 +64,31 @@
   .cat { display: grid; grid-template-columns: 1fr auto; gap: 2px 10px; margin-bottom: 10px; font-size: 14px; }
   .cat .n { color: var(--suave); font-size: 12px; }
   .lista { list-style: none; margin: 0; padding: 0; }
-  .lista li { display: flex; gap: 10px; align-items: center; padding: 10px 0;
-              border-top: 1px solid var(--borde); }
+  /* dos líneas: nombre + importe arriba, detalle + acciones debajo. Así el
+     nombre del comercio dispone de todo el ancho y no se corta en el iPhone. */
+  .lista li { display: grid; grid-template-columns: 1fr auto; align-items: center;
+              gap: 2px 10px; padding: 10px 0; border-top: 1px solid var(--borde); }
   .lista li:first-child { border-top: none; }
-  .lista .info { flex: 1; min-width: 0; }
-  .lista .nombre { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .lista .meta { font-size: 12px; color: var(--suave); }
-  .lista .importe { font-variant-numeric: tabular-nums; font-weight: 600; white-space: nowrap; }
-  #listaRevisar li { flex-wrap: wrap; }
-  #listaRevisar .ponerCat { flex: 1 0 100%; }
+  .lista .nombre { font-weight: 600; min-width: 0; overflow-wrap: anywhere; }
+  .lista .meta { font-size: 12px; color: var(--suave); display: flex;
+                 flex-wrap: wrap; gap: 6px; align-items: center; }
+  .lista .importe { font-variant-numeric: tabular-nums; font-weight: 600;
+                    white-space: nowrap; text-align: right; font-size: 17px; }
+  .lista .acciones { display: flex; justify-content: flex-end; }
+  .lista .ponerCat { grid-column: 1 / -1; margin-top: 8px; }
   .tag { font-size: 11px; padding: 2px 7px; border-radius: 99px; background: var(--panel2);
          border: 1px solid var(--borde); color: var(--suave); }
   .tag.hormiga { color: var(--hormiga); border-color: color-mix(in srgb, var(--hormiga) 45%, var(--borde)); }
+  label.check { display: flex; align-items: center; justify-content: flex-start;
+                gap: 10px; font-size: 15px; color: var(--suave); min-height: 44px; }
+  label.check input { flex: 0 0 auto; width: 22px; height: 22px; min-height: 0; margin: 0; }
+  label.campo { display: block; font-size: 13px; color: var(--suave); }
+  label.campo input { width: 100%; margin-top: 4px; }
   .aviso { background: color-mix(in srgb, var(--hormiga) 12%, var(--panel));
            border-color: color-mix(in srgb, var(--hormiga) 45%, var(--borde)); }
-  form.alta { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-  form.alta input, form.alta select { width: 100%; }
+  form.alta { display: grid; grid-template-columns: 1fr; gap: 10px; }
+  @media (min-width: 430px) { form.alta { grid-template-columns: 1fr 1fr; } }
+  form.alta input:not([type="checkbox"]), form.alta select { width: 100%; }
   form.alta .ancho { grid-column: 1 / -1; }
   svg.dias { width: 100%; height: 70px; display: block; }
   .vacio { color: var(--suave); font-size: 14px; }
@@ -146,8 +158,8 @@
       <input name="comercio" placeholder="Dónde / qué">
       <select name="categoria" id="selCategoria"></select>
       <input name="fecha" type="date">
-      <label class="fila ancho" style="font-size:14px;color:var(--suave)">
-        <input type="checkbox" name="hormiga" style="width:auto"> Marcar como gasto hormiga
+      <label class="check ancho">
+        <input type="checkbox" name="hormiga"> Marcar como gasto hormiga
       </label>
       <button class="principal ancho" type="submit">Guardar</button>
     </form>
@@ -180,10 +192,10 @@
   <section class="panel">
     <h2>Ajustes</h2>
     <form class="alta" id="formConfig">
-      <label style="font-size:13px;color:var(--suave)">Umbral hormiga (€)
+      <label class="campo">Umbral hormiga (€)
         <input name="umbral_hormiga" inputmode="decimal">
       </label>
-      <label style="font-size:13px;color:var(--suave)">Presupuesto del mes (€)
+      <label class="campo">Presupuesto del mes (€)
         <input name="presupuesto_mes" inputmode="decimal">
       </label>
       <button class="ancho" type="submit">Guardar ajustes</button>
@@ -233,21 +245,33 @@ function aviso(texto) {
 
 /* --------------------------------- login --------------------------------- */
 
+/**
+ * Al entrar, el servidor deja una cookie de sesión que dura más de un año.
+ * El token también se guarda aquí, pero solo para poder enseñarlo en "Datos
+ * para el Atajo": quien manda para entrar es la cookie, porque iOS borra a los
+ * 7 días lo que guarda el JavaScript.
+ */
+async function entrar(valor) {
+  token = valor.trim();
+  const { mes } = await api('/entrar', { method: 'POST' });
+  try { localStorage.setItem('gastos_token', token); } catch { /* modo privado */ }
+  mesSel = mes;
+  arrancar();
+}
+
 $('#formEntrar').addEventListener('submit', async (e) => {
   e.preventDefault();
-  token = $('#token').value.trim();
   try {
-    const { mes } = await api('/ping');
-    localStorage.setItem('gastos_token', token);
-    mesSel = mes;
-    arrancar();
+    await entrar($('#token').value);
   } catch (err) {
     $('#errorEntrar').textContent = 'No ha entrado: ' + err.message;
   }
 });
 
-$('#salir').addEventListener('click', () => {
-  localStorage.removeItem('gastos_token');
+$('#salir').addEventListener('click', async () => {
+  if (!confirm('¿Salir? Tendrás que volver a meter el token.')) return;
+  try { await api('/salir', { method: 'POST' }); } catch { /* da igual */ }
+  try { localStorage.removeItem('gastos_token'); } catch {}
   location.reload();
 });
 
@@ -328,17 +352,20 @@ function itemGasto(g, conRevisar = false) {
   const cuando = new Date(g.ts).toLocaleDateString('es-ES', { day: 'numeric', month: 'short' });
   const nombre = g.comercio || g.descripcion || 'Gasto';
   return `<li data-id="${g.id}">
-    <div class="info">
-      <div class="nombre">${ICONOS[g.categoria] || '•'} ${escapar(nombre)}</div>
-      <div class="meta">${cuando} · ${g.categoria}${g.origen === 'atajo' ? ' · atajo' : ''}</div>
-    </div>
-    ${g.hormiga ? '<span class="tag hormiga">🐜</span>' : ''}
+    <span class="nombre">${ICONOS[g.categoria] || '•'} ${escapar(nombre)}</span>
     <span class="importe">${eur(g.importe)}</span>
+    <span class="meta">
+      ${cuando} · ${g.categoria}${g.origen === 'atajo' ? ' · atajo' : ''}
+      ${g.hormiga ? '<span class="tag hormiga">🐜 hormiga</span>' : ''}
+    </span>
+    ${conRevisar ? '<span></span>' : `<span class="acciones">
+      <button class="icono cambiarHormiga" title="Marcar o quitar hormiga">🐜</button>
+      <button class="icono borrar" title="Borrar">✕</button>
+    </span>`}
     ${conRevisar
       ? `<select class="ponerCat"><option value="" selected>Elegir categoría…</option>${CATEGORIAS.filter((c) => c !== 'sin-categoria')
           .map((c) => `<option value="${c}">${ICONOS[c]} ${c}</option>`).join('')}</select>`
-      : `<button class="icono cambiarHormiga" title="Marcar/desmarcar hormiga">🐜</button>
-         <button class="icono borrar" title="Borrar">✕</button>`}
+      : ''}
   </li>`;
 }
 
@@ -406,7 +433,7 @@ document.body.addEventListener('click', async (e) => {
       await api('/gastos/' + id, { method: 'DELETE' });
       cargar();
     } else if (e.target.classList.contains('cambiarHormiga')) {
-      const esHormiga = li.querySelector('.tag.hormiga');
+      const esHormiga = li.querySelector('.tag.hormiga');  // la fila la muestra en la meta
       await api('/gastos/' + id, { method: 'PATCH', body: JSON.stringify({ hormiga: esHormiga ? 0 : 1 }) });
       cargar();
     }
@@ -443,6 +470,7 @@ $('#formConfig').addEventListener('submit', async (e) => {
 });
 
 $('#copiar').addEventListener('click', async () => {
+  if (!token) return;
   const url = location.origin + '/api/gastos?token=' + encodeURIComponent(token);
   try { await navigator.clipboard.writeText(url); aviso('Copiado'); }
   catch { prompt('Copia esta URL:', url); }
@@ -457,18 +485,29 @@ function arrancar() {
     CATEGORIAS.filter((c) => c !== 'sin-categoria')
       .map((c) => `<option value="${c}">${ICONOS[c]} ${c}</option>`).join('');
   $('#urlApi').textContent = location.origin + '/api/gastos';
-  $('#tokenApi').textContent = token;
+  $('#tokenApi').textContent = token || '(no guardado en este dispositivo)';
+  $('#copiar').disabled = !token;
   cargar().catch((err) => aviso(err.message));
 }
 
 (async () => {
-  if (!token) return;
+  // 1) ¿enlace con el token dentro? (#token=...) — se usa y se borra de la barra
+  const enlace = new URLSearchParams(location.hash.slice(1)).get('token');
+  if (enlace) {
+    history.replaceState(null, '', location.pathname);
+    try { return await entrar(enlace); } catch { /* seguimos probando */ }
+  }
+  // 2) ¿ya hay cookie de sesión? entonces ni preguntamos
   try {
     const { mes } = await api('/ping');
     mesSel = mes;
-    arrancar();
-  } catch {
-    localStorage.removeItem('gastos_token');
+    return arrancar();
+  } catch { /* sin sesión */ }
+  // 3) queda el token del navegador de una versión anterior: lo canjeamos
+  if (token) {
+    try { return await entrar(token); } catch {}
+    try { localStorage.removeItem('gastos_token'); } catch {}
+    token = '';
   }
 })();
 </script>
