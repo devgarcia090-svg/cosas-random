@@ -90,6 +90,32 @@ subiéndola a un hosting normal por FTP.
 > El fichero `_headers` configura la caché y unas cabeceras de seguridad en
 > Cloudflare Pages y Netlify. En otros hostings se ignora sin dar problemas.
 
+### Vista previa rápida, sin cuenta
+
+Wrangler puede publicar en una cuenta temporal anónima, sin necesidad de estar
+logueado. Va bien para mandar un enlace y que alguien lo vea en el móvil:
+
+```bash
+mkdir -p /tmp/prev && cp -r aqualadra /tmp/prev/public
+cd /tmp/prev && cat > wrangler.jsonc <<'EOF'
+{
+  "name": "aqualadra",
+  "compatibility_date": "2026-08-01",
+  "assets": { "directory": "./public", "not_found_handling": "404-page" }
+}
+EOF
+npx wrangler deploy --temporary
+```
+
+Devuelve una URL `*.workers.dev` y, con ella, un **enlace para reclamar** el
+despliegue: si se abre desde una cuenta de Cloudflare dentro del plazo que
+indica (algo menos de una hora), el proyecto pasa a esa cuenta y deja de ser
+temporal. Si no se reclama, la cuenta temporal se pierde.
+
+Conviene añadir `<meta name="robots" content="noindex, nofollow">` y un
+`robots.txt` con `Disallow: /` **solo en la copia de la vista previa**, para que
+los buscadores no indexen una dirección provisional.
+
 ---
 
 ## Cómo está organizado
