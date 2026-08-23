@@ -93,18 +93,35 @@ npx http-server aqualadra -p 8899 -s
 
 ### Publicarla
 
-Al ser estática vale cualquier hosting. La web actual está en **Cloudflare**,
-así que lo natural es seguir ahí:
+Hay un script que lo hace todo. Antes, autenticarse de una de estas dos formas:
 
 ```bash
-npm install -g wrangler
-wrangler login
-wrangler pages deploy aqualadra --project-name aqualadra
+wrangler login                       # abre el navegador
+# o bien, sin navegador:
+export CLOUDFLARE_API_TOKEN="..."    # token con permiso Workers Scripts: Edit
 ```
 
-Después, en el panel de Cloudflare Pages, apuntar el dominio `aqualadra.com`
-al proyecto. También funciona igual arrastrando la carpeta a Netlify, o
-subiéndola a un hosting normal por FTP.
+Y entonces:
+
+```bash
+./aqualadra/desplegar.sh                 # vista previa, en la URL *.workers.dev
+./aqualadra/desplegar.sh --produccion    # cuando ya tenga el dominio propio
+./aqualadra/desplegar.sh --solo-preparar # deja el paquete listo sin desplegar
+```
+
+La diferencia entre los dos primeros es el `noindex`: mientras la web viva en
+una dirección provisional conviene que Google no la indexe, y en cuanto tenga
+`aqualadra.com` hay que desplegar con `--produccion` para que sí la indexe.
+
+El script copia el sitio a una carpeta aparte antes de subirlo, para no publicar
+las pruebas ni este README (todo lo que esté en la carpeta de assets se sirve).
+
+Para poner el dominio: en el panel de Cloudflare, **Workers & Pages → aqualadra
+→ Settings → Domains & Routes → Add**, y añadir `aqualadra.com` y
+`www.aqualadra.com`.
+
+Al ser una web estática también vale cualquier otro hosting: arrastrar la
+carpeta a Netlify, o subirla por FTP.
 
 > El fichero `_headers` configura la caché y unas cabeceras de seguridad en
 > Cloudflare Pages y Netlify. En otros hostings se ignora sin dar problemas.
@@ -155,6 +172,7 @@ aqualadra/
 ├── fonts/                Baloo 2 y Nunito Sans (.woff2)
 ├── img/                  fotos optimizadas + logo y emblema
 ├── pruebas/              comprobaciones automáticas
+├── desplegar.sh          publica en Cloudflare
 ├── _headers              caché y seguridad (Cloudflare / Netlify)
 ├── robots.txt
 └── sitemap.xml
