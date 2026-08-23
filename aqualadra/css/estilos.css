@@ -159,9 +159,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .section-head--left { margin-inline: 0; text-align: left; }
 
 .eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: .5rem;
+  display: block;
   font-family: var(--font-display);
   font-weight: 700;
   font-size: .82rem;
@@ -169,10 +167,19 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   text-transform: uppercase;
   color: var(--aqua-700);
   margin-bottom: .85rem;
+  text-wrap: balance;
 }
+/* El guion decorativo va DENTRO del flujo del texto, no como elemento
+   aparte. Si fuera un hermano flex, al ocupar el rótulo dos líneas en un
+   móvil el guion se quedaría suelto en el margen izquierdo y el texto
+   parecería descentrado. Así cada línea se centra por su cuenta. */
 .eyebrow::before {
   content: "";
-  width: 26px; height: 3px;
+  display: inline-block;
+  width: 26px;
+  height: 3px;
+  margin-right: .5rem;
+  vertical-align: .25em;
   border-radius: 3px;
   background: linear-gradient(90deg, var(--aqua-500), var(--sand-500));
 }
@@ -1452,4 +1459,13 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   background: radial-gradient(circle at 34% 30%, rgba(255,255,255,.34) 0 6%, transparent 14%);
   border: 1.5px solid rgba(255,255,255,.26);
   box-shadow: inset -8px -10px 22px rgba(255,255,255,.07);
+}
+
+/* Los distintivos del hero sobresalen a propósito de la foto, pero en un
+   móvil estrecho se salían de la pantalla y quedaban recortados. */
+@media (max-width: 420px) {
+  .hero__badge { padding: .65rem .9rem; }
+  .hero__badge strong { font-size: 1.28rem; }
+  .hero__badge--price { left: 0; bottom: 6%; }
+  .hero__badge--stars { right: 0; top: 4%; }
 }
