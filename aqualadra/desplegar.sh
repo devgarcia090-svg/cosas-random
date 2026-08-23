@@ -19,13 +19,35 @@
 set -euo pipefail
 
 SITIO="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-MODO="${1:-}"
+
+# Las opciones se leen todas, en cualquier orden. Antes solo se miraba $1, asi
+# que "--produccion --solo-preparar" ignoraba el segundo flag y desplegaba
+# produccion sin avisar. Una opcion desconocida corta la ejecucion en vez de
+# pasar desapercibida.
+PRODUCCION=0
+SOLO_PREPARAR=0
+A_WORKERS=0
+
+ayuda() {
+  sed -n '3,12p' "${BASH_SOURCE[0]}" | sed 's/^# \{0,1\}//'
+}
+
+for arg in "$@"; do
+  case "$arg" in
+    --produccion)    PRODUCCION=1 ;;
+    --solo-preparar) SOLO_PREPARAR=1 ;;
+    --workers)       A_WORKERS=1 ;;
+    -h|--help|--ayuda) ayuda; exit 0 ;;
+    *) echo "Opcion desconocida: $arg" >&2; echo >&2; ayuda >&2; exit 1 ;;
+  esac
+done
+
 DESTINO="$(mktemp -d)"
 trap 'rm -rf "$DESTINO"' EXIT
 
-# Dirección de la vista previa según el destino. Se puede forzar con:
+# Direccion de la vista previa segun el destino. Se puede forzar con:
 #   URL_VISTA_PREVIA=https://otra.dev ./desplegar.sh
-if [[ "$MODO" == "--workers" ]]; then
+if [[ "$A_WORKERS" == 1 ]]; then
   URL_VISTA_PREVIA="${URL_VISTA_PREVIA:-https://aqualadra.fate-forgery.workers.dev}"
 else
   URL_VISTA_PREVIA="${URL_VISTA_PREVIA:-https://aqualadra.pages.dev}"
@@ -35,7 +57,7 @@ echo "Preparando el paquete en $DESTINO"
 cp -r "$SITIO" "$DESTINO/public"
 rm -rf "$DESTINO/public/pruebas" "$DESTINO/public/README.md" "$DESTINO/public/desplegar.sh"
 
-if [[ "$MODO" != "--produccion" ]]; then
+if [[ "$PRODUCCION" == 0 ]]; then
   echo "Modo vista previa: noindex y URLs apuntando a $URL_VISTA_PREVIA"
   python3 - "$DESTINO/public" "$URL_VISTA_PREVIA" <<'REESCRIBIR'
 import pathlib, sys
@@ -64,8 +86,10 @@ for f in sorted(d.glob("*.html")):
 
 (d / "robots.txt").write_text("# Vista previa provisional: no indexar.\nUser-agent: *\nDisallow: /\n", encoding="utf-8")
 
-sm = d / "sitemap.xml"
-sm.write_text(sm.read_text(encoding="utf-8").replace("https://www.aqualadra.com", previa), encoding="utf-8")
+for extra in ("sitemap.xml", "llms.txt"):
+    f = d / extra
+    if f.exists():
+        f.write_text(f.read_text(encoding="utf-8").replace("https://www.aqualadra.com", previa), encoding="utf-8")
 print("  URLs reescritas en %d paginas" % len(list(d.glob("*.html"))))
 REESCRIBIR
 else
@@ -74,14 +98,15 @@ fi
 
 echo "$(find "$DESTINO/public" -type f | wc -l) ficheros listos."
 
-if [[ "$MODO" == "--solo-preparar" ]]; then
+if [[ "$SOLO_PREPARAR" == 1 ]]; then
   COPIA="${TMPDIR:-/tmp}/aqualadra-paquete"
+  [[ "$PRODUCCION" == 1 ]] && COPIA="$COPIA-produccion"
   rm -rf "$COPIA" && cp -r "$DESTINO" "$COPIA"
   echo "Paquete dejado en $COPIA (no se ha desplegado)."
   exit 0
 fi
 
-if [[ "$MODO" == "--workers" ]]; then
+if [[ "$A_WORKERS" == 1 ]]; then
   # Worker con assets estaticos. Se mantiene por si acaso, pero la URL que
   # genera Cloudflare para la cuenta (fate-forgery.workers.dev) no se puede
   # renombrar y no es presentable, asi que lo normal es usar Pages.
