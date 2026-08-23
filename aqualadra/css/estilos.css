@@ -1469,3 +1469,70 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   .hero__badge--price { left: 0; bottom: 6%; }
   .hero__badge--stars { right: 0; top: 4%; }
 }
+
+/* =====================================================================
+   25. Preguntas frecuentes
+   Se usan <details>/<summary> nativos: funcionan sin JavaScript, el
+   teclado y los lectores de pantalla los entienden solos, y el texto de
+   las respuestas está en el HTML aunque el desplegable esté cerrado, que
+   es lo que necesitan Google y los rastreadores de IA para leerlo.
+   ===================================================================== */
+.faq {
+  max-width: 50rem;
+  margin-inline: auto;
+  display: grid;
+  gap: .7rem;
+}
+.faq details {
+  background: var(--paper);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-sm);
+  overflow: hidden;
+  transition: box-shadow .2s ease;
+}
+.faq details[open] { box-shadow: var(--sh-md); }
+
+.faq summary {
+  display: flex;
+  align-items: center;
+  gap: .9rem;
+  padding: 1.15rem 1.3rem;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.06rem;
+  line-height: 1.35;
+  color: var(--ink);
+  list-style: none;
+  transition: color .16s ease;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary:hover { color: var(--aqua-700); }
+
+/* El signo de la derecha, que gira al abrir */
+.faq summary::after {
+  content: "";
+  flex: none;
+  margin-left: auto;
+  width: 13px;
+  height: 13px;
+  border-right: 2.5px solid var(--aqua-600);
+  border-bottom: 2.5px solid var(--aqua-600);
+  border-radius: 2px;
+  transform: rotate(45deg) translateY(-2px);
+  transition: transform .25s cubic-bezier(.4, 0, .2, 1);
+}
+.faq details[open] summary::after { transform: rotate(-135deg) translateY(-2px); }
+
+.faq .respuesta {
+  padding: 0 1.3rem 1.25rem;
+  color: var(--ink-2);
+}
+.faq .respuesta p + p { margin-top: .7rem; }
+.faq .respuesta strong { color: var(--ink); }
+
+.faq__mas {
+  margin-top: 1.6rem;
+  text-align: center;
+  color: var(--muted);
+}

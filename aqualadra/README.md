@@ -203,8 +203,9 @@ aqualadra/
 ├── pruebas/              comprobaciones automáticas
 ├── desplegar.sh          publica en Cloudflare
 ├── _headers              caché y seguridad (Cloudflare / Netlify)
-├── robots.txt
-└── sitemap.xml
+├── robots.txt            incluye los rastreadores de IA
+├── sitemap.xml
+└── llms.txt              resumen del negocio para asistentes de IA
 ```
 
 ### Los colores
@@ -301,6 +302,78 @@ quede ninguna, la web está lista para publicarse.
 
 ---
 
+## SEO: qué se ha hecho y qué falta
+
+### Para Google
+
+- **Datos estructurados** (JSON-LD) con cuatro entidades en un solo grafo:
+  `LocalBusiness` (dirección, teléfono, horario de los siete días, rango de
+  precios, zona de servicio, imágenes y un catálogo con **los 18 servicios y
+  sus precios**), `WebSite`, `HowTo` con los cuatro pasos del autolavado y
+  `FAQPage` con las nueve preguntas.
+- **Preguntas frecuentes** de verdad en la página, no solo en el dato
+  estructurado. Aportan el texto relevante que antes faltaba y son candidatas
+  a salir como resultado enriquecido.
+- **Titulares con las palabras que la gente busca**: «Tarifas de peluquería…»,
+  «Reserva cita en la peluquería canina», «Dónde estamos: Puente Tocinos,
+  Murcia». Sin apelotonar palabras clave: el titular principal sigue siendo
+  para las personas.
+- **Sitemap** con las cuatro páginas indexables y su fecha, y **robots.txt**
+  apuntando a él.
+
+### Para las IA
+
+- **`llms.txt`** ([convención de llmstxt.org](https://llmstxt.org)): un
+  resumen en texto plano con los datos del negocio, los servicios, **todas las
+  tarifas** y las preguntas frecuentes. Es lo que lee un asistente para poder
+  responder «¿cuánto cuesta bañar un perro en Murcia?» sin tener que
+  interpretar el diseño de la web.
+- **`robots.txt` con los rastreadores de IA listados uno a uno** (GPTBot,
+  ClaudeBot, PerplexityBot, Google-Extended, Applebot-Extended, CCBot y algún
+  otro). La regla general ya les deja pasar; se listan aparte para que la
+  decisión quede escrita y cambiarla sea poner `Disallow` en uno.
+- Los desplegables de las preguntas usan `<details>` nativo: **el texto de las
+  respuestas está en el HTML aunque estén cerrados**, que es justo lo que
+  necesitan los rastreadores.
+
+### Lo que la prueba de SEO vigila
+
+`pruebas/seo.mjs` no comprueba que existan las etiquetas, comprueba que **no
+mientan**. Lo que más se rompe con el tiempo no es que falte una etiqueta: es
+que se cambia un precio en la tabla y el JSON-LD sigue publicando el viejo.
+Google lo penaliza y las IA responden un precio que no existe.
+
+Así que compara, uno a uno: los 18 precios del JSON-LD contra los de la tabla
+visible (en los dos sentidos: ni sobra ni falta ninguno), las nueve preguntas
+palabra por palabra, los pasos del HowTo, y que el teléfono del dato
+estructurado sea el mismo que el enlace de la página. **Si se cambia un precio
+y no se regenera el JSON-LD, la prueba falla.**
+
+### Lo que falta, y no es código
+
+Por orden de impacto real:
+
+1. **La ficha de Google del negocio.** Para una peluquería de barrio, quien
+   decide si sales en el mapa cuando alguien busca «peluquería canina cerca»
+   es el perfil de Google Business, no la web. Ya tienen ficha
+   (`AQUALADRA - Autolavado de Mascotas`): lo que más rinde es completarla con
+   horario, servicios, fotos recientes y pedir reseñas. Eso pesa más que todo
+   lo que se pueda escribir en el HTML.
+2. **Las coordenadas del local.** Falta el `geo` del `LocalBusiness`. No se han
+   puesto porque no se han podido verificar: el número 138 de Calle Mayor no es
+   geocodificable, y el único resultado con ese número está en Los Garres, otro
+   distrito. Unas coordenadas equivocadas sitúan el negocio en el sitio
+   erróneo, que es peor que no ponerlas. Se saca en diez segundos: Google Maps,
+   pulsación larga sobre el local, y copiar los dos números. Las
+   instrucciones están junto al bloque JSON-LD del `index.html`.
+3. **Las reseñas reales de Google.** Las tres opiniones de la web son las que
+   ya había en la anterior. No se ha marcado ninguna con datos estructurados a
+   propósito: las reseñas que un negocio publica sobre sí mismo en su propia
+   web no dan resultado enriquecido y pueden dar aviso en Search Console. Lo
+   que sí funciona es tener reseñas en Google.
+4. **Contenido propio.** Fotos de trabajos de peluquería (antes y después) es
+   lo que más vende y sigue sin haber ninguna.
+
 ## Cuando alguien dice «no me abre la web»
 
 Hay una página de diagnóstico en `prueba.html`
@@ -332,6 +405,7 @@ npx http-server aqualadra -p 8899 -s &
 node aqualadra/pruebas/comprobar.mjs    # 24 comprobaciones de interacción
 node aqualadra/pruebas/consentimiento.mjs  # 38 sobre cookies, legal y animaciones
 node aqualadra/pruebas/contraste.mjs    # contraste de cada texto, en las 5 páginas
+node aqualadra/pruebas/seo.mjs         # 35 sobre datos estructurados y etiquetas
 ```
 
 La de consentimiento comprueba lo más fácil de romper sin enterarse: que **no

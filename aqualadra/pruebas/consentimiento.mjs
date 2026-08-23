@@ -50,8 +50,12 @@ await p.goto(B+'/index.html', {waitUntil:'load'});
 const maq = await p.locator('.machine').innerText();
 t(/Deslanadora/i.test(maq) && /3 €/.test(maq), 'la deslanadora aparece con su precio');
 t(/Lavado de mascota/.test(maq) && /6 €/.test(maq), 'el lavado sigue a 6 €');
+// El JSON-LD es un @graph con varias entidades: hay que buscar el negocio.
 const ld = await p.evaluate(()=>JSON.parse(document.querySelector('script[type="application/ld+json"]').textContent));
-t(ld.hasOfferCatalog.itemListElement.some(o=>/Deslanadora/i.test(o.name) && o.price==='3'), 'la deslanadora está en el JSON-LD');
+const negocio = (ld['@graph']||[]).find(x => [].concat(x['@type']).includes('LocalBusiness')) || {};
+const catalogo = (negocio.hasOfferCatalog||{}).itemListElement || [];
+t(catalogo.some(o => /Deslanadora/i.test(o.itemOffered.name) && o.priceSpecification.price === '3'),
+  'la deslanadora está en el JSON-LD, a 3 €');
 
 // ---------- Animaciones ----------
 const anim = await p.evaluate(()=>{

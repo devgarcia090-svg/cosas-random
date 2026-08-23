@@ -1,4 +1,56 @@
+# AquaLadra — https://www.aqualadra.com
+
+# La regla de abajo ya permite el paso a todo el mundo. Los rastreadores de
+# IA se listan aparte a propósito, para que la decisión quede escrita y sea
+# fácil de cambiar: basta poner Disallow en vez de Allow en el que se quiera
+# echar. Para un negocio local interesa que le dejen pasar: es así como los
+# asistentes acaban recomendando el sitio cuando alguien pregunta por una
+# peluquería canina en Murcia.
+
 User-agent: *
+Allow: /
+
+# --- Buscadores con IA y asistentes ---
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# Afecta a los productos de IA de Google, no a la Búsqueda
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: MistralAI-User
+Allow: /
+
+# Common Crawl: base de datos que usan muchos modelos
+User-agent: CCBot
 Allow: /
 
 Sitemap: https://www.aqualadra.com/sitemap.xml

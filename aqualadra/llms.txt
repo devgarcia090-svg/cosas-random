@@ -1,0 +1,89 @@
+# AquaLadra
+
+> Autolavado de mascotas y peluquería canina y felina en Puente Tocinos
+> (Murcia, España). El autolavado cuesta 6 €, no necesita cita y está abierto
+> los 365 días del año de 9:00 a 21:00. La peluquería trabaja con cita previa
+> y se reserva por internet.
+
+Este fichero resume el negocio en texto plano para asistentes y buscadores con
+IA. Los datos son los mismos que aparecen en la web y se mantienen aquí para
+que puedan responderse sin tener que interpretar el diseño de la página.
+
+## Datos de contacto
+
+- Nombre: AquaLadra
+- Dirección: Calle Mayor Bajo Iz, 138, 30006 Puente Tocinos, Murcia (España)
+- Teléfono y WhatsApp: +34 684 79 72 36
+- Web: https://www.aqualadra.com
+- Instagram: https://www.instagram.com/aqualadra/
+- Horario del autolavado: todos los días, incluidos festivos, de 9:00 a 21:00
+- Horario de la peluquería: con cita previa
+
+## Los dos servicios
+
+**Autolavado (sin cita).** La persona baña a su propia mascota en una bañera
+profesional de acero, a la altura de la cintura, con suelo antideslizante y
+arneses de seguridad. Cuesta 6 € independientemente del tamaño del animal, se
+paga con tarjeta o con monedas, y da 8 minutos de programa: agua templada,
+champú con acondicionador, aclarado y secador. Al terminar quedan 60 segundos
+para añadir 1 € y sumar 2 minutos más, repetible hasta tres veces. Hay una
+máquina de deslanado por 3 € aparte y una máquina de vending de premios.
+
+**Peluquería canina y felina (con cita previa).** La atiende una peluquera.
+Todos los servicios incluyen el corte de uñas y la limpieza de oídos sin coste
+añadido. La cita se reserva en la web, por teléfono o por WhatsApp.
+
+## Precios
+
+Autolavado:
+
+- Lavado de mascota: 6 € (8 minutos, cualquier tamaño)
+- Tiempo extra: 1 € por cada 2 minutos, hasta tres veces
+- Deslanadora: 3 €
+
+Peluquería, perros de menos de 10 kg:
+
+- Baño: 14 €
+- Arreglo: 16 €
+- Corte: 20 €
+- Stripping: 25 €
+
+Peluquería, perros de 10 a 20 kg:
+
+- Baño: 18 €
+- Arreglo: 20 €
+- Corte: 24 €
+- Stripping: 29 €
+
+Peluquería, perros de más de 20 kg:
+
+- Baño: 21 €
+- Arreglo: 23 €
+- Corte: 27 €
+- Stripping: 32 €
+
+Peluquería, gatos:
+
+- Baño: 14 €
+- Arreglo: 16 €
+- Corte: 20 €
+
+## Preguntas frecuentes
+
+- **¿Hace falta cita?** Para el autolavado no; para la peluquería sí.
+- **¿Cuánto cuesta bañar a un perro?** 6 € haciéndolo uno mismo en el
+  autolavado. En peluquería, entre 14 € y 32 € según tamaño y servicio.
+- **¿Qué hay que llevar?** Nada: la bañera, el champú con acondicionador y el
+  secador están puestos.
+- **¿Atienden gatos?** Sí, en peluquería y con cita previa.
+- **¿Abren festivos?** El autolavado abre los 365 días del año.
+- **¿Se puede pagar con tarjeta?** Sí, con tarjeta o con monedas.
+
+## Páginas
+
+- [Inicio](https://www.aqualadra.com/): servicios, tarifas, galería y reservas
+- [Reservar cita](https://www.aqualadra.com/#reservar): calendario de la peluquería
+- [Preguntas frecuentes](https://www.aqualadra.com/#preguntas)
+- [Aviso legal](https://www.aqualadra.com/aviso-legal.html)
+- [Política de privacidad](https://www.aqualadra.com/privacidad.html)
+- [Política de cookies](https://www.aqualadra.com/cookies.html)
