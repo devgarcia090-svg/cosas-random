@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AquaLadra · Autolavado y peluquería canina en Puente Tocinos (Murcia)</title>
+<meta name="description" content="Autolavado de mascotas por 6 € los 365 días del año, de 9:00 a 21:00, y peluquería canina y felina con cita previa. Calle Mayor Bajo Iz 138, Puente Tocinos (Murcia). Reserva online.">
+<meta name="theme-color" content="#2496B2">
+<script>document.documentElement.classList.add("js")</script>
+<link rel="canonical" href="https://www.aqualadra.com/">
+
+<!-- Open Graph / redes -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="AquaLadra">
+<meta property="og:title" content="AquaLadra · Autolavado y peluquería canina en Puente Tocinos">
+<meta property="og:description" content="Baña a tu perro por 6 € cualquier día de 9:00 a 21:00, o reserva cita en nuestra peluquería canina. Puente Tocinos, Murcia.">
+<meta property="og:url" content="https://www.aqualadra.com/">
+<meta property="og:image" content="https://www.aqualadra.com/img/logo.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="img/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="img/favicon.png">
+
+<!-- Tipografías, servidas desde el propio dominio -->
+<link rel="preload" href="fonts/baloo-2-800-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/nunito-sans-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/tipografias.css">
+<link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+<!-- ============ ICONOS (sprite oculto) ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-paw" viewBox="0 0 24 24" fill="currentColor">
+      <ellipse cx="6.2" cy="9.4" rx="2.3" ry="3"/><ellipse cx="10.6" cy="6.6" rx="2.3" ry="3.1"/>
+      <ellipse cx="15.4" cy="6.6" rx="2.3" ry="3.1"/><ellipse cx="19.8" cy="9.4" rx="2.3" ry="3"/>
+      <path d="M13 12.2c3.1 0 5.9 2.3 5.9 5 0 2-1.6 3.1-3.6 3.1-1.3 0-2-.5-2.3-.5s-1 .5-2.3.5c-2 0-3.6-1.1-3.6-3.1 0-2.7 2.8-5 5.9-5Z"/>
+    </symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <circle cx="12" cy="12" r="9"/><path d="M12 7v5.2l3.4 2"/>
+    </symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/>
+      <circle cx="8.5" cy="14.5" r="1.2" fill="currentColor" stroke="none"/>
+      <circle cx="12.5" cy="14.5" r="1.2" fill="currentColor" stroke="none"/>
+    </symbol>
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4.5 12.5l5 5 10-11"/>
+    </symbol>
+    <symbol id="i-card" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <rect x="2.5" y="5" width="19" height="14" rx="3"/><path d="M2.5 10h19M6.5 15h4"/>
+    </symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6.6 3.5h3l1.6 4-2 1.4a11.5 11.5 0 0 0 5.5 5.5l1.4-2 4 1.6v3a2 2 0 0 1-2.2 2A16.5 16.5 0 0 1 4.6 5.7a2 2 0 0 1 2-2.2Z"/>
+    </symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/>
+    </symbol>
+    <symbol id="i-wa" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12.03 2C6.6 2 2.2 6.4 2.2 11.83c0 1.9.53 3.68 1.46 5.2L2 22.4l5.5-1.62a9.8 9.8 0 0 0 4.53 1.12c5.43 0 9.83-4.4 9.83-9.83S17.46 2 12.03 2Zm5.6 13.7c-.24.66-1.4 1.3-1.94 1.35-.53.05-1.02.24-3.44-.83-2.9-1.28-4.68-4.34-4.82-4.53-.14-.2-1.12-1.55-1.06-2.9.05-1.36.78-2 1.06-2.28.28-.29.6-.34.8-.34h.57c.19 0 .43-.02.66.53.24.58.82 2 .89 2.14.07.15.11.32.01.5-.1.2-.19.32-.38.53-.19.2-.4.46-.24.74.15.29.7 1.18 1.5 1.9 1.03.93 1.9 1.22 2.17 1.36.28.15.44.12.6-.07.15-.2.7-.83.89-1.11.19-.29.38-.24.63-.15.26.1 1.65.79 1.94.93.28.15.47.22.53.34.07.12.07.68-.17 1.34Z"/>
+    </symbol>
+    <symbol id="i-ig" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <rect x="3" y="3" width="18" height="18" rx="5.2"/><circle cx="12" cy="12" r="4"/>
+      <circle cx="17.2" cy="6.8" r="1.2" fill="currentColor" stroke="none"/>
+    </symbol>
+    <symbol id="i-bath" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M2.5 12.5h19v2.6a4.4 4.4 0 0 1-4.4 4.4H6.9a4.4 4.4 0 0 1-4.4-4.4v-2.6Z"/>
+      <path d="M6 12.5V6.4a2.4 2.4 0 0 1 4.8 0M6.5 21.2l-.7 1.3M17.5 21.2l.7 1.3"/>
+      <circle cx="15.5" cy="7.5" r="1.4"/><circle cx="19" cy="4.6" r="1"/>
+    </symbol>
+    <symbol id="i-scissors" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="6" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M8.4 7.8L20 18M8.4 16.2L20 6"/>
+    </symbol>
+    <symbol id="i-brush" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="4" y="3" width="16" height="9" rx="4.5"/><path d="M12 12v9M8 12v3M16 12v3"/>
+    </symbol>
+    <symbol id="i-bottle" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M9.5 2.8h5v3.4l1.7 2.4a4 4 0 0 1 .7 2.3v8.3a2 2 0 0 1-2 2H8.1a2 2 0 0 1-2-2v-8.3a4 4 0 0 1 .7-2.3l1.7-2.4V2.8Z"/>
+      <path d="M6.4 13.4h11.2"/>
+    </symbol>
+    <symbol id="i-candy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="3.5" y="2.8" width="17" height="18.4" rx="2.6"/><path d="M3.5 8.6h17M8 12.4h3M8 16.2h3M14.5 12.4h2M14.5 16.2h2"/>
+    </symbol>
+    <symbol id="i-drop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 3.2s6.2 6.4 6.2 10.6a6.2 6.2 0 0 1-12.4 0C5.8 9.6 12 3.2 12 3.2Z"/>
+    </symbol>
+    <symbol id="i-euro" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <path d="M17 6.6a7 7 0 1 0 0 10.8M4.5 10.5h8M4.5 13.9h8"/>
+    </symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+      <path d="M4 7h16M4 12h16M4 17h16"/>
+    </symbol>
+    <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
+      <path d="M6 6l12 12M18 6L6 18"/>
+    </symbol>
+    <symbol id="i-star" viewBox="0 0 24 24" fill="currentColor">
+      <path d="m12 2.8 2.8 5.9 6.4.8-4.7 4.4 1.2 6.3L12 17.2l-5.7 3 1.2-6.3-4.7-4.4 6.4-.8Z"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ============ NAVEGACIÓN ============ -->
+<header class="nav" id="nav">
+  <div class="nav__inner">
+    <a class="nav__brand" href="#inicio" aria-label="AquaLadra, inicio">
+      <picture>
+        <source srcset="img/emblema.webp" type="image/webp">
+        <img src="img/emblema.png" alt="" width="320" height="320">
+      </picture>
+      <span>Aqua<b>Ladra</b></span>
+    </a>
+
+    <nav class="nav__links" aria-label="Navegación principal">
+      <a href="#servicios">Servicios</a>
+      <a href="#autolavado">Autolavado</a>
+      <a href="#tarifas">Tarifas</a>
+      <a href="#galeria">Galería</a>
+      <a href="#opiniones">Opiniones</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+
+    <a class="btn btn--sm nav__cta" href="#reservar">
+      <svg aria-hidden="true"><use href="#i-calendar"></use></svg>
+      Reservar cita
+    </a>
+
+    <button class="nav__burger" id="burger" aria-expanded="false" aria-controls="drawer" aria-label="Abrir menú">
+      <svg class="icon-open" aria-hidden="true"><use href="#i-menu"></use></svg>
+      <svg class="icon-close" aria-hidden="true"><use href="#i-x"></use></svg>
+    </button>
+  </div>
+</header>
+
+<div class="drawer" id="drawer" data-open="false">
+  <a href="#servicios">Servicios</a>
+  <a href="#autolavado">Autolavado</a>
+  <a href="#tarifas">Tarifas</a>
+  <a href="#galeria">Galería</a>
+  <a href="#opiniones">Opiniones</a>
+  <a href="#contacto">Contacto</a>
+  <a class="btn btn--block" href="#reservar">
+    <svg aria-hidden="true"><use href="#i-calendar"></use></svg> Reservar cita
+  </a>
+</div>
+
+<main id="contenido">
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="inicio">
+  <div class="bubbles" aria-hidden="true">
+    <span style="width:120px;height:120px;top:12%;left:4%;animation-delay:-1s"></span>
+    <span style="width:64px;height:64px;top:62%;left:12%;animation-delay:-4s"></span>
+    <span style="width:38px;height:38px;top:32%;left:26%;animation-delay:-2.5s"></span>
+    <span style="width:86px;height:86px;top:8%;right:34%;animation-delay:-6s"></span>
+    <span style="width:52px;height:52px;bottom:8%;right:16%;animation-delay:-3s"></span>
+  </div>
+
+  <div class="wrap hero__grid">
+    <div class="hero__copy">
+      <p class="eyebrow">Puente Tocinos · Murcia</p>
+      <h1>El baño de tu perro, <em>fácil y sin dramas</em></h1>
+      <p class="hero__lead">
+        Autolavado con bañeras profesionales por <strong>6 €</strong>, abierto los
+        <strong>365 días del año de 9:00 a 21:00</strong>. Y si prefieres que se lo hagan todo,
+        nuestra <strong>peluquería canina y felina</strong> te espera con cita previa.
+      </p>
+
+      <div class="hero__actions">
+        <a class="btn btn--lg btn--sand" href="#reservar">
+          <svg aria-hidden="true"><use href="#i-calendar"></use></svg>
+          Reservar cita de peluquería
+        </a>
+        <a class="btn btn--lg btn--ghost" href="#autolavado">
+          <svg aria-hidden="true"><use href="#i-drop"></use></svg>
+          Cómo funciona el autolavado
+        </a>
+      </div>
+
+      <ul class="hero__facts">
+        <li class="chip"><svg aria-hidden="true"><use href="#i-clock"></use></svg> 9:00 – 21:00</li>
+        <li class="chip"><svg aria-hidden="true"><use href="#i-paw"></use></svg> 365 días al año</li>
+        <li class="chip"><svg aria-hidden="true"><use href="#i-card"></use></svg> Tarjeta o monedas</li>
+        <li class="chip"><svg aria-hidden="true"><use href="#i-check"></use></svg> Perros y gatos</li>
+      </ul>
+    </div>
+
+    <div class="hero__art reveal reveal-d1">
+      <div class="hero__photo">
+        <picture>
+          <source srcset="img/labrador.webp" type="image/webp">
+          <img src="img/labrador.jpg" alt="Un labrador feliz en el local de AquaLadra, junto a la bañera de autolavado" width="772" height="1000" fetchpriority="high">
+        </picture>
+      </div>
+      <div class="hero__badge hero__badge--price">
+        <span class="dot"><svg aria-hidden="true"><use href="#i-euro"></use></svg></span>
+        <span><strong>6 €</strong><small>el autolavado</small></span>
+      </div>
+      <div class="hero__badge hero__badge--stars">
+        <span>
+          <span class="stars" aria-hidden="true">★★★★★</span>
+          <small>Nos quieren en el barrio</small>
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<svg class="wave wave--paper" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
+  <path d="M0 40c180-40 360-40 540 0s360 40 540 0 360-40 360-40v80H0Z"/>
+</svg>
+
+<!-- ============ DOS VÍAS ============ -->
+<section class="section section--paper" id="servicios">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Dos formas de dejarlo reluciente</p>
+      <h2>Tú lo bañas o te lo bañamos</h2>
+      <p>Elige la que mejor te venga. Las dos con producto profesional y mucho cariño por los animales.</p>
+    </div>
+
+    <div class="tracks">
+      <article class="track reveal">
+        <div class="track__icon"><svg aria-hidden="true"><use href="#i-bath"></use></svg></div>
+        <h3>Autolavado</h3>
+        <p class="track__price">6 €<small> / lavado</small></p>
+        <p style="color:var(--muted)">Sin cita. Llegas, pagas y lo bañas tú con todo puesto.</p>
+        <ul class="track__list">
+          <li><svg aria-hidden="true"><use href="#i-check"></use></svg> Bañeras ergonómicas y antideslizantes, a tu altura</li>
+          <li><svg aria-hidden="true"><use href="#i-check"></use></svg> Agua templada, champú con acondicionador y secador</li>
+          <li><svg aria-hidden="true"><use href="#i-check"></use></svg> 8 minutos de programa, ampliables</li>
+          <li><svg aria-hidden="true"><use href="#i-check"></use></svg> Abierto todos los días de 9:00 a 21:00</li>
+        </ul>
+        <a class="btn btn--block" href="#autolavado">Ver cómo funciona</a>
+      </article>
+
+      <article class="track track--groom reveal reveal-d1">
+        <div class="track__icon"><svg aria-hidden="true"><use href="#i-scissors"></use></svg></div>
+        <h3>Peluquería canina y felina</h3>
+        <p class="track__price">Desde 14 €<small> / servicio</small></p>
+        <p style="color:var(--muted)">Con cita previa. Se encarga nuestra peluquera de todo.</p>
+        <ul class="track__list">
+          <li><svg aria-hidden="true"><use href="#i-check"></use></svg> Baño, arreglo, corte y stripping</li>
+          <li><svg aria-hidden="true"><use href="#i-check"></use></svg> Corte de uñas y limpieza de oídos incluidos</li>
+          <li><svg aria-hidden="true"><use href="#i-check"></use></svg> Máquina de deslanado profesional</li>
+          <li><svg aria-hidden="true"><use href="#i-check"></use></svg> También gatos</li>
+        </ul>
+        <a class="btn btn--block btn--sand" href="#reservar">
+          <svg aria-hidden="true"><use href="#i-calendar"></use></svg> Reservar cita
+        </a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AUTOLAVADO PASO A PASO ============ -->
+<section class="section section--aqua" id="autolavado">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Autolavado</p>
+      <h2>Cuatro pasos y listo</h2>
+      <p>Es más fácil que en casa, y sin pelos en tu bañera. Si es tu primera vez, te echamos una mano.</p>
+    </div>
+
+    <ol class="steps">
+      <li class="step reveal">
+        <h3>Mete a tu mascota</h3>
+        <p>Bañera de acero a tu altura, con <em>suelo antideslizante</em> y arneses de seguridad para que esté tranquilo.</p>
+      </li>
+      <li class="step reveal reveal-d1">
+        <h3>Paga 6 €</h3>
+        <p>Con <em>tarjeta</em> o en <em>monedas</em>. En cuanto se completa el pago la máquina se activa.</p>
+      </li>
+      <li class="step reveal reveal-d2">
+        <h3>Elige programa</h3>
+        <p>Tienes <em>8 minutos</em> para ir seleccionando en la pantalla: agua templada, champú con acondicionador, aclarado y secado.</p>
+      </li>
+      <li class="step reveal reveal-d3">
+        <h3>¿Te falta un poco?</h3>
+        <p>Al acabar tienes <em>1 minuto</em> para meter <em>1 €</em> y sumar 2 minutos más. Se puede repetir hasta 3 veces.</p>
+      </li>
+    </ol>
+
+    <p class="note reveal">
+      <svg aria-hidden="true"><use href="#i-candy"></use></svg>
+      Y de premio por portarse bien, gominolas de nuestra máquina de vending. Se lo ha ganado.
+    </p>
+  </div>
+</section>
+
+<!-- ============ TARIFAS ============ -->
+<section class="section section--paper" id="tarifas">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Peluquería</p>
+      <h2>Tarifas claras, sin sorpresas</h2>
+      <p>El precio depende del tamaño de tu mascota. Todos los servicios incluyen corte de uñas y limpieza de oídos.</p>
+    </div>
+
+    <div class="tabs reveal" role="tablist" aria-label="Tarifas por tamaño">
+      <button class="tab" role="tab" id="tab-p1" aria-controls="panel-p1" aria-selected="true">Perros &lt; 10 kg</button>
+      <button class="tab" role="tab" id="tab-p2" aria-controls="panel-p2" aria-selected="false">Perros 10-20 kg</button>
+      <button class="tab" role="tab" id="tab-p3" aria-controls="panel-p3" aria-selected="false">Perros &gt; 20 kg</button>
+      <button class="tab" role="tab" id="tab-p4" aria-controls="panel-p4" aria-selected="false">Gatos</button>
+    </div>
+
+    <div class="panel" id="panel-p1" role="tabpanel" aria-labelledby="tab-p1" tabindex="0">
+      <div class="prices">
+        <div class="price price--featured">
+          <span class="price__tag">El más pedido</span>
+          <p class="price__name">Baño</p><p class="price__value">14<sup>€</sup></p>
+          <p class="price__desc">Baño completo y secado</p>
+        </div>
+        <div class="price"><p class="price__name">Arreglo</p><p class="price__value">16<sup>€</sup></p><p class="price__desc">Baño y retoque de zonas</p></div>
+        <div class="price"><p class="price__name">Corte</p><p class="price__value">20<sup>€</sup></p><p class="price__desc">Corte completo a tijera o máquina</p></div>
+        <div class="price"><p class="price__name">Stripping</p><p class="price__value">25<sup>€</sup></p><p class="price__desc">Arrancado de pelo muerto</p></div>
+      </div>
+    </div>
+
+    <div class="panel" id="panel-p2" role="tabpanel" aria-labelledby="tab-p2" tabindex="0" hidden>
+      <div class="prices">
+        <div class="price"><p class="price__name">Baño</p><p class="price__value">18<sup>€</sup></p><p class="price__desc">Baño completo y secado</p></div>
+        <div class="price"><p class="price__name">Arreglo</p><p class="price__value">20<sup>€</sup></p><p class="price__desc">Baño y retoque de zonas</p></div>
+        <div class="price"><p class="price__name">Corte</p><p class="price__value">24<sup>€</sup></p><p class="price__desc">Corte completo a tijera o máquina</p></div>
+        <div class="price"><p class="price__name">Stripping</p><p class="price__value">29<sup>€</sup></p><p class="price__desc">Arrancado de pelo muerto</p></div>
+      </div>
+    </div>
+
+    <div class="panel" id="panel-p3" role="tabpanel" aria-labelledby="tab-p3" tabindex="0" hidden>
+      <div class="prices">
+        <div class="price"><p class="price__name">Baño</p><p class="price__value">21<sup>€</sup></p><p class="price__desc">Baño completo y secado</p></div>
+        <div class="price"><p class="price__name">Arreglo</p><p class="price__value">23<sup>€</sup></p><p class="price__desc">Baño y retoque de zonas</p></div>
+        <div class="price"><p class="price__name">Corte</p><p class="price__value">27<sup>€</sup></p><p class="price__desc">Corte completo a tijera o máquina</p></div>
+        <div class="price"><p class="price__name">Stripping</p><p class="price__value">32<sup>€</sup></p><p class="price__desc">Arrancado de pelo muerto</p></div>
+      </div>
+    </div>
+
+    <div class="panel" id="panel-p4" role="tabpanel" aria-labelledby="tab-p4" tabindex="0" hidden>
+      <div class="prices">
+        <div class="price"><p class="price__name">Baño</p><p class="price__value">14<sup>€</sup></p><p class="price__desc">Baño completo y secado</p></div>
+        <div class="price"><p class="price__name">Arreglo</p><p class="price__value">16<sup>€</sup></p><p class="price__desc">Baño y retoque de zonas</p></div>
+        <div class="price"><p class="price__name">Corte</p><p class="price__value">20<sup>€</sup></p><p class="price__desc">Corte completo</p></div>
+        <div class="price" style="display:grid;place-content:center;background:var(--aqua-50);box-shadow:none">
+          <p class="price__desc" style="margin:0">Los gatos necesitan su tiempo:<br>escríbenos y lo vemos.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="included reveal">
+      <strong>Todos los servicios incluyen</strong> corte de uñas y limpieza de oídos. ·
+      El autolavado son <strong>6 €</strong> independientemente del tamaño.
+    </p>
+  </div>
+</section>
+
+<!-- ============ RESERVAS ============ -->
+<section class="section section--sand" id="reservar">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Reservas online</p>
+      <h2>Coge cita en la peluquería</h2>
+      <p>Mira los huecos libres, elige el que te venga bien y listo. Te llega la confirmación al correo.</p>
+    </div>
+
+    <div class="booking">
+      <aside class="booking__aside reveal">
+        <h3>Cómo va esto</h3>
+        <ol class="booking__steps">
+          <li><b>1</b><span>Elige <strong>día y hora</strong> entre los huecos disponibles del calendario.</span></li>
+          <li><b>2</b><span>Déjanos tu <strong>nombre, teléfono</strong> y qué necesita tu peludo (raza, tamaño y si es baño, arreglo o corte).</span></li>
+          <li><b>3</b><span>Recibes la <strong>confirmación por email</strong> y nosotros lo apuntamos en la agenda.</span></li>
+        </ol>
+
+        <ul class="track__list">
+          <li><svg aria-hidden="true"><use href="#i-check"></use></svg> Puedes cambiarla o cancelarla desde el mismo email</li>
+          <li><svg aria-hidden="true"><use href="#i-check"></use></svg> Si tu perro es reactivo o tiene miedo, dínoslo al reservar</li>
+        </ul>
+
+        <div class="booking__alt">
+          <p>¿Prefieres hablar con una persona? También te cogemos la cita por teléfono o WhatsApp.</p>
+          <a class="btn btn--wa btn--block" href="https://wa.me/34684797236?text=%C2%A1Hola%20AquaLadra!%20Quer%C3%ADa%20pedir%20cita%20para%20la%20peluquer%C3%ADa." target="_blank" rel="noopener">
+            <svg aria-hidden="true"><use href="#i-wa"></use></svg> Escribir por WhatsApp
+          </a>
+          <a class="btn btn--ghost btn--block" href="tel:+34684797236" style="margin-top:.6rem">
+            <svg aria-hidden="true"><use href="#i-phone"></use></svg> 684 79 72 36
+          </a>
+        </div>
+      </aside>
+
+      <div class="calendar-card reveal reveal-d1">
+        <div class="calendar-card__bar">
+          <svg aria-hidden="true"><use href="#i-calendar"></use></svg>
+          Peluquería AquaLadra
+          <span class="live"><i aria-hidden="true"></i> Disponibilidad real</span>
+        </div>
+        <div id="calendario-slot">
+          <noscript>
+            <p class="calendar-card__fallback">
+              Para ver el calendario necesitas activar JavaScript.
+              <a href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ0TB3CkzzD2VCLoi9bWnkO8gGvxrkGcz_4IaJWLuuFp6F5DAzm7XakYus5sqdi9TlxDF5nrlKgm?gv=true" target="_blank" rel="noopener">Abrir el calendario de reservas</a>
+              o llámanos al 684 79 72 36.
+            </p>
+          </noscript>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INSTALACIONES ============ -->
+<section class="section section--paper">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">El local</p>
+      <h2>Lo que te vas a encontrar</h2>
+      <p>Todo lo que necesitas para que salga de aquí oliendo de maravilla.</p>
+    </div>
+
+    <div class="features">
+      <article class="feature reveal">
+        <div class="feature__icon"><svg aria-hidden="true"><use href="#i-bath"></use></svg></div>
+        <h3>Bañeras profesionales</h3>
+        <p>Sistemas ergonómicos y antideslizantes para que ni tu espalda ni tu perro sufran.</p>
+      </article>
+      <article class="feature reveal reveal-d1">
+        <div class="feature__icon"><svg aria-hidden="true"><use href="#i-brush"></use></svg></div>
+        <h3>Máquina de deslanado</h3>
+        <p>Deslanado profesional para sacar todo el pelo muerto y un acabado perfecto.</p>
+      </article>
+      <article class="feature reveal reveal-d2">
+        <div class="feature__icon"><svg aria-hidden="true"><use href="#i-bottle"></use></svg></div>
+        <h3>Champús profesionales</h3>
+        <p>Los mejores champús con acondicionador del mercado, incluidos en el lavado.</p>
+      </article>
+      <article class="feature reveal reveal-d3">
+        <div class="feature__icon"><svg aria-hidden="true"><use href="#i-candy"></use></svg></div>
+        <h3>Máquina de premios</h3>
+        <p>Vending de gominolas para recompensarle por lo bien que se ha portado.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GALERÍA ============ -->
+<section class="section section--cream" id="galeria">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Galería</p>
+      <h2>Por aquí han pasado</h2>
+      <p>Nuestras instalaciones y algunos clientes que ya son de la familia.</p>
+    </div>
+
+    <div class="gallery reveal" id="galeria-grid">
+      <figure class="gallery__item gallery__item--wide" data-full="img/toby-mojado.jpg" tabindex="0" role="button" aria-label="Ampliar foto: Toby recién salido de la bañera">
+        <picture><source srcset="img/toby-mojado.webp" type="image/webp">
+          <img src="img/toby-mojado.jpg" alt="Toby recién salido de la bañera" width="1400" height="1867" loading="lazy"></picture>
+        <figcaption>Recién salido de la bañera</figcaption>
+      </figure>
+      <figure class="gallery__item" data-full="img/banera.jpg" tabindex="0" role="button" aria-label="Ampliar foto: la bañera de autolavado">
+        <picture><source srcset="img/banera.webp" type="image/webp">
+          <img src="img/banera.jpg" alt="Bañera de autolavado con central de pago" width="1400" height="788" loading="lazy"></picture>
+        <figcaption>La bañera y la central de pago</figcaption>
+      </figure>
+      <figure class="gallery__item" data-full="img/instrucciones.jpg" tabindex="0" role="button" aria-label="Ampliar foto: el cartel de instrucciones">
+        <picture><source srcset="img/instrucciones.webp" type="image/webp">
+          <img src="img/instrucciones.jpg" alt="Cartel con las instrucciones del autolavado" width="1000" height="1778" loading="lazy"></picture>
+        <figcaption>Instrucciones paso a paso</figcaption>
+      </figure>
+      <figure class="gallery__item" data-full="img/tarjetero.jpg" tabindex="0" role="button" aria-label="Ampliar foto: pago con tarjeta o monedas">
+        <picture><source srcset="img/tarjetero.webp" type="image/webp">
+          <img src="img/tarjetero.jpg" alt="Central de pago con tarjeta o monedas" width="1000" height="1778" loading="lazy"></picture>
+        <figcaption>Paga con tarjeta o monedas</figcaption>
+      </figure>
+      <figure class="gallery__item" data-full="img/toby.jpg" tabindex="0" role="button" aria-label="Ampliar foto: Toby ya seco">
+        <picture><source srcset="img/toby.webp" type="image/webp">
+          <img src="img/toby.jpg" alt="Toby ya seco y peinado" width="768" height="958" loading="lazy"></picture>
+        <figcaption>Guapo y listo para casa</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<dialog class="lightbox" id="lightbox" aria-label="Foto ampliada">
+  <button class="lightbox__nav lightbox__nav--prev" id="lb-prev" aria-label="Foto anterior">&#8249;</button>
+  <img id="lb-img" src="" alt="">
+  <button class="lightbox__nav lightbox__nav--next" id="lb-next" aria-label="Foto siguiente">&#8250;</button>
+  <button class="lightbox__close" id="lb-close" aria-label="Cerrar">&times;</button>
+</dialog>
+
+<!-- ============ OPINIONES ============ -->
+<section class="section section--paper" id="opiniones">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Opiniones</p>
+      <h2>Lo que dicen sus dueños</h2>
+    </div>
+
+    <div class="reviews">
+      <article class="review reveal">
+        <p class="review__stars" aria-label="5 de 5 estrellas">★★★★★</p>
+        <p>Llevamos a Toby y se ha encariñado, seguro que vuelve otra vez.</p>
+        <div class="review__who">
+          <span class="av" aria-hidden="true">M</span>
+          <span><b>María Bernal</b><small>con Toby</small></span>
+        </div>
+      </article>
+      <article class="review reveal reveal-d1">
+        <p class="review__stars" aria-label="5 de 5 estrellas">★★★★★</p>
+        <p>Me ha gustado mucho la decoración y la limpieza del local.</p>
+        <div class="review__who">
+          <span class="av" aria-hidden="true">A</span>
+          <span><b>Ana López</b><small>con Coco</small></span>
+        </div>
+      </article>
+      <article class="review reveal reveal-d2">
+        <p class="review__stars" aria-label="5 de 5 estrellas">★★★★★</p>
+        <p>Nunca habíamos probado un autolavado, pero una vez que lo probé ya no hay vuelta atrás.</p>
+        <div class="review__who">
+          <span class="av" aria-hidden="true">C</span>
+          <span><b>Carolina Sánchez</b><small>con Robert</small></span>
+        </div>
+      </article>
+    </div>
+
+    <p style="text-align:center;margin-top:1.8rem">
+      <a class="btn btn--ghost" href="https://g.co/kgs/HyQfB5b" target="_blank" rel="noopener">
+        <svg aria-hidden="true"><use href="#i-star"></use></svg> Ver reseñas en Google
+      </a>
+    </p>
+  </div>
+</section>
+
+<!-- ============ CONTACTO ============ -->
+<section class="section section--aqua" id="contacto">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Contacto</p>
+      <h2>Estamos aquí al lado</h2>
+      <p>En pleno Puente Tocinos, con sitio para aparcar cerca.</p>
+    </div>
+
+    <div class="contact">
+      <div class="contact__card reveal">
+        <ul class="contact__list">
+          <li>
+            <span class="ic"><svg aria-hidden="true"><use href="#i-pin"></use></svg></span>
+            <span>
+              <b>Dónde estamos</b>
+              <a href="https://www.google.com/maps/search/?api=1&query=Calle+Mayor+Bajo+Iz+138%2C+30006+Puente+Tocinos%2C+Murcia" target="_blank" rel="noopener">
+                Calle Mayor Bajo Iz, 138<br>30006 Puente Tocinos (Murcia)
+              </a>
+            </span>
+          </li>
+          <li>
+            <span class="ic"><svg aria-hidden="true"><use href="#i-phone"></use></svg></span>
+            <span><b>Teléfono</b><a href="tel:+34684797236">684 79 72 36</a></span>
+          </li>
+          <li>
+            <span class="ic"><svg aria-hidden="true"><use href="#i-wa"></use></svg></span>
+            <span><b>WhatsApp</b><a href="https://wa.me/34684797236" target="_blank" rel="noopener">Escríbenos por WhatsApp</a></span>
+          </li>
+          <li>
+            <span class="ic"><svg aria-hidden="true"><use href="#i-clock"></use></svg></span>
+            <span style="width:100%">
+              <b>Horario</b>
+              <ul class="hours">
+                <li><span>Autolavado, todos los días</span><span>9:00 – 21:00</span></li>
+                <li><span>Peluquería</span><span>Con cita previa</span></li>
+              </ul>
+            </span>
+          </li>
+        </ul>
+
+        <div class="contact__actions">
+          <a class="btn btn--sand" href="#reservar"><svg aria-hidden="true"><use href="#i-calendar"></use></svg> Reservar cita</a>
+          <a class="btn btn--wa" href="https://wa.me/34684797236" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"></use></svg> WhatsApp</a>
+          <a class="btn btn--ghost" href="https://www.instagram.com/aqualadra/" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-ig"></use></svg> Instagram</a>
+        </div>
+      </div>
+
+      <div class="map reveal reveal-d1">
+        <iframe
+          title="Mapa con la ubicación de AquaLadra en Puente Tocinos"
+          src="https://www.google.com/maps?q=Calle%20Mayor%20Bajo%20Iz%20138%2C%2030006%20Puente%20Tocinos%2C%20Murcia&output=embed"
+          loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA FINAL ============ -->
+<section class="section section--paper section--tight">
+  <div class="wrap">
+    <div class="cta reveal">
+      <div class="bubbles" aria-hidden="true">
+        <span style="width:110px;height:110px;top:-20px;left:6%;animation-delay:-2s;opacity:.35"></span>
+        <span style="width:70px;height:70px;bottom:-10px;right:10%;animation-delay:-5s;opacity:.35"></span>
+      </div>
+      <h2>¿Le toca baño?</h2>
+      <p>Vente cuando quieras al autolavado, o coge cita en la peluquería y nos encargamos nosotros.</p>
+      <div class="cta__actions">
+        <a class="btn btn--lg btn--white" href="#reservar"><svg aria-hidden="true"><use href="#i-calendar"></use></svg> Reservar cita</a>
+        <a class="btn btn--lg btn--ghost" href="tel:+34684797236"><svg aria-hidden="true"><use href="#i-phone"></use></svg> 684 79 72 36</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__brand">
+          <picture><source srcset="img/emblema.webp" type="image/webp">
+            <img src="img/emblema.png" alt="Logo de AquaLadra" width="320" height="320"></picture>
+          AquaLadra
+        </div>
+        <p>Autolavado de mascotas y peluquería canina y felina en Puente Tocinos, Murcia. Abierto los 365 días del año.</p>
+        <div class="footer__social">
+          <a href="https://www.instagram.com/aqualadra/" target="_blank" rel="noopener" aria-label="Instagram de AquaLadra"><svg aria-hidden="true"><use href="#i-ig"></use></svg></a>
+          <a href="https://wa.me/34684797236" target="_blank" rel="noopener" aria-label="WhatsApp de AquaLadra"><svg aria-hidden="true"><use href="#i-wa"></use></svg></a>
+          <a href="tel:+34684797236" aria-label="Llamar a AquaLadra"><svg aria-hidden="true"><use href="#i-phone"></use></svg></a>
+        </div>
+      </div>
+
+      <div>
+        <h4>Secciones</h4>
+        <ul class="footer__links">
+          <li><a href="#servicios">Servicios</a></li>
+          <li><a href="#autolavado">Autolavado</a></li>
+          <li><a href="#tarifas">Tarifas</a></li>
+          <li><a href="#reservar">Reservar cita</a></li>
+          <li><a href="#galeria">Galería</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Visítanos</h4>
+        <ul class="footer__links">
+          <li><a href="https://www.google.com/maps/search/?api=1&query=Calle+Mayor+Bajo+Iz+138%2C+30006+Puente+Tocinos%2C+Murcia" target="_blank" rel="noopener">Calle Mayor Bajo Iz, 138<br>30006 Puente Tocinos (Murcia)</a></li>
+          <li><a href="tel:+34684797236">684 79 72 36</a></li>
+          <li>Autolavado: 9:00 – 21:00</li>
+          <li>Peluquería: con cita previa</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <span>&copy; <span id="anyo">2026</span> AquaLadra. Todos los derechos reservados.</span>
+      <span>Hecho con mucho cariño (y algún pelo de perro) 🐾</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ BARRA MÓVIL ============ -->
+<div class="mobile-bar" id="mobile-bar">
+  <a class="btn btn--sand" href="#reservar"><svg aria-hidden="true"><use href="#i-calendar"></use></svg> Reservar</a>
+  <a class="btn btn--wa" href="https://wa.me/34684797236" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#i-wa"></use></svg> WhatsApp</a>
+</div>
+
+<!-- ============ DATOS ESTRUCTURADOS ============ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "AquaLadra",
+  "description": "Autolavado de mascotas y peluquería canina y felina en Puente Tocinos (Murcia).",
+  "image": "https://www.aqualadra.com/img/logo.png",
+  "url": "https://www.aqualadra.com/",
+  "telephone": "+34684797236",
+  "priceRange": "6 € - 32 €",
+  "currenciesAccepted": "EUR",
+  "paymentAccepted": "Efectivo, Tarjeta de crédito",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Calle Mayor Bajo Iz, 138",
+    "postalCode": "30006",
+    "addressLocality": "Puente Tocinos",
+    "addressRegion": "Murcia",
+    "addressCountry": "ES"
+  },
+  "openingHoursSpecification": [{
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+    "opens": "09:00",
+    "closes": "21:00"
+  }],
+  "sameAs": ["https://www.instagram.com/aqualadra/"],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Servicios",
+    "itemListElement": [
+      { "@type": "Offer", "name": "Autolavado de mascotas", "price": "6", "priceCurrency": "EUR" },
+      { "@type": "Offer", "name": "Baño en peluquería (perro < 10 kg)", "price": "14", "priceCurrency": "EUR" },
+      { "@type": "Offer", "name": "Corte en peluquería (perro < 10 kg)", "price": "20", "priceCurrency": "EUR" },
+      { "@type": "Offer", "name": "Baño en peluquería (perro 10-20 kg)", "price": "18", "priceCurrency": "EUR" },
+      { "@type": "Offer", "name": "Baño en peluquería (perro > 20 kg)", "price": "21", "priceCurrency": "EUR" },
+      { "@type": "Offer", "name": "Baño en peluquería (gato)", "price": "14", "priceCurrency": "EUR" }
+    ]
+  }
+}
+</script>
+
+<script src="js/config.js"></script>
+<script src="js/app.js" defer></script>
+</body>
+</html>
