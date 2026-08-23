@@ -104,10 +104,20 @@ export CLOUDFLARE_API_TOKEN="..."    # token con permiso Workers Scripts: Edit
 Y entonces:
 
 ```bash
-./aqualadra/desplegar.sh                 # vista previa, en la URL *.workers.dev
+./aqualadra/desplegar.sh                 # vista previa en aqualadra.pages.dev
 ./aqualadra/desplegar.sh --produccion    # cuando ya tenga el dominio propio
+./aqualadra/desplegar.sh --workers       # al Worker antiguo (*.workers.dev)
 ./aqualadra/desplegar.sh --solo-preparar # deja el paquete listo sin desplegar
 ```
+
+> **Sobre la dirección de la vista previa.** El primer despliegue se hizo como
+> Worker y Cloudflare le asignó a la cuenta el subdominio `fate-forgery`, o sea
+> `aqualadra.fate-forgery.workers.dev`. Ese subdominio **no se puede renombrar**
+> (la API responde «Account already has an associated subdomain»), y *forgery*
+> significa falsificación: una URL así no se le manda a un cliente, y es
+> carnaza para cualquier filtro de seguridad. Por eso ahora se despliega en
+> **Cloudflare Pages**, que da `aqualadra.pages.dev`: más corta, sin palabras
+> raras y en un dominio distinto. `--workers` sigue ahí por si hiciera falta.
 
 La diferencia entre los dos primeros es importante y no es solo el `noindex`:
 

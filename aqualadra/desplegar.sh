@@ -2,18 +2,19 @@
 #
 # Despliega la web de AquaLadra en Cloudflare.
 #
-#   ./desplegar.sh                 vista previa (URL *.workers.dev, sin indexar)
+#   ./desplegar.sh                 vista previa en https://aqualadra.pages.dev
 #   ./desplegar.sh --produccion    para cuando ya tenga el dominio aqualadra.com
+#   ./desplegar.sh --workers       al Worker antiguo (*.workers.dev)
 #   ./desplegar.sh --solo-preparar deja el paquete listo pero no despliega
 #
 # Hace falta estar autenticado, de una de estas dos formas:
 #   wrangler login                        (abre el navegador)
-#   export CLOUDFLARE_API_TOKEN="..."     (token con permiso Workers Scripts: Edit)
+#   export CLOUDFLARE_API_TOKEN="..."     (token con permisos de Pages y Workers)
 #
 # Por qué copia a otra carpeta en vez de desplegar la carpeta directamente:
-# todo lo que esté en el directorio de assets se publica, y aquí hay cosas que
-# no deben publicarse (las pruebas y el README). Además, en la vista previa se
-# añade un noindex que en producción no queremos.
+# todo lo que esté en el directorio que se sube se publica, y aquí hay cosas que
+# no deben publicarse (las pruebas y el README). Además, en la vista previa hay
+# que tocar la cabecera: ver más abajo.
 
 set -euo pipefail
 
@@ -22,13 +23,17 @@ MODO="${1:-}"
 DESTINO="$(mktemp -d)"
 trap 'rm -rf "$DESTINO"' EXIT
 
+# Dirección de la vista previa según el destino. Se puede forzar con:
+#   URL_VISTA_PREVIA=https://otra.dev ./desplegar.sh
+if [[ "$MODO" == "--workers" ]]; then
+  URL_VISTA_PREVIA="${URL_VISTA_PREVIA:-https://aqualadra.fate-forgery.workers.dev}"
+else
+  URL_VISTA_PREVIA="${URL_VISTA_PREVIA:-https://aqualadra.pages.dev}"
+fi
+
 echo "Preparando el paquete en $DESTINO"
 cp -r "$SITIO" "$DESTINO/public"
 rm -rf "$DESTINO/public/pruebas" "$DESTINO/public/README.md" "$DESTINO/public/desplegar.sh"
-
-# Dirección de la vista previa. Se puede cambiar con:
-#   URL_VISTA_PREVIA=https://otra.workers.dev ./desplegar.sh
-URL_VISTA_PREVIA="${URL_VISTA_PREVIA:-https://aqualadra.fate-forgery.workers.dev}"
 
 if [[ "$MODO" != "--produccion" ]]; then
   echo "Modo vista previa: noindex y URLs apuntando a $URL_VISTA_PREVIA"
@@ -41,9 +46,9 @@ for f in sorted(d.glob("*.html")):
     # Solo se reescribe la cabecera. Las URLs absolutas de canonical y og:*
     # apuntan al dominio de produccion, y en una vista previa eso es un
     # problema de verdad: WhatsApp e Instagram usan og:url como destino real
-    # del enlace, asi que al tocarlo te llevaban a la web VIEJA en vez de a
-    # esta. Y og:image se buscaba en un dominio donde no existe, con lo que la
-    # tarjeta de previsualizacion salia rota.
+    # del enlace, asi que al tocarlo te llevan a la web VIEJA en vez de a
+    # esta. Y og:image se busca en un dominio donde no existe, con lo que la
+    # tarjeta de previsualizacion sale rota.
     #
     # El cuerpo se deja tal cual a proposito: en el aviso legal, el sitio web
     # del negocio es un dato legal y tiene que seguir siendo aqualadra.com.
@@ -67,17 +72,6 @@ else
   echo "Modo produccion: indexable y con las URLs de aqualadra.com."
 fi
 
-cat > "$DESTINO/wrangler.jsonc" <<'EOF'
-{
-  "name": "aqualadra",
-  "compatibility_date": "2026-08-01",
-  "assets": {
-    "directory": "./public",
-    "not_found_handling": "404-page"
-  }
-}
-EOF
-
 echo "$(find "$DESTINO/public" -type f | wc -l) ficheros listos."
 
 if [[ "$MODO" == "--solo-preparar" ]]; then
@@ -87,5 +81,23 @@ if [[ "$MODO" == "--solo-preparar" ]]; then
   exit 0
 fi
 
-cd "$DESTINO"
-npx --yes wrangler@latest deploy
+if [[ "$MODO" == "--workers" ]]; then
+  # Worker con assets estaticos. Se mantiene por si acaso, pero la URL que
+  # genera Cloudflare para la cuenta (fate-forgery.workers.dev) no se puede
+  # renombrar y no es presentable, asi que lo normal es usar Pages.
+  cat > "$DESTINO/wrangler.jsonc" <<'EOF'
+{
+  "name": "aqualadra",
+  "compatibility_date": "2026-08-01",
+  "assets": {
+    "directory": "./public",
+    "not_found_handling": "404-page"
+  }
+}
+EOF
+  cd "$DESTINO"
+  npx --yes wrangler@latest deploy
+else
+  npx --yes wrangler@latest pages deploy "$DESTINO/public" \
+    --project-name aqualadra --branch main --commit-dirty=true
+fi
