@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Prueba de carga · AquaLadra</title>
+<!--
+  Página de diagnóstico. A propósito NO carga nada de fuera: ni CSS, ni
+  JavaScript, ni fuentes, ni imágenes. Todo va aquí dentro.
+
+  Sirve para separar dos causas cuando alguien dice "no me abre la web":
+   · Si ESTA página carga y la web no  -> el problema está en la web (CSS/JS).
+   · Si ESTA página tampoco carga      -> el problema está en el camino
+                                          (red, DNS, filtro, navegador).
+-->
+<style>
+  *{box-sizing:border-box;margin:0}
+  body{font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+       background:#FDF8F0;color:#0E3440;padding:24px 18px;max-width:640px;margin:0 auto}
+  .ok{background:#197289;color:#fff;border-radius:20px;padding:26px 20px;text-align:center;margin-bottom:22px}
+  .ok b{display:block;font-size:30px;line-height:1.15;margin-bottom:6px}
+  .ok span{opacity:.9;font-size:15px}
+  h2{font-size:17px;margin:22px 0 10px}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  td{padding:9px 4px;border-bottom:1px solid #E7EDEE;vertical-align:top}
+  td:first-child{color:#526D76}
+  td:last-child{text-align:right;font-weight:700}
+  .si{color:#197289}.no{color:#B3261E}
+  #ua{font-size:12px;word-break:break-all;color:#526D76;background:#fff;
+      border-radius:12px;padding:12px;margin-top:8px}
+  .pie{margin-top:24px;font-size:14px;color:#526D76;text-align:center}
+  .pie a{color:#197289}
+</style>
+</head>
+<body>
+
+<div class="ok">
+  <b>✅ Esta página carga</b>
+  <span>Si ves esto, el móvil llega hasta el servidor sin problema.</span>
+</div>
+
+<h2>Qué soporta este navegador</h2>
+<table id="tabla">
+  <tr><td>JavaScript</td><td id="js" class="no">no se ejecuta</td></tr>
+</table>
+
+<h2>Navegador</h2>
+<div id="ua">—</div>
+
+<p class="pie">
+  Ahora prueba la web entera:<br>
+  <a href="/">aqualadra.pages.dev</a>
+</p>
+
+<script>
+(function () {
+  function fila(nombre, valor) {
+    var tr = document.createElement("tr");
+    var a = document.createElement("td"); a.textContent = nombre;
+    var b = document.createElement("td");
+    b.textContent = valor ? "sí" : "no";
+    b.className = valor ? "si" : "no";
+    tr.appendChild(a); tr.appendChild(b);
+    document.getElementById("tabla").appendChild(tr);
+  }
+  var js = document.getElementById("js");
+  js.textContent = "funciona"; js.className = "si";
+
+  var almacen = false;
+  try { localStorage.setItem("_p", "1"); localStorage.removeItem("_p"); almacen = true; } catch (e) {}
+
+  fila("IntersectionObserver", "IntersectionObserver" in window);
+  fila("Elemento <dialog>",    typeof document.createElement("dialog").showModal === "function");
+  fila("Almacenamiento local", almacen);
+  fila("Animaciones por scroll", !!(window.CSS && CSS.supports && CSS.supports("animation-timeline", "view()")));
+  fila("Imágenes WebP",        !!(window.CSS && CSS.supports && CSS.supports("(background-image: image-set(url(a.webp) type('image/webp')))")));
+  fila("Variables CSS",        !!(window.CSS && CSS.supports && CSS.supports("--x", "1")));
+
+  document.getElementById("ua").textContent = navigator.userAgent;
+})();
+</script>
+
+</body>
+</html>

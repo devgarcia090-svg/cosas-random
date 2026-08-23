@@ -191,6 +191,7 @@ aqualadra/
 ├── privacidad.html        > páginas legales
 ├── cookies.html          /
 ├── 404.html              página de error
+├── prueba.html           diagnóstico: carga sin CSS ni JS (ver más arriba)
 ├── css/
 │   ├── estilos.css       sistema de diseño: tokens, componentes, responsive
 │   └── tipografias.css   las dos fuentes, auto-alojadas
@@ -299,6 +300,25 @@ y `privacidad.html`, y sustituir cada marca amarilla por el dato real. Cuando no
 quede ninguna, la web está lista para publicarse.
 
 ---
+
+## Cuando alguien dice «no me abre la web»
+
+Hay una página de diagnóstico en `prueba.html`
+([aqualadra.pages.dev/prueba.html](https://aqualadra.pages.dev/prueba.html)).
+No carga **nada** de fuera: ni CSS, ni JavaScript, ni fuentes, ni imágenes.
+Todo va dentro del propio fichero.
+
+Sirve para separar dos causas que se confunden todo el rato:
+
+- **Si esa página carga y la web no** → el problema está en la web: algún CSS o
+  JavaScript. La propia página lista qué soporta el navegador, así que la
+  captura ya dice por dónde mirar.
+- **Si esa página tampoco carga** → el problema está en el camino, no en el
+  código: la red, el DNS, un filtro o el navegador. Ahí no hay nada que
+  arreglar en el repositorio.
+
+Al pedir la captura, pide también que se vea el apartado «Navegador»: el
+user-agent completo suele resolver el misterio en un segundo.
 
 ## Pruebas
 
