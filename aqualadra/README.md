@@ -189,3 +189,9 @@ Google Maps.
   antigua. Si tienen reseñas en Google, mejor esas, con su nombre real.
 - **Fotos de trabajos de peluquería** (antes y después). Es lo que más vende en
   este negocio y no hay ninguna: todas las fotos son del autolavado.
+- **Los precios de la máquina.** En la foto de la central de pago se lee la
+  pantalla: «LAVADO MASCOTA 6,00 € · TIEMPO EXTRA 1,00 € · DESLANADORA 3,00 €».
+  La deslanadora a 3 € no se menciona en ningún texto de la web, ni en la
+  antigua ni en esta. Si sigue siendo así, merece la pena decirlo: es un
+  servicio de pago que ahora mismo no se está anunciando. No se ha puesto por
+  no dar por buenos unos precios leídos en una foto.
