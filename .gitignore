@@ -1,0 +1,12 @@
+# Caché local de wrangler (Cloudflare). La genera cada despliegue y guarda
+# el id de cuenta y el proyecto: es estado de la máquina, no del proyecto.
+.wrangler/
+
+# Dependencias. Las pruebas de aqualadra/ necesitan Playwright, que se
+# instala aparte y no se versiona.
+node_modules/
+
+# Basura de los sistemas operativos
+.DS_Store
+Thumbs.db
+desktop.ini
