@@ -109,9 +109,27 @@ Y entonces:
 ./aqualadra/desplegar.sh --solo-preparar # deja el paquete listo sin desplegar
 ```
 
-La diferencia entre los dos primeros es el `noindex`: mientras la web viva en
-una dirección provisional conviene que Google no la indexe, y en cuanto tenga
-`aqualadra.com` hay que desplegar con `--produccion` para que sí la indexe.
+La diferencia entre los dos primeros es importante y no es solo el `noindex`:
+
+En modo vista previa el script **reescribe las URLs absolutas de la cabecera**
+(`canonical`, `og:url`, `og:image` y el sitemap) para que apunten a la dirección
+provisional en lugar de a `aqualadra.com`. Si no se hace, pasa algo que parece
+un misterio: WhatsApp e Instagram **usan `og:url` como destino real del
+enlace**, así que al tocarlo te llevan a la web *antigua* en vez de a la nueva,
+y `og:image` se busca en un dominio donde no existe, con lo que la tarjeta de
+previsualización sale rota.
+
+La dirección de la vista previa se puede cambiar:
+
+```bash
+URL_VISTA_PREVIA=https://otra.workers.dev ./aqualadra/desplegar.sh
+```
+
+Solo se reescribe el `<head>`. El cuerpo se deja tal cual a propósito: en el
+aviso legal, el sitio web del negocio es un dato legal y tiene que seguir
+siendo `aqualadra.com` aunque el despliegue esté en otra dirección.
+
+En modo `--produccion` no se toca nada: las URLs ya son las buenas.
 
 El script copia el sitio a una carpeta aparte antes de subirlo, para no publicar
 las pruebas ni este README (todo lo que esté en la carpeta de assets se sirve).
@@ -252,6 +270,10 @@ que es lo que lee Google.
 `webp` y `jpg`) y copiar uno de los bloques `<figure class="gallery__item">`
 cambiando nombres, `alt`, `width` y `height`. Con 5 fotos la rejilla queda
 cuadrada en ordenador; conviene añadirlas de 4 en 4 para que siga cuadrando.
+
+**Cambiar la imagen de previsualización** (la tarjeta que sale al compartir el
+enlace por WhatsApp) → es `img/og.jpg`, de 1200x630. Está referenciada en las
+etiquetas `og:image` y `twitter:image`.
 
 **Cambiar el horario** → aparece en tres sitios: los *chips* del hero, la lista
 de la sección de contacto y el `openingHoursSpecification` del JSON-LD.
