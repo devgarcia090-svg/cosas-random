@@ -13,5 +13,11 @@ window.AQUALADRA = {
   reservasUrl: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ0TB3CkzzD2VCLoi9bWnkO8gGvxrkGcz_4IaJWLuuFp6F5DAzm7XakYus5sqdi9TlxDF5nrlKgm?gv=true",
 
   /* Altura del calendario incrustado, en píxeles */
-  reservasAlto: 640
+  reservasAlto: 640,
+
+  /* Mapa de la ubicación (Google Maps, incrustado) */
+  mapaUrl: "https://www.google.com/maps?q=Calle%20Mayor%20Bajo%20Iz%20138%2C%2030006%20Puente%20Tocinos%2C%20Murcia&output=embed",
+
+  /* Enlace a Google Maps para abrirlo fuera, sin incrustar nada */
+  mapaEnlace: "https://www.google.com/maps/search/?api=1&query=Calle+Mayor+Bajo+Iz+138%2C+30006+Puente+Tocinos%2C+Murcia"
 };

@@ -83,6 +83,34 @@
     secciones.forEach(function (s) { obsNav.observe(s); });
   }
 
+  /* ---------- Aparición escalonada dentro de las rejillas ----------
+     En vez de que una rejilla entera aparezca de golpe, cada tarjeta entra
+     con un pequeño retraso. Se nota sobre todo en el móvil, donde se hace
+     mucho scroll y casi todo son listas de una columna.                */
+  $$("[data-escalonar]").forEach(function (rejilla) {
+    rejilla.classList.remove("reveal");           // aparece cada hijo, no el conjunto
+    Array.prototype.forEach.call(rejilla.children, function (hijo, i) {
+      hijo.classList.add("reveal");
+      hijo.style.transitionDelay = Math.min(i * 70, 420) + "ms";
+    });
+  });
+
+  /* ---------- Pausar las animaciones infinitas fuera de pantalla ----------
+     Las burbujas y el oleaje no paran nunca. Si su sección no se está
+     viendo, no hay motivo para que el móvil gaste batería en moverlas.  */
+  var infinitas = $$(".bubbles, .wave");
+  if (infinitas.length && "IntersectionObserver" in window) {
+    var obsPausa = new IntersectionObserver(function (entradas) {
+      entradas.forEach(function (en) {
+        en.target.classList.toggle("fuera-de-vista", !en.isIntersecting);
+      });
+    }, { rootMargin: "80px 0px" });
+    infinitas.forEach(function (el) {
+      el.classList.add("fuera-de-vista");
+      obsPausa.observe(el);
+    });
+  }
+
   /* ---------- Aparición suave al hacer scroll ---------- */
   var aparecer = $$(".reveal");
   var sinMovimiento = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -112,7 +140,12 @@
       t.setAttribute("aria-selected", String(activa));
       t.tabIndex = activa ? 0 : -1;
       var panel = document.getElementById(t.getAttribute("aria-controls"));
-      if (panel) panel.hidden = !activa;
+      if (panel) {
+        panel.hidden = !activa;
+        // Un panel oculto nunca ha entrado en pantalla, así que sus
+        // elementos con aparición seguirían invisibles al mostrarlo.
+        if (activa) $$(".reveal", panel).forEach(function (r) { r.classList.add("is-in"); });
+      }
     });
     if (mover) tab.focus();
   }
@@ -186,64 +219,150 @@
     });
   }
 
-  /* ---------- Calendario de reservas ----------
-     Se incrusta la página de citas de Google Calendar, así la peluquera
-     sigue gestionando su agenda desde su propio calendario y aquí se ve
-     siempre la disponibilidad real. Se carga solo cuando el usuario se
-     acerca a la sección, para no penalizar la carga inicial.          */
-  var slot = $("#calendario-slot");
+  /* ---------- Contenidos de Google, solo si se piden ----------
+     El calendario de reservas y el mapa vienen de Google y ponen cookies
+     suyas en cuanto se cargan. Para no instalar nada sin permiso, en su
+     sitio se muestra un aviso con un botón: hasta que no se pulsa, no se
+     carga nada de Google. La decisión se recuerda en el almacenamiento
+     local (no es una cookie y no viaja a ningún servidor).             */
+
+  var CLAVE = "aqualadra:consiente-google";
+
+  function consiente() {
+    try { return localStorage.getItem(CLAVE) === "si"; } catch (e) { return false; }
+  }
+
+  function guardarConsentimiento() {
+    try { localStorage.setItem(CLAVE, "si"); } catch (e) { /* modo privado: vale por esta visita */ }
+  }
+
+  var telHref = "tel:+" + (CFG.telefono || "");
+  var telTexto = "684 79 72 36";
+  var waHref = "https://wa.me/" + (CFG.telefono || "");
+
+  /* Crea el marco de un contenido incrustado */
+  function marco(src, titulo, alto) {
+    var f = document.createElement("iframe");
+    f.src = src;
+    f.title = titulo;
+    f.loading = "lazy";
+    f.setAttribute("frameborder", "0");
+    f.referrerPolicy = "no-referrer-when-downgrade";
+    if (alto) f.style.height = alto + "px";
+    return f;
+  }
+
+  /* Aviso con el botón para cargar el contenido */
+  function aviso(opciones) {
+    var caja = document.createElement("div");
+    caja.className = "consent";
+    caja.innerHTML =
+      '<span class="consent__icono"><svg aria-hidden="true"><use href="#i-shield"></use></svg></span>' +
+      '<h3>' + opciones.titulo + '</h3>' +
+      '<p>' + opciones.texto + '</p>' +
+      '<div class="consent__acciones">' +
+        '<button class="btn" type="button">' + opciones.boton + '</button>' +
+        opciones.alterno +
+      '</div>' +
+      '<p class="consent__nota"><a href="cookies.html">Más detalles en la política de cookies</a></p>';
+
+    caja.querySelector("button").addEventListener("click", function () {
+      guardarConsentimiento();
+      pintarCalendario();
+      pintarMapa();
+    });
+    return caja;
+  }
+
+  /* ---------- Calendario de reservas ---------- */
+  var slotCal = $("#calendario-slot");
 
   function pintarCalendario() {
-    if (!slot || slot.getAttribute("data-cargado") === "true") return;
-    slot.setAttribute("data-cargado", "true");
+    if (!slotCal) return;
+    var estado = consiente() ? "cargado" : "aviso";
+    if (slotCal.getAttribute("data-estado") === estado) return;
+    slotCal.setAttribute("data-estado", estado);
+    slotCal.innerHTML = "";
 
-    if (!CFG.reservasUrl) { pintarFallback(); return; }
-
-    var marco = document.createElement("iframe");
-    marco.src = CFG.reservasUrl;
-    marco.title = "Calendario de reservas de la peluquería AquaLadra";
-    marco.loading = "lazy";
-    marco.style.height = (CFG.reservasAlto || 640) + "px";
-    marco.setAttribute("frameborder", "0");
-
-    /* Si Google no cargara, dejamos una salida a mano */
-    var aviso = document.createElement("p");
-    aviso.className = "calendar-card__fallback";
-    aviso.style.paddingTop = "1rem";
-    aviso.innerHTML = '¿No ves el calendario? ' +
-      '<a href="' + CFG.reservasUrl + '" target="_blank" rel="noopener">Ábrelo en una pestaña nueva</a>' +
-      ' o llámanos al <a href="tel:+' + CFG.telefono + '">684 79 72 36</a>.';
-
-    slot.appendChild(marco);
-    slot.appendChild(aviso);
-  }
-
-  function pintarFallback() {
-    if (!slot) return;
-    slot.innerHTML = '<p class="calendar-card__fallback">Ahora mismo no podemos mostrar el calendario. ' +
-      'Llámanos al <a href="tel:+' + (CFG.telefono || "") + '">684 79 72 36</a> ' +
-      'o escríbenos por <a href="https://wa.me/' + (CFG.telefono || "") + '" target="_blank" rel="noopener">WhatsApp</a> ' +
-      'y te cogemos la cita.</p>';
-  }
-
-  if (slot) {
-    if ("IntersectionObserver" in window) {
-      var obsCal = new IntersectionObserver(function (entradas, obs) {
-        entradas.forEach(function (en) {
-          if (!en.isIntersecting) return;
-          pintarCalendario();
-          obs.disconnect();
-        });
-      }, { rootMargin: "500px 0px" });
-      obsCal.observe(slot);
-    } else {
-      pintarCalendario();
+    if (!CFG.reservasUrl) {
+      slotCal.innerHTML = '<p class="calendar-card__fallback">Ahora mismo no podemos mostrar el calendario. ' +
+        'Llámanos al <a href="' + telHref + '">' + telTexto + '</a> o escríbenos por ' +
+        '<a href="' + waHref + '" target="_blank" rel="noopener">WhatsApp</a> y te cogemos la cita.</p>';
+      return;
     }
 
-    /* Si alguien llega directo con #reservar, que no espere al scroll */
-    if (window.location.hash === "#reservar") pintarCalendario();
-    $$('a[href="#reservar"]').forEach(function (a) {
-      a.addEventListener("click", pintarCalendario);
-    });
+    if (!consiente()) {
+      slotCal.appendChild(aviso({
+        titulo: "El calendario lo pone Google",
+        texto: "Para elegir día y hora cargamos la agenda de Google Calendar, que instala sus propias cookies. " +
+               "Solo se carga si lo pides tú.",
+        boton: "Ver los huecos disponibles",
+        alterno: '<a class="btn btn--wa" href="' + waHref +
+                 '?text=%C2%A1Hola%20AquaLadra!%20Quer%C3%ADa%20pedir%20cita%20para%20la%20peluquer%C3%ADa." ' +
+                 'target="_blank" rel="noopener">Pedir cita por WhatsApp</a>'
+      }));
+      return;
+    }
+
+    slotCal.appendChild(marco(CFG.reservasUrl, "Calendario de reservas de la peluquería AquaLadra", CFG.reservasAlto || 640));
+
+    var salida = document.createElement("p");
+    salida.className = "calendar-card__fallback";
+    salida.style.paddingTop = "1rem";
+    salida.innerHTML = '¿No ves el calendario? ' +
+      '<a href="' + CFG.reservasUrl + '" target="_blank" rel="noopener">Ábrelo en una pestaña nueva</a>' +
+      ' o llámanos al <a href="' + telHref + '">' + telTexto + '</a>.';
+    slotCal.appendChild(salida);
   }
+
+  /* ---------- Mapa ---------- */
+  var slotMapa = $("#mapa-slot");
+
+  function pintarMapa() {
+    if (!slotMapa || !CFG.mapaUrl) return;
+    var estado = consiente() ? "cargado" : "aviso";
+    if (slotMapa.getAttribute("data-estado") === estado) return;
+    slotMapa.setAttribute("data-estado", estado);
+    slotMapa.innerHTML = "";
+
+    if (!consiente()) {
+      slotMapa.appendChild(aviso({
+        titulo: "El mapa lo pone Google",
+        texto: "Cargar el mapa de Google Maps instala cookies suyas. Si prefieres no cargarlo, " +
+               "puedes abrir la ubicación directamente en Google Maps.",
+        boton: "Ver el mapa aquí",
+        alterno: '<a class="btn btn--ghost" href="' + (CFG.mapaEnlace || "#") +
+                 '" target="_blank" rel="noopener">Abrir en Google Maps</a>'
+      }));
+      return;
+    }
+
+    slotMapa.appendChild(marco(CFG.mapaUrl, "Mapa con la ubicación de AquaLadra en Puente Tocinos"));
+  }
+
+  /* ---------- Cuándo se pintan ----------
+     Se espera a que la sección esté cerca para no trabajar de más, pero el
+     aviso se pinta igual: así nunca hay un hueco vacío.               */
+  function alAcercarse(elemento, hacer) {
+    if (!elemento) return;
+    if (!("IntersectionObserver" in window)) { hacer(); return; }
+    var obs = new IntersectionObserver(function (entradas, o) {
+      entradas.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        hacer();
+        o.disconnect();
+      });
+    }, { rootMargin: "500px 0px" });
+    obs.observe(elemento);
+  }
+
+  alAcercarse(slotCal, pintarCalendario);
+  alAcercarse(slotMapa, pintarMapa);
+
+  /* Si alguien llega directo con #reservar, que no espere al scroll */
+  if (window.location.hash === "#reservar") pintarCalendario();
+  $$('a[href="#reservar"]').forEach(function (a) {
+    a.addEventListener("click", pintarCalendario);
+  });
+
 })();

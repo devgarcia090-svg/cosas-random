@@ -97,6 +97,10 @@
     <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round">
       <path d="M6 6l12 12M18 6L6 18"/>
     </symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 2.8l7.2 2.7v6c0 4.7-3 8.3-7.2 9.7-4.2-1.4-7.2-5-7.2-9.7v-6L12 2.8Z"/>
+      <path d="M8.8 12.2l2.2 2.2 4.2-4.4"/>
+    </symbol>
     <symbol id="i-star" viewBox="0 0 24 24" fill="currentColor">
       <path d="m12 2.8 2.8 5.9 6.4.8-4.7 4.4 1.2 6.3L12 17.2l-5.7 3 1.2-6.3-4.7-4.4 6.4-.8Z"/>
     </symbol>
@@ -152,11 +156,11 @@
 <!-- ============ HERO ============ -->
 <section class="hero" id="inicio">
   <div class="bubbles" aria-hidden="true">
-    <span style="width:120px;height:120px;top:12%;left:4%;animation-delay:-1s"></span>
-    <span style="width:64px;height:64px;top:62%;left:12%;animation-delay:-4s"></span>
-    <span style="width:38px;height:38px;top:32%;left:26%;animation-delay:-2.5s"></span>
-    <span style="width:86px;height:86px;top:8%;right:34%;animation-delay:-6s"></span>
-    <span style="width:52px;height:52px;bottom:8%;right:16%;animation-delay:-3s"></span>
+    <span style="width:120px;height:120px;top:22%;left:4%;--desvio:18px;animation-duration:13s;animation-delay:-1s"></span>
+    <span style="width:64px;height:64px;top:66%;left:12%;--desvio:-14px;animation-duration:10s;animation-delay:-4s"></span>
+    <span style="width:38px;height:38px;top:40%;left:26%;--desvio:22px;animation-duration:8.5s;animation-delay:-2.5s"></span>
+    <span style="width:86px;height:86px;top:16%;right:34%;--desvio:-20px;animation-duration:14s;animation-delay:-6s"></span>
+    <span style="width:52px;height:52px;bottom:12%;right:16%;--desvio:16px;animation-duration:11s;animation-delay:-3s"></span>
   </div>
 
   <div class="wrap hero__grid">
@@ -210,7 +214,10 @@
 </section>
 
 <svg class="wave wave--paper" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
-  <path d="M0 40c180-40 360-40 540 0s360 40 540 0 360-40 360-40v80H0Z"/>
+  <g class="wave__g">
+    <path d="M0 40 C 240 0, 480 0, 720 40 S 1200 80, 1440 40 V 80 H 0 Z"/>
+    <path d="M0 40 C 240 0, 480 0, 720 40 S 1200 80, 1440 40 V 80 H 0 Z" transform="translate(1440 0)"/>
+  </g>
 </svg>
 
 <!-- ============ DOS VÍAS ============ -->
@@ -222,7 +229,7 @@
       <p>Elige la que mejor te venga. Las dos con producto profesional y mucho cariño por los animales.</p>
     </div>
 
-    <div class="tracks">
+    <div class="tracks" data-escalonar>
       <article class="track reveal">
         <div class="track__icon"><svg aria-hidden="true"><use href="#i-bath"></use></svg></div>
         <h3>Autolavado</h3>
@@ -265,7 +272,7 @@
       <p>Es más fácil que en casa, y sin pelos en tu bañera. Si es tu primera vez, te echamos una mano.</p>
     </div>
 
-    <ol class="steps">
+    <ol class="steps" data-escalonar>
       <li class="step reveal">
         <h3>Mete a tu mascota</h3>
         <p>Bañera de acero a tu altura, con <em>suelo antideslizante</em> y arneses de seguridad para que esté tranquilo.</p>
@@ -283,6 +290,28 @@
         <p>Al acabar tienes <em>1 minuto</em> para meter <em>1 €</em> y sumar 2 minutos más. Se puede repetir hasta 3 veces.</p>
       </li>
     </ol>
+
+    <div class="machine reveal">
+      <h3>Lo que puedes elegir en la máquina</h3>
+      <p>Se paga con tarjeta o con monedas, en la misma central de pago.</p>
+      <ul class="machine__list" data-escalonar>
+        <li class="machine__item">
+          <span class="ic"><svg aria-hidden="true"><use href="#i-bath"></use></svg></span>
+          <span class="txt"><b>Lavado de mascota</b><small>8 minutos de programa</small></span>
+          <span class="eur">6 €</span>
+        </li>
+        <li class="machine__item">
+          <span class="ic"><svg aria-hidden="true"><use href="#i-clock"></use></svg></span>
+          <span class="txt"><b>Tiempo extra</b><small>2 minutos más, hasta 3 veces</small></span>
+          <span class="eur">1 €</span>
+        </li>
+        <li class="machine__item">
+          <span class="ic"><svg aria-hidden="true"><use href="#i-brush"></use></svg></span>
+          <span class="txt"><b>Deslanadora</b><small>saca el pelo muerto</small></span>
+          <span class="eur">3 €</span>
+        </li>
+      </ul>
+    </div>
 
     <p class="note reveal">
       <svg aria-hidden="true"><use href="#i-candy"></use></svg>
@@ -396,7 +425,7 @@
           Peluquería AquaLadra
           <span class="live"><i aria-hidden="true"></i> Disponibilidad real</span>
         </div>
-        <div id="calendario-slot">
+        <div id="calendario-slot" class="calendar-card__cuerpo">
           <noscript>
             <p class="calendar-card__fallback">
               Para ver el calendario necesitas activar JavaScript.
@@ -419,7 +448,7 @@
       <p>Todo lo que necesitas para que salga de aquí oliendo de maravilla.</p>
     </div>
 
-    <div class="features">
+    <div class="features" data-escalonar>
       <article class="feature reveal">
         <div class="feature__icon"><svg aria-hidden="true"><use href="#i-bath"></use></svg></div>
         <h3>Bañeras profesionales</h3>
@@ -453,7 +482,7 @@
       <p>Nuestras instalaciones y algunos clientes que ya son de la familia.</p>
     </div>
 
-    <div class="gallery reveal" id="galeria-grid">
+    <div class="gallery reveal" id="galeria-grid" data-escalonar>
       <figure class="gallery__item gallery__item--wide" data-full="img/toby-mojado.jpg" tabindex="0" role="button" aria-label="Ampliar foto: Toby recién salido de la bañera">
         <picture><source srcset="img/toby-mojado.webp" type="image/webp">
           <img src="img/toby-mojado.jpg" alt="Toby recién salido de la bañera" width="1400" height="1867" loading="lazy"></picture>
@@ -498,7 +527,7 @@
       <h2>Lo que dicen sus dueños</h2>
     </div>
 
-    <div class="reviews">
+    <div class="reviews" data-escalonar>
       <article class="review reveal">
         <p class="review__stars" aria-label="5 de 5 estrellas">★★★★★</p>
         <p>Llevamos a Toby y se ha encariñado, seguro que vuelve otra vez.</p>
@@ -581,11 +610,12 @@
         </div>
       </div>
 
-      <div class="map reveal reveal-d1">
-        <iframe
-          title="Mapa con la ubicación de AquaLadra en Puente Tocinos"
-          src="https://www.google.com/maps?q=Calle%20Mayor%20Bajo%20Iz%20138%2C%2030006%20Puente%20Tocinos%2C%20Murcia&output=embed"
-          loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+      <div class="map reveal reveal-d1" id="mapa-slot">
+        <noscript>
+          <p class="calendar-card__fallback">
+            <a href="https://www.google.com/maps/search/?api=1&amp;query=Calle+Mayor+Bajo+Iz+138%2C+30006+Puente+Tocinos%2C+Murcia" target="_blank" rel="noopener">Ver la ubicación en Google Maps</a>
+          </p>
+        </noscript>
       </div>
     </div>
   </div>
@@ -596,8 +626,8 @@
   <div class="wrap">
     <div class="cta reveal">
       <div class="bubbles" aria-hidden="true">
-        <span style="width:110px;height:110px;top:-20px;left:6%;animation-delay:-2s;opacity:.35"></span>
-        <span style="width:70px;height:70px;bottom:-10px;right:10%;animation-delay:-5s;opacity:.35"></span>
+        <span style="width:110px;height:110px;top:10%;left:6%;--desvio:20px;animation-duration:15s;animation-delay:-2s"></span>
+        <span style="width:70px;height:70px;bottom:14%;right:10%;--desvio:-16px;animation-duration:12s;animation-delay:-5s"></span>
       </div>
       <h2>¿Le toca baño?</h2>
       <p>Vente cuando quieras al autolavado, o coge cita en la peluquería y nos encargamos nosotros.</p>
@@ -610,6 +640,13 @@
 </section>
 
 </main>
+
+<svg class="wave wave--ink" viewBox="0 0 1440 80" preserveAspectRatio="none" aria-hidden="true">
+  <g class="wave__g">
+    <path d="M0 40 C 240 0, 480 0, 720 40 S 1200 80, 1440 40 V 80 H 0 Z"/>
+    <path d="M0 40 C 240 0, 480 0, 720 40 S 1200 80, 1440 40 V 80 H 0 Z" transform="translate(1440 0)"/>
+  </g>
+</svg>
 
 <!-- ============ FOOTER ============ -->
 <footer class="footer">
@@ -654,6 +691,11 @@
 
     <div class="footer__bottom">
       <span>&copy; <span id="anyo">2026</span> AquaLadra. Todos los derechos reservados.</span>
+      <span class="footer__legal">
+        <a href="aviso-legal.html">Aviso legal</a> ·
+        <a href="privacidad.html">Privacidad</a> ·
+        <a href="cookies.html">Cookies</a>
+      </span>
       <span>Hecho con mucho cariño (y algún pelo de perro) 🐾</span>
     </div>
   </div>
@@ -698,6 +740,8 @@
     "name": "Servicios",
     "itemListElement": [
       { "@type": "Offer", "name": "Autolavado de mascotas", "price": "6", "priceCurrency": "EUR" },
+      { "@type": "Offer", "name": "Deslanadora en el autolavado", "price": "3", "priceCurrency": "EUR" },
+      { "@type": "Offer", "name": "Tiempo extra en el autolavado (2 minutos)", "price": "1", "priceCurrency": "EUR" },
       { "@type": "Offer", "name": "Baño en peluquería (perro < 10 kg)", "price": "14", "priceCurrency": "EUR" },
       { "@type": "Offer", "name": "Corte en peluquería (perro < 10 kg)", "price": "20", "priceCurrency": "EUR" },
       { "@type": "Offer", "name": "Baño en peluquería (perro 10-20 kg)", "price": "18", "priceCurrency": "EUR" },

@@ -6,6 +6,22 @@ peluquería canina y felina en Puente Tocinos (Murcia).
 Es una web **estática**: HTML, CSS y JavaScript sin dependencias ni compilación.
 Se sube tal cual a cualquier hosting y funciona.
 
+> ## ⚠️ Antes de publicar en aqualadra.com
+>
+> Las páginas legales están escritas pero **les faltan datos que no constaban
+> en ninguna parte**. Están marcados en amarillo dentro de las propias páginas
+> (`aviso-legal.html` y `privacidad.html`), así que se ven a simple vista:
+>
+> - Nombre y apellidos o razón social del titular
+> - NIF o CIF
+> - Un correo electrónico de contacto
+> - Si es sociedad, los datos del Registro Mercantil
+> - Los plazos de conservación de datos
+>
+> Busca `class="rellenar"` en el código para encontrarlos todos. Y que le dé un
+> repaso la gestoría o quien lleve la protección de datos: esto es una
+> estructura estándar bien montada, no un dictamen jurídico.
+
 ---
 
 ## Qué cambia respecto a la web anterior
@@ -20,6 +36,9 @@ Se sube tal cual a cualquier hosting y funciona.
 | Móvil | poco cuidado | barra fija abajo con *Reservar* y *WhatsApp*, menú desplegable |
 | Fotos | con marco de Instagram y marca de agua encima | recortadas y limpias, en `webp` + `jpg` |
 | Accesibilidad | contrastes por debajo del mínimo | todos los textos cumplen WCAG AA (comprobado, ver *Pruebas*) |
+| Legal | no había aviso legal, ni privacidad, ni cookies | las tres páginas, enlazadas desde el pie |
+| Cookies | el mapa cargaba Google sin preguntar | ningún contenido de Google se carga hasta que la persona lo pide |
+| Movimiento | estática | oleaje, burbujas que suben y apariciones escalonadas, todo pausado fuera de pantalla |
 
 Los precios, el teléfono, la dirección, el horario y las opiniones son
 **los mismos** que había en la web anterior. No se ha inventado nada.
@@ -123,6 +142,9 @@ los buscadores no indexen una dirección provisional.
 ```
 aqualadra/
 ├── index.html            la web entera (una sola página con anclas)
+├── aviso-legal.html      \
+├── privacidad.html        > páginas legales
+├── cookies.html          /
 ├── 404.html              página de error
 ├── css/
 │   ├── estilos.css       sistema de diseño: tokens, componentes, responsive
@@ -154,6 +176,53 @@ Cambiando esas variables cambia toda la web de golpe.
 
 ---
 
+## Cookies y contenidos de Google
+
+El calendario de reservas y el mapa vienen de Google, y **ponen cookies suyas
+en cuanto se cargan**. Para no instalar nada sin permiso, en su sitio aparece un
+aviso con un botón: hasta que no se pulsa, no se carga nada de Google y no se
+instala ninguna cookie de terceros.
+
+Es la razón por la que la web **no necesita el típico banner de cookies** que
+tapa media pantalla: no hay cookies propias de análisis ni publicidad, y las de
+terceros no llegan a ponerse sin que se pidan.
+
+Quien no quiera cargar el calendario tiene igualmente el botón de WhatsApp y el
+teléfono a la vista, así que puede pedir cita sin pasar por Google. Y en la
+sección de contacto, el enlace «Abrir en Google Maps» funciona sin incrustar
+nada.
+
+La decisión se recuerda en el almacenamiento local del navegador con la clave
+`aqualadra:consiente-google`. No es una cookie y no viaja a ningún servidor. Se
+puede retirar desde el botón que hay en la política de cookies.
+
+## Las animaciones
+
+Todas se mueven con `transform` y `opacity`, que son las dos propiedades que el
+navegador puede animar en la GPU sin recalcular la página. Es lo que hace que en
+un móvil no se note ningún tirón:
+
+- **Oleaje** en los separadores entre secciones y en la entrada al pie. Son dos
+  copias de la misma onda desplazándose; al recorrer 1440 px el bucle encaja sin
+  salto.
+- **Burbujas que suben** en el hero y en la llamada final, cada una con su
+  duración y su desvío.
+- **Apariciones escalonadas**: las tarjetas de una rejilla entran una detrás de
+  otra en vez de todas de golpe. Se consigue poniendo `data-escalonar` en el
+  contenedor; el JavaScript reparte los retrasos solo.
+- **La foto del hero y las de la galería** se acercan al ritmo del scroll, con
+  `animation-timeline: view()`. Donde el navegador no lo soporta, simplemente no
+  pasa nada.
+- **Al toque**: como en el móvil no hay «hover», los pies de foto de la galería
+  se ven siempre y las tarjetas se hunden un poco al tocarlas.
+
+Dos cosas que evitan que esto pase factura:
+
+1. Las animaciones infinitas **se pausan cuando su sección no está en pantalla**
+   (`app.js` pone la clase `fuera-de-vista`).
+2. Quien tenga activado *reducir movimiento* en su sistema **no ve nada de
+   esto**. La web queda quieta y completamente legible.
+
 ## Tareas típicas
 
 **Cambiar un precio** → en `index.html`, buscar el panel del tamaño
@@ -171,6 +240,14 @@ de la sección de contacto y el `openingHoursSpecification` del JSON-LD.
 
 **Quitar una opinión** → borrar su `<article class="review">`.
 
+**Cambiar los precios de la máquina** → en `index.html`, el bloque
+`<div class="machine">` de la sección de autolavado. Están también en el
+JSON-LD.
+
+**Rellenar los datos legales** → buscar `class="rellenar"` en `aviso-legal.html`
+y `privacidad.html`, y sustituir cada marca amarilla por el dato real. Cuando no
+quede ninguna, la web está lista para publicarse.
+
 ---
 
 ## Pruebas
@@ -182,9 +259,13 @@ suficiente**.
 
 ```bash
 npx http-server aqualadra -p 8899 -s &
-node aqualadra/pruebas/comprobar.mjs    # 24 comprobaciones
-node aqualadra/pruebas/contraste.mjs    # contraste de cada texto de la página
+node aqualadra/pruebas/comprobar.mjs    # 24 comprobaciones de interacción
+node aqualadra/pruebas/consentimiento.mjs  # 38 sobre cookies, legal y animaciones
+node aqualadra/pruebas/contraste.mjs    # contraste de cada texto, en las 5 páginas
 ```
+
+La de consentimiento comprueba lo más fácil de romper sin enterarse: que **no
+salga ni una petición a Google** antes de que alguien acepte.
 
 Necesitan Playwright (`npm i -D playwright`).
 
@@ -215,9 +296,7 @@ Google Maps.
   antigua. Si tienen reseñas en Google, mejor esas, con su nombre real.
 - **Fotos de trabajos de peluquería** (antes y después). Es lo que más vende en
   este negocio y no hay ninguna: todas las fotos son del autolavado.
-- **Los precios de la máquina.** En la foto de la central de pago se lee la
-  pantalla: «LAVADO MASCOTA 6,00 € · TIEMPO EXTRA 1,00 € · DESLANADORA 3,00 €».
-  La deslanadora a 3 € no se menciona en ningún texto de la web, ni en la
-  antigua ni en esta. Si sigue siendo así, merece la pena decirlo: es un
-  servicio de pago que ahora mismo no se está anunciando. No se ha puesto por
-  no dar por buenos unos precios leídos en una foto.
+- **Confirmar los precios de la máquina.** El bloque de la sección de
+  autolavado (lavado 6 €, tiempo extra 1 €, deslanadora 3 €) sale de la pantalla
+  de la central de pago que se ve en una de las fotos. El servicio está
+  confirmado; conviene repasar que los importes sigan siendo esos.

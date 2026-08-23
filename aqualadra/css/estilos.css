@@ -106,7 +106,7 @@ img { height: auto; display: block; }
 /* <picture> es inline por defecto y rompería el alto 100% de su <img> */
 picture { display: block; }
 
-ul { margin: 0; padding: 0; list-style: none; }
+ul, ol { margin: 0; padding: 0; list-style: none; }
 
 :focus-visible {
   outline: 3px solid var(--aqua-500);
@@ -332,9 +332,18 @@ ul { margin: 0; padding: 0; list-style: none; }
   display: grid;
   gap: .2rem;
   transform: translateY(-115%);
-  transition: transform .3s cubic-bezier(.4,0,.2,1);
+  /* Oculto de verdad mientras está cerrado: si solo se desplaza fuera de
+     la pantalla, sus enlaces siguen siendo enfocables con el tabulador. */
+  visibility: hidden;
+  pointer-events: none;
+  transition: transform .3s cubic-bezier(.4,0,.2,1), visibility 0s linear .3s;
 }
-.drawer[data-open="true"] { transform: translateY(0); }
+.drawer[data-open="true"] {
+  transform: translateY(0);
+  visibility: visible;
+  pointer-events: auto;
+  transition: transform .3s cubic-bezier(.4,0,.2,1), visibility 0s;
+}
 .drawer a {
   padding: .85rem .6rem;
   border-radius: var(--r-sm);
@@ -460,11 +469,6 @@ ul { margin: 0; padding: 0; list-style: none; }
   border-radius: 50%;
   background: radial-gradient(circle at 32% 28%, rgba(255,255,255,.95), rgba(111,203,225,.42) 62%, rgba(36,150,178,.22));
   box-shadow: inset 0 0 12px rgba(255,255,255,.6);
-  animation: float 12s ease-in-out infinite;
-}
-@keyframes float {
-  0%, 100% { transform: translateY(0) scale(1); }
-  50%      { transform: translateY(-22px) scale(1.04); }
 }
 
 /* ---------- 8. Tarjetas de vía (autolavado / peluquería) ---------- */
@@ -577,6 +581,57 @@ ul { margin: 0; padding: 0; list-style: none; }
   font-weight: 600;
 }
 .note svg { width: 26px; height: 26px; flex: none; }
+
+/* ---------- 9b. Precios de la máquina del autolavado ---------- */
+.machine {
+  margin-top: clamp(1.5rem, 3vw, 2.25rem);
+  padding: clamp(1.25rem, 2.5vw, 1.8rem);
+  border-radius: var(--r-xl);
+  background: var(--paper);
+  box-shadow: var(--sh-md);
+}
+.machine h3 { font-size: 1.18rem; margin-bottom: .2rem; }
+.machine > p { color: var(--muted); font-size: .95rem; margin-bottom: 1.3rem; }
+
+.machine__list { display: grid; gap: .75rem; }
+@media (min-width: 700px) { .machine__list { grid-template-columns: repeat(3, 1fr); } }
+
+.machine__item {
+  display: flex;
+  align-items: center;
+  gap: .85rem;
+  padding: .9rem 1.05rem;
+  border-radius: var(--r-md);
+  background: var(--aqua-50);
+  box-shadow: inset 0 0 0 1.5px var(--aqua-100);
+}
+.machine__item .ic {
+  flex: none;
+  width: 38px; height: 38px;
+  border-radius: 12px;
+  display: grid; place-items: center;
+  background: var(--paper);
+  color: var(--aqua-700);
+}
+.machine__item .ic svg { width: 20px; height: 20px; }
+.machine__item .txt { min-width: 0; }
+.machine__item b {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.2;
+}
+.machine__item small { color: var(--muted); font-size: .85rem; }
+.machine__item .eur {
+  margin-left: auto;
+  flex: none;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.4rem;
+  line-height: 1;
+  color: var(--aqua-700);
+}
 
 /* ---------- 10. Tarifas ---------- */
 .tabs {
@@ -705,12 +760,16 @@ ul { margin: 0; padding: 0; list-style: none; }
 
 .calendar-card {
   position: relative;
+  display: flex;
+  flex-direction: column;
   border-radius: var(--r-xl);
   background: var(--paper);
   box-shadow: var(--sh-lg);
   overflow: hidden;
   min-height: 620px;
 }
+.calendar-card__cuerpo { flex: 1; display: flex; flex-direction: column; }
+.calendar-card__cuerpo > .consent { flex: 1; }
 .calendar-card__bar {
   display: flex;
   align-items: center;
@@ -964,6 +1023,8 @@ ul { margin: 0; padding: 0; list-style: none; }
 .contact__list a:hover { color: var(--aqua-600); }
 .contact__actions { display: flex; flex-wrap: wrap; gap: .7rem; }
 
+.map { display: flex; flex-direction: column; }
+.map > .consent { flex: 1; }
 .map {
   border-radius: var(--r-xl);
   overflow: hidden;
@@ -1096,6 +1157,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 .wave--cream { color: var(--cream); }
 .wave--aqua  { color: var(--aqua-50); }
 .wave--sand  { color: var(--sand-100); }
+.wave--ink   { color: var(--aqua-900); }
 .wave-flip { transform: rotate(180deg); }
 
 /* ---------- 20. Aparición al hacer scroll ---------- */
@@ -1127,4 +1189,267 @@ ul { margin: 0; padding: 0; list-style: none; }
   .nav, .mobile-bar, .drawer, .calendar-card iframe, .map, .bubbles { display: none !important; }
   body { background: #fff; }
   .section { padding-block: 1rem; }
+}
+
+/* =====================================================================
+   22. Páginas legales (aviso legal, privacidad, cookies)
+   Cabecera y pie reducidos, y una columna de texto cómoda de leer.
+   ===================================================================== */
+.legal-top {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  background: rgba(253, 248, 240, .9);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(14, 52, 64, .08);
+}
+.legal-top__inner {
+  max-width: var(--wrap);
+  margin-inline: auto;
+  padding: .8rem var(--gutter);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.legal-top .nav__brand { margin-right: auto; }
+
+.legal {
+  padding-block: clamp(2.25rem, 5vw, 4rem);
+  background:
+    radial-gradient(760px 420px at 12% -10%, var(--aqua-100), transparent 60%),
+    var(--cream);
+}
+.legal__wrap {
+  max-width: 46rem;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+.legal__card {
+  background: var(--paper);
+  border-radius: var(--r-xl);
+  box-shadow: var(--sh-md);
+  padding: clamp(1.5rem, 4vw, 3rem);
+}
+.legal h1 { font-size: clamp(1.9rem, 1.4rem + 2.2vw, 2.8rem); margin-bottom: .3em; }
+.legal__fecha { color: var(--muted); font-size: .92rem; margin-bottom: 2rem; }
+.legal h2 {
+  font-size: clamp(1.25rem, 1.1rem + .7vw, 1.5rem);
+  margin-top: 2.4rem;
+  margin-bottom: .6rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--line);
+}
+.legal h2:first-of-type { margin-top: 0; padding-top: 0; border-top: 0; }
+.legal h3 { font-size: 1.08rem; margin-top: 1.5rem; margin-bottom: .3rem; }
+.legal p, .legal li { color: var(--ink-2); }
+.legal ul.puntos { margin: .8rem 0 1.2rem; display: grid; gap: .55rem; }
+.legal ul.puntos li { padding-left: 1.5rem; position: relative; }
+.legal ul.puntos li::before {
+  content: "";
+  position: absolute;
+  left: .3rem; top: .62em;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--aqua-500);
+}
+.legal dl.datos { display: grid; gap: .7rem; margin: 1rem 0 1.4rem; }
+@media (min-width: 560px) { .legal dl.datos { grid-template-columns: max-content 1fr; gap: .7rem 1.4rem; } }
+.legal dl.datos dt { font-weight: 700; color: var(--muted); }
+.legal dl.datos dd { margin: 0; color: var(--ink); }
+
+/* Marcador bien visible para lo que falta por rellenar */
+.rellenar {
+  background: #FFF3B0;
+  color: #6B4E00;
+  padding: .1em .45em;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: .93em;
+  box-shadow: inset 0 0 0 1.5px #E9C93B;
+}
+
+.legal__aviso {
+  margin: 1.5rem 0;
+  padding: 1.1rem 1.3rem;
+  border-radius: var(--r-md);
+  background: var(--sand-100);
+  box-shadow: inset 0 0 0 1.5px var(--sand-200);
+  color: var(--sand-700);
+  font-size: .95rem;
+}
+.legal__aviso strong { color: var(--sand-700); }
+
+.legal__volver { margin-top: 2.5rem; display: flex; flex-wrap: wrap; gap: .7rem; }
+.legal__enlaces {
+  margin-top: 1.5rem;
+  padding-top: 1.3rem;
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem 1.2rem;
+  font-size: .95rem;
+}
+
+/* =====================================================================
+   23. Contenidos de terceros con consentimiento
+   El calendario y el mapa vienen de Google y ponen cookies suyas, así que
+   no se cargan hasta que la persona lo pide expresamente.
+   ===================================================================== */
+.consent {
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: .9rem;
+  text-align: center;
+  padding: clamp(1.75rem, 4vw, 3rem) clamp(1.25rem, 3vw, 2rem);
+  min-height: 320px;
+  height: 100%;
+  background:
+    radial-gradient(520px 300px at 50% 0%, var(--aqua-50), transparent 70%),
+    var(--paper);
+}
+.consent__icono {
+  width: 58px; height: 58px;
+  border-radius: 18px;
+  display: grid; place-items: center;
+  background: var(--aqua-100);
+  color: var(--aqua-700);
+}
+.consent__icono svg { width: 30px; height: 30px; }
+.consent h3 { font-size: 1.2rem; margin: 0; }
+.consent p {
+  color: var(--muted);
+  font-size: .95rem;
+  max-width: 32rem;
+  margin: 0;
+}
+.consent__acciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem;
+  justify-content: center;
+  margin-top: .3rem;
+}
+.consent__nota { font-size: .85rem; }
+
+/* =====================================================================
+   24. Movimiento
+   Todo con transform y opacity, que el navegador puede animar en la GPU:
+   es lo que hace que en un móvil vaya suave. Las animaciones infinitas se
+   pausan cuando su sección no está en pantalla (lo hace app.js con la
+   clase .fuera-de-vista), para no gastar batería de balde.
+   Cualquiera que tenga activado "reducir movimiento" en su sistema no ve
+   nada de esto: el bloque de prefers-reduced-motion lo desactiva todo.
+   ===================================================================== */
+
+/* Pausa cuando la sección no se ve */
+.fuera-de-vista, .fuera-de-vista * { animation-play-state: paused !important; }
+
+/* ---------- Entrada del hero ---------- */
+@keyframes entrar-arriba {
+  from { opacity: 0; transform: translate3d(0, 18px, 0); }
+  to   { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .js .hero__copy > * { animation: entrar-arriba .7s cubic-bezier(.2, .7, .3, 1) both; }
+  .js .hero__copy > *:nth-child(1) { animation-delay: .05s; }
+  .js .hero__copy > *:nth-child(2) { animation-delay: .13s; }
+  .js .hero__copy > *:nth-child(3) { animation-delay: .23s; }
+  .js .hero__copy > *:nth-child(4) { animation-delay: .33s; }
+  .js .hero__copy > *:nth-child(5) { animation-delay: .43s; }
+
+  /* El trazo del titular se pinta como con un rotulador */
+  .js .hero h1 em::after {
+    transform-origin: left center;
+    animation: trazo .55s cubic-bezier(.4, 0, .2, 1) .5s both;
+  }
+  @keyframes trazo {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+  }
+}
+
+/* ---------- Burbujas que suben ---------- */
+.bubbles span {
+  animation: subir 11s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+@keyframes subir {
+  0%   { transform: translate3d(0, 26px, 0) scale(.86); opacity: 0; }
+  18%  { opacity: .9; }
+  82%  { opacity: .65; }
+  100% { transform: translate3d(var(--desvio, 12px), -120px, 0) scale(1.1); opacity: 0; }
+}
+
+/* ---------- Oleaje de los separadores ---------- */
+.wave__g { animation: oleaje 16s linear infinite; }
+@keyframes oleaje {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-1440px); }
+}
+
+/* ---------- La foto del hero, al ritmo del scroll ----------
+   Scroll-driven animations: las calcula el compositor, así que no cuesta
+   nada. Donde no estén soportadas simplemente no pasa nada.          */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .hero__photo {
+      animation: acercar-foto linear both;
+      animation-timeline: view();
+      animation-range: entry 10% cover 45%;
+    }
+    @keyframes acercar-foto {
+      from { transform: scale(1.07) translate3d(0, 16px, 0); }
+      to   { transform: none; }
+    }
+
+    /* Las fotos de la galería respiran un poco al pasar */
+    .gallery__item img {
+      animation: respirar linear both;
+      animation-timeline: view();
+      animation-range: entry 0% exit 100%;
+    }
+    @keyframes respirar {
+      from { transform: scale(1.09); }
+      to   { transform: scale(1); }
+    }
+  }
+}
+
+/* ---------- El emblema saluda ---------- */
+.nav__brand img, .legal-top .nav__brand img { transition: transform .35s cubic-bezier(.34, 1.4, .64, 1); }
+.nav__brand:hover img, .nav__brand:focus-visible img { transform: rotate(-8deg) scale(1.06); }
+
+/* ---------- Táctil: sin hover, hace falta otra respuesta ---------- */
+@media (hover: none) {
+  /* Los pies de foto de la galería siempre a la vista */
+  .gallery__item figcaption { opacity: 1; transform: none; }
+  .gallery__item::after { opacity: 1; }
+
+  /* Al tocar, la tarjeta se hunde un poco */
+  .track:active, .feature:active, .step:active, .price:active,
+  .review:active, .machine__item:active {
+    transform: scale(.985);
+    transition: transform .1s ease;
+  }
+  .gallery__item:active img { transform: scale(1.04); }
+}
+
+/* Los enlaces legales del pie, centrados entre los otros dos textos */
+.footer__legal { display: flex; gap: .5rem; flex-wrap: wrap; }
+
+/* En pantallas estrechas la cabecera del calendario se apelotona */
+@media (max-width: 520px) {
+  .calendar-card__bar { font-size: .98rem; }
+  .calendar-card__bar .live { display: none; }
+}
+
+/* Sobre el fondo oscuro del CTA una burbuja rellena parece una bola gris.
+   Lo que se ve de una pompa de jabón es el contorno y un brillo. */
+.cta .bubbles span {
+  background: radial-gradient(circle at 34% 30%, rgba(255,255,255,.34) 0 6%, transparent 14%);
+  border: 1.5px solid rgba(255,255,255,.26);
+  box-shadow: inset -8px -10px 22px rgba(255,255,255,.07);
 }

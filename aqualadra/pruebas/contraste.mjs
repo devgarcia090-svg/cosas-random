@@ -4,10 +4,15 @@ import { chromium } from 'playwright';
 //   npx http-server aqualadra -p 8899 -s &
 //   BASE=http://127.0.0.1:8899 node aqualadra/pruebas/contraste.mjs
 const BASE = process.env.BASE || 'http://127.0.0.1:8899';
+// PAGE=cookies.html para revisar una página concreta; por defecto, todas.
+const PAGINAS = process.env.PAGE ? [process.env.PAGE]
+  : ['index.html', 'aviso-legal.html', 'privacidad.html', 'cookies.html', '404.html'];
 
 const b = await chromium.launch();
+let totalFallos = 0;
+for (const PAGINA of PAGINAS) {
 const p = await (await b.newContext({viewport:{width:1440,height:1000}})).newPage();
-await p.goto(BASE + '/index.html', {waitUntil:'load'});
+await p.goto(BASE + '/' + PAGINA, {waitUntil:'load'});
 await p.evaluate(async () => {
   document.documentElement.style.scrollBehavior='auto';
   for (let y=0;y<document.body.scrollHeight;y+=300){window.scrollTo({top:y,behavior:'instant'});await new Promise(r=>setTimeout(r,60));}
@@ -64,9 +69,13 @@ const out = await p.evaluate(() => {
 });
 
 const fmt = x => `  ${String(x.ratio).padStart(5)} (mín ${x.min})  ${x.px}px/${x.peso}  ${x.sel.padEnd(28)} "${x.texto}"`;
-console.log(`Elementos revisados: ${out.total}`);
-console.log(`\nFALLOS DE CONTRASTE: ${out.fallos.length}`);
+console.log(`\n=== ${PAGINA} — ${out.total} elementos revisados ===`);
+console.log(`FALLOS DE CONTRASTE: ${out.fallos.length}`);
 out.fallos.forEach(x=>console.log(fmt(x)));
-console.log(`\nSobre degradado (revisar a mano): ${out.gradientes.length}`);
-out.gradientes.slice(0,14).forEach(x=>console.log(fmt(x)));
+if (out.gradientes.length) console.log(`sobre degradado (se revisan a mano): ${out.gradientes.length}`);
+totalFallos += out.fallos.length;
+await p.close();
+}
 await b.close();
+console.log(`\nTotal de fallos de contraste: ${totalFallos}`);
+if (totalFallos) process.exitCode = 1;

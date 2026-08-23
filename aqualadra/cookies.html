@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Política de cookies · AquaLadra</title>
+<meta name="description" content="AquaLadra no usa cookies de análisis ni publicidad. Los contenidos de Google solo se cargan si los pides.">
+<meta name="theme-color" content="#197289">
+<script>document.documentElement.classList.add("js")</script>
+<link rel="icon" href="img/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="img/favicon.png">
+<link rel="stylesheet" href="css/tipografias.css">
+<link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+<header class="legal-top">
+  <div class="legal-top__inner">
+    <a class="nav__brand" href="index.html" aria-label="AquaLadra, inicio">
+      <picture>
+        <source srcset="img/emblema.webp" type="image/webp">
+        <img src="img/emblema.png" alt="" width="320" height="320">
+      </picture>
+      <span>Aqua<b>Ladra</b></span>
+    </a>
+    <a class="btn btn--sm btn--ghost" href="index.html">Volver a la web</a>
+  </div>
+</header>
+
+<main class="legal" id="contenido">
+  <div class="legal__wrap">
+    <h1>Política de cookies</h1>
+    <p class="legal__fecha">Última actualización: Agosto de 2026</p>
+
+    <div class="legal__card">
+      <h2>1. Qué son las cookies</h2>
+      <p>
+        Una cookie es un pequeño fichero que una web guarda en tu navegador. Sirve,
+        por ejemplo, para recordar preferencias o para que ciertos contenidos
+        funcionen.
+      </p>
+
+      <h2>2. Esta web no te rastrea</h2>
+      <p>
+        AquaLadra <strong>no utiliza cookies propias</strong> de análisis,
+        estadística ni publicidad. No hay Google Analytics, ni píxeles de redes
+        sociales, ni nada parecido.
+      </p>
+
+      <h2>3. Los contenidos de Google no se cargan solos</h2>
+      <p>
+        Dos partes de la web vienen de Google y sí pueden instalar cookies suyas:
+      </p>
+      <ul class="puntos">
+        <li>El <strong>calendario de reservas</strong> (Google Calendar), en la
+            sección de reservas.</li>
+        <li>El <strong>mapa</strong> con la ubicación (Google Maps), en la sección
+            de contacto.</li>
+      </ul>
+      <p>
+        Para no instalar nada sin que lo pidas, <strong>esos dos contenidos no se
+        cargan automáticamente</strong>. En su lugar aparece un aviso con un botón,
+        y solo al pulsarlo se carga el contenido de Google y, con él, sus cookies.
+        Si no pulsas nada, no se instala ninguna cookie de terceros.
+      </p>
+      <p>
+        Puedes consultar cómo trata Google esos datos en su
+        <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">política
+        de privacidad</a> y en su
+        <a href="https://policies.google.com/technologies/cookies" target="_blank" rel="noopener">información
+        sobre cookies</a>.
+      </p>
+
+      <h2>4. Lo único que guarda la web</h2>
+      <p>
+        Si aceptas cargar el calendario o el mapa, la web guarda esa decisión en el
+        <em>almacenamiento local</em> de tu navegador para no volver a preguntarte
+        en cada visita:
+      </p>
+      <dl class="datos">
+        <dt>Nombre</dt><dd><code>aqualadra:consiente-google</code></dd>
+        <dt>Tipo</dt><dd>Almacenamiento local (no es una cookie y no se envía a ningún servidor)</dd>
+        <dt>Finalidad</dt><dd>Recordar que has aceptado cargar los contenidos de Google</dd>
+        <dt>Duración</dt><dd>Hasta que lo borres tú o vacíes los datos del navegador</dd>
+      </dl>
+
+      <h2>5. Retirar tu consentimiento</h2>
+      <p>
+        Puedes deshacer esa elección cuando quieras. Al pulsar el botón se olvida y
+        los contenidos de Google volverán a pedirte permiso:
+      </p>
+      <p>
+        <button class="btn btn--sand" id="olvidar-consentimiento" type="button">
+          Olvidar mi consentimiento
+        </button>
+        <span id="olvidar-resultado" role="status" style="margin-left:.8rem;font-weight:700;color:var(--aqua-700)"></span>
+      </p>
+
+      <h2>6. Cómo gestionar las cookies en tu navegador</h2>
+      <p>
+        Además, cada navegador permite bloquear o eliminar cookies desde sus
+        ajustes:
+      </p>
+      <ul class="puntos">
+        <li><a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener">Google Chrome</a></li>
+        <li><a href="https://support.mozilla.org/es/kb/proteccion-antirrastreo-mejorada-firefox-escritorio" target="_blank" rel="noopener">Mozilla Firefox</a></li>
+        <li><a href="https://support.apple.com/es-es/guide/safari/sfri11471/mac" target="_blank" rel="noopener">Safari</a></li>
+        <li><a href="https://support.microsoft.com/es-es/microsoft-edge" target="_blank" rel="noopener">Microsoft Edge</a></li>
+      </ul>
+
+      <script>
+        (function () {
+          var boton = document.getElementById("olvidar-consentimiento");
+          var salida = document.getElementById("olvidar-resultado");
+          if (!boton) return;
+          boton.addEventListener("click", function () {
+            try { localStorage.removeItem("aqualadra:consiente-google"); } catch (e) {}
+            salida.textContent = "Hecho, ya no se recuerda.";
+          });
+        })();
+      </script>
+
+      <div class="legal__enlaces">
+      <a href="aviso-legal.html">Aviso legal</a>
+      <a href="privacidad.html">Política de privacidad</a>
+      </div>
+    </div>
+
+    <div class="legal__volver">
+      <a class="btn" href="index.html">Volver al inicio</a>
+      <a class="btn btn--sand" href="index.html#reservar">Reservar cita</a>
+    </div>
+  </div>
+</main>
+
+</body>
+</html>
