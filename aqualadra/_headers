@@ -6,6 +6,15 @@
   Referrer-Policy: strict-origin-when-cross-origin
   X-Frame-Options: SAMEORIGIN
   Permissions-Policy: geolocation=(), microphone=(), camera=()
+  # Obliga a HTTPS durante un año. Sin includeSubDomains a proposito: la web
+  # vive en un subdominio y no hay por que comprometer a los hermanos.
+  Strict-Transport-Security: max-age=31536000
+  # Todo se sirve del propio dominio. Las dos unicas excepciones son los
+  # marcos de Google (el calendario de reservas y el mapa), que van
+  # nombrados uno a uno en frame-src. 'unsafe-inline' es necesario porque
+  # hay un script en linea (la clase js del <html>) y atributos style, y en
+  # un sitio estatico sin compilacion no se pueden firmar con nonce.
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-src https://calendar.google.com https://www.google.com; form-action 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; upgrade-insecure-requests
 
 # Las imágenes y las fuentes no cambian: se cachean un año.
 # Si se sustituye una foto, hay que cambiarle el nombre del fichero.

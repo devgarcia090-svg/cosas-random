@@ -117,7 +117,7 @@
     <a class="nav__brand" href="#inicio" aria-label="AquaLadra, inicio">
       <picture>
         <source srcset="img/emblema.webp" type="image/webp">
-        <img src="img/emblema.png" alt="" width="320" height="320">
+        <img src="img/emblema.png" alt="" width="160" height="160">
       </picture>
       <span>Aqua<b>Ladra</b></span>
     </a>
@@ -511,8 +511,9 @@
         <figcaption>La bañera y la central de pago</figcaption>
       </figure>
       <figure class="gallery__item" data-full="img/instrucciones.jpg" tabindex="0" role="button" aria-label="Ampliar foto: el cartel de instrucciones">
-        <picture><source srcset="img/instrucciones.webp" type="image/webp">
-          <img src="img/instrucciones.jpg" alt="Cartel con las instrucciones del autolavado" width="1000" height="1778" loading="lazy"></picture>
+        <!-- Sin <source> webp a propósito: es la foto de un cartel, con mucho
+             detalle fino, y ahí el webp sale más pesado que el jpg. -->
+        <img src="img/instrucciones.jpg" alt="Cartel con las instrucciones del autolavado" width="900" height="1600" loading="lazy">
         <figcaption>Instrucciones paso a paso</figcaption>
       </figure>
       <figure class="gallery__item" data-full="img/tarjetero.jpg" tabindex="0" role="button" aria-label="Ampliar foto: pago con tarjeta o monedas">
@@ -802,7 +803,7 @@
       <div>
         <div class="footer__brand">
           <picture><source srcset="img/emblema.webp" type="image/webp">
-            <img src="img/emblema.png" alt="Logo de AquaLadra" width="320" height="320"></picture>
+            <img src="img/emblema.png" alt="Logo de AquaLadra" width="160" height="160"></picture>
           AquaLadra
         </div>
         <p>Autolavado de mascotas y peluquería canina y felina en Puente Tocinos, Murcia. Abierto los 365 días del año.</p>
@@ -814,7 +815,7 @@
       </div>
 
       <div>
-        <h4>Secciones</h4>
+        <h3>Secciones</h3>
         <ul class="footer__links">
           <li><a href="#servicios">Servicios</a></li>
           <li><a href="#autolavado">Autolavado</a></li>
@@ -827,7 +828,7 @@
       </div>
 
       <div>
-        <h4>Visítanos</h4>
+        <h3>Visítanos</h3>
         <ul class="footer__links">
           <li><a href="https://www.google.com/maps/search/?api=1&query=Calle+Mayor+Bajo+Iz+138%2C+30006+Puente+Tocinos%2C+Murcia" target="_blank" rel="noopener">Calle Mayor Bajo Iz, 138<br>30006 Puente Tocinos (Murcia)</a></li>
           <li><a href="tel:+34684797236">684 79 72 36</a></li>

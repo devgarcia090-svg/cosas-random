@@ -156,7 +156,6 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   text-align: center;
 }
 .section-head p { color: var(--muted); font-size: 1.075em; }
-.section-head--left { margin-inline: 0; text-align: left; }
 
 .eyebrow {
   display: block;
@@ -241,11 +240,6 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   box-shadow: var(--sh-sm);
 }
 .chip svg { width: 1.05em; height: 1.05em; color: var(--aqua-600); flex: none; }
-.chip--aqua { background: var(--aqua-700); color: #fff; box-shadow: var(--sh-aqua); }
-.chip--aqua svg { color: #fff; }
-.chip--sand { background: var(--sand-200); color: var(--sand-700); box-shadow: none; }
-.chip--sand svg { color: var(--sand-700); }
-.chip--outline { background: rgba(255,255,255,.7); box-shadow: inset 0 0 0 1.5px var(--line); }
 
 /* ---------- 6. Navegación ---------- */
 .nav {
@@ -1095,7 +1089,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   border-bottom: 1px solid rgba(255,255,255,.12);
 }
 @media (min-width: 760px) { .footer__grid { grid-template-columns: 1.4fr 1fr 1fr; } }
-.footer h4 {
+.footer h3 {
   color: #fff;
   font-size: 1rem;
   letter-spacing: .06em;
@@ -1161,11 +1155,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .wave { display: block; width: 100%; height: clamp(40px, 6vw, 80px); }
 .wave path { fill: currentColor; }
 .wave--paper { color: var(--paper); }
-.wave--cream { color: var(--cream); }
-.wave--aqua  { color: var(--aqua-50); }
-.wave--sand  { color: var(--sand-100); }
 .wave--ink   { color: var(--aqua-900); }
-.wave-flip { transform: rotate(180deg); }
 
 /* ---------- 20. Aparición al hacer scroll ---------- */
 /* Solo se oculta si hay JavaScript para volver a mostrarlo. Sin JS
@@ -1179,7 +1169,6 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .reveal-d1 { transition-delay: .07s; }
 .reveal-d2 { transition-delay: .14s; }
 .reveal-d3 { transition-delay: .21s; }
-.reveal-d4 { transition-delay: .28s; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
