@@ -15,9 +15,12 @@
 /fonts/*
   Cache-Control: public, max-age=31536000, immutable
 
-# Estilos y scripts: una semana.
+# Estilos y scripts: un año, igual que las imágenes. Se puede porque
+# desplegar.sh les añade ?v=<hash del contenido> a los enlaces del HTML, así
+# que cada cambio genera una URL nueva. Sin ese versionado esto seria un error
+# grave: nadie volveria a ver un cambio de estilos.
 /css/*
-  Cache-Control: public, max-age=604800
+  Cache-Control: public, max-age=31536000, immutable
 
 /js/*
-  Cache-Control: public, max-age=604800
+  Cache-Control: public, max-age=31536000, immutable

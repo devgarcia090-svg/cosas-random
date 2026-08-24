@@ -96,6 +96,43 @@ else
   echo "Modo produccion: indexable y con las URLs de aqualadra.com."
 fi
 
+# ---------------------------------------------------------------------------
+# Version en los enlaces al CSS y al JavaScript.
+#
+# Sin esto pasa algo que parece un fallo de diseño: el HTML se revalida en cada
+# visita (max-age=0) pero el CSS se cachea, asi que quien ya habia entrado se
+# queda con la hoja de estilos vieja y el HTML nuevo. El resultado es una pagina
+# a medio maquetar. Añadiendo ?v=<hash del contenido>, cada cambio de CSS o de
+# JS es una URL distinta y el navegador la pide de nuevo; y como la URL cambia
+# sola cuando cambia el fichero, se puede cachear un año sin miedo.
+#
+# Se hace sobre la copia, no sobre el repositorio: en local interesa que las
+# rutas sigan limpias.
+python3 - "$DESTINO/public" <<'VERSIONAR'
+import hashlib, pathlib, sys
+
+d = pathlib.Path(sys.argv[1])
+versiones = {}
+for carpeta, extension in (("css", ".css"), ("js", ".js")):
+    for f in sorted((d / carpeta).glob("*" + extension)):
+        firma = hashlib.sha256(f.read_bytes()).hexdigest()[:10]
+        versiones[carpeta + "/" + f.name] = firma
+
+tocados = 0
+for html in sorted(d.glob("*.html")):
+    s = html.read_text(encoding="utf-8")
+    original = s
+    for ruta, firma in versiones.items():
+        s = s.replace('"' + ruta + '"', '"' + ruta + "?v=" + firma + '"')
+    if s != original:
+        html.write_text(s, encoding="utf-8")
+        tocados += 1
+
+print("  %d ficheros versionados, en %d páginas" % (len(versiones), tocados))
+for ruta, firma in versiones.items():
+    print("    %s?v=%s" % (ruta, firma))
+VERSIONAR
+
 echo "$(find "$DESTINO/public" -type f | wc -l) ficheros listos."
 
 if [[ "$SOLO_PREPARAR" == 1 ]]; then
