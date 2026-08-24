@@ -801,17 +801,8 @@
      Esto es lo que leen Google y los asistentes de IA para entender el
      negocio sin tener que interpretar el diseño.
 
-     FALTA UN DATO: las coordenadas del local. No se han puesto porque no se
-     han podido verificar (el numero 138 de Calle Mayor no es geocodificable
-     y los tramos de esa calle en Puente Tocinos estan a kilometro y medio
-     entre si). Unas coordenadas equivocadas situan el negocio en el sitio
-     erroneo, que es peor que no ponerlas.
-
-     Para anadirlas: abrir Google Maps, mantener pulsado sobre el local, y
-     copiar los dos numeros que aparecen. Luego, dentro del objeto
-     LocalBusiness de aqui abajo, aniadir:
-
-       "geo": { "@type": "GeoCoordinates", "latitude": 37.99..., "longitude": -1.09... },
+     Las coordenadas del local las facilito el cliente y coinciden con el
+     tramo de Calle Mayor que OpenStreetMap situa en Puente Tocinos.
      ============================================================ -->
 <script type="application/ld+json">
 {
@@ -840,6 +831,11 @@
         "addressLocality": "Puente Tocinos",
         "addressRegion": "Murcia",
         "addressCountry": "ES"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 37.994601,
+        "longitude": -1.098951
       },
       "hasMap": "https://www.google.com/maps/search/?api=1&query=Calle+Mayor+Bajo+Iz+138%2C+30006+Puente+Tocinos%2C+Murcia",
       "areaServed": [
