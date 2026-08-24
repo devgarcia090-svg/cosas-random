@@ -27,7 +27,9 @@ arneses de seguridad. Cuesta 6 € independientemente del tamaño del animal, se
 paga con tarjeta o con monedas, y da 8 minutos de programa: agua templada,
 champú con acondicionador, aclarado y secador. Al terminar quedan 60 segundos
 para añadir 1 € y sumar 2 minutos más, repetible hasta tres veces. Hay una
-máquina de deslanado por 3 € aparte y una máquina de vending de premios.
+máquina de deslanado por 3 € aparte y una máquina de vending de premios. Al
+terminar cada lavado la máquina se autolimpia y se desinfecta sola, de modo que
+la bañera queda lista para el siguiente animal.
 
 **Peluquería canina y felina (con cita previa).** La atiende una peluquera.
 Todos los servicios incluyen el corte de uñas y la limpieza de oídos sin coste
@@ -78,6 +80,8 @@ Peluquería, gatos:
 - **¿Atienden gatos?** Sí, en peluquería y con cita previa.
 - **¿Abren festivos?** El autolavado abre los 365 días del año.
 - **¿Se puede pagar con tarjeta?** Sí, con tarjeta o con monedas.
+- **¿Está limpia la bañera al llegar?** Sí: la máquina se autolimpia y se
+  desinfecta sola al terminar cada lavado.
 
 ## Páginas
 

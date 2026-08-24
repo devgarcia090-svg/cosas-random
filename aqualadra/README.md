@@ -202,6 +202,7 @@ aqualadra/
 ├── img/                  fotos optimizadas + logo y emblema
 ├── pruebas/              comprobaciones automáticas
 ├── desplegar.sh          publica en Cloudflare
+├── generar-datos.py      regenera el JSON-LD leyéndolo del HTML
 ├── _headers              caché y seguridad (Cloudflare / Netlify)
 ├── robots.txt            incluye los rastreadores de IA
 ├── sitemap.xml
@@ -335,6 +336,24 @@ quede ninguna, la web está lista para publicarse.
 - Los desplegables de las preguntas usan `<details>` nativo: **el texto de las
   respuestas está en el HTML aunque estén cerrados**, que es justo lo que
   necesitan los rastreadores.
+
+### Regenerar los datos estructurados
+
+El catálogo de servicios, las preguntas frecuentes y los pasos del autolavado
+del JSON-LD **no se escriben a mano**: se leen del propio `index.html`. Después
+de tocar una tarifa, una pregunta o un paso:
+
+```bash
+python3 aqualadra/generar-datos.py              # regenera y escribe
+python3 aqualadra/generar-datos.py --comprobar  # no escribe; falla si hay algo pendiente
+```
+
+El modo `--comprobar` va bien antes de desplegar: sale con error si el HTML y el
+JSON-LD se han separado.
+
+Lo que el script **no** toca, y hay que editar a mano en el bloque JSON-LD:
+la dirección, el teléfono, el horario, las coordenadas, las imágenes y el nodo
+`WebSite`.
 
 ### Lo que la prueba de SEO vigila
 
