@@ -1595,3 +1595,43 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 }
 .review__fuente a { color: var(--muted); }
 .review__fuente a:hover { color: var(--aqua-700); }
+
+/* =====================================================================
+   27. Quién te atiende
+   Una peluquería canina se elige por la persona, no por el local. La
+   tarjeta funciona sin foto (con la inicial, como en las reseñas) y gana
+   cuando haya una: basta sustituir el <span> de la inicial por un <img>
+   del mismo tamaño, que ya está recortado en círculo.
+   ===================================================================== */
+.quien-atiende {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 1.3rem;
+  margin-bottom: 1.3rem;
+  border-bottom: 1px solid var(--line);
+}
+.quien-atiende__foto {
+  flex: none;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  background: var(--sand-200);
+  color: var(--sand-700);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.6rem;
+  line-height: 1;
+}
+.quien-atiende__foto img { width: 100%; height: 100%; object-fit: cover; }
+.quien-atiende b {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.22rem;
+  line-height: 1.2;
+}
+.quien-atiende small { display: block; color: var(--muted); font-size: .89rem; }

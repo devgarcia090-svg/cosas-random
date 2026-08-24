@@ -225,6 +225,31 @@ Cambiando esas variables cambia toda la web de golpe.
 
 ---
 
+## Pendiente: la foto de Erika
+
+La peluquería la atiende Erika, y la web ya la nombra. Falta su foto, que está
+prevista pero no puesta: la tarjeta de la sección de reservas funciona con la
+inicial y gana cuando haya retrato.
+
+Cuando la tengáis:
+
+1. Recortarla **cuadrada** y guardarla como `img/erika.jpg`, de unos 232×232 px
+   (el doble de los 116 que se muestran, para que se vea nítida en móvil).
+2. En `index.html`, en el bloque `quien-atiende` de la sección de reservas,
+   sustituir el `<span>` de la inicial por la imagen. El comentario del propio
+   HTML lo explica ahí mismo:
+
+```html
+<img src="img/erika.jpg" alt="Erika, la peluquera de AquaLadra"
+     width="116" height="116">
+```
+
+El CSS ya la recorta en círculo y la encaja, así que no hay que tocar estilos.
+
+**Qué pedirle**, para no tener que pedirla dos veces: de cintura para arriba,
+mirando a cámara, con luz de día y a ser posible dentro del local o con un perro
+en brazos. Y que sepa que va en la web pública.
+
 ## Cookies y contenidos de Google
 
 El calendario de reservas y el mapa vienen de Google, y **ponen cookies suyas
