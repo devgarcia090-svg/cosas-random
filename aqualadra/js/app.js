@@ -252,25 +252,54 @@
     return f;
   }
 
+  /* Crea un enlace sin pasar por innerHTML: los valores de config.js entran
+     siempre por .href y .textContent, nunca como HTML. config.js es el fichero
+     que se espera que edite quien lleve el negocio, y un apóstrofo mal puesto
+     no debería poder romper la página ni colar nada dentro de ella. */
+  function enlace(href, texto, opciones) {
+    opciones = opciones || {};
+    var a = document.createElement("a");
+    a.href = href;
+    a.textContent = texto;
+    if (opciones.clase) a.className = opciones.clase;
+    if (opciones.fuera) { a.target = "_blank"; a.rel = "noopener"; }
+    return a;
+  }
+
+  /* Junta trozos de texto y nodos en un párrafo, sin interpretar HTML */
+  function parrafo(clase, trozos) {
+    var p = document.createElement("p");
+    if (clase) p.className = clase;
+    trozos.forEach(function (t) {
+      p.appendChild(typeof t === "string" ? document.createTextNode(t) : t);
+    });
+    return p;
+  }
+
   /* Aviso con el botón para cargar el contenido */
   function aviso(opciones) {
     var caja = document.createElement("div");
     caja.className = "consent";
+    /* Aquí solo va estructura fija: no se interpola ni un valor. */
     caja.innerHTML =
       '<span class="consent__icono"><svg aria-hidden="true"><use href="#i-shield"></use></svg></span>' +
-      '<h3>' + opciones.titulo + '</h3>' +
-      '<p>' + opciones.texto + '</p>' +
-      '<div class="consent__acciones">' +
-        '<button class="btn" type="button">' + opciones.boton + '</button>' +
-        opciones.alterno +
-      '</div>' +
+      '<h3 class="consent__titulo"></h3>' +
+      '<p class="consent__texto"></p>' +
+      '<div class="consent__acciones"><button class="btn" type="button"></button></div>' +
       '<p class="consent__nota"><a href="cookies.html">Más detalles en la política de cookies</a></p>';
 
-    caja.querySelector("button").addEventListener("click", function () {
+    caja.querySelector(".consent__titulo").textContent = opciones.titulo;
+    caja.querySelector(".consent__texto").textContent = opciones.texto;
+
+    var boton = caja.querySelector("button");
+    boton.textContent = opciones.boton;
+    boton.addEventListener("click", function () {
       guardarConsentimiento();
       pintarCalendario();
       pintarMapa();
     });
+
+    if (opciones.alterno) caja.querySelector(".consent__acciones").appendChild(opciones.alterno);
     return caja;
   }
 
@@ -285,9 +314,13 @@
     slotCal.innerHTML = "";
 
     if (!CFG.reservasUrl) {
-      slotCal.innerHTML = '<p class="calendar-card__fallback">Ahora mismo no podemos mostrar el calendario. ' +
-        'Llámanos al <a href="' + telHref + '">' + telTexto + '</a> o escríbenos por ' +
-        '<a href="' + waHref + '" target="_blank" rel="noopener">WhatsApp</a> y te cogemos la cita.</p>';
+      slotCal.appendChild(parrafo("calendar-card__fallback", [
+        "Ahora mismo no podemos mostrar el calendario. Llámanos al ",
+        enlace(telHref, telTexto),
+        " o escríbenos por ",
+        enlace(waHref, "WhatsApp", { fuera: true }),
+        " y te cogemos la cita."
+      ]));
       return;
     }
 
@@ -297,21 +330,23 @@
         texto: "Para elegir día y hora cargamos la agenda de Google Calendar, que instala sus propias cookies. " +
                "Solo se carga si lo pides tú.",
         boton: "Ver los huecos disponibles",
-        alterno: '<a class="btn btn--wa" href="' + waHref +
-                 '?text=%C2%A1Hola%20AquaLadra!%20Quer%C3%ADa%20pedir%20cita%20para%20la%20peluquer%C3%ADa." ' +
-                 'target="_blank" rel="noopener">Pedir cita por WhatsApp</a>'
+        alterno: enlace(
+          waHref + "?text=" + encodeURIComponent("¡Hola AquaLadra! Quería pedir cita para la peluquería."),
+          "Pedir cita por WhatsApp", { clase: "btn btn--wa", fuera: true })
       }));
       return;
     }
 
     slotCal.appendChild(marco(CFG.reservasUrl, "Calendario de reservas de la peluquería AquaLadra", CFG.reservasAlto || 640));
 
-    var salida = document.createElement("p");
-    salida.className = "calendar-card__fallback";
+    var salida = parrafo("calendar-card__fallback", [
+      "¿No ves el calendario? ",
+      enlace(CFG.reservasUrl, "Ábrelo en una pestaña nueva", { fuera: true }),
+      " o llámanos al ",
+      enlace(telHref, telTexto),
+      "."
+    ]);
     salida.style.paddingTop = "1rem";
-    salida.innerHTML = '¿No ves el calendario? ' +
-      '<a href="' + CFG.reservasUrl + '" target="_blank" rel="noopener">Ábrelo en una pestaña nueva</a>' +
-      ' o llámanos al <a href="' + telHref + '">' + telTexto + '</a>.';
     slotCal.appendChild(salida);
   }
 
@@ -331,8 +366,8 @@
         texto: "Cargar el mapa de Google Maps instala cookies suyas. Si prefieres no cargarlo, " +
                "puedes abrir la ubicación directamente en Google Maps.",
         boton: "Ver el mapa aquí",
-        alterno: '<a class="btn btn--ghost" href="' + (CFG.mapaEnlace || "#") +
-                 '" target="_blank" rel="noopener">Abrir en Google Maps</a>'
+        alterno: enlace(CFG.mapaEnlace || "#", "Abrir en Google Maps",
+                        { clase: "btn btn--ghost", fuera: true })
       }));
       return;
     }

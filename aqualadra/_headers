@@ -9,6 +9,9 @@
   # Obliga a HTTPS durante un año. Sin includeSubDomains a proposito: la web
   # vive en un subdominio y no hay por que comprometer a los hermanos.
   Strict-Transport-Security: max-age=31536000
+  # Aisla la ventana de las que se abren desde ella. Los enlaces externos ya
+  # llevan rel=noopener; esto lo garantiza tambien si alguno se olvida.
+  Cross-Origin-Opener-Policy: same-origin-allow-popups
   # Todo se sirve del propio dominio. Las dos unicas excepciones son los
   # marcos de Google (el calendario de reservas y el mapa), que van
   # nombrados uno a uno en frame-src. 'unsafe-inline' es necesario porque
