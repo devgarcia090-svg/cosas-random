@@ -86,6 +86,10 @@ python3 -m http.server 8000
 ## Pendiente antes de publicar
 
 - Completar los `[por completar]` de `legal.html` (NIF y proveedor de hosting).
+- La web original se contradice con el kilómetro extra: la página de precios dice
+  0,35 €/km y las preguntas frecuentes 0,30 €/km. Aquí se ha usado **0,35 €** en
+  todas partes (precios, FAQ y calculadora); conviene confirmar cuál es la cifra
+  buena y cambiarla en `tema.js` (`KM_EXTRA`) si no es esa.
 - Confirmar los precios de los extras opcionales, o dejarlos como «a confirmar».
 - Enchufar el formulario de reserva a un backend o a un servicio de formularios
   si se prefiere no depender del `mailto:`.

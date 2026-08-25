@@ -112,13 +112,19 @@
       img.alt = fuentes[idx].alt;
       if (cont) cont.textContent = (idx + 1) + ' / ' + fuentes.length;
     };
-    const abrir = (lista, i) => {
-      fuentes = lista; idx = i; pintar();
+    let origen = null;   // botón que abrió el visor, para devolverle el foco
+
+    const abrir = (lista, i, disparador) => {
+      fuentes = lista; idx = i; origen = disparador || null; pintar();
       visor.classList.add('abierto');
       document.body.classList.add('sin-scroll');
       $('.cerrar', visor).focus();
     };
-    const cerrar = () => { visor.classList.remove('abierto'); document.body.classList.remove('sin-scroll'); };
+    const cerrar = () => {
+      visor.classList.remove('abierto');
+      document.body.classList.remove('sin-scroll');
+      if (origen) { origen.focus(); origen = null; }
+    };
     const mover = d => { idx = (idx + d + fuentes.length) % fuentes.length; pintar(); };
 
     $$('.galeria').forEach(g => {
@@ -127,7 +133,7 @@
         const i = $('img', b);
         return { src: b.dataset.grande || i.src, alt: i.alt };
       });
-      botones.forEach((b, i) => b.addEventListener('click', () => abrir(lista, i)));
+      botones.forEach((b, i) => b.addEventListener('click', () => abrir(lista, i, b)));
     });
 
     $('.cerrar', visor).addEventListener('click', cerrar);
@@ -136,9 +142,19 @@
     visor.addEventListener('click', e => { if (e.target === visor) cerrar(); });
     document.addEventListener('keydown', e => {
       if (!visor.classList.contains('abierto')) return;
-      if (e.key === 'Escape') cerrar();
-      if (e.key === 'ArrowLeft') mover(-1);
-      if (e.key === 'ArrowRight') mover(1);
+      if (e.key === 'Escape') return cerrar();
+      if (e.key === 'ArrowLeft') return mover(-1);
+      if (e.key === 'ArrowRight') return mover(1);
+      // El visor se anuncia como modal: el foco no debe escaparse de él
+      if (e.key === 'Tab') {
+        const foco = $$('button', visor);
+        const i = foco.indexOf(document.activeElement);
+        const sig = e.shiftKey
+          ? (i <= 0 ? foco.length - 1 : i - 1)
+          : (i === foco.length - 1 ? 0 : i + 1);
+        foco[sig].focus();
+        e.preventDefault();
+      }
     });
   }
 
@@ -195,8 +211,8 @@
 
     if (caja) caja.addEventListener('input', () => { texto = caja.value.trim().toLowerCase(); aplicar(); });
     tabs.forEach(t => t.addEventListener('click', () => {
-      tabs.forEach(o => o.setAttribute('aria-selected', 'false'));
-      t.setAttribute('aria-selected', 'true');
+      tabs.forEach(o => o.setAttribute('aria-pressed', 'false'));
+      t.setAttribute('aria-pressed', 'true');
       categoria = t.dataset.cat;
       aplicar();
     }));

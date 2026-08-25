@@ -1117,10 +1117,10 @@ def faq_ld():
         ensure_ascii=False, indent=1)
 
 def tabs_faq():
-    b = ['<button type="button" data-cat="todo" aria-selected="true">Todas</button>']
+    b = ['<button type="button" data-cat="todo" aria-pressed="true">Todas</button>']
     for cat, titulo, _ in FAQ:
-        b.append('<button type="button" data-cat="%s" aria-selected="false">%s</button>' % (cat, titulo))
-    return '<div class="tabs-faq" role="tablist" aria-label="Categorías de preguntas">%s</div>' % "".join(b)
+        b.append('<button type="button" data-cat="%s" aria-pressed="false">%s</button>' % (cat, titulo))
+    return '<div class="tabs-faq" role="group" aria-label="Filtrar las preguntas por tema">%s</div>' % "".join(b)
 
 PAGINA_FAQ = armar("""
 @@HERO@@
