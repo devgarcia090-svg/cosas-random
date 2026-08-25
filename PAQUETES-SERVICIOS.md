@@ -258,7 +258,7 @@ Con 0 resultados en la frase exacta ya puedes hacer esta semana, y por menos de
       `estudio-olfato/privacidad.html` (nombre fiscal, NIF, domicilio) y borrar el
       aviso naranja del principio. Sin eso no se puede publicar el formulario: son
       datos que exige el artículo 13 del RGPD y que solo tú tienes.
-- [ ] Diseñar un favicon propio (hay un comentario `PENDIENTE` en el `<head>`).
+- [x] Logo y favicon: hechos, en `estudio-olfato/`.
 
 Lo que **no** toca todavía es registrar el nombre comercial en la OEPM: unos 150 €
 por clase, 450 € por las tres, antes de haber facturado un euro. Usar
@@ -269,6 +269,28 @@ tardar en cerrar los primeros clientes.
 **Registra la marca con el dinero del primer cliente, no antes.** Y si alguna de
 las dos búsquedas de arriba da un resultado en las clases 35, 41 o 42, párate y
 cambia el nombre entonces — cuesta 22 $ en dominios, no una rotulación.
+
+### Los ficheros del logo
+
+En `estudio-olfato/`:
+
+| Fichero | Para qué |
+|---|---|
+| `logo.svg` | Logotipo completo (trufa + ESTUDIO OLFATO). Firma de correo, facturas, presupuestos. |
+| `logo-mono.svg` | El mismo a un solo color, hereda el del contexto. Para serigrafía, sellos y fondos claros. |
+| `logo-marca.svg` | Solo la trufa. Avatar de Instagram y TikTok, sello en los vídeos. |
+| `favicon.svg` | Trufa sobre cuadrado oscuro, legible en pestañas claras y oscuras. |
+
+El símbolo es una **trufa** (la nariz del perro): dos ventanas curvas sobre una
+forma más ancha que alta. Se descartaron por el camino una versión con las fosas
+como dos óvalos (se leía como una calavera), un hocico de perfil (no se
+reconocía) y una "O" con ventanas (salía una cabeza de oso en negativo).
+
+Dos cosas prácticas. El texto del logotipo va como **texto**, no como trazos, así
+que necesita Montserrat instalada para verse igual: si se lo mandas a una
+imprenta, pide que lo convierta a curvas o mándale un PDF. Y en `logo-marca.svg`
+el color sale de `var(--eo-marca)` con `#C8722A` de reserva, así que puedes
+recolorearlo por CSS sin tocar el fichero.
 
 ### Estudio Olfato y Maya son dos webs separadas
 

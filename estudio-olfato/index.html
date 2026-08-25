@@ -86,8 +86,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
-    <!-- PENDIENTE: favicon propio de Estudio Olfato. El de Maya no se
-         reutiliza a propósito. -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -114,7 +113,14 @@
             text-decoration: none; letter-spacing: 1px; text-transform: uppercase;
             display: flex; align-items: center; gap: 0.6rem;
         }
-        .nav-logo span { color: var(--blanco); font-weight: 400; }
+        .nav-logo .nav-mark { flex-shrink: 0; }
+        .nav-nombre { color: var(--fuego); }
+        .nav-claim {
+            color: rgba(242,237,230,0.5); font-weight: 500;
+            text-transform: none; letter-spacing: 0;
+            font-size: 0.72rem; padding-left: 0.55rem;
+            border-left: 1px solid rgba(200,114,42,0.3);
+        }
         .nav-right { display: flex; align-items: center; gap: 0.8rem; }
         .nav-links { display: flex; gap: 1.4rem; list-style: none; }
         .nav-links a {
@@ -429,7 +435,17 @@
 
 <!-- NAV -->
 <nav>
-    <a href="index.html" class="nav-logo">ESTUDIO OLFATO <span>| Web y vídeo para el sector mascotas</span></a>
+    <a href="index.html" class="nav-logo">
+        <svg class="nav-mark" viewBox="0 0 64 64" width="30" height="30" aria-hidden="true" focusable="false">
+            <mask id="nav-trufa"><rect width="64" height="64" fill="#000"/>
+                <path d="M12.5 20.5C14.5 16 22 13.5 32 13.5s17.5 2.5 19.5 7c2.5 5.5 1.5 12-2.5 17.5-4 5.5-10 9-17 9s-13-3.5-17-9c-4-5.5-5-12-2.5-17.5Z" fill="#fff"/>
+                <path d="M24.5 26c-4.2 1.6-6.3 4.7-4.7 8.9" stroke="#000" stroke-width="5.6" stroke-linecap="round" fill="none"/>
+                <path d="M39.5 26c4.2 1.6 6.3 4.7 4.7 8.9" stroke="#000" stroke-width="5.6" stroke-linecap="round" fill="none"/>
+            </mask>
+            <rect width="64" height="64" fill="currentColor" mask="url(#nav-trufa)"/>
+        </svg>
+        <span class="nav-nombre">ESTUDIO OLFATO</span><span class="nav-claim">Web y vídeo para el sector mascotas</span>
+    </a>
     <div class="nav-right">
         <ul class="nav-links">
             <li><a href="#paquetes">Paquetes</a></li>
@@ -454,7 +470,7 @@
 <section class="hero" id="inicio">
     <canvas class="hero-canvas" id="heroCanvas"></canvas>
     <div class="hero-content">
-        <div class="hero-badge">🐾 Estudio Olfato · Sector mascotas</div>
+        <div class="hero-badge">Estudio Olfato · Servicios para el sector mascotas</div>
         <h1>Hacemos por tu negocio<br>lo que hicimos<br>con <span>Maya</span></h1>
         <p><strong style="color:var(--blanco);font-weight:700;">Somos Estudio Olfato, el equipo que está detrás de Maya.</strong> 41.000 seguidores y 4,5 millones de visualizaciones al mes sin gastar un euro en publicidad, y una web que convierte ese alcance en clientes. Eso es lo que sabemos hacer, y lo hacemos solo para negocios del sector mascotas.</p>
         <div class="hero-btns">

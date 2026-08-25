@@ -7,6 +7,7 @@
     <meta name="description" content="Política de privacidad de Estudio Olfato: quién trata tus datos cuando envías el formulario de presupuesto, para qué, cuánto tiempo y cómo ejercer tus derechos.">
     <meta name="robots" content="noindex, follow">
     <link rel="canonical" href="https://olfatoestudio.com/privacidad.html">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
@@ -27,7 +28,9 @@
             font-size: 0.9rem; font-weight: 900; color: var(--fuego);
             text-decoration: none; letter-spacing: 1px; text-transform: uppercase;
         }
-        .nav-logo span { color: var(--blanco); font-weight: 400; }
+        .nav-logo { display: flex; align-items: center; gap: 0.6rem; }
+        .nav-logo .nav-mark { flex-shrink: 0; }
+        .nav-nombre { color: var(--fuego); }
         .nav-back {
             color: var(--blanco); text-decoration: none; font-weight: 600;
             font-size: 0.78rem; letter-spacing: 1px; text-transform: uppercase;
@@ -85,7 +88,17 @@
 <body>
 
 <nav>
-    <a href="index.html" class="nav-logo">ESTUDIO OLFATO <span>| Web y vídeo para el sector mascotas</span></a>
+    <a href="index.html" class="nav-logo">
+        <svg class="nav-mark" viewBox="0 0 64 64" width="30" height="30" aria-hidden="true" focusable="false">
+            <mask id="nav-trufa"><rect width="64" height="64" fill="#000"/>
+                <path d="M12.5 20.5C14.5 16 22 13.5 32 13.5s17.5 2.5 19.5 7c2.5 5.5 1.5 12-2.5 17.5-4 5.5-10 9-17 9s-13-3.5-17-9c-4-5.5-5-12-2.5-17.5Z" fill="#fff"/>
+                <path d="M24.5 26c-4.2 1.6-6.3 4.7-4.7 8.9" stroke="#000" stroke-width="5.6" stroke-linecap="round" fill="none"/>
+                <path d="M39.5 26c4.2 1.6 6.3 4.7 4.7 8.9" stroke="#000" stroke-width="5.6" stroke-linecap="round" fill="none"/>
+            </mask>
+            <rect width="64" height="64" fill="currentColor" mask="url(#nav-trufa)"/>
+        </svg>
+        <span class="nav-nombre">ESTUDIO OLFATO</span>
+    </a>
     <a href="index.html" class="nav-back">← Volver</a>
 </nav>
 
