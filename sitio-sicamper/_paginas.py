@@ -226,9 +226,9 @@ INDEX = """
       </div>
     </div>
     <div class="solapado" data-revelar>
-      <div class="marco-foto ratio-3-4"><img src="img/int-2.webp" alt="Interior de la autocaravana: salón con mesa y asientos" loading="lazy" width="600" height="800"></div>
-      <div class="marco-foto ratio-1-1"><img src="img/int-5.webp" alt="Cocina equipada de la autocaravana" loading="lazy" width="600" height="800"></div>
-      <div class="marco-foto ratio-1-1"><img src="img/int-7.webp" alt="Baño con ducha independiente" loading="lazy" width="600" height="800"></div>
+      <div class="marco-foto ratio-3-4"><img src="img/int-5.webp" alt="Mesa del salón puesta, con los asientos alrededor" loading="lazy" width="600" height="800"></div>
+      <div class="marco-foto ratio-1-1"><img src="img/int-3.webp" alt="Cocina: fogones de gas y fregadero" loading="lazy" width="600" height="800"></div>
+      <div class="marco-foto ratio-1-1"><img src="img/int-1.webp" alt="Baño: lavabo con espejo, grifo y toallas" loading="lazy" width="600" height="800"></div>
     </div>
   </div>
 </section>
@@ -582,17 +582,19 @@ registrar(archivo="precios.html", ruta="precios.html", prio="0.9", og="arboles",
 # ═══════════════════════════════════════════════════════════════════════════
 # LA AUTOCARAVANA
 # ═══════════════════════════════════════════════════════════════════════════
+# (archivo, texto alternativo, ocupa dos columnas)
+# Solo las fotos horizontales van a doble ancho: recortar una vertical a 3/2 la destroza.
 FOTOS_GALERIA = [
-    ("int-1", "Salón de la autocaravana con mesa y asientos giratorios", True),
-    ("int-2", "Zona de estar vista desde la puerta", False),
-    ("int-3", "Cama capuchina sobre la cabina", False),
-    ("int-4", "Literas traseras de 90 × 210 cm", False),
-    ("int-5", "Cocina con encimera, fregadero y nevera", True),
-    ("int-6", "Baño con WC y ducha independiente", False),
-    ("int-7", "Armarios y almacenaje interior", False),
-    ("int-8", "Detalle del habitáculo y la iluminación", False),
+    ("int-1", "Baño: lavabo con espejo, grifo y toallas", False),
+    ("int-2", "Una de las camas, hecha y lista", False),
+    ("int-3", "Cocina: fogones de gas y fregadero", False),
+    ("int-4", "Interior desde la entrada, con la cocina y el baño a los lados", False),
+    ("int-5", "Mesa del salón puesta, con los asientos alrededor", False),
+    ("int-6", "Detalle de los fogones y la encimera", False),
+    ("int-7", "Zona de estar con la Smart TV y la mesa", False),
+    ("int-8", "Asientos y mesa preparada para comer", False),
     ("valles-4", "Exterior de la autocaravana en el Vallès", True),
-    ("lago", "Autocaravana aparcada frente a un lago", False),
+    ("lago", "Autocaravana aparcada frente a un lago", True),
     ("carretera", "Autocaravana vista desde detrás en carretera", False),
     ("montanas", "Autocaravana en un paisaje de montaña", False),
 ]
@@ -652,7 +654,7 @@ AUTOCARAVANA = armar("""
       <p class="nota" style="margin-top:1rem">La litera abatible se recoge para ganar espacio de carga: bicis,
         tablas de surf o el equipaje de un viaje largo.</p>
     </div>
-    <div class="marco-foto ratio-3-4" data-revelar><img src="img/int-3.webp" alt="Cama capuchina sobre la cabina" loading="lazy" width="600" height="800"></div>
+    <div class="marco-foto ratio-3-4" data-revelar><img src="img/int-2.webp" alt="Una de las camas de la autocaravana, hecha y lista" loading="lazy" width="600" height="800"></div>
   </div>
 </section>
 
@@ -1424,9 +1426,9 @@ VENTA = armar("""
       <div class="sello" style="margin-top:1.8rem">@@ICO_ESCUDO@@<div><b>Se puede ver y probar</b><span>Concertamos una visita y te lo explico todo sin prisa</span></div></div>
     </div>
     <div class="solapado" data-revelar>
-      <div class="marco-foto ratio-3-4"><img src="img/int-4.webp" alt="Interior de la McLouis Glamys 222 en venta" loading="lazy" width="600" height="800"></div>
-      <div class="marco-foto ratio-1-1"><img src="img/int-6.webp" alt="Baño de la McLouis Glamys 222" loading="lazy" width="600" height="800"></div>
-      <div class="marco-foto ratio-1-1"><img src="img/int-8.webp" alt="Habitáculo de la McLouis Glamys 222" loading="lazy" width="600" height="800"></div>
+      <div class="marco-foto ratio-3-4"><img src="img/int-4.webp" alt="Interior de la McLouis Glamys 222 desde la entrada" loading="lazy" width="600" height="800"></div>
+      <div class="marco-foto ratio-1-1"><img src="img/int-6.webp" alt="Fogones y encimera de la McLouis Glamys 222" loading="lazy" width="600" height="800"></div>
+      <div class="marco-foto ratio-1-1"><img src="img/int-8.webp" alt="Asientos y mesa de la McLouis Glamys 222" loading="lazy" width="600" height="800"></div>
     </div>
   </div>
 </section>

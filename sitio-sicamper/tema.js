@@ -372,12 +372,14 @@
   }
 
   /* ── Interfaz de la calculadora ───────────────────────────── */
-  function initCalculadora() {
-    const form = $('#calc');
-    if (!form) return;
+  function initCalculadora() { $$('form.calc').forEach(montarCalculadora); }
 
+  /** Todas las búsquedas van limitadas al formulario, así puede haber
+   *  más de una calculadora en la misma página sin pisarse. */
+  function montarCalculadora(form) {
     const iIni = $('#f-inicio', form), iFin = $('#f-fin', form);
-    const salida = $('#resultado');
+    const salida = $('.resumen', form);
+    if (!iIni || !iFin || !salida) return;
     const hoy = new Date();
     const min = iso(dias(hoy, 1));
     iIni.min = min; iFin.min = min;
@@ -386,7 +388,7 @@
     const q = new URLSearchParams(location.search);
     if (q.get('inicio')) iIni.value = q.get('inicio');
     if (q.get('fin')) iFin.value = q.get('fin');
-    if (q.get('domicilio') === '1') { const d = $('#o-domicilio'); if (d) d.checked = true; }
+    if (q.get('domicilio') === '1') { const d = $('#o-domicilio', form); if (d) d.checked = true; }
 
     const svgAviso = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>';
 
@@ -403,11 +405,11 @@
 
       const op = {
         inicio: iIni.value, fin: iFin.value,
-        domicilio: !!($('#o-domicilio') && $('#o-domicilio').checked),
-        cancelacion: !!($('#o-cancelacion') && $('#o-cancelacion').checked),
-        horaEntrega: ($('#o-hora-entrega') || {}).value || 'normal',
-        horaDevolucion: ($('#o-hora-devolucion') || {}).value || 'normal',
-        consultar: $$('.opcion input[data-consultar]:checked').map(i => i.dataset.consultar)
+        domicilio: !!($('#o-domicilio', form) || {}).checked,
+        cancelacion: !!($('#o-cancelacion', form) || {}).checked,
+        horaEntrega: ($('#o-hora-entrega', form) || {}).value || 'normal',
+        horaDevolucion: ($('#o-hora-devolucion', form) || {}).value || 'normal',
+        consultar: $$('.opcion input[data-consultar]:checked', form).map(i => i.dataset.consultar)
       };
       const r = presupuestar(op);
       if (r.error) { salida.innerHTML = '<h3>Tu presupuesto</h3><p class="vacio">Revisa las fechas: la vuelta tiene que ser posterior a la salida.</p>'; return; }
@@ -449,7 +451,8 @@
       }
       salida.innerHTML = html;
 
-      // Sincronizar el formulario de reserva, si existe
+      // Sincronizar el formulario de solicitud: solo la calculadora de reservar
+      if (!form.dataset.esReserva) return;
       const rNoches = $('#r-noches'), rTotal = $('#r-total'), rTemp = $('#r-temporada');
       const rIni = $('#r-inicio'), rFin = $('#r-fin');
       const bonito = v => new Date(v + 'T12:00:00').toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
