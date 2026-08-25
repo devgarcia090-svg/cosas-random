@@ -124,7 +124,10 @@
         en.target.classList.add('visto');
         io.unobserve(en.target);
       });
-    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+      // Umbral 0: basta con que asome un píxel. Con un umbral mayor, un salto
+      // de scroll puede dejar un elemento asomando menos de lo exigido y no
+      // revelarse nunca; con el barrido de las fotos eso las deja invisibles.
+    }, { rootMargin: '0px 0px -5% 0px', threshold: 0 });
     els.forEach(e => io.observe(e));
   }
 

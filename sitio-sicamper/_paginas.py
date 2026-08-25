@@ -56,11 +56,13 @@ def opiniones_seccion():
     for n, (nombre, fecha, texto) in enumerate(OPINIONES):
         estrellas = I["estrella"] * 5
         inicial = nombre[0]
-        tarjetas.append("""<figure class="card opinion" data-revelar="%d">
+        # Sin data-revelar: el carril las recorta con overflow, así que el
+        # observador no llega a verlas y se quedarían invisibles.
+        tarjetas.append("""<figure class="card opinion">
   <div class="estrellas" aria-label="5 de 5 estrellas">%s</div>
   <blockquote>%s</blockquote>
   <figcaption><span class="avatar" aria-hidden="true">%s</span><span class="quien"><b>%s</b><span>%s · Google</span></span></figcaption>
-</figure>""" % (n, estrellas, texto, inicial, nombre, fecha))
+</figure>""" % (estrellas, texto, inicial, nombre, fecha))
     return """<section class="seccion">
   <div class="env">
     <div class="cabecera-sec centro" data-revelar>
