@@ -214,6 +214,9 @@ strong, b { font-weight: 650; color: var(--texto); }
 }
 .centro .entradilla { margin-inline: auto; }
 
+/* Aire entre un titular y su entradilla también fuera de .cabecera-sec */
+:is(h1, h2, h3) + :is(.entradilla, .tono) { margin-top: .95rem; }
+
 .cabecera-sec { margin-bottom: clamp(2rem, 4vw, 3.25rem); }
 .cabecera-sec p { margin-top: .95rem; }
 
@@ -376,7 +379,7 @@ strong, b { font-weight: 650; color: var(--texto); }
 
 /* Hamburguesa */
 .hamb {
-  display: inline-grid; place-items: center; margin-left: auto;
+  display: inline-grid; place-items: center; align-content: center; margin-left: auto;
   width: 44px; height: 44px; border: 0; background: none; cursor: pointer; border-radius: var(--r-s);
 }
 @media (min-width: 1000px) { .hamb { display: none; } }
@@ -396,7 +399,7 @@ strong, b { font-weight: 650; color: var(--texto); }
 }
 .cajon.abierto { opacity: 1; visibility: visible; transform: none; }
 .cajon nav > ul { display: grid; gap: .15rem; }
-.cajon a, .cajon .grupo > button {
+.cajon nav a, .cajon .grupo > button {
   display: flex; align-items: center; justify-content: space-between; width: 100%;
   padding: .95rem .25rem; font-family: var(--serif); font-size: 1.3rem; font-weight: 600;
   border: 0; background: none; cursor: pointer; text-align: left;
@@ -409,7 +412,8 @@ strong, b { font-weight: 650; color: var(--texto); }
 .cajon .grupo > ul a { font-family: var(--sans); font-size: 1rem; font-weight: 500; padding: .72rem .25rem .72rem 1.1rem; color: var(--texto-2); }
 .cajon-pie { margin-top: 1.8rem; display: grid; gap: .7rem; }
 .cajon-contacto { margin-top: 1.5rem; display: grid; gap: .35rem; font-size: .9rem; color: var(--texto-2); }
-.cajon-contacto a { font: inherit; padding: .2rem 0; border: 0; display: inline; }
+.cajon-contacto a { padding: .2rem 0; }
+.cajon-contacto a:hover { color: var(--acento-txt); }
 
 /* Con el cajón abierto la cabecera vuelve a los colores normales y se
    apartan los elementos flotantes, que si no lo tapan */
