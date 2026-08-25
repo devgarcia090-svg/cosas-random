@@ -1,16 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 330 84" width="330" height="84" role="img" aria-label="Estudio Olfato · Web y vídeo para el sector mascotas">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 336 84" width="336" height="84" role="img" aria-label="Estudio Olfato · Web y vídeo para el sector mascotas">
   <title>Estudio Olfato</title>
-  <mask id="eo-l">
-    <rect width="330" height="84" fill="#000"/>
+  <mask id="eo-claro">
+    <rect width="336" height="84" fill="#000"/>
     <g transform="translate(4 10)">
       <path d="M12.5 20.5C14.5 16 22 13.5 32 13.5s17.5 2.5 19.5 7c2.5 5.5 1.5 12-2.5 17.5-4 5.5-10 9-17 9s-13-3.5-17-9c-4-5.5-5-12-2.5-17.5Z" fill="#fff"/>
       <path d="M24.5 26c-4.2 1.6-6.3 4.7-4.7 8.9" stroke="#000" stroke-width="5.6" stroke-linecap="round" fill="none"/>
       <path d="M39.5 26c4.2 1.6 6.3 4.7 4.7 8.9" stroke="#000" stroke-width="5.6" stroke-linecap="round" fill="none"/>
     </g>
   </mask>
-  <rect width="330" height="84" fill="#C8722A" mask="url(#eo-l)"/>
-  <g font-family="Montserrat, 'Helvetica Neue', Arial, sans-serif">
-    <text x="76" y="35" fill="#F2EDE6" font-size="14" font-weight="700" letter-spacing="6.2">ESTUDIO</text>
-    <text x="74" y="68" fill="#C8722A" font-size="35" font-weight="900" letter-spacing="-0.4">OLFATO</text>
+  <rect width="336" height="84" fill="#C8722A" mask="url(#eo-claro)"/>
+  <g font-family="Archivo, 'Helvetica Neue', Arial, sans-serif">
+    <text x="76" y="35" fill="#6B7873" font-size="13" font-weight="600" letter-spacing="4.4">ESTUDIO</text>
+    <text x="74" y="69" fill="#12171A" font-size="36" font-weight="700" letter-spacing="-1.1">OLFATO</text>
   </g>
 </svg>

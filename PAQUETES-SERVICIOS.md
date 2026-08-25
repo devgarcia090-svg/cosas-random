@@ -299,13 +299,62 @@ tardar en cerrar los primeros clientes.
 las dos búsquedas de arriba da un resultado en las clases 35, 41 o 42, párate y
 cambia el nombre entonces — cuesta 22 $ en dominios, no una rotulación.
 
+### El sistema visual
+
+La web ya no usa el tema de Maya. Tiene el suyo en `estudio-olfato/estilo.css`, y el
+cambio es deliberado: el tema de Maya está hecho para entretener (negro, naranja
+fuego, brasas animadas, grano de película, titulares en mayúsculas a peso 900) y eso
+juega en contra cuando le pides 2.490 € a la directora de una clínica.
+
+| | |
+|---|---|
+| Papel | `#EDEFEC` — gris con un sesgo verde muy leve, no gris de fábrica |
+| Tinta | `#12171A` — casi negro, con sesgo frío |
+| Verde bosque | `#1E4238` — color dominante de marca: portada, secciones oscuras, botones |
+| Brasa | `#C8722A` — el naranja de siempre, ahora **micro-acento**: la trufa y algunas cifras |
+| Titulares | **Newsreader** (serif editorial), en caja baja, nunca en mayúsculas |
+| Funcional | **Archivo** (navegación, listas, precios con cifras tabulares) |
+
+Fuera de la página: Montserrat (la fuente gratuita más usada de la última década,
+lee a plantilla), el grano, las brasas, los resplandores, el barrido de los botones,
+las mayúsculas de los titulares y **todos los emojis**, que eran lo que más restaba
+seriedad.
+
+**Todos los contrastes pasan WCAG AA**, comprobado calculando los ratios, no a ojo.
+Cuatro combinaciones fallaban en la primera versión y se corrigieron: el gris
+secundario (3,98 → 5,45), los rótulos sobre verde (4,10 → 5,86), el pie de las
+cifras y el marcador «El más elegido», que llevaba texto claro sobre naranja (3,08)
+y ahora lo lleva oscuro (5,07). Si tocas un color, recalcula.
+
+### Mecánica de conversión
+
+La página tiene que vender, no solo estar bonita, y en servicios B2B lo que convierte
+no es ruido visual:
+
+- **Prueba en la portada.** Las cuatro cifras están en el primer pantallazo, no
+  enterradas. Y son estáticas: hubo una versión que las animaba contando desde cero,
+  y se quitó porque durante un segundo mostraba «7K» y «0,8M». Con el dato que
+  sostiene la página entera no se juega.
+- **Una sola acción, repetida** en portada, en cada paquete, tras el FAQ y en una
+  barra fija que aparece solo en móvil.
+- **Reducción de riesgo pegada a cada botón:** «llamada de 20 minutos, gratis y sin
+  compromiso», «contestamos en 48 horas laborables».
+- **Objeciones resueltas antes de pedir nada:** «lo que no hacemos» y el FAQ van
+  delante del formulario a propósito.
+- **El caso Maya con foto**, que es la única prueba visual real que existe hoy.
+
+Queda el hueco marcado con borde discontinuo para **tres capturas de trabajos
+reales**. Es lo que más va a convertir de toda la página, así que pide permiso para
+publicar capturas desde el primer cliente.
+
 ### Los ficheros del logo
 
 En `estudio-olfato/`:
 
 | Fichero | Para qué |
 |---|---|
-| `logo.svg` | Logotipo completo (trufa + ESTUDIO OLFATO). Firma de correo, facturas, presupuestos. |
+| `logo.svg` | Logotipo completo, para fondo claro. Firma de correo, facturas, presupuestos. |
+| `logo-inverso.svg` | El mismo para fondos oscuros. |
 | `logo-mono.svg` | El mismo a un solo color, hereda el del contexto. Para serigrafía, sellos y fondos claros. |
 | `logo-marca.svg` | Solo la trufa. Avatar de Instagram y TikTok, sello en los vídeos. |
 | `favicon.svg` | Trufa sobre cuadrado oscuro, legible en pestañas claras y oscuras. |
@@ -316,7 +365,7 @@ como dos óvalos (se leía como una calavera), un hocico de perfil (no se
 reconocía) y una "O" con ventanas (salía una cabeza de oso en negativo).
 
 Dos cosas prácticas. El texto del logotipo va como **texto**, no como trazos, así
-que necesita Montserrat instalada para verse igual: si se lo mandas a una
+que necesita Archivo instalada para verse igual: si se lo mandas a una
 imprenta, pide que lo convierta a curvas o mándale un PDF. Y en `logo-marca.svg`
 el color sale de `var(--eo-marca)` con `#C8722A` de reserva, así que puedes
 recolorearlo por CSS sin tocar el fichero.
