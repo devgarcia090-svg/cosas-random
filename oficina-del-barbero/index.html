@@ -1,0 +1,1059 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Oficina del Barbero</title>
+
+<!--
+  ═══════════════════════════════════════════════════════════════════
+  DATOS PARA REVISAR ANTES DE PUBLICAR  (buscar "REVISAR" en el archivo)
+  ═══════════════════════════════════════════════════════════════════
+  1. TELÉFONO / WHATSAPP: aparece como +34 674 48 59 68 en las fichas
+     públicas de Booksy. Confírmalo y cámbialo en los enlaces marcados
+     con REVISAR-TEL (nav, academia, footer y JSON-LD).
+  2. PRECIOS: tomados de Booksy en agosto de 2026. Si cambian en Booksy,
+     cambiarlos aquí (sección #servicios).
+  3. PROGRAMA DEL CURSO: los cuatro módulos son una propuesta editorial
+     basada en el estándar del sector. Ajustar a lo que Samu imparte
+     realmente (sección #academia).
+  4. FOTOS: la página está diseñada sin fotografías a propósito. Si
+     quieres añadirlas, en el README están las instrucciones.
+  ═══════════════════════════════════════════════════════════════════
+-->
+
+<meta name="description" content="Barbería de precisión en Llano de Brujas, Murcia. 5,0 sobre 5 en 166 reseñas. Corte, barba, prótesis capilar a medida y formación profesional para protesistas.">
+<meta name="theme-color" content="#14100D">
+<link rel="canonical" href="https://oficinadelbarbero.es/">
+
+<meta property="og:type" content="business.business">
+<meta property="og:title" content="Oficina del Barbero — Barbería y academia capilar en Murcia">
+<meta property="og:description" content="Corte, barba y prótesis capilar a medida en Llano de Brujas. 5,0 sobre 5 en 166 reseñas. Formación profesional de protesistas capilares.">
+<meta property="og:locale" content="es_ES">
+<meta property="og:url" content="https://oficinadelbarbero.es/">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,600;1,6..96,400&family=Courier+Prime:wght@400;700&family=Jost:wght@300;400;500&display=swap">
+
+<style>
+/* ── Tokens ───────────────────────────────────────────────────────── */
+:root{
+  /* papel envejecido — tema claro */
+  --bg:#E8E5DB;
+  --bg-elev:#F3F1E9;
+  --bg-sunk:#DDD9CC;
+  --ink-band:#171210;          /* la banda oscura de la academia, igual en ambos temas */
+  --ink-band-text:#EFE6D6;
+  --text:#1E1712;
+  --text-soft:#584A3E;
+  --line:#C8C4B3;
+  --line-strong:#ADA894;
+  --brass:#7A571D;
+  --brass-hi:#5F4413;
+  --seal:#7E2A21;
+  --grain:.045;
+  --grain-blend:multiply;
+
+  --display:"Bodoni Moda",'Times New Roman',Times,serif;
+  --body:"Jost",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --label:"Courier Prime",ui-monospace,"Courier New",monospace;
+
+  --wrap:1140px;
+  --gut:clamp(1.25rem,5vw,3.5rem);
+  --rule:1px;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#14100D;
+    --bg-elev:#1E1712;
+    --bg-sunk:#0E0B09;
+    --text:#EFE6D6;
+    --text-soft:#A6968A;
+    --line:#332720;
+    --line-strong:#4B392B;
+    --brass:#CBA063;
+    --brass-hi:#E0BA80;
+    --seal:#C2564A;
+    --grain:.05;
+    --grain-blend:screen;
+    --ink-band:#221912;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#14100D;
+  --bg-elev:#1E1712;
+  --bg-sunk:#0E0B09;
+  --text:#EFE6D6;
+  --text-soft:#A6968A;
+  --line:#332720;
+  --line-strong:#4B392B;
+  --brass:#CBA063;
+  --brass-hi:#E0BA80;
+  --seal:#C2564A;
+  --grain:.05;
+  --grain-blend:screen;
+  --ink-band:#221912;
+}
+
+/* ── Base ─────────────────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--body);
+  font-weight:300;
+  font-size:clamp(1rem,.96rem + .18vw,1.0625rem);
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+/* grano de papel / madera: SVG feTurbulence en data URI */
+body::before{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+  opacity:var(--grain);mix-blend-mode:var(--grain-blend);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+main,header,footer{position:relative;z-index:1}
+img{max-width:100%;display:block}
+a{color:inherit}
+
+h1,h2,h3,h4{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance;letter-spacing:-.01em}
+p{margin:0}
+ul{margin:0;padding:0;list-style:none}
+
+.wrap{width:100%;max-width:var(--wrap);margin-inline:auto;padding-inline:var(--gut)}
+.eyebrow{
+  font-family:var(--label);font-size:.6875rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--brass);display:flex;align-items:center;gap:.85em;font-weight:400;
+}
+.eyebrow::before{content:"";width:2.25rem;height:var(--rule);background:currentColor;flex:none;opacity:.7}
+.lede{font-size:clamp(1.0625rem,1rem + .4vw,1.25rem);color:var(--text-soft);max-width:62ch}
+
+a.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:.6em;
+  font-family:var(--label);font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;
+  text-decoration:none;padding:1.05em 1.9em;border:var(--rule) solid var(--brass);
+  color:var(--brass);background:transparent;transition:background .28s ease,color .28s ease,border-color .28s ease;
+}
+a.btn:hover{background:var(--brass);color:var(--bg);border-color:var(--brass)}
+a.btn--solid{background:var(--brass);color:var(--bg)}
+a.btn--solid:hover{background:var(--brass-hi);border-color:var(--brass-hi)}
+a.btn--ghost{border-color:var(--line-strong);color:var(--text)}
+a.btn--ghost:hover{background:var(--text);color:var(--bg);border-color:var(--text)}
+
+:where(a,button):focus-visible{outline:2px solid var(--brass-hi);outline-offset:3px;border-radius:1px}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:var(--gut);top:.75rem;z-index:99;background:var(--bg-elev);color:var(--text);padding:.75em 1.25em;border:var(--rule) solid var(--brass)}
+
+/* ── Reveal ───────────────────────────────────────────────────────── */
+.js .reveal{opacity:0;transform:translateY(15px);transition:opacity .8s cubic-bezier(.2,.7,.3,1),transform .8s cubic-bezier(.2,.7,.3,1)}
+.js .reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+  .js .reveal{opacity:1;transform:none;transition:none}
+}
+
+/* ── Barra superior ───────────────────────────────────────────────── */
+.top{
+  position:sticky;top:0;z-index:20;
+  background:var(--bg);
+  background:color-mix(in srgb,var(--bg) 88%,transparent);
+  backdrop-filter:blur(10px) saturate(120%);
+  border-bottom:var(--rule) solid transparent;transition:border-color .3s ease;
+}
+.top.stuck{border-bottom-color:var(--line)}
+.top__in{display:flex;align-items:center;gap:1.5rem;min-height:4.25rem}
+.mark{
+  font-family:var(--display);font-size:.9375rem;letter-spacing:.2em;text-transform:uppercase;
+  text-decoration:none;margin-right:auto;white-space:nowrap;
+}
+.mark b{font-weight:500}
+.mark span{color:var(--brass)}
+.nav{display:none;gap:1.9rem}
+.nav a{
+  font-family:var(--label);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+  text-decoration:none;color:var(--text-soft);padding-block:.35rem;position:relative;
+}
+.nav a::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:var(--rule);background:var(--brass);transition:right .3s ease}
+.nav a:hover{color:var(--text)}
+.nav a:hover::after{right:0}
+.top .btn{padding:.8em 1.35em;font-size:.6875rem}
+@media (min-width:64rem){.nav{display:flex}}
+
+/* ── Portada ──────────────────────────────────────────────────────── */
+.hero{padding:clamp(3.5rem,9vw,7.5rem) 0 clamp(2.5rem,5vw,4rem);position:relative;overflow:hidden}
+.hero__grid{display:grid;gap:clamp(2.5rem,5vw,4rem)}
+@media (min-width:60rem){.hero__grid{grid-template-columns:minmax(0,1fr) 15rem;align-items:start}}
+
+.hero h1{
+  font-size:clamp(2.9rem,1.3rem + 8.6vw,7.75rem);
+  line-height:.9;letter-spacing:-.035em;margin-block:.5rem .1em;
+}
+.hero h1 em{font-style:italic;font-weight:400}
+.hero h1 .of{
+  display:block;font-family:var(--label);color:var(--text-soft);
+  font-size:clamp(.625rem,.55rem + .35vw,.8125rem);letter-spacing:.3em;
+  text-transform:uppercase;line-height:1;margin-bottom:1.4rem;
+}
+.hero__sub{
+  font-size:clamp(1.0625rem,1rem + .5vw,1.375rem);color:var(--text-soft);
+  max-width:34ch;margin-top:1.5rem;
+}
+.hero__sub b{color:var(--text);font-weight:400}
+.hero__cta{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2.25rem}
+
+.hours{
+  margin-top:clamp(2.5rem,5vw,3.5rem);border-top:var(--rule) solid var(--line);
+  padding-top:1.1rem;display:flex;flex-wrap:wrap;gap:.5rem 2.25rem;
+  font-family:var(--label);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-soft);
+}
+.hours b{color:var(--text);font-weight:400}
+
+/* Sello */
+.seal{
+  --seal-rot:-4deg;--seal-scale:1;
+  width:min(15rem,58vw);margin-inline:auto;color:var(--seal);
+  transform:rotate(var(--seal-rot)) scale(var(--seal-scale));
+}
+@media (min-width:60rem){.seal{--seal-rot:-7deg;margin:0}}
+.seal svg{width:100%;height:auto;display:block}
+.seal text{font-family:var(--label);font-weight:700}
+.seal .seal__big{font-family:var(--display);font-weight:500}
+.js .seal{opacity:0;--seal-scale:1.14}
+.js .seal.in{
+  opacity:.92;--seal-scale:1;
+  transition:opacity .5s ease .35s,transform .55s cubic-bezier(.2,1.5,.4,1) .35s;
+}
+@media (prefers-reduced-motion:reduce){
+  .js .seal{opacity:.92;--seal-scale:1;transition:none}
+}
+
+/* ── Secciones ────────────────────────────────────────────────────── */
+.sec{padding-block:clamp(3.5rem,8vw,6.5rem);border-top:var(--rule) solid var(--line)}
+section[id]{scroll-margin-top:5rem}
+.sec__head{display:grid;gap:1.1rem;margin-bottom:clamp(2.25rem,4vw,3.25rem)}
+.sec__head h2{font-size:clamp(2rem,1.35rem + 2.6vw,3.4rem);line-height:1.02}
+@media (min-width:56rem){
+  .sec__head--split{grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(2rem,4vw,4rem);align-items:end}
+  .sec__head--split .eyebrow{grid-column:1;margin-bottom:-.4rem}
+  .sec__head--split h2{grid-column:1}
+  .sec__head--split .lede{grid-column:2;grid-row:1/3;align-self:end}
+}
+
+/* Casa / manifiesto */
+.house{display:grid;gap:clamp(2rem,4vw,3.5rem)}
+@media (min-width:56rem){.house{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.house h3{font-size:1.375rem;margin-bottom:.6rem}
+.house p{color:var(--text-soft)}
+.house__n{font-family:var(--label);font-size:.6875rem;letter-spacing:.2em;color:var(--brass);display:block;margin-bottom:1.1rem;padding-bottom:1.1rem;border-bottom:var(--rule) solid var(--line)}
+
+/* Carta de precios */
+.card{border:var(--rule) solid var(--line);background:var(--bg-elev);padding:clamp(1.5rem,3.5vw,2.75rem)}
+.menu{display:grid;gap:clamp(2rem,4vw,3.5rem)}
+@media (min-width:56rem){.menu{grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);align-items:start}}
+.price{display:grid;gap:0}
+.price li{border-bottom:var(--rule) dotted var(--line-strong)}
+.price li:first-child{border-top:var(--rule) solid var(--line-strong)}
+.price a,.price .row{
+  display:grid;grid-template-columns:1fr auto;align-items:baseline;gap:.35rem 1.25rem;
+  padding:1.15rem .25rem;text-decoration:none;transition:background .25s ease,padding .25s ease;
+}
+.price a:hover{background:var(--bg-sunk)}
+.price .name{font-family:var(--display);font-size:clamp(1.125rem,1.02rem + .5vw,1.5rem)}
+.price .amount{
+  font-family:var(--display);font-size:clamp(1.125rem,1.02rem + .5vw,1.5rem);
+  font-variant-numeric:tabular-nums;white-space:nowrap;
+}
+.price .meta{
+  grid-column:1;font-family:var(--label);font-size:.6875rem;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--text-soft);
+}
+.price a:hover .amount{color:var(--brass)}
+.menu__aside{font-size:.9375rem;color:var(--text-soft);display:grid;gap:1.5rem}
+@media (min-width:56rem){.menu__aside{position:sticky;top:6rem}}
+.menu__aside h3{font-size:1.25rem;color:var(--text);margin-bottom:.4rem}
+.stamp-note{
+  font-family:var(--label);font-size:.6875rem;line-height:1.7;letter-spacing:.04em;
+  text-transform:uppercase;color:var(--text-soft);border:var(--rule) solid var(--line);padding:1rem 1.15rem;
+}
+
+/* Prótesis */
+.pro{display:grid;gap:clamp(2rem,4vw,3.5rem)}
+@media (min-width:56rem){.pro{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.pro article{border-top:var(--rule) solid var(--line-strong);padding-top:1.35rem}
+.pro h3{font-size:1.3125rem;margin-bottom:.55rem}
+.pro p{color:var(--text-soft);font-size:.9375rem}
+.pro__step{font-family:var(--label);font-size:.6875rem;letter-spacing:.2em;color:var(--brass);display:block;margin-bottom:.9rem}
+
+/* ── Academia: banda oscura ──────────────────────────────────────── */
+.academy{
+  background:var(--ink-band);color:var(--ink-band-text);position:relative;isolation:isolate;
+  border-block:var(--rule) solid rgba(203,160,99,.4);
+}
+.academy::after{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:-1;
+  background:radial-gradient(120% 80% at 15% 0%,rgba(203,160,99,.17),transparent 62%);
+}
+.academy .eyebrow{color:#CBA063}
+.academy .lede{color:#B4A493}
+.academy h2{font-size:clamp(2.1rem,1.35rem + 3vw,3.9rem)}
+.academy h2 em{font-style:italic}
+.course{display:grid;gap:clamp(2.5rem,5vw,4rem)}
+@media (min-width:60rem){.course{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);align-items:start}}
+.mod{counter-reset:m}
+.mod li{
+  counter-increment:m;display:grid;grid-template-columns:auto 1fr;gap:.35rem 1.35rem;
+  padding:1.35rem 0;border-top:var(--rule) solid rgba(203,160,99,.28);
+}
+.mod li::before{
+  content:"0" counter(m);font-family:var(--label);font-size:.75rem;letter-spacing:.1em;
+  color:#CBA063;padding-top:.45em;
+}
+.mod h3{font-size:1.1875rem;color:#F3EADB}
+.mod p{grid-column:2;color:#B4A493;font-size:.9375rem}
+.tuition{border:var(--rule) solid rgba(203,160,99,.35);padding:clamp(1.5rem,3vw,2.25rem);display:grid;gap:1.35rem;background:rgba(0,0,0,.22)}
+.tuition__fee{display:flex;align-items:baseline;gap:.6rem}
+.tuition__fee .num{font-family:var(--display);font-size:clamp(3rem,2rem + 4vw,4.5rem);line-height:.85;color:#F3EADB;font-variant-numeric:tabular-nums}
+.tuition__fee .cur{font-family:var(--display);font-size:2.25rem;color:#CBA063;line-height:1}
+.tuition__fee .per{font-family:var(--label);font-size:.6875rem;letter-spacing:.16em;text-transform:uppercase;color:#B4A493;margin-left:auto;text-align:right;line-height:1.5}
+.incl{display:grid;gap:.7rem;font-size:.9375rem;color:#D9CDBC}
+.incl li{display:grid;grid-template-columns:auto 1fr;gap:.85rem;align-items:start}
+.incl li::before{content:"";width:.4rem;height:.4rem;background:#CBA063;transform:rotate(45deg);margin-top:.62em;flex:none}
+.academy a.btn{border-color:#CBA063;color:#CBA063}
+.academy a.btn:hover{background:#CBA063;color:#171210}
+.academy a.btn--solid{background:#CBA063;color:#171210}
+.academy a.btn--solid:hover{background:#E0BA80;border-color:#E0BA80}
+.seats{font-family:var(--label);font-size:.6875rem;letter-spacing:.14em;text-transform:uppercase;color:#B4A493;line-height:1.8}
+
+/* ── Cifras ──────────────────────────────────────────────────────── */
+.figures{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  border-top:var(--rule) solid var(--line);
+}
+@media (min-width:56rem){.figures{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.figures div{
+  padding:clamp(1.5rem,3vw,2.25rem) 1.25rem clamp(1.5rem,3vw,2rem) 0;
+  border-bottom:var(--rule) solid var(--line);
+}
+@media (min-width:56rem){
+  .figures div{border-bottom:0;border-left:var(--rule) solid var(--line);padding-left:clamp(1.25rem,2.5vw,2rem)}
+  .figures div:first-child{border-left:0;padding-left:0}
+}
+@media (max-width:55.99rem){
+  .figures div:nth-child(even){border-left:var(--rule) solid var(--line);padding-left:1.25rem}
+}
+.figures .n{
+  display:block;font-family:var(--display);font-size:clamp(2.25rem,1.6rem + 2.4vw,3.5rem);
+  line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums;
+}
+.figures .n sup{font-size:.42em;vertical-align:top;color:var(--brass);letter-spacing:0}
+.figures .l{
+  display:block;margin-top:.85rem;font-family:var(--label);font-size:.6875rem;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--text-soft);line-height:1.6;
+}
+
+/* ── Matrícula: formulario + preguntas ───────────────────────────── */
+.enroll{
+  margin-top:clamp(3rem,6vw,5rem);padding-top:clamp(2.5rem,5vw,3.5rem);
+  border-top:var(--rule) solid rgba(203,160,99,.28);display:grid;gap:clamp(2.5rem,5vw,4rem);
+}
+@media (min-width:60rem){.enroll{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+.enroll h3{font-family:var(--display);font-size:clamp(1.5rem,1.25rem + 1.2vw,2.125rem);color:#F3EADB;margin-bottom:.9rem}
+.enroll p.note{color:#B4A493;font-size:.9375rem;max-width:46ch}
+
+.form{display:grid;gap:1.5rem;margin-top:1.85rem}
+.form label{display:grid;gap:.5rem}
+.form .lb{font-family:var(--label);font-size:.6875rem;letter-spacing:.16em;text-transform:uppercase;color:#CBA063}
+.form input,.form select,.form textarea{
+  font-family:var(--body);font-size:1rem;font-weight:300;color:#F3EADB;
+  background:rgba(0,0,0,.25);border:var(--rule) solid rgba(203,160,99,.35);
+  padding:.85em 1em;width:100%;border-radius:0;
+  transition:border-color .25s ease,background .25s ease;
+}
+.form textarea{resize:vertical;min-height:5.5em;line-height:1.6}
+.form select{appearance:none;background-image:linear-gradient(45deg,transparent 49%,#CBA063 50%),linear-gradient(-45deg,transparent 49%,#CBA063 50%);background-size:6px 6px,6px 6px;background-position:calc(100% - 1.25em) 55%,calc(100% - .9em) 55%;background-repeat:no-repeat}
+.form input:focus,.form select:focus,.form textarea:focus{
+  outline:none;border-color:#CBA063;background:rgba(0,0,0,.4);
+}
+.form input::placeholder,.form textarea::placeholder{color:#8C7E70}
+.form button{
+  font-family:var(--label);font-size:.75rem;letter-spacing:.16em;text-transform:uppercase;
+  padding:1.05em 1.9em;border:var(--rule) solid #CBA063;background:#CBA063;color:#171210;
+  cursor:pointer;transition:background .28s ease,border-color .28s ease;
+}
+.form button:hover{background:#E0BA80;border-color:#E0BA80}
+.form .fine{font-family:var(--label);font-size:.625rem;letter-spacing:.08em;color:#8C7E70;line-height:1.7;text-transform:uppercase}
+
+.faq{display:grid;align-content:start}
+.faq details{border-top:var(--rule) solid rgba(203,160,99,.28)}
+.faq details:last-of-type{border-bottom:var(--rule) solid rgba(203,160,99,.28)}
+.faq summary{
+  cursor:pointer;list-style:none;padding:1.25rem 2.5rem 1.25rem 0;position:relative;
+  font-family:var(--display);font-size:1.0625rem;color:#F3EADB;
+}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{
+  content:"";position:absolute;right:.35rem;top:1.75rem;width:.7rem;height:.7rem;
+  border-right:var(--rule) solid #CBA063;border-bottom:var(--rule) solid #CBA063;
+  transform:rotate(45deg);transition:transform .3s ease;
+}
+.faq details[open] summary::after{transform:rotate(225deg)}
+.faq summary:hover{color:#CBA063}
+.faq p{padding:0 1.5rem 1.4rem 0;color:#B4A493;font-size:.9375rem;max-width:52ch}
+
+/* ── Banda de Instagram ──────────────────────────────────────────── */
+.social{border-top:var(--rule) solid var(--line);padding-block:clamp(3rem,6vw,4.5rem);background:var(--bg-sunk)}
+.social__in{display:grid;gap:1.5rem;align-items:end}
+@media (min-width:56rem){.social__in{grid-template-columns:minmax(0,1fr) auto}}
+.social h2{font-size:clamp(1.75rem,1.35rem + 2vw,3rem);line-height:1.05}
+.social h2 em{font-style:italic;color:var(--brass)}
+.social p{color:var(--text-soft);margin-top:.85rem;max-width:52ch}
+
+/* ── Barra fija en móvil ─────────────────────────────────────────── */
+.cta-bar{
+  position:fixed;bottom:0;left:0;right:0;z-index:30;display:grid;grid-template-columns:1fr 1fr;
+  border-top:var(--rule) solid var(--line);background:var(--bg-elev);
+  padding-bottom:env(safe-area-inset-bottom,0);
+}
+.cta-bar a{
+  display:flex;align-items:center;justify-content:center;gap:.5em;text-decoration:none;
+  font-family:var(--label);font-size:.6875rem;letter-spacing:.14em;text-transform:uppercase;
+  padding:1.15em .5em;color:var(--text);
+}
+.cta-bar a+a{border-left:var(--rule) solid var(--line);background:var(--brass);color:var(--bg-elev)}
+@media (min-width:64rem){.cta-bar{display:none}}
+@media (max-width:63.99rem){body{padding-bottom:3.9rem}}
+
+/* ── Reseñas ─────────────────────────────────────────────────────── */
+.quotes{display:grid;gap:clamp(1.5rem,3vw,2rem)}
+@media (min-width:48rem){.quotes{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.quote{border:var(--rule) solid var(--line);padding:clamp(1.5rem,3vw,2.25rem);background:var(--bg-elev);display:grid;gap:1.25rem;align-content:start}
+.quote blockquote{margin:0;font-family:var(--display);font-size:clamp(1.125rem,1.02rem + .55vw,1.5rem);line-height:1.4}
+.quote blockquote::before{content:"«"}
+.quote blockquote::after{content:"»"}
+.quote figcaption{font-family:var(--label);font-size:.6875rem;letter-spacing:.16em;text-transform:uppercase;color:var(--text-soft);display:flex;gap:.75em;align-items:center}
+.quote figcaption span{color:var(--brass)}
+
+/* ── Equipo ──────────────────────────────────────────────────────── */
+.team{display:grid;gap:clamp(1.75rem,3.5vw,3rem)}
+@media (min-width:48rem){.team{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.team article{display:grid;gap:.75rem;border-top:var(--rule) solid var(--line-strong);padding-top:1.35rem}
+.team h3{font-size:clamp(1.5rem,1.3rem + .8vw,2rem)}
+.team .role{font-family:var(--label);font-size:.6875rem;letter-spacing:.18em;text-transform:uppercase;color:var(--brass)}
+.team p{color:var(--text-soft);font-size:.9375rem}
+
+/* ── Visita ──────────────────────────────────────────────────────── */
+.visit{display:grid;gap:clamp(2rem,4vw,3.5rem)}
+@media (min-width:56rem){.visit{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.dl{display:grid;gap:1.6rem}
+.dl>div{display:grid;gap:.4rem;border-top:var(--rule) solid var(--line);padding-top:1.1rem}
+.dl dt{font-family:var(--label);font-size:.6875rem;letter-spacing:.18em;text-transform:uppercase;color:var(--brass)}
+.dl dd{margin:0;font-family:var(--display);font-size:1.1875rem;line-height:1.5}
+.dl dd a{text-decoration-thickness:var(--rule);text-underline-offset:.22em;text-decoration-color:var(--line-strong)}
+.dl dd a:hover{text-decoration-color:var(--brass)}
+.schedule{display:grid;gap:0;font-size:.9375rem}
+.schedule li{display:grid;grid-template-columns:1fr auto;gap:1rem;padding:.8rem .1rem;border-bottom:var(--rule) dotted var(--line-strong)}
+.schedule li:first-child{border-top:var(--rule) solid var(--line-strong)}
+.schedule .day{font-family:var(--label);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-soft)}
+.schedule .h{font-variant-numeric:tabular-nums;text-align:right}
+.schedule li.off .h{color:var(--text-soft);font-style:italic}
+
+/* ── Pie ─────────────────────────────────────────────────────────── */
+footer{border-top:var(--rule) solid var(--line);padding-block:clamp(2.5rem,5vw,4rem) 2.5rem}
+.foot{display:grid;gap:2rem}
+@media (min-width:48rem){.foot{grid-template-columns:1fr auto;align-items:end}}
+.foot__mark{font-family:var(--display);font-size:clamp(1.75rem,1.4rem + 1.6vw,2.75rem);line-height:1.05;letter-spacing:-.02em}
+.foot__links{display:flex;flex-wrap:wrap;gap:1.5rem;font-family:var(--label);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase}
+.foot__links a{text-decoration:none;color:var(--text-soft)}
+.foot__links a:hover{color:var(--brass)}
+.legal{margin-top:2.5rem;padding-top:1.25rem;border-top:var(--rule) solid var(--line);font-family:var(--label);font-size:.6875rem;letter-spacing:.06em;color:var(--text-soft);display:flex;flex-wrap:wrap;gap:.5rem 1.5rem}
+</style>
+</head>
+<body>
+<a class="skip" href="#servicios">Saltar al contenido</a>
+
+<header class="top" id="top">
+  <div class="wrap top__in">
+    <a class="mark" href="#top">Oficina <span>del</span> <b>Barbero</b></a>
+    <nav class="nav" aria-label="Secciones">
+      <a href="#servicios">Servicios</a>
+      <a href="#protesis">Prótesis capilar</a>
+      <a href="#academia">Academia</a>
+      <a href="#visita">Visítanos</a>
+    </nav>
+    <a class="btn btn--solid" href="https://booksy.com/es-es/93875_oficina-del-barbero_barberia_81288_llano-de-brujas" target="_blank" rel="noopener">Reservar</a>
+  </div>
+</header>
+
+<main>
+
+  <!-- ── Portada ─────────────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="wrap hero__grid">
+      <div>
+        <h1 class="reveal">
+          <span class="of">Llano de Brujas · Murcia</span>
+          Oficina <em>del</em><br>Barbero
+        </h1>
+        <p class="hero__sub reveal">Barbería de precisión y <b>prótesis capilar a medida</b>. Y la academia donde se aprende a hacerlo bien.</p>
+        <div class="hero__cta reveal">
+          <a class="btn btn--solid" href="https://booksy.com/es-es/93875_oficina-del-barbero_barberia_81288_llano-de-brujas" target="_blank" rel="noopener">Reservar cita</a>
+          <a class="btn btn--ghost" href="#academia">Curso de prótesis capilares</a>
+        </div>
+      </div>
+
+      <!-- Sello: 5,0 de 166 reseñas verificadas en Booksy -->
+      <div class="seal reveal" role="img" aria-label="Cinco sobre cinco en 166 reseñas de Booksy">
+        <svg viewBox="0 0 240 240" aria-hidden="true">
+          <defs>
+            <!-- arco superior: izquierda → arriba → derecha (texto en pie) -->
+            <path id="arcoSup" d="M31,120 a89,89 0 0 1 178,0" fill="none"></path>
+            <!-- arco inferior: izquierda → abajo → derecha, sweep 0 (texto en pie) -->
+            <path id="arcoInf" d="M20,120 a100,100 0 0 0 200,0" fill="none"></path>
+          </defs>
+          <circle cx="120" cy="120" r="112" fill="none" stroke="currentColor" stroke-width="3"></circle>
+          <circle cx="120" cy="120" r="104" fill="none" stroke="currentColor" stroke-width="1"></circle>
+          <circle cx="120" cy="120" r="74" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="1 5" stroke-linecap="round"></circle>
+          <text font-size="13" letter-spacing="3.2" fill="currentColor">
+            <textPath href="#arcoSup" startOffset="50%" text-anchor="middle">166 RESEÑAS EN BOOKSY</textPath>
+          </text>
+          <text font-size="11" letter-spacing="2.6" fill="currentColor">
+            <textPath href="#arcoInf" startOffset="50%" text-anchor="middle">LLANO DE BRUJAS · MURCIA</textPath>
+          </text>
+          <text class="seal__big" x="120" y="130" text-anchor="middle" font-size="60" fill="currentColor">5,0</text>
+          <text x="120" y="152" text-anchor="middle" font-size="11" letter-spacing="3.6" fill="currentColor">SOBRE 5</text>
+          <path d="M96 163h48" stroke="currentColor" stroke-width="1"></path>
+        </svg>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <div class="hours reveal">
+        <span>Lunes a viernes <b>9:30–13:30 · 16:30–20:30</b></span>
+        <span>Sábado <b>9:30–13:30</b></span>
+        <span>Domingo <b>cerrado</b></span>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <!-- Cifras verificables. Si quieres añadir "alumnos formados" o "años de
+           oficio", copia un bloque <div> y rellénalo: la rejilla admite 5. -->
+      <div class="figures reveal">
+        <div><span class="n">5,0<sup>/5</sup></span><span class="l">Valoración media<br>en Booksy</span></div>
+        <div><span class="n">166</span><span class="l">Reseñas<br>verificadas</span></div>
+        <div><span class="n">2</span><span class="l">Barberos<br>a sillón</span></div>
+        <div><span class="n">6</span><span class="l">Días abiertos<br>por semana</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── La casa ─────────────────────────────────────────────────── -->
+  <section class="sec" aria-labelledby="casa-t">
+    <div class="wrap">
+      <div class="sec__head sec__head--split">
+        <p class="eyebrow">La casa</p>
+        <h2 id="casa-t">Un oficio que se ejerce<br>con criterio</h2>
+        <p class="lede">Samu y Joti trabajan a dos sillones en Llano de Brujas. Nada de prisas ni de cortes en serie: se pregunta, se asesora y se ejecuta. Es lo que sostiene un 5,0 limpio después de 166 reseñas.</p>
+      </div>
+
+      <div class="house">
+        <article class="reveal">
+          <span class="house__n">Asesoramiento</span>
+          <h3>Primero el diagnóstico</h3>
+          <p>Tipo de pelo, densidad, forma de la cara y lo que estás dispuesto a mantener en casa. Del corte se habla antes de encender la máquina.</p>
+        </article>
+        <article class="reveal">
+          <span class="house__n">Ejecución</span>
+          <h3>Tijera, navaja y tiempo</h3>
+          <p>Cada servicio tiene su franja reservada, de quince minutos a una hora. El tiempo que hace falta, no el que cabe en la agenda.</p>
+        </article>
+        <article class="reveal">
+          <span class="house__n">Especialidad</span>
+          <h3>Pelo que vuelve</h3>
+          <p>Prótesis capilares a medida, colocadas y mantenidas aquí mismo. Una de las pocas barberías de Murcia que además forma a profesionales.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Servicios ───────────────────────────────────────────────── -->
+  <section class="sec" id="servicios" aria-labelledby="serv-t">
+    <div class="wrap">
+      <div class="sec__head sec__head--split">
+        <p class="eyebrow">Carta de servicios</p>
+        <h2 id="serv-t">Precios claros,<br>sin extras al final</h2>
+        <p class="lede">Lo que ves es lo que se cobra. La reserva se gestiona en Booksy: eliges barbero, servicio y hora, y recibes el recordatorio.</p>
+      </div>
+
+      <div class="menu">
+        <!-- REVISAR: precios y duraciones tomados de Booksy (agosto 2026) -->
+        <ul class="price reveal">
+          <li><a href="https://booksy.com/es-es/93875_oficina-del-barbero_barberia_81288_llano-de-brujas" target="_blank" rel="noopener">
+            <span class="name">Corte caballero</span><span class="amount">13&nbsp;€</span>
+            <span class="meta">30 min · corte, lavado y acabado</span>
+          </a></li>
+          <li><a href="https://booksy.com/es-es/93875_oficina-del-barbero_barberia_81288_llano-de-brujas" target="_blank" rel="noopener">
+            <span class="name">Recorte de barba</span><span class="amount">8&nbsp;€</span>
+            <span class="meta">15 min · mantenimiento entre visitas</span>
+          </a></li>
+          <li><a href="https://booksy.com/es-es/93875_oficina-del-barbero_barberia_81288_llano-de-brujas" target="_blank" rel="noopener">
+            <span class="name">Barba premium</span><span class="amount">15&nbsp;€</span>
+            <span class="meta">30 min · toalla caliente, navaja y aceites</span>
+          </a></li>
+          <li><a href="https://booksy.com/es-es/93875_oficina-del-barbero_barberia_81288_llano-de-brujas" target="_blank" rel="noopener">
+            <span class="name">Corte + perfilado de barba</span><span class="amount">15&nbsp;€</span>
+            <span class="meta">30 min · el clásico de la casa</span>
+          </a></li>
+          <li><a href="https://booksy.com/es-es/93875_oficina-del-barbero_barberia_81288_llano-de-brujas" target="_blank" rel="noopener">
+            <span class="name">Corte + barba</span><span class="amount">19&nbsp;€</span>
+            <span class="meta">45 min · servicio completo</span>
+          </a></li>
+          <li><a href="https://booksy.com/es-es/93875_oficina-del-barbero_barberia_81288_llano-de-brujas" target="_blank" rel="noopener">
+            <span class="name">Corte y barba premium</span><span class="amount">26&nbsp;€</span>
+            <span class="meta">1 hora · el ritual completo, sin reloj encima</span>
+          </a></li>
+        </ul>
+
+        <div class="menu__aside reveal">
+          <div>
+            <h3>Prótesis capilar</h3>
+            <p>Se valora en consulta privada: el precio depende de la base, el tipo de pelo y el grado de personalización. Pide una cita de valoración sin compromiso.</p>
+          </div>
+          <p class="stamp-note">
+            Precios vigentes según Booksy, agosto de 2026.<br>
+            Pago en efectivo o tarjeta.<br>
+            Cancela con antelación y liberas la hora para otro cliente.
+          </p>
+          <a class="btn" href="https://booksy.com/es-es/93875_oficina-del-barbero_barberia_81288_llano-de-brujas" target="_blank" rel="noopener">Ver agenda en Booksy</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Prótesis ────────────────────────────────────────────────── -->
+  <section class="sec" id="protesis" aria-labelledby="pro-t">
+    <div class="wrap">
+      <div class="sec__head sec__head--split">
+        <p class="eyebrow">Prótesis capilar</p>
+        <h2 id="pro-t">Recuperar el pelo<br>sin que se note</h2>
+        <p class="lede">Un sistema capilar bien hecho no se ve: se peina, se moja y se lleva. El trabajo está en la medida, el corte y el mantenimiento, y las tres cosas se hacen aquí.</p>
+      </div>
+
+      <div class="pro">
+        <article class="reveal">
+          <span class="pro__step">Consulta</span>
+          <h3>Valoración privada</h3>
+          <p>Estudiamos la zona, el pelo que tienes y el resultado que buscas, con la sala reservada solo para ti. Salimos con un plan y un presupuesto, no con una venta.</p>
+        </article>
+        <article class="reveal">
+          <span class="pro__step">Colocación</span>
+          <h3>Medida y corte</h3>
+          <p>Plantilla a tu cráneo, elección de base y densidad, y corte integrado con tu propio pelo hasta que la línea frontal desaparece.</p>
+        </article>
+        <article class="reveal">
+          <span class="pro__step">Mantenimiento</span>
+          <h3>Revisión periódica</h3>
+          <p>Cada tres o cuatro semanas: retirada, limpieza, reposicionado y repaso de corte. Te enseñamos también a cuidarla en casa.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Academia ────────────────────────────────────────────────── -->
+  <section class="sec academy" id="academia" aria-labelledby="aca-t">
+    <div class="wrap">
+      <div class="sec__head sec__head--split">
+        <p class="eyebrow">Academia</p>
+        <h2 id="aca-t">Curso de prótesis<br>capilares <em>para profesionales</em></h2>
+        <p class="lede">Formación presencial e intensiva en una de las pocas barberías de Murcia especializadas en sistemas capilares. Grupos reducidos, práctica sobre cabeza real y todo el proceso, de la primera consulta al mantenimiento.</p>
+      </div>
+
+      <div class="course">
+        <div>
+          <ul class="mod">
+            <li class="reveal">
+              <h3>Fundamentos y consulta</h3>
+              <p>Tipos de alopecia, expectativas del cliente, cómo se conduce una consulta y cómo se cierra un presupuesto sin prometer imposibles.</p>
+            </li>
+            <li class="reveal">
+              <h3>Medición y elección del sistema</h3>
+              <p>Plantilla y toma de medidas, bases (encaje, piel, monofilamento), densidades, curvatura y color. Cómo pedir una prótesis a medida sin errores.</p>
+            </li>
+            <li class="reveal">
+              <h3>Colocación y corte de integración</h3>
+              <p>Preparación de la zona, adhesivos y cintas, sellado de la línea frontal y el corte que fusiona la prótesis con el pelo propio.</p>
+            </li>
+            <li class="reveal">
+              <h3>Mantenimiento y negocio</h3>
+              <p>Retirada, limpieza y reposicionado. Calendario de revisiones, tarifas, recurrencia y cómo montar el servicio en tu propio local.</p>
+            </li>
+          </ul>
+        </div>
+
+        <aside class="tuition reveal">
+          <div class="tuition__fee">
+            <span class="num">800</span><span class="cur">€</span>
+            <span class="per">Curso completo<br>por alumno</span>
+          </div>
+          <ul class="incl">
+            <li>Formación presencial en el local, en grupo reducido</li>
+            <li>Práctica real de colocación, corte y mantenimiento</li>
+            <li>Material y prótesis de prácticas incluidos</li>
+            <li>Manual de protocolos y tarifas para tu negocio</li>
+            <li>Certificado de asistencia y soporte posterior por WhatsApp</li>
+          </ul>
+          <p class="seats">Plazas limitadas por convocatoria.<br>Consulta las próximas fechas.</p>
+          <!-- REVISAR-TEL -->
+          <a class="btn btn--solid" href="https://wa.me/34674485968?text=Hola%2C%20me%20interesa%20el%20curso%20de%20pr%C3%B3tesis%20capilares.%20%C2%BFCu%C3%A1ndo%20es%20la%20pr%C3%B3xima%20convocatoria%3F" target="_blank" rel="noopener">Pedir información</a>
+          <a class="btn" href="https://www.instagram.com/samu_thebarber/" target="_blank" rel="noopener">Ver trabajos en Instagram</a>
+        </aside>
+      </div>
+
+      <div class="enroll">
+        <div class="reveal">
+          <h3>Reserva tu plaza</h3>
+          <p class="note">Rellena estos datos y se abre WhatsApp con tu consulta ya escrita. Te contamos fechas, plazas libres y cómo se organiza el día.</p>
+          <!-- El formulario no necesita servidor: compone el mensaje y lo abre en WhatsApp. -->
+          <form class="form" id="formCurso" novalidate>
+            <label>
+              <span class="lb">Nombre y apellidos</span>
+              <input type="text" name="nombre" autocomplete="name" required placeholder="Tu nombre">
+            </label>
+            <label>
+              <span class="lb">Teléfono</span>
+              <input type="tel" name="telefono" autocomplete="tel" required placeholder="600 000 000">
+            </label>
+            <label>
+              <span class="lb">Tu situación</span>
+              <select name="perfil">
+                <option>Barbero o barbera en activo</option>
+                <option>Peluquería / estética</option>
+                <option>Estudiante del sector</option>
+                <option>Empiezo de cero</option>
+              </select>
+            </label>
+            <label>
+              <span class="lb">Algo que quieras contarnos <em>(opcional)</em></span>
+              <textarea name="mensaje" placeholder="Cuándo te encajaría, dudas, si vienes de fuera de Murcia…"></textarea>
+            </label>
+            <button type="submit">Enviar por WhatsApp →</button>
+            <p class="fine">No se guarda nada en esta web: el mensaje se envía desde tu propio WhatsApp.</p>
+          </form>
+        </div>
+
+        <!-- REVISAR: respuestas basadas en lo que incluye el curso. Ajustar. -->
+        <div class="faq reveal">
+          <details>
+            <summary>¿Necesito experiencia previa?</summary>
+            <p>Ayuda tener oficio con la tijera, pero no es imprescindible. El curso empieza por la consulta y la medición, y se practica cada paso acompañado.</p>
+          </details>
+          <details>
+            <summary>¿Cuántos alumnos hay por convocatoria?</summary>
+            <p>Grupos reducidos. Es la única forma de que cada alumno coloque, corte y mantenga una prótesis con las manos y no solo mirando.</p>
+          </details>
+          <details>
+            <summary>¿Qué material tengo que llevar?</summary>
+            <p>Tus tijeras y máquina, si las tienes. Las prótesis de prácticas, adhesivos y consumibles están incluidos en los 800 €.</p>
+          </details>
+          <details>
+            <summary>¿Salgo pudiendo cobrar el servicio?</summary>
+            <p>Esa es la idea. Además de la técnica se trabaja el precio, el calendario de revisiones y cómo presentar el servicio en tu propio local.</p>
+          </details>
+          <details>
+            <summary>¿Hay certificado?</summary>
+            <p>Sí, certificado de asistencia al terminar, y soporte por WhatsApp para tus primeros clientes.</p>
+          </details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Reseñas ─────────────────────────────────────────────────── -->
+  <section class="sec" aria-labelledby="res-t">
+    <div class="wrap">
+      <div class="sec__head sec__head--split">
+        <p class="eyebrow">Lo que dicen los clientes</p>
+        <h2 id="res-t">166 reseñas,<br>ni una por debajo</h2>
+        <p class="lede">Reseñas publicadas por clientes en Booksy. Se pueden leer todas, sin filtrar, en la ficha de la barbería.</p>
+      </div>
+
+      <div class="quotes">
+        <figure class="quote reveal">
+          <blockquote>Grandes profesionales. Con mucha diferencia, la mejor peluquería de Murcia.</blockquote>
+          <figcaption><span>★★★★★</span> Alejandro</figcaption>
+        </figure>
+        <figure class="quote reveal">
+          <blockquote>Increíble el trato de Samu y el chico que lo acompaña, atento en todo momento y profesional.</blockquote>
+          <figcaption><span>★★★★★</span> José García</figcaption>
+        </figure>
+        <figure class="quote reveal">
+          <blockquote>Corte perfecto tal y como le describes lo que quieres, asesorándote en todo momento.</blockquote>
+          <figcaption><span>★★★★★</span> Patricia</figcaption>
+        </figure>
+        <figure class="quote reveal">
+          <blockquote>Lo recomiendo muchísimo.</blockquote>
+          <figcaption><span>★★★★★</span> Juanjo</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Equipo ──────────────────────────────────────────────────── -->
+  <section class="sec" aria-labelledby="eq-t">
+    <div class="wrap">
+      <div class="sec__head sec__head--split">
+        <p class="eyebrow">El equipo</p>
+        <h2 id="eq-t">Dos sillones,<br>dos manos conocidas</h2>
+        <p class="lede">Puedes elegir barbero al reservar. Los dos hacen la carta completa; la prótesis capilar y la formación las lleva Samu.</p>
+      </div>
+      <div class="team">
+        <article class="reveal">
+          <p class="role">Barbero · Prótesis capilar · Formación</p>
+          <h3>Samuel Guerrero</h3>
+          <p>Al frente de la Oficina. Especialista en sistemas capilares a medida y responsable del curso de protesista. Publica su trabajo en @samu_thebarber.</p>
+        </article>
+        <article class="reveal">
+          <p class="role">Barbero</p>
+          <h3>Joti</h3>
+          <p>Corte clásico y degradados. El nombre que más se repite en las reseñas junto al de Samu, y por el mismo motivo: escucha antes de cortar.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Instagram ───────────────────────────────────────────────── -->
+  <section class="social">
+    <div class="wrap social__in">
+      <div>
+        <h2>El trabajo, <em>en directo</em></h2>
+        <p>Cortes, barbas y prótesis colocadas esta misma semana. Es el mejor sitio para ver si te gusta la mano antes de sentarte en el sillón.</p>
+      </div>
+      <a class="btn" href="https://www.instagram.com/samu_thebarber/" target="_blank" rel="noopener">@samu_thebarber ↗</a>
+    </div>
+  </section>
+
+  <!-- ── Visita ──────────────────────────────────────────────────── -->
+  <section class="sec" id="visita" aria-labelledby="vis-t">
+    <div class="wrap">
+      <div class="sec__head sec__head--split">
+        <p class="eyebrow">Visítanos</p>
+        <h2 id="vis-t">Calle Poeta Sánchez<br>Bautista, 3</h2>
+        <p class="lede">En Llano de Brujas, a diez minutos del centro de Murcia y con sitio para aparcar en la calle. Se atiende con cita previa.</p>
+      </div>
+
+      <div class="visit">
+        <dl class="dl reveal">
+          <div>
+            <dt>Dirección</dt>
+            <dd><a href="https://www.google.com/maps/place/Oficina+del+Barbero/@38.0046825,-1.0714542,158m/data=!3m1!1e3!4m6!3m5!1s0xd63839cb7bca52d:0x656cc8fcd2f23ec1!8m2!3d38.004766!4d-1.0712198" target="_blank" rel="noopener">Calle Poeta Sánchez Bautista, 3<br>30161 Llano de Brujas, Murcia<br>Abrir en Google Maps ↗</a></dd>
+          </div>
+          <div>
+            <!-- REVISAR-TEL -->
+            <dt>Teléfono y WhatsApp</dt>
+            <dd><a href="tel:+34674485968">674 48 59 68</a></dd>
+          </div>
+          <div>
+            <dt>Reservas</dt>
+            <dd><a href="https://booksy.com/es-es/93875_oficina-del-barbero_barberia_81288_llano-de-brujas" target="_blank" rel="noopener">Booksy · Oficina del Barbero ↗</a></dd>
+          </div>
+          <div>
+            <dt>Instagram</dt>
+            <dd><a href="https://www.instagram.com/samu_thebarber/" target="_blank" rel="noopener">@samu_thebarber ↗</a></dd>
+          </div>
+        </dl>
+
+        <div class="reveal">
+          <ul class="schedule">
+            <li><span class="day">Lunes</span><span class="h">9:30–13:30 · 16:30–20:30</span></li>
+            <li><span class="day">Martes</span><span class="h">9:30–13:30 · 16:30–20:30</span></li>
+            <li><span class="day">Miércoles</span><span class="h">9:30–13:30 · 16:30–20:30</span></li>
+            <li><span class="day">Jueves</span><span class="h">9:30–13:30 · 16:30–20:30</span></li>
+            <li><span class="day">Viernes</span><span class="h">9:30–13:30 · 16:30–20:30</span></li>
+            <li><span class="day">Sábado</span><span class="h">9:30–13:30</span></li>
+            <li class="off"><span class="day">Domingo</span><span class="h">Cerrado</span></li>
+          </ul>
+          <div class="hero__cta">
+            <a class="btn btn--solid" href="https://booksy.com/es-es/93875_oficina-del-barbero_barberia_81288_llano-de-brujas" target="_blank" rel="noopener">Reservar cita</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <p class="foot__mark">Oficina <em>del</em><br>Barbero</p>
+      <nav class="foot__links" aria-label="Enlaces">
+        <a href="#servicios">Servicios</a>
+        <a href="#protesis">Prótesis capilar</a>
+        <a href="#academia">Academia</a>
+        <a href="#visita">Visítanos</a>
+        <a href="https://booksy.com/es-es/93875_oficina-del-barbero_barberia_81288_llano-de-brujas" target="_blank" rel="noopener">Booksy ↗</a>
+        <a href="https://www.instagram.com/samu_thebarber/" target="_blank" rel="noopener">Instagram ↗</a>
+      </nav>
+    </div>
+    <div class="legal">
+      <span>Barbería y academia capilar · Llano de Brujas, Murcia</span>
+      <span>Precios según Booksy, agosto 2026</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Acción siempre a mano en móvil. REVISAR-TEL -->
+<nav class="cta-bar" aria-label="Acciones rápidas">
+  <a href="https://wa.me/34674485968?text=Hola%2C%20quer%C3%ADa%20preguntar%20una%20cosa." target="_blank" rel="noopener">WhatsApp</a>
+  <a href="https://booksy.com/es-es/93875_oficina-del-barbero_barberia_81288_llano-de-brujas" target="_blank" rel="noopener">Reservar cita</a>
+</nav>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@graph":[
+    {
+      "@type":"HairSalon",
+      "@id":"https://oficinadelbarbero.es/#negocio",
+      "name":"Oficina del Barbero",
+      "description":"Barbería especializada en corte, barba y prótesis capilar a medida en Llano de Brujas, Murcia. Imparte formación profesional de protesista capilar.",
+      "url":"https://oficinadelbarbero.es/",
+      "telephone":"+34674485968",
+      "priceRange":"€€",
+      "currenciesAccepted":"EUR",
+      "paymentAccepted":"Efectivo, Tarjeta",
+      "address":{
+        "@type":"PostalAddress",
+        "streetAddress":"Calle Poeta Sánchez Bautista, 3",
+        "addressLocality":"Llano de Brujas",
+        "addressRegion":"Murcia",
+        "postalCode":"30161",
+        "addressCountry":"ES"
+      },
+      "geo":{"@type":"GeoCoordinates","latitude":38.004766,"longitude":-1.0712198},
+      "areaServed":{"@type":"City","name":"Murcia"},
+      "sameAs":[
+        "https://booksy.com/es-es/93875_oficina-del-barbero_barberia_81288_llano-de-brujas",
+        "https://www.instagram.com/samu_thebarber/"
+      ],
+      "aggregateRating":{"@type":"AggregateRating","ratingValue":"5.0","reviewCount":"166","bestRating":"5"},
+      "openingHoursSpecification":[
+        {"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"09:30","closes":"13:30"},
+        {"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"16:30","closes":"20:30"},
+        {"@type":"OpeningHoursSpecification","dayOfWeek":"Saturday","opens":"09:30","closes":"13:30"}
+      ],
+      "employee":[
+        {"@type":"Person","name":"Samuel Guerrero","jobTitle":"Barbero y protesista capilar"},
+        {"@type":"Person","name":"Joti","jobTitle":"Barbero"}
+      ],
+      "hasOfferCatalog":{
+        "@type":"OfferCatalog",
+        "name":"Servicios de barbería",
+        "itemListElement":[
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Corte caballero"},"price":"13.00","priceCurrency":"EUR"},
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Recorte de la barba"},"price":"8.00","priceCurrency":"EUR"},
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Barba premium"},"price":"15.00","priceCurrency":"EUR"},
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Corte + perfilado de barba"},"price":"15.00","priceCurrency":"EUR"},
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Corte + barba"},"price":"19.00","priceCurrency":"EUR"},
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Corte y barba premium"},"price":"26.00","priceCurrency":"EUR"},
+          {"@type":"Offer","itemOffered":{"@type":"Service","name":"Prótesis capilar a medida"}}
+        ]
+      }
+    },
+    {
+      "@type":"FAQPage",
+      "mainEntity":[
+        {"@type":"Question","name":"¿Necesito experiencia previa para el curso de prótesis capilares?","acceptedAnswer":{"@type":"Answer","text":"Ayuda tener oficio con la tijera, pero no es imprescindible. El curso empieza por la consulta y la medición, y se practica cada paso acompañado."}},
+        {"@type":"Question","name":"¿Cuántos alumnos hay por convocatoria?","acceptedAnswer":{"@type":"Answer","text":"Grupos reducidos, para que cada alumno coloque, corte y mantenga una prótesis con sus propias manos."}},
+        {"@type":"Question","name":"¿Qué material incluye el curso?","acceptedAnswer":{"@type":"Answer","text":"Las prótesis de prácticas, adhesivos y consumibles están incluidos en los 800 € del curso completo."}},
+        {"@type":"Question","name":"¿El curso incluye certificado?","acceptedAnswer":{"@type":"Answer","text":"Sí, certificado de asistencia al terminar y soporte posterior por WhatsApp."}}
+      ]
+    },
+    {
+      "@type":"Course",
+      "name":"Curso de prótesis capilares para profesionales",
+      "description":"Formación presencial e intensiva en prótesis capilares: consulta, medición, elección del sistema, colocación, corte de integración y mantenimiento.",
+      "inLanguage":"es",
+      "provider":{"@id":"https://oficinadelbarbero.es/#negocio"},
+      "offers":{"@type":"Offer","price":"800","priceCurrency":"EUR","category":"Matrícula","availability":"https://schema.org/LimitedAvailability"},
+      "hasCourseInstance":{
+        "@type":"CourseInstance",
+        "courseMode":"Onsite",
+        "location":{
+          "@type":"Place",
+          "name":"Oficina del Barbero",
+          "address":{
+            "@type":"PostalAddress",
+            "streetAddress":"Calle Poeta Sánchez Bautista, 3",
+            "addressLocality":"Llano de Brujas",
+            "addressRegion":"Murcia",
+            "postalCode":"30161",
+            "addressCountry":"ES"
+          }
+        }
+      }
+    }
+  ]
+}
+</script>
+
+<script>
+document.documentElement.classList.add('js');
+
+/* Hairline en la barra al hacer scroll */
+var top_ = document.getElementById('top');
+var onScroll = function(){ top_.classList.toggle('stuck', window.scrollY > 8); };
+onScroll();
+addEventListener('scroll', onScroll, {passive:true});
+
+/* Matrícula del curso: se compone el mensaje y se abre WhatsApp */
+var WA = '34674485968'; /* REVISAR-TEL */
+var form = document.getElementById('formCurso');
+if (form) form.addEventListener('submit', function(e){
+  e.preventDefault();
+  var f = form.elements;
+  var falta = null;
+  ['nombre','telefono'].forEach(function(k){
+    var el = f[k];
+    var vacio = !el.value.trim();
+    el.setAttribute('aria-invalid', vacio ? 'true' : 'false');
+    el.style.borderColor = vacio ? '#C2564A' : '';
+    if (vacio && !falta) falta = el;
+  });
+  if (falta) { falta.focus(); return; }
+
+  var partes = [
+    'Hola, me interesa el curso de prótesis capilares.',
+    '',
+    'Nombre: ' + f.nombre.value.trim(),
+    'Teléfono: ' + f.telefono.value.trim(),
+    'Situación: ' + f.perfil.value
+  ];
+  if (f.mensaje.value.trim()) partes.push('', f.mensaje.value.trim());
+  partes.push('', '¿Cuándo es la próxima convocatoria?');
+  window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(partes.join('\n')), '_blank', 'noopener');
+});
+
+/* Entradas al viewport */
+var items = document.querySelectorAll('.reveal');
+if (!('IntersectionObserver' in window)) {
+  items.forEach(function(el){ el.classList.add('in'); });
+} else {
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (!e.isIntersecting) return;
+      io.unobserve(e.target);
+      e.target.classList.add('in');
+    });
+  }, {rootMargin:'0px 0px -6% 0px', threshold:0});
+  items.forEach(function(el, i){
+    /* escalonado suave dentro de cada bloque */
+    el.style.transitionDelay = (Math.min(i % 4, 3) * 70) + 'ms';
+    io.observe(el);
+  });
+}
+</script>
+</body>
+</html>
