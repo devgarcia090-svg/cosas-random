@@ -180,6 +180,9 @@ tenerla pero "quiere ser viral". Ese cliente te va a costar dinero.
 **Nombre comercial:** Estudio Olfato
 **Eslogan:** Web y vídeo para el sector mascotas
 **Descriptor largo:** El estudio detrás de Maya
+**Dominio principal:** `olfatoestudio.com`
+**Redirección:** `estudioolfato.com` → al principal
+**Email:** `hola@olfatoestudio.com`
 
 Ya está aplicado en `servicios.html` (title, Open Graph, JSON-LD, distintivo del
 hero, pie de página y asunto de los correos del formulario).
@@ -190,14 +193,40 @@ horas de edición, vendes criterio sobre qué funciona en este nicho. Nada de
 "Servicios" ni "Marketing" pegado detrás: la primera no dice nada y la segunda te
 mete en la categoría genérica de la que quieres salir.
 
-### Pendiente antes de gastar un euro en la marca
+### Por qué el dominio no repite el nombre exacto
+
+La marca es "Estudio Olfato", pero el dominio es `olfatoestudio.com`, con las
+palabras al revés. No es un descuido:
+
+- `estudioolfato.com` junta dos oes (estudi**o**+**o**lfato). Se lee bien, pero
+  dictado por teléfono obliga a aclarar "con dos oes" cada vez. Y la dirección de
+  correo se dicta muchísimo más que el dominio.
+- `olfato.pet` era más corto, pero "punto pet" hay que explicarlo a un cliente
+  español, y la renovación son 27,98 $/año frente a los 14,98 $ del `.com`.
+- Invirtiendo el orden desaparece la colisión sin perder ninguna de las dos
+  palabras. Que no coincida con el orden de la marca no lo nota nadie: la gente
+  llega por Google, por la bio de Instagram o por un QR, no reconstruyendo el
+  dominio de memoria.
+
+`estudioolfato.com` se compra igualmente (11 $/año) y se deja redirigido al
+principal. Cubre justo el único caso en que alguien teclearía el nombre de memoria
+en el orden de la marca. Nada más: no montes una cartera defensiva de dominios a
+estas alturas, es gasto sin retorno.
+
+### Pendiente antes de gastar un euro más en la marca
 
 - [ ] **OEPM** (`consultas2.oepm.es`), clases 35 (publicidad) y 42 (servicios
-      informáticos). Esto primero: si está pillado, no hay nada más que mirar.
-- [ ] **Dominios** `estudioolfato.es` y `.com`.
-- [ ] **Handles** `@estudioolfato` libres en Instagram y TikTok, los dos iguales.
-- [ ] Registrar el **nombre comercial** en la OEPM si los tres pasos anteriores
-      salen bien (es más barato que una marca y suficiente para empezar).
+      informáticos). Esto es lo único que puede tumbar el nombre entero, así que
+      hazlo antes de encargar logo, tarjetas o rotulación.
+- [ ] **Handles** `@olfatoestudio` o `@estudioolfato` en Instagram y TikTok, el
+      mismo en las dos. Decide uno y úsalo igual en todas partes.
+- [ ] Registrar el **nombre comercial** en la OEPM si la consulta sale limpia (más
+      barato que una marca y suficiente para empezar).
+- [ ] Crear el buzón `hola@olfatoestudio.com` y **solo entonces** cambiarlo en
+      `servicios.html`: hay dos referencias a `hola@mayarottweiler.com` (el enlace
+      "Escribir un email" y el mensaje de error del formulario). Mientras el buzón
+      no exista, se queda el de Maya — mejor un correo que funciona que uno bonito
+      que rebota.
 
 Recuerda que como autónomo las facturas van con tu nombre y tu NIF: "Estudio
 Olfato" es un nombre comercial, no una razón social. No hay sociedad ni notario, y
