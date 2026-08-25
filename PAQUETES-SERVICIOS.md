@@ -115,6 +115,34 @@ clientes**. En cuanto tengas tres casos con resultados que puedas enseñar:
 Nunca bajes el precio para cerrar: **quita alcance**. "No llego a 1.190" se
 responde con "hacemos 4 páginas en vez de 6 por 890 €", no con un descuento.
 
+### Todos estos precios son SIN IVA
+
+Es lo correcto aquí: vendes a negocios, y un negocio se deduce el IVA, así que la
+cifra que compara con la competencia es la neta. Si publicaras el precio con el IVA
+dentro parecerías un 21 % más caro que quien cotiza en neto.
+
+| Paquete | Neto | Con IVA (21 %) |
+|---|---|---|
+| 01 · Web | 1.190 € | 1.439,90 € |
+| 02 · Contenido | 690 €/mes | 834,90 €/mes |
+| 03 · Lanzamiento | 2.490 € | 3.012,90 € |
+
+Reglas para no meter la pata:
+
+- En el presupuesto, **las dos cifras desglosadas** (base, IVA, total). Que nadie
+  descubra el 21 % al recibir la factura.
+- Dilo también en voz alta en la llamada. "Mil ciento noventa más IVA" evita la
+  conversación incómoda de la semana siguiente.
+- **Retención de IRPF:** si el cliente es empresa o profesional, te retiene IRPF de
+  la factura y lo ingresa por ti. El tipo general es el 15 %, pero puedes aplicar el
+  **7 % durante el año de alta y los dos siguientes** — dilo tú en la factura,
+  porque el cliente aplica lo que le pongas. No es un coste extra, es un adelanto de
+  tu propio IRPF, pero cambia lo que te entra en la cuenta: en una factura de
+  1.190 € + IVA con retención del 7 %, cobras 1.356,60 € en vez de 1.439,90 €.
+- Si algún día vendes a un particular (no a un negocio), ahí la ley de consumidores
+  obliga a mostrar el precio final **con** IVA incluido. Con clientes empresa no
+  aplica.
+
 ---
 
 ## Costes que repercutes al cliente (no los pagues tú)
@@ -163,8 +191,9 @@ tenerla pero "quiere ser viral". Ese cliente te va a costar dinero.
 
 - [ ] **Alta de autónomo** (RETA + alta censal 036/037) antes de emitir la primera
       factura. La tarifa plana del primer año hace esto muy asumible.
-- [ ] **IVA 21 %** en las facturas y retención de IRPF si el cliente es empresa.
-      Presupuestos siempre "+ IVA" por escrito.
+- [ ] **IVA 21 %** en las facturas y retención de IRPF si el cliente es empresa
+      (ver la nota de IVA en el apartado de precios). Presupuestos siempre con base,
+      IVA y total desglosados.
 - [ ] **Contrato o presupuesto aceptado por escrito** con: alcance, plazo, número
       de rondas de revisión (dos) y qué pasa si el cliente no entrega material.
 - [ ] **Contrato de encargado del tratamiento (RGPD art. 28)** con cada cliente
