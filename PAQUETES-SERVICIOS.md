@@ -175,14 +175,38 @@ tenerla pero "quiere ser viral". Ese cliente te va a costar dinero.
 - [ ] Decidir si esto se factura desde la marca Maya o desde una marca propia
       (ver abajo).
 
-## Nota sobre la marca
+## La marca: Estudio Olfato
 
-La página está escrita como "el equipo detrás de Maya", sin inventar un nombre
-comercial, porque eso es una decisión tuya. Cuando lo tengas, hay que cambiarlo en
-cuatro sitios de `servicios.html`: el `<title>`, el `og:title`, el campo
-`provider.name` del JSON-LD y el pie de página.
+**Nombre comercial:** Estudio Olfato
+**Eslogan:** Web y vídeo para el sector mascotas
+**Descriptor largo:** El estudio detrás de Maya
 
-Ojo con una cosa: Maya está gestionada por **MTS23 Talent** para las
-colaboraciones de marca. Los servicios de esta página son un negocio distinto y la
-web lo dice explícitamente en el FAQ, pero antes de lanzarlo revisa qué firmaste
-con ellos — si hay exclusividad, podría alcanzar al uso comercial de la marca Maya.
+Ya está aplicado en `servicios.html` (title, Open Graph, JSON-LD, distintivo del
+hero, pie de página y asunto de los correos del formulario).
+
+Por qué este patrón y no otro: "Estudio" dice equipo pequeño y trabajo artesanal,
+que es exactamente lo que vendes. "Olfato" nombra el producto real — no vendes
+horas de edición, vendes criterio sobre qué funciona en este nicho. Nada de
+"Servicios" ni "Marketing" pegado detrás: la primera no dice nada y la segunda te
+mete en la categoría genérica de la que quieres salir.
+
+### Pendiente antes de gastar un euro en la marca
+
+- [ ] **OEPM** (`consultas2.oepm.es`), clases 35 (publicidad) y 42 (servicios
+      informáticos). Esto primero: si está pillado, no hay nada más que mirar.
+- [ ] **Dominios** `estudioolfato.es` y `.com`.
+- [ ] **Handles** `@estudioolfato` libres en Instagram y TikTok, los dos iguales.
+- [ ] Registrar el **nombre comercial** en la OEPM si los tres pasos anteriores
+      salen bien (es más barato que una marca y suficiente para empezar).
+
+Recuerda que como autónomo las facturas van con tu nombre y tu NIF: "Estudio
+Olfato" es un nombre comercial, no una razón social. No hay sociedad ni notario, y
+cambiarlo en seis meses cuesta un dominio y un handle. Es reversible.
+
+### Un detalle de coherencia
+
+Maya está gestionada por **MTS23 Talent** para las colaboraciones de marca. Los
+servicios de Estudio Olfato son un negocio distinto y la web lo dice
+explícitamente en el FAQ, pero antes de lanzarlo revisa qué firmaste con ellos: si
+hay exclusividad, podría alcanzar al uso comercial de la marca Maya, y toda la
+página se apoya en Maya como caso.
