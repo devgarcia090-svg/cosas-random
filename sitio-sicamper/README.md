@@ -65,6 +65,11 @@ _construir.py       Plantilla, cabecera, pie y metadatos
 _paginas.py         Contenido de cada página  ← punto de entrada
 ```
 
+## Ver cómo queda
+
+En `_capturas/` hay capturas de página completa de la portada, la página de
+precios y la de la autocaravana, en escritorio y en móvil.
+
 ## Regenerar el HTML
 
 Las cabeceras, pies y metadatos son compartidos, así que el HTML se genera:

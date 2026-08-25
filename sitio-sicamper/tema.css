@@ -19,14 +19,13 @@
   --niebla:      #5E6A80;
   --linea:       #E4DED3;
   --arena:       #F4EFE6;
-  --arena-2:     #EDE6D9;
   --papel:       #FBF9F5;
   --blanco:      #FFFFFF;
 
   /* Acento cálido para contrapunto */
   --terra:       #AD4F2B;
   --oliva:       #4E5C3C;
-  --oro:         #C9A227;
+  --oro:         #E2A32B;   /* estrellas de las opiniones */
 
   /* Semántica (se reasigna en oscuro) */
   --fondo:       var(--papel);
@@ -36,7 +35,6 @@
   --texto-2:     var(--grafito);
   --texto-3:     var(--niebla);
   --borde:       var(--linea);
-  --acento:      var(--azur);
   --acento-txt:  #0A63C4;      /* azul legible sobre papel */
   --acento-suave:var(--azur-nube);
 
@@ -765,7 +763,7 @@ body:has(.barra-movil.visible) { padding-bottom: 4.5rem; }
 @media (min-width: 760px) { .carril { grid-auto-columns: min(46%, 400px); } }
 
 .opinion { display: flex; flex-direction: column; gap: .9rem; }
-.opinion .estrellas { display: flex; gap: .12rem; color: #E2A32B; }
+.opinion .estrellas { display: flex; gap: .12rem; color: var(--oro); }
 .opinion .estrellas svg { width: 15px; height: 15px; }
 .opinion blockquote { font-size: .965rem; line-height: 1.62; color: var(--texto-2); }
 .opinion figcaption { display: flex; align-items: center; gap: .7rem; margin-top: auto; padding-top: .5rem; }
