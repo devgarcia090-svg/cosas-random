@@ -1,6 +1,6 @@
 # Paquetes de servicios — alcance real y guion de venta
 
-Documento interno. La página pública es `sitio-recuperado/servicios.html`; esto es
+Documento interno. La web pública es `estudio-olfato/`; esto es
 lo que necesitas tener claro **antes** de la primera llamada, para no vender algo
 que luego cuesta el triple de lo cobrado.
 
@@ -184,7 +184,7 @@ tenerla pero "quiere ser viral". Ese cliente te va a costar dinero.
 **Redirección:** `estudioolfato.com` → al principal
 **Email:** `hola@olfatoestudio.com`
 
-Ya está aplicado en `servicios.html` (title, Open Graph, JSON-LD, distintivo del
+Ya está aplicado en `estudio-olfato/index.html` (title, Open Graph, JSON-LD, distintivo del
 hero, pie de página y asunto de los correos del formulario).
 
 Por qué este patrón y no otro: "Estudio" dice equipo pequeño y trabajo artesanal,
@@ -220,16 +220,27 @@ usar el nombre, pero no es una comprobación completa.
 
 Pendiente, dos búsquedas de cinco minutos:
 
-- [ ] **OEPM buscando solo `Olfato`**. La parte distintiva del nombre es "Olfato";
-      "Estudio" es descriptivo y un examinador lo ignora casi por completo, así que
-      una marca "OLFATO" en tus clases choca contigo aunque la frase completa no
-      exista. Van a salir resultados (es palabra común): lo único que importa es si
-      alguno está en clase **35** (publicidad y gestión de negocios), **41**
-      (producción de vídeo) o **42** (diseño y desarrollo web). Una marca "Olfato"
-      en clase 3, cosmética, es irrelevante.
+- [x] **OEPM buscando solo `Olfato`** (25/08/2026): 3 resultados, **ninguno
+      bloquea**. Nadie tiene registrado "OLFATO" como marca distintiva en las clases
+      35, 41 ni 42:
+      - `M4332984` "SENSIA VER CON EL OLFATO, SENTIR CON LOS OJOS", clase 41. La
+        marca es SENSIA; "olfato" va dentro de un eslogan como palabra común.
+      - `N0440889` "SEARCH DOG, MÁS ALLÁ DEL OLFATO.", clase 41. Igual: la marca es
+        SEARCH DOG.
+      - `N0362460` "CENTRO VETERINARIO EL OLFATO", clase **44** (servicios
+        veterinarios). Esta es la única que merece un comentario, abajo.
 - [ ] **TMview** (`tmview.org`), también solo `Olfato`. La OEPM solo cubre marcas
       nacionales españolas; una marca de la Unión Europea registrada en cualquier
-      otro país tiene efecto en España igualmente, y TMview cubre las dos.
+      otro país tiene efecto en España igualmente, y TMview cubre las dos. Es la
+      última comprobación que queda.
+
+**Sobre "Centro Veterinario El Olfato":** está en la clase 44, que es prestación de
+servicios veterinarios, no la 35/41/42 en las que trabajarías tú. No hay conflicto
+legal: son servicios distintos para públicos distintos. Pero está en tu mismo
+sector, así que ten en cuenta dos cosas. Una, que si algún día alguien busca
+"olfato" + veterinaria vais a aparecer mezclados. Y dos, que esa clínica es
+potencialmente un cliente tuyo, y presentarte con un nombre casi igual al suyo
+sería raro — táchala de la lista de captación.
 
 ### Orden de gasto (esto importa más que la marca)
 
@@ -238,11 +249,16 @@ Con 0 resultados en la frase exacta ya puedes hacer esta semana, y por menos de
 
 - [ ] Comprar `olfatoestudio.com` y `estudioolfato.com` (~22 $/año los dos).
 - [ ] Coger los handles en Instagram y TikTok, el mismo en las dos. Gratis.
-- [ ] Crear el buzón `hola@olfatoestudio.com` y **entonces** cambiar las dos
-      referencias a `hola@mayarottweiler.com` de `servicios.html` (el botón
-      "Escribir un email" y el mensaje de error del formulario). Mientras el buzón
-      no exista se queda el de Maya: mejor un correo que funciona que uno bonito
-      que rebota.
+- [ ] Crear el buzón `hola@olfatoestudio.com`. La web ya lo usa en todas partes,
+      así que hasta que exista los correos rebotan.
+- [ ] Crear un formulario propio en `formspree.io` y sustituir
+      `TU_ID_DE_FORMSPREE` en `estudio-olfato/index.html`. Es gratis y son dos
+      minutos. Hasta entonces el formulario no envía nada.
+- [ ] Rellenar los tres campos marcados `PENDIENTE` en
+      `estudio-olfato/privacidad.html` (nombre fiscal, NIF, domicilio) y borrar el
+      aviso naranja del principio. Sin eso no se puede publicar el formulario: son
+      datos que exige el artículo 13 del RGPD y que solo tú tienes.
+- [ ] Diseñar un favicon propio (hay un comentario `PENDIENTE` en el `<head>`).
 
 Lo que **no** toca todavía es registrar el nombre comercial en la OEPM: unos 150 €
 por clase, 450 € por las tres, antes de haber facturado un euro. Usar
@@ -253,6 +269,31 @@ tardar en cerrar los primeros clientes.
 **Registra la marca con el dinero del primer cliente, no antes.** Y si alguna de
 las dos búsquedas de arriba da un resultado en las clases 35, 41 o 42, párate y
 cambia el nombre entonces — cuesta 22 $ en dominios, no una rotulación.
+
+### Estudio Olfato y Maya son dos webs separadas
+
+`estudio-olfato/` no comparte **nada** de infraestructura con `sitio-recuperado/`
+(la web de Maya). Es deliberado, y conviene que siga así:
+
+- **Analítica:** la web de Estudio Olfato no lleva ninguna. La propiedad de Google
+  Analytics de Maya no se reutiliza, para que el tráfico de las dos no se mezcle
+  en el mismo informe. Cuando quieras métricas, crea una propiedad nueva y recupera
+  el bloque del banner de cookies que está al final de `sitio-recuperado/tema.js`.
+- **Formulario:** buzón de Formspree distinto. Las propuestas de marca para el
+  canal de Maya y las solicitudes de presupuesto de la agencia no comparten
+  bandeja.
+- **Correo:** `hola@olfatoestudio.com`, no el de Maya.
+- **Tema visual:** `tema.css` y `tema.js` están **copiados**, no enlazados. Si
+  algún día cambias el diseño de la web de Maya, esta no se altera. El precio es
+  que una mejora en uno hay que llevarla al otro a mano, y es un precio que merece
+  la pena.
+- **Enlaces a Maya:** todos absolutos a `https://mayarottweiler.com` y en pestaña
+  nueva. La web de Maya no tiene ningún enlace entrante a Estudio Olfato, así que
+  no la hemos tocado.
+
+Lo único que se ha traído de allí es lo que es tuyo de todas formas: el tema
+visual y la foto de Maya (`estudio-olfato/fotos/maya-piscina.jpg`, copiada, no
+enlazada).
 
 ### Un detalle de coherencia
 
