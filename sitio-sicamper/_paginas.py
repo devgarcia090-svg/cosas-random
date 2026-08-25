@@ -166,12 +166,14 @@ INDEX = """
 </section>
 
 <section class="seccion-sm bg-alt">
-  <div class="env datos">
-    <div class="dato" data-revelar="0"><p class="n">7</p><p class="e">Plazas para viajar y dormir</p></div>
-    <div class="dato" data-revelar="1"><p class="n">0<small> h</small></p><p class="e">Horarios de entrega fijos</p></div>
-    <div class="dato" data-revelar="2"><p class="n">365</p><p class="e">Días con soporte al teléfono</p></div>
-    <div class="dato" data-revelar="3"><p class="n">5,0</p><p class="e">Valoración media en Google</p></div>
-    <div class="dato" data-revelar="4"><p class="n">115<small> €</small></p><p class="e">Por día en temporada baja</p></div>
+  <div class="env">
+    <dl class="placa" data-revelar>
+      <div><dt>Plazas</dt><dd>7<span>para viajar y dormir</span></dd></div>
+      <div><dt>Medidas</dt><dd>6,99&nbsp;×&nbsp;3,20&nbsp;×&nbsp;2,40&nbsp;m<span>largo, alto y ancho</span></dd></div>
+      <div><dt>Motor</dt><dd>160&nbsp;cv diésel<span>manual de 6 marchas</span></dd></div>
+      <div><dt>Carné</dt><dd>B<span>MMA 3.500&nbsp;kg</span></dd></div>
+      <div><dt>Tarifa</dt><dd>Desde 115&nbsp;€/día<span>temporada baja</span></dd></div>
+    </dl>
   </div>
 </section>
 
@@ -610,12 +612,14 @@ AUTOCARAVANA = armar("""
 @@HERO@@
 
 <section class="seccion-sm bg-alt">
-  <div class="env datos">
-    <div class="dato" data-revelar="0"><p class="n">7</p><p class="e">Plazas para viajar y dormir</p></div>
-    <div class="dato" data-revelar="1"><p class="n">160<small> cv</small></p><p class="e">Diésel, caja manual de 6 marchas</p></div>
-    <div class="dato" data-revelar="2"><p class="n">B</p><p class="e">Carné necesario · MMA 3.500 kg</p></div>
-    <div class="dato" data-revelar="3"><p class="n">120<small> W</small></p><p class="e">Placa solar fotovoltaica</p></div>
-    <div class="dato" data-revelar="4"><p class="n">7,0<small> m</small></p><p class="e">De largo · 3,20 alto · 2,40 ancho</p></div>
+  <div class="env">
+    <dl class="placa" data-revelar>
+      <div><dt>Modelo</dt><dd>McLouis Glamys<span>capuchina</span></dd></div>
+      <div><dt>Plazas</dt><dd>7 + 7<span>viajar y dormir</span></dd></div>
+      <div><dt>Medidas</dt><dd>6,99&nbsp;×&nbsp;3,20&nbsp;×&nbsp;2,40&nbsp;m<span>largo, alto y ancho</span></dd></div>
+      <div><dt>Motor</dt><dd>160&nbsp;cv diésel<span>6 marchas · carné B</span></dd></div>
+      <div><dt>Energía</dt><dd>Placa solar 120&nbsp;W<span>2 baterías · 220&nbsp;V y USB</span></dd></div>
+    </dl>
   </div>
 </section>
 

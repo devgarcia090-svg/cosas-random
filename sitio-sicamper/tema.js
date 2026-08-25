@@ -83,6 +83,34 @@
     }));
   }
 
+  /* ── ¿Quiere el visitante menos movimiento? ───────────────── */
+  const menosMovimiento = () =>
+    window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ── La foto del hero se desplaza más despacio que el texto ─ */
+  function initParalaje() {
+    if (menosMovimiento()) return;
+    const fotos = $$('.hero .hero-img img, .cta-final .hero-img img');
+    if (!fotos.length) return;
+    fotos.forEach(f => { f.style.transform = 'scale(1.12)'; });
+
+    let pendiente = false;
+    const mover = () => {
+      pendiente = false;
+      fotos.forEach(f => {
+        const caja = f.parentElement.getBoundingClientRect();
+        if (caja.bottom < -200 || caja.top > window.innerHeight + 200) return;  // fuera de pantalla
+        const avance = (window.innerHeight - caja.top) / (window.innerHeight + caja.height);
+        f.style.transform = 'translate3d(0,' + (avance * 40 - 20).toFixed(1) + 'px,0) scale(1.12)';
+      });
+    };
+    mover();
+    window.addEventListener('scroll', () => {
+      if (!pendiente) { pendiente = true; window.requestAnimationFrame(mover); }
+    }, { passive: true });
+    window.addEventListener('resize', mover);
+  }
+
   /* ── Revelado al hacer scroll ─────────────────────────────── */
   function initRevelar() {
     const els = $$('[data-revelar]');
@@ -449,7 +477,10 @@
       if (!form.dataset.esReserva) {
         html += '<a class="btn btn-primario btn-bloque" href="' + url + '">Solicitar estas fechas</a>';
       }
+      const totalAnterior = form._ultimoTotal;
       salida.innerHTML = html;
+      animarTotal($('.fila.total b', salida), totalAnterior, r.total);
+      form._ultimoTotal = r.total;
 
       // Sincronizar el formulario de solicitud: solo la calculadora de reservar
       if (!form.dataset.esReserva) return;
@@ -463,9 +494,29 @@
       if (rTemp) rTemp.value = r.etiqueta;
     }
 
-    form.addEventListener('input', render);
-    form.addEventListener('change', render);
+    // input y change llegan casi a la vez al tocar una fecha: si se pintara
+    // dos veces, el segundo repintado se comería la animación del total.
+    let espera;
+    const repintar = () => { clearTimeout(espera); espera = setTimeout(render, 70); };
+    form.addEventListener('input', repintar);
+    form.addEventListener('change', repintar);
     render();
+  }
+
+  /** Recorre del importe anterior al nuevo, para que se vea que ha cambiado. */
+  function animarTotal(el, desde, hasta) {
+    if (!el || desde === hasta) return;
+    if (typeof desde !== 'number' || menosMovimiento()) { el.textContent = eur(hasta); return; }
+    el.classList.add('cambiando');
+    const t0 = performance.now(), dur = 420;
+    const paso = ahora => {
+      const p = Math.min(1, (ahora - t0) / dur);
+      const suave = 1 - Math.pow(1 - p, 3);
+      el.textContent = eur(Math.round(desde + (hasta - desde) * suave));
+      if (p < 1) window.requestAnimationFrame(paso);
+      else { el.textContent = eur(hasta); el.classList.remove('cambiando'); }
+    };
+    window.requestAnimationFrame(paso);
   }
 
   /* ── Buscador del hero (fechas → reservar.html) ───────────── */
@@ -516,7 +567,7 @@
 
   /* ── Arranque ─────────────────────────────────────────────── */
   document.addEventListener('DOMContentLoaded', () => {
-    initTema(); initCabecera(); initCajon(); initRevelar(); initGaleria();
+    initTema(); initCabecera(); initCajon(); initRevelar(); initParalaje(); initGaleria();
     initCarriles(); initFaq(); initCookies(); initCalculadora();
     initBuscadorHero(); initFormularios(); initAnio();
   });

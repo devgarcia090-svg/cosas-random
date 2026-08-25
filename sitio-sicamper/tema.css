@@ -178,7 +178,7 @@ strong, b { font-weight: 650; color: var(--texto); }
 
 .rejilla { display: grid; gap: clamp(1.15rem, 2.4vw, 1.9rem); }
 /* Los hijos de una rejilla no deben crecer por su contenido mínimo */
-:is(.rejilla, .dos-col, .calc, .datos, .tarifas, .solapado, .galeria) > * { min-width: 0; }
+:is(.rejilla, .dos-col, .calc, .placa, .tarifas, .solapado, .galeria) > * { min-width: 0; }
 .r-2 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); }
 .r-3 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 275px), 1fr)); }
 .r-4 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 215px), 1fr)); }
@@ -556,13 +556,38 @@ body:has(.barra-movil.visible) { padding-bottom: 4.5rem; }
   background: color-mix(in srgb, var(--oliva) 15%, transparent) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234E5C3C' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center/12px no-repeat;
 }
 
-/* Datos / stats */
-.datos { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: clamp(1rem, 2.4vw, 2rem); }
-.dato .n { font-family: var(--serif); font-size: clamp(2rem, 1.5rem + 2vw, 2.9rem); font-weight: 620; line-height: 1; letter-spacing: -.03em; }
-.dato .n small { font-size: .45em; font-weight: 600; letter-spacing: 0; }
-.dato .e { font-size: .82rem; color: var(--texto-3); margin-top: .45rem; letter-spacing: .02em; }
-.bg-tinta .dato .n { color: #fff; }
-.bg-tinta .dato .e { color: #8896A8; }
+/* ── Placa de datos ──────────────────────────────────────────────────────
+   Ficha técnica en una tira, como la placa de características de un
+   vehículo: etiqueta pequeña arriba, valor con su unidad debajo. El truco
+   del gap de 1px sobre fondo de borde dibuja la retícula sola, aunque las
+   celdas se reordenen al cambiar de ancho. */
+.placa {
+  display: grid; gap: 0;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 186px), 1fr));
+  background: var(--fondo-card);
+  border: 1px solid var(--borde); border-radius: var(--r-m); overflow: hidden;
+  box-shadow: var(--s-1);
+}
+/* Las líneas interiores son bordes de cada celda, y el margen negativo saca
+   los del borde exterior fuera del contenedor, que los recorta. Así la
+   retícula queda bien aunque la última fila esté incompleta: con el truco
+   del gap sobre fondo de borde, la celda que falta se veía como un hueco. */
+.placa > div {
+  padding: .95rem 1.1rem;
+  border-right: 1px solid var(--borde); border-bottom: 1px solid var(--borde);
+  margin: 0 -1px -1px 0;
+}
+.placa dt {
+  font-size: .655rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase;
+  color: var(--texto-3);
+}
+.placa dd {
+  margin: .35rem 0 0; font-size: .975rem; font-weight: 600; line-height: 1.35;
+  font-variant-numeric: tabular-nums; letter-spacing: -.005em;
+}
+.placa dd span { display: block; font-weight: 450; font-size: .82rem; color: var(--texto-2); margin-top: .1rem; }
+.bg-tinta .placa { background: var(--tinta-2); border-color: rgba(255,255,255,.14); }
+.bg-tinta .placa > div { border-color: rgba(255,255,255,.14); }
 
 /* ── 9. PASOS ──────────────────────────────────────────────── */
 .pasos { counter-reset: p; display: grid; gap: 0; }
@@ -933,6 +958,73 @@ body:has(.barra-movil.visible) .cookies { bottom: 5rem; }
 /* Mapa */
 .mapa { border: 0; width: 100%; aspect-ratio: 16/10; border-radius: var(--r-l); filter: saturate(.88); }
 @media (min-width: 760px) { .mapa { aspect-ratio: 16/7; } }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   MOVIMIENTO
+   Todo va dentro de prefers-reduced-motion: no-preference, así que
+   quien pida menos animación ve la página quieta y completa.
+   ═══════════════════════════════════════════════════════════════ */
+@keyframes entra { from { opacity: 0; transform: translateY(18px); } }
+
+@media (prefers-reduced-motion: no-preference) {
+
+  /* ── Entrada del hero: una secuencia, no efectos sueltos ─────────── */
+  .hero-contenido > *,
+  .hero-int .env > * {
+    animation: entra .85s var(--ease) both;
+  }
+  :is(.hero-contenido, .hero-int .env) > :nth-child(1) { animation-delay: .10s; }
+  :is(.hero-contenido, .hero-int .env) > :nth-child(2) { animation-delay: .19s; }
+  :is(.hero-contenido, .hero-int .env) > :nth-child(3) { animation-delay: .28s; }
+  :is(.hero-contenido, .hero-int .env) > :nth-child(4) { animation-delay: .37s; }
+  :is(.hero-contenido, .hero-int .env) > :nth-child(5) { animation-delay: .46s; }
+
+  /* ── La foto del hero se desplaza al hacer scroll (lo mueve el JS) ── */
+  :is(.hero, .cta-final) .hero-img img { will-change: transform; }
+
+  /* ── Las fotos se revelan con un barrido, no con un desvanecido ──── */
+  .marco-foto[data-revelar],
+  .solapado[data-revelar] {
+    opacity: 1; transform: none;
+    clip-path: inset(0 0 100% 0);
+    transition: clip-path 1s var(--ease);
+  }
+  .marco-foto[data-revelar].visto,
+  .solapado[data-revelar].visto { clip-path: inset(0 0 0 0); }
+  .marco-foto[data-revelar] img,
+  .solapado[data-revelar] img { transform: scale(1.07); transition: transform 1.4s var(--ease); }
+  .marco-foto[data-revelar].visto img,
+  .solapado[data-revelar].visto img { transform: none; }
+
+  /* ── Los pasos entran en cascada: son una secuencia de verdad ────── */
+  .pasos[data-revelar] .paso { opacity: 0; }
+  .pasos[data-revelar].visto .paso { animation: entra .7s var(--ease) both; }
+  .pasos[data-revelar].visto .paso:nth-child(1) { animation-delay: .05s; }
+  .pasos[data-revelar].visto .paso:nth-child(2) { animation-delay: .14s; }
+  .pasos[data-revelar].visto .paso:nth-child(3) { animation-delay: .23s; }
+  .pasos[data-revelar].visto .paso:nth-child(4) { animation-delay: .32s; }
+  .pasos[data-revelar].visto .paso:nth-child(5) { animation-delay: .41s; }
+
+  /* ── La barra de temporada crece: es un indicador, no un adorno ──── */
+  .tarifa[data-revelar] .barra-t { transform: scaleX(0); transform-origin: left; transition: transform .9s var(--ease) .15s; }
+  .tarifa[data-revelar].visto .barra-t { transform: scaleX(1); }
+
+  /* ── El total del presupuesto avisa de que ha cambiado ───────────── */
+  .desglose .fila.total b.cambiando { animation: latido .45s var(--ease); }
+  @keyframes latido {
+    0%   { transform: none; }
+    35%  { transform: translateY(-3px) scale(1.03); }
+    100% { transform: none; }
+  }
+
+  /* ── La cabecera se compacta al bajar ────────────────────────────── */
+  .cabecera { transition: background .35s var(--ease-io), box-shadow .35s var(--ease-io),
+                          border-color .35s, height .35s var(--ease-io); }
+  .cabecera.fija { height: 60px; }
+  .cabecera .logo svg { transition: height .35s var(--ease-io); }
+  .cabecera.fija .logo svg { height: 29px; }
+}
 
 /* Print */
 @media print {
