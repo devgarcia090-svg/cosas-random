@@ -53,9 +53,7 @@ I = {
  "flecha":   ico('<path d="M5 12h14M13 6l6 6-6 6"/>'),
 }
 
-LOGO_SVG = ('<svg viewBox="0 0 48 32" fill="none" aria-hidden="true" focusable="false">'
- '<g stroke="currentColor" stroke-width="2.2" stroke-linecap="round" opacity=".28">'
- '<path d="M1 11h6.5"/><path d="M3.5 16h4"/><path d="M1 21h6.5"/></g>'
+LOGO_SVG = ('<svg viewBox="9.5 4.5 38 25.5" fill="none" aria-hidden="true" focusable="false">'
  '<path d="M14 6.5h13.5l4.5 5H43a3.5 3.5 0 0 1 3.5 3.5v6.5a3.5 3.5 0 0 1-3.5 3.5H14a3.5 3.5 0 0 1-3.5-3.5V10a3.5 3.5 0 0 1 3.5-3.5Z" fill="#007FFF"/>'
  '<rect x="34.6" y="14" width="8.6" height="5.4" rx="1.6" fill="#fff" opacity=".9"/>'
  '<circle cx="18.5" cy="25.6" r="3.7" fill="currentColor"/><circle cx="18.5" cy="25.6" r="1.5" fill="#007FFF"/>'
@@ -198,7 +196,7 @@ def pie():
 <a class="wa-flot" href="%s" rel="noopener">%s Escríbeme por WhatsApp</a>
 
 <div class="cookies" role="dialog" aria-label="Aviso de cookies">
-  <p>Uso cookies propias para que la web funcione y, si me das permiso, cookies de analítica para saber qué páginas resultan útiles. Puedes cambiar de opinión cuando quieras.</p>
+  <p>Uso cookies propias para que la web funcione. Si me das permiso, también de analítica para saber qué páginas resultan útiles.</p>
   <div class="acciones">
     <button class="btn btn-primario btn-sm" data-cookies="todo" type="button">Aceptar todas</button>
     <button class="btn btn-linea btn-sm" data-cookies="solo-necesarias" type="button">Solo necesarias</button>

@@ -34,7 +34,7 @@ poner una cifra.
   backend, sin datos en servidores de terceros y con copia para quien escribe.
 
 **Técnica**
-- 42 fotos reconvertidas a WebP: 2,9 MB en total frente a los ~800 KB de HTML
+- 37 fotos reconvertidas a WebP: 2,7 MB en total frente a los ~800 KB de HTML
   que pesaba una sola página en la web original.
 - HTML semántico, `aria-*` donde hace falta, foco visible, `prefers-reduced-motion`
   respetado y salto al contenido.
@@ -60,7 +60,7 @@ legal.html          Aviso legal, privacidad, cookies
 
 tema.css            Sistema de diseño
 tema.js             Interacción + motor de cálculo de presupuestos
-img/                42 fotos en WebP
+img/                37 fotos en WebP
 _construir.py       Plantilla, cabecera, pie y metadatos
 _paginas.py         Contenido de cada página  ← punto de entrada
 ```

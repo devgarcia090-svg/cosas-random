@@ -49,15 +49,17 @@
 
     const cerrar = () => {
       btn.setAttribute('aria-expanded', 'false');
+      btn.setAttribute('aria-label', 'Abrir menú');
       cajon.classList.remove('abierto');
-      document.body.classList.remove('sin-scroll');
+      document.body.classList.remove('sin-scroll', 'cajon-abierto');
     };
     btn.addEventListener('click', () => {
       const abierto = btn.getAttribute('aria-expanded') === 'true';
       if (abierto) return cerrar();
       btn.setAttribute('aria-expanded', 'true');
+      btn.setAttribute('aria-label', 'Cerrar menú');
       cajon.classList.add('abierto');
-      document.body.classList.add('sin-scroll');
+      document.body.classList.add('sin-scroll', 'cajon-abierto');
     });
     $$('.cajon a').forEach(a => a.addEventListener('click', cerrar));
     document.addEventListener('keydown', e => { if (e.key === 'Escape') cerrar(); });
