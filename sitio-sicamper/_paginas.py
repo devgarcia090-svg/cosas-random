@@ -1319,7 +1319,7 @@ def zonas_html():
 </article>""" % (slug, n, nombre, texto) for n, (nombre, slug, texto) in enumerate(pueblos))
         out.append("""<div style="margin-bottom:3.2rem">
   <div class="cabecera-sec" data-revelar style="margin-bottom:1.6rem">
-    <h2 style="font-size:clamp(1.5rem,1.2rem+1.4vw,2.1rem)">%s</h2><p class="tono">%s</p>
+    <h2 class="h2-sm">%s</h2><p class="tono">%s</p>
   </div>
   <div class="rejilla r-3">%s</div>
 </div>""" % (titulo, sub, tarjetas))
@@ -1415,7 +1415,7 @@ VENTA = armar("""
       <h2>McLouis Glamys 222</h2>
       <p class="entradilla">Capuchina de 2022 con 7 plazas para viajar y para dormir, mecánica Citroën Jumper y
         mantenimiento al día. Pintura nueva, batería y centralita de nevera cambiadas, e ITV hasta 2028.</p>
-      <p class="precio" style="font-family:var(--serif);font-size:clamp(2.4rem,2rem+2vw,3.4rem);font-weight:620;letter-spacing:-.035em;margin-top:1.2rem;line-height:1">52.499 €</p>
+      <p class="precio-grande" style="margin-top:1.2rem">52.499 €</p>
       <p class="nota">IVA incluido y deducible al 100 %. Garantía mecánica de 1 año.</p>
       <div class="acciones" style="margin-top:1.8rem">
         <a class="btn btn-primario btn-lg" href="contacto.html">Concertar una visita</a>
@@ -1521,7 +1521,7 @@ CONTACTO = armar("""
   <div class="env calc">
     <div class="calc-panel" data-revelar>
       <div>
-        <h2 style="font-size:clamp(1.5rem,1.2rem+1.2vw,2rem)">Escríbeme</h2>
+        <h2 class="h2-sm">Escríbeme</h2>
         <p class="tono" style="margin-top:.6rem">Cuéntame qué necesitas y te contesto el mismo día. Si es urgente,
           el teléfono es más rápido.</p>
       </div>
