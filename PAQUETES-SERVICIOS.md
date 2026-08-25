@@ -213,24 +213,46 @@ principal. Cubre justo el único caso en que alguien teclearía el nombre de mem
 en el orden de la marca. Nada más: no montes una cartera defensiva de dominios a
 estas alturas, es gasto sin retorno.
 
-### Pendiente antes de gastar un euro más en la marca
+### Estado de la comprobación de marca
 
-- [ ] **OEPM** (`consultas2.oepm.es`), clases 35 (publicidad) y 42 (servicios
-      informáticos). Esto es lo único que puede tumbar el nombre entero, así que
-      hazlo antes de encargar logo, tarjetas o rotulación.
-- [ ] **Handles** `@olfatoestudio` o `@estudioolfato` en Instagram y TikTok, el
-      mismo en las dos. Decide uno y úsalo igual en todas partes.
-- [ ] Registrar el **nombre comercial** en la OEPM si la consulta sale limpia (más
-      barato que una marca y suficiente para empezar).
-- [ ] Crear el buzón `hola@olfatoestudio.com` y **solo entonces** cambiarlo en
-      `servicios.html`: hay dos referencias a `hola@mayarottweiler.com` (el enlace
+**OEPM, 25/08/2026 — "Estudio Olfato": 0 resultados.** Suficiente para empezar a
+usar el nombre, pero no es una comprobación completa.
+
+Pendiente, dos búsquedas de cinco minutos:
+
+- [ ] **OEPM buscando solo `Olfato`**. La parte distintiva del nombre es "Olfato";
+      "Estudio" es descriptivo y un examinador lo ignora casi por completo, así que
+      una marca "OLFATO" en tus clases choca contigo aunque la frase completa no
+      exista. Van a salir resultados (es palabra común): lo único que importa es si
+      alguno está en clase **35** (publicidad y gestión de negocios), **41**
+      (producción de vídeo) o **42** (diseño y desarrollo web). Una marca "Olfato"
+      en clase 3, cosmética, es irrelevante.
+- [ ] **TMview** (`tmview.org`), también solo `Olfato`. La OEPM solo cubre marcas
+      nacionales españolas; una marca de la Unión Europea registrada en cualquier
+      otro país tiene efecto en España igualmente, y TMview cubre las dos.
+
+### Orden de gasto (esto importa más que la marca)
+
+Con 0 resultados en la frase exacta ya puedes hacer esta semana, y por menos de
+30 €:
+
+- [ ] Comprar `olfatoestudio.com` y `estudioolfato.com` (~22 $/año los dos).
+- [ ] Coger los handles en Instagram y TikTok, el mismo en las dos. Gratis.
+- [ ] Crear el buzón `hola@olfatoestudio.com` y **entonces** cambiar las dos
+      referencias a `hola@mayarottweiler.com` de `servicios.html` (el botón
       "Escribir un email" y el mensaje de error del formulario). Mientras el buzón
-      no exista, se queda el de Maya — mejor un correo que funciona que uno bonito
+      no exista se queda el de Maya: mejor un correo que funciona que uno bonito
       que rebota.
 
-Recuerda que como autónomo las facturas van con tu nombre y tu NIF: "Estudio
-Olfato" es un nombre comercial, no una razón social. No hay sociedad ni notario, y
-cambiarlo en seis meses cuesta un dominio y un handle. Es reversible.
+Lo que **no** toca todavía es registrar el nombre comercial en la OEPM: unos 150 €
+por clase, 450 € por las tres, antes de haber facturado un euro. Usar
+comercialmente un nombre sin registrar es legal en España; el riesgo es que otro lo
+registre después, y es un riesgo bajo durante los tres o cuatro meses que vas a
+tardar en cerrar los primeros clientes.
+
+**Registra la marca con el dinero del primer cliente, no antes.** Y si alguna de
+las dos búsquedas de arriba da un resultado en las clases 35, 41 o 42, párate y
+cambia el nombre entonces — cuesta 22 $ en dominios, no una rotulación.
 
 ### Un detalle de coherencia
 
