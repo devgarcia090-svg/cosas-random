@@ -323,8 +323,26 @@ export CLOUDFLARE_API_TOKEN="tu_token"   # nunca en un fichero del repositorio
 npm run deploy
 ```
 
-Los HTML se sirven con `Cache-Control: no-cache`, así que un cambio se ve al
-recargar. Los estáticos sí se cachean.
+**Todo se sirve con `Cache-Control: no-cache`**, así que cualquier cambio se ve al
+recargar. Y además el enlace al CSS lleva versión (`estilo.css?v=3`): **si tocas
+`estilo.css`, sube ese número en los cuatro HTML.**
+
+Esto viene de un fallo real: el CSS se cacheaba una hora, y tras un despliegue el
+navegador seguía usando el `estilo.css` anterior. La página se renderizaba con
+reglas que ya no existían — los titulares de las páginas legales salían grandes y
+sin márgenes, amontonados. No era el diseño, era el CSS viejo.
+
+Dos cosas que aprender de ahí:
+
+- En `_headers` las reglas **se suman, no se sustituyen**. Si pones `Cache-Control`
+  en `/*` y luego otro valor para una ruta, la respuesta lleva los dos y gana el más
+  restrictivo. Por eso ahora hay una sola regla para todo.
+- Al verificar desde este entorno, el proxy de salida puede devolver respuestas
+  cacheadas. Para comprobar de verdad qué hay desplegado hay que forzar el salto:
+  `curl -H 'Cache-Control: no-cache' "$URL/ruta?cb=1"`.
+
+**Al lanzar:** pasar `estilo.css` y las imágenes a URLs versionadas por contenido
+(`estilo.abc123.css`) y cachearlas un año, quitando el `no-cache` de `/*`.
 
 **Está en `noindex, nofollow` a propósito.** No se puede quitar hasta que estén los
 datos fiscales en la política de privacidad y el formulario tenga buzón. El día del
