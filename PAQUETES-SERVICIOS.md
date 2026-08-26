@@ -364,11 +364,24 @@ lanzamiento se cambia el contenido de la etiqueta robots en `index.html`.
 
 ### SEO: qué está hecho y qué falta
 
+**El título lleva la marca, y no es solo estética.** La primera versión era solo la
+keyword, sin "Estudio Olfato". Dos motivos para corregirlo:
+
+- Google no siempre respeta el `<title>` tal cual: a veces lo reescribe, y cuando lo
+  hace suele meter la marca si la detecta clara en la página. Mejor no dejárselo a su
+  criterio.
+- El `og:title` (lo que se ve al compartir en WhatsApp) **ya llevaba la marca** y el
+  `<title>` no — eran inconsistentes entre sí. Ahora los dos siguen el mismo patrón:
+  keyword primero, `| Estudio Olfato` detrás. Es el estándar (palabra clave que
+  responde a la búsqueda, marca al final para reconocimiento), y deja margen de sobra
+  frente al límite de ~60 caracteres donde Google empieza a truncar por píxeles.
+
+
 **Hecho, y es la parte fácil:**
 
 | | |
 |---|---|
-| Título | `Diseño web y vídeo para veterinarias y tiendas de mascotas` (58 car.) — apunta a lo que la gente teclea, no a cómo nos llamamos nosotros |
+| Título | `Diseño web y vídeo para veterinarias \| Estudio Olfato` (53 car.) — keyword delante, marca detrás de la barra |
 | Descripción | 154 caracteres, con el gancho de la llamada gratis |
 | Datos estructurados | `Organization` + `WebSite` + `ProfessionalService` con catálogo de las tres ofertas y sus precios, más `FAQPage` |
 | Técnico | Canonical, Open Graph con imagen 1200x630, sitemap, HTML semántico, carga instantánea, móvil primero, contrastes AA |
