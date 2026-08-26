@@ -310,9 +310,16 @@ cambia el nombre entonces — cuesta 22 $ en dominios, no una rotulación.
 
 ### La web está desplegada
 
-**https://estudio-olfato.devgarcia090.workers.dev**
+**https://olfatoestudio.devgarcia090.workers.dev**
 
-Cloudflare Workers, cuenta `Devgarcia090@gmail.com`, Worker llamado `estudio-olfato`.
+⚠ La URL anterior (`estudio-olfato.devgarcia090.workers.dev`) quedó inservible: ese
+Worker se congeló sirviendo una versión antigua desde el borde de Cloudflare. Los
+despliegues creaban versiones nuevas, la API confirmaba el 100 % en la última,
+`wrangler versions deploy` la promocionaba a mano, y aun así devolvía HTML viejo y
+404 en ficheros recién subidos. Con un nombre de Worker nuevo desapareció al
+instante. Si vuelve a pasar, la salida es renombrar.
+
+Cloudflare Workers, cuenta `Devgarcia090@gmail.com`, Worker llamado `olfatoestudio`.
 Es un Worker distinto del de la web de Maya (`mayarottweiler`), así que ninguno de
 los dos puede pisar al otro.
 
@@ -354,6 +361,49 @@ Dos cosas que aprender de ahí:
 **Está en `noindex, nofollow` a propósito.** No se puede quitar hasta que estén los
 datos fiscales en la política de privacidad y el formulario tenga buzón. El día del
 lanzamiento se cambia el contenido de la etiqueta robots en `index.html`.
+
+### SEO: qué está hecho y qué falta
+
+**Hecho, y es la parte fácil:**
+
+| | |
+|---|---|
+| Título | `Diseño web y vídeo para veterinarias y tiendas de mascotas` (58 car.) — apunta a lo que la gente teclea, no a cómo nos llamamos nosotros |
+| Descripción | 154 caracteres, con el gancho de la llamada gratis |
+| Datos estructurados | `Organization` + `WebSite` + `ProfessionalService` con catálogo de las tres ofertas y sus precios, más `FAQPage` |
+| Técnico | Canonical, Open Graph con imagen 1200x630, sitemap, HTML semántico, carga instantánea, móvil primero, contrastes AA |
+| Rastreadores de IA | `robots.txt` con las reglas ya escritas para GPTBot, ClaudeBot, PerplexityBot, OAI-SearchBot y Google-Extended, listas para descomentar |
+
+**Lo que falta, y es lo que de verdad decide:**
+
+1. **Quitar el `noindex`.** Ahora mismo la web no puede aparecer en Google ni en
+   ninguna IA, y es a propósito: falta la ficha fiscal en las páginas legales. Hasta
+   que eso esté, el SEO es teórico.
+2. **Un dominio propio.** `workers.dev` no acumula autoridad. Hasta que la web viva
+   en `olfatoestudio.com`, no hay nada que posicionar.
+3. **Contenido.** Esto es lo grande y no tiene atajo: **una sola página no posiciona
+   para casi nada.** La web de Maya posiciona porque tiene más de treinta guías. Para
+   aparecer por «diseño web para veterinarias» hacen falta páginas que respondan a esa
+   búsqueda concreta:
+   - Una página por servicio y por tipo de cliente: *Webs para clínicas veterinarias*,
+     *Vídeo para tiendas de mascotas*, *Redes sociales para adiestradores*.
+   - Artículos que resuelvan dudas reales del sector: cuánto cuesta la web de una
+     clínica, qué pedirle a una agencia, cómo grabar vídeos en la consulta sin molestar
+     a los animales.
+   - Y en cuanto haya clientes, **una página por caso**. Los casos posicionan por el
+     nombre del cliente y por su ciudad.
+4. **Google Search Console** y **ficha de Google Business**, el día del lanzamiento.
+5. **Menciones fuera.** Para salir en respuestas de IA pesa más que te citen en otros
+   sitios (directorios del sector, colegios de veterinarios, notas de prensa) que
+   cualquier ajuste en la web.
+
+**Sobre aparecer en las IAs**, sin humo: lo que funciona es lo mismo que funciona en
+Google más dos cosas concretas — dejar entrar a sus rastreadores (ya preparado) y
+escribir de forma **extraíble**: precios explícitos en texto, definiciones claras de
+cada servicio, y un FAQ que responda directo. Eso ya está hecho, y es la razón por la
+que el FAQ está redactado como respuestas cerradas y no como argumentario. Del
+`llms.txt` que circula: no es un estándar y no hay evidencia de que sirva; no le
+dediques tiempo todavía.
 
 ### El sistema visual (v4, la definitiva de momento)
 

@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Vídeo y web para el sector mascotas | Estudio Olfato</title>
-<meta name="description" content="Estudio Olfato: vídeo vertical y páginas web para clínicas veterinarias, tiendas de animales y adiestradores. Construimos una audiencia de 41.000 personas desde cero, sin publicidad pagada. Tres paquetes con precio cerrado.">
+<title>Diseño web y vídeo para veterinarias y tiendas de mascotas</title>
+<meta name="description" content="Diseño web, SEO y vídeo vertical para clínicas veterinarias, tiendas de animales y adiestradores en España. Precio cerrado y llamada gratis de 20 minutos.">
 <meta name="author" content="Estudio Olfato">
 <!-- ⚠ MODO PREVISUALIZACIÓN. El día del lanzamiento, cambiar el contenido de la
      etiqueta robots de abajo por "index, follow". Sin escribir aquí ninguna
@@ -35,22 +35,77 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Service",
-  "name": "Estudio Olfato — vídeo y web para el sector mascotas",
-  "description": "Producción de vídeo vertical y desarrollo web para clínicas veterinarias, tiendas de animales, adiestradores y marcas de producto pet.",
-  "url": "https://olfatoestudio.com/",
-  "areaServed": {"@type": "Country", "name": "España"},
-  "serviceType": ["Diseño web", "Producción de vídeo", "Marketing de contenidos"],
-  "provider": {
-    "@type": "Organization",
-    "name": "Estudio Olfato",
-    "slogan": "Vídeo y web para el sector mascotas",
-    "url": "https://olfatoestudio.com/"
-  },
-  "offers": [
-    {"@type": "Offer", "name": "Web", "price": "1190", "priceCurrency": "EUR", "valueAddedTaxIncluded": false, "description": "Precio sin IVA."},
-    {"@type": "Offer", "name": "Vídeo", "price": "690", "priceCurrency": "EUR", "valueAddedTaxIncluded": false, "description": "Precio mensual sin IVA."},
-    {"@type": "Offer", "name": "Lanzamiento", "price": "2490", "priceCurrency": "EUR", "valueAddedTaxIncluded": false, "description": "Precio sin IVA."}
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://olfatoestudio.com/#organizacion",
+      "name": "Estudio Olfato",
+      "alternateName": "Olfato Estudio",
+      "url": "https://olfatoestudio.com/",
+      "logo": "https://olfatoestudio.com/img/compartir.jpg",
+      "email": "hola@olfatoestudio.com",
+      "slogan": "Vídeo y web para el sector mascotas",
+      "description": "Estudio de diseño web y producción de vídeo vertical especializado en negocios del sector mascotas."
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://olfatoestudio.com/#web",
+      "url": "https://olfatoestudio.com/",
+      "name": "Estudio Olfato",
+      "inLanguage": "es-ES",
+      "publisher": {"@id": "https://olfatoestudio.com/#organizacion"}
+    },
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://olfatoestudio.com/#servicio",
+      "name": "Estudio Olfato",
+      "description": "Diseño web, SEO y producción de vídeo vertical para clínicas veterinarias, tiendas de animales, adiestradores y marcas de producto pet.",
+      "url": "https://olfatoestudio.com/",
+      "email": "hola@olfatoestudio.com",
+      "parentOrganization": {"@id": "https://olfatoestudio.com/#organizacion"},
+      "areaServed": {"@type": "Country", "name": "España"},
+      "availableLanguage": "es",
+      "priceRange": "690 € - 2490 €",
+      "knowsAbout": [
+        "diseño web para veterinarias",
+        "vídeo vertical para redes sociales",
+        "SEO local para clínicas veterinarias",
+        "marketing de contenidos para el sector mascotas"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Paquetes de Estudio Olfato",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "name": "Web",
+            "price": "1190",
+            "priceCurrency": "EUR",
+            "valueAddedTaxIncluded": false,
+            "description": "Web de hasta 6 páginas con SEO técnico, cumplimiento de RGPD y LSSI, formulario y alta en Google. Entrega en 2-3 semanas.",
+            "itemOffered": {"@type": "Service", "name": "Diseño y desarrollo web", "serviceType": "Diseño web"}
+          },
+          {
+            "@type": "Offer",
+            "name": "Vídeo",
+            "price": "690",
+            "priceCurrency": "EUR",
+            "valueAddedTaxIncluded": false,
+            "description": "Ocho vídeos verticales al mes con guion, edición, subtítulos y publicación gestionada. Mínimo tres meses.",
+            "itemOffered": {"@type": "Service", "name": "Producción de vídeo vertical", "serviceType": "Producción audiovisual"}
+          },
+          {
+            "@type": "Offer",
+            "name": "Lanzamiento",
+            "price": "2490",
+            "priceCurrency": "EUR",
+            "valueAddedTaxIncluded": false,
+            "description": "Web, diez vídeos iniciales, perfiles creados, email marketing montado y plan de contenido de noventa días. Entrega en 4-6 semanas.",
+            "itemOffered": {"@type": "Service", "name": "Lanzamiento digital completo", "serviceType": "Marketing digital"}
+          }
+        ]
+      }
+    }
   ]
 }
 </script>
@@ -76,7 +131,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/estilo.css?v=10">
+<link rel="stylesheet" href="/estilo.css?v=11">
 </head>
 <body>
 <a class="saltar" href="#principal">Saltar al contenido</a>

@@ -2,12 +2,19 @@
 # Estudio Olfato · despliegue en Cloudflare Workers (static assets)
 #
 # Este fichero despliega ÚNICAMENTE la carpeta estudio-olfato/.
-# El Worker se llama "estudio-olfato", así que `wrangler deploy` NUNCA
+# El Worker se llama "olfatoestudio", así que `wrangler deploy` NUNCA
 # puede tocar el Worker "mayarottweiler" de la web de Maya, ni al
 # revés. Son dos Workers distintos en la misma cuenta.
+#
+# Se llamaba "estudio-olfato" y hubo que cambiarlo: ese Worker se quedó
+# sirviendo una versión antigua congelada en el borde de Cloudflare. Los
+# despliegues creaban versiones nuevas, la API confirmaba el 100 % en la última,
+# y aun así respondía HTML viejo y daba 404 a ficheros recién subidos. Con un
+# nombre nuevo el problema desapareció. Si vuelve a pasar, la salida es la
+# misma: renombrar.
 # ══════════════════════════════════════════════════════════════════════
 
-name = "estudio-olfato"
+name = "olfatoestudio"
 account_id = "c21d634c54dbb741978cf0efd1135bc8"
 compatibility_date = "2026-08-26"
 
