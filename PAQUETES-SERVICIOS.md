@@ -299,54 +299,46 @@ tardar en cerrar los primeros clientes.
 las dos búsquedas de arriba da un resultado en las clases 35, 41 o 42, párate y
 cambia el nombre entonces — cuesta 22 $ en dominios, no una rotulación.
 
-### El sistema visual: pantalla y papel
+### El sistema visual (v4, la definitiva de momento)
 
-La web tiene su propio sistema en `estudio-olfato/estilo.css`. Hubo dos versiones
-antes de esta y las dos fallaban por lo mismo — eran plantillas:
+Hubo tres versiones antes de esta y las tres se descartaron:
 
-1. El tema heredado de Maya (negro, naranja fuego, brasas, grano, mayúsculas a peso
-   900). Hecho para entretener, no para vender servicios de 2.490 €.
-2. Papel casi crema con serif editorial en caja baja, columnas separadas por filetes
-   y tarjetas con borde. Correcto y anodino: es el segundo aspecto más genérico que
-   existe.
+1. El tema heredado de Maya (negro, naranja fuego, brasas, mayúsculas a peso 900).
+   Hecho para entretener, no para vender servicios.
+2. Papel crema con serif editorial. Correcto y anodino.
+3. Pantalla y papel alternando, con mucho mono en mayúsculas. La idea era buena,
+   pero el mono en mayúsculas con espaciado extra resultó **ilegible en móvil**:
+   etiquetas como «SEGUIDORES CONSTRUIDOS DESDE CERO» se partían en tres líneas.
 
-**La idea de la buena:** la página está construida con la gramática de lo que
-vendes. Alterna **dos mundos** y las secciones van cambiando entre ellos:
+**La v4 es claro y limpio.** Fondo blanco, mucho aire, una sola tipografía y el
+color reducido al mínimo. El trabajo lo hacen la jerarquía y el espacio.
 
-| | Pantalla (el vídeo) | Papel (la web) |
-|---|---|---|
-| Fondo | `#14171A` grafito frío | `#E8E4DA` gris cálido |
-| Texto | `#EDEEEC` | `#14171A` |
-| Secundario | `#97A1A5` | `#52585A` |
-| Acento | `#E4682A` naranja de señal | `#9C3E0E` el mismo, oscurecido |
+| | |
+|---|---|
+| Blanco | `#FFFFFF` |
+| Superficie | `#F6F7F9` — gris muy claro con sesgo frío, para alternar secciones |
+| Borde | `#DDE2E8` |
+| Tinta | `#14181F` — 17,8:1 sobre blanco |
+| Secundario | `#55606F` — 6,4:1 sobre blanco |
+| Acento | `#B54C0C` — 5,24:1 **en los dos sentidos**: como texto sobre blanco y con texto blanco encima |
+| Tipografía | **Instrument Sans**, una sola familia. Los papeles se distinguen por peso y tamaño, no por familia |
 
-Los componentes solo leen tokens locales (`--fondo`, `--texto`, `--acento`), y la
-clase `.papel` los redefine. Por eso el mismo componente funciona en los dos mundos
-sin duplicar CSS. **Si añades una sección, solo tienes que decidir si lleva `.papel`
-o no.**
+El naranja de la marca se oscureció de `#E4682A` a `#B54C0C` justamente para que
+pase contraste en los dos sentidos. Los ficheros del logo ya están actualizados.
 
-El naranja se usa como **campo macizo con tinta negra encima**, no como línea ni
-como resplandor: señalética industrial. Y ojo con una cosa: `#E4682A` como texto
-sobre papel da 2,62 de contraste y no vale. Para eso está `--naranja-txt` (`#9C3E0E`),
-que es a lo que apunta `--acento` dentro de `.papel`.
+**Reglas que salieron de los errores de las versiones anteriores:**
 
-**Tipografía:** **Familjen Grotesk** para titulares, en caja baja. **Martian Mono**
-solo para metadatos: rótulos, duraciones, unidades de precio. El mono no es adorno,
-es el lenguaje de los datos de un vídeo.
-
-**El riesgo asumido:** el titular de la portada va tratado como **subtítulo
-incrustado** — líneas de caption con el naranja macizo detrás de «con Maya», cantos
-duros. Es la firma visual exacta del producto que vendes. Se usa **una sola vez**;
-repetirlo lo convertiría en un meme. Y el resaltado lleva `white-space: nowrap`
-porque partido entre dos líneas parecía roto, no intencionado.
-
-**El marco 9:16** es la unidad estructural, y no es una metáfora forzada: la foto de
-Maya mide 900x1600, o sea 9:16 exacto.
-
-**Contrastes: todo pasa WCAG AA**, calculado, no juzgado a ojo. En esta versión
-fallaban cuatro y se corrigieron: el naranja como texto sobre papel (2,62 → 5,32),
-el texto secundario del paquete naranja (3,87 → 5,32), su rótulo (3,51 → 5,32) y el
-texto de sugerencia de los campos (3,93 → 4,83). Si tocas un color, recalcula.
+- **Nada de mono en mayúsculas para nada que pueda partirse.** Fue lo que hizo
+  ilegible la v3.
+- **Las anchuras de los titulares en px, no en `ch`.** La unidad `ch` se calcula
+  sobre el tamaño de fuente del contenedor, no del titular, y dejaba los titulares
+  apretados a media anchura en escritorio.
+- **Nada de animar las cifras.** Una versión las hacía contar desde cero y durante
+  la animación mostraba «7K» y «0,8M». Con el dato que sostiene la credibilidad de
+  la página no se juega.
+- **Comprobar siempre a 390 px de ancho**, no solo en escritorio. El fallo de
+  legibilidad de la v3 solo se veía en móvil.
+- **Los contrastes se calculan, no se juzgan a ojo.** Si tocas un color, recalcula.
 
 ### Mecánica de conversión
 
