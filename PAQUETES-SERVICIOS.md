@@ -499,6 +499,39 @@ párrafo de texto no demuestran oficio. Se cambiaron por el **test interactivo**
 **media kit con datos de audiencia**, que sí muestran cosas construidas. Regla para
 las próximas: enseña **funcionalidad y diseño**, no contenido.
 
+### La foto sobraba, y los datos se repetían tres veces
+
+Dos cosas que el usuario detectó y las dos eran ciertas.
+
+**El hueco en la tarjeta de Maya** venía de un punto de corte a medias: entre 720 y
+1000px la foto se quedaba encajonada en 240px dentro de una fila de 780px, con todo
+ese ancho vacío al lado antes de que el texto bajara. Se corrigió primero con puntos
+de corte intermedios (foto y texto compartiendo fila en tablet, apilado y centrado en
+móvil) — pero al revisarlo con más calma, la foto no hacía falta en absoluto.
+
+**La foto era decorativa, no una prueba.** Esta sección se llama «Trabajos» y existe
+para demostrar el oficio; un retrato del perro no lo hace — ya lo demuestran las
+cuatro capturas de la web que hay debajo. Y rompía la simetría con la tarjeta de
+WodBox, que no lleva foto: dos proyectos, tratamiento distinto, sin motivo real.
+Quitarla también deshizo la complejidad de CSS (rejillas con áreas nombradas en dos
+puntos de corte) que había causado el hueco en primer lugar — la lección de siempre:
+la solución más simple suele ser quitar el elemento problemático, no parchear su
+maquetación.
+
+**Y los cuatro datos de la tarjeta (41.000 / 4,5M / 30+ / 0 €) eran los mismos que ya
+están en la portada**, en prosa y en las cifras del hero. El lector los veía tres
+veces antes de llegar aquí. Se sustituyeron por datos que sí son del **proyecto web**
+y no de la audiencia: páginas indexadas, idiomas, cumplimiento legal, SEO sin pago. La
+regla que queda para el futuro: **la portada cuenta la audiencia, esta sección
+demuestra la web** — no repetir el mismo argumento con las mismas cifras en las dos.
+
+También se recortó el segundo párrafo de la tarjeta («Lo hemos hecho nosotros de
+principio a fin...»), que decía lo mismo que la intro de la sección («No son maquetas
+ni conceptos») con otras palabras.
+
+`fotos/maya-retrato.jpg` se queda en el repositorio sin usar, por si hace falta en
+otro sitio — no cuesta nada tenerla.
+
 **Casos y trabajos son lo mismo, y van en una sola sección.** Al principio había una
 sección «Caso» con la foto y los números de Maya y otra «Trabajos» con las capturas de
 su web: Maya salía dos veces y el lector no sabía si eran cosas distintas. Ahora cada
