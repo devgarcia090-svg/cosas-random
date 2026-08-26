@@ -299,6 +299,28 @@ tardar en cerrar los primeros clientes.
 las dos búsquedas de arriba da un resultado en las clases 35, 41 o 42, párate y
 cambia el nombre entonces — cuesta 22 $ en dominios, no una rotulación.
 
+### La web está desplegada
+
+**https://estudio-olfato.devgarcia090.workers.dev**
+
+Cloudflare Workers, cuenta `Devgarcia090@gmail.com`, Worker llamado `estudio-olfato`.
+Es un Worker distinto del de la web de Maya (`mayarottweiler`), así que ninguno de
+los dos puede pisar al otro.
+
+Para volver a desplegar tras un cambio:
+
+```bash
+export CLOUDFLARE_API_TOKEN="tu_token"   # nunca en un fichero del repositorio
+npm run deploy
+```
+
+Los HTML se sirven con `Cache-Control: no-cache`, así que un cambio se ve al
+recargar. Los estáticos sí se cachean.
+
+**Está en `noindex, nofollow` a propósito.** No se puede quitar hasta que estén los
+datos fiscales en la política de privacidad y el formulario tenga buzón. El día del
+lanzamiento se cambia el contenido de la etiqueta robots en `index.html`.
+
 ### El sistema visual (v4, la definitiva de momento)
 
 Hubo tres versiones antes de esta y las tres se descartaron:
