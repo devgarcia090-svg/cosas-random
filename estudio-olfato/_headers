@@ -5,9 +5,13 @@
   Permissions-Policy: geolocation=(), microphone=(), camera=()
   Strict-Transport-Security: max-age=31536000; includeSubDomains
   Content-Security-Policy: default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; script-src 'self' 'unsafe-inline'; form-action https://formspree.io; frame-ancestors 'none'; base-uri 'self'
-  Cache-Control: no-cache
+  Cache-Control: no-store
 
-# Mientras la web esté en desarrollo, TODO se revalida en cada carga.
+# Mientras la web esté en desarrollo, NADA se cachea.
+#
+# Se usaba `no-cache`, pero Cloudflare seguía sirviendo del borde con
+# `cf-cache-status: HIT` y quedaban copias viejas incluso tras desplegar: el
+# etag servido no coincidía con el fichero local. `no-store` prohíbe guardar.
 #
 # Antes el CSS se cacheaba una hora y eso provocó un fallo real: tras un
 # despliegue el navegador seguía usando el estilo.css anterior y la página se

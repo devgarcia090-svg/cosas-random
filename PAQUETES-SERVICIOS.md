@@ -323,7 +323,7 @@ export CLOUDFLARE_API_TOKEN="tu_token"   # nunca en un fichero del repositorio
 npm run deploy
 ```
 
-**Todo se sirve con `Cache-Control: no-cache`**, así que cualquier cambio se ve al
+**Todo se sirve con `Cache-Control: no-store`**, así que cualquier cambio se ve al
 recargar. Y además el enlace al CSS lleva versión (`estilo.css?v=3`): **si tocas
 `estilo.css`, sube ese número en los cuatro HTML.**
 
@@ -334,6 +334,13 @@ sin márgenes, amontonados. No era el diseño, era el CSS viejo.
 
 Dos cosas que aprender de ahí:
 
+- **`no-cache` no basta con Cloudflare.** Se probó primero y el borde seguía
+  respondiendo `cf-cache-status: HIT` con copias viejas: el etag servido no coincidía
+  con el md5 del fichero local ni después de desplegar. Con `no-store` sí deja de
+  guardarlas. Y para saber qué está realmente publicado, no te fíes de lo que
+  devuelva `curl` desde aquí: pregunta a la API, que es la única fuente fiable —
+  `GET /accounts/<id>/workers/scripts/estudio-olfato/deployments`, y el primero de la
+  lista es el activo.
 - En `_headers` las reglas **se suman, no se sustituyen**. Si pones `Cache-Control`
   en `/*` y luego otro valor para una ruta, la respuesta lleva los dos y gana el más
   restrictivo. Por eso ahora hay una sola regla para todo.
@@ -428,6 +435,12 @@ guías y el cuerpo de un artículo, y eran malas capturas: un listado de enlaces
 párrafo de texto no demuestran oficio. Se cambiaron por el **test interactivo** y el
 **media kit con datos de audiencia**, que sí muestran cosas construidas. Regla para
 las próximas: enseña **funcionalidad y diseño**, no contenido.
+
+**Casos y trabajos son lo mismo, y van en una sola sección.** Al principio había una
+sección «Caso» con la foto y los números de Maya y otra «Trabajos» con las capturas de
+su web: Maya salía dos veces y el lector no sabía si eran cosas distintas. Ahora cada
+proyecto es un bloque con foto, historia, disciplinas, datos y capturas, todo junto. Y
+el menú tiene su enlace directo.
 
 **Cada proyecto tiene cuatro capturas**, no una: portada en escritorio dentro de un
 marco de navegador con su URL, portada en móvil dentro de un marco de teléfono, y dos
