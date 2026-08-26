@@ -18,11 +18,11 @@
 
 <meta property="og:title" content="Estudio Olfato — Vídeo y web para el sector mascotas">
 <meta property="og:description" content="Construimos una audiencia de 41.000 personas desde cero y la web que la convierte en clientes. Tres paquetes con precio cerrado.">
-<!-- PENDIENTE: imagen de compartir horizontal de 1200x630. La foto actual es
-     vertical (900x1600) y WhatsApp y LinkedIn la recortan por los lados. -->
-<meta property="og:image" content="https://olfatoestudio.com/fotos/maya-piscina.jpg">
-<meta property="og:image:width" content="900">
-<meta property="og:image:height" content="1600">
+<meta property="og:image" content="https://olfatoestudio.com/img/compartir.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Estudio Olfato · Vídeo y web para el sector mascotas">
 <meta property="og:site_name" content="Estudio Olfato">
 <meta property="og:locale" content="es_ES">
 <meta property="og:url" content="https://olfatoestudio.com/">
@@ -30,7 +30,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Estudio Olfato — Vídeo y web para el sector mascotas">
 <meta name="twitter:description" content="Vídeo vertical y páginas web para negocios del sector mascotas.">
-<meta name="twitter:image" content="https://olfatoestudio.com/fotos/maya-piscina.jpg">
+<meta name="twitter:image" content="https://olfatoestudio.com/img/compartir.jpg">
 
 <script type="application/ld+json">
 {
@@ -72,12 +72,14 @@
 </script>
 
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/img/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/estilo.css?v=3">
+<link rel="stylesheet" href="/estilo.css?v=5">
 </head>
 <body>
+<a class="saltar" href="#principal">Saltar al contenido</a>
 
 <header class="nav">
   <div class="nav-in">
@@ -113,7 +115,7 @@
 </header>
 
 <!-- PORTADA -->
-<section class="portada">
+<section class="portada" id="principal">
   <div class="caja">
     <h1>Vídeo y web para negocios del sector mascotas.</h1>
     <p class="grande">Construimos una audiencia de 41.000 personas desde cero, sin gastar
@@ -199,13 +201,52 @@
         <a href="https://mayarottweiler.com" target="_blank" rel="noopener" class="btn btn-borde">Ver el proyecto</a>
       </div>
     </div>
-    <!-- PENDIENTE: sustituir por tres capturas reales de trabajos y borrar este hueco. -->
-    <div class="hueco rev">
-      <h4>Aquí van tres capturas de trabajos reales</h4>
-      <p>En cuanto tengas los primeros clientes, este hueco se sustituye por capturas de sus
-      webs y un vídeo. Es lo que más convierte de toda la página, así que pide permiso para
-      publicarlas desde el primer proyecto.</p>
+
+  </div>
+</section>
+
+<!-- TRABAJOS -->
+<section id="trabajos">
+  <div class="caja">
+    <div class="cabecera">
+      <span class="eyebrow">Trabajos</span>
+      <h2>Cosas que hemos construido.</h2>
+      <p>Dos proyectos propios, en marcha y visitables. No son maquetas ni conceptos.</p>
     </div>
+    <div class="rejilla-2">
+      <article class="trabajo rev">
+        <a href="https://mayarottweiler.com" target="_blank" rel="noopener">
+          <img src="/img/trabajo-maya.jpg" width="1000" height="625" loading="lazy"
+               alt="Portada de mayarottweiler.com, la web del proyecto Maya">
+        </a>
+        <div class="trabajo-txt">
+          <h3>mayarottweiler.com</h3>
+          <p>Web de contenido con más de treinta páginas indexadas, guías que posicionan en
+          Google, newsletter y tienda conectada. Hecha a mano sobre Cloudflare, con RGPD y
+          LSSI cumplidos.</p>
+          <p class="etiquetas">Web · SEO · Email · Tienda</p>
+          <a class="btn btn-texto" href="https://mayarottweiler.com" target="_blank" rel="noopener">Visitar el sitio →</a>
+        </div>
+      </article>
+      <article class="trabajo rev">
+        <a href="https://wodbox.xyz" target="_blank" rel="noopener">
+          <img src="/img/trabajo-wodbox.jpg" width="1000" height="625" loading="lazy"
+               alt="Portada de wodbox.xyz, la web del producto WodBox">
+        </a>
+        <div class="trabajo-txt">
+          <h3>wodbox.xyz</h3>
+          <p>Producto propio: una app para gestionar boxes de CrossFit — miembros, reservas,
+          WOD del día y comunicación en un solo sitio, para iOS y Android. Diseño de producto,
+          web y desarrollo.</p>
+          <p class="etiquetas">Producto · App · Web</p>
+          <a class="btn btn-texto" href="https://wodbox.xyz" target="_blank" rel="noopener">Visitar el sitio →</a>
+        </div>
+      </article>
+    </div>
+    <p class="nota rev"><strong>WodBox está fuera del sector mascotas, y es a propósito que lo
+    veas.</strong> Es un proyecto propio y lo enseñamos porque demuestra hasta dónde llega la
+    parte técnica: un producto con app, no solo una web. Pero el compromiso sigue siendo el de
+    arriba — a clientes solo servimos al sector mascotas.</p>
   </div>
 </section>
 
@@ -495,8 +536,8 @@
           <button type="submit" class="btn btn-principal" id="enviar">Enviar solicitud</button>
           <p class="aviso">Contestamos en 48 horas laborables.</p>
         </div>
-        <p class="ok" id="ok"></p>
-        <p class="ko" id="ko"></p>
+        <p class="ok" id="ok" role="status" aria-live="polite"></p>
+        <p class="ko" id="ko" role="alert" aria-live="assertive"></p>
       </form>
     </div>
   </div>

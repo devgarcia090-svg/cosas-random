@@ -1,0 +1,7 @@
+# MODO PREVISUALIZACIÓN: la web está en noindex mientras faltan los datos
+# fiscales de las páginas legales y el buzón del formulario.
+# AL LANZAR: borrar el Disallow, dejar solo "Allow: /" y el Sitemap.
+User-agent: *
+Disallow: /
+
+Sitemap: https://olfatoestudio.com/sitemap.xml

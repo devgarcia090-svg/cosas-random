@@ -356,3 +356,39 @@ section { padding: var(--seccion) 0; }
   background: var(--blanco); border: 1px solid var(--borde);
   padding: 0.1rem 0.35rem; border-radius: 3px; font-size: 0.88em;
 }
+
+/* ── Trabajos ─────────────────────────────────────────────────────── */
+.trabajo {
+  border: 1px solid var(--borde); border-radius: 12px; overflow: hidden;
+  background: var(--blanco); display: flex; flex-direction: column;
+}
+.trabajo > a { display: block; border-bottom: 1px solid var(--borde); }
+.trabajo img { width: 100%; height: auto; aspect-ratio: 16/10; object-fit: cover; object-position: top center; }
+.trabajo-txt { padding: 1.5rem 1.6rem 1.6rem; display: grid; gap: 0.7rem; }
+.trabajo-txt h3 { margin: 0; }
+.trabajo-txt p { font-size: 0.96rem; margin: 0; }
+.etiquetas { font-size: 0.88rem; color: var(--tinta-2); }
+.trabajo-txt .btn-texto { justify-self: start; margin-top: 0.2rem; }
+
+/* ── Accesibilidad: enlace para saltar la navegación ─────────────── */
+.saltar {
+  position: absolute; left: -9999px; top: 0; z-index: 100;
+  background: var(--acento); color: var(--blanco);
+  padding: 0.7rem 1.1rem; border-radius: 0 0 6px 0;
+  font-size: 0.95rem; font-weight: 600; text-decoration: none;
+}
+.saltar:focus { left: 0; }
+
+/* ── Impresión: las páginas legales se imprimen y se guardan ─────── */
+@media print {
+  .nav, .fija, .pie .der, .saltar, .pendiente { display: none !important; }
+  body { background: #fff; color: #000; font-size: 11pt; }
+  section { padding: 0 0 1rem; }
+  .caja { max-width: none; padding: 0; }
+  .legal, .legal p, .legal li { color: #000; max-width: none; }
+  .legal h2 { border-top: 1px solid #999; page-break-after: avoid; }
+  .ficha { border: 1px solid #999; background: #fff; }
+  a { color: #000; text-decoration: underline; }
+  .legal a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 9pt; color: #444; }
+  .pie { border-top: 1px solid #999; }
+}

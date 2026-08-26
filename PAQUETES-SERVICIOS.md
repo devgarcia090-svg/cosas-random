@@ -406,9 +406,48 @@ no es ruido visual:
   delante del formulario a propósito.
 - **El caso Maya con foto**, que es la única prueba visual real que existe hoy.
 
-Queda el hueco marcado con borde discontinuo para **tres capturas de trabajos
-reales**. Es lo que más va a convertir de toda la página, así que pide permiso para
-publicar capturas desde el primer cliente.
+La sección **Trabajos** ya tiene dos proyectos reales, con captura y enlace:
+
+| | |
+|---|---|
+| `mayarottweiler.com` | Web de contenido, SEO, newsletter y tienda |
+| `wodbox.xyz` | Producto propio: app de gestión para boxes de CrossFit |
+
+Sobre WodBox hay una decisión que conviene no deshacer: **está fuera del sector
+mascotas y la página lo dice en voz alta**, con una nota que explica que se enseña
+por capacidad técnica (un producto con app, no solo una web) y que el compromiso de
+servir solo al sector mascotas sigue en pie. Esconderlo sería raro y quitarlo
+desperdicia la mejor prueba técnica que hay; explicarlo lo convierte en un punto a
+favor, en la misma línea que la sección de «lo que no hacemos».
+
+Cuando tengas trabajos de clientes, van en esa misma rejilla. **Pide permiso para
+publicar capturas desde el primer proyecto.**
+
+Las capturas se generan renderizando cada sitio y comprimiendo a JPEG. Están en
+`estudio-olfato/img/`.
+
+### Recursos de la web
+
+En `estudio-olfato/img/`:
+
+| Fichero | Para qué |
+|---|---|
+| `compartir.jpg` | Imagen 1200x630 para WhatsApp, LinkedIn y X. Con la tipografía de la marca incrustada |
+| `trabajo-maya.jpg` | Captura de mayarottweiler.com para la sección de trabajos |
+| `trabajo-wodbox.jpg` | Captura de wodbox.xyz |
+| `apple-touch-icon.png` | Icono de 180x180 para cuando alguien añade la web a la pantalla de inicio en iOS |
+
+Y en la raíz del sitio: `robots.txt` (ahora en `Disallow: /` porque la web está en
+previsualización) y `sitemap.xml` con las tres URL.
+
+### Accesibilidad y detalles
+
+- **Enlace «saltar al contenido»** en las cuatro páginas, visible solo al tabular.
+- Los avisos del formulario se anuncian a lectores de pantalla (`aria-live`).
+- **Estilos de impresión** para las páginas legales: sin navegación ni barras, con
+  las URL de los enlaces desplegadas entre paréntesis, para que se puedan guardar en
+  PDF o imprimir y archivar.
+- Todos los contrastes pasan WCAG AA (ver el sistema visual).
 
 ### Los ficheros del logo
 
