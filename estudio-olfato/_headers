@@ -1,0 +1,22 @@
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  Content-Security-Policy: default-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; script-src 'self' 'unsafe-inline'; form-action https://formspree.io; frame-ancestors 'none'; base-uri 'self'
+
+# Los HTML se revalidan siempre: así un cambio se ve al recargar
+/*.html
+  Cache-Control: no-cache
+
+/
+  Cache-Control: no-cache
+
+# Los estáticos sí se cachean
+/*.css
+  Cache-Control: public, max-age=3600
+/*.svg
+  Cache-Control: public, max-age=86400
+/fotos/*
+  Cache-Control: public, max-age=86400

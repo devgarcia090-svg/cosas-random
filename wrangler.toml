@@ -1,0 +1,17 @@
+# ══════════════════════════════════════════════════════════════════════
+# Estudio Olfato · despliegue en Cloudflare Workers (static assets)
+#
+# Este fichero despliega ÚNICAMENTE la carpeta estudio-olfato/.
+# El Worker se llama "estudio-olfato", así que `wrangler deploy` NUNCA
+# puede tocar el Worker "mayarottweiler" de la web de Maya, ni al
+# revés. Son dos Workers distintos en la misma cuenta.
+# ══════════════════════════════════════════════════════════════════════
+
+name = "estudio-olfato"
+account_id = "c21d634c54dbb741978cf0efd1135bc8"
+compatibility_date = "2026-08-26"
+
+# Sitio estático puro: no hay código de Worker, solo ficheros.
+[assets]
+directory = "./estudio-olfato"
+not_found_handling = "404-page"
