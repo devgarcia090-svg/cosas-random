@@ -283,10 +283,19 @@ Con 0 resultados en la frase exacta ya puedes hacer esta semana, y por menos de
 - [ ] Crear un formulario propio en `formspree.io` y sustituir
       `TU_ID_DE_FORMSPREE` en `estudio-olfato/index.html`. Es gratis y son dos
       minutos. Hasta entonces el formulario no envía nada.
-- [ ] Rellenar los tres campos marcados `PENDIENTE` en
-      `estudio-olfato/privacidad.html` (nombre fiscal, NIF, domicilio) y borrar el
-      aviso naranja del principio. Sin eso no se puede publicar el formulario: son
-      datos que exige el artículo 13 del RGPD y que solo tú tienes.
+- [ ] Rellenar los campos `PENDIENTE` en **las dos páginas legales** y borrar sus
+      avisos naranjas:
+      - `privacidad.html` — nombre fiscal, NIF y domicilio. Los exige el artículo 13
+        del RGPD y sin ellos no se puede publicar el formulario.
+      - `aviso-legal.html` — los mismos datos. Los exige el **artículo 10 de la
+        LSSI-CE** para cualquier web con actividad comercial, y es lo que impide
+        quitar el `noindex`.
+
+      Sobre las que **no** hacen falta, para que no te las venda nadie: no hay
+      política de cookies porque la web no usa cookies ni analítica, y no hay
+      condiciones de contratación porque no se vende nada en línea (la contratación
+      se formaliza con el presupuesto aceptado por escrito). Si algún día añades
+      analítica o cobras desde la web, eso cambia.
 - [x] Logo y favicon: hechos, en `estudio-olfato/`.
 
 Lo que **no** toca todavía es registrar el nombre comercial en la OEPM: unos 150 €
