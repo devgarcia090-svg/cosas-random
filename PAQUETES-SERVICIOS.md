@@ -299,32 +299,54 @@ tardar en cerrar los primeros clientes.
 las dos búsquedas de arriba da un resultado en las clases 35, 41 o 42, párate y
 cambia el nombre entonces — cuesta 22 $ en dominios, no una rotulación.
 
-### El sistema visual
+### El sistema visual: pantalla y papel
 
-La web ya no usa el tema de Maya. Tiene el suyo en `estudio-olfato/estilo.css`, y el
-cambio es deliberado: el tema de Maya está hecho para entretener (negro, naranja
-fuego, brasas animadas, grano de película, titulares en mayúsculas a peso 900) y eso
-juega en contra cuando le pides 2.490 € a la directora de una clínica.
+La web tiene su propio sistema en `estudio-olfato/estilo.css`. Hubo dos versiones
+antes de esta y las dos fallaban por lo mismo — eran plantillas:
 
-| | |
-|---|---|
-| Papel | `#EDEFEC` — gris con un sesgo verde muy leve, no gris de fábrica |
-| Tinta | `#12171A` — casi negro, con sesgo frío |
-| Verde bosque | `#1E4238` — color dominante de marca: portada, secciones oscuras, botones |
-| Brasa | `#C8722A` — el naranja de siempre, ahora **micro-acento**: la trufa y algunas cifras |
-| Titulares | **Newsreader** (serif editorial), en caja baja, nunca en mayúsculas |
-| Funcional | **Archivo** (navegación, listas, precios con cifras tabulares) |
+1. El tema heredado de Maya (negro, naranja fuego, brasas, grano, mayúsculas a peso
+   900). Hecho para entretener, no para vender servicios de 2.490 €.
+2. Papel casi crema con serif editorial en caja baja, columnas separadas por filetes
+   y tarjetas con borde. Correcto y anodino: es el segundo aspecto más genérico que
+   existe.
 
-Fuera de la página: Montserrat (la fuente gratuita más usada de la última década,
-lee a plantilla), el grano, las brasas, los resplandores, el barrido de los botones,
-las mayúsculas de los titulares y **todos los emojis**, que eran lo que más restaba
-seriedad.
+**La idea de la buena:** la página está construida con la gramática de lo que
+vendes. Alterna **dos mundos** y las secciones van cambiando entre ellos:
 
-**Todos los contrastes pasan WCAG AA**, comprobado calculando los ratios, no a ojo.
-Cuatro combinaciones fallaban en la primera versión y se corrigieron: el gris
-secundario (3,98 → 5,45), los rótulos sobre verde (4,10 → 5,86), el pie de las
-cifras y el marcador «El más elegido», que llevaba texto claro sobre naranja (3,08)
-y ahora lo lleva oscuro (5,07). Si tocas un color, recalcula.
+| | Pantalla (el vídeo) | Papel (la web) |
+|---|---|---|
+| Fondo | `#14171A` grafito frío | `#E8E4DA` gris cálido |
+| Texto | `#EDEEEC` | `#14171A` |
+| Secundario | `#97A1A5` | `#52585A` |
+| Acento | `#E4682A` naranja de señal | `#9C3E0E` el mismo, oscurecido |
+
+Los componentes solo leen tokens locales (`--fondo`, `--texto`, `--acento`), y la
+clase `.papel` los redefine. Por eso el mismo componente funciona en los dos mundos
+sin duplicar CSS. **Si añades una sección, solo tienes que decidir si lleva `.papel`
+o no.**
+
+El naranja se usa como **campo macizo con tinta negra encima**, no como línea ni
+como resplandor: señalética industrial. Y ojo con una cosa: `#E4682A` como texto
+sobre papel da 2,62 de contraste y no vale. Para eso está `--naranja-txt` (`#9C3E0E`),
+que es a lo que apunta `--acento` dentro de `.papel`.
+
+**Tipografía:** **Familjen Grotesk** para titulares, en caja baja. **Martian Mono**
+solo para metadatos: rótulos, duraciones, unidades de precio. El mono no es adorno,
+es el lenguaje de los datos de un vídeo.
+
+**El riesgo asumido:** el titular de la portada va tratado como **subtítulo
+incrustado** — líneas de caption con el naranja macizo detrás de «con Maya», cantos
+duros. Es la firma visual exacta del producto que vendes. Se usa **una sola vez**;
+repetirlo lo convertiría en un meme. Y el resaltado lleva `white-space: nowrap`
+porque partido entre dos líneas parecía roto, no intencionado.
+
+**El marco 9:16** es la unidad estructural, y no es una metáfora forzada: la foto de
+Maya mide 900x1600, o sea 9:16 exacto.
+
+**Contrastes: todo pasa WCAG AA**, calculado, no juzgado a ojo. En esta versión
+fallaban cuatro y se corrigieron: el naranja como texto sobre papel (2,62 → 5,32),
+el texto secundario del paquete naranja (3,87 → 5,32), su rótulo (3,51 → 5,32) y el
+texto de sugerencia de los campos (3,93 → 4,83). Si tocas un color, recalcula.
 
 ### Mecánica de conversión
 
@@ -353,8 +375,8 @@ En `estudio-olfato/`:
 
 | Fichero | Para qué |
 |---|---|
-| `logo.svg` | Logotipo completo, para fondo claro. Firma de correo, facturas, presupuestos. |
-| `logo-inverso.svg` | El mismo para fondos oscuros. |
+| `logo.svg` | Logotipo completo para fondo oscuro. |
+| `logo-claro.svg` | El mismo para fondo claro. Firma de correo, facturas, presupuestos. |
 | `logo-mono.svg` | El mismo a un solo color, hereda el del contexto. Para serigrafía, sellos y fondos claros. |
 | `logo-marca.svg` | Solo la trufa. Avatar de Instagram y TikTok, sello en los vídeos. |
 | `favicon.svg` | Trufa sobre cuadrado oscuro, legible en pestañas claras y oscuras. |
@@ -365,7 +387,7 @@ como dos óvalos (se leía como una calavera), un hocico de perfil (no se
 reconocía) y una "O" con ventanas (salía una cabeza de oso en negativo).
 
 Dos cosas prácticas. El texto del logotipo va como **texto**, no como trazos, así
-que necesita Archivo instalada para verse igual: si se lo mandas a una
+que necesita Familjen Grotesk y Martian Mono instaladas para verse igual: si se lo mandas a una
 imprenta, pide que lo convierta a curvas o mándale un PDF. Y en `logo-marca.svg`
 el color sale de `var(--eo-marca)` con `#C8722A` de reserva, así que puedes
 recolorearlo por CSS sin tocar el fichero.
