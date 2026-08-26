@@ -76,7 +76,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/estilo.css?v=5">
+<link rel="stylesheet" href="/estilo.css?v=7">
 </head>
 <body>
 <a class="saltar" href="#principal">Saltar al contenido</a>
@@ -211,38 +211,104 @@
     <div class="cabecera">
       <span class="eyebrow">Trabajos</span>
       <h2>Cosas que hemos construido.</h2>
-      <p>Dos proyectos propios, en marcha y visitables. No son maquetas ni conceptos.</p>
+      <p>Dos proyectos propios, en marcha y visitables. No son maquetas ni conceptos: puedes
+      abrirlos y navegarlos ahora mismo.</p>
     </div>
-    <div class="rejilla-2">
-      <article class="trabajo rev">
-        <a href="https://mayarottweiler.com" target="_blank" rel="noopener">
-          <img src="/img/trabajo-maya.jpg" width="1000" height="625" loading="lazy"
-               alt="Portada de mayarottweiler.com, la web del proyecto Maya">
-        </a>
-        <div class="trabajo-txt">
+
+    <article class="proyecto rev">
+      <div class="proyecto-cab">
+        <div>
           <h3>mayarottweiler.com</h3>
-          <p>Web de contenido con más de treinta páginas indexadas, guías que posicionan en
-          Google, newsletter y tienda conectada. Hecha a mano sobre Cloudflare, con RGPD y
-          LSSI cumplidos.</p>
-          <p class="etiquetas">Web · SEO · Email · Tienda</p>
-          <a class="btn btn-texto" href="https://mayarottweiler.com" target="_blank" rel="noopener">Visitar el sitio →</a>
+          <p>Web de contenido para una audiencia de 41.000 personas: más de treinta páginas
+          indexadas, guías que posicionan en Google, newsletter y tienda conectada. Hecha a
+          mano sobre Cloudflare, con RGPD y LSSI cumplidos.</p>
+          <ul class="tags">
+            <li>Diseño web</li><li>Desarrollo</li><li>SEO</li><li>Contenido</li><li>Email</li><li>Tienda</li>
+          </ul>
+          <a class="btn btn-borde" href="https://mayarottweiler.com" target="_blank" rel="noopener">Visitar mayarottweiler.com</a>
         </div>
-      </article>
-      <article class="trabajo rev">
-        <a href="https://wodbox.xyz" target="_blank" rel="noopener">
-          <img src="/img/trabajo-wodbox.jpg" width="1000" height="625" loading="lazy"
-               alt="Portada de wodbox.xyz, la web del producto WodBox">
-        </a>
-        <div class="trabajo-txt">
+        <dl class="proyecto-datos">
+          <div><dt class="num">41.000</dt><dd>Seguidores</dd></div>
+          <div><dt class="num">4,5M</dt><dd>Views/mes</dd></div>
+          <div><dt class="num">30+</dt><dd>Páginas en Google</dd></div>
+          <div><dt class="num">0 €</dt><dd>En publicidad</dd></div>
+        </dl>
+      </div>
+
+      <div class="vistas">
+        <figure class="v-pc">
+          <div class="chrome" aria-hidden="true"><span></span><span></span><span></span><i>mayarottweiler.com</i></div>
+          <img src="/img/trabajos/maya-pc.jpg" width="1200" height="750" loading="lazy"
+               alt="Portada de mayarottweiler.com en ordenador">
+          <figcaption>Portada · escritorio</figcaption>
+        </figure>
+        <figure class="v-movil">
+          <div class="marco-movil"><img src="/img/trabajos/maya-movil.jpg" width="440" height="952" loading="lazy"
+               alt="Portada de mayarottweiler.com en móvil"></div>
+          <figcaption>Portada · móvil</figcaption>
+        </figure>
+      </div>
+
+      <div class="vistas-extra">
+        <figure>
+          <img src="/img/trabajos/maya-guias.jpg" width="900" height="562" loading="lazy"
+               alt="Índice de guías de mayarottweiler.com, con las fichas de cada guía">
+          <figcaption>Más de treinta guías, cada una escrita para posicionar por su cuenta</figcaption>
+        </figure>
+        <figure>
+          <img src="/img/trabajos/maya-articulo.jpg" width="900" height="562" loading="lazy"
+               alt="Cuerpo de una de las guías de mayarottweiler.com">
+          <figcaption>Contenido largo, con avisos legales y fuentes citadas</figcaption>
+        </figure>
+      </div>
+    </article>
+
+    <article class="proyecto rev">
+      <div class="proyecto-cab">
+        <div>
           <h3>wodbox.xyz</h3>
           <p>Producto propio: una app para gestionar boxes de CrossFit — miembros, reservas,
           WOD del día y comunicación en un solo sitio, para iOS y Android. Diseño de producto,
-          web y desarrollo.</p>
-          <p class="etiquetas">Producto · App · Web</p>
-          <a class="btn btn-texto" href="https://wodbox.xyz" target="_blank" rel="noopener">Visitar el sitio →</a>
+          web de lanzamiento y desarrollo.</p>
+          <ul class="tags">
+            <li>Producto</li><li>App iOS y Android</li><li>Diseño de interfaz</li><li>Web</li><li>Desarrollo</li>
+          </ul>
+          <a class="btn btn-borde" href="https://wodbox.xyz" target="_blank" rel="noopener">Visitar wodbox.xyz</a>
         </div>
-      </article>
-    </div>
+        <dl class="proyecto-datos">
+          <div><dt class="num">2</dt><dd>Plataformas: iOS y Android</dd></div>
+          <div><dt class="num">1</dt><dd>Sola app para todo el box</dd></div>
+        </dl>
+      </div>
+
+      <div class="vistas">
+        <figure class="v-pc">
+          <div class="chrome" aria-hidden="true"><span></span><span></span><span></span><i>wodbox.xyz</i></div>
+          <img src="/img/trabajos/wodbox-pc.jpg" width="1200" height="750" loading="lazy"
+               alt="Portada de wodbox.xyz en ordenador">
+          <figcaption>Portada · escritorio</figcaption>
+        </figure>
+        <figure class="v-movil">
+          <div class="marco-movil"><img src="/img/trabajos/wodbox-movil.jpg" width="440" height="952" loading="lazy"
+               alt="Portada de wodbox.xyz en móvil"></div>
+          <figcaption>Portada · móvil</figcaption>
+        </figure>
+      </div>
+
+      <div class="vistas-extra">
+        <figure>
+          <img src="/img/trabajos/wodbox-funciones.jpg" width="900" height="562" loading="lazy"
+               alt="Sección de funcionalidades de wodbox.xyz">
+          <figcaption>Funcionalidades, con la interfaz real de la app</figcaption>
+        </figure>
+        <figure>
+          <img src="/img/trabajos/wodbox-precio.jpg" width="900" height="562" loading="lazy"
+               alt="Sección de precio de wodbox.xyz">
+          <figcaption>Precio y planes</figcaption>
+        </figure>
+      </div>
+    </article>
+
     <p class="nota rev"><strong>WodBox está fuera del sector mascotas, y es a propósito que lo
     veas.</strong> Es un proyecto propio y lo enseñamos porque demuestra hasta dónde llega la
     parte técnica: un producto con app, no solo una web. Pero el compromiso sigue siendo el de

@@ -423,8 +423,23 @@ favor, en la misma línea que la sección de «lo que no hacemos».
 Cuando tengas trabajos de clientes, van en esa misma rejilla. **Pide permiso para
 publicar capturas desde el primer proyecto.**
 
-Las capturas se generan renderizando cada sitio y comprimiendo a JPEG. Están en
-`estudio-olfato/img/`.
+**Cada proyecto tiene cuatro capturas**, no una: portada en escritorio dentro de un
+marco de navegador con su URL, portada en móvil dentro de un marco de teléfono, y dos
+vistas interiores con pie explicativo. Los marcos están dibujados en CSS, no
+incrustados en la imagen, así que se pueden cambiar sin retocar los JPEG.
+
+Las capturas están en `estudio-olfato/img/trabajos/` y se generan renderizando cada
+sitio con Chromium y comprimiendo a JPEG por canvas (388 KB las ocho juntas).
+
+Dos trucos que hicieron falta y conviene recordar:
+
+- Las webs con animaciones al hacer scroll **no pintan** el contenido de más abajo si
+  las metes en un iframe desplazado. La forma que funciona es servir una copia de la
+  página con `body{margin-top:-Npx}` y capturar en una ventana normal.
+- Tampoco vale capturar en una ventana altísima para pillar la página entera: si el
+  hero usa `100vh`, se estira hasta ocupar toda la ventana y empuja el resto fuera.
+- Y para las capturas de la web de Maya hay que ocultar el banner de cookies, que es
+  una capa de interfaz y no parte del diseño.
 
 ### Recursos de la web
 
@@ -433,8 +448,8 @@ En `estudio-olfato/img/`:
 | Fichero | Para qué |
 |---|---|
 | `compartir.jpg` | Imagen 1200x630 para WhatsApp, LinkedIn y X. Con la tipografía de la marca incrustada |
-| `trabajo-maya.jpg` | Captura de mayarottweiler.com para la sección de trabajos |
-| `trabajo-wodbox.jpg` | Captura de wodbox.xyz |
+| `trabajos/maya-*.jpg` | Cuatro vistas de mayarottweiler.com: portada en PC y móvil, índice de guías y cuerpo de un artículo |
+| `trabajos/wodbox-*.jpg` | Cuatro vistas de wodbox.xyz: portada en PC y móvil, funcionalidades y precio |
 | `apple-touch-icon.png` | Icono de 180x180 para cuando alguien añade la web a la pantalla de inicio en iOS |
 
 Y en la raíz del sitio: `robots.txt` (ahora en `Disallow: /` porque la web está en

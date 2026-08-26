@@ -358,17 +358,78 @@ section { padding: var(--seccion) 0; }
 }
 
 /* ── Trabajos ─────────────────────────────────────────────────────── */
-.trabajo {
-  border: 1px solid var(--borde); border-radius: 12px; overflow: hidden;
-  background: var(--blanco); display: flex; flex-direction: column;
+.proyecto { display: grid; gap: clamp(1.6rem, 3vw, 2.4rem); }
+.proyecto + .proyecto {
+  margin-top: clamp(3.5rem, 7vw, 5.5rem);
+  padding-top: clamp(3.5rem, 7vw, 5.5rem);
+  border-top: 1px solid var(--borde-fino);
 }
-.trabajo > a { display: block; border-bottom: 1px solid var(--borde); }
-.trabajo img { width: 100%; height: auto; aspect-ratio: 16/10; object-fit: cover; object-position: top center; }
-.trabajo-txt { padding: 1.5rem 1.6rem 1.6rem; display: grid; gap: 0.7rem; }
-.trabajo-txt h3 { margin: 0; }
-.trabajo-txt p { font-size: 0.96rem; margin: 0; }
-.etiquetas { font-size: 0.88rem; color: var(--tinta-2); }
-.trabajo-txt .btn-texto { justify-self: start; margin-top: 0.2rem; }
+.proyecto-cab { display: grid; grid-template-columns: 1fr 300px; gap: clamp(2rem, 4vw, 3.5rem); align-items: start; }
+.proyecto-cab h3 { font-size: 1.45rem; letter-spacing: -.026em; margin-bottom: 0.7rem; }
+.proyecto-cab p { font-size: 1rem; margin-bottom: 1.1rem; }
+
+.tags { display: flex; flex-wrap: wrap; gap: 0.4rem; list-style: none; margin-bottom: 1.4rem; }
+.tags li {
+  font-size: 0.85rem; color: var(--tinta-2); background: var(--superficie);
+  border: 1px solid var(--borde); border-radius: 20px; padding: 0.28rem 0.8rem;
+}
+
+.proyecto-datos { display: grid; grid-template-columns: 1fr 1fr; gap: 1.3rem 1.2rem; margin: 0; }
+.proyecto-datos dt { font-size: 1.55rem; font-weight: 600; letter-spacing: -.03em; line-height: 1; color: var(--tinta); }
+.proyecto-datos dd { margin: 0.3rem 0 0; font-size: 0.88rem; color: var(--tinta-2); line-height: 1.35; }
+
+/* Vista principal: navegador grande y móvil al lado */
+.vistas { display: grid; grid-template-columns: 1fr 260px; gap: clamp(1.2rem, 2.5vw, 2rem); align-items: end; }
+.vistas figure, .vistas-extra figure { margin: 0; }
+.vistas figcaption, .vistas-extra figcaption {
+  margin-top: 0.7rem; font-size: 0.87rem; color: var(--tinta-2); line-height: 1.4;
+}
+
+/* Marco de navegador dibujado en CSS */
+.v-pc > img {
+  width: 100%; height: auto; display: block;
+  border: 1px solid var(--borde); border-top: 0;
+  border-radius: 0 0 10px 10px;
+}
+.chrome {
+  display: flex; align-items: center; gap: 6px;
+  background: var(--superficie); border: 1px solid var(--borde); border-bottom: 0;
+  border-radius: 10px 10px 0 0; padding: 0.55rem 0.8rem;
+}
+.chrome span { width: 9px; height: 9px; border-radius: 50%; background: #CBD2DA; flex-shrink: 0; }
+.chrome i {
+  font-style: normal; font-size: 0.76rem; color: var(--tinta-2);
+  background: var(--blanco); border: 1px solid var(--borde); border-radius: 5px;
+  padding: 0.12rem 0.6rem; margin-left: 0.5rem;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+
+/* Marco de móvil */
+.marco-movil {
+  border: 8px solid #14181F; border-radius: 26px; overflow: hidden;
+  background: #14181F; max-width: 260px;
+}
+.marco-movil img { width: 100%; height: auto; display: block; }
+
+/* Vistas secundarias */
+.vistas-extra { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.2rem, 2.5vw, 2rem); }
+.vistas-extra img {
+  width: 100%; height: auto; display: block;
+  border: 1px solid var(--borde); border-radius: 10px;
+}
+
+@media (max-width: 1000px) {
+  .proyecto-cab { grid-template-columns: 1fr; }
+  .proyecto-datos { grid-template-columns: repeat(4, 1fr); }
+  .vistas { grid-template-columns: 1fr 200px; }
+  .marco-movil { max-width: 200px; }
+}
+@media (max-width: 720px) {
+  .proyecto-datos { grid-template-columns: 1fr 1fr; }
+  .vistas, .vistas-extra { grid-template-columns: 1fr; }
+  .vistas .v-movil { justify-self: start; }
+  .marco-movil { max-width: 220px; }
+}
 
 /* ── Accesibilidad: enlace para saltar la navegación ─────────────── */
 .saltar {
