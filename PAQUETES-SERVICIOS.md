@@ -423,6 +423,12 @@ favor, en la misma línea que la sección de «lo que no hacemos».
 Cuando tengas trabajos de clientes, van en esa misma rejilla. **Pide permiso para
 publicar capturas desde el primer proyecto.**
 
+**Qué se enseña importa más que el recorte.** La primera versión usaba el índice de
+guías y el cuerpo de un artículo, y eran malas capturas: un listado de enlaces y un
+párrafo de texto no demuestran oficio. Se cambiaron por el **test interactivo** y el
+**media kit con datos de audiencia**, que sí muestran cosas construidas. Regla para
+las próximas: enseña **funcionalidad y diseño**, no contenido.
+
 **Cada proyecto tiene cuatro capturas**, no una: portada en escritorio dentro de un
 marco de navegador con su URL, portada en móvil dentro de un marco de teléfono, y dos
 vistas interiores con pie explicativo. Los marcos están dibujados en CSS, no
@@ -440,6 +446,13 @@ Dos trucos que hicieron falta y conviene recordar:
   hero usa `100vh`, se estira hasta ocupar toda la ventana y empuja el resto fuera.
 - Y para las capturas de la web de Maya hay que ocultar el banner de cookies, que es
   una capa de interfaz y no parte del diseño.
+- Si una web anima la aparición con opacidad, la captura sale **atenuada**. El guion
+  `recorte.sh` acepta un último parámetro `si` que fuerza `opacity:1` en todo. Sin
+  eso, las secciones del media kit y del precio de WodBox salían medio invisibles.
+- Los recortes se ajustan midiendo la geometría real de las secciones
+  (`medir.py` imprime top, alto y ancho de cada bloque a lo ancho de la página), no a
+  ojo. Aun así hace falta corregir a mano unos píxeles, porque la barra superior fija
+  se solapa y algunas secciones se desbordan.
 
 ### Recursos de la web
 
@@ -448,7 +461,7 @@ En `estudio-olfato/img/`:
 | Fichero | Para qué |
 |---|---|
 | `compartir.jpg` | Imagen 1200x630 para WhatsApp, LinkedIn y X. Con la tipografía de la marca incrustada |
-| `trabajos/maya-*.jpg` | Cuatro vistas de mayarottweiler.com: portada en PC y móvil, índice de guías y cuerpo de un artículo |
+| `trabajos/maya-*.jpg` | Cuatro vistas de mayarottweiler.com: portada en PC y móvil, test interactivo y media kit |
 | `trabajos/wodbox-*.jpg` | Cuatro vistas de wodbox.xyz: portada en PC y móvil, funcionalidades y precio |
 | `apple-touch-icon.png` | Icono de 180x180 para cuando alguien añade la web a la pantalla de inicio en iOS |
 
