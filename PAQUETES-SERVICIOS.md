@@ -398,14 +398,16 @@ keyword, sin "Estudio Olfato". Dos motivos para corregirlo:
    para casi nada.** La web de Maya posiciona porque tiene más de treinta guías. Para
    aparecer por «diseño web para veterinarias» hacen falta páginas que respondan a esa
    búsqueda concreta:
-   - Una página por servicio y por tipo de cliente: *Webs para clínicas veterinarias*,
-     *Vídeo para tiendas de mascotas*, *Redes sociales para adiestradores*.
+   - Una página por servicio y por tipo de cliente: *Webs para clínicas veterinarias*
+     ✅ hecha (`para-veterinarias.html`, ver más abajo), *Vídeo para tiendas de
+     mascotas*, *Redes sociales para adiestradores* — pendientes, mismo patrón.
    - Artículos que resuelvan dudas reales del sector: cuánto cuesta la web de una
      clínica, qué pedirle a una agencia, cómo grabar vídeos en la consulta sin molestar
      a los animales.
    - Y en cuanto haya clientes, **una página por caso**. Los casos posicionan por el
      nombre del cliente y por su ciudad.
-4. **Google Search Console** y **ficha de Google Business**, el día del lanzamiento.
+4. **Google Search Console** y **ficha de Google Business**, el día del lanzamiento
+   (guía de la ficha más abajo, para tenerla lista antes de lanzar).
 5. **Menciones fuera.** Para salir en respuestas de IA pesa más que te citen en otros
    sitios (directorios del sector, colegios de veterinarios, notas de prensa) que
    cualquier ajuste en la web.
@@ -417,6 +419,97 @@ cada servicio, y un FAQ que responda directo. Eso ya está hecho, y es la razón
 que el FAQ está redactado como respuestas cerradas y no como argumentario. Del
 `llms.txt` que circula: no es un estándar y no hay evidencia de que sirva; no le
 dediques tiempo todavía.
+
+### Primera página vertical: `para-veterinarias.html`
+
+Primera de las páginas «servicio + tipo de cliente» del punto 3. Se ha hecho **una
+sola** antes que las otras tres a propósito: es la que ya estaba en el título y la
+descripción de la home (veterinarias es el público con más presupuesto y más dolor
+de los cuatro), y sirve de plantilla para replicar a tiendas de animales,
+adiestradores y marcas de producto pet una vez se vea que el enfoque funciona.
+
+No es la home con «veterinarias» pegado con calzador — el contenido es realmente
+distinto, porque una página casi duplicada no solo no ayuda al SEO, puede
+perjudicarlo:
+
+- Tres problemas específicos de una consulta (menos llamadas repetitivas, confianza
+  del dueño antes de la visita, aparecer en «veterinario cerca de mí»), no los tres
+  paquetes genéricos otra vez.
+- Cuatro ideas de vídeo concretas para clínica, que no están en ningún otro sitio de
+  la web.
+- Un FAQ propio con las dudas que tendría una clínica (grabar sin interrumpir
+  consultas, varias sedes, cita online) — schema `FAQPage` distinto al de la home,
+  no repetido.
+- Los precios **no se repiten**: hay una nota corta con un enlace a `/#precios`. Siempre
+  hay una única fuente de verdad para el precio, para no tener que actualizar dos
+  sitios el día que cambie.
+
+Estructura técnica: mismo `<head>` que el resto (title/description/OG/Twitter
+propios, canonical a `/para-veterinarias`), `Service` + `BreadcrumbList` en JSON-LD
+en vez de repetir el `Organization`/`ProfessionalService` de la home (ya está en la
+home, no hace falta duplicarlo), y el mismo `noindex` que el resto de la web: se
+activa el mismo día que todo lo demás, no antes ni por separado. Enlazada desde el
+pie de la home («Para veterinarias»); cuando existan las otras tres, ese pie pasa a
+listarlas todas.
+
+### Local SEO y ficha de Google Business
+
+Para un negocio de servicios sin local a pie de calle, la ficha de Google Business
+(Google Business Profile, antes "Google My Business") pesa tanto o más que el SEO
+orgánico puro: es lo que aparece con mapa y estrellas cuando alguien busca «diseño
+web para veterinarias» o similar, y no compite con las palabras clave de las
+agencias grandes.
+
+**Cómo darla de alta**, en [business.google.com](https://business.google.com):
+
+1. **Tipo de negocio: "Área de servicio"**, no "Local comercial". Estudio Olfato no
+   recibe visitas, trabaja donde está el cliente o en remoto — así que se oculta la
+   dirección física y se listan las zonas a las que se llega, en vez de dar de alta
+   un local que no existe de cara al público.
+2. **Categoría principal:** *Agencia de marketing*. Secundarias: *Diseñador de
+   páginas web* y *Servicio de producción de vídeo*. Cubre las tres búsquedas sin
+   diluir cuál es la principal.
+3. **Zona de servicio:** España a nivel país es válido, pero Google pondera mejor
+   unas pocas zonas concretas que un país entero. Si hay una ciudad base real desde
+   la que trabajas, mejor listar esa ciudad y las de alrededor (hasta 20 zonas) y
+   dejar constancia explícita de que se atiende toda España en la propia web (ya
+   está: `areaServed: España` en el schema y en el texto de la home).
+4. **Descripción del negocio** (750 caracteres máx.), lista para pegar:
+
+   > Diseño web y vídeo vertical para negocios del sector mascotas: clínicas
+   > veterinarias, tiendas de animales, adiestradores y marcas de producto pet. Tres
+   > paquetes con precio cerrado antes de empezar — sin sorpresas a mitad de
+   > proyecto. Caso propio: una audiencia de 41.000 personas construida desde cero,
+   > sin publicidad pagada, y la web que la convierte en clientes. Trabajamos con
+   > toda España, en remoto o donde haga falta grabar. Primera llamada de 20
+   > minutos, gratis y sin compromiso.
+
+5. **Servicios**, uno por línea, calcados de los paquetes: *Diseño y desarrollo web*,
+   *SEO técnico*, *Producción de vídeo vertical*, *Gestión de redes sociales*,
+   *Lanzamiento digital completo*.
+6. **Fotos:** el logo (`logo-marca.svg` exportado a PNG), una captura de
+   `mayarottweiler.com` y otra de `wodbox.xyz` (las mismas de la web, ya recortadas
+   y sin datos personales), y una foto de quien esté detrás del trabajo — las fichas
+   con cara de una persona generan más confianza que las que no.
+7. **Reseñas:** en cuanto haya un primer cliente contento, pedirle la reseña con el
+   enlace directo a la ficha (Google lo genera solo). No se pueden comprar ni
+   incentivar con descuentos — Google las detecta y penaliza la ficha entera.
+
+**Dos cosas pendientes que no dependen de esto y hay que decidir antes de dar de
+alta la ficha:**
+
+- **Un teléfono.** Ahora mismo la web entera solo tiene contacto por email y
+  formulario — no hay ningún número, ni en la web ni en ningún sitio. La ficha de
+  Google pide uno y lo hace público. Antes de crear la ficha, decide si usas tu
+  móvil personal, das de alta un número virtual (Google Voice no opera en España,
+  pero sí hay alternativas tipo Fonvirtual o un número de VoIP) para no mezclar
+  clientes con tu vida personal, o de momento se deja sin ficha de Google hasta
+  tenerlo. Si se añade, va también en el pie de la web y en el schema
+  (`telephone`) para que el nombre, dirección/zona y teléfono coincidan en todos
+  los sitios (lo que se llama consistencia NAP, y Google la usa como señal de
+  confianza).
+- **La ciudad base**, si la hay, para afinar el punto 3 de arriba. Sin ella la
+  única opción razonable es dejar España como zona de servicio a nivel país.
 
 ### El sistema visual (v4, la definitiva de momento)
 
