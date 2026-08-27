@@ -499,6 +499,24 @@ párrafo de texto no demuestran oficio. Se cambiaron por el **test interactivo**
 **media kit con datos de audiencia**, que sí muestran cosas construidas. Regla para
 las próximas: enseña **funcionalidad y diseño**, no contenido.
 
+### Las capturas de móvil son fotos reales, no renders
+
+Las de `maya-movil.jpg` y `wodbox-movil.jpg` eran capturas hechas por Chromium en un
+marco de móvil dibujado a mano. El usuario mandó capturas reales de su iPhone
+navegando las dos webs, y son mejores: pixelado real de la pantalla, sin el sesgo de
+cómo Chromium simula un móvil.
+
+Para usarlas hubo que quitar dos cosas que no debían salir: la barra de estado de
+iOS (hora, batería, cobertura) arriba, y la barra de Safari con la URL abajo. El
+recorte se hizo a píxel exacto, no a ojo: se renderizó cada imagen con una regla de
+coordenadas superpuesta cada 50px para leer dónde starts y termina cada barra, y
+luego se recortó con esos números.
+
+Los originales sin recortar se guardan en `img/originales/`, por si hace falta
+rehacer el recorte con otro margen.
+
+### La foto sobraba, y los datos se repetían tres veces
+
 ### La foto sobraba, y los datos se repetían tres veces
 
 Dos cosas que el usuario detectó y las dos eran ciertas.
