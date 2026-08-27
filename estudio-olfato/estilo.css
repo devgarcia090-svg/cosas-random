@@ -79,7 +79,9 @@ section { padding: var(--seccion) 0; }
   background: rgba(255,255,255,0.86);
   backdrop-filter: saturate(180%) blur(14px);
   border-bottom: 1px solid var(--borde-fino);
+  transition: box-shadow .25s ease;
 }
+.nav.alzada { box-shadow: 0 12px 28px -20px rgba(20,24,31,.35); }
 .nav-in {
   max-width: var(--caja); margin: 0 auto; padding: 0.8rem var(--gutter);
   display: flex; align-items: center; gap: 1.6rem;
@@ -115,12 +117,13 @@ section { padding: var(--seccion) 0; }
   text-decoration: none; cursor: pointer; font-family: inherit;
   font-size: 1rem; font-weight: 600; letter-spacing: -0.01em;
   padding: 0.78rem 1.35rem; border-radius: 6px; border: 1px solid transparent;
-  transition: background .15s, border-color .15s, color .15s;
+  transition: background .15s, border-color .15s, color .15s, transform .15s ease;
 }
+.btn:active { transform: scale(.96); }
 .btn-principal { background: var(--acento); color: var(--blanco); }
-.btn-principal:hover { background: var(--acento-osc); }
+.btn-principal:hover { background: var(--acento-osc); transform: translateY(-1px); }
 .btn-borde { background: var(--blanco); border-color: var(--borde); color: var(--tinta); }
-.btn-borde:hover { border-color: var(--tinta-2); }
+.btn-borde:hover { border-color: var(--tinta); transform: translateY(-1px); }
 .btn-texto { color: var(--acento); padding-left: 0; padding-right: 0; }
 .btn-texto:hover { color: var(--acento-osc); }
 .acciones { display: flex; flex-wrap: wrap; gap: 0.7rem; align-items: center; }
@@ -130,6 +133,15 @@ section { padding: var(--seccion) 0; }
 .portada { padding-top: clamp(3.5rem, 7vw, 6rem); padding-bottom: 0; }
 .portada h1 { max-width: 24ch; }
 .portada .grande { margin: 1.5rem 0 2.2rem; }
+
+/* Entrada escalonada al cargar: un único momento orquestado, no un efecto por
+   cada elemento de la página. Solo aquí, en la portada. */
+@keyframes entra { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+.portada h1        { animation: entra .7s cubic-bezier(.16,1,.3,1) both; }
+.portada .grande   { animation: entra .7s cubic-bezier(.16,1,.3,1) .08s both; }
+.portada .acciones { animation: entra .7s cubic-bezier(.16,1,.3,1) .16s both; }
+.portada .aviso    { animation: entra .7s cubic-bezier(.16,1,.3,1) .22s both; }
+.portada .cifras   { animation: entra .7s cubic-bezier(.16,1,.3,1) .3s both; }
 
 .cifras {
   display: grid; grid-template-columns: repeat(4, 1fr);
@@ -149,13 +161,20 @@ section { padding: var(--seccion) 0; }
 .tarjeta {
   background: var(--blanco); border: 1px solid var(--borde);
   border-radius: var(--r); padding: 1.7rem 1.6rem;
+  transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+.tarjeta:hover {
+  transform: translateY(-4px); border-color: var(--acento);
+  box-shadow: 0 20px 32px -22px rgba(20,24,31,.25);
 }
 .tarjeta h3 { margin-bottom: 0.6rem; }
 .tarjeta p { font-size: 0.97rem; }
 .tarjeta-icono {
   width: 38px; height: 38px; border-radius: 8px; background: var(--acento-luz);
   display: grid; place-items: center; margin-bottom: 1.1rem; color: var(--acento);
+  transition: transform .2s ease;
 }
+.tarjeta:hover .tarjeta-icono { transform: scale(1.08) rotate(-4deg); }
 .gris .tarjeta { border-color: var(--borde); }
 
 /* ── Caso ──────────────────────────────────────────────────────── */
@@ -173,8 +192,11 @@ section { padding: var(--seccion) 0; }
   background: var(--blanco); border: 1px solid var(--borde);
   border-radius: 12px; padding: 1.9rem 1.7rem;
   display: flex; flex-direction: column; height: 100%;
+  transition: transform .2s ease, box-shadow .2s ease;
 }
+.pack:hover { transform: translateY(-5px); box-shadow: 0 24px 40px -24px rgba(20,24,31,.28); }
 .pack.destacado { border-color: var(--acento); box-shadow: 0 0 0 1px var(--acento); }
+.pack.destacado:hover { box-shadow: 0 0 0 1px var(--acento), 0 24px 40px -20px rgba(181,76,12,.32); }
 .pack-top { display: flex; align-items: center; justify-content: space-between; gap: 0.7rem; margin-bottom: 0.9rem; min-height: 1.7rem; }
 .pack-top h3 { margin: 0; }
 .insignia {
@@ -243,7 +265,7 @@ section { padding: var(--seccion) 0; }
   transition: transform .18s;
 }
 .faq details[open] summary::after { transform: rotate(-135deg); }
-.faq .r { padding: 0 2.5rem 1.4rem 0; }
+.faq .r { padding: 0 2.5rem 1.4rem 0; transition: height .28s ease; }
 .faq .r p + p { margin-top: 0.8rem; }
 
 /* ── Formulario ────────────────────────────────────────────────── */
@@ -296,10 +318,32 @@ section { padding: var(--seccion) 0; }
 /* ── Aparición ─────────────────────────────────────────────────── */
 .rev { opacity: 0; transform: translateY(10px); transition: opacity .5s ease, transform .5s ease; }
 .rev.visto { opacity: 1; transform: none; }
+
+/* Cascada dentro de cada rejilla: los elementos de una misma fila entran casi
+   a la vez por el observador de scroll (llegan al viewport en el mismo
+   instante); el retraso escalonado los convierte en una ola en vez de un
+   golpe seco. */
+.rejilla-3 > .rev:nth-child(2), .rejilla-4 > .rev:nth-child(2),
+.packs > .rev:nth-child(2), .noes > .rev:nth-child(2),
+.faq > .rev:nth-child(2) { transition-delay: .07s; }
+.rejilla-3 > .rev:nth-child(3), .rejilla-4 > .rev:nth-child(3),
+.packs > .rev:nth-child(3), .noes > .rev:nth-child(3),
+.faq > .rev:nth-child(3) { transition-delay: .14s; }
+.rejilla-4 > .rev:nth-child(4), .noes > .rev:nth-child(4),
+.faq > .rev:nth-child(4) { transition-delay: .21s; }
+.faq > .rev:nth-child(5) { transition-delay: .24s; }
+.faq > .rev:nth-child(6) { transition-delay: .27s; }
+
 @media (prefers-reduced-motion: reduce) {
   .rev { opacity: 1; transform: none; transition: none; }
   html { scroll-behavior: auto; }
-  .btn, .nav-links a, .faq summary::after { transition: none; }
+  .btn, .btn:active, .btn-principal:hover, .btn-borde:hover,
+  .nav-links a, .faq summary::after,
+  .tarjeta, .tarjeta:hover, .tarjeta-icono, .tarjeta:hover .tarjeta-icono,
+  .pack, .pack:hover, .nav { transition: none; transform: none; }
+  .portada h1, .portada .grande, .portada .acciones, .portada .aviso, .portada .cifras {
+    animation: none; opacity: 1; transform: none;
+  }
 }
 
 /* ── Adaptación ────────────────────────────────────────────────── */

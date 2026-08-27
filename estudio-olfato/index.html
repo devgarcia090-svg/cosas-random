@@ -131,7 +131,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/estilo.css?v=14">
+<link rel="stylesheet" href="/estilo.css?v=15">
 </head>
 <body>
 <a class="saltar" href="#principal">Saltar al contenido</a>
@@ -459,29 +459,29 @@
       <h2>Lo que no hacemos.</h2>
       <p>Preferimos perder un cliente en la primera llamada que decepcionarlo en el tercer mes.</p>
     </div>
-    <div class="noes rev">
-      <div class="no">
+    <div class="noes">
+      <div class="no rev">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg>
         <div>
           <h4>Comprar seguidores</h4>
           <p>Ni bots, ni sorteos falsos. Una audiencia comprada no compra nada y hunde el alcance de lo que publiques después.</p>
         </div>
       </div>
-      <div class="no">
+      <div class="no rev">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg>
         <div>
           <h4>Prometer que te haremos viral</h4>
           <p>Nadie puede garantizarlo. Lo que sí garantizamos es volumen, constancia y criterio en este nicho.</p>
         </div>
       </div>
-      <div class="no">
+      <div class="no rev">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg>
         <div>
           <h4>Gestionar publicidad pagada</h4>
           <p>No llevamos Meta Ads ni Google Ads. Nuestro terreno es el crecimiento orgánico y la web. Si la necesitas, te decimos con quién hablar.</p>
         </div>
       </div>
-      <div class="no">
+      <div class="no rev">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg>
         <div>
           <h4>Trabajar con quien lucra con la cría</h4>
@@ -514,40 +514,40 @@
       <span class="eyebrow">Preguntas</span>
       <h2>Lo que nos preguntan siempre.</h2>
     </div>
-    <div class="faq rev">
-      <details>
+    <div class="faq">
+      <details class="rev">
         <summary>¿Los precios llevan IVA?</summary>
         <div class="r"><p>No. Son precios sin IVA, como es habitual entre profesionales: a la
         factura se le suma el 21 %, que tú te deduces como cualquier gasto del negocio. El de
         1.190 € se factura en 1.439,90 €, el de 690 €/mes en 834,90 € y el de 2.490 € en
         3.012,90 €. El presupuesto lleva siempre las dos cifras desglosadas.</p></div>
       </details>
-      <details>
+      <details class="rev">
         <summary>¿Por qué solo el sector mascotas?</summary>
         <div class="r"><p>Porque es donde tenemos el caso demostrable y donde conocemos al
         cliente final: son las mismas 41.000 personas que nos siguen cada día. Fuera de ahí
         seríamos una agencia más entre miles.</p></div>
       </details>
-      <details>
+      <details class="rev">
         <summary>¿De quién es la web cuando acabamos?</summary>
         <div class="r"><p>Tuya, desde el primer día. El dominio, el hosting y los perfiles se
         crean a tu nombre y con tus accesos, y te entregamos una guía en vídeo para
         gestionarlo. Si dejamos de trabajar juntos, no tienes que rescatar nada de nadie.</p></div>
       </details>
-      <details>
+      <details class="rev">
         <summary>¿Cuánto tarda en verse resultado?</summary>
         <div class="r"><p>El SEO tarda entre tres y seis meses en dar tráfico estable, y eso
         depende de Google, no de nosotros. El vídeo da las primeras señales entre la semana
         cuatro y la ocho. Nadie puede garantizar ventas ni viralidad, y no lo vamos a hacer.</p></div>
       </details>
-      <details>
+      <details class="rev">
         <summary>¿Trabajáis a distancia?</summary>
         <div class="r"><p>La web, la edición y la estrategia se hacen igual de bien a
         distancia, con toda España. Las grabaciones presenciales dependen de la zona: dínoslo
         en el formulario y te confirmamos si podemos ir o si trabajamos con el material que
         grabes tú, que te enseñamos cómo.</p></div>
       </details>
-      <details>
+      <details class="rev">
         <summary>¿Puede aparecer mi marca en el canal de Maya?</summary>
         <div class="r"><p>Eso es un servicio distinto. Las colaboraciones de marca en el canal
         de Maya se gestionan a través de MTS23 Talent y tienen su propio contacto en
@@ -680,6 +680,44 @@
   } else {
     revs.forEach(function (el) { el.classList.add('visto'); });
   }
+
+  // Sombra en la barra de navegación al despegarse del borde superior
+  var nav = document.querySelector('.nav');
+  function marcarScroll() { nav.classList.toggle('alzada', window.scrollY > 6); }
+  window.addEventListener('scroll', marcarScroll, { passive: true });
+  marcarScroll();
+
+  // Preguntas: despliegue con altura real animada en vez del salto seco
+  // nativo de <details>. Con movimiento reducido, se comporta como el
+  // <details> normal: abre y cierra al instante.
+  document.querySelectorAll('.faq details').forEach(function (det) {
+    var resumen = det.querySelector('summary');
+    var respuesta = det.querySelector('.r');
+    if (reduce) return;
+    respuesta.style.overflow = 'hidden';
+    resumen.addEventListener('click', function (ev) {
+      ev.preventDefault();
+      if (det.open) {
+        var altoActual = respuesta.scrollHeight;
+        respuesta.style.height = altoActual + 'px';
+        requestAnimationFrame(function () { respuesta.style.height = '0px'; });
+        respuesta.addEventListener('transitionend', function cerrar() {
+          det.open = false;
+          respuesta.style.height = '';
+          respuesta.removeEventListener('transitionend', cerrar);
+        });
+      } else {
+        det.open = true;
+        var alto = respuesta.scrollHeight;
+        respuesta.style.height = '0px';
+        requestAnimationFrame(function () { respuesta.style.height = alto + 'px'; });
+        respuesta.addEventListener('transitionend', function abrir() {
+          respuesta.style.height = '';
+          respuesta.removeEventListener('transitionend', abrir);
+        });
+      }
+    });
+  });
 
   var form = document.getElementById('form');
   var btn = document.getElementById('enviar');

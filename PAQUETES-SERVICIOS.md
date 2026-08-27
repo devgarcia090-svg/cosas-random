@@ -659,3 +659,75 @@ servicios de Estudio Olfato son un negocio distinto y la web lo dice
 explícitamente en el FAQ, pero antes de lanzarlo revisa qué firmaste con ellos: si
 hay exclusividad, podría alcanzar al uso comercial de la marca Maya, y toda la
 página se apoya en Maya como caso.
+
+### Animaciones (v15)
+
+La web era completamente estática: ni una transición. Se añadió movimiento en
+sitios concretos, todos con el mismo criterio: contar algo (que ha cargado, que
+ha entrado en pantalla, que responde al ratón), nunca decoración porque sí.
+
+- **Portada:** al cargar, el título, el subtítulo, los botones, el aviso de
+  precios y las cifras entran en cascada (`@keyframes entra`, 0/.08/.16/.22/.3 s
+  de retraso). Es el único sitio con una coreografía de carga; el resto de la
+  página usa aparición al hacer scroll.
+- **Aparición al hacer scroll:** ya existía (`.rev`/`.visto` con
+  `IntersectionObserver`, desde antes de esta ronda). Lo nuevo es el
+  **escalonado dentro de cada fila**: las tarjetas de servicios, los paquetes,
+  los "no hacemos" y las preguntas frecuentes ya no aparecen todos a la vez con
+  un golpe seco, sino con `transition-delay` creciente por `nth-child` (.07 s,
+  .14 s, .21 s...). Para que el escalonado se pueda aplicar por elemento, el
+  `.rev` de `<div class="noes rev">` y `<div class="faq rev">` pasó a ir en cada
+  hijo (`<div class="no rev">`, `<details class="rev">`) en vez de en el
+  contenedor.
+- **Tarjetas y paquetes:** se elevan un poco y ganan sombra al pasar el ratón
+  (`translateY` + `box-shadow`); el icono de cada tarjeta de servicio gira
+  ligeramente. Los botones se hunden un poco al pulsarlos (`:active`).
+- **Barra de navegación:** gana una sombra sutil en cuanto se hace scroll más
+  de 6 px (clase `.alzada`, alternada por JS en el evento `scroll`), para que
+  se note que queda flotando sobre el contenido.
+- **Preguntas frecuentes:** el `<details>` nativo abre y cierra de un salto
+  seco (no se puede animar `height: auto` con solo CSS). Se sustituyó por un
+  guion en JS que mide la altura real del contenido (`scrollHeight`), fuerza
+  `0px`, y en el siguiente frame anima hasta esa altura con una transición
+  CSS; al terminar, quita el `height` en línea para que el contenido pueda
+  seguir creciendo si la ventana cambia de tamaño.
+- **`prefers-reduced-motion: reduce`:** desactiva las cinco cosas anteriores
+  (animación de portada, transition-delay de las rejillas — vía `.rev { opacity:
+  1; transform: none; transition: none }`, hover de tarjetas/paquetes/botones,
+  sombra de navegación) y el guion de las preguntas se salta directamente al
+  comportamiento nativo del `<details>` (abre/cierra al instante, sin medir
+  alturas). Es la misma regla que ya existía, ampliada para cubrir lo nuevo.
+
+**Verificación.** Probar animaciones con Chromium headless (`--screenshot`,
+`--virtual-time-budget`) tiene varias trampas encontradas en el camino, todas
+de la herramienta de prueba, no del código:
+
+1. Hacer scroll con `iframe.contentWindow.scrollTo()` bajo `file://` no hace
+   nada, ni con `--allow-file-access-from-files`.
+2. Navegar a una URL con `#ancla` no dispara el scroll en una captura headless.
+3. `window.scrollTo(0, Y)` sin especificar `behavior` lo intercepta el
+   `scroll-behavior: smooth` del CSS y la captura sale sin scroll aplicado; hay
+   que forzar `{top: Y, left: 0, behavior: 'instant'}`.
+4. Un elemento `position: fixed` o `sticky` (la barra de navegación) puede
+   pintarse en una posición de pantalla que no corresponde al `scrollY` real
+   en el momento de la captura: es un problema de compositor de Chromium con
+   `--virtual-time-budget`, no del CSS del sitio (se comprobó volcando
+   `getBoundingClientRect()` por JS, que siempre daba el valor correcto).
+5. Las transiciones CSS que dependen de un cambio de clase por JS (el
+   escalonado de las rejillas, la sombra de la barra) **no avanzan** con
+   `--virtual-time-budget`: se queda congelado el primer fotograma. Las
+   animaciones por `@keyframes` (la de la portada) sí avanzan, porque su
+   progreso se calcula sobre la línea de tiempo del documento sin depender de
+   un repintado intermedio. Por el mismo motivo, `requestAnimationFrame` nunca
+   llega a ejecutarse en este modo.
+
+Con eso descartado como fiable para animaciones basadas en transición, la
+verificación se hizo por estado discreto en vez de por píxel: confirmar que la
+clase `visto` se añade con el `transition-delay` correcto leído de la hoja de
+estilos (nth-child 1/2/3 → 0/.07/.14 s), que `.alzada` aparece en la barra al
+simular un `scroll`, y que el `<details>` de preguntas cambia `open` y fija
+`height: 0px` como primer paso al pulsarlo. Sumado a que el patrón
+`.rev`/`.visto` ya estaba en producción antes de esta ronda, es prueba
+suficiente de que el código hace lo que debe; lo que no se pudo ver fue la
+interpolación en sí, y eso es un límite de la herramienta de prueba, no del
+sitio.
