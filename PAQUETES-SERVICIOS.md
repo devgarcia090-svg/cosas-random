@@ -398,9 +398,9 @@ keyword, sin "Estudio Olfato". Dos motivos para corregirlo:
    para casi nada.** La web de Maya posiciona porque tiene más de treinta guías. Para
    aparecer por «diseño web para veterinarias» hacen falta páginas que respondan a esa
    búsqueda concreta:
-   - Una página por servicio y por tipo de cliente: *Webs para clínicas veterinarias*
-     ✅ hecha (`para-veterinarias.html`, ver más abajo), *Vídeo para tiendas de
-     mascotas*, *Redes sociales para adiestradores* — pendientes, mismo patrón.
+   - ✅ Una página por servicio y por tipo de cliente: las cuatro hechas —
+     veterinarias, tiendas de animales, adiestradores y marcas de producto pet (ver
+     más abajo). Si aparece un quinto tipo de cliente recurrente, mismo patrón.
    - Artículos que resuelvan dudas reales del sector: cuánto cuesta la web de una
      clínica, qué pedirle a una agencia, cómo grabar vídeos en la consulta sin molestar
      a los animales.
@@ -420,37 +420,41 @@ que el FAQ está redactado como respuestas cerradas y no como argumentario. Del
 `llms.txt` que circula: no es un estándar y no hay evidencia de que sirva; no le
 dediques tiempo todavía.
 
-### Primera página vertical: `para-veterinarias.html`
+### Las cuatro páginas verticales: veterinarias, tiendas, adiestradores, marcas
 
-Primera de las páginas «servicio + tipo de cliente» del punto 3. Se ha hecho **una
-sola** antes que las otras tres a propósito: es la que ya estaba en el título y la
-descripción de la home (veterinarias es el público con más presupuesto y más dolor
-de los cuatro), y sirve de plantilla para replicar a tiendas de animales,
-adiestradores y marcas de producto pet una vez se vea que el enfoque funciona.
+Las páginas «servicio + tipo de cliente» del punto 3, completas: `para-veterinarias.html`,
+`para-tiendas-de-animales.html`, `para-adiestradores.html` y
+`para-marcas-de-mascotas.html`. Se hizo primero solo la de veterinarias como prueba
+de concepto (era la que ya estaba en el título y la descripción de la home), y una
+vez comprobado que el patrón funciona y se veía bien, se replicó a las otras tres
+con el mismo criterio.
 
-No es la home con «veterinarias» pegado con calzador — el contenido es realmente
+Ninguna es la home con la palabra cambiada — cada una tiene contenido realmente
 distinto, porque una página casi duplicada no solo no ayuda al SEO, puede
 perjudicarlo:
 
-- Tres problemas específicos de una consulta (menos llamadas repetitivas, confianza
-  del dueño antes de la visita, aparecer en «veterinario cerca de mí»), no los tres
-  paquetes genéricos otra vez.
-- Cuatro ideas de vídeo concretas para clínica, que no están en ningún otro sitio de
-  la web.
-- Un FAQ propio con las dudas que tendría una clínica (grabar sin interrumpir
-  consultas, varias sedes, cita online) — schema `FAQPage` distinto al de la home,
-  no repetido.
-- Los precios **no se repiten**: hay una nota corta con un enlace a `/#precios`. Siempre
-  hay una única fuente de verdad para el precio, para no tener que actualizar dos
-  sitios el día que cambie.
+- Tres problemas específicos de cada público (una consulta veterinaria no tiene los
+  mismos problemas que una tienda, un adiestrador o una marca de producto), no los
+  tres paquetes genéricos otra vez.
+- Cuatro ideas de vídeo concretas por página, que no están repetidas entre ellas ni
+  en ningún otro sitio de la web.
+- Un FAQ propio por página con las dudas reales de ese público — cuatro schemas
+  `FAQPage` distintos, no el mismo repetido cuatro veces. La de marcas incluye la
+  pregunta de si se puede colaborar con el canal de Maya, con la misma respuesta
+  que ya está en el FAQ de la home (MTS23 Talent, servicio distinto) para no crear
+  una expectativa contradictoria entre páginas.
+- Los precios **no se repiten** en ninguna: una nota corta con enlace a `/#precios`
+  en las cuatro. Siempre hay una única fuente de verdad para el precio, para no
+  tener que actualizar cinco sitios el día que cambie.
 
-Estructura técnica: mismo `<head>` que el resto (title/description/OG/Twitter
-propios, canonical a `/para-veterinarias`), `Service` + `BreadcrumbList` en JSON-LD
-en vez de repetir el `Organization`/`ProfessionalService` de la home (ya está en la
-home, no hace falta duplicarlo), y el mismo `noindex` que el resto de la web: se
-activa el mismo día que todo lo demás, no antes ni por separado. Enlazada desde el
-pie de la home («Para veterinarias»); cuando existan las otras tres, ese pie pasa a
-listarlas todas.
+Estructura técnica igual en las cuatro: mismo `<head>` que el resto
+(title/description/OG/Twitter propios, canonical a su propia URL), `Service` +
+`BreadcrumbList` en JSON-LD en vez de repetir el `Organization`/`ProfessionalService`
+de la home (ya está ahí, no hace falta duplicarlo), y el mismo `noindex` que el
+resto de la web: se activan todas el mismo día que el resto, no antes ni por
+separado. Cada página enlaza en su pie a las otras tres (y la home a las cuatro),
+para que un visitante — o un rastreador — pueda moverse entre verticales sin volver
+al inicio.
 
 ### Local SEO y ficha de Google Business
 
