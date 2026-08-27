@@ -498,17 +498,13 @@ agencias grandes.
 **Dos cosas pendientes que no dependen de esto y hay que decidir antes de dar de
 alta la ficha:**
 
-- **Un teléfono.** Ahora mismo la web entera solo tiene contacto por email y
-  formulario — no hay ningún número, ni en la web ni en ningún sitio. La ficha de
-  Google pide uno y lo hace público. Antes de crear la ficha, decide si usas tu
-  móvil personal, das de alta un número virtual (Google Voice no opera en España,
-  pero sí hay alternativas tipo Fonvirtual o un número de VoIP) para no mezclar
-  clientes con tu vida personal, o de momento se deja sin ficha de Google hasta
-  tenerlo. Si se añade, va también en el pie de la web y en el schema
-  (`telephone`) para que el nombre, dirección/zona y teléfono coincidan en todos
-  los sitios (lo que se llama consistencia NAP, y Google la usa como señal de
-  confianza).
-- **La ciudad base**, si la hay, para afinar el punto 3 de arriba. Sin ella la
+- ~~Un teléfono~~ ✅ resuelto: **+34 643 40 41 20**, el móvil personal, la opción
+  simple y la que usa la mayoría de autónomos. Ya está en el pie de las cinco
+  páginas (`tel:+34643404120`), en la sección de contacto de la home junto al
+  email, y como `telephone` en el `Organization` y el `ProfessionalService` del
+  schema — mismo número en todos los sitios, que es lo que Google llama
+  consistencia NAP. Úsalo también al rellenar la ficha de Google Business.
+- **La ciudad base**, si la hay, para afinar el punto 3 de más arriba. Sin ella la
   única opción razonable es dejar España como zona de servicio a nivel país.
 
 ### El sistema visual (v4, la definitiva de momento)
