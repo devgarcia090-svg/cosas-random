@@ -13,4 +13,4 @@ binding = "ASSETS"
 [[d1_databases]]
 binding = "DB"
 database_name = "podium-reservas"
-database_id = "PON-AQUI-EL-ID-DE-TU-BASE-DE-DATOS"
+database_id = "d25baa9b-cb62-4cec-b9b9-93f1d337f2fd"
