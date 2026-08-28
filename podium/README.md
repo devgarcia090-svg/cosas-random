@@ -110,5 +110,10 @@ SESSION_SECRET=otracosa
 
 - **El horario** está tomado de Google y Restaurant Guru. Revísalo en
   `public/assets/js/config.js` y corrige lo que no cuadre.
-- La carta viene del PDF `Carta Podium.pdf`; se han corregido erratas
+- La carta se ha generado desde `carta-original.pdf`, **alérgenos incluidos**
+  (venían como iconos de la tipografía `eicon`). Se han corregido erratas
   («Lecguga» → «Lechuga», «foa» → «foie»). Conviene repasar los precios.
+- **36 platos no traían alérgenos declarados** en el PDF (por ejemplo la
+  parrillada de marisco). La web los muestra como «alérgenos sin declarar»,
+  nunca como libres de alérgenos, y el filtro avisa de que no puede filtrarlos.
+  Conviene completarlos en `public/assets/js/carta-datos.js`.

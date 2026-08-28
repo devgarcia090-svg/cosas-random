@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Carta — Podium Café &amp; Grill</title>
-<meta name="description" content="Carta completa de Podium Café &amp; Grill: brasa, arroces, tapas, hamburguesas, pescados y postres caseros. Precios actualizados.">
+<meta name="description" content="Carta completa de Podium Café &amp; Grill: brasa, arroces, tapas, hamburguesas, pescados y postres caseros, con alérgenos de cada plato.">
 <meta name="theme-color" content="#12100e">
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,24 +16,22 @@
 
 <header class="cabecera" data-cabecera></header>
 
-<main>
-  <section style="padding:2.5rem 0 .5rem">
+<main class="hoja">
+  <div class="hoja__portada">
     <div class="contenedor">
-      <p class="antetitulo">Carta</p>
-      <h1 style="font-size:clamp(2rem,5vw,3rem)">Nuestra carta</h1>
-      <p class="tenue" style="max-width:56ch">
-        Precios con IVA incluido. Si tienes alguna alergia o intolerancia, dínoslo
-        y te indicamos los platos que puedes tomar.
-      </p>
+      <p class="antetitulo">Podium Café &amp; Grill</p>
+      <h1>Nuestra carta</h1>
+      <p>Brasa, producto de la tierra y cocina de siempre. Precios con IVA incluido.</p>
+      <div class="hoja__filete"></div>
     </div>
-  </section>
+  </div>
 
   <div class="carta-barra no-imprimir">
     <div class="contenedor">
       <div class="carta-barra__fila">
         <label class="buscador">
           <span aria-hidden="true">🔍</span>
-          <input type="search" id="buscar" placeholder="Buscar plato (croqueta, chuletón, arroz…)" aria-label="Buscar en la carta">
+          <input type="search" id="buscar" placeholder="Buscar plato…" aria-label="Buscar en la carta">
         </label>
         <button class="boton boton--fantasma boton--pequeno" onclick="window.print()">Imprimir</button>
       </div>
@@ -41,16 +39,36 @@
     </div>
   </div>
 
+  <div class="contenedor no-imprimir">
+    <div class="filtros">
+      <p class="filtros__titulo">¿Tienes alguna alergia? Oculta los platos que la contienen</p>
+      <div class="filtros__lista" data-filtros></div>
+    </div>
+  </div>
+
   <section class="seccion" style="padding-top:0">
     <div class="contenedor">
       <div data-carta></div>
-      <p class="sin-resultados oculto" data-vacio>No hay platos que coincidan con la búsqueda.</p>
+      <p class="sin-resultados oculto" data-vacio>No hay platos que coincidan.</p>
+
+      <div class="aviso-alergenos" data-aviso-filtro hidden></div>
 
       <div class="tarjeta menu-dia" style="margin-top:3rem" data-menu-dia></div>
 
-      <p class="tenue" style="margin-top:3rem;font-size:.85rem">
+      <section class="leyenda">
+        <h2 style="font-size:1.3rem">Alérgenos</h2>
+        <p style="color:var(--crema-tenue);max-width:62ch">
+          Junto a cada plato indicamos los alérgenos declarados en nuestra carta.
+          Los platos marcados como <em>«alérgenos sin declarar»</em> no los tienen
+          recogidos todavía: <strong>pregúntanos y te informamos</strong>.
+          Cocinamos en una cocina donde se manipulan todos estos alérgenos, así que
+          no podemos descartar trazas.
+        </p>
+        <div class="leyenda__lista" data-leyenda></div>
+      </section>
+
+      <p style="margin-top:2.5rem;font-size:.85rem;color:var(--gris)">
         La carta puede variar según temporada y disponibilidad de producto.
-        Los arroces se preparan por encargo, con un mínimo de 2 personas.
       </p>
     </div>
   </section>
@@ -62,78 +80,6 @@
 <script src="/assets/js/horario.js"></script>
 <script src="/assets/js/carta-datos.js"></script>
 <script src="/assets/js/comun.js"></script>
-<script>
-  iniciarPagina('/carta');
-
-  const contenedor = document.querySelector('[data-carta]');
-  const vacio = document.querySelector('[data-vacio]');
-
-  const precios = (lista) => lista
-    .map((p) => `<span class="plato__precio">${lista.length > 1 || p.l !== 'Unidad' ? `<span>${p.l}</span>` : ''}${euros(p.v)}</span>`)
-    .join('');
-
-  contenedor.innerHTML = window.CARTA.map((cat) => `
-    <section class="grupo" id="${cat.id}">
-      <div class="grupo__titulo">
-        <span aria-hidden="true">${cat.icono}</span>
-        <h2>${cat.nombre}</h2>
-      </div>
-      ${cat.nota ? `<p class="grupo__nota">${cat.nota}</p>` : ''}
-      ${cat.platos.map((p) => `
-        <article class="plato" data-busqueda="${(p.n + ' ' + (p.d || '')).toLowerCase()}">
-          <div>
-            <p class="plato__nombre">${p.n}</p>
-            ${p.d ? `<p class="plato__desc">${p.d}</p>` : ''}
-          </div>
-          <div class="plato__precios">${precios(p.p)}</div>
-        </article>`).join('')}
-    </section>`).join('');
-
-  document.querySelector('[data-categorias]').innerHTML = window.CARTA
-    .map((c) => `<a href="#${c.id}">${c.nombre}</a>`).join('');
-
-  const md = window.MENU_DIARIO;
-  document.querySelector('[data-menu-dia]').innerHTML = `
-    <p class="antetitulo">De martes a viernes</p>
-    <h2 style="margin-bottom:.2rem">Menú diario</h2>
-    <p class="menu-dia__precio">${euros(md.precio)}</p>
-    <p class="tenue">${md.incluye}</p>
-    <div class="rejilla rejilla--3" style="margin-top:1.4rem">
-      <div><h4>Primeros</h4><ul>${md.primeros.map((x) => `<li>${x}</li>`).join('')}</ul></div>
-      <div><h4>Segundos</h4><ul>${md.segundos.map((x) => `<li>${x}</li>`).join('')}</ul></div>
-      <div><h4>Postre</h4><ul>${md.postres.map((x) => `<li>${x}</li>`).join('')}</ul></div>
-    </div>`;
-
-  // Buscador
-  document.getElementById('buscar').addEventListener('input', (e) => {
-    const texto = e.target.value.trim().toLowerCase();
-    let visibles = 0;
-
-    for (const grupo of contenedor.querySelectorAll('.grupo')) {
-      let enGrupo = 0;
-      for (const plato of grupo.querySelectorAll('.plato')) {
-        const coincide = !texto || plato.dataset.busqueda.includes(texto);
-        plato.classList.toggle('oculto', !coincide);
-        if (coincide) enGrupo++;
-      }
-      grupo.classList.toggle('oculto', enGrupo === 0);
-      visibles += enGrupo;
-    }
-    vacio.classList.toggle('oculto', visibles > 0);
-  });
-
-  // Resalta la categoría visible en la barra
-  const enlaces = [...document.querySelectorAll('.categorias a')];
-  const observador = new IntersectionObserver((entradas) => {
-    for (const e of entradas) {
-      if (!e.isIntersecting) continue;
-      const activo = enlaces.find((a) => a.getAttribute('href') === '#' + e.target.id);
-      enlaces.forEach((a) => a.classList.toggle('activa', a === activo));
-      activo?.scrollIntoView({ block: 'nearest', inline: 'center', behavior: 'smooth' });
-    }
-  }, { rootMargin: '-140px 0px -70% 0px' });
-
-  contenedor.querySelectorAll('.grupo').forEach((g) => observador.observe(g));
-</script>
+<script src="/assets/js/carta.js"></script>
 </body>
 </html>
