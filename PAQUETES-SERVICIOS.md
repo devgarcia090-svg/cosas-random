@@ -610,6 +610,53 @@ luego se recortó con esos números.
 Los originales sin recortar se guardan en `img/originales/`, por si hace falta
 rehacer el recorte con otro margen.
 
+### Tercer caso: aqualadra.com
+
+Autolavado de mascotas y peluquería canina/felina en Puente Tocinos (Murcia).
+Tercera tarjeta de la sección Trabajos, entre Maya y WodBox — con Maya y no con
+WodBox porque las dos están dentro del sector mascotas; WodBox se queda al final
+porque es la excepción explicada en su propia nota.
+
+Se destacan tres cosas que son de verdad, no relleno:
+
+- **Reservas conectadas a un Google Calendar real**, no un formulario que cae en un
+  buzón: se ve la disponibilidad real de la peluquera, con huecos tachados si están
+  ocupados.
+- **Tarifas por tamaño de mascota**, cuatro categorías con sus cuatro servicios cada
+  una — nada de "consultar precio".
+- **La ficha de Google (4,9★, 231 reseñas) integrada en la propia portada**, no solo
+  enlazada.
+
+Las capturas son las que compartió el usuario directamente en el chat (desktop:
+portada, tarifas y reservas; móvil: portada y servicios), extraídas de los bloques
+de imagen del propio JSONL de la sesión — mismo mecanismo ya usado para las fotos
+reales de Maya y WodBox. Recortadas con Pillow (instalado en esta sesión: `pip
+install pillow`, sin necesidad de la vuelta larga por Chromium + canvas que hizo
+falta en rondas anteriores) a los mismos huecos que ya usa el resto de la web
+(`.v-pc`, `.marco-movil`, `.vistas-extra`), sin recortar barra de navegación en las
+dos extra (tarifas y reservas) para que el contenido entre directo.
+
+**Nota sobre "proyectos propios":** la entradilla de la sección decía "Dos
+proyectos propios" — con un tercer caso que puede ser cliente y no solo cosa
+personal del fundador, se cambió a "Tres proyectos reales", quitando la palabra
+"propios" en vez de dar por hecho de quién es. Si en el futuro hace falta
+distinguir explícitamente casos propios de casos de cliente, es un cambio de una
+palabra por tarjeta, no de toda la entradilla.
+
+**Nota técnica del intento fallido de capturar en vivo:** antes de que el usuario
+diera las capturas, se intentó volver a fotografiar aqualadra.com en directo con
+Chromium headless + CDP crudo (sin Puppeteer/Playwright, no están instalados) para
+poder simular el clic en "Ver los huecos disponibles" del calendario y capturar la
+disponibilidad real cargada. El primer bloqueo fue que Chromium no confiaba en el
+certificado del proxy de salida del entorno — solucionado instalando
+`libnss3-tools` e importando los 154 certificados de `/root/.ccr/ca-bundle.crt` a
+`~/.pki/nssdb` con `certutil` (nunca con `--ignore-certificate-errors`: el propio
+entorno lo bloquea, y con razón). Aun arreglado el certificado, el botón del
+calendario seguía sin aparecer en la captura — probablemente por diferencias entre
+el DOM real y el mirror local usado para inspeccionar el HTML. Se abandonó la ruta
+en cuanto el usuario ofreció sus propias capturas, que además son las mismas que ya
+había visto y aprobado.
+
 ### La foto sobraba, y los datos se repetían tres veces
 
 ### La foto sobraba, y los datos se repetían tres veces
