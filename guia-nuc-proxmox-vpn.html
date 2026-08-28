@@ -527,24 +527,24 @@
       <p class="rack-label">Proxmox VE 9 · NVMe: sistema · SATA: backups</p>
       <div class="host-bar">
         <span>Host</span>
-        <em>vmbr0 192.168.1.10 &nbsp;·&nbsp; vmbr1 10.10.20.1</em>
+        <em>vmbr0 192.168.18.10 &nbsp;·&nbsp; vmbr1 10.10.20.1</em>
       </div>
       <div class="pods">
         <div class="pod" style="border-left-color:var(--s1)">
           <b>vpn-avanza</b>
-          <span>openfortivpn → sede Avanza<br>192.168.1.11</span>
+          <span>openfortivpn → sede Avanza<br>192.168.18.11</span>
         </div>
         <div class="pod" style="border-left-color:var(--s2)">
           <b>vpn-alcazares</b>
-          <span>openfortivpn → Ayto. Los Alcázares<br>192.168.1.12</span>
+          <span>openfortivpn → Ayto. Los Alcázares<br>192.168.18.12</span>
         </div>
         <div class="pod" style="border-left-color:var(--s3)">
           <b>vpn-santomera</b>
-          <span>openfortivpn → Ayto. Santomera<br>192.168.1.13</span>
+          <span>openfortivpn → Ayto. Santomera<br>192.168.18.13</span>
         </div>
         <div class="pod" style="border-left-color:var(--accent)">
           <b>acceso</b>
-          <span>Tailscale subnet router<br>192.168.1.14</span>
+          <span>Tailscale subnet router<br>192.168.18.14</span>
         </div>
         <div class="pod wide" style="border-left-color:var(--muted)">
           <b>hosting</b>
@@ -585,9 +585,9 @@
       <p>El resto de la instalación va sobre el NVMe. Datos que te pedirá:</p>
       <ul>
         <li><strong>Hostname (FQDN)</strong>: algo como <code>nuc.lan</code>. Tiene que llevar punto.</li>
-        <li><strong>IP</strong>: fija, fuera del rango DHCP de tu router. En esta guía uso <code>192.168.1.10/24</code>, puerta de enlace <code>192.168.1.1</code>.</li>
+        <li><strong>IP</strong>: fija, fuera del rango DHCP de tu router. En esta guía uso <code>192.168.18.10/24</code>, puerta de enlace <code>192.168.18.1</code>.</li>
       </ul>
-      <p>Al terminar, saca el USB y reinicia. La interfaz web queda en <code>https://192.168.1.10:8006</code> — usuario <code>root</code>, reino <code>Linux PAM</code>. El aviso de certificado es normal, es autofirmado.</p>
+      <p>Al terminar, saca el USB y reinicia. La interfaz web queda en <code>https://192.168.18.10:8006</code> — usuario <code>root</code>, reino <code>Linux PAM</code>. El aviso de certificado es normal, es autofirmado.</p>
     </div>
   </div>
 
@@ -595,7 +595,7 @@
     <div class="step-num">03</div>
     <div class="step-body">
       <h2>Repositorios y disco de backups</h2>
-      <p>Por SSH a <code>root@192.168.1.10</code>, o desde la consola web (<strong>nodo → Shell</strong>). Lo primero es quitar el repositorio de empresa, que no tienes suscripción y hace fallar cada <code>apt update</code>:</p>
+      <p>Por SSH a <code>root@192.168.18.10</code>, o desde la consola web (<strong>nodo → Shell</strong>). Lo primero es quitar el repositorio de empresa, que no tienes suscripción y hace fallar cada <code>apt update</code>:</p>
       <pre><code><span class="c"># Proxmox 9 usa el formato deb822 (.sources)</span>
 sed -i 's/^Enabled: true/Enabled: false/' \
   /etc/apt/sources.list.d/pve-enterprise.sources \
@@ -650,15 +650,15 @@ iface vmbr1 inet static
     bridge-fd 0
     post-up echo 1 &gt; /proc/sys/net/ipv4/ip_forward
     post-up iptables -t nat -A POSTROUTING -s 10.10.20.0/24 -o vmbr0 -j MASQUERADE
-    post-up iptables -I FORWARD 1 -s 10.10.20.0/24 -d 192.168.1.0/24 -j REJECT
+    post-up iptables -I FORWARD 1 -s 10.10.20.0/24 -d 192.168.18.0/24 -j REJECT
     post-down iptables -t nat -D POSTROUTING -s 10.10.20.0/24 -o vmbr0 -j MASQUERADE
-    post-down iptables -D FORWARD -s 10.10.20.0/24 -d 192.168.1.0/24 -j REJECT</code></pre>
+    post-down iptables -D FORWARD -s 10.10.20.0/24 -d 192.168.18.0/24 -j REJECT</code></pre>
 
       <p>Esas tres reglas hacen tres cosas distintas: activan el reenvío, dan salida a internet al hosting por NAT, y le cierran el paso hacia tu LAN — y por tanto hacia los contenedores VPN. Aplica con <code>ifreload -a</code>.</p>
 
       <div class="note warn">
         <span class="tag">Ojo con el DNS del hosting</span>
-        <p>Como el hosting no puede hablar con tu router, no le pongas <code>192.168.1.1</code> como servidor DNS o no resolverá nada. Usa <code>1.1.1.1</code> o <code>9.9.9.9</code> al crear el contenedor.</p>
+        <p>Como el hosting no puede hablar con tu router, no le pongas <code>192.168.18.1</code> como servidor DNS o no resolverá nada. Usa <code>1.1.1.1</code> o <code>9.9.9.9</code> al crear el contenedor.</p>
       </div>
     </div>
   </div>
@@ -677,7 +677,7 @@ pveam download local debian-13-standard_13.1-1_amd64.tar.zst</code></pre>
   --hostname vpn-avanza \
   --cores 1 --memory 256 --swap 256 \
   --rootfs local-lvm:2 \
-  --net0 name=eth0,bridge=vmbr0,ip=192.168.1.11/24,gw=192.168.1.1 \
+  --net0 name=eth0,bridge=vmbr0,ip=192.168.18.11/24,gw=192.168.18.1 \
   --nameserver 1.1.1.1 \
   --unprivileged 1 --onboot 1 \
   --password</code></pre>
@@ -761,13 +761,13 @@ systemctl enable --now nftables</code></pre>
     <div class="step-num">07</div>
     <div class="step-body">
       <h2>Acceso remoto con Tailscale</h2>
-      <p>Crea un cuarto contenedor, <code>acceso</code>, igual que los anteriores (ID <code>114</code>, IP <code>192.168.1.14</code>) y con el mismo pasamanos de <code>/dev/net/tun</code> — Tailscale también lo necesita. El de <code>/dev/ppp</code> aquí sobra.</p>
+      <p>Crea un cuarto contenedor, <code>acceso</code>, igual que los anteriores (ID <code>114</code>, IP <code>192.168.18.14</code>) y con el mismo pasamanos de <code>/dev/net/tun</code> — Tailscale también lo necesita. El de <code>/dev/ppp</code> aquí sobra.</p>
 
       <p>Dentro, enseña al contenedor el camino hacia cada sede a través de su túnel. Sustituye las subredes por las tuyas reales:</p>
       <pre><code><span class="c"># en /etc/network/interfaces, dentro de iface eth0</span>
-    post-up ip route add 10.50.0.0/16 via 192.168.1.11
-    post-up ip route add 10.60.0.0/16 via 192.168.1.12
-    post-up ip route add 10.70.0.0/16 via 192.168.1.13</code></pre>
+    post-up ip route add 10.50.0.0/16 via 192.168.18.11
+    post-up ip route add 10.60.0.0/16 via 192.168.18.12
+    post-up ip route add 10.70.0.0/16 via 192.168.18.13</code></pre>
 
       <p>Instala Tailscale y anuncia esas mismas subredes:</p>
       <pre><code>curl -fsSL https://tailscale.com/install.sh | sh
@@ -879,13 +879,13 @@ curl -fsSL https://get.docker.com | sh</code></pre>
 
   <section>
     <h2>El fallo que más se repite</h2>
-    <p>Si dos sedes usan el mismo rango interno, o alguna usa <code>192.168.1.0/24</code> como tu propia LAN, el enrutado del paso 7 no puede funcionar: la misma dirección apuntaría a dos sitios.</p>
+    <p>Si dos sedes usan el mismo rango interno, o alguna usa <code>192.168.18.0/24</code> como tu propia LAN, el enrutado del paso 7 no puede funcionar: la misma dirección apuntaría a dos sitios.</p>
     <p>Se arregla haciendo que cada contenedor VPN presente la red de su sede bajo un rango falso y único — con <code>netmap</code> de nftables — y anunciando ese rango a Tailscale en lugar del real. Es más enredado que el resto de la guía, así que compruébalo pronto: conecta cada túnel y mira <code>ip route | grep ppp0</code>. Si los tres rangos son distintos entre sí y distintos de tu LAN, no tienes que hacer nada.</p>
   </section>
 
   <footer>
     <p>Runbook para Intel NUC8i3BEH · Proxmox VE 9 · 8 GB</p>
-    <p>Direcciones de ejemplo: LAN <code>192.168.1.0/24</code>, red aislada <code>10.10.20.0/24</code>. Ajusta a la tuya.</p>
+    <p>Direcciones de ejemplo: LAN <code>192.168.18.0/24</code>, red aislada <code>10.10.20.0/24</code>. Ajusta a la tuya.</p>
   </footer>
 
 </div>
