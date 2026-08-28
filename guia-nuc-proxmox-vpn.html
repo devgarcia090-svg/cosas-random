@@ -482,7 +482,7 @@
     <dl class="spec">
       <div><dt>CPU</dt><dd>i3-8109U · 2C/4T · VT-d</dd></div>
       <div><dt>RAM</dt><dd>8 GB DDR4-2400</dd></div>
-      <div><dt>Disco</dt><dd>NVMe + bahía 2,5"</dd></div>
+      <div><dt>Disco</dt><dd>NVMe 120 GB · bahía 2,5" libre</dd></div>
       <div><dt>Red</dt><dd>1× Gb Intel i219-V</dd></div>
     </dl>
   </header>
@@ -524,7 +524,7 @@
     <p>Cada sede vive en su propio contenedor. Como cada LXC tiene su propia pila de red, los tres túneles conviven sin pelearse por las rutas — que es justo lo que FortiClient no te deja hacer dentro de un mismo sistema.</p>
 
     <div class="rack">
-      <p class="rack-label">Proxmox VE 9 · NVMe: sistema · SATA: backups</p>
+      <p class="rack-label">Proxmox VE 9 · NVMe 120 GB: sistema y contenedores</p>
       <div class="host-bar">
         <span>Host</span>
         <em>vmbr0 192.168.18.10 &nbsp;·&nbsp; vmbr1 10.10.20.1</em>
@@ -616,8 +616,10 @@ apt update &amp;&amp; apt full-upgrade -y</code></pre>
         <p>Comprueba con <code>pveversion</code>. La 8 va sobre Debian 12 y usa ficheros <code>.list</code>: comenta la línea de <code>/etc/apt/sources.list.d/pve-enterprise.list</code> y añade <code>deb http://download.proxmox.com/debian/pve bookworm pve-no-subscription</code>.</p>
       </div>
 
-      <p>Ahora el disco SATA como almacén de copias de seguridad. <strong>Esto borra el disco</strong>, así que mira antes <code>lsblk</code> y confirma que <code>/dev/sda</code> es el que crees:</p>
-      <pre><code>lsblk
+      <div class="note">
+        <span class="tag">La bahía de 2,5" está vacía</span>
+        <p>El sistema vive en el NVMe de 120 GB y no hay segundo disco todavía, así que de momento no hay dónde poner las copias de seguridad. El soporte metálico y el cable SATA sí están montados, de modo que el día que aparezca cualquier disco de 2,5" entra directo. Cuando lo hagas, míralo con <code>lsblk</code> para confirmar su nombre — <strong>los comandos de abajo borran el disco entero</strong> — y móntalo:</p>
+        <pre><code>lsblk
 
 sgdisk -N 1 /dev/sda
 mkfs.ext4 -L backups /dev/sda1
@@ -627,6 +629,7 @@ mount -a
 
 pvesm add dir backups --path /mnt/backups \
   --content backup,iso,vztmpl</code></pre>
+      </div>
 
       <p>Carga también los módulos que necesitarán los contenedores VPN, y deja que se carguen solos en cada arranque:</p>
       <pre><code>modprobe tun ppp_generic
@@ -827,11 +830,11 @@ curl -fsSL https://get.docker.com | sh</code></pre>
     <div class="step-num">09</div>
     <div class="step-body">
       <h2>Copias de seguridad</h2>
-      <p>En la interfaz web: <strong>Datacenter → Backup → Add</strong>. Almacén <code>backups</code> (el disco SATA), todos los contenedores, diario de madrugada, modo <em>snapshot</em>, compresión <code>zstd</code> y retención de 7 diarias y 4 semanales.</p>
-      <p>Los contenedores VPN ocupan unos pocos cientos de megas cada uno, así que el disco de 2,5" te aguanta meses de histórico. Si un día un túnel deja de funcionar tras una actualización, restauras el contenedor de ayer en treinta segundos y sigues trabajando.</p>
+      <p>En la interfaz web: <strong>Datacenter → Backup → Add</strong>. Almacén <code>backups</code>, todos los contenedores, diario de madrugada, modo <em>snapshot</em>, compresión <code>zstd</code> y retención de 7 diarias y 4 semanales.</p>
+      <p>Los contenedores VPN ocupan unos pocos cientos de megas cada uno, así que cualquier disco de 2,5" te aguanta meses de histórico. Si un día un túnel deja de funcionar tras una actualización, restauras el contenedor de ayer en treinta segundos y sigues trabajando.</p>
       <div class="note warn">
-        <span class="tag">El backup vive en la misma caja</span>
-        <p>Un disco interno te salva de un error tuyo, no de un robo ni de que se queme la fuente. Copia los <code>vzdump</code> importantes a otro sitio de vez en cuando.</p>
+        <span class="tag">Hasta que haya segundo disco</span>
+        <p>Con un solo disco no hay copia de seguridad que valga: guardar los <code>vzdump</code> en el mismo NVMe no protege de que ese NVMe muera, que es exactamente lo que acaba de pasar con el Kingston. Mientras tanto, una vez montado todo, exporta los contenedores a mano con <code>vzdump 111 112 113 114 --dumpdir /tmp</code> y bájate los ficheros a tu portátil. Y cuando haya disco: un disco interno te salva de un error tuyo, no de un robo ni de que se queme la fuente, así que copia lo importante fuera de casa de vez en cuando.</p>
       </div>
     </div>
   </div>
