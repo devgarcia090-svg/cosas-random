@@ -1,6 +1,6 @@
 // Generador del cartel con el código QR de la carta.
 
-iniciarPagina('qr.html');
+iniciarPagina('/qr');
 
 const campoDestino = document.getElementById('destino');
 const campoUrl = document.getElementById('url');
@@ -9,7 +9,7 @@ const contenedorCodigo = document.querySelector('[data-codigo]');
 const textoTitulo = document.querySelector('[data-titulo]');
 const piePlantilla = document.querySelector('[data-pie-tarjeta]');
 
-const base = location.href.replace(/[^/]*$/, '');
+const base = location.origin + '/';
 const urlDestino = () => new URL(campoDestino.value, base).href;
 
 /** Dibuja el QR como SVG: se imprime nítido a cualquier tamaño. */

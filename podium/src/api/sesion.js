@@ -1,4 +1,4 @@
-import { json, fallo, iguales, haySesion, crearCookieSesion, cookieBorrada } from '../../lib/servidor.js';
+import { json, fallo, iguales, haySesion, crearCookieSesion, cookieBorrada } from '../servidor.js';
 
 /** ¿Sigue viva la sesión del panel? */
 export async function onRequestGet({ request, env }) {

@@ -3,11 +3,12 @@
 Web del restaurante con la carta completa, un sistema de reservas propio con
 panel para el personal, y un generador de códigos QR para las mesas.
 
-- `index.html` — portada: destacados, menú diario, fotos, horario y mapa.
-- `carta.html` — carta completa, con buscador y botón de imprimir.
-- `reservar.html` — formulario de reserva para el cliente.
-- `admin.html` — panel del restaurante: ver, confirmar y cancelar reservas.
-- `qr.html` — genera e imprime el cartel con el QR de la carta.
+- `public/index.html` — portada: destacados, menú diario, fotos, horario y mapa.
+- `public/carta.html` — carta completa, con buscador y botón de imprimir.
+- `public/reservar.html` — formulario de reserva para el cliente.
+- `public/admin.html` — panel del restaurante: ver, confirmar y cancelar reservas.
+- `public/qr.html` — genera e imprime el cartel con el QR de la carta.
+- `worker.js` + `src/` — la API de reservas.
 
 Todo es HTML, CSS y JavaScript sin frameworks ni compilación: se edita y se sube.
 
@@ -15,17 +16,18 @@ Todo es HTML, CSS y JavaScript sin frameworks ni compilación: se edita y se sub
 
 ## 1. Publicar la web
 
-Se despliega en **Cloudflare Pages** (mismo sitio donde ya tienes la otra web).
+Es un **Worker con assets estáticos**: `worker.js` atiende `/api/*` (las reservas)
+y todo lo demás (HTML, CSS, fotos) sale de `public/`.
 
-1. En el panel de Cloudflare: **Workers & Pages → Create → Pages → Connect to Git**.
-2. Elige este repositorio.
-3. Configura:
-   - **Root directory:** `podium`
-   - **Build command:** *(vacío)*
-   - **Build output directory:** `/`
-4. Guarda y despliega.
+En **Workers & Pages → tu proyecto `podium` → Settings → Build**:
+
+- **Root directory:** `podium`  ← importante, si no no encuentra `wrangler.toml`
+- **Build command:** *(vacío)*
+- **Deploy command:** `npx wrangler deploy`
 
 Con esto la web ya funciona y la carta se ve. Las reservas necesitan el paso 2.
+
+Las direcciones quedan limpias: `/`, `/carta`, `/reservar`, `/qr`, `/admin`.
 
 ## 2. Activar las reservas
 
@@ -76,19 +78,13 @@ a la carta online, así que **al cambiar un precio no hay que reimprimir nada**.
 
 | Qué quieres cambiar | Dónde |
 |---|---|
-| Precios, platos, menú del día | `assets/js/carta-datos.js` |
-| Horario, teléfono, dirección, aforo máximo | `assets/js/config.js` |
+| Precios, platos, menú del día | `public/assets/js/carta-datos.js` |
+| Horario, teléfono, dirección, aforo máximo | `public/assets/js/config.js` |
 | Plazas por turno y días cerrados | Panel `admin.html`, sin tocar código |
-| Fotos del local | `assets/img/fotos/` (ver `LEEME.txt`) |
+| Fotos del local | `public/assets/img/fotos/` |
 
-El horario de `config.js` lo usan a la vez la web y el servidor de reservas, así
+El horario de `public/assets/js/config.js` lo usan a la vez la web y el servidor de reservas, así
 que cambiándolo en un sitio se actualiza todo.
-
-### Las fotos
-
-Copia las fotos del local en `assets/img/fotos/` con los nombres que indica
-`assets/img/fotos/LEEME.txt` (`salon.jpg`, `terraza.jpg`, `chimenea.jpg`,
-`jamon.jpg`, `barra.jpg`). Si falta alguna, la web la omite sin romperse.
 
 ---
 
@@ -98,7 +94,7 @@ Copia las fotos del local en `assets/img/fotos/` con los nombres que indica
 cd podium
 npm install wrangler
 npx wrangler d1 execute podium-reservas --local --file=schema.sql
-npx wrangler pages dev .
+npx wrangler dev
 ```
 
 Para probar el panel en local, crea un fichero `.dev.vars` (no se sube a git):
@@ -113,6 +109,6 @@ SESSION_SECRET=otracosa
 ## Pendiente de confirmar
 
 - **El horario** está tomado de Google y Restaurant Guru. Revísalo en
-  `assets/js/config.js` y corrige lo que no cuadre.
+  `public/assets/js/config.js` y corrige lo que no cuadre.
 - La carta viene del PDF `Carta Podium.pdf`; se han corregido erratas
   («Lecguga» → «Lechuga», «foa» → «foie»). Conviene repasar los precios.

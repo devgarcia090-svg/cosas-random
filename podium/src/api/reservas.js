@@ -1,7 +1,7 @@
 import {
   json, fallo, REGLAS, esFechaISO, diasDesdeHoy, exigirSesion, exigirBase,
   disponibilidadDe, codigoReserva, limpiar
-} from '../../lib/servidor.js';
+} from '../servidor.js';
 
 const TELEFONO = /^[+\d][\d\s.\-()]{6,19}$/;
 const EMAIL = /^[^@\s]+@[^@\s.]+\.[^@\s]+$/;

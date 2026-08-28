@@ -1,6 +1,6 @@
 // Formulario público de reservas.
 
-iniciarPagina('reservar.html');
+iniciarPagina('/reservar');
 
 const P = globalThis.PODIUM;
 const R = P.reservas;
@@ -96,7 +96,7 @@ async function cargarTurnos({ avanzarSiVacio = false } = {}) {
   contenedorTurnos.innerHTML = '';
 
   try {
-    const respuesta = await fetch(`api/disponibilidad?fecha=${encodeURIComponent(fecha)}`);
+    const respuesta = await fetch(`/api/disponibilidad?fecha=${encodeURIComponent(fecha)}`);
     if (!respuesta.ok) throw new Error('sin servicio');
 
     const datos = await respuesta.json();
@@ -171,7 +171,7 @@ function mostrarExito(datos, codigo) {
     </div>
     <p>
       <a class="boton" href="${enlaceCalendario(datos)}" target="_blank" rel="noopener">Añadir al calendario</a>
-      <a class="boton boton--fantasma" href="carta.html">Ver la carta</a>
+      <a class="boton boton--fantasma" href="/carta">Ver la carta</a>
     </p>`;
   cajaExito.scrollIntoView({ block: 'center', behavior: 'smooth' });
 }
@@ -212,7 +212,7 @@ form.addEventListener('submit', async (e) => {
   botonEnviar.textContent = 'Enviando…';
 
   try {
-    const respuesta = await fetch('api/reservas', {
+    const respuesta = await fetch('/api/reservas', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(datos)

@@ -2,8 +2,8 @@
 // Importa la misma configuración de horarios que usa la web, para que el
 // servidor y el navegador nunca se contradigan.
 
-import '../assets/js/config.js';
-import '../assets/js/horario.js';
+import '../public/assets/js/config.js';
+import '../public/assets/js/horario.js';
 
 export const CONFIG = globalThis.PODIUM;
 export const REGLAS = CONFIG.reservas;

@@ -1,4 +1,4 @@
-import { json, fallo, esFechaISO, diasDesdeHoy, REGLAS, exigirBase, disponibilidadDe } from '../../lib/servidor.js';
+import { json, fallo, esFechaISO, diasDesdeHoy, REGLAS, exigirBase, disponibilidadDe } from '../servidor.js';
 
 /** Turnos libres de una fecha. Público: lo consulta el formulario de reserva. */
 export async function onRequestGet({ request, env }) {

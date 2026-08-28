@@ -6,14 +6,14 @@
 <title>Podium Café &amp; Grill — Carne a la brasa y tapeo en Murcia</title>
 <meta name="description" content="Podium Café &amp; Grill en Puente Tocinos, Murcia. Chuletones a la brasa, arroces, tapas y hamburguesas. Consulta la carta y reserva mesa online.">
 <meta name="theme-color" content="#12100e">
-<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
 <meta property="og:title" content="Podium Café &amp; Grill">
 <meta property="og:description" content="Carne a la brasa, arroces y tapeo en Puente Tocinos, Murcia. Reserva tu mesa online.">
 <meta property="og:type" content="restaurant">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/estilo.css">
+<link rel="stylesheet" href="/assets/css/estilo.css">
 </head>
 <body>
 
@@ -21,7 +21,7 @@
 
 <main>
   <section class="hero">
-    <div class="hero__fondo" data-foto-fondo="assets/img/fotos/salon.jpg"></div>
+    <div class="hero__fondo" data-foto-fondo="/assets/img/fotos/salon.jpg"></div>
     <div class="contenedor">
       <p class="hero__etiqueta">Puente Tocinos · Murcia</p>
       <h1>Brasa, producto y <em>buena mesa</em></h1>
@@ -30,8 +30,8 @@
         hamburguesas de angus. Comer bien, sin complicaciones.
       </p>
       <div class="hero__acciones">
-        <a class="boton" href="reservar.html">Reservar mesa</a>
-        <a class="boton boton--fantasma" href="carta.html">Ver la carta</a>
+        <a class="boton" href="/reservar">Reservar mesa</a>
+        <a class="boton boton--fantasma" href="/carta">Ver la carta</a>
       </div>
 
       <div class="insignias">
@@ -58,7 +58,7 @@
           <p class="antetitulo">Lo más pedido</p>
           <h2>De la brasa a la mesa</h2>
           <div data-destacados></div>
-          <p style="margin-top:1.6rem"><a class="boton boton--fantasma" href="carta.html">Carta completa</a></p>
+          <p style="margin-top:1.6rem"><a class="boton boton--fantasma" href="/carta">Carta completa</a></p>
         </div>
 
         <div class="tarjeta menu-dia" data-menu-dia></div>
@@ -79,7 +79,7 @@
       </div>
       <div class="rejilla rejilla--2" style="align-items:center;margin-bottom:2.5rem">
         <div class="foto-lado" data-foto>
-          <img src="assets/img/fotos/jamon.jpg" alt="Cortando jamón a cuchillo en Podium Café &amp; Grill" loading="lazy">
+          <img src="/assets/img/fotos/jamon.jpg" alt="Cortando jamón a cuchillo en Podium Café &amp; Grill" loading="lazy">
         </div>
         <div>
           <h3>Al corte, delante de ti</h3>
@@ -118,11 +118,11 @@
         <p>Comedor amplio para grupos, barra para el tapeo y terraza acristalada y climatizada todo el año.</p>
       </div>
       <div class="galeria">
-        <figure data-foto><img src="assets/img/fotos/salon.jpg" alt="Comedor de Podium Café &amp; Grill con las mesas puestas" loading="lazy"></figure>
-        <figure data-foto><img src="assets/img/fotos/terraza.jpg" alt="Terraza acristalada y climatizada de Podium" loading="lazy"></figure>
-        <figure data-foto><img src="assets/img/fotos/chimenea.jpg" alt="Mesa larga preparada para un grupo" loading="lazy"></figure>
-        <figure data-foto><img src="assets/img/fotos/barra.jpg" alt="Barra y zona de entrada del local" loading="lazy"></figure>
-        <figure data-foto><img src="assets/img/fotos/jamon.jpg" alt="Corte de jamón en la barra" loading="lazy"></figure>
+        <figure data-foto><img src="/assets/img/fotos/salon.jpg" alt="Comedor de Podium Café &amp; Grill con las mesas puestas" loading="lazy"></figure>
+        <figure data-foto><img src="/assets/img/fotos/terraza.jpg" alt="Terraza acristalada y climatizada de Podium" loading="lazy"></figure>
+        <figure data-foto><img src="/assets/img/fotos/chimenea.jpg" alt="Mesa larga preparada para un grupo" loading="lazy"></figure>
+        <figure data-foto><img src="/assets/img/fotos/barra.jpg" alt="Barra y zona de entrada del local" loading="lazy"></figure>
+        <figure data-foto><img src="/assets/img/fotos/jamon.jpg" alt="Corte de jamón en la barra" loading="lazy"></figure>
       </div>
     </div>
   </section>
@@ -145,12 +145,12 @@
 
 <footer class="pie" data-pie></footer>
 
-<script src="assets/js/config.js"></script>
-<script src="assets/js/horario.js"></script>
-<script src="assets/js/carta-datos.js"></script>
-<script src="assets/js/comun.js"></script>
+<script src="/assets/js/config.js"></script>
+<script src="/assets/js/horario.js"></script>
+<script src="/assets/js/carta-datos.js"></script>
+<script src="/assets/js/comun.js"></script>
 <script>
-  iniciarPagina('index.html');
+  iniciarPagina('/');
 
   // Destacados: las sugerencias de la casa.
   const sugerencias = window.CARTA.find((c) => c.id === 'sugerencias');
@@ -171,7 +171,7 @@
     <h4>Primeros</h4><ul>${md.primeros.map((x) => `<li>${x}</li>`).join('')}</ul>
     <h4>Segundos</h4><ul>${md.segundos.map((x) => `<li>${x}</li>`).join('')}</ul>
     <h4>Postre</h4><ul>${md.postres.map((x) => `<li>${x}</li>`).join('')}</ul>
-    <a class="boton boton--ancho" href="reservar.html">Reservar mesa</a>`;
+    <a class="boton boton--ancho" href="/reservar">Reservar mesa</a>`;
 
   const P = window.PODIUM;
   document.querySelector('[data-contacto]').innerHTML = `

@@ -1,4 +1,4 @@
-import { json, fallo, esFechaISO, exigirSesion, exigirBase, plazasPorTurno, limpiar } from '../../lib/servidor.js';
+import { json, fallo, esFechaISO, exigirSesion, exigirBase, plazasPorTurno, limpiar } from '../servidor.js';
 
 /** Aforo por turno y días de cierre puntual (vacaciones, festivos, privados). */
 export async function onRequestGet({ request, env }) {

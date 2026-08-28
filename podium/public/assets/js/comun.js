@@ -10,20 +10,20 @@ const MARCA_HTML = `${LLAMA_SVG}<span class="marca__texto">Podium<small>Cafe &am
 
 function pintarCabecera(paginaActual) {
   const enlaces = [
-    ['index.html', 'Inicio'],
-    ['carta.html', 'Carta'],
-    ['reservar.html', 'Reservar'],
-    ['index.html#contacto', 'Contacto']
+    ['/', 'Inicio'],
+    ['/carta', 'Carta'],
+    ['/reservar', 'Reservar'],
+    ['/#contacto', 'Contacto']
   ];
   const marcada = (href) => (href.split('#')[0] === paginaActual ? " aria-current='page'" : '');
 
   document.querySelector('[data-cabecera]').innerHTML = `
     <div class="contenedor cabecera__fila">
-      <a class="marca" href="index.html">${MARCA_HTML}</a>
+      <a class="marca" href="/">${MARCA_HTML}</a>
       <button class="menu-btn" type="button" aria-expanded="false" aria-label="Abrir menú">☰</button>
       <nav class="nav">
         ${enlaces.map(([h, t]) => `<a href="${h}"${marcada(h)}>${t}</a>`).join('')}
-        <a class="boton boton--pequeno" href="reservar.html">Reservar mesa</a>
+        <a class="boton boton--pequeno" href="/reservar">Reservar mesa</a>
       </nav>
     </div>`;
 
@@ -44,7 +44,7 @@ function pintarPie() {
     <div class="contenedor">
       <div class="pie__rejilla">
         <div>
-          <a class="marca" href="index.html">${MARCA_HTML}</a>
+          <a class="marca" href="/">${MARCA_HTML}</a>
           <p class="tenue" style="margin-top:1rem">Brasa, tapeo y producto de la tierra en Puente Tocinos.</p>
           <span class="estado-abierto" data-abierto="${abierto ? 'si' : 'no'}">${abierto ? 'Abierto ahora' : 'Cerrado ahora'}</span>
         </div>
@@ -72,9 +72,9 @@ function pintarPie() {
         <div>
           <h4>Web</h4>
           <ul>
-            <li><a href="carta.html">Ver la carta</a></li>
-            <li><a href="reservar.html">Reservar mesa</a></li>
-            <li><a href="qr.html">Código QR de la carta</a></li>
+            <li><a href="/carta">Ver la carta</a></li>
+            <li><a href="/reservar">Reservar mesa</a></li>
+            <li><a href="/qr">Código QR de la carta</a></li>
           </ul>
         </div>
       </div>

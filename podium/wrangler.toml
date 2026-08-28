@@ -1,6 +1,11 @@
 name = "podium"
+main = "worker.js"
 compatibility_date = "2024-11-01"
-pages_build_output_dir = "."
+
+# La web estática (HTML, CSS, imágenes). Todo lo que no sea /api/* sale de aquí.
+[assets]
+directory = "./public"
+binding = "ASSETS"
 
 # Base de datos de reservas. Crea la tuya con:
 #   npx wrangler d1 create podium-reservas

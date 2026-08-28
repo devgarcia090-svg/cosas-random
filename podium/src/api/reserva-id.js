@@ -1,4 +1,4 @@
-import { json, fallo, exigirSesion, exigirBase, limpiar } from '../../../lib/servidor.js';
+import { json, fallo, exigirSesion, exigirBase, limpiar } from '../servidor.js';
 
 const ESTADOS = ['pendiente', 'confirmada', 'cancelada'];
 

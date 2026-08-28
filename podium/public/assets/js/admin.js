@@ -39,7 +39,7 @@ document.querySelector('[data-login]').addEventListener('submit', async (e) => {
   e.preventDefault();
   const error = document.querySelector('[data-login-error]');
   try {
-    await api('api/sesion', { method: 'POST', cuerpo: { password: document.getElementById('password').value } });
+    await api('/api/sesion', { method: 'POST', cuerpo: { password: document.getElementById('password').value } });
     entrar();
   } catch (err) {
     avisar(error, err.message, 0);
@@ -47,7 +47,7 @@ document.querySelector('[data-login]').addEventListener('submit', async (e) => {
 });
 
 botonSalir.addEventListener('click', async () => {
-  await api('api/sesion', { method: 'DELETE' }).catch(() => {});
+  await api('/api/sesion', { method: 'DELETE' }).catch(() => {});
   location.reload();
 });
 
@@ -101,7 +101,7 @@ function tarjetaReserva(r) {
 async function cargarReservas() {
   lista.innerHTML = '<p class="tenue">Cargando…</p>';
   try {
-    const { reservas } = await api(`api/reservas?desde=${rango.desde}&hasta=${rango.hasta}`);
+    const { reservas } = await api(`/api/reservas?desde=${rango.desde}&hasta=${rango.hasta}`);
     pintarMetricas(reservas);
 
     subtitulo.textContent = rango.desde === rango.hasta
@@ -126,7 +126,7 @@ lista.addEventListener('click', async (e) => {
 
   boton.disabled = true;
   try {
-    await api(`api/reservas/${tarjeta.dataset.id}`, { method: 'PATCH', cuerpo: { estado: boton.dataset.accion } });
+    await api(`/api/reservas/${tarjeta.dataset.id}`, { method: 'PATCH', cuerpo: { estado: boton.dataset.accion } });
     await cargarReservas();
   } catch (err) {
     boton.disabled = false;
@@ -162,7 +162,7 @@ const contenedorCierres = document.querySelector('[data-cierres]');
 
 async function cargarAjustes() {
   try {
-    const datos = await api('api/ajustes');
+    const datos = await api('/api/ajustes');
     campoPlazas.value = datos.plazasPorTurno;
 
     contenedorCierres.innerHTML = datos.cierres.length
@@ -179,7 +179,7 @@ async function cargarAjustes() {
 
 document.querySelector('[data-guardar-plazas]').addEventListener('click', async () => {
   try {
-    await api('api/ajustes', { method: 'PUT', cuerpo: { plazasPorTurno: Number(campoPlazas.value) } });
+    await api('/api/ajustes', { method: 'PUT', cuerpo: { plazasPorTurno: Number(campoPlazas.value) } });
     avisar(okAjustes, 'Aforo guardado.');
   } catch (err) {
     avisar(errorPanel, err.message);
@@ -191,7 +191,7 @@ document.querySelector('[data-anadir-cierre]').addEventListener('click', async (
   if (!fecha) return avisar(errorPanel, 'Elige la fecha que quieres cerrar.');
 
   try {
-    await api('api/ajustes', {
+    await api('/api/ajustes', {
       method: 'POST',
       cuerpo: { fecha, motivo: document.getElementById('cierre-motivo').value }
     });
@@ -207,7 +207,7 @@ contenedorCierres.addEventListener('click', async (e) => {
   const boton = e.target.closest('[data-quitar]');
   if (!boton) return;
   try {
-    await api(`api/ajustes?fecha=${boton.dataset.quitar}`, { method: 'DELETE' });
+    await api(`/api/ajustes?fecha=${boton.dataset.quitar}`, { method: 'DELETE' });
     cargarAjustes();
   } catch (err) {
     avisar(errorPanel, err.message);
@@ -216,7 +216,7 @@ contenedorCierres.addEventListener('click', async (e) => {
 
 // --- Arranque ---
 
-api('api/sesion')
+api('/api/sesion')
   .then((datos) => {
     if (datos.autenticado) return entrar();
     seccionAcceso.classList.remove('oculto');
