@@ -636,12 +636,24 @@ falta en rondas anteriores) a los mismos huecos que ya usa el resto de la web
 (`.v-pc`, `.marco-movil`, `.vistas-extra`), sin recortar barra de navegación en las
 dos extra (tarifas y reservas) para que el contenido entre directo.
 
-**Nota sobre "proyectos propios":** la entradilla de la sección decía "Dos
-proyectos propios" — con un tercer caso que puede ser cliente y no solo cosa
-personal del fundador, se cambió a "Tres proyectos reales", quitando la palabra
-"propios" en vez de dar por hecho de quién es. Si en el futuro hace falta
-distinguir explícitamente casos propios de casos de cliente, es un cambio de una
-palabra por tarjeta, no de toda la entradilla.
+**AquaLadra es cliente, no proyecto propio — confirmado.** Es el primer cliente
+real de Estudio Olfato. Por eso la entradilla de la sección se dejó en "Tres
+proyectos reales" (sin "propios", que sí describe a Maya y WodBox pero no a este) y
+la tarjeta lleva `<li>Cliente</li>` como primera etiqueta, mismo patrón que
+`<li>Producto</li>` en WodBox: la primera etiqueta dice de quién es, antes de decir
+qué se hizo. Es, además, la prueba que le falta a la web: no solo "sabemos hacer
+esto", sino "ya lo hemos hecho para alguien que nos pagó por ello".
+
+**Pendiente de confirmar: permiso de AquaLadra para aparecer como caso.** La propia
+sección "Antes del primer cliente" de este documento dice, textualmente, "pide
+permiso para publicar capturas desde el primer proyecto" — y este es exactamente
+ese primer proyecto. Antes de quitar el `noindex` general de la web (o antes,
+si se puede, ya que ahora mismo es públicamente visible en el `workers.dev` aunque
+no esté indexado), confirma con el dueño de AquaLadra que está de acuerdo con que
+su negocio, su ficha de Google y sus tarifas aparezcan en la web de Estudio Olfato
+como caso de trabajo. Si no lo has hecho todavía, dímelo y lo quito mientras se
+resuelve — no vale la pena el riesgo de una mala relación con el primer cliente por
+una tarjeta en una web.
 
 **Nota técnica del intento fallido de capturar en vivo:** antes de que el usuario
 diera las capturas, se intentó volver a fotografiar aqualadra.com en directo con
