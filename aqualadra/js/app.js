@@ -237,7 +237,7 @@
   }
 
   var telHref = "tel:+" + (CFG.telefono || "");
-  var telTexto = "684 79 72 36";
+  var telTexto = "658 28 40 18";
   var waHref = "https://wa.me/" + (CFG.telefono || "");
 
   /* Crea el marco de un contenido incrustado */

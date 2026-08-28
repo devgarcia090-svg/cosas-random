@@ -699,6 +699,15 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   color: var(--aqua-700);
 }
 .price__value sup { font-size: .42em; top: -.7em; margin-left: .1em; }
+.price__desde {
+  display: block;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: .68rem;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
 .price__desc { color: var(--muted); font-size: .88rem; margin-top: .5rem; }
 .price--featured { box-shadow: 0 0 0 2.5px var(--sand-400), var(--sh-md); }
 .price__tag {

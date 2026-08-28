@@ -37,7 +37,7 @@ for (const tipo of ['LocalBusiness', 'WebSite', 'HowTo', 'FAQPage'])
 // ---------- Ficha del negocio ----------
 const n = nodos.LocalBusiness || {};
 t(n.name === 'AquaLadra', 'nombre del negocio');
-t(n.telephone === '+34684797236', 'teléfono en formato internacional');
+t(n.telephone === '+34658284018', 'teléfono en formato internacional');
 t(n.address && n.address.postalCode === '30006', 'código postal');
 t(n.address && n.address.addressLocality === 'Puente Tocinos', 'localidad');
 t(Array.isArray(n.image) && n.image.length >= 2, `${(n.image||[]).length} imágenes declaradas`);
@@ -75,7 +75,8 @@ const visibles = await p.evaluate(() => {
 });
 
 const preciosLD = new Set(
-  ((n.hasOfferCatalog || {}).itemListElement || []).map(o => o.priceSpecification.price));
+  ((n.hasOfferCatalog || {}).itemListElement || [])
+    .map(o => o.priceSpecification.price ?? o.priceSpecification.minPrice));
 const preciosVis = new Set();
 for (const [grupo, lista] of Object.entries(visibles))
   for (const [, v] of lista) if (v) preciosVis.add(v);

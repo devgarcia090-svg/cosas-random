@@ -5,7 +5,7 @@
    ===================================================================== */
 window.AQUALADRA = {
   /* Teléfono en formato internacional, sin espacios ni signos */
-  telefono: "34684797236",
+  telefono: "34658284018",
 
   /* Página de citas de Google Calendar ("Peluqueria Aqualadra").
      Para sacarla: Google Calendar > la programación de citas > Abrir

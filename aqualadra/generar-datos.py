@@ -56,14 +56,15 @@ def sin_etiquetas(texto):
     return re.sub(r"\s+", " ", texto).strip()
 
 
-def oferta(nombre, precio, descripcion):
+def oferta(nombre, precio, descripcion, desde=False):
+    especificacion = {"@type": "UnitPriceSpecification", "priceCurrency": "EUR"}
+    especificacion["minPrice" if desde else "price"] = precio
     return {
         "@type": "Offer",
         "itemOffered": {"@type": "Service", "name": nombre,
                         "description": descripcion,
                         "provider": {"@id": BASE + "/#negocio"}},
-        "priceSpecification": {"@type": "UnitPriceSpecification",
-                               "price": precio, "priceCurrency": "EUR"},
+        "priceSpecification": especificacion,
         "availability": "https://schema.org/InStock",
     }
 
@@ -82,12 +83,14 @@ def leer_tarifas(html):
         if not panel:
             raise SystemExit(f"No se ha encontrado el panel {clave}.")
         for nombre, precio in re.findall(
-                r'class="price__name">(.*?)</p><p class="price__value">(\d+)<sup>',
+                r'class="price__name">(.*?)</p><p class="price__value">'
+                r'(?:<span class="price__desde">Desde</span>\s*)?(\d+)<sup>',
                 panel.group(0)):
             nombre = sin_etiquetas(nombre)
             ofertas.append(oferta(
                 f"{nombre} en peluquería · {grupo}", precio,
-                DETALLE_PELUQUERIA.get(nombre, INCLUYE) + f" Tarifa para {grupo.lower()}."))
+                DETALLE_PELUQUERIA.get(nombre, INCLUYE) + f" Tarifa para {grupo.lower()}.",
+                desde=True))
     return ofertas
 
 
