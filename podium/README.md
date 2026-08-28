@@ -19,13 +19,25 @@ Todo es HTML, CSS y JavaScript sin frameworks ni compilación: se edita y se sub
 Es un **Worker con assets estáticos**: `worker.js` atiende `/api/*` (las reservas)
 y todo lo demás (HTML, CSS, fotos) sale de `public/`.
 
-En **Workers & Pages → tu proyecto `podium` → Settings → Build**:
+### Conectar el repositorio
 
-- **Root directory:** `podium`  ← importante, si no no encuentra `wrangler.toml`
-- **Build command:** *(vacío)*
-- **Deploy command:** `npx wrangler deploy`
+En **Workers & Pages → podium → Settings → Build**:
 
-Con esto la web ya funciona y la carta se ve. Las reservas necesitan el paso 2.
+| Campo | Valor |
+|---|---|
+| Git repository | `devgarcia090-svg/cosas-random` |
+| **Root directory** | `podium` |
+| Build command | *(vacío)* |
+| Deploy command | `npx wrangler deploy` |
+| Production branch | la rama donde esté el código |
+| Build watch paths → Include | `podium/*` |
+
+> Si el proyecto está conectado a un repositorio `podium` creado automáticamente
+> por Cloudflare, ese es una copia congelada y no recibe los cambios: pulsa
+> **Disconnect** y conecta `cosas-random`.
+
+**El orden importa:** el primer build fallará mientras `wrangler.toml` tenga el
+`database_id` de ejemplo, así que haz antes el paso 2.
 
 Las direcciones quedan limpias: `/`, `/carta`, `/reservar`, `/qr`, `/admin`.
 
