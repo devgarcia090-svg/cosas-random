@@ -644,16 +644,12 @@ la tarjeta lleva `<li>Cliente</li>` como primera etiqueta, mismo patrón que
 qué se hizo. Es, además, la prueba que le falta a la web: no solo "sabemos hacer
 esto", sino "ya lo hemos hecho para alguien que nos pagó por ello".
 
-**Pendiente de confirmar: permiso de AquaLadra para aparecer como caso.** La propia
-sección "Antes del primer cliente" de este documento dice, textualmente, "pide
-permiso para publicar capturas desde el primer proyecto" — y este es exactamente
-ese primer proyecto. Antes de quitar el `noindex` general de la web (o antes,
-si se puede, ya que ahora mismo es públicamente visible en el `workers.dev` aunque
-no esté indexado), confirma con el dueño de AquaLadra que está de acuerdo con que
-su negocio, su ficha de Google y sus tarifas aparezcan en la web de Estudio Olfato
-como caso de trabajo. Si no lo has hecho todavía, dímelo y lo quito mientras se
-resuelve — no vale la pena el riesgo de una mala relación con el primer cliente por
-una tarjeta en una web.
+**Permiso de AquaLadra: resuelto.** Se planteó porque la sección "Antes del primer
+cliente" de este documento pide, textualmente, "permiso para publicar capturas
+desde el primer proyecto". El usuario, que hizo la web como desarrollador, decidió
+explícitamente publicarla como caso sin pedir confirmación aparte al dueño del
+negocio. Es su decisión y su relación con el cliente, no algo que este documento
+tenga que seguir cuestionando. Queda publicada tal cual.
 
 **Nota técnica del intento fallido de capturar en vivo:** antes de que el usuario
 diera las capturas, se intentó volver a fotografiar aqualadra.com en directo con
