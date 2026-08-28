@@ -704,13 +704,18 @@ lxc.mount.entry: /dev/ppp dev/ppp none bind,create=file</code></pre>
       <p>Dentro del contenedor:</p>
       <pre><code>apt update &amp;&amp; apt install -y openfortivpn nftables</code></pre>
 
-      <p>Crea <code>/etc/openfortivpn/avanza.conf</code> con los datos que ves en tu FortiClient:</p>
-      <pre><code>host = vpn.tusede.es
+      <p>Crea <code>/etc/openfortivpn/avanza.conf</code> con los datos que ves en el perfil de FortiClient — el gateway y el puerto salen tal cual de ahí:</p>
+      <pre><code>host = vpn.avanzafibra.com
 port = 10443
 username = tu.usuario
 password = tu-contraseña
 set-routes = 1
 set-dns = 0</code></pre>
+
+      <div class="note warn">
+        <span class="tag">La contraseña va en claro</span>
+        <p>Por eso el <code>chmod 600</code> de abajo, y por eso este fichero no debe acabar en ningún repositorio ni copia de seguridad que salga de casa. Si prefieres no guardarla, quita la línea <code>password</code> y openfortivpn la pedirá al conectar — pero entonces el túnel no levanta solo al arrancar.</p>
+      </div>
 
       <pre><code>chmod 600 /etc/openfortivpn/avanza.conf</code></pre>
 
@@ -832,20 +837,25 @@ curl -fsSL https://get.docker.com | sh</code></pre>
   </div>
 
   <section>
-    <h2>La bifurcación que queda por resolver</h2>
-    <p>Todo lo anterior asume que <code>openfortivpn</code> puede autenticarse contra las tres sedes. Eso depende de qué te pide FortiClient al pulsar Conectar:</p>
+    <h2>Comprobar cada sede antes de montarla</h2>
+    <p>Todo lo anterior asume que <code>openfortivpn</code> puede autenticarse contra las tres sedes. Abre el perfil de cada una en FortiClient y mira tres cosas: si pone <strong>VPN SSL</strong> o <strong>VPN IPsec</strong>, si la casilla de <strong>SSO</strong> está marcada, y si hay <strong>certificado de cliente</strong>.</p>
+
+    <div class="note">
+      <span class="tag">Avanza · comprobado</span>
+      <p>VPN SSL contra <code>vpn.avanzafibra.com:10443</code>, SSO desactivado, sin certificado de cliente y con las credenciales guardadas en el propio cliente. Es el caso favorable: contenedor de 256 MB y funciona tal cual.</p>
+    </div>
 
     <div class="fork">
       <div class="yes">
-        <b>Usuario y contraseña dentro de FortiClient</b>
+        <b>VPN SSL, SSO desmarcado, sin certificado</b>
         <span>SSL-VPN clásico, con o sin código OTP. Es el caso de esta guía y funciona tal cual.</span>
       </div>
       <div class="maybe">
-        <b>Se abre el navegador para el login</b>
+        <b>SSO marcado, o se abre el navegador al conectar</b>
         <span>Es SAML. Necesitas <code>openfortivpn-webview</code>, que abre esa ventana de login y le pasa la cookie a openfortivpn. Funciona, pero cuesta más de montar.</span>
       </div>
       <div class="no">
-        <b>Dice IPsec, o exige FortiClient registrado en EMS</b>
+        <b>Pestaña VPN IPsec, o FortiClient registrado en EMS</b>
         <span>Ahí openfortivpn no llega. Esa sede concreta necesita Windows.</span>
       </div>
     </div>
