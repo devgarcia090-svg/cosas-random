@@ -276,7 +276,9 @@ sería raro — táchala de la lista de captación.
 Con 0 resultados en la frase exacta ya puedes hacer esta semana, y por menos de
 30 €:
 
-- [ ] Comprar `olfatoestudio.com` y `estudioolfato.com` (~22 $/año los dos).
+- [ ] Comprar `olfatoestudio.com` (~15 $/año). Decidido comprar solo este por
+      ahora, no los dos: la redirección desde `estudioolfato.com` es un extra que
+      se puede añadir después, sin prisa, cuando sobre presupuesto.
 - [ ] Coger los handles en Instagram y TikTok, el mismo en las dos. Gratis.
 - [ ] Crear el buzón `hola@olfatoestudio.com`. La web ya lo usa en todas partes,
       así que hasta que exista los correos rebotan.
