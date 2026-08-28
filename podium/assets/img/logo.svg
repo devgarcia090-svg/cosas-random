@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 205" role="img" aria-label="Podium Café &amp; Grill">
+  <g fill="currentColor">
+    <g transform="translate(130 8) scale(0.82) translate(-134 0)">
+      <path d="M130 8c-3 18-13 28-24 38-13 12-22 25-22 42 0 20 13 34 30 39-7-8-10-16-10-25 0-12 7-20 16-27-2 14 2 22 10 27-4-11-1-19 6-26 5 12 3 21-2 30 12-5 20-16 20-29 0-11-5-20-11-28 10 5 18 14 22 25 3 9 2 18-2 26 15-8 24-22 24-39 0-19-11-32-24-43-9-8-17-17-20-28-3 10-8 17-13 18z"/>
+    </g>
+
+    <text x="130" y="160" text-anchor="middle"
+          font-family="Oswald, 'Arial Black', 'Helvetica Neue', sans-serif"
+          font-size="54" font-weight="700" letter-spacing="2">PODIUM</text>
+
+    <rect x="34" y="184" width="34" height="2.4" rx="1.2"/>
+    <rect x="192" y="184" width="34" height="2.4" rx="1.2"/>
+    <text x="130" y="192" text-anchor="middle"
+          font-family="Georgia, 'Times New Roman', serif"
+          font-size="22" font-style="italic">Cafe &amp; Grill</text>
+  </g>
+</svg>

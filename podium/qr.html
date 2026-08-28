@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Código QR de la carta — Podium Café &amp; Grill</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#12100e">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/estilo.css">
+</head>
+<body>
+
+<header class="cabecera" data-cabecera></header>
+
+<main class="seccion">
+  <div class="contenedor">
+    <p class="antetitulo">Para las mesas</p>
+    <h1 style="font-size:clamp(2rem,5vw,3rem)">Código QR de la carta</h1>
+    <p class="tenue" style="max-width:60ch">
+      Imprime este cartel y ponlo en las mesas o en la puerta. Al escanearlo con la
+      cámara del móvil se abre la carta actualizada, sin instalar nada.
+    </p>
+
+    <div class="qr-disposicion" style="margin-top:2.5rem">
+      <div class="no-imprimir">
+        <div class="campo">
+          <label for="destino">¿A dónde lleva el QR?</label>
+          <select id="destino">
+            <option value="carta.html">La carta</option>
+            <option value="index.html">La página principal</option>
+            <option value="reservar.html">Reservar mesa</option>
+          </select>
+        </div>
+
+        <div class="campo">
+          <label for="url">Dirección completa</label>
+          <input type="url" id="url">
+          <p class="campo__ayuda">Se rellena sola. Cámbiala si usas otro dominio.</p>
+        </div>
+
+        <div class="campo">
+          <label for="titulo">Texto del cartel</label>
+          <input type="text" id="titulo" maxlength="40" value="Escanea y mira la carta">
+        </div>
+
+        <div style="display:flex;gap:.6rem;flex-wrap:wrap">
+          <button class="boton" type="button" onclick="window.print()">Imprimir cartel</button>
+          <button class="boton boton--fantasma" type="button" data-descargar>Descargar SVG</button>
+        </div>
+
+        <p class="campo__ayuda" style="margin-top:1.5rem">
+          El SVG no pierde calidad: sirve igual para un adhesivo pequeño que para un cartel grande.
+        </p>
+      </div>
+
+      <div class="qr-tarjeta" data-tarjeta>
+        <img class="qr-tarjeta__logo" src="assets/img/logo.svg" alt="Podium Café &amp; Grill">
+        <div class="qr-tarjeta__codigo" data-codigo></div>
+        <p class="qr-tarjeta__titulo" data-titulo>Escanea y mira la carta</p>
+        <p class="qr-tarjeta__pie" data-pie-tarjeta></p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="pie" data-pie></footer>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/horario.js"></script>
+<script src="assets/js/comun.js"></script>
+<script src="assets/js/qrcode.min.js"></script>
+<script src="assets/js/qr.js"></script>
+</body>
+</html>

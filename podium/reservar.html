@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reservar mesa — Podium Café &amp; Grill</title>
+<meta name="description" content="Reserva tu mesa en Podium Café &amp; Grill (Puente Tocinos, Murcia) en menos de un minuto.">
+<meta name="theme-color" content="#12100e">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/estilo.css">
+</head>
+<body>
+
+<header class="cabecera" data-cabecera></header>
+
+<main class="seccion">
+  <div class="contenedor" style="max-width:640px">
+    <p class="antetitulo">Reservas</p>
+    <h1 style="font-size:clamp(2rem,5vw,3rem)">Reserva tu mesa</h1>
+    <p class="tenue">
+      Elige día, hora y número de comensales. Te confirmamos por teléfono si hay
+      cualquier cambio. Para grupos grandes o arroces, cuéntanoslo en las notas.
+    </p>
+
+    <form id="formulario" novalidate style="margin-top:2rem">
+      <div class="aviso aviso--error oculto" data-error role="alert"></div>
+
+      <div class="fila-campos">
+        <div class="campo">
+          <label for="fecha">Día</label>
+          <input type="date" id="fecha" name="fecha" required>
+        </div>
+        <div class="campo">
+          <label for="personas">Comensales</label>
+          <select id="personas" name="personas" required></select>
+        </div>
+      </div>
+
+      <div class="campo">
+        <label>Hora</label>
+        <div class="turnos" data-turnos></div>
+        <p class="campo__ayuda" data-turnos-mensaje>Elige primero un día.</p>
+      </div>
+
+      <div class="fila-campos">
+        <div class="campo">
+          <label for="nombre">Nombre y apellidos</label>
+          <input type="text" id="nombre" name="nombre" autocomplete="name" maxlength="80" required>
+        </div>
+        <div class="campo">
+          <label for="telefono">Teléfono</label>
+          <input type="tel" id="telefono" name="telefono" autocomplete="tel" maxlength="20" required>
+        </div>
+      </div>
+
+      <div class="campo">
+        <label for="email">Correo <span class="tenue">(opcional)</span></label>
+        <input type="email" id="email" name="email" autocomplete="email" maxlength="120">
+      </div>
+
+      <div class="campo">
+        <label for="notas">Notas <span class="tenue">(opcional)</span></label>
+        <textarea id="notas" name="notas" maxlength="300" placeholder="Alergias, trona, terraza, arroz por encargo…"></textarea>
+      </div>
+
+      <button class="boton boton--ancho" type="submit" data-enviar>Confirmar reserva</button>
+
+      <p class="campo__ayuda centrado" style="margin-top:1rem">
+        ¿Prefieres llamar? <a data-telefono href="#"></a>
+      </p>
+    </form>
+
+    <div class="exito oculto" data-exito></div>
+  </div>
+</main>
+
+<footer class="pie" data-pie></footer>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/horario.js"></script>
+<script src="assets/js/comun.js"></script>
+<script src="assets/js/reservar.js"></script>
+</body>
+</html>
