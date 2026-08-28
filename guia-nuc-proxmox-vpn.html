@@ -1,0 +1,881 @@
+<title>Tres túneles, ocho gigas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+
+<style>
+  /* ---------- Tokens: light (bare :root = complete palette) ---------- */
+  :root {
+    --ground:      #EDF1F2;
+    --surface:     #FFFFFF;
+    --surface-2:   #E2E8EA;
+    --ink:         #121D23;
+    --ink-2:       #3B4D57;
+    --muted:       #6A7F8B;
+    --rule:        #C9D4D8;
+    --rule-soft:   #DDE5E8;
+    --accent:      #0B6E75;
+    --accent-2:    #0D8A8A;
+    --accent-wash: #DBEBEC;
+    --warn:        #9A4814;
+    --warn-wash:   #F6E6DA;
+
+    /* Identidad por sede — codifica qué túnel, no decora */
+    --s1: #0D8A8A;
+    --s2: #6C5DC0;
+    --s3: #A5711A;
+
+    /* El terminal es oscuro en ambos temas: decisión deliberada */
+    --term-bg:  #0F1B21;
+    --term-ink: #C7D7DE;
+    --term-dim: #6E8794;
+    --term-hi:  #4FC3C3;
+
+    --measure: 68ch;
+    --step-1: 0.82rem;
+    --step0:  1rem;
+    --step1:  1.16rem;
+    --step2:  1.45rem;
+    --step3:  1.9rem;
+    --step4:  2.9rem;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:      #0D1417;
+      --surface:     #141E24;
+      --surface-2:   #1C2930;
+      --ink:         #DCE7EC;
+      --ink-2:       #AEBFC8;
+      --muted:       #7C909B;
+      --rule:        #2A3941;
+      --rule-soft:   #1F2C33;
+      --accent:      #46B9B9;
+      --accent-2:    #5FCCC6;
+      --accent-wash: #123033;
+      --warn:        #DC8B43;
+      --warn-wash:   #31200F;
+
+      --s1: #46B9B9;
+      --s2: #9A8BE4;
+      --s3: #D3A247;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ground:      #0D1417;
+    --surface:     #141E24;
+    --surface-2:   #1C2930;
+    --ink:         #DCE7EC;
+    --ink-2:       #AEBFC8;
+    --muted:       #7C909B;
+    --rule:        #2A3941;
+    --rule-soft:   #1F2C33;
+    --accent:      #46B9B9;
+    --accent-2:    #5FCCC6;
+    --accent-wash: #123033;
+    --warn:        #DC8B43;
+    --warn-wash:   #31200F;
+
+    --s1: #46B9B9;
+    --s2: #9A8BE4;
+    --s3: #D3A247;
+  }
+
+  /* ---------- Base ---------- */
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: var(--step0);
+    line-height: 1.65;
+    margin: 0;
+    padding: 0 1.25rem 5rem;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 54rem;
+    margin: 0 auto;
+  }
+
+  h1, h2, h3 {
+    font-family: Archivo, "IBM Plex Sans", sans-serif;
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  p { margin: 0; max-width: var(--measure); }
+  ul, ol { margin: 0; padding-left: 1.15rem; max-width: var(--measure); }
+  li { margin-block: 0.3rem; }
+  li::marker { color: var(--muted); }
+
+  a {
+    color: var(--accent);
+    text-underline-offset: 0.18em;
+    text-decoration-thickness: 1px;
+  }
+  a:focus-visible, summary:focus-visible {
+    outline: 2px solid var(--accent-2);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  code {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 0.88em;
+    background: var(--surface-2);
+    color: var(--ink);
+    padding: 0.1em 0.36em;
+    border-radius: 3px;
+  }
+
+  strong { font-weight: 600; color: var(--ink); }
+
+  .eyebrow {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: var(--step-1);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0;
+  }
+
+  /* ---------- Cabecera ---------- */
+  .masthead {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    padding: 4rem 0 2.25rem;
+    border-bottom: 2px solid var(--ink);
+  }
+  .masthead h1 {
+    font-size: clamp(2.3rem, 7vw, var(--step4));
+  }
+  .standfirst {
+    font-size: var(--step1);
+    color: var(--ink-2);
+    max-width: 46ch;
+  }
+
+  .spec {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+    gap: 0.1rem 1.75rem;
+    margin-top: 0.5rem;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: var(--step-1);
+  }
+  .spec div { padding: 0.45rem 0; border-top: 1px solid var(--rule); }
+  .spec dt { color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
+  .spec dd { margin: 0; color: var(--ink); font-weight: 500; }
+
+  /* ---------- Secciones ---------- */
+  section {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    padding-top: 3.25rem;
+  }
+  section > h2 {
+    font-size: var(--step3);
+  }
+  section > h3 {
+    font-size: var(--step1);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin-top: 0.6rem;
+  }
+
+  /* ---------- Ledger de RAM ---------- */
+  .ledger {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .ledger-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: var(--step-1);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .ledger-head b {
+    color: var(--ink);
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+  }
+  .bar {
+    display: flex;
+    height: 2.4rem;
+    border-radius: 3px;
+    overflow: hidden;
+    background: var(--surface-2);
+  }
+  .bar span {
+    display: block;
+    border-right: 1px solid var(--surface);
+  }
+  .bar span:last-child { border-right: 0; }
+
+  .alloc {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+    gap: 0.55rem 1.5rem;
+    font-size: var(--step-1);
+  }
+  .alloc div {
+    display: flex;
+    align-items: baseline;
+    gap: 0.55rem;
+    border-top: 1px solid var(--rule-soft);
+    padding-top: 0.4rem;
+  }
+  .chip {
+    width: 0.62rem;
+    height: 0.62rem;
+    border-radius: 2px;
+    flex: none;
+    transform: translateY(-0.05em);
+  }
+  .alloc .name { color: var(--ink-2); flex: 1; }
+  .alloc .val {
+    font-family: "IBM Plex Mono", monospace;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+    font-weight: 500;
+  }
+
+  /* ---------- Diagrama ---------- */
+  .rack {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-radius: 4px;
+    padding: 1.35rem;
+  }
+  .rack-label {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: var(--step-1);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .host-bar {
+    background: var(--surface-2);
+    border-radius: 3px;
+    padding: 0.7rem 0.9rem;
+    font-weight: 600;
+    font-size: 0.94rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .host-bar em {
+    font-style: normal;
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 400;
+    font-size: var(--step-1);
+    color: var(--muted);
+  }
+  .pods {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+    gap: 0.5rem;
+    padding-left: 1.1rem;
+  }
+  .pod {
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--accent);
+    border-radius: 3px;
+    padding: 0.65rem 0.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    background: var(--ground);
+  }
+  .pod b {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.87rem;
+    font-weight: 500;
+  }
+  .pod span {
+    font-size: var(--step-1);
+    color: var(--muted);
+    line-height: 1.45;
+  }
+  .pod.wide { grid-column: 1 / -1; }
+
+  /* ---------- Pasos ---------- */
+  .step {
+    display: grid;
+    grid-template-columns: 3.25rem 1fr;
+    gap: 0 1.25rem;
+    padding-top: 3rem;
+  }
+  .step-num {
+    font-family: Archivo, sans-serif;
+    font-weight: 700;
+    font-size: var(--step2);
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+    line-height: 1.25;
+    letter-spacing: -0.03em;
+  }
+  .step-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    min-width: 0;
+  }
+  .step-body > h2 {
+    font-size: var(--step2);
+    margin-bottom: 0.15rem;
+  }
+  @media (max-width: 34rem) {
+    .step { grid-template-columns: 1fr; gap: 0.35rem; }
+    .step-num { font-size: var(--step1); }
+  }
+
+  /* ---------- Terminal ---------- */
+  pre {
+    background: var(--term-bg);
+    color: var(--term-ink);
+    border-radius: 4px;
+    padding: 1.05rem 1.15rem;
+    margin: 0;
+    overflow-x: auto;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 0.845rem;
+    line-height: 1.72;
+    border: 1px solid var(--rule);
+    -webkit-overflow-scrolling: touch;
+  }
+  pre code {
+    background: none;
+    color: inherit;
+    padding: 0;
+    font-size: inherit;
+  }
+  pre .c { color: var(--term-dim); }
+  pre .k { color: var(--term-hi); }
+
+  /* ---------- Avisos ---------- */
+  .note {
+    border-left: 3px solid var(--accent);
+    background: var(--accent-wash);
+    padding: 1rem 1.15rem;
+    border-radius: 0 3px 3px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    max-width: var(--measure);
+  }
+  .note.warn {
+    border-left-color: var(--warn);
+    background: var(--warn-wash);
+  }
+  .note .tag {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: var(--step-1);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .note.warn .tag { color: var(--warn); }
+  .note p { max-width: none; }
+
+  /* ---------- Bifurcación ---------- */
+  .fork {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 0.65rem;
+    max-width: var(--measure);
+  }
+  .fork > div {
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-top: 3px solid var(--rule);
+    border-radius: 3px;
+    padding: 0.9rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .fork > div.yes { border-top-color: var(--accent); }
+  .fork > div.maybe { border-top-color: var(--s2); }
+  .fork > div.no { border-top-color: var(--warn); }
+  .fork b {
+    font-size: 0.94rem;
+    font-weight: 600;
+  }
+  .fork span {
+    font-size: var(--step-1);
+    color: var(--ink-2);
+    line-height: 1.55;
+  }
+
+  /* ---------- Tabla ---------- */
+  .tablewrap { overflow-x: auto; max-width: var(--measure); }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 0.92rem;
+  }
+  th, td {
+    text-align: left;
+    padding: 0.55rem 0.9rem 0.55rem 0;
+    border-bottom: 1px solid var(--rule-soft);
+    vertical-align: top;
+  }
+  th {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: var(--step-1);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+    border-bottom-color: var(--rule);
+  }
+  td code { white-space: nowrap; }
+
+  /* ---------- Pie ---------- */
+  footer {
+    margin-top: 4.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--rule);
+    color: var(--muted);
+    font-size: var(--step-1);
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <p class="eyebrow">Runbook · Intel NUC8i3BEH</p>
+    <h1>Tres túneles, ocho gigas</h1>
+    <p class="standfirst">Proxmox en un NUC de 2018 con tres VPN FortiClient activas a la vez, acceso remoto desde fuera y hosting Docker. Sin comprar nada.</p>
+    <dl class="spec">
+      <div><dt>CPU</dt><dd>i3-8109U · 2C/4T · VT-d</dd></div>
+      <div><dt>RAM</dt><dd>8 GB DDR4-2400</dd></div>
+      <div><dt>Disco</dt><dd>NVMe + bahía 2,5"</dd></div>
+      <div><dt>Red</dt><dd>1× Gb Intel i219-V</dd></div>
+    </dl>
+  </header>
+
+  <section>
+    <h2>El presupuesto manda</h2>
+    <p>Cada decisión de este montaje se paga en RAM. Ocho gigas es una cantidad fija y todo lo demás sale de ahí, así que conviene tener el reparto delante antes de empezar.</p>
+
+    <div class="ledger">
+      <div class="ledger-head">
+        <span>Reparto de memoria</span>
+        <b>8192 MB</b>
+      </div>
+      <div class="bar" role="img" aria-label="Reparto de los 8 GB: Proxmox 1200 MB, tres contenedores VPN 256 MB cada uno, acceso remoto 256 MB, hosting 4096 MB, libre 1840 MB">
+        <span style="width:15%;  background:var(--ink-2)"></span>
+        <span style="width:3.1%; background:var(--s1)"></span>
+        <span style="width:3.1%; background:var(--s2)"></span>
+        <span style="width:3.1%; background:var(--s3)"></span>
+        <span style="width:3.1%; background:var(--accent)"></span>
+        <span style="width:50%;  background:var(--muted)"></span>
+        <span style="width:19.6%;background:var(--surface-2)"></span>
+      </div>
+      <div class="alloc">
+        <div><i class="chip" style="background:var(--ink-2)"></i><span class="name">Proxmox (host)</span><span class="val">1200</span></div>
+        <div><i class="chip" style="background:var(--s1)"></i><span class="name">vpn-avanza</span><span class="val">256</span></div>
+        <div><i class="chip" style="background:var(--s2)"></i><span class="name">vpn-alcazares</span><span class="val">256</span></div>
+        <div><i class="chip" style="background:var(--s3)"></i><span class="name">vpn-santomera</span><span class="val">256</span></div>
+        <div><i class="chip" style="background:var(--accent)"></i><span class="name">acceso (Tailscale)</span><span class="val">256</span></div>
+        <div><i class="chip" style="background:var(--muted)"></i><span class="name">hosting (Docker)</span><span class="val">4096</span></div>
+        <div><i class="chip" style="background:var(--surface-2); border:1px solid var(--rule)"></i><span class="name">Libre y caché</span><span class="val">1872</span></div>
+      </div>
+    </div>
+
+    <p>La clave de que esto quepa: los contenedores LXC comparten el kernel del host. Un túnel FortiClient dentro de un LXC cuesta unos 80 MB reales y prácticamente cero CPU. Tres VMs Windows haciendo lo mismo costarían 12 GB.</p>
+  </section>
+
+  <section>
+    <h2>Arquitectura</h2>
+    <p>Cada sede vive en su propio contenedor. Como cada LXC tiene su propia pila de red, los tres túneles conviven sin pelearse por las rutas — que es justo lo que FortiClient no te deja hacer dentro de un mismo sistema.</p>
+
+    <div class="rack">
+      <p class="rack-label">Proxmox VE 9 · NVMe: sistema · SATA: backups</p>
+      <div class="host-bar">
+        <span>Host</span>
+        <em>vmbr0 192.168.1.10 &nbsp;·&nbsp; vmbr1 10.10.20.1</em>
+      </div>
+      <div class="pods">
+        <div class="pod" style="border-left-color:var(--s1)">
+          <b>vpn-avanza</b>
+          <span>openfortivpn → sede Avanza<br>192.168.1.11</span>
+        </div>
+        <div class="pod" style="border-left-color:var(--s2)">
+          <b>vpn-alcazares</b>
+          <span>openfortivpn → Ayto. Los Alcázares<br>192.168.1.12</span>
+        </div>
+        <div class="pod" style="border-left-color:var(--s3)">
+          <b>vpn-santomera</b>
+          <span>openfortivpn → Ayto. Santomera<br>192.168.1.13</span>
+        </div>
+        <div class="pod" style="border-left-color:var(--accent)">
+          <b>acceso</b>
+          <span>Tailscale subnet router<br>192.168.1.14</span>
+        </div>
+        <div class="pod wide" style="border-left-color:var(--muted)">
+          <b>hosting</b>
+          <span>Docker · webs · bases de datos · Cloudflare Tunnel — en <code>vmbr1</code>, red aislada sin ruta hacia los contenedores VPN</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="note">
+      <span class="tag">Por qué el hosting va aparte</span>
+      <p>Una web comprometida en una máquina que toca tres redes de administraciones públicas es un salto directo hacia ellas. Por eso el hosting vive en una red propia sin ruta hacia los contenedores VPN, y sale a internet por NAT del host.</p>
+    </div>
+  </section>
+
+  <div class="step">
+    <div class="step-num">01</div>
+    <div class="step-body">
+      <h2>BIOS y USB de instalación</h2>
+      <p>Descarga la ISO de Proxmox VE 9 y grábala en un pendrive con Rufus (modo DD), balenaEtcher o <code>dd</code>. En el NUC, <code>F2</code> al arrancar entra en la BIOS:</p>
+      <ul>
+        <li><strong>Advanced → Security</strong>: activa <code>Intel VT for Directed I/O (VT-d)</code> y <code>Intel Virtualization Technology</code>.</li>
+        <li><strong>Boot → Secure Boot</strong>: desactívalo. Proxmox lo soporta, pero te ahorras problemas.</li>
+        <li>Guarda con <code>F10</code>. Al reiniciar, <code>F10</code> otra vez abre el menú de arranque para elegir el USB.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">02</div>
+    <div class="step-body">
+      <h2>Instalar Proxmox</h2>
+
+      <div class="note warn">
+        <span class="tag">No elijas ZFS</span>
+        <p>En <strong>Options</strong>, dentro de la selección de disco, elige <code>ext4</code>. La caché ARC de ZFS reserva por defecto la mitad de la RAM: en este equipo son 4 GB perdidos de golpe, la mitad de tu presupuesto. Con ext4 no existe ese problema.</p>
+      </div>
+
+      <p>El resto de la instalación va sobre el NVMe. Datos que te pedirá:</p>
+      <ul>
+        <li><strong>Hostname (FQDN)</strong>: algo como <code>nuc.lan</code>. Tiene que llevar punto.</li>
+        <li><strong>IP</strong>: fija, fuera del rango DHCP de tu router. En esta guía uso <code>192.168.1.10/24</code>, puerta de enlace <code>192.168.1.1</code>.</li>
+      </ul>
+      <p>Al terminar, saca el USB y reinicia. La interfaz web queda en <code>https://192.168.1.10:8006</code> — usuario <code>root</code>, reino <code>Linux PAM</code>. El aviso de certificado es normal, es autofirmado.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">03</div>
+    <div class="step-body">
+      <h2>Repositorios y disco de backups</h2>
+      <p>Por SSH a <code>root@192.168.1.10</code>, o desde la consola web (<strong>nodo → Shell</strong>). Lo primero es quitar el repositorio de empresa, que no tienes suscripción y hace fallar cada <code>apt update</code>:</p>
+      <pre><code><span class="c"># Proxmox 9 usa el formato deb822 (.sources)</span>
+sed -i 's/^Enabled: true/Enabled: false/' \
+  /etc/apt/sources.list.d/pve-enterprise.sources \
+  /etc/apt/sources.list.d/ceph.sources
+
+cat &gt; /etc/apt/sources.list.d/pve-no-subscription.sources &lt;&lt;'EOF'
+Types: deb
+URIs: http://download.proxmox.com/debian/pve
+Suites: trixie
+Components: pve-no-subscription
+Signed-By: /usr/share/keyrings/proxmox-archive-keyring.gpg
+EOF
+
+apt update &amp;&amp; apt full-upgrade -y</code></pre>
+
+      <div class="note">
+        <span class="tag">Si instalaste Proxmox 8</span>
+        <p>Comprueba con <code>pveversion</code>. La 8 va sobre Debian 12 y usa ficheros <code>.list</code>: comenta la línea de <code>/etc/apt/sources.list.d/pve-enterprise.list</code> y añade <code>deb http://download.proxmox.com/debian/pve bookworm pve-no-subscription</code>.</p>
+      </div>
+
+      <p>Ahora el disco SATA como almacén de copias de seguridad. <strong>Esto borra el disco</strong>, así que mira antes <code>lsblk</code> y confirma que <code>/dev/sda</code> es el que crees:</p>
+      <pre><code>lsblk
+
+sgdisk -N 1 /dev/sda
+mkfs.ext4 -L backups /dev/sda1
+mkdir -p /mnt/backups
+echo 'LABEL=backups /mnt/backups ext4 defaults 0 2' &gt;&gt; /etc/fstab
+mount -a
+
+pvesm add dir backups --path /mnt/backups \
+  --content backup,iso,vztmpl</code></pre>
+
+      <p>Carga también los módulos que necesitarán los contenedores VPN, y deja que se carguen solos en cada arranque:</p>
+      <pre><code>modprobe tun ppp_generic
+printf 'tun\nppp_generic\n' &gt; /etc/modules-load.d/vpn-lxc.conf</code></pre>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">04</div>
+    <div class="step-body">
+      <h2>Las dos redes</h2>
+      <p><code>vmbr0</code> ya existe: es tu LAN, y ahí van el host y los contenedores VPN. Falta <code>vmbr1</code>, una red interna sin puerto físico donde vivirá el hosting aislado. Mira primero cómo se llama tu tarjeta de red:</p>
+      <pre><code>ip -br link   <span class="c"># normalmente eno1 o enp0s31f6 en el NUC8</span></code></pre>
+
+      <p>Edita <code>/etc/network/interfaces</code> y añade el segundo puente al final:</p>
+      <pre><code>auto vmbr1
+iface vmbr1 inet static
+    address 10.10.20.1/24
+    bridge-ports none
+    bridge-stp off
+    bridge-fd 0
+    post-up echo 1 &gt; /proc/sys/net/ipv4/ip_forward
+    post-up iptables -t nat -A POSTROUTING -s 10.10.20.0/24 -o vmbr0 -j MASQUERADE
+    post-up iptables -I FORWARD 1 -s 10.10.20.0/24 -d 192.168.1.0/24 -j REJECT
+    post-down iptables -t nat -D POSTROUTING -s 10.10.20.0/24 -o vmbr0 -j MASQUERADE
+    post-down iptables -D FORWARD -s 10.10.20.0/24 -d 192.168.1.0/24 -j REJECT</code></pre>
+
+      <p>Esas tres reglas hacen tres cosas distintas: activan el reenvío, dan salida a internet al hosting por NAT, y le cierran el paso hacia tu LAN — y por tanto hacia los contenedores VPN. Aplica con <code>ifreload -a</code>.</p>
+
+      <div class="note warn">
+        <span class="tag">Ojo con el DNS del hosting</span>
+        <p>Como el hosting no puede hablar con tu router, no le pongas <code>192.168.1.1</code> como servidor DNS o no resolverá nada. Usa <code>1.1.1.1</code> o <code>9.9.9.9</code> al crear el contenedor.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">05</div>
+    <div class="step-body">
+      <h2>Un contenedor por sede</h2>
+      <p>Descarga la plantilla de Debian una sola vez:</p>
+      <pre><code>pveam update
+pveam available --section system | grep debian-13
+pveam download local debian-13-standard_13.1-1_amd64.tar.zst</code></pre>
+
+      <p>Y crea el primer contenedor. Repite cambiando <code>111</code>, el <code>hostname</code> y la IP para <code>vpn-alcazares</code> (<code>112</code>, <code>.12</code>) y <code>vpn-santomera</code> (<code>113</code>, <code>.13</code>):</p>
+      <pre><code>pct create 111 local:vztmpl/debian-13-standard_13.1-1_amd64.tar.zst \
+  --hostname vpn-avanza \
+  --cores 1 --memory 256 --swap 256 \
+  --rootfs local-lvm:2 \
+  --net0 name=eth0,bridge=vmbr0,ip=192.168.1.11/24,gw=192.168.1.1 \
+  --nameserver 1.1.1.1 \
+  --unprivileged 1 --onboot 1 \
+  --password</code></pre>
+
+      <p>FortiClient SSL-VPN va sobre PPP, así que el contenedor necesita acceso a dos dispositivos del host. Añádelos a <code>/etc/pve/lxc/111.conf</code> (y al <code>112</code> y <code>113</code>):</p>
+      <pre><code>lxc.cgroup2.devices.allow: c 10:200 rwm
+lxc.mount.entry: /dev/net/tun dev/net/tun none bind,create=file
+lxc.cgroup2.devices.allow: c 108:0 rwm
+lxc.mount.entry: /dev/ppp dev/ppp none bind,create=file</code></pre>
+
+      <div class="note">
+        <span class="tag">Si el túnel no levanta</span>
+        <p>Algunos <code>pppd</code> se resisten dentro de un contenedor sin privilegios. La solución rápida es convertirlo en privilegiado: <code>pct set 111 --unprivileged 0</code> (hay que recrearlo, no se cambia en caliente). Pierdes una capa de aislamiento, pero el contenedor sigue separado del hosting.</p>
+      </div>
+
+      <p>Arranca con <code>pct start 111</code> y entra con <code>pct enter 111</code>.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">06</div>
+    <div class="step-body">
+      <h2>Levantar el túnel</h2>
+      <p>Dentro del contenedor:</p>
+      <pre><code>apt update &amp;&amp; apt install -y openfortivpn nftables</code></pre>
+
+      <p>Crea <code>/etc/openfortivpn/avanza.conf</code> con los datos que ves en tu FortiClient:</p>
+      <pre><code>host = vpn.tusede.es
+port = 10443
+username = tu.usuario
+password = tu-contraseña
+set-routes = 1
+set-dns = 0</code></pre>
+
+      <pre><code>chmod 600 /etc/openfortivpn/avanza.conf</code></pre>
+
+      <p>Pruébalo a mano la primera vez. Te mostrará la huella del certificado del servidor y se parará pidiendo confirmación — copia esa línea <code>trusted-cert = ...</code> al fichero de configuración y vuelve a lanzarlo:</p>
+      <pre><code>openfortivpn -c /etc/openfortivpn/avanza.conf</code></pre>
+
+      <p>Cuando conecte, automatízalo. Crea <code>/etc/systemd/system/openfortivpn@.service</code>:</p>
+      <pre><code>[Unit]
+Description=Túnel FortiClient a %I
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/openfortivpn -c /etc/openfortivpn/%i.conf
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target</code></pre>
+
+      <pre><code>systemctl daemon-reload
+systemctl enable --now openfortivpn@avanza
+systemctl status openfortivpn@avanza</code></pre>
+
+      <p>Por último, que el contenedor sepa reenviar y enmascarar el tráfico que le llegue desde tu portátil hacia el túnel:</p>
+      <pre><code>echo 'net.ipv4.ip_forward=1' &gt; /etc/sysctl.d/99-forward.conf
+sysctl --system
+
+nft add table ip nat
+nft add chain ip nat postrouting \
+  '{ type nat hook postrouting priority srcnat; }'
+nft add rule ip nat postrouting oifname "ppp0" masquerade
+
+nft list ruleset &gt; /etc/nftables.conf
+systemctl enable --now nftables</code></pre>
+
+      <p>Apunta las subredes que anuncia cada sede — las ves con <code>ip route | grep ppp0</code> una vez conectado. Las necesitas en el paso siguiente.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">07</div>
+    <div class="step-body">
+      <h2>Acceso remoto con Tailscale</h2>
+      <p>Crea un cuarto contenedor, <code>acceso</code>, igual que los anteriores (ID <code>114</code>, IP <code>192.168.1.14</code>) y con el mismo pasamanos de <code>/dev/net/tun</code> — Tailscale también lo necesita. El de <code>/dev/ppp</code> aquí sobra.</p>
+
+      <p>Dentro, enseña al contenedor el camino hacia cada sede a través de su túnel. Sustituye las subredes por las tuyas reales:</p>
+      <pre><code><span class="c"># en /etc/network/interfaces, dentro de iface eth0</span>
+    post-up ip route add 10.50.0.0/16 via 192.168.1.11
+    post-up ip route add 10.60.0.0/16 via 192.168.1.12
+    post-up ip route add 10.70.0.0/16 via 192.168.1.13</code></pre>
+
+      <p>Instala Tailscale y anuncia esas mismas subredes:</p>
+      <pre><code>curl -fsSL https://tailscale.com/install.sh | sh
+
+echo 'net.ipv4.ip_forward=1' &gt; /etc/sysctl.d/99-forward.conf
+sysctl --system
+
+tailscale up \
+  --advertise-routes=10.50.0.0/16,10.60.0.0/16,10.70.0.0/16 \
+  --accept-dns=false</code></pre>
+
+      <p>Entra en la consola de Tailscale y <strong>aprueba las rutas</strong> en la ficha de esa máquina; hasta que no lo hagas no se anuncian. A partir de ahí, desde tu portátil con Tailscale las IPs internas de cada ayuntamiento funcionan directamente, estés donde estés.</p>
+
+      <div class="note warn">
+        <span class="tag">Dar acceso a otra persona</span>
+        <p>Compartir un nodo suelto <em>no</em> propaga rutas de subred: la otra persona vería la máquina, pero no las redes de detrás. Lo que funciona es invitarla como <strong>usuario de tu tailnet</strong> y limitarla por ACL a la subred que quieras:</p>
+        <pre><code>{
+  "acls": [
+    {"action": "accept", "src": ["tu@correo"],
+     "dst": ["*:*"]},
+    {"action": "accept", "src": ["companero@correo"],
+     "dst": ["10.60.0.0/16:*"]}
+  ]
+}</code></pre>
+        <p>Le quitas el acceso borrando su línea. Y antes de dárselo, comprueba que las condiciones de la VPN de esa sede lo permiten.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">08</div>
+    <div class="step-body">
+      <h2>Hosting</h2>
+      <p>El quinto contenedor va en la red aislada. Docker dentro de un LXC sin privilegios necesita <code>nesting</code> y <code>keyctl</code>:</p>
+      <pre><code>pct create 120 local:vztmpl/debian-13-standard_13.1-1_amd64.tar.zst \
+  --hostname hosting \
+  --cores 2 --memory 4096 --swap 1024 \
+  --rootfs local-lvm:24 \
+  --net0 name=eth0,bridge=vmbr1,ip=10.10.20.10/24,gw=10.10.20.1 \
+  --nameserver 1.1.1.1 \
+  --unprivileged 1 --features nesting=1,keyctl=1 \
+  --onboot 1 --password</code></pre>
+
+      <pre><code>pct start 120 &amp;&amp; pct enter 120
+curl -fsSL https://get.docker.com | sh</code></pre>
+
+      <p>Para publicar las webs, <strong>no abras puertos en el router</strong>. Cloudflare Tunnel es gratis, no necesita IP fija ni puertos abiertos, y el contenedor sale hacia fuera en lugar de aceptar conexiones entrantes:</p>
+      <pre><code>docker run -d --name cloudflared --restart unless-stopped \
+  cloudflare/cloudflared:latest tunnel --no-autoupdate \
+  run --token TU_TOKEN</code></pre>
+
+      <p>El token sale del panel de Cloudflare Zero Trust, en <strong>Networks → Tunnels</strong>, donde también mapeas cada dominio al servicio interno correspondiente.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">09</div>
+    <div class="step-body">
+      <h2>Copias de seguridad</h2>
+      <p>En la interfaz web: <strong>Datacenter → Backup → Add</strong>. Almacén <code>backups</code> (el disco SATA), todos los contenedores, diario de madrugada, modo <em>snapshot</em>, compresión <code>zstd</code> y retención de 7 diarias y 4 semanales.</p>
+      <p>Los contenedores VPN ocupan unos pocos cientos de megas cada uno, así que el disco de 2,5" te aguanta meses de histórico. Si un día un túnel deja de funcionar tras una actualización, restauras el contenedor de ayer en treinta segundos y sigues trabajando.</p>
+      <div class="note warn">
+        <span class="tag">El backup vive en la misma caja</span>
+        <p>Un disco interno te salva de un error tuyo, no de un robo ni de que se queme la fuente. Copia los <code>vzdump</code> importantes a otro sitio de vez en cuando.</p>
+      </div>
+    </div>
+  </div>
+
+  <section>
+    <h2>La bifurcación que queda por resolver</h2>
+    <p>Todo lo anterior asume que <code>openfortivpn</code> puede autenticarse contra las tres sedes. Eso depende de qué te pide FortiClient al pulsar Conectar:</p>
+
+    <div class="fork">
+      <div class="yes">
+        <b>Usuario y contraseña dentro de FortiClient</b>
+        <span>SSL-VPN clásico, con o sin código OTP. Es el caso de esta guía y funciona tal cual.</span>
+      </div>
+      <div class="maybe">
+        <b>Se abre el navegador para el login</b>
+        <span>Es SAML. Necesitas <code>openfortivpn-webview</code>, que abre esa ventana de login y le pasa la cookie a openfortivpn. Funciona, pero cuesta más de montar.</span>
+      </div>
+      <div class="no">
+        <b>Dice IPsec, o exige FortiClient registrado en EMS</b>
+        <span>Ahí openfortivpn no llega. Esa sede concreta necesita Windows.</span>
+      </div>
+    </div>
+
+    <h3>Si una sede acaba necesitando Windows</h3>
+    <p>Con 8 GB no puedes tener esa VM encendida todo el día junto al resto, pero sí <strong>bajo demanda</strong>: la arrancas cuando vas a trabajar con ese cliente y la apagas al terminar. Parada no consume nada.</p>
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr><th>Recurso</th><th>Ajuste</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>VM Windows</td><td>4096 MB, 2 vCPU, disco 40 GB en el NVMe</td></tr>
+          <tr><td>Hosting mientras tanto</td><td><code>pct set 120 --memory 2048</code>, y de vuelta a 4096 al apagarla</td></tr>
+          <tr><td>Acceso</td><td>Consola noVNC de Proxmox, o RDP por Tailscale</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Con 2 núcleos físicos irá lenta si te pones a trabajar dentro. Para mantener un túnel abierto y hacer RDP a un servidor de la sede, cumple.</p>
+  </section>
+
+  <section>
+    <h2>El fallo que más se repite</h2>
+    <p>Si dos sedes usan el mismo rango interno, o alguna usa <code>192.168.1.0/24</code> como tu propia LAN, el enrutado del paso 7 no puede funcionar: la misma dirección apuntaría a dos sitios.</p>
+    <p>Se arregla haciendo que cada contenedor VPN presente la red de su sede bajo un rango falso y único — con <code>netmap</code> de nftables — y anunciando ese rango a Tailscale en lugar del real. Es más enredado que el resto de la guía, así que compruébalo pronto: conecta cada túnel y mira <code>ip route | grep ppp0</code>. Si los tres rangos son distintos entre sí y distintos de tu LAN, no tienes que hacer nada.</p>
+  </section>
+
+  <footer>
+    <p>Runbook para Intel NUC8i3BEH · Proxmox VE 9 · 8 GB</p>
+    <p>Direcciones de ejemplo: LAN <code>192.168.1.0/24</code>, red aislada <code>10.10.20.0/24</code>. Ajusta a la tuya.</p>
+  </footer>
+
+</div>
