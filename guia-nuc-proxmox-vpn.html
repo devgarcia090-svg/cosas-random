@@ -527,24 +527,24 @@
       <p class="rack-label">Proxmox VE 9 · NVMe 120 GB: sistema y contenedores</p>
       <div class="host-bar">
         <span>Host</span>
-        <em>vmbr0 192.168.18.10 &nbsp;·&nbsp; vmbr1 10.10.20.1</em>
+        <em>vmbr0 192.168.18.20 &nbsp;·&nbsp; vmbr1 10.10.20.1</em>
       </div>
       <div class="pods">
         <div class="pod" style="border-left-color:var(--s1)">
           <b>vpn-avanza</b>
-          <span>openfortivpn → sede Avanza<br>192.168.18.11</span>
+          <span>openfortivpn → sede Avanza<br>192.168.18.21</span>
         </div>
         <div class="pod" style="border-left-color:var(--s2)">
           <b>vpn-alcazares</b>
-          <span>openfortivpn → Ayto. Los Alcázares<br>192.168.18.12</span>
+          <span>openfortivpn → Ayto. Los Alcázares<br>192.168.18.22</span>
         </div>
         <div class="pod" style="border-left-color:var(--s3)">
           <b>vpn-santomera</b>
-          <span>openfortivpn → Ayto. Santomera<br>192.168.18.13</span>
+          <span>openfortivpn → Ayto. Santomera<br>192.168.18.23</span>
         </div>
         <div class="pod" style="border-left-color:var(--accent)">
           <b>acceso</b>
-          <span>Tailscale subnet router<br>192.168.18.14</span>
+          <span>Tailscale subnet router<br>192.168.18.24</span>
         </div>
         <div class="pod wide" style="border-left-color:var(--muted)">
           <b>hosting</b>
@@ -585,9 +585,9 @@
       <p>El resto de la instalación va sobre el NVMe. Datos que te pedirá:</p>
       <ul>
         <li><strong>Hostname (FQDN)</strong>: algo como <code>nuc.lan</code>. Tiene que llevar punto.</li>
-        <li><strong>IP</strong>: fija, fuera del rango DHCP de tu router. En esta guía uso <code>192.168.18.10/24</code>, puerta de enlace <code>192.168.18.1</code>.</li>
+        <li><strong>IP</strong>: fija, fuera del rango DHCP de tu router. En esta guía uso <code>192.168.18.20/24</code>, puerta de enlace <code>192.168.18.1</code>.</li>
       </ul>
-      <p>Al terminar, saca el USB y reinicia. La interfaz web queda en <code>https://192.168.18.10:8006</code> — usuario <code>root</code>, reino <code>Linux PAM</code>. El aviso de certificado es normal, es autofirmado.</p>
+      <p>Al terminar, saca el USB y reinicia. La interfaz web queda en <code>https://192.168.18.20:8006</code> — usuario <code>root</code>, reino <code>Linux PAM</code>. El aviso de certificado es normal, es autofirmado.</p>
     </div>
   </div>
 
@@ -595,12 +595,8 @@
     <div class="step-num">03</div>
     <div class="step-body">
       <h2>Repositorios y disco de backups</h2>
-      <p>Por SSH a <code>root@192.168.18.10</code>, o desde la consola web (<strong>nodo → Shell</strong>). Lo primero es quitar el repositorio de empresa, que no tienes suscripción y hace fallar cada <code>apt update</code>:</p>
-      <pre><code><span class="c"># Proxmox 9 usa el formato deb822 (.sources)</span>
-sed -i 's/^Enabled: true/Enabled: false/' \
-  /etc/apt/sources.list.d/pve-enterprise.sources \
-  /etc/apt/sources.list.d/ceph.sources
-
+      <p>Por SSH a <code>root@192.168.18.20</code>, o desde la consola web (<strong>nodo → Shell</strong>). Lo primero es quitar el repositorio de empresa, que no tienes suscripción y hace fallar cada <code>apt update</code>:</p>
+      <pre><code><span class="c"># Añadir el repositorio sin suscripción (formato deb822 de PVE 9)</span>
 cat &gt; /etc/apt/sources.list.d/pve-no-subscription.sources &lt;&lt;'EOF'
 Types: deb
 URIs: http://download.proxmox.com/debian/pve
@@ -609,7 +605,19 @@ Components: pve-no-subscription
 Signed-By: /usr/share/keyrings/proxmox-archive-keyring.gpg
 EOF
 
+<span class="c"># Desactivar los de empresa: apt solo lee .sources y .list,</span>
+<span class="c"># así que renombrarlos basta y es reversible</span>
+cd /etc/apt/sources.list.d/
+grep -l 'enterprise.proxmox.com' *.sources | while read f; do
+  mv "$f" "$f.disabled"
+done
+
 apt update &amp;&amp; apt full-upgrade -y</code></pre>
+
+      <div class="note warn">
+        <span class="tag">No busques una línea "Enabled"</span>
+        <p>Los ficheros <code>.sources</code> de Proxmox 9 no traen campo <code>Enabled</code>, así que intentar desactivarlos con un <code>sed</code> sobre esa línea no hace nada y <code>apt update</code> sigue devolviendo <code>401 Unauthorized</code>. El <code>grep</code> de arriba localiza cualquier fichero que apunte al servidor de empresa, se llame <code>pve-enterprise.sources</code>, <code>ceph.sources</code> o como sea.</p>
+      </div>
 
       <div class="note">
         <span class="tag">Si instalaste Proxmox 8</span>
@@ -680,7 +688,7 @@ pveam download local debian-13-standard_13.1-1_amd64.tar.zst</code></pre>
   --hostname vpn-avanza \
   --cores 1 --memory 256 --swap 256 \
   --rootfs local-lvm:2 \
-  --net0 name=eth0,bridge=vmbr0,ip=192.168.18.11/24,gw=192.168.18.1 \
+  --net0 name=eth0,bridge=vmbr0,ip=192.168.18.21/24,gw=192.168.18.1 \
   --nameserver 1.1.1.1 \
   --unprivileged 1 --onboot 1 \
   --password</code></pre>
@@ -764,13 +772,13 @@ systemctl enable --now nftables</code></pre>
     <div class="step-num">07</div>
     <div class="step-body">
       <h2>Acceso remoto con Tailscale</h2>
-      <p>Crea un cuarto contenedor, <code>acceso</code>, igual que los anteriores (ID <code>114</code>, IP <code>192.168.18.14</code>) y con el mismo pasamanos de <code>/dev/net/tun</code> — Tailscale también lo necesita. El de <code>/dev/ppp</code> aquí sobra.</p>
+      <p>Crea un cuarto contenedor, <code>acceso</code>, igual que los anteriores (ID <code>114</code>, IP <code>192.168.18.24</code>) y con el mismo pasamanos de <code>/dev/net/tun</code> — Tailscale también lo necesita. El de <code>/dev/ppp</code> aquí sobra.</p>
 
       <p>Dentro, enseña al contenedor el camino hacia cada sede a través de su túnel. Sustituye las subredes por las tuyas reales:</p>
       <pre><code><span class="c"># en /etc/network/interfaces, dentro de iface eth0</span>
-    post-up ip route add 10.50.0.0/16 via 192.168.18.11
-    post-up ip route add 10.60.0.0/16 via 192.168.18.12
-    post-up ip route add 10.70.0.0/16 via 192.168.18.13</code></pre>
+    post-up ip route add 10.50.0.0/16 via 192.168.18.21
+    post-up ip route add 10.60.0.0/16 via 192.168.18.22
+    post-up ip route add 10.70.0.0/16 via 192.168.18.23</code></pre>
 
       <p>Instala Tailscale y anuncia esas mismas subredes:</p>
       <pre><code>curl -fsSL https://tailscale.com/install.sh | sh
