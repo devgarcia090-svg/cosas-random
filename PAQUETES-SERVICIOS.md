@@ -502,6 +502,57 @@ separado. Cada página enlaza en su pie a las otras tres (y la home a las cuatro
 para que un visitante — o un rastreador — pueda moverse entre verticales sin volver
 al inicio.
 
+### Seguridad: qué se auditó y qué se arregló
+
+Auditoría hecha contra la web en producción, no de memoria. Lo que ya estaba bien
+lo está sobre todo **porque el sitio es estático**: sin base de datos, sin panel de
+administración, sin login y sin código ejecutándose en servidor, toda la familia
+clásica de ataques (inyección SQL, robo de sesiones, subida de ficheros) no tiene
+dónde agarrarse. Comprobado:
+
+- Las seis cabeceras de seguridad presentes, con una CSP estricta
+  (`default-src 'self'`, `frame-ancestors 'none'`, formularios solo a Formspree).
+- `POST`, `PUT`, `DELETE`, `TRACE` y `OPTIONS` devuelven **405**: el sitio solo se
+  puede leer.
+- `.git/config`, `.env`, `wrangler.toml`, `package.json` y `_headers` devuelven
+  **404**: no se sirve nada que no deba servirse.
+- Ni cookies ni analítica, así que no hay datos de visitantes que robar. Lo único
+  que sale de la web son los envíos del formulario, y van a Formspree, que ya está
+  declarado como encargado del tratamiento en la política de privacidad.
+- Contra peticiones «a lo bruto» no hay nada que forzar, porque no hay
+  contraseñas; el volumen lo absorbe Cloudflare, y el formulario ya lleva un campo
+  trampa (`_gotcha`) más el filtro antispam de Formspree.
+
+**Lo que faltaba y se arregló:**
+
+- **DMARC.** No existía el registro, así que cualquiera podía mandar correos
+  falsificando `hola@olfatoestudio.com` sin que ningún servidor tuviera
+  instrucciones de rechazarlos. Para un negocio que va a escribir en frío a
+  clínicas y tiendas, eso es riesgo de suplantación real. Puesto directamente en
+  `p=reject`, saltándose el periodo de observación en `p=none` que se recomienda
+  por defecto, y por un motivo concreto: **desde este dominio no sale ni un correo
+  legítimo**. Formspree escribe desde sus propios servidores, las respuestas salen
+  del Gmail personal, y Cloudflare solo recibe y reenvía. Cualquier correo que diga
+  venir del dominio es falso por definición, así que no hay nada que se pueda
+  romper al rechazarlos.
+- **SPF.** Estaba en `~all` (softfail). Por el mismo razonamiento se pasó a `-all`.
+
+**Trampa para el futuro, y es fácil pisarla:** el día que se configure poder
+*responder* desde `hola@olfatoestudio.com` (Workspace, Zoho o lo que sea), hay que
+autorizar a ese proveedor en el SPF y el DKIM **antes** de mandar el primer correo.
+Con `-all` y `p=reject`, los correos propios se rechazarían solos.
+
+**La debilidad que queda, dicha sin maquillar:** la CSP permite `'unsafe-inline'`
+en scripts. En teoría debilita la protección contra XSS; en la práctica aquí da
+igual, porque no hay contenido de usuario en ninguna página — ni comentarios, ni
+buscador, ni nada que un atacante pueda inyectar. Se podría afinar con hashes por
+script, pero hoy sería trabajo sin beneficio.
+
+**Y el riesgo mayor no estaba en el código:** el token de API de Cloudflare se pegó
+en una conversación de chat. Ese token permite desplegar en el Worker, o sea
+sustituir la web entera. Está pendiente de revocar y regenerar en
+Cloudflare → My Profile → API Tokens.
+
 ### Local SEO y ficha de Google Business
 
 Para un negocio de servicios sin local a pie de calle, la ficha de Google Business
