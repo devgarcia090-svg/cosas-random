@@ -231,7 +231,7 @@ section { padding: var(--seccion) 0; }
   border-radius: 50%; background: var(--acento-luz); color: var(--acento-osc);
   font-size: 0.9rem; font-weight: 600; margin-bottom: 1rem;
 }
-.paso h4 { margin-bottom: 0.4rem; }
+.paso h3 { margin-bottom: 0.4rem; }
 .paso p { font-size: 0.95rem; }
 
 /* ── Lista de negaciones ───────────────────────────────────────── */
@@ -383,13 +383,7 @@ section { padding: var(--seccion) 0; }
   border-radius: var(--r); padding: 1.4rem 1.6rem; margin-bottom: 1.5rem;
 }
 .ficha p { margin: 0.3rem 0; font-size: 0.97rem; }
-.pendiente {
-  border: 1px dashed var(--acento); background: var(--acento-luz);
-  border-radius: var(--r); padding: 1.4rem 1.6rem; margin-bottom: 2.5rem;
-}
-.pendiente h4 { color: var(--acento-osc); margin-bottom: 0.4rem; }
-.pendiente p { margin: 0; font-size: 0.95rem; color: var(--acento-osc); }
-.legal code, .pendiente code {
+.legal code {
   background: var(--blanco); border: 1px solid var(--borde);
   padding: 0.1rem 0.35rem; border-radius: 3px; font-size: 0.88em;
 }
@@ -479,8 +473,7 @@ section { padding: var(--seccion) 0; }
 
 /* ── Impresión: las páginas legales se imprimen y se guardan ─────── */
 @media print {
-  .nav, .fija, .pie .der, .saltar, .pendiente { display: none !important; }
-  body { background: #fff; color: #000; font-size: 11pt; }
+  .nav, .fija, .pie .der, .saltar,   body { background: #fff; color: #000; font-size: 11pt; }
   section { padding: 0 0 1rem; }
   .caja { max-width: none; padding: 0; }
   .legal, .legal p, .legal li { color: #000; max-width: none; }

@@ -7,9 +7,6 @@
 <title>Vídeo y web para el sector mascotas | Estudio Olfato</title>
 <meta name="description" content="Diseño web y vídeo vertical para veterinarias, tiendas de animales y marcas de mascotas. Precio cerrado y llamada gratis de 20 minutos.">
 <meta name="author" content="Estudio Olfato">
-<!-- La web está abierta a los buscadores desde el 29 de agosto de 2026. Las páginas
-     legales siguen en noindex, que es lo normal, pero les faltan los datos del
-     titular: ver el aviso al principio de privacidad.html y aviso-legal.html. -->
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://olfatoestudio.com/">
 
@@ -143,7 +140,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/estilo.css?v=15">
+<link rel="stylesheet" href="/estilo.css?v=16">
 </head>
 <body>
 <a class="saltar" href="#principal">Saltar al contenido</a>
@@ -182,6 +179,8 @@
     </ul>
   </nav>
 </header>
+
+<main id="contenido">
 
 <!-- PORTADA -->
 <section class="portada" id="principal">
@@ -500,22 +499,22 @@
     <div class="rejilla-4">
       <div class="paso rev">
         <span class="n">1</span>
-        <h4>Llamada de 20 minutos</h4>
+        <h3>Llamada de 20 minutos</h3>
         <p>Gratis. Nos cuentas dónde estás y te decimos con franqueza si podemos ayudarte.</p>
       </div>
       <div class="paso rev">
         <span class="n">2</span>
-        <h4>Propuesta en 48 horas</h4>
+        <h3>Propuesta en 48 horas</h3>
         <p>Alcance, plazo y precio final por escrito. Si te encaja, se firma.</p>
       </div>
       <div class="paso rev">
         <span class="n">3</span>
-        <h4>Producción</h4>
+        <h3>Producción</h3>
         <p>Con una revisión a mitad del proyecto para que no haya sustos al final.</p>
       </div>
       <div class="paso rev">
         <span class="n">4</span>
-        <h4>Entrega y traspaso</h4>
+        <h3>Entrega y traspaso</h3>
         <p>Todo a tu nombre, con una guía en vídeo para que puedas editarlo tú.</p>
       </div>
     </div>
@@ -534,28 +533,28 @@
       <div class="no rev">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg>
         <div>
-          <h4>Comprar seguidores</h4>
+          <h3>Comprar seguidores</h3>
           <p>Ni bots, ni sorteos falsos. Una audiencia comprada no compra nada y hunde el alcance de lo que publiques después.</p>
         </div>
       </div>
       <div class="no rev">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg>
         <div>
-          <h4>Prometer que te haremos viral</h4>
+          <h3>Prometer que te haremos viral</h3>
           <p>Nadie puede garantizarlo. Lo que sí garantizamos es volumen, constancia y criterio en este nicho.</p>
         </div>
       </div>
       <div class="no rev">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg>
         <div>
-          <h4>Gestionar publicidad pagada</h4>
+          <h3>Gestionar publicidad pagada</h3>
           <p>No llevamos Meta Ads ni Google Ads. Nuestro terreno es el crecimiento orgánico y la web. Si la necesitas, te decimos con quién hablar.</p>
         </div>
       </div>
       <div class="no rev">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg>
         <div>
-          <h4>Trabajar con quien lucra con la cría</h4>
+          <h3>Trabajar con quien lucra con la cría</h3>
           <p>Ni criaderos que vendan camadas, ni tiendas que vendan animales. Adoptar antes que comprar es un filtro de clientes, no una frase bonita.</p>
         </div>
       </div>
@@ -652,10 +651,6 @@
         <a href="https://wa.me/34643404120?text=Hola%2C%20vengo%20de%20la%20web%20de%20Estudio%20Olfato%20y%20quer%C3%ADa%20preguntaros%20sobre..." target="_blank" rel="noopener">escríbenos por WhatsApp</a>.</p>
       </div>
 
-      <!-- Formulario propio de Estudio Olfato en Formspree. El de la web de Maya no se
-           reutiliza a propósito: son dos negocios distintos y sus contactos no deben
-           acabar en la misma bandeja. Si alguna vez hay que cambiarlo, esto y la
-           directiva form-action de la CSP tienen que apuntar al mismo sitio. -->
       <form class="form" id="form" action="https://formspree.io/f/maeynlvj" method="POST">
         <div class="fila">
           <div class="campo">
@@ -703,10 +698,6 @@
           usan solo para responder a esta solicitud.</span>
         </label>
         <input type="hidden" name="_subject" value="Estudio Olfato — nueva solicitud">
-        <!-- Solo entra en juego si el visitante tiene JavaScript desactivado: entonces el
-             submit de abajo no se intercepta, el navegador hace un POST nativo y Formspree
-             redirige a esta página en vez de a la suya, que es genérica y de otra marca.
-             Con JavaScript activo (el caso normal) se confirma sin salir de la página. -->
         <input type="hidden" name="_next" value="https://olfatoestudio.com/gracias">
         <input type="text" name="_gotcha" style="display:none" tabindex="-1" aria-hidden="true">
         <div>
@@ -719,6 +710,8 @@
     </div>
   </div>
 </section>
+
+</main>
 
 <footer class="pie">
   <div class="pie-in">
