@@ -892,3 +892,61 @@ simular un `scroll`, y que el `<details>` de preguntas cambia `open` y fija
 suficiente de que el código hace lo que debe; lo que no se pudo ver fue la
 interpolación en sí, y eso es un límite de la herramienta de prueba, no del
 sitio.
+
+## Estrategia de contenido en Instagram y TikTok
+
+Cuenta profesional (Empresa), categoría *Agencia de marketing*, usuario
+`@olfatoestudio`, avatar `logo-marca.svg` exportado a PNG. Lo que falta es qué
+publicar y con qué ritmo, para no quedarse sin plan después de los primeros
+tres posts.
+
+### Los tres pilares (se repiten en bucle, no se inventan cada semana)
+
+1. **Prueba de trabajo.** Los tres casos reales que ya están en la web (Maya,
+   WodBox, AquaLadra), convertidos en carrusel: capturas + el problema que
+   resolvía + el resultado. Es el contenido más barato de producir — ya existen
+   las capturas — y el que más convierte, porque no es una promesa, es algo
+   visitable.
+2. **Detrás de cámaras / proceso.** Cómo se toma una decisión de diseño, por
+   qué un negocio necesita X y no Y, el origen del propio Estudio Olfato
+   (construir una audiencia desde cero con Maya y aplicar eso a otros
+   negocios). Este pilar es el que necesita grabación nueva, no reciclaje.
+3. **Educación del sector.** Reaprovecha directamente las "ideas de vídeo" ya
+   escritas en cada página vertical (`para-veterinarias.html`,
+   `para-tiendas-de-animales.html`, `para-adiestradores.html`,
+   `para-marcas-de-mascotas.html`): son contenido pensado para los *clientes*
+   de esos sectores, pero sirven igual de bien como demostración pública de
+   que Estudio Olfato entiende el sector, no solo sabe hacer vídeo en general.
+
+Un cuarto tipo, la **oferta directa** (paquetes, precio cerrado, llamada
+gratis), no es un pilar: es un remate que aparece de vez en cuando, nunca la
+mayoría del contenido — una cuenta que solo vende no genera alcance.
+
+### Cadencia
+
+**2 publicaciones por semana, sostenidas, mejor que 5 la primera semana y
+luego silencio.** El algoritmo de Instagram premia la constancia sobre el
+volumen, y una cuenta que arranca fuerte y se para manda la señal contraria.
+
+- Carrusel para prueba de trabajo y educación (formato barato, reutiliza
+  capturas ya hechas).
+- Reel para detrás de cámaras (el formato que más alcance nuevo trae, pero el
+  único que exige grabar algo).
+- El mismo Reel se sube también a TikTok sin cambios — mismo usuario, mismo
+  contenido, "el mismo handle en las dos" ya estaba decidido desde el reparto
+  de gasto inicial.
+
+### Primer mes, semana a semana
+
+| Semana | Publicación 1 | Publicación 2 |
+|---|---|---|
+| 1 | Presentación: "Esto es Estudio Olfato" (logo + una frase de posicionamiento) | Carrusel — caso AquaLadra |
+| 2 | Reel — por qué nace Estudio Olfato (el salto de creador de contenido a agencia) | Carrusel — caso Maya (solo métricas de la audiencia, sin datos personales, igual que en la web) |
+| 3 | Carrusel educativo — ideas de vídeo para veterinarias (de `para-veterinarias.html`) | Carrusel — caso WodBox |
+| 4 | Reel — un vistazo al proceso de construir una web (antes/después de una sección real) | Oferta directa — los tres paquetes, con CTA a la llamada gratis |
+
+A partir del mes 2 se repite el ciclo cambiando el sector del contenido
+educativo (tiendas, adiestradores, marcas) y, si ya hay más casos reales, se
+suman al pilar de prueba de trabajo. No hace falta un calendario editorial
+más detallado que este hasta que se vea qué formato funciona mejor — eso lo
+dicen las estadísticas de la cuenta, no una planificación a priori.
