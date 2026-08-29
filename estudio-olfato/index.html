@@ -677,6 +677,11 @@
           usan solo para responder a esta solicitud.</span>
         </label>
         <input type="hidden" name="_subject" value="Estudio Olfato — nueva solicitud">
+        <!-- Solo entra en juego si el visitante tiene JavaScript desactivado: entonces el
+             submit de abajo no se intercepta, el navegador hace un POST nativo y Formspree
+             redirige a esta página en vez de a la suya, que es genérica y de otra marca.
+             Con JavaScript activo (el caso normal) se confirma sin salir de la página. -->
+        <input type="hidden" name="_next" value="https://olfatoestudio.com/gracias">
         <input type="text" name="_gotcha" style="display:none" tabindex="-1" aria-hidden="true">
         <div>
           <button type="submit" class="btn btn-principal" id="enviar">Enviar solicitud</button>
