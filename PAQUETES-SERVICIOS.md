@@ -293,9 +293,24 @@ Con 0 resultados en la frase exacta ya puedes hacer esta semana, y por menos de
 - [ ] Coger los handles en Instagram y TikTok, el mismo en las dos. Gratis.
 - [ ] Crear el buzón `hola@olfatoestudio.com`. La web ya lo usa en todas partes,
       así que hasta que exista los correos rebotan.
-- [ ] Crear un formulario propio en `formspree.io` y sustituir
-      `TU_ID_DE_FORMSPREE` en `estudio-olfato/index.html`. Es gratis y son dos
-      minutos. Hasta entonces el formulario no envía nada.
+- [x] Crear un formulario propio en `formspree.io`. Hecho: el identificador es
+      `maeynlvj` y ya está puesto en `estudio-olfato/index.html`. Comprobado con
+      un envío real contra el endpoint, que devolvió `{"ok":true}` — no dado por
+      bueno "porque debería funcionar".
+
+      Antes se probó **MailerLite**, y no vale para esto: su formulario es de
+      suscripción a newsletter y solo recoge `fields[email]`, mientras que el
+      nuestro tiene siete campos y, sobre todo, tiene que acabar en una bandeja
+      de entrada, no en una lista de suscriptores. Había además un problema de
+      RGPD: el consentimiento del formulario dice que los datos se usan «solo
+      para responder a esta solicitud», y meterlos en una lista de marketing es
+      otra finalidad distinta que ese texto no cubre. MailerLite se guarda para
+      cuando haya boletín de verdad, que para eso sí es buena opción.
+
+      Si algún día se cambia de proveedor, hay que tocar **dos sitios**: el
+      `action` del formulario en `index.html` y la directiva `form-action` de la
+      CSP en `estudio-olfato/_headers`. Si solo se cambia uno, el navegador
+      bloquea el envío sin decir nada visible en la página.
 - [ ] Rellenar los campos `PENDIENTE` en **las dos páginas legales** y borrar sus
       avisos naranjas:
       - `privacidad.html` — nombre fiscal, NIF y domicilio. Los exige el artículo 13
