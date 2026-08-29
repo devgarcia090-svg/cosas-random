@@ -291,8 +291,26 @@ Con 0 resultados en la frase exacta ya puedes hacer esta semana, y por menos de
       compitiendo por palabras clave con su propia página `para-veterinarias`.
       Corregido y desplegado (commit `d28ba09`).
 - [ ] Coger los handles en Instagram y TikTok, el mismo en las dos. Gratis.
-- [ ] Crear el buzón `hola@olfatoestudio.com`. La web ya lo usa en todas partes,
-      así que hasta que exista los correos rebotan.
+- [x] Crear el buzón `hola@olfatoestudio.com`. Hecho con **Email Routing de
+      Cloudflare**, que venía incluido con el dominio: `hola@olfatoestudio.com`
+      reenvía a la cuenta personal de Gmail. Verificados por DNS los tres MX
+      (`route1/2/3.mx.cloudflare.net`) y el SPF
+      (`v=spf1 include:_spf.mx.cloudflare.net ~all`).
+
+      Se descartó **Google Workspace**, que se llegó a empezar: son unos 7 €/mes
+      por usuario y lo que se ofrecía como gratis era una prueba con tarjeta, no
+      un plan gratuito. La diferencia real es que con Workspace se puede
+      *responder* desde `hola@`, y con el reenvío de Cloudflare solo *recibir* —
+      al contestar sale el Gmail personal. Se asume por ahora: lo urgente era que
+      los correos dejaran de rebotar. Cuando entre el primer cliente, los 7 €/mes
+      se justifican y la migración es de minutos.
+
+      **Aviso para cuando se pruebe:** mandarse un correo a uno mismo desde el
+      Gmail de destino cae en spam siempre, y no es un fallo de configuración. El
+      mensaje dice venir de ti pero llega a través de un tercero que no está en
+      el SPF de Gmail, que es justo el patrón de una suplantación. Se arregla con
+      un filtro en Gmail («Para: hola@olfatoestudio.com» → *No enviar nunca a
+      Spam*) y probando desde otra cuenta, que es lo que hará un cliente real.
 - [x] Crear un formulario propio en `formspree.io`. Hecho: el identificador es
       `maeynlvj` y ya está puesto en `estudio-olfato/index.html`. Comprobado con
       un envío real contra el endpoint, que devolvió `{"ok":true}` — no dado por
