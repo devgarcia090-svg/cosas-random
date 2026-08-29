@@ -1,53 +1,47 @@
 # ══════════════════════════════════════════════════════════════════════
-# MODO PREVISUALIZACIÓN
-# La web está bloqueada a todos los rastreadores mientras falten los datos
-# fiscales de las páginas legales y el buzón del formulario.
-#
-# AL LANZAR: borra el bloque de abajo y descomenta el de "EN PRODUCCIÓN".
-# ══════════════════════════════════════════════════════════════════════
-User-agent: *
-Disallow: /
-
-# ══════════════════════════════════════════════════════════════════════
-# EN PRODUCCIÓN — descomentar esto y borrar lo de arriba
+# EN PRODUCCIÓN desde el 29 de agosto de 2026.
 #
 # Los rastreadores de IA van explícitos a propósito. Aparecer en las
 # respuestas de ChatGPT, Claude, Perplexity o Gemini hoy vale tanto como
 # aparecer en Google, y para eso tienen que poder leer la web. Si algún día
 # prefieres que no te usen, cambia Allow por Disallow en cada uno.
 #
-# User-agent: *
-# Allow: /
-#
-# # Buscadores
-# User-agent: Googlebot
-# Allow: /
-# User-agent: Bingbot
-# Allow: /
-#
-# # Asistentes de IA
-# User-agent: GPTBot
-# Allow: /
-# User-agent: OAI-SearchBot
-# Allow: /
-# User-agent: ChatGPT-User
-# Allow: /
-# User-agent: ClaudeBot
-# Allow: /
-# User-agent: Claude-SearchBot
-# Allow: /
-# User-agent: PerplexityBot
-# Allow: /
-# User-agent: Google-Extended
-# Allow: /
-# User-agent: Applebot-Extended
-# Allow: /
-#
-# # Rastreadores de SEO de terceros: no aportan nada y consumen
-# User-agent: AhrefsBot
-# Disallow: /
-# User-agent: SemrushBot
-# Disallow: /
+# Las páginas legales y la de confirmación del formulario no se bloquean
+# aquí: llevan su propia etiqueta robots en el HTML. Bloquearlas por
+# robots.txt sería contraproducente, porque un rastreador que no puede
+# leer la página tampoco puede leer la etiqueta que le pide no indexarla.
 # ══════════════════════════════════════════════════════════════════════
+User-agent: *
+Allow: /
+
+# Buscadores
+User-agent: Googlebot
+Allow: /
+User-agent: Bingbot
+Allow: /
+
+# Asistentes de IA
+User-agent: GPTBot
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: Claude-SearchBot
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+User-agent: Applebot-Extended
+Allow: /
+
+# Rastreadores de SEO de terceros: no aportan nada y consumen
+User-agent: AhrefsBot
+Disallow: /
+User-agent: SemrushBot
+Disallow: /
 
 Sitemap: https://olfatoestudio.com/sitemap.xml
