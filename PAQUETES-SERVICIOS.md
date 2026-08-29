@@ -276,9 +276,20 @@ sería raro — táchala de la lista de captación.
 Con 0 resultados en la frase exacta ya puedes hacer esta semana, y por menos de
 30 €:
 
-- [ ] Comprar `olfatoestudio.com` (~15 $/año). Decidido comprar solo este por
-      ahora, no los dos: la redirección desde `estudioolfato.com` es un extra que
-      se puede añadir después, sin prisa, cuando sobre presupuesto.
+- [x] Comprar `olfatoestudio.com`. Comprado en el Registrar de Cloudflare
+      (10,46 $/año, con WHOIS Privacy, DNSSEC y Email Forwarding incluidos sin
+      coste extra) y conectado como Custom Domain del Worker `olfatoestudio`.
+      La web ya sirve en `https://olfatoestudio.com` — el DNS y el certificado
+      SSL los gestiona Cloudflare automáticamente por estar en la misma cuenta.
+      No se compró `estudioolfato.com`: sigue siendo un extra para cuando sobre
+      presupuesto.
+
+      De paso salió un bug real: el `<title>` y la meta description del
+      homepage llevaban desde antes de que existieran las páginas verticales
+      apuntando a "veterinarias" (arrastrado del commit `1288005`), mientras
+      canonical/og:title/og:description ya eran genéricos — la portada estaba
+      compitiendo por palabras clave con su propia página `para-veterinarias`.
+      Corregido y desplegado (commit `d28ba09`).
 - [ ] Coger los handles en Instagram y TikTok, el mismo en las dos. Gratis.
 - [ ] Crear el buzón `hola@olfatoestudio.com`. La web ya lo usa en todas partes,
       así que hasta que exista los correos rebotan.
