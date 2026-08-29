@@ -486,11 +486,24 @@ agencias grandes.
 2. **Categoría principal:** *Agencia de marketing*. Secundarias: *Diseñador de
    páginas web* y *Servicio de producción de vídeo*. Cubre las tres búsquedas sin
    diluir cuál es la principal.
-3. **Zona de servicio:** España a nivel país es válido, pero Google pondera mejor
-   unas pocas zonas concretas que un país entero. Si hay una ciudad base real desde
-   la que trabajas, mejor listar esa ciudad y las de alrededor (hasta 20 zonas) y
-   dejar constancia explícita de que se atiende toda España en la propia web (ya
-   está: `areaServed: España` en el schema y en el texto de la home).
+3. **Zona de servicio:** ✅ decidida. La ciudad base es **Murcia**. Google pondera
+   mejor unas pocas zonas concretas que un país entero, así que se listan estas 20
+   (el máximo que permite), todas a distancia real de conducir para grabar:
+
+   - *Núcleo (área metropolitana):* Murcia, Alcantarilla, Molina de Segura, Las
+     Torres de Cotillas, Santomera, Beniel, Alguazas, Ceutí, Lorquí, Archena.
+   - *Segundo anillo:* Cartagena, Torre Pacheco, San Javier, Los Alcázares, San
+     Pedro del Pinatar, Alhama de Murcia, Totana, Lorca, Cieza.
+   - *Provincia vecina:* Orihuela (Alicante, a 25 km — extiende el alcance a otra
+     provincia sin coste).
+
+   Concretar aquí no renuncia al alcance nacional: la web ya deja constancia
+   explícita de que se atiende toda España (`areaServed: España` en el schema y en
+   el texto de la home).
+
+   Nota de coherencia: AquaLadra, el tercer caso de la web, está en Puente
+   Tocinos — pedanía de Murcia. El caso y la zona de servicio cuentan la misma
+   historia, que es justo lo que Google premia.
 4. **Descripción del negocio** (750 caracteres máx.), lista para pegar:
 
    > Diseño web y vídeo vertical para negocios del sector mascotas: clínicas
@@ -504,10 +517,10 @@ agencias grandes.
 5. **Servicios**, uno por línea, calcados de los paquetes: *Diseño y desarrollo web*,
    *SEO técnico*, *Producción de vídeo vertical*, *Gestión de redes sociales*,
    *Lanzamiento digital completo*.
-6. **Fotos:** el logo (`logo-marca.svg` exportado a PNG), una captura de
-   `mayarottweiler.com` y otra de `wodbox.xyz` (las mismas de la web, ya recortadas
-   y sin datos personales), y una foto de quien esté detrás del trabajo — las fichas
-   con cara de una persona generan más confianza que las que no.
+6. **Fotos:** el logo (`logo-marca.svg` exportado a PNG), y capturas de los tres
+   casos — `mayarottweiler.com`, `wodbox.xyz` y `aqualadra.com` — las mismas de la
+   web, ya recortadas y sin datos personales. Y una foto de quien esté detrás del
+   trabajo: las fichas con cara de una persona generan más confianza que las que no.
 7. **Reseñas:** en cuanto haya un primer cliente contento, pedirle la reseña con el
    enlace directo a la ficha (Google lo genera solo). No se pueden comprar ni
    incentivar con descuentos — Google las detecta y penaliza la ficha entera.
@@ -521,8 +534,21 @@ alta la ficha:**
   email, y como `telephone` en el `Organization` y el `ProfessionalService` del
   schema — mismo número en todos los sitios, que es lo que Google llama
   consistencia NAP. Úsalo también al rellenar la ficha de Google Business.
-- **La ciudad base**, si la hay, para afinar el punto 3 de más arriba. Sin ella la
-  única opción razonable es dejar España como zona de servicio a nivel país.
+- ~~La ciudad base~~ ✅ resuelto: **Murcia**. Las 20 zonas de servicio concretas
+  están en el punto 3 de más arriba.
+
+**Antes de que la ficha empiece a mandar gente a la web**, ten en cuenta que de los
+tres canales de contacto ahora mismo solo funciona uno: el formulario no envía nada
+(falta el ID de Formspree) y `hola@olfatoestudio.com` rebota (el buzón no existe).
+Solo el teléfono y el WhatsApp están vivos. No es motivo para retrasar el alta —
+la verificación por postal tarda una o dos semanas y da margen de sobra para
+arreglarlo — pero si la verificación llega antes, alguien puede escribir y perderse
+el contacto.
+
+**Ojo con el nombre:** en la ficha va `Estudio Olfato` a secas, sin añadidos
+descriptivos. Google penaliza meter palabras clave en el campo del nombre. Es lo
+contrario que en Instagram, donde el campo de nombre sí es buscable por palabra
+clave y ahí sí conviene `Estudio Olfato · Web y vídeo`.
 
 ### El sistema visual (v4, la definitiva de momento)
 
