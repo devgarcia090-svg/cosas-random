@@ -47,21 +47,25 @@
   --verde-50:   #E4F5EC;
 
   /* Tipografía */
-  --font-display: "Baloo 2", "Trebuchet MS", system-ui, sans-serif;
+  --font-display: "Playfair Display", "Georgia", "Times New Roman", serif;
   --font-body: "Nunito Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
 
-  /* Formas y sombras */
-  --r-sm: 12px;
-  --r-md: 18px;
-  --r-lg: 26px;
-  --r-xl: 34px;
+  /* Formas y sombras. Los radios bajan bastante: el redondeo muy marcado
+     es lo que hacía que las tarjetas parecieran pegatinas. Y las sombras
+     dejan de tener color: un halo aqua o arena a 45 % de opacidad canta
+     a plantilla, mientras que una sombra neutra y corta se lee como
+     profundidad de verdad.                                             */
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 16px;
+  --r-xl: 20px;
   --r-pill: 999px;
 
-  --sh-sm: 0 1px 2px rgba(14, 52, 64, .06), 0 2px 6px rgba(14, 52, 64, .05);
-  --sh-md: 0 2px 4px rgba(14, 52, 64, .05), 0 10px 24px -6px rgba(14, 52, 64, .12);
-  --sh-lg: 0 4px 8px rgba(14, 52, 64, .05), 0 24px 48px -12px rgba(14, 52, 64, .18);
-  --sh-aqua: 0 10px 30px -8px rgba(36, 150, 178, .45);
-  --sh-sand: 0 10px 30px -8px rgba(197, 154, 96, .45);
+  --sh-sm: 0 1px 2px rgba(14, 52, 64, .05), 0 1px 3px rgba(14, 52, 64, .04);
+  --sh-md: 0 2px 4px rgba(14, 52, 64, .04), 0 6px 16px -6px rgba(14, 52, 64, .10);
+  --sh-lg: 0 4px 8px rgba(14, 52, 64, .04), 0 16px 36px -14px rgba(14, 52, 64, .14);
+  --sh-aqua: 0 4px 14px -6px rgba(11, 44, 54, .28);
+  --sh-sand: 0 4px 14px -6px rgba(11, 44, 54, .22);
 
   --wrap: 1180px;
   --gutter: clamp(1.15rem, 4vw, 2.5rem);
@@ -88,11 +92,14 @@ body {
   overflow-x: hidden;
 }
 
+/* Playfair es una romana de contraste alto: pide algo más de interlínea
+   que una palo seco redondeada, y no aguanta el interletrado negativo
+   sin que los remates se toquen en los tamaños grandes.               */
 h1, h2, h3, h4 {
   font-family: var(--font-display);
-  font-weight: 800;
-  line-height: 1.06;
-  letter-spacing: -.015em;
+  font-weight: 700;
+  line-height: 1.14;
+  letter-spacing: -.005em;
   margin: 0 0 .5em;
   text-wrap: balance;
 }
@@ -203,20 +210,25 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   border-radius: var(--r-pill);
   background: var(--btn-bg);
   color: var(--btn-fg);
-  font-family: var(--font-display);
+  /* El botón NO usa la romana de los títulos: Playfair en cuerpos
+     pequeños y en mayúsculas pierde legibilidad, y un botón se lee de
+     reojo. Va en la palo seco, con peso y un poco de interletrado.    */
+  font-family: var(--font-body);
   font-weight: 700;
-  font-size: 1.02rem;
+  font-size: .99rem;
+  letter-spacing: .01em;
   line-height: 1.15;
   cursor: pointer;
   box-shadow: var(--sh-aqua);
-  transition: transform .18s cubic-bezier(.34,1.4,.64,1), box-shadow .18s ease, background .18s ease;
+  /* Sin rebote: la curva elástica anterior (.34,1.4,.64,1) daba un
+     saltito de juguete. Ahora entra y sale liso.                      */
+  transition: background .2s ease, box-shadow .2s ease, transform .2s ease;
   text-align: center;
 }
-.btn:hover { transform: translateY(-2px); color: var(--btn-fg); box-shadow: 0 14px 34px -8px rgba(36,150,178,.55); }
-.btn:active { transform: translateY(0) scale(.985); }
+.btn:hover { color: var(--btn-fg); box-shadow: var(--sh-md); filter: brightness(1.06); }
+.btn:active { transform: translateY(1px); }
 
 .btn--sand { --btn-bg: var(--sand-500); --btn-fg: var(--ink); box-shadow: var(--sh-sand); }
-.btn--sand:hover { box-shadow: 0 14px 34px -8px rgba(197,154,96,.6); }
 
 .btn--ghost {
   --btn-bg: transparent;
@@ -225,8 +237,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 }
 .btn--ghost:hover { background: rgba(14,52,64,.04); box-shadow: inset 0 0 0 2px rgba(14,52,64,.28); }
 
-.btn--wa { --btn-bg: #0F7C6F; box-shadow: 0 10px 30px -8px rgba(15,124,111,.5); }
-.btn--wa:hover { box-shadow: 0 14px 34px -8px rgba(15,124,111,.65); }
+.btn--wa { --btn-bg: #0F7C6F; box-shadow: var(--sh-aqua); }
 
 .btn--lg { padding: 1.05rem 2rem; font-size: 1.1rem; }
 .btn--sm { padding: .62rem 1.1rem; font-size: .92rem; }
@@ -304,7 +315,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   gap: .6rem;
   margin-right: auto;
   font-family: var(--font-display);
-  font-weight: 800;
+  font-weight: 700;
   font-size: 1.3rem;
   color: var(--ink);
   letter-spacing: -.02em;
@@ -316,7 +327,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 }
 .nav__brand span { display: none; }
 @media (min-width: 360px) { .nav__brand span { display: block; } }
-.nav__brand b { color: var(--aqua-600); font-weight: 800; }
+.nav__brand b { color: var(--aqua-600); font-weight: 700; }
 
 .nav__links { display: none; gap: .15rem; align-items: center; }
 @media (min-width: 950px) { .nav__links { display: flex; } }
@@ -379,7 +390,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   padding: .85rem .6rem;
   border-radius: var(--r-sm);
   color: var(--ink);
-  font-family: var(--font-display);
+  font-family: var(--font-body);
   font-weight: 700;
   font-size: 1.12rem;
   border-bottom: 1px solid var(--line);
@@ -495,11 +506,14 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 
 /* Burbujas decorativas */
 .bubbles { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 0; }
+/* Las burbujas se quedan, pero como textura y no como dibujo: fuera el
+   brillo blanco interior y el degradado marcado, que era lo que las
+   convertía en pompas de cómic. Ahora son un velo de color que apenas
+   se nota y sugiere el agua sin gritarlo.                             */
 .bubbles span {
   position: absolute;
   border-radius: 50%;
-  background: radial-gradient(circle at 32% 28%, rgba(255,255,255,.95), rgba(111,203,225,.42) 62%, rgba(36,150,178,.22));
-  box-shadow: inset 0 0 12px rgba(255,255,255,.6);
+  background: radial-gradient(circle at 34% 30%, rgba(255,255,255,.30), rgba(111,203,225,.13) 66%, rgba(36,150,178,.06));
 }
 
 /* ---------- 8. Tarjetas de vía (autolavado / peluquería) ---------- */
@@ -542,7 +556,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .track__icon svg { width: 32px; height: 32px; }
 .track__price {
   font-family: var(--font-display);
-  font-weight: 800;
+  font-weight: 700;
   font-size: 2.5rem;
   line-height: 1;
   color: var(--aqua-600);
@@ -591,7 +605,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   background: var(--aqua-700);
   color: #fff;
   font-family: var(--font-display);
-  font-weight: 800;
+  font-weight: 700;
   font-size: 1.32rem;
   box-shadow: var(--sh-aqua);
 }
@@ -648,7 +662,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .machine__item .txt { min-width: 0; }
 .machine__item b {
   display: block;
-  font-family: var(--font-display);
+  font-family: var(--font-body);
   font-weight: 700;
   font-size: 1rem;
   line-height: 1.2;
@@ -658,7 +672,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   margin-left: auto;
   flex: none;
   font-family: var(--font-display);
-  font-weight: 800;
+  font-weight: 700;
   font-size: 1.4rem;
   line-height: 1;
   color: var(--aqua-700);
@@ -683,7 +697,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   background: transparent;
   padding: .68rem 1.15rem;
   border-radius: var(--r-pill);
-  font-family: var(--font-display);
+  font-family: var(--font-body);
   font-weight: 700;
   font-size: 1rem;
   color: var(--muted);
@@ -716,14 +730,14 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 }
 .price:hover { transform: translateY(-4px); box-shadow: var(--sh-md); }
 .price__name {
-  font-family: var(--font-display);
+  font-family: var(--font-body);
   font-weight: 700;
   font-size: 1.15rem;
   margin-bottom: .35rem;
 }
 .price__value {
   font-family: var(--font-display);
-  font-weight: 800;
+  font-weight: 700;
   font-size: 2.4rem;
   line-height: 1;
   color: var(--aqua-700);
@@ -746,7 +760,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   transform: translateX(-50%);
   background: var(--sand-500);
   color: var(--ink);
-  font-family: var(--font-display);
+  font-family: var(--font-body);
   font-weight: 700;
   font-size: .78rem;
   padding: .2rem .7rem;
@@ -787,7 +801,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   display: grid; place-items: center;
   background: var(--sand-200);
   color: var(--sand-700);
-  font-family: var(--font-display);
+  font-family: var(--font-body);
   font-size: 1rem;
 }
 .booking__steps span { color: var(--ink-2); font-size: .97rem; line-height: 1.5; }
@@ -817,7 +831,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   padding: .9rem 1.2rem;
   background: linear-gradient(100deg, var(--aqua-900), var(--aqua-700));
   color: #fff;
-  font-family: var(--font-display);
+  font-family: var(--font-body);
   font-weight: 700;
 }
 .calendar-card__bar svg { width: 20px; height: 20px; }
@@ -1021,7 +1035,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   color: var(--aqua-900);
   display: grid; place-items: center;
   font-family: var(--font-display);
-  font-weight: 800;
+  font-weight: 700;
   flex: none;
 }
 .review__who b { display: block; font-size: .97rem; }
@@ -1054,7 +1068,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .contact__list .ic svg { width: 22px; height: 22px; }
 .contact__list dt, .contact__list b {
   display: block;
-  font-family: var(--font-display);
+  font-family: var(--font-body);
   font-weight: 700;
   font-size: .95rem;
   color: var(--muted);
@@ -1143,7 +1157,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   gap: .7rem;
   margin-bottom: .9rem;
   font-family: var(--font-display);
-  font-weight: 800;
+  font-weight: 700;
   font-size: 1.35rem;
   color: #fff;
 }
@@ -1206,7 +1220,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 @media (max-width: 699px) { body { padding-bottom: 76px; } }
 
 /* ---------- 19. Separadores de onda ---------- */
-.wave { display: block; width: 100%; height: clamp(40px, 6vw, 80px); }
+.wave { display: block; width: 100%; height: clamp(26px, 3.5vw, 46px); }
 .wave path { fill: currentColor; }
 .wave--paper { color: var(--paper); }
 .wave--ink   { color: var(--aqua-900); }
@@ -1428,17 +1442,15 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 }
 @keyframes subir {
   0%   { transform: translate3d(0, 26px, 0) scale(.86); opacity: 0; }
-  18%  { opacity: .9; }
-  82%  { opacity: .65; }
+  18%  { opacity: .5; }
+  82%  { opacity: .34; }
   100% { transform: translate3d(var(--desvio, 12px), -120px, 0) scale(1.1); opacity: 0; }
 }
 
 /* ---------- Oleaje de los separadores ---------- */
-.wave__g { animation: oleaje 16s linear infinite; }
-@keyframes oleaje {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-1440px); }
-}
+/* El oleaje perpetuo se ha quitado a propósito: una animación que no
+   para nunca y no comunica nada compite con el contenido y es de las
+   cosas que más delatan una plantilla. La onda se queda quieta.     */
 
 /* ---------- La foto del hero, al ritmo del scroll ----------
    Scroll-driven animations: las calcula el compositor, así que no cuesta
@@ -1469,7 +1481,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 }
 
 /* ---------- El emblema saluda ---------- */
-.nav__brand img, .legal-top .nav__brand img { transition: transform .35s cubic-bezier(.34, 1.4, .64, 1); }
+.nav__brand img, .legal-top .nav__brand img { transition: transform .35s ease; }
 .nav__brand:hover img, .nav__brand:focus-visible img { transform: rotate(-8deg) scale(1.06); }
 
 /* ---------- Táctil: sin hover, hace falta otra respuesta ---------- */
@@ -1611,7 +1623,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .nota__cifra { display: flex; align-items: baseline; gap: .5rem; }
 .nota__cifra b {
   font-family: var(--font-display);
-  font-weight: 800;
+  font-weight: 700;
   font-size: 3.2rem;
   line-height: .9;
   color: var(--ink);
@@ -1665,7 +1677,7 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   background: var(--sand-200);
   color: var(--sand-700);
   font-family: var(--font-display);
-  font-weight: 800;
+  font-weight: 700;
   font-size: 1.6rem;
   line-height: 1;
 }

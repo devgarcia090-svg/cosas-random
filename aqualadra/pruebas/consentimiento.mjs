@@ -69,7 +69,10 @@ const anim = await p.evaluate(()=>{
   };
 });
 t(anim.burbujaAnim==='subir', 'las burbujas usan la animación de subida');
-t(anim.ondaAnim==='oleaje', 'los separadores tienen oleaje');
+// El oleaje perpetuo se retiró al pasar la web a un registro más sobrio:
+// una animación que no para nunca y no comunica nada compite con el
+// contenido. La onda tiene que quedarse quieta.
+t(anim.ondaAnim==='none' || !anim.ondaAnim, 'los separadores NO tienen animación en bucle');
 t(anim.escalonados>=20, 'hay '+anim.escalonados+' elementos con aparición escalonada');
 t(anim.conRetraso>=15, anim.conRetraso+' de ellos con retraso propio');
 
