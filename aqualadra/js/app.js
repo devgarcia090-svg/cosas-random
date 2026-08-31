@@ -400,4 +400,51 @@
     a.addEventListener("click", pintarCalendario);
   });
 
+  /* ---------- 8. ¿Está abierto ahora mismo? ----------
+     Al autolavado se viene sin cita, así que lo que decide la visita no es
+     el horario en abstracto: es si ahora mismo se puede venir. Se calcula
+     en la hora de Murcia y no en la del visitante, porque si no un cliente
+     de vacaciones fuera de España vería un horario que no es el del local.
+     Si el navegador no soporta zonas horarias, se deja el texto de siempre
+     y no se inventa nada.                                              */
+
+  var ABRE = 9, CIERRA = 21;
+
+  function horaEnMurcia() {
+    try {
+      var partes = new Intl.DateTimeFormat("es-ES", {
+        timeZone: "Europe/Madrid", hour: "numeric", minute: "numeric", hour12: false
+      }).formatToParts(new Date());
+      var h = null, m = null;
+      partes.forEach(function (p) {
+        if (p.type === "hour") h = parseInt(p.value, 10);
+        if (p.type === "minute") m = parseInt(p.value, 10);
+      });
+      return (h === null || isNaN(h)) ? null : { h: h % 24, m: m || 0 };
+    } catch (e) { return null; }
+  }
+
+  function pintarEstado() {
+    var caja = document.getElementById("estado-horario");
+    if (!caja) return;
+    var texto = caja.querySelector("span");
+    var ahora = horaEnMurcia();
+    if (!texto || !ahora) return;          /* sin zona horaria fiable, se queda el horario a secas */
+
+    var abierto = ahora.h >= ABRE && ahora.h < CIERRA;
+    caja.classList.toggle("chip--abierto", abierto);
+    caja.classList.toggle("chip--cerrado", !abierto);
+
+    if (abierto) {
+      texto.textContent = ahora.h === CIERRA - 1
+        ? "Abierto · cierra en " + (60 - ahora.m) + " min"
+        : "Abierto ahora · hasta las " + CIERRA + ":00";
+    } else {
+      texto.textContent = "Cerrado · abre a las " + ABRE + ":00";
+    }
+  }
+
+  pintarEstado();
+  setInterval(pintarEstado, 60000);        /* que no se quede obsoleto en una pestaña abierta */
+
 })();

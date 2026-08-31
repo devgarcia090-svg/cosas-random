@@ -39,6 +39,13 @@
   /* Guiño: la lengua del perro del logo. Usar con cuentagotas. */
   --pink:       #F2789F;
 
+  /* Abierto / cerrado. El verde es el único color de la paleta que no sale
+     del azul ni del arena: se usa solo aquí, porque "abierto ahora" tiene
+     que leerse de un vistazo y sin depender del color (lleva su texto).
+     Ambos pares pasan AA sobre su propio fondo (6,8:1 y 7,3:1).        */
+  --verde-700:  #0F5F3D;
+  --verde-50:   #E4F5EC;
+
   /* Tipografía */
   --font-display: "Baloo 2", "Trebuchet MS", system-ui, sans-serif;
   --font-body: "Nunito Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -240,6 +247,29 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   box-shadow: var(--sh-sm);
 }
 .chip svg { width: 1.05em; height: 1.05em; color: var(--aqua-600); flex: none; }
+
+/* Estado del local. El punto es un refuerzo, no el mensaje: quien no
+   distinga el color sigue leyendo "Abierto ahora" o "Cerrado".        */
+.chip--abierto { background: var(--verde-50); color: var(--verde-700); }
+.chip--abierto svg { color: var(--verde-700); }
+.chip--cerrado { background: var(--sand-100); color: var(--sand-700); }
+.chip--cerrado svg { color: var(--sand-700); }
+.chip--abierto::before,
+.chip--cerrado::before {
+  content: "";
+  width: .5rem; height: .5rem;
+  border-radius: 50%;
+  background: currentColor;
+  flex: none;
+}
+.chip--abierto::before { animation: latido 2.4s ease-in-out infinite; }
+@keyframes latido {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: .35; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .chip--abierto::before { animation: none; }
+}
 
 /* ---------- 6. Navegación ---------- */
 .nav {
@@ -1156,7 +1186,22 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   transition: transform .3s ease;
 }
 .mobile-bar.is-visible { transform: translateY(0); }
-.mobile-bar .btn { flex: 1; padding-inline: .8rem; }
+/* Tres destinos: cita, cómo llegar y WhatsApp. Los dos primeros reparten
+   el ancho y pueden encoger (min-width:0, si no un flex nunca baja de su
+   contenido y el último botón se sale de la pantalla). WhatsApp se queda
+   con el ancho justo de su icono y su etiqueta.                        */
+.mobile-bar .btn {
+  flex: 1 1 0;
+  min-width: 0;
+  padding-inline: .6rem;
+  white-space: nowrap;
+}
+.mobile-bar .btn--wa { flex: 0 1 auto; }
+/* Por debajo de 430px WhatsApp se queda solo con el icono: lleva
+   aria-label, así que sigue anunciándose igual.                        */
+@media (max-width: 430px) {
+  .mobile-bar .solo-ancho { display: none; }
+}
 @media (min-width: 700px) { .mobile-bar { display: none; } }
 @media (max-width: 699px) { body { padding-bottom: 76px; } }
 
