@@ -1,0 +1,40 @@
+# Redirecciones permanentes .html -> URL limpia
+# Cloudflare sirve las URLs limpias (/guias) y por defecto redirige
+# /guias.html con un 307 (temporal). Aqui lo forzamos a 301 (permanente)
+# para que Google transfiera las senales y saque las .html del indice.
+
+/index.html  /  301
+
+/alimentacion-rottweiler.html  /alimentacion-rottweiler  301
+/aviso-legal.html  /aviso-legal  301
+/bozal-rottweiler.html  /bozal-rottweiler  301
+/cuanto-cuesta-rottweiler.html  /cuanto-cuesta-rottweiler  301
+/descargo-responsabilidad.html  /descargo-responsabilidad  301
+/displasia-rottweiler.html  /displasia-rottweiler  301
+/educar-rottweiler.html  /educar-rottweiler  301
+/ejercicio-rottweiler.html  /ejercicio-rottweiler  301
+/enfermedades-rottweiler.html  /enfermedades-rottweiler  301
+/guias.html  /guias  301
+/historia-rottweiler.html  /historia-rottweiler  301
+/historia.html  /historia  301
+/ley-bienestar-animal.html  /ley-bienestar-animal  301
+/marcas.html  /marcas  301
+/microchip-rottweiler.html  /microchip-rottweiler  301
+/murcia-perros-transporte-publico.html  /murcia-perros-transporte-publico  301
+/privacidad.html  /privacidad  301
+/protectoras-ppp-espana.html  /protectoras-ppp-espana  301
+/quiz.html  /quiz  301
+/razas-perros-ppp.html  /razas-perros-ppp  301
+/renfe-perros-40kg-ppp.html  /renfe-perros-40kg-ppp  301
+/requisitos-rottweiler-espana.html  /requisitos-rottweiler-espana  301
+/rottweiler-agresivo.html  /rottweiler-agresivo  301
+/rottweiler-cachorro.html  /rottweiler-cachorro  301
+/rottweiler-con-ninos.html  /rottweiler-con-ninos  301
+/rottweiler-en-piso.html  /rottweiler-en-piso  301
+/rottweiler-esperanza-vida.html  /rottweiler-esperanza-vida  301
+/rottweiler-macho-vs-hembra.html  /rottweiler-macho-vs-hembra  301
+/rottweiler-temperamento.html  /rottweiler-temperamento  301
+/rottweiler-y-gatos.html  /rottweiler-y-gatos  301
+/seguro-rc-rottweiler.html  /seguro-rc-rottweiler  301
+/socializar-rottweiler.html  /socializar-rottweiler  301
+/tienda.html  /tienda  301
