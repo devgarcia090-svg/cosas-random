@@ -68,13 +68,18 @@ Dos decisiones que sostienen todo lo demás:
    # NEXT_PUBLIC_SUPABASE_ANON_KEY=...
    ```
 
-4. Da de alta a un camarero: crea el usuario en *Authentication → Users* (con
-   contraseña) y enlázalo al local:
+4. Da de alta a un camarero. Con la cadena de conexión de *Project Settings →
+   Database* (usa la pestaña **Session pooler**, que va por IPv4):
 
-   ```sql
-   insert into staff (user_id, venue_id, role)
-   values ('<uuid-del-usuario>', '00000000-0000-4000-8000-0000000000fe', 'manager');
+   ```bash
+   psql "$DATABASE_URL" \
+     -v email="'camarero@bar.test'" -v password="'tu-contraseña'" \
+     -v venue="'00000000-0000-4000-8000-0000000000fe'" \
+     -f supabase/crear_camarero.sql
    ```
+
+   También se puede a mano: crear el usuario en *Authentication → Users* y
+   añadir después una fila en `staff` con su `user_id` y el `venue_id`.
 
 5. Arranca:
 
