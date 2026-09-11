@@ -14,6 +14,22 @@ type Props = {
   categories: Category[];
 };
 
+/** Nunca decimos "sin alérgenos" por omisión: si la carta del local no declara
+ *  nada, lo honesto es mandar a preguntar. */
+function Alergenos({ product }: { product: Product }) {
+  const partes: string[] = [];
+  if (product.allergens.length) {
+    partes.push(`Contiene: ${product.allergens.join(', ')}`);
+  }
+  if (product.allergens_free.length) {
+    partes.push(`Sin: ${product.allergens_free.join(', ')}`);
+  }
+  if (!partes.length) {
+    partes.push('Alérgenos: consulta al personal');
+  }
+  return <p className="mt-1 text-xs text-stone-400">{partes.join(' · ')}</p>;
+}
+
 /** Dos líneas se funden si son el mismo producto con las mismas opciones y nota. */
 function lineKey(
   productId: string,
@@ -129,8 +145,8 @@ export function Carta({
               {zone ? ` · ${zone}` : ''}
             </p>
           </div>
-          <span className="rounded-full bg-amber-100 px-2.5 py-1 text-xs font-medium text-amber-900">
-            Te lo llevamos a la mesa
+          <span className="shrink-0 whitespace-nowrap rounded-full bg-amber-100 px-2.5 py-1 text-xs font-medium text-amber-900">
+            Servicio en mesa
           </span>
         </div>
         <nav className="mx-auto flex max-w-2xl gap-1 px-3 pt-3">
@@ -150,11 +166,9 @@ export function Carta({
             </button>
           ))}
         </nav>
-      </header>
 
-      {tab === 'carta' ? (
-        <>
-          <div className="sticky top-[6.5rem] z-10 border-b border-stone-200 bg-[#faf9f7]/95 backdrop-blur">
+        {tab === 'carta' ? (
+          <div className="border-t border-stone-200 bg-[#faf9f7]/95">
             <div className="mx-auto flex max-w-2xl gap-2 overflow-x-auto px-4 py-2.5 [scrollbar-width:none]">
               {categories.map((category) => (
                 <a
@@ -167,11 +181,19 @@ export function Carta({
               ))}
             </div>
           </div>
+        ) : null}
+      </header>
 
+      {tab === 'carta' ? (
+        <>
           <main className="mx-auto w-full max-w-2xl flex-1 px-4 pb-32">
             {categories.map((category) => (
-              <section key={category.id} id={`cat-${category.id}`} className="pt-6">
-                <h2 className="scroll-mt-40 pb-2 text-base font-semibold uppercase tracking-wide text-stone-500">
+              <section
+                key={category.id}
+                id={`cat-${category.id}`}
+                className="scroll-mt-44 pt-6"
+              >
+                <h2 className="pb-2 text-base font-semibold uppercase tracking-wide text-stone-500">
                   {category.name}
                 </h2>
                 <ul className="divide-y divide-stone-200 overflow-hidden rounded-xl border border-stone-200 bg-white">
@@ -192,11 +214,7 @@ export function Carta({
                               {product.description}
                             </p>
                           ) : null}
-                          {product.allergens.length ? (
-                            <p className="mt-1 text-xs text-stone-400">
-                              Alérgenos: {product.allergens.join(', ')}
-                            </p>
-                          ) : null}
+                          <Alergenos product={product} />
                         </div>
                         <div className="flex flex-col items-end gap-2">
                           <span className="font-medium tabular-nums">
@@ -380,8 +398,11 @@ function ProductSheet({
       }
     >
       {product.description ? (
-        <p className="pb-3 text-stone-600">{product.description}</p>
+        <p className="pt-1 text-stone-600">{product.description}</p>
       ) : null}
+      <div className="pb-3 pt-1">
+        <Alergenos product={product} />
+      </div>
 
       {product.modifier_groups.map((group) => (
         <fieldset key={group.id} className="border-t border-stone-200 py-3">

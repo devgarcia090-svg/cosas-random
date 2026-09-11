@@ -11,7 +11,7 @@ const MENU_QUERY = `
   id, name, position, active,
   products (
     id, venue_id, category_id, name, description, price_cents,
-    allergens, available, position,
+    allergens, allergens_free, available, position,
     modifier_groups (
       id, product_id, name, min_select, max_select, position,
       modifiers (id, group_id, name, price_delta_cents, available, position)

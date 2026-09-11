@@ -46,7 +46,11 @@ export type Product = {
   name: string;
   description: string | null;
   price_cents: number;
+  /** Alérgenos que el plato contiene. */
   allergens: string[];
+  /** Alérgenos que el local declara ausentes. Vacío junto con `allergens`
+   *  significa "sin declarar", no "sin alérgenos". */
+  allergens_free: string[];
   available: boolean;
   position: number;
   modifier_groups: ModifierGroup[];

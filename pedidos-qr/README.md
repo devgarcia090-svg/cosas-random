@@ -12,9 +12,15 @@ listado más abajo sin adornos.
 
 **Cliente** (`/mesa/<id-de-mesa>`)
 
-- Carta por categorías con descripciones, alérgenos y precios.
-- Opciones por producto (punto de la carne, extras, tipo de pan…) con mínimos y
-  máximos por grupo.
+- Carta por categorías con descripciones, precios y alérgenos.
+- Tres estados de alérgenos, que no es lo mismo: lo que el plato **contiene**,
+  lo que el local declara que **no lleva**, y *consulta al personal* cuando la
+  carta original no declara nada. Nunca se presenta un plato como libre de
+  alérgenos por el hecho de que falte el dato.
+- Opciones por producto (formato media/entera, punto de la carne, extras…) con
+  mínimos y máximos por grupo. Los platos con varios formatos llevan un grupo
+  obligatorio: el precio base es el del formato más barato y cada opción suma
+  su diferencia.
 - Carrito con cantidades y notas para cocina.
 - Varias rondas sobre la misma mesa: todas se agrupan en una sesión.
 - Seguimiento del pedido en tiempo real: Recibido → Confirmado → En preparación →
@@ -54,11 +60,20 @@ Dos decisiones que sostienen todo lo demás:
 1. Crea un proyecto en [supabase.com](https://supabase.com) (el plan gratuito
    sobra para probar).
 
-2. En el **SQL Editor**, ejecuta en este orden:
+2. En el **SQL Editor**, ejecuta las migraciones en orden:
 
    - `supabase/migrations/0001_schema.sql`
    - `supabase/migrations/0002_rls_and_rpc.sql`
-   - `supabase/seed.sql` (datos de demo: un bar con 6 mesas y 19 productos)
+   - `supabase/migrations/0003_orden_de_opciones.sql`
+   - `supabase/migrations/0004_alergenos_declarados.sql`
+
+   Y después **uno** de los dos juegos de datos:
+
+   - `supabase/seed-podium.sql` — la carta real de Podium Café & Grill: 13
+     categorías, 129 platos, 20 mesas. Generado desde el repositorio
+     `devgarcia090-svg/podium`, que a su vez sale del PDF oficial del local.
+   - `supabase/seed.sql` — un bar de demo con 6 mesas y 19 productos. Es el que
+     usan las pruebas, porque sus identificadores son fijos y conocidos.
 
 3. Copia las credenciales de *Project Settings → API*:
 
@@ -106,8 +121,9 @@ Postgres local sin Supabase, ejecuta antes
 `supabase/tests/00_shim_postgres_local.sql`, que crea los roles y el
 `auth.uid()` que la plataforma da hecho.
 
-Las pruebas dan por hecho una base recién migrada y con el seed puesto: los
-totales esperados se apoyan en los datos de demo.
+Las pruebas dan por hecho una base recién migrada y con `seed.sql` (el de
+demo) puesto: los totales esperados se apoyan en esos datos. Contra una base
+con la carta real no valen — usa un proyecto aparte o un Postgres local.
 
 ## Qué endurecer antes de producción
 

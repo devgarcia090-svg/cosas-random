@@ -22,16 +22,22 @@ begin
   if v_user_id is null then
     v_user_id := gen_random_uuid();
 
+    -- Los campos de token van a cadena vacía, no a NULL: GoTrue los lee como
+    -- texto y con NULL responde "Database error querying schema" al hacer login.
     insert into auth.users (
       instance_id, id, aud, role, email, encrypted_password,
       email_confirmed_at, created_at, updated_at,
-      raw_app_meta_data, raw_user_meta_data
+      raw_app_meta_data, raw_user_meta_data,
+      confirmation_token, recovery_token, email_change_token_new, email_change,
+      email_change_token_current, phone_change, phone_change_token,
+      reauthentication_token
     ) values (
       '00000000-0000-0000-0000-000000000000', v_user_id,
       'authenticated', 'authenticated', v_email,
       extensions.crypt(v_password, extensions.gen_salt('bf')),
       now(), now(), now(),
-      '{"provider":"email","providers":["email"]}'::jsonb, '{}'::jsonb
+      '{"provider":"email","providers":["email"]}'::jsonb, '{}'::jsonb,
+      '', '', '', '', '', '', '', ''
     );
 
     -- Sin esta fila, GoTrue no reconoce el login por contraseña.
