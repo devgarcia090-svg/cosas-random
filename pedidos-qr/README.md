@@ -150,3 +150,29 @@ Está señalado aquí en vez de escondido en el código:
   con la impresora de cocina.
 - **Multi-local en la interfaz.** El modelo de datos ya es multi-local; las
   pantallas asumen el primero del camarero.
+
+## Despliegue
+
+En producción: **https://pedidos-qr-phi.vercel.app** (Vercel, cuenta `dani-9465`,
+proyecto `pedidos-qr`, directorio raíz `pedidos-qr/`).
+
+Las dos variables `NEXT_PUBLIC_*` están configuradas en los tres entornos del
+proyecto. Al ser `NEXT_PUBLIC_`, se incrustan **en tiempo de compilación**: si
+cambias de proyecto de Supabase, hay que volver a desplegar, no basta con
+editar la variable.
+
+Dos cosas que hay que revisar en un despliegue nuevo:
+
+- **Protección de despliegue.** Vercel activa *Vercel Authentication* por
+  defecto, y entonces el QR pide iniciar sesión en la cuenta de Vercel: para un
+  bar es inservible. En *Settings → Deployment Protection* hay que dejarla solo
+  para previsualizaciones, no para producción.
+- **El proyecto de Supabase despierto.** En el plan gratuito se pausa tras 7
+  días sin uso y la carta aparece vacía hasta reactivarlo.
+
+Los QR se generan a partir de la dirección donde esté servida la app, así que
+apuntan solos a la URL correcta. Si más adelante pones un dominio propio,
+reimprime los códigos.
+
+El despliegue se hizo subiendo los ficheros con el CLI, sin conectar el
+repositorio. Para que cada push despliegue solo: `vercel git connect`.
