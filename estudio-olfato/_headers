@@ -5,24 +5,46 @@
   Permissions-Policy: geolocation=(), microphone=(), camera=()
   Strict-Transport-Security: max-age=31536000; includeSubDomains
   Content-Security-Policy: default-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; media-src 'self'; script-src 'self' 'unsafe-inline'; form-action https://formspree.io; frame-ancestors 'none'; base-uri 'self'
-  Cache-Control: no-store
 
-# Mientras la web esté en desarrollo, NADA se cachea.
+# Caché
 #
-# Se usaba `no-cache`, pero Cloudflare seguía sirviendo del borde con
-# `cf-cache-status: HIT` y quedaban copias viejas incluso tras desplegar: el
-# etag servido no coincidía con el fichero local. `no-store` prohíbe guardar.
+# Durante el desarrollo esto era `Cache-Control: no-store` en `/*`, sin
+# excepciones, porque una caché de una hora en el CSS provocó que tras un
+# despliegue el navegador siguiera usando el estilo anterior.
 #
-# Antes el CSS se cacheaba una hora y eso provocó un fallo real: tras un
-# despliegue el navegador seguía usando el estilo.css anterior y la página se
-# renderizaba con reglas que ya no existían (titulares grandes y sin márgenes).
-# No merece la pena arriesgarlo: el CSS pesa 18 KB y `no-cache` solo obliga a
-# revalidar, así que lo normal es una respuesta 304 de unos pocos bytes.
+# Con la web ya publicada, `no-store` salía caro: cada visita volvía a
+# descargar las doce fuentes, las imágenes y el vídeo. Y además impedía las
+# peticiones por rango, que es como los navegadores piden el vídeo: iOS
+# Safari exige una respuesta 206 y sin ella no reproduce nada.
 #
-# Ojo: en _headers las reglas se SUMAN, no se sustituyen. Si aquí se pone
-# `Cache-Control: no-cache` y luego se añade otro valor para una ruta concreta,
-# la respuesta lleva las dos y gana la más restrictiva. Por eso no hay
-# excepciones por ruta: una sola regla para todo.
+# Ahora: el HTML no se guarda (siempre se revalida, y así un despliegue se
+# ve al instante), las fuentes, imágenes y vídeos van a un año —sus nombres
+# no se reutilizan nunca con otro contenido— y las hojas de estilo, que sí
+# conservan el nombre, se quedan en cinco minutos. Llevan `?v=` en la URL,
+# que ya basta para invalidar, pero cinco minutos acota el daño si algún día
+# se olvida subir ese número.
 #
-# AL LANZAR: pasar estilo.css y las imágenes a URLs versionadas
-# (estilo.abc123.css) y cachearlas un año, quitando esta línea de `/*`.
+# OJO: en `_headers` las reglas de varias rutas que casan se SUMAN. Si una
+# cabecera aparece dos veces, la respuesta lleva las dos. Por eso
+# `Cache-Control` no está en el bloque `/*` de arriba.
+
+/*.html
+  Cache-Control: no-cache
+
+/
+  Cache-Control: no-cache
+
+/estilo.css
+  Cache-Control: public, max-age=300
+
+/fuentes.css
+  Cache-Control: public, max-age=300
+
+/fuentes/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/img/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/video/*
+  Cache-Control: public, max-age=31536000, immutable

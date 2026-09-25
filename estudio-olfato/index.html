@@ -141,7 +141,7 @@
 <link rel="preload" href="/fuentes/familjen-grotesk-600-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fuentes/familjen-grotesk-400-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/fuentes.css?v=1">
-<link rel="stylesheet" href="/estilo.css?v=26">
+<link rel="stylesheet" href="/estilo.css?v=27">
 </head>
 <body>
 <a class="saltar" href="#principal">Saltar al contenido</a>
@@ -228,10 +228,13 @@
 <!-- BANDA DE VIDEO -->
 <section class="banda-video" aria-labelledby="banda-titulo">
   <video id="bandaVideo" class="banda-media" playsinline muted loop autoplay
-         preload="metadata" poster="/video/playa-portada.jpg?v=2"
-         aria-label="Plano de Daniel y Maya jugando en la orilla al atardecer">
-    <source src="/video/playa.webm?v=2" type="video/webm">
-    <source src="/video/playa.mp4?v=2" type="video/mp4">
+         preload="metadata" poster="/video/orilla-portada.jpg"
+         aria-label="Maya, una rottweiler, caminando por el agua al atardecer frente a un puerto deportivo">
+    <!-- El MP4 va primero a propósito: pesa 1,45 MB frente a 1,7 del WebM y
+         lo reproduce cualquier navegador real. El WebM solo entra en juego en
+         compilaciones sin H.264, que es un códec propietario. -->
+    <source src="/video/orilla.mp4" type="video/mp4">
+    <source src="/video/orilla.webm" type="video/webm">
   </video>
   <div class="banda-velo" aria-hidden="true"></div>
   <div class="banda-texto">
@@ -868,6 +871,30 @@
     pausa.addEventListener('click', function () {
       if (vid.paused) { vid.play(); pintar(false); } else { vid.pause(); pintar(true); }
     });
+  }
+
+  // Marca en la barra la sección que estás viendo. Sin librerías: un solo
+  // observador sobre las secciones que la barra enlaza.
+  var enlaces = {};
+  document.querySelectorAll('.nav-links a[href^="#"]').forEach(function (a) {
+    enlaces[a.getAttribute('href').slice(1)] = a;
+  });
+  var secciones = Object.keys(enlaces)
+    .map(function (id) { return document.getElementById(id); })
+    .filter(Boolean);
+  if ('IntersectionObserver' in window && secciones.length) {
+    var visibles = {};
+    var spy = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { visibles[e.target.id] = e.isIntersecting ? e.intersectionRatio : 0; });
+      var mejor = null, max = 0;
+      Object.keys(visibles).forEach(function (id) {
+        if (visibles[id] > max) { max = visibles[id]; mejor = id; }
+      });
+      Object.keys(enlaces).forEach(function (id) {
+        enlaces[id].classList.toggle('aqui', id === mejor && max > 0);
+      });
+    }, { threshold: [0, 0.15, 0.4, 0.75], rootMargin: '-96px 0px -45% 0px' });
+    secciones.forEach(function (s) { spy.observe(s); });
   }
 
   // Sombra en la barra de navegación al despegarse del borde superior

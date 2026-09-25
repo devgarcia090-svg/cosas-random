@@ -278,12 +278,12 @@ section { padding: var(--seccion) 0; }
 
 /* A partir de 1000 px el texto va encima del plano.
    La altura sigue al ancho (40vw) en lugar de quedarse fija: el clip es
-   2,13:1 y las siluetas ocupan del 10 % al 92 % de su altura, así que con
-   una altura fija, cuanto más ancha la pantalla más recorta object-fit y
-   antes se quedaban fuera los pies y la cabeza. Con 40vw el recorte se
-   mantiene por debajo del aire que tienen por arriba y por abajo. */
+   16:9 y Maya camina por la franja baja del encuadre (del 55 % al 95 % de
+   la altura), así que con una altura fija, cuanto más ancha la pantalla
+   más recorta object-fit y antes se la comía por abajo. Con 52vw el
+   recorte se queda por debajo de ese margen en cualquier ancho. */
 @media (min-width: 1000px) {
-  .banda-video { height: min(40vw, 900px); }
+  .banda-video { height: min(52vw, 1000px); }
   .banda-media { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 }
 /* Por debajo de 1000 px no hay altura suficiente para superponer el texto
@@ -291,7 +291,7 @@ section { padding: var(--seccion) 0; }
    proporción intacta y el texto debajo. */
 @media (max-width: 999px) {
   .banda-video { flex-direction: column; }
-  .banda-media { position: static; width: 100%; height: auto; aspect-ratio: 1152 / 540; }
+  .banda-media { position: static; width: 100%; height: auto; aspect-ratio: 16 / 9; }
   .banda-velo { display: none; }
   .banda-texto { padding-top: var(--e-7); }
   /* El botón se queda donde lo pone la regla base, abajo a la derecha:
@@ -324,8 +324,11 @@ section { padding: var(--seccion) 0; }
   /* Degradado vertical mínimo (4 % de diferencia): da la sensación de que
      la luz cae desde arriba, que es lo que distingue una superficie de un
      rectángulo pintado. */
-  background: linear-gradient(to bottom,
-              rgba(255, 255, 255, 0.90), rgba(255, 255, 255, 0.76));
+  background:
+    linear-gradient(to bottom,
+      rgba(255, 255, 255, 0.97) 0%,
+      rgba(255, 253, 251, 0.92) 55%,
+      rgba(252, 248, 244, 0.88) 100%);
   backdrop-filter: saturate(180%) blur(16px);
   -webkit-backdrop-filter: saturate(180%) blur(16px);
   border: 1px solid var(--borde-fino);
@@ -334,10 +337,12 @@ section { padding: var(--seccion) 0; }
      arriba (la pieza clave), una sombra de contacto muy corta, y una
      difusa que la separa del fondo. */
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.95),
-    inset 0 -1px 0 rgba(20, 24, 31, 0.03),
-    0 1px 2px rgba(20, 24, 31, 0.04),
-    0 10px 28px -14px rgba(20, 24, 31, 0.16);
+    inset 0 1px 0 rgba(255, 255, 255, 1),
+    inset 0 0 0 1px rgba(181, 76, 12, 0.05),
+    inset 0 -2px 4px -2px rgba(20, 24, 31, 0.07),
+    0 1px 2px rgba(20, 24, 31, 0.05),
+    0 6px 14px -8px rgba(20, 24, 31, 0.13),
+    0 20px 44px -20px rgba(20, 24, 31, 0.25);
   transition: box-shadow var(--v-lenta) var(--curva),
               border-color var(--v-lenta) var(--curva);
 }
@@ -346,8 +351,8 @@ section { padding: var(--seccion) 0; }
    y se recorta al radio de la barra. */
 .nav::before {
   content: ""; position: absolute; inset: 0; border-radius: inherit;
-  pointer-events: none; opacity: .035; mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='r'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23r)'/%3E%3C/svg%3E");
+  pointer-events: none; opacity: .09; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='r'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.4' numOctaves='4'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23r)'/%3E%3C/svg%3E");
 }
 .nav-in { position: relative; z-index: 1; }
 /* El contenido arranca justo debajo: sin esto la barra flotante se
@@ -357,10 +362,12 @@ body { padding-top: var(--e-2); }
    canto de luz se mantiene. */
 .nav.alzada {
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.95),
-    inset 0 -1px 0 rgba(20, 24, 31, 0.03),
-    0 1px 2px rgba(20, 24, 31, 0.05),
-    0 18px 40px -18px rgba(20, 24, 31, 0.26);
+    inset 0 1px 0 rgba(255, 255, 255, 1),
+    inset 0 0 0 1px rgba(181, 76, 12, 0.05),
+    inset 0 -2px 4px -2px rgba(20, 24, 31, 0.07),
+    0 1px 2px rgba(20, 24, 31, 0.06),
+    0 10px 20px -10px rgba(20, 24, 31, 0.16),
+    0 30px 60px -24px rgba(20, 24, 31, 0.34);
   border-color: var(--borde);
 }
 /* El relleno izquierdo iguala al gutter del contenido: así el logotipo
@@ -388,6 +395,14 @@ body { padding-top: var(--e-2); }
               background-color var(--v-rapida) var(--curva);
 }
 .nav-links a:hover { color: var(--tinta); background: rgba(20, 24, 31, 0.05); }
+/* Marca la sección en la que estás. Es lo que convierte la barra en algo
+   que responde en vez de un adorno fijo. */
+.nav-links a.aqui { color: var(--tinta); background: var(--acento-luz); }
+.nav-links a.aqui::after {
+  content: ""; position: absolute; left: 50%; bottom: 3px;
+  width: 14px; height: 2px; margin-left: -7px; border-radius: 2px;
+  background: var(--acento);
+}
 .nav-links a:focus-visible { outline: 2px solid var(--acento); outline-offset: 2px; }
 .burger {
   display: none; background: var(--blanco); border: 1px solid var(--borde);

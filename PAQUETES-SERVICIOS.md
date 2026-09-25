@@ -1070,16 +1070,31 @@ la mitad de lo que se vende.
 | Fichero | Origen | Uso |
 |---|---|---|
 | `img/estudio/maya-atardecer-{800,1200}.{webp,jpg}` | Foto propia, embalse al atardecer | Columna derecha de la portada |
-| `video/playa.{mp4,webm}` + `playa-portada.jpg` | Clip propio, playa al atardecer | Banda a sangre bajo la portada |
+| `video/orilla.{mp4,webm}` + `orilla-portada.jpg` | Clip propio 4K, Maya en el agua al atardecer | Banda a sangre bajo la portada |
 
 Criterio: **solo material propio, nunca banco de imágenes**, porque la marca se
 apoya en el «nada inventado». Y nada que proceda de una colaboración pagada de
 Maya: esas piezas son de campaña y se gestionan por MTS23 (cláusula 17 del
 contrato).
 
-Pendiente de calidad: el clip llegó por WhatsApp, que lo recomprimió a 576 px de
-ancho. Se sirve reescalado a 1152 y en pantalla grande se nota blando. Conviene
-reemplazarlo por el fichero original cuando esté a mano.
+Resuelto: el primer clip llegó por WhatsApp recomprimido a 576 px. Los
+originales (3840×2160, HEVC) sustituyen a aquel. Se sirve a 1600×900, 25 fps:
+MP4 a 1,45 MB y WebM a 1,70 MB. El MP4 va primero en el `<source>` porque es
+más pequeño y lo reproduce cualquier navegador real; el WebM solo entra en
+compilaciones sin H.264.
+
+**Peticiones por rango.** El servidor de assets de Workers responde 200 con el
+fichero entero ante una cabecera `Range`, no un 206. Safari, y sobre todo el de
+iOS, pide un rango antes de reproducir y sin 206 no reproduce. Se añade un
+Worker mínimo (`worker/index.js`) que solo se ejecuta para `/video/*`
+(`run_worker_first`) y sirve los tramos. Verificado en producción: rango
+inicial, tramo intermedio, abierto por la derecha, sufijo, y 416 fuera de
+rango.
+
+**Caché.** Durante el desarrollo todo iba con `Cache-Control: no-store`. Con la
+web publicada eso significaba volver a descargar las doce fuentes, las imágenes
+y el vídeo en cada visita. Ahora: HTML `no-cache`, hojas de estilo 5 minutos
+(llevan `?v=` en la URL), y fuentes, imágenes y vídeo un año con `immutable`.
 
 Accesibilidad: el bucle lleva botón de pausa (criterio WCAG 2.2.2) y con
 `prefers-reduced-motion` ni siquiera arranca.

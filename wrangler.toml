@@ -18,7 +18,14 @@ name = "olfatoestudio"
 account_id = "c21d634c54dbb741978cf0efd1135bc8"
 compatibility_date = "2026-08-26"
 
-# Sitio estático puro: no hay código de Worker, solo ficheros.
+# Casi todo el sitio son ficheros servidos directamente. La única excepción
+# es /video/*: el asset server no responde a las peticiones por rango, y sin
+# ellas Safari no reproduce vídeo. `run_worker_first` hace que solo esas rutas
+# pasen por el código; el resto ni lo invoca.
+main = "worker/index.js"
+
 [assets]
 directory = "./estudio-olfato"
 not_found_handling = "404-page"
+binding = "ASSETS"
+run_worker_first = ["/video/*"]
