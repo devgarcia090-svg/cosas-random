@@ -502,7 +502,9 @@ body { padding-top: var(--e-2); }
 .hueco p { font-size: var(--t-base); }
 
 /* ── Paquetes ──────────────────────────────────────────────────── */
-.packs { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--e-5); align-items: start; }
+/* La columna del medio va algo más ancha: el tamaño es la primera señal
+   de jerarquía, antes que el color. */
+.packs { display: grid; grid-template-columns: 1fr 1.08fr 1fr; gap: var(--e-5); align-items: start; }
 .pack {
   background: var(--blanco); border: 1px solid var(--borde);
   border-radius: var(--r-3); padding: var(--e-6) var(--e-5);
@@ -511,59 +513,48 @@ body { padding-top: var(--e-2); }
 }
 .pack:hover { transform: translateY(-5px); box-shadow: var(--sombra-3); }
 /* LA OPCIÓN DESTACADA
-   Antes solo cambiaba el color del borde, y al lado de las otras dos apenas
-   se distinguía. Ahora es un bloque oscuro: la jerarquía se ve de un vistazo
-   desde el otro extremo de la pantalla, sin tener que leer la insignia.
+   Primero solo cambiaba el color del borde y no se distinguía. Luego se probó
+   como bloque oscuro y el efecto fue el contrario del buscado: sobre una
+   página blanca un bloque negro no atrae, pesa — se lee como algo cerrado, y
+   las tarjetas claras de al lado parecen más abiertas.
 
-   Todos los colores de dentro están medidos contra el fondo #14181F: el
-   naranja claro da 7,5:1, los textos van de 8,7:1 a 13,3:1 y el botón blanco
-   17,8:1. El naranja de marca no vale aquí —se queda en 3,4:1— y por eso
-   dentro de esta tarjeta se usa una versión más clara. */
+   Lo que hace que un plan llame es que sobresalga: más ancho que sus vecinos,
+   levantado, con una sombra cálida que lo separa del papel y una cinta de
+   color arriba que se lee desde lejos. El fondo sigue siendo claro, con un
+   rescoldo del acento en el arranque. */
 .pack.destacado {
-  position: relative; overflow: hidden;
-  background: #14181F; border-color: #14181F;
-  box-shadow: 0 1px 2px rgba(20,24,31,.10), 0 20px 44px -22px rgba(20,24,31,.45);
+  position: relative;
+  border-color: var(--acento);
+  background: linear-gradient(to bottom, var(--acento-luz) 0, var(--blanco) 38%);
+  /* La sombra es naranja, no gris: tiñe el papel de alrededor y tira del ojo. */
+  box-shadow:
+    0 2px 6px rgba(20, 24, 31, .06),
+    0 30px 60px -28px rgba(181, 76, 12, .45);
+  transform: translateY(-14px);
+  padding-top: 0; padding-bottom: var(--e-7);
 }
-.pack.destacado > *:not(.pack-marca) { position: relative; z-index: 1; }
 .pack.destacado:hover {
-  box-shadow: 0 1px 2px rgba(20,24,31,.12), 0 30px 60px -26px rgba(20,24,31,.6);
+  transform: translateY(-22px);
+  box-shadow:
+    0 2px 6px rgba(20, 24, 31, .08),
+    0 40px 76px -30px rgba(181, 76, 12, .55);
 }
-.pack.destacado h3,
-.pack.destacado .precio b { color: var(--blanco); }
-.pack.destacado .para { color: rgba(255,255,255,.78); }
-.pack.destacado .precio span,
-.pack.destacado .plazo { color: rgba(255,255,255,.68); }
-.pack.destacado li { color: rgba(255,255,255,.86); }
-.pack.destacado li::before { color: #E8945C; }
-/* El botón pasa a blanco: dentro del bloque oscuro es la acción con más
-   contraste de toda la página, que es justo lo que le corresponde al plan
-   más contratado. */
-.pack.destacado .btn {
-  background: var(--blanco); border-color: var(--blanco); color: var(--tinta);
+/* Cinta superior: pegada al borde de la tarjeta, de ahí los márgenes
+   negativos y el padding-top 0 de arriba. El radio descuenta 1 px para no
+   asomar por fuera del borde. */
+.pack-cinta {
+  display: flex; align-items: center; justify-content: center; gap: var(--e-2);
+  margin: 0 calc(var(--e-5) * -1) var(--e-6);
+  padding: var(--e-3) var(--e-4);
+  background: var(--acento); color: var(--blanco);
+  border-radius: calc(var(--r-3) - 1px) calc(var(--r-3) - 1px) 0 0;
+  font-family: var(--fuente-mono); font-size: var(--t-micro);
+  font-weight: 500; letter-spacing: .08em; text-transform: uppercase;
 }
-.pack.destacado .btn:hover { background: #F1F3F5; border-color: #F1F3F5; }
-.pack.destacado .btn:focus-visible { outline: 2px solid var(--blanco); outline-offset: 2px; }
+.pack-cinta svg { flex-shrink: 0; }
 
-/* El isotipo dentro del bloque, saliéndose por la esquina inferior derecha.
-   Al 7 % sobre oscuro se lee como textura; las listas que pasan por encima
-   siguen dando 13:1 porque el blanco de la marca apenas levanta el fondo. */
-.pack-marca {
-  position: absolute; z-index: 0; pointer-events: none;
-  width: 74%; height: auto; aspect-ratio: 1;
-  /* Ni al fondo ni a la esquina: abajo la tapaba casi entera el botón, que
-     ocupa todo el ancho. Aquí cae en el hueco que dejan las líneas cortas de
-     la lista y se reconoce el isotipo. */
-  right: -22%; top: 26%; bottom: auto;
-  opacity: .10; filter: blur(1px);
-}
-.pack-marca svg { display: block; }
 .pack-top { display: flex; align-items: center; justify-content: space-between; gap: var(--e-3); margin-bottom: var(--e-3); min-height: 1.7rem; }
 .pack-top h3 { margin: 0; }
-.insignia {
-  background: var(--acento-luz); color: var(--acento-osc);
-  font-size: var(--t-micro); font-weight: 600; padding: var(--e-1) var(--e-2);
-  border-radius: var(--r-4); white-space: nowrap;
-}
 .pack .para { font-size: var(--t-base); color: var(--tinta-2); min-height: 3.6rem; }
 .precio { margin: var(--e-5) 0 var(--e-5); }
 .precio b { font-size: 2.4rem; font-weight: 600; letter-spacing: -0.035em; line-height: 1; }
@@ -750,6 +741,9 @@ body { padding-top: var(--e-2); }
 /* ── Adaptación ────────────────────────────────────────────────── */
 @media (max-width: 1000px) {
   .packs, .rejilla-3 { grid-template-columns: 1fr; max-width: 560px; }
+  /* Apiladas, levantar la destacada solo dejaría un hueco raro entre ella y
+     la anterior: la cinta y la sombra ya la distinguen de sobra. */
+  .pack.destacado, .pack.destacado:hover { transform: none; }
   .pack .para { min-height: 0; }
   .rejilla-4 { grid-template-columns: 1fr 1fr; }
   .cierre { grid-template-columns: 1fr; }
