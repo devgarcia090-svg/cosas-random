@@ -141,7 +141,7 @@
 <link rel="preload" href="/fuentes/familjen-grotesk-600-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fuentes/familjen-grotesk-400-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/fuentes.css?v=1">
-<link rel="stylesheet" href="/estilo.css?v=22">
+<link rel="stylesheet" href="/estilo.css?v=23">
 </head>
 <body>
 <a class="saltar" href="#principal">Saltar al contenido</a>
@@ -187,15 +187,34 @@
 <section class="portada" id="principal">
   <div class="aurora" aria-hidden="true"><span class="a1"></span><span class="a2"></span></div>
   <div class="caja">
-    <h1>Vídeo y web para negocios del sector mascotas.</h1>
-    <p class="grande">Construimos una audiencia de 41.000 personas desde cero, sin gastar
-    un euro en publicidad, y la web que la convierte en clientes. Hacemos lo mismo para tu
-    clínica, tu tienda o tu centro de adiestramiento.</p>
-    <div class="acciones">
-      <a href="#contacto" class="btn btn-principal">Pedir presupuesto</a>
-      <a href="#precios" class="btn btn-borde">Ver precios</a>
+    <div class="portada-rejilla">
+      <div class="portada-texto">
+        <h1>Vídeo y web para negocios del sector mascotas.</h1>
+        <p class="grande">Construimos una audiencia de 41.000 personas desde cero, sin gastar
+        un euro en publicidad, y la web que la convierte en clientes. Hacemos lo mismo para tu
+        clínica, tu tienda o tu centro de adiestramiento.</p>
+        <div class="acciones">
+          <a href="#contacto" class="btn btn-principal">Pedir presupuesto</a>
+          <a href="#precios" class="btn btn-borde">Ver precios</a>
+        </div>
+        <p class="aviso">Llamada de 20 minutos, gratis y sin compromiso.</p>
+      </div>
+
+      <figure class="portada-foto">
+        <picture>
+          <source type="image/webp" sizes="(max-width: 900px) 92vw, 34vw"
+                  srcset="/img/estudio/maya-atardecer-800.webp 800w,
+                          /img/estudio/maya-atardecer-1200.webp 1200w">
+          <img src="/img/estudio/maya-atardecer-1200.jpg"
+               srcset="/img/estudio/maya-atardecer-800.jpg 800w,
+                       /img/estudio/maya-atardecer-1200.jpg 1200w"
+               sizes="(max-width: 900px) 92vw, 34vw"
+               width="1200" height="1600" fetchpriority="high" decoding="async"
+               alt="Daniel García con Maya, su rottweiler, al atardecer sobre una roca frente a un embalse en Murcia">
+        </picture>
+        <figcaption>Maya y yo. La marca con la que aprendimos todo esto.</figcaption>
+      </figure>
     </div>
-    <p class="aviso">Llamada de 20 minutos, gratis y sin compromiso.</p>
 
     <div class="cifras">
       <div><b class="num">41.000</b><span>Seguidores construidos desde cero</span></div>
@@ -204,6 +223,27 @@
       <div><b class="num">0 €</b><span>En publicidad pagada</span></div>
     </div>
   </div>
+</section>
+
+<!-- BANDA DE VIDEO -->
+<section class="banda-video" aria-labelledby="banda-titulo">
+  <video id="bandaVideo" class="banda-media" playsinline muted loop autoplay
+         preload="metadata" poster="/video/playa-portada.jpg"
+         aria-label="Plano de Daniel y Maya jugando en la orilla al atardecer">
+    <source src="/video/playa.webm" type="video/webm">
+    <source src="/video/playa.mp4" type="video/mp4">
+  </video>
+  <div class="banda-velo" aria-hidden="true"></div>
+  <div class="banda-texto">
+    <span class="eyebrow">Grabado por nosotros</span>
+    <h2 id="banda-titulo">Esto es lo que sabemos hacer con una cámara.</h2>
+    <p>Sin equipo de rodaje, sin actores y sin banco de imágenes. Una persona,
+    una cámara y el animal de verdad. Lo mismo que grabamos para tu negocio.</p>
+  </div>
+  <button type="button" id="bandaPausa" class="banda-pausa" aria-pressed="false">
+    <span class="banda-pausa-icono" aria-hidden="true"></span>
+    <span id="bandaPausaTexto">Pausar el vídeo</span>
+  </button>
 </section>
 
 <!-- SERVICIOS -->
@@ -811,6 +851,23 @@
     revs.forEach(function (el) { io.observe(el); });
   } else {
     revs.forEach(function (el) { el.classList.add('visto'); });
+  }
+
+  // Vídeo de la banda: se puede detener (WCAG 2.2.2) y, si el sistema pide
+  // movimiento reducido, ni siquiera arranca: se queda en su fotograma.
+  var vid = document.getElementById('bandaVideo');
+  var pausa = document.getElementById('bandaPausa');
+  if (vid && pausa) {
+    var texto = document.getElementById('bandaPausaTexto');
+    function pintar(detenido) {
+      pausa.setAttribute('aria-pressed', detenido ? 'true' : 'false');
+      pausa.classList.toggle('detenido', detenido);
+      texto.textContent = detenido ? 'Reanudar el vídeo' : 'Pausar el vídeo';
+    }
+    if (reduce) { vid.autoplay = false; vid.pause(); pintar(true); }
+    pausa.addEventListener('click', function () {
+      if (vid.paused) { vid.play(); pintar(false); } else { vid.pause(); pintar(true); }
+    });
   }
 
   // Sombra en la barra de navegación al despegarse del borde superior

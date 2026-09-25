@@ -189,6 +189,97 @@ section { padding: var(--seccion) 0; }
   from { transform: translate3d(0, 0, 0) scale(1.08); }
   to   { transform: translate3d(6vw, -6vw, 0) scale(.92); }
 }
+/* PORTADA A DOS COLUMNAS
+   El texto manda (1,15fr) y la foto acompaña (0,85fr). La foto es vertical,
+   que es justo lo que pedía el hueco que quedaba a la derecha. */
+.portada-rejilla {
+  display: grid; grid-template-columns: 1.15fr 0.85fr;
+  gap: clamp(var(--e-6), 5vw, var(--e-9));
+  align-items: center;
+}
+.portada-foto { margin: 0; position: relative; }
+.portada-foto img {
+  display: block; width: 100%; height: auto;
+  border-radius: var(--r-4);
+  /* Mismo relieve que la barra: canto de luz arriba y sombra en dos capas.
+     Sin esto la foto parece pegada encima en vez de apoyada. */
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.4),
+    0 2px 4px rgba(20, 24, 31, 0.05),
+    0 24px 48px -24px rgba(20, 24, 31, 0.35);
+}
+.portada-foto figcaption {
+  margin-top: var(--e-3); font-size: var(--t-menor); color: var(--tinta-2);
+}
+@media (max-width: 900px) {
+  .portada-rejilla { grid-template-columns: 1fr; gap: var(--e-7); }
+  /* En móvil la foto va debajo del texto: primero el argumento, luego la
+     prueba. Al revés obligaría a hacer scroll para leer de qué va esto. */
+  .portada-foto { order: 2; }
+}
+
+/* BANDA DE VÍDEO
+   A sangre, sin caja: es la única sección que rompe el ancho del contenido,
+   y por eso funciona como pausa entre la portada y los servicios. */
+.banda-video {
+  position: relative; overflow: hidden;
+  min-height: clamp(380px, 52vw, 620px);
+  display: flex; align-items: flex-end;
+  background: #14181F;
+}
+.banda-media {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; z-index: 0;
+}
+/* Velo en degradado: sube el contraste del texto sobre un plano que cambia
+   fotograma a fotograma. Sin él no hay forma de garantizar legibilidad. */
+.banda-velo {
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(to top,
+              rgba(10, 13, 17, 0.88) 0%,
+              rgba(10, 13, 17, 0.55) 38%,
+              rgba(10, 13, 17, 0.12) 72%,
+              rgba(10, 13, 17, 0.05) 100%);
+}
+.banda-texto {
+  position: relative; z-index: 2;
+  max-width: var(--caja); margin: 0 auto;
+  padding: var(--seccion) var(--gutter) clamp(var(--e-7), 6vw, var(--e-9));
+  width: 100%;
+}
+.banda-texto .eyebrow { color: #F3B98A; }
+.banda-texto h2 {
+  color: var(--blanco); max-width: 20ch; margin-top: var(--e-3);
+}
+.banda-texto p {
+  color: rgba(255, 255, 255, 0.82); max-width: 54ch;
+  margin-top: var(--e-4); font-size: var(--t-cuerpo);
+}
+.banda-pausa {
+  position: absolute; z-index: 3; right: var(--gutter); bottom: var(--e-5);
+  display: inline-flex; align-items: center; gap: var(--e-2);
+  padding: var(--e-2) var(--e-3);
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.22); border-radius: var(--r-4);
+  color: var(--blanco); font-family: inherit; font-size: var(--t-micro);
+  font-weight: 500; cursor: pointer;
+  transition: background-color var(--v-rapida) var(--curva);
+}
+.banda-pausa:hover { background: rgba(255, 255, 255, 0.2); }
+.banda-pausa:focus-visible { outline: 2px solid var(--blanco); outline-offset: 2px; }
+/* Dos barras (pausa) que pasan a un triángulo (reproducir) sin cargar
+   ningún icono: todo son bordes y fondos. */
+.banda-pausa-icono {
+  width: 9px; height: 11px; flex-shrink: 0;
+  border-left: 3px solid currentColor; border-right: 3px solid currentColor;
+}
+.banda-pausa.detenido .banda-pausa-icono {
+  width: 0; height: 0; border-right: none;
+  border-left: 9px solid currentColor;
+  border-top: 6px solid transparent; border-bottom: 6px solid transparent;
+}
+
 /* La portada pasa a ser el contexto de posición, y su contenido se
    coloca por encima de la aurora. */
 .portada { position: relative; }
@@ -211,18 +302,48 @@ section { padding: var(--seccion) 0; }
   max-width: var(--caja);
   margin: var(--e-3) auto 0;
   width: calc(100% - var(--gutter) * 2);
-  background: rgba(255, 255, 255, 0.82);
+  /* Degradado vertical mínimo (4 % de diferencia): da la sensación de que
+     la luz cae desde arriba, que es lo que distingue una superficie de un
+     rectángulo pintado. */
+  background: linear-gradient(to bottom,
+              rgba(255, 255, 255, 0.90), rgba(255, 255, 255, 0.76));
   backdrop-filter: saturate(180%) blur(16px);
   -webkit-backdrop-filter: saturate(180%) blur(16px);
   border: 1px solid var(--borde-fino);
   border-radius: var(--r-4);
+  /* El relieve son tres capas, no una sombra: el canto de luz interior
+     arriba (la pieza clave), una sombra de contacto muy corta, y una
+     difusa que la separa del fondo. */
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -1px 0 rgba(20, 24, 31, 0.03),
+    0 1px 2px rgba(20, 24, 31, 0.04),
+    0 10px 28px -14px rgba(20, 24, 31, 0.16);
   transition: box-shadow var(--v-lenta) var(--curva),
               border-color var(--v-lenta) var(--curva);
 }
+/* Grano: turbulencia SVG al 3,5 %. Es lo que da textura táctil y evita el
+   plano digital perfecto. Va en una capa aparte para no teñir el contenido,
+   y se recorta al radio de la barra. */
+.nav::before {
+  content: ""; position: absolute; inset: 0; border-radius: inherit;
+  pointer-events: none; opacity: .035; mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='r'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23r)'/%3E%3C/svg%3E");
+}
+.nav-in { position: relative; z-index: 1; }
 /* El contenido arranca justo debajo: sin esto la barra flotante se
    solaparía con la portada al cargar. */
 body { padding-top: var(--e-2); }
-.nav.alzada { box-shadow: var(--sombra-1); border-color: var(--borde); }
+/* Al hacer scroll la barra "despega": la sombra difusa crece y baja, el
+   canto de luz se mantiene. */
+.nav.alzada {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -1px 0 rgba(20, 24, 31, 0.03),
+    0 1px 2px rgba(20, 24, 31, 0.05),
+    0 18px 40px -18px rgba(20, 24, 31, 0.26);
+  border-color: var(--borde);
+}
 /* El relleno izquierdo iguala al gutter del contenido: así el logotipo
    cae exactamente sobre la vertical del titular de abajo. Con un valor
    distinto la barra queda 16 px desplazada y se nota. */
@@ -236,12 +357,19 @@ body { padding-top: var(--e-2); }
   font-weight: 600; font-size: var(--t-cuerpo); letter-spacing: -0.018em;
 }
 .logo svg { color: var(--acento); flex-shrink: 0; }
-.nav-links { display: flex; gap: var(--e-5); list-style: none; }
+.nav-links { display: flex; list-style: none; }
+.nav-links { align-items: center; gap: var(--e-1); }
 .nav-links a {
+  position: relative; display: block;
+  padding: var(--e-2) var(--e-3);
+  border-radius: var(--r-2);
   color: var(--tinta-2); text-decoration: none; font-size: var(--t-base);
-  font-weight: 500; transition: color .15s;
+  font-weight: 500;
+  transition: color var(--v-rapida) var(--curva),
+              background-color var(--v-rapida) var(--curva);
 }
-.nav-links a:hover { color: var(--tinta); }
+.nav-links a:hover { color: var(--tinta); background: rgba(20, 24, 31, 0.05); }
+.nav-links a:focus-visible { outline: 2px solid var(--acento); outline-offset: 2px; }
 .burger {
   display: none; background: var(--blanco); border: 1px solid var(--borde);
   border-radius: var(--r-2); padding: var(--e-2) var(--e-3); cursor: pointer;
