@@ -153,6 +153,26 @@ main > section:last-of-type { padding-bottom: var(--seccion); }
 .cabecera h2 { max-width: 20ch; }
 .cabecera p { margin-top: var(--e-4); }
 
+/* MARCA DE AGUA DE SECCIÓN
+   Solo sobre fondo tintado. Sobre blanco ya se probó y no funciona: sin una
+   superficie que la sostenga, una marca de agua al 4 % se lee como una
+   mancha. Sobre el gris de --superficie sí tiene suelo.
+
+   Sale por el borde derecho a propósito: centrada y entera parecería un
+   sello de documento. */
+.marca-seccion {
+  position: absolute; z-index: 0; pointer-events: none;
+  width: clamp(420px, 48vw, 780px); height: auto; aspect-ratio: 1;
+  right: -10vw; top: 50%; transform: translateY(-50%);
+  opacity: .055; filter: blur(2px);
+}
+.marca-seccion svg { display: block; }
+.gris { position: relative; overflow: hidden; }
+.gris > .caja { position: relative; z-index: 1; }
+@media (max-width: 900px) {
+  .marca-seccion { right: -32vw; opacity: .04; }
+}
+
 /* ── Barra de navegación ────────────────────────────────────────── */
 
 /* ── Aurora de portada ──────────────────────────────────────────────
@@ -334,13 +354,17 @@ main > section:last-of-type { padding-bottom: var(--seccion); }
   /* Degradado vertical mínimo (4 % de diferencia): da la sensación de que
      la luz cae desde arriba, que es lo que distingue una superficie de un
      rectángulo pintado. */
+  /* Más translúcida de lo que era (0,97-0,88): sobre la banda de vídeo
+     tapaba un plano que merece verse. El desenfoque sube de 16 a 22 px para
+     compensar: con menos opacidad y poco desenfoque deja de leerse como
+     cristal y pasa a parecer un cristal sucio. */
   background:
     linear-gradient(to bottom,
-      rgba(255, 255, 255, 0.97) 0%,
-      rgba(255, 253, 251, 0.92) 55%,
-      rgba(252, 248, 244, 0.88) 100%);
-  backdrop-filter: saturate(180%) blur(16px);
-  -webkit-backdrop-filter: saturate(180%) blur(16px);
+      rgba(255, 255, 255, 0.82) 0%,
+      rgba(255, 253, 251, 0.76) 55%,
+      rgba(252, 248, 244, 0.72) 100%);
+  backdrop-filter: saturate(180%) blur(22px);
+  -webkit-backdrop-filter: saturate(180%) blur(22px);
   border: 1px solid var(--borde-fino);
   border-radius: var(--r-4);
   /* El relieve son tres capas, no una sombra: el canto de luz interior
@@ -399,7 +423,12 @@ body { padding-top: var(--e-2); }
   position: relative; display: block;
   padding: var(--e-2) var(--e-3);
   border-radius: var(--r-2);
-  color: var(--tinta-2); text-decoration: none; font-size: var(--t-base);
+  /* Un punto más oscuro que --tinta-2, y solo aquí. Al subir la
+     transparencia de la barra, sobre el fotograma más desfavorable de la
+     banda de vídeo los enlaces bajaban a 4,49:1, justo por debajo del
+     mínimo. Medido sobre el render, no estimado: con este tono suben a
+     5,56:1 sobre ese mismo fondo y a 7,91:1 sobre blanco. */
+  color: #49525F; text-decoration: none; font-size: var(--t-base);
   font-weight: 500;
   transition: color var(--v-rapida) var(--curva),
               background-color var(--v-rapida) var(--curva);
@@ -707,12 +736,20 @@ body { padding-top: var(--e-2); }
 }
 
 /* ── Barra fija en móvil ───────────────────────────────────────── */
+/* Barra fija de móvil.
+   Aparecía nada más entrar, y en la primera pantalla ya está el botón de
+   presupuesto de la portada: se pedía dos veces lo mismo a la vez. Esta barra
+   existe para cuando el botón principal ya no está a mano, así que no asoma
+   hasta que ese botón sale de pantalla. */
 .fija {
   display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 60;
   background: rgba(255,255,255,0.96); backdrop-filter: blur(12px);
   border-top: 1px solid var(--borde); padding: 0.7rem var(--gutter);
   align-items: center; gap: var(--e-4);
+  transform: translateY(100%); opacity: 0; pointer-events: none;
+  transition: transform var(--v-lenta) var(--curva), opacity var(--v-lenta) var(--curva);
 }
+.fija.asoma { transform: none; opacity: 1; pointer-events: auto; }
 .fija span { font-size: 0.92rem; color: var(--tinta-2); line-height: 1.3; }
 .fija .btn { margin-left: auto; white-space: nowrap; padding: var(--e-3) var(--e-4); }
 
