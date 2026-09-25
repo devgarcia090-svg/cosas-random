@@ -223,14 +223,10 @@ section { padding: var(--seccion) 0; }
    y por eso funciona como pausa entre la portada y los servicios. */
 .banda-video {
   position: relative; overflow: hidden;
-  min-height: clamp(380px, 52vw, 620px);
   display: flex; align-items: flex-end;
   background: #14181F;
 }
-.banda-media {
-  position: absolute; inset: 0; width: 100%; height: 100%;
-  object-fit: cover; z-index: 0;
-}
+.banda-media { display: block; z-index: 0; }
 /* Velo en degradado: sube el contraste del texto sobre un plano que cambia
    fotograma a fotograma. Sin él no hay forma de garantizar legibilidad. */
 .banda-velo {
@@ -279,6 +275,29 @@ section { padding: var(--seccion) 0; }
   border-left: 9px solid currentColor;
   border-top: 6px solid transparent; border-bottom: 6px solid transparent;
 }
+
+/* A partir de 1000 px el texto va encima del plano.
+   La altura sigue al ancho (40vw) en lugar de quedarse fija: el clip es
+   2,13:1 y las siluetas ocupan del 10 % al 92 % de su altura, así que con
+   una altura fija, cuanto más ancha la pantalla más recorta object-fit y
+   antes se quedaban fuera los pies y la cabeza. Con 40vw el recorte se
+   mantiene por debajo del aire que tienen por arriba y por abajo. */
+@media (min-width: 1000px) {
+  .banda-video { height: min(40vw, 900px); }
+  .banda-media { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+}
+/* Por debajo de 1000 px no hay altura suficiente para superponer el texto
+   sin recortar el plano por los lados: el vídeo pasa arriba con su
+   proporción intacta y el texto debajo. */
+@media (max-width: 999px) {
+  .banda-video { flex-direction: column; }
+  .banda-media { position: static; width: 100%; height: auto; aspect-ratio: 1152 / 540; }
+  .banda-velo { display: none; }
+  .banda-texto { padding-top: var(--e-7); }
+  /* El botón se queda donde lo pone la regla base, abajo a la derecha:
+     arriba, sobre el plano, chocaba con la barra de navegación adherida. */
+}
+
 
 /* La portada pasa a ser el contexto de posición, y su contenido se
    coloca por encima de la aurora. */
@@ -406,7 +425,10 @@ body { padding-top: var(--e-2); }
 .aviso { font-size: var(--t-menor); color: var(--tinta-2); margin-top: var(--e-4); }
 
 /* ── Portada ────────────────────────────────────────────────────── */
-.portada { padding-top: clamp(2.5rem, 4.6vw, 4rem); padding-bottom: 0; }
+/* La portada llevaba padding-bottom 0 porque debajo venia una seccion con
+   filete superior que ya separaba. Ahora debajo hay una banda a sangre, y
+   sin aire las cifras quedaban pegadas al borde del video. */
+.portada { padding-top: clamp(2.5rem, 4.6vw, 4rem); padding-bottom: var(--seccion); }
 /* 17ch con el cuerpo nuevo llena la caja de 1120px en escritorio;
    con 24ch el titular se quedaba en 720px y sobraba medio contenedor. */
 .portada h1 { max-width: 17ch; }
