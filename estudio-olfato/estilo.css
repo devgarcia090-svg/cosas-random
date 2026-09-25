@@ -299,32 +299,6 @@ section { padding: var(--seccion) 0; }
 }
 
 
-/* MARCA DE AGUA
-   El isotipo a gran tamaño detrás de los precios. Dos límites que no se
-   tocan: opacidad del 4 %, para que no baje el contraste de ninguna cifra
-   ni de ningún texto de las tarjetas, y desenfoque suficiente para que se
-   lea como atmósfera y no como un logotipo mal colocado. Sale por el borde
-   derecho a propósito: centrado y entero parecería una marca de agua de
-   documento, que es justo lo que no queremos. */
-#precios { position: relative; overflow: hidden; }
-#precios > .caja { position: relative; z-index: 1; }
-.marca-agua {
-  position: absolute; z-index: 0; pointer-events: none;
-  width: clamp(460px, 54vw, 880px); height: clamp(460px, 54vw, 880px);
-  /* Arriba a la derecha, no en el centro: ahí está el hueco que deja el
-     titular, y abajo lo taparían las tarjetas. Se sale por dos bordes para
-     que se lea como un recorte grande y no como un sello centrado. */
-  right: -12vw; top: -14%;
-  opacity: .05; filter: blur(2px);
-}
-.marca-agua svg { display: block; }
-@media (max-width: 900px) {
-  /* En móvil las tarjetas se apilan y ocupan todo el ancho: la marca queda
-     justo debajo del texto en vez de a un lado, así que se reduce y se
-     aparta más. */
-  .marca-agua { right: -28vw; opacity: .03; }
-}
-
 /* La portada pasa a ser el contexto de posición, y su contenido se
    coloca por encima de la aurora. */
 .portada { position: relative; }
@@ -536,8 +510,53 @@ body { padding-top: var(--e-2); }
   transition: transform .2s ease, box-shadow .2s ease;
 }
 .pack:hover { transform: translateY(-5px); box-shadow: var(--sombra-3); }
-.pack.destacado { border-color: var(--acento); box-shadow: 0 0 0 1px var(--acento); }
-.pack.destacado:hover { box-shadow: 0 0 0 1px var(--acento), 0 24px 40px -20px rgba(181,76,12,.32); }
+/* LA OPCIÓN DESTACADA
+   Antes solo cambiaba el color del borde, y al lado de las otras dos apenas
+   se distinguía. Ahora es un bloque oscuro: la jerarquía se ve de un vistazo
+   desde el otro extremo de la pantalla, sin tener que leer la insignia.
+
+   Todos los colores de dentro están medidos contra el fondo #14181F: el
+   naranja claro da 7,5:1, los textos van de 8,7:1 a 13,3:1 y el botón blanco
+   17,8:1. El naranja de marca no vale aquí —se queda en 3,4:1— y por eso
+   dentro de esta tarjeta se usa una versión más clara. */
+.pack.destacado {
+  position: relative; overflow: hidden;
+  background: #14181F; border-color: #14181F;
+  box-shadow: 0 1px 2px rgba(20,24,31,.10), 0 20px 44px -22px rgba(20,24,31,.45);
+}
+.pack.destacado > *:not(.pack-marca) { position: relative; z-index: 1; }
+.pack.destacado:hover {
+  box-shadow: 0 1px 2px rgba(20,24,31,.12), 0 30px 60px -26px rgba(20,24,31,.6);
+}
+.pack.destacado h3,
+.pack.destacado .precio b { color: var(--blanco); }
+.pack.destacado .para { color: rgba(255,255,255,.78); }
+.pack.destacado .precio span,
+.pack.destacado .plazo { color: rgba(255,255,255,.68); }
+.pack.destacado li { color: rgba(255,255,255,.86); }
+.pack.destacado li::before { color: #E8945C; }
+/* El botón pasa a blanco: dentro del bloque oscuro es la acción con más
+   contraste de toda la página, que es justo lo que le corresponde al plan
+   más contratado. */
+.pack.destacado .btn {
+  background: var(--blanco); border-color: var(--blanco); color: var(--tinta);
+}
+.pack.destacado .btn:hover { background: #F1F3F5; border-color: #F1F3F5; }
+.pack.destacado .btn:focus-visible { outline: 2px solid var(--blanco); outline-offset: 2px; }
+
+/* El isotipo dentro del bloque, saliéndose por la esquina inferior derecha.
+   Al 7 % sobre oscuro se lee como textura; las listas que pasan por encima
+   siguen dando 13:1 porque el blanco de la marca apenas levanta el fondo. */
+.pack-marca {
+  position: absolute; z-index: 0; pointer-events: none;
+  width: 74%; height: auto; aspect-ratio: 1;
+  /* Ni al fondo ni a la esquina: abajo la tapaba casi entera el botón, que
+     ocupa todo el ancho. Aquí cae en el hueco que dejan las líneas cortas de
+     la lista y se reconoce el isotipo. */
+  right: -22%; top: 26%; bottom: auto;
+  opacity: .10; filter: blur(1px);
+}
+.pack-marca svg { display: block; }
 .pack-top { display: flex; align-items: center; justify-content: space-between; gap: var(--e-3); margin-bottom: var(--e-3); min-height: 1.7rem; }
 .pack-top h3 { margin: 0; }
 .insignia {
