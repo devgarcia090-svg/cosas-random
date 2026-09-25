@@ -144,16 +144,90 @@ section { padding: var(--seccion) 0; }
 .cabecera p { margin-top: var(--e-4); }
 
 /* ── Barra de navegación ────────────────────────────────────────── */
-.nav {
-  position: sticky; top: 0; z-index: 50;
-  background: rgba(255,255,255,0.86);
-  backdrop-filter: saturate(180%) blur(14px);
-  border-bottom: 1px solid var(--borde-fino);
-  transition: box-shadow .25s ease;
+
+/* ── Aurora de portada ──────────────────────────────────────────────
+   El único elemento decorativo de toda la web, y está aquí por dos
+   razones concretas: la mitad derecha de la portada quedaba vacía, y la
+   única alternativa era una foto de stock, que rompería el «nada
+   inventado» sobre el que se sostiene la marca. Esto es color generado,
+   no material ajeno.
+
+   Cómo está hecho: dos manchas radiales del naranja de marca a muy baja
+   opacidad, desenfocadas y en movimiento lento y desacompasado (38 s y
+   47 s, sin múltiplo común), de modo que nunca repiten la misma
+   composición. Va detrás del texto y no lo toca: aria-hidden y
+   pointer-events none.
+
+   Límites que se respetan: opacidad máxima del 9 %, así que nunca
+   compite con el contenido ni baja el contraste del texto; y con
+   prefers-reduced-motion se queda quieta, no desaparece. */
+.aurora {
+  position: absolute; inset: 0; overflow: hidden; pointer-events: none;
+  z-index: 0;
 }
-.nav.alzada { box-shadow: var(--sombra-1); }
+.aurora span {
+  position: absolute; display: block; border-radius: var(--r-redondo);
+  filter: blur(90px); opacity: .09;
+  background: radial-gradient(circle at 50% 50%, var(--acento) 0%, transparent 70%);
+  will-change: transform;
+}
+.aurora .a1 {
+  width: 46vw; height: 46vw; max-width: 720px; max-height: 720px;
+  right: -6vw; top: -14vw;
+  animation: deriva-1 38s ease-in-out infinite alternate;
+}
+.aurora .a2 {
+  width: 34vw; height: 34vw; max-width: 520px; max-height: 520px;
+  right: 14vw; top: 16vw; opacity: .07;
+  animation: deriva-2 47s ease-in-out infinite alternate;
+}
+@keyframes deriva-1 {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to   { transform: translate3d(-7vw, 5vw, 0) scale(1.14); }
+}
+@keyframes deriva-2 {
+  from { transform: translate3d(0, 0, 0) scale(1.08); }
+  to   { transform: translate3d(6vw, -6vw, 0) scale(.92); }
+}
+/* La portada pasa a ser el contexto de posición, y su contenido se
+   coloca por encima de la aurora. */
+.portada { position: relative; }
+.portada .caja { position: relative; z-index: 1; }
+
+/* ── Barra de navegación flotante ───────────────────────────────────
+   Antes era una barra adherida a ancho completo, pegada al borde y con
+   filete inferior. Ahora flota: se despega del borde, se redondea y se
+   apoya sobre el contenido.
+
+   El fondo es blanco translúcido con desenfoque detrás, no opaco: al
+   pasar contenido por debajo se intuye el movimiento y la barra se lee
+   como una capa, que es lo que justifica que flote. El filete inferior
+   desaparece porque ya no separa dos zonas: ahora hay borde alrededor.
+
+   La sombra solo aparece al hacer scroll (clase .alzada), no en reposo:
+   arriba del todo no hay nada debajo que justifique elevarla. */
+.nav {
+  position: sticky; top: var(--e-3); z-index: 50;
+  max-width: var(--caja);
+  margin: var(--e-3) auto 0;
+  width: calc(100% - var(--gutter) * 2);
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: saturate(180%) blur(16px);
+  -webkit-backdrop-filter: saturate(180%) blur(16px);
+  border: 1px solid var(--borde-fino);
+  border-radius: var(--r-4);
+  transition: box-shadow var(--v-lenta) var(--curva),
+              border-color var(--v-lenta) var(--curva);
+}
+/* El contenido arranca justo debajo: sin esto la barra flotante se
+   solaparía con la portada al cargar. */
+body { padding-top: var(--e-2); }
+.nav.alzada { box-shadow: var(--sombra-1); border-color: var(--borde); }
+/* El relleno izquierdo iguala al gutter del contenido: así el logotipo
+   cae exactamente sobre la vertical del titular de abajo. Con un valor
+   distinto la barra queda 16 px desplazada y se nota. */
 .nav-in {
-  max-width: var(--caja); margin: 0 auto; padding: 0.8rem var(--gutter);
+  padding: var(--e-3) var(--e-3) var(--e-3) var(--gutter);
   display: flex; align-items: center; gap: var(--e-5);
 }
 .logo {
@@ -173,9 +247,13 @@ section { padding: var(--seccion) 0; }
   border-radius: var(--r-2); padding: var(--e-2) var(--e-3); cursor: pointer;
   font-family: inherit; font-size: var(--t-base); font-weight: 500; color: var(--tinta);
 }
-.nav-movil { display: none; border-top: 1px solid var(--borde-fino); background: var(--blanco); }
+.nav-movil {
+  display: none; border-top: 1px solid var(--borde-fino);
+  background: var(--blanco);
+  border-radius: 0 0 var(--r-4) var(--r-4);
+}
 .nav-movil.abierto { display: block; }
-.nav-movil ul { list-style: none; padding: 0.35rem var(--gutter) 1.1rem; }
+.nav-movil ul { list-style: none; padding: var(--e-1) var(--e-5) var(--e-4); }
 .nav-movil a {
   display: block; padding: var(--e-3) 0; color: var(--tinta); text-decoration: none;
   font-size: var(--t-cuerpo); font-weight: 500; border-bottom: 1px solid var(--borde-fino);
@@ -447,6 +525,7 @@ section { padding: var(--seccion) 0; }
 .faq > .rev:nth-child(6) { transition-delay: .27s; }
 
 @media (prefers-reduced-motion: reduce) {
+  .aurora span { animation: none; }
   .rev { opacity: 1; transform: none; transition: none; }
   html { scroll-behavior: auto; }
   .btn, .btn:active, .btn-principal:hover, .btn-borde:hover,
