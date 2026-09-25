@@ -141,7 +141,7 @@
 <link rel="preload" href="/fuentes/familjen-grotesk-600-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fuentes/familjen-grotesk-400-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/fuentes.css?v=1">
-<link rel="stylesheet" href="/estilo.css?v=27">
+<link rel="stylesheet" href="/estilo.css?v=29">
 </head>
 <body>
 <a class="saltar" href="#principal">Saltar al contenido</a>
@@ -459,6 +459,19 @@
 
 <!-- PRECIOS -->
 <section id="precios">
+  <!-- Marca de agua: el propio isotipo a gran tamaño, desenfocado y al 4 %.
+       El id del mask es distinto del de la barra y el pie: repetirlo haría
+       que los tres recortaran contra la misma definición. -->
+  <div class="marca-agua" aria-hidden="true">
+    <svg viewBox="0 0 64 64" width="100%" height="100%" focusable="false">
+      <mask id="aguaT"><rect width="64" height="64" fill="#000"/>
+        <path d="M12.5 20.5C14.5 16 22 13.5 32 13.5s17.5 2.5 19.5 7c2.5 5.5 1.5 12-2.5 17.5-4 5.5-10 9-17 9s-13-3.5-17-9c-4-5.5-5-12-2.5-17.5Z" fill="#fff"/>
+        <path d="M24.5 26c-4.2 1.6-6.3 4.7-4.7 8.9" stroke="#000" stroke-width="5.6" stroke-linecap="round" fill="none"/>
+        <path d="M39.5 26c4.2 1.6 6.3 4.7 4.7 8.9" stroke="#000" stroke-width="5.6" stroke-linecap="round" fill="none"/>
+      </mask>
+      <rect width="64" height="64" fill="#B54C0C" mask="url(#aguaT)"/>
+    </svg>
+  </div>
   <div class="caja">
     <div class="cabecera">
       <span class="eyebrow">Precios</span>

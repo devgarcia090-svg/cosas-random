@@ -299,6 +299,32 @@ section { padding: var(--seccion) 0; }
 }
 
 
+/* MARCA DE AGUA
+   El isotipo a gran tamaño detrás de los precios. Dos límites que no se
+   tocan: opacidad del 4 %, para que no baje el contraste de ninguna cifra
+   ni de ningún texto de las tarjetas, y desenfoque suficiente para que se
+   lea como atmósfera y no como un logotipo mal colocado. Sale por el borde
+   derecho a propósito: centrado y entero parecería una marca de agua de
+   documento, que es justo lo que no queremos. */
+#precios { position: relative; overflow: hidden; }
+#precios > .caja { position: relative; z-index: 1; }
+.marca-agua {
+  position: absolute; z-index: 0; pointer-events: none;
+  width: clamp(460px, 54vw, 880px); height: clamp(460px, 54vw, 880px);
+  /* Arriba a la derecha, no en el centro: ahí está el hueco que deja el
+     titular, y abajo lo taparían las tarjetas. Se sale por dos bordes para
+     que se lea como un recorte grande y no como un sello centrado. */
+  right: -12vw; top: -14%;
+  opacity: .05; filter: blur(2px);
+}
+.marca-agua svg { display: block; }
+@media (max-width: 900px) {
+  /* En móvil las tarjetas se apilan y ocupan todo el ancho: la marca queda
+     justo debajo del texto en vez de a un lado, así que se reduce y se
+     aparta más. */
+  .marca-agua { right: -28vw; opacity: .03; }
+}
+
 /* La portada pasa a ser el contexto de posición, y su contenido se
    coloca por encima de la aurora. */
 .portada { position: relative; }
