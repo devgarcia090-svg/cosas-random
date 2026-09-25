@@ -1060,3 +1060,26 @@ educativo (tiendas, adiestradores, marcas) y, si ya hay más casos reales, se
 suman al pilar de prueba de trabajo. No hace falta un calendario editorial
 más detallado que este hasta que se vea qué formato funciona mejor — eso lo
 dicen las estadísticas de la cuenta, no una planificación a priori.
+
+## Material propio en la web
+
+Primer material audiovisual propio publicado (25-09-2026). Hasta aquí la web solo
+mostraba capturas de las tres webs hechas: ni un solo fotograma de vídeo, que es
+la mitad de lo que se vende.
+
+| Fichero | Origen | Uso |
+|---|---|---|
+| `img/estudio/maya-atardecer-{800,1200}.{webp,jpg}` | Foto propia, embalse al atardecer | Columna derecha de la portada |
+| `video/playa.{mp4,webm}` + `playa-portada.jpg` | Clip propio, playa al atardecer | Banda a sangre bajo la portada |
+
+Criterio: **solo material propio, nunca banco de imágenes**, porque la marca se
+apoya en el «nada inventado». Y nada que proceda de una colaboración pagada de
+Maya: esas piezas son de campaña y se gestionan por MTS23 (cláusula 17 del
+contrato).
+
+Pendiente de calidad: el clip llegó por WhatsApp, que lo recomprimió a 576 px de
+ancho. Se sirve reescalado a 1152 y en pantalla grande se nota blando. Conviene
+reemplazarlo por el fichero original cuando esté a mano.
+
+Accesibilidad: el bucle lleva botón de pausa (criterio WCAG 2.2.2) y con
+`prefers-reduced-motion` ni siquiera arranca.
