@@ -367,15 +367,55 @@ section { padding: var(--seccion) 0; }
 .cierre { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2.5rem, 6vw, 5rem); align-items: start; }
 
 /* ── Pie ───────────────────────────────────────────────────────── */
-.pie { border-top: 1px solid var(--borde-fino); padding: var(--e-8) 0; }
-.pie-in {
-  max-width: var(--caja); margin: 0 auto; padding: 0 var(--gutter);
-  display: flex; flex-wrap: wrap; gap: var(--e-4) var(--e-6); align-items: center;
+/* ── Pie ────────────────────────────────────────────────────────────
+   Antes era una sola fila plana con once elementos: el correo y el
+   teléfono tenían el mismo aspecto que los enlaces de navegación, así
+   que el número parecía una página más del menú. Ahora cada cosa va en
+   su columna, con su etiqueta, y los datos de contacto se distinguen
+   de los enlaces. */
+.pie { border-top: 1px solid var(--borde-fino); padding: var(--e-9) 0 var(--e-6); }
+.pie-in { max-width: var(--caja); margin: 0 auto; padding: 0 var(--gutter); }
+.pie a { color: var(--tinta-2); text-decoration: none; transition: color var(--v-rapida); }
+.pie a:hover { color: var(--tinta); }
+
+.pie-rejilla {
+  display: grid; grid-template-columns: 1.7fr 1fr 1fr 1fr;
+  gap: var(--e-7) var(--e-6); align-items: start;
+}
+.pie-marca { display: flex; align-items: center; gap: var(--e-3); }
+.pie-marca svg { flex: none; }
+.pie-marca b { font-size: var(--t-base); font-weight: 600; color: var(--tinta); letter-spacing: -0.018em; }
+.pie-lema { margin-top: var(--e-3); font-size: var(--t-menor); color: var(--tinta-2); max-width: 30ch; }
+
+.pie-grupo h4 {
+  font-family: var(--fuente-mono); font-size: var(--t-micro); font-weight: 500;
+  text-transform: uppercase; letter-spacing: 0.14em; color: var(--acento);
+  margin-bottom: var(--e-4);
+}
+.pie-grupo ul { list-style: none; display: flex; flex-direction: column; gap: var(--e-3); }
+.pie-grupo li { font-size: var(--t-menor); color: var(--tinta-2); line-height: 1.3; }
+/* El dato de contacto se lee como dato, no como enlace de navegación:
+   la etiqueta pequeña encima y el valor en tinta fuerte. */
+.pie-dato { display: block; font-size: 0.7rem; color: var(--tinta-2); opacity: .75; margin-bottom: 2px; }
+.pie-grupo .fuerte { color: var(--tinta); font-weight: 500; }
+
+.pie-cierre {
+  margin-top: var(--e-8); padding-top: var(--e-5);
+  border-top: 1px solid var(--borde-fino);
+  display: flex; flex-wrap: wrap; gap: var(--e-3) var(--e-5);
+  align-items: center; justify-content: space-between;
   font-size: var(--t-menor); color: var(--tinta-2);
 }
-.pie a { color: var(--tinta-2); text-decoration: none; }
-.pie a:hover { color: var(--tinta); }
-.pie .der { margin-left: auto; display: flex; gap: var(--e-5); flex-wrap: wrap; }
+.pie-cierre nav { display: flex; gap: var(--e-5); flex-wrap: wrap; }
+
+@media (max-width: 860px) {
+  .pie-rejilla { grid-template-columns: 1fr 1fr; }
+  .pie-marca-col { grid-column: 1 / -1; }
+}
+@media (max-width: 520px) {
+  .pie-rejilla { grid-template-columns: 1fr; }
+  .pie-cierre { justify-content: flex-start; }
+}
 
 /* ── Barra fija en móvil ───────────────────────────────────────── */
 .fija {
