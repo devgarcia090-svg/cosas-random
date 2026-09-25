@@ -1071,6 +1071,7 @@ la mitad de lo que se vende.
 |---|---|---|
 | `img/estudio/maya-atardecer-{800,1200}.{webp,jpg}` | Foto propia, embalse al atardecer | Columna derecha de la portada |
 | `video/orilla.{mp4,webm}` + `orilla-portada.jpg` | Clip propio 4K, Maya en el agua al atardecer | Banda a sangre bajo la portada |
+| `video/vertical.{mp4,webm}` + `vertical-portada.jpg` | Clip propio 4K vertical, Maya en la orilla del embalse | Bloque de vídeo vertical en Trabajos |
 
 Criterio: **solo material propio, nunca banco de imágenes**, porque la marca se
 apoya en el «nada inventado». Y nada que proceda de una colaboración pagada de
@@ -1098,3 +1099,11 @@ y el vídeo en cada visita. Ahora: HTML `no-cache`, hojas de estilo 5 minutos
 
 Accesibilidad: el bucle lleva botón de pausa (criterio WCAG 2.2.2) y con
 `prefers-reduced-motion` ni siquiera arranca.
+
+El vertical se reproduce solo mientras está a la vista (`IntersectionObserver`)
+y arranca con `preload="none"`: hasta que no se llega a Trabajos no se descarga
+nada. Con movimiento reducido no se reproduce solo, se muestran los controles.
+
+En el servidor hay 4,37 MB de vídeo, pero por visita se piden como mucho dos
+ficheros: el MP4 de la banda y, al llegar a Trabajos, el vertical. Los WebM
+solo los pide un navegador sin H.264.

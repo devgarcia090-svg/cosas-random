@@ -134,7 +134,17 @@ a { color: var(--acento); }
 
 /* ── Estructura ─────────────────────────────────────────────────── */
 .caja { max-width: var(--caja); margin: 0 auto; padding: 0 var(--gutter); }
-section { padding: var(--seccion) 0; }
+/* Cada sección aporta MEDIO ritmo por arriba y medio por abajo, de modo que
+   entre dos seguidas el aire sume uno, no dos. Con el valor completo a ambos
+   lados quedaban 256 px de vacío entre el final de un texto y el titular
+   siguiente, que sobre fondo blanco y sin separador se lee como un error.
+   Las secciones con fondo tintado sí llevan el ritmo completo: ahí el aire no
+   separa dos bloques, sino que es el margen interior del propio bloque. */
+section { padding: calc(var(--seccion) * .5) 0; }
+.gris { padding: var(--seccion) 0; }
+/* La última antes del pie recupera el aire completo: debajo no hay otra
+   sección que aporte su mitad, sino el pie. */
+main > section:last-of-type { padding-bottom: var(--seccion); }
 .gris { background: var(--superficie); }
 .linea-arriba { border-top: 1px solid var(--borde-fino); }
 /* En px, no en ch: la unidad ch se calcula sobre el tamaño de fuente del
@@ -836,6 +846,35 @@ body { padding-top: var(--e-2); }
   background: #14181F; max-width: 260px;
 }
 .marco-movil img { width: 100%; height: auto; display: block; }
+
+/* BLOQUE DE VÍDEO VERTICAL
+   Dos columnas: el argumento a la izquierda y la pieza a la derecha, dentro
+   del mismo marco de móvil que usan las capturas, para que se lea como «así
+   sale publicado» y no como un vídeo decorativo. */
+.vertical-obra {
+  display: grid;
+  /* La columna del móvil crece con el contenedor en vez de quedarse fija en
+     260 px: con el marco pequeño sobraban 300 px de vacío entre las dos
+     columnas y el bloque parecía descuadrado. */
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 380px);
+  gap: clamp(2rem, 5vw, 4rem); align-items: center;
+}
+.obra-texto h3 { margin-bottom: var(--e-4); }
+.obra-texto p { color: var(--tinta-2); margin-bottom: var(--e-4); max-width: 56ch; }
+.obra-texto .tags { margin-bottom: var(--e-5); }
+.obra-movil { margin: 0; }
+/* El marco de las capturas tiene 260 px; aquí ocupa toda su columna porque
+   es la pieza protagonista del bloque y no una vista secundaria. */
+.obra-movil .marco-movil { max-width: 100%; }
+.obra-media { width: 100%; height: auto; display: block; aspect-ratio: 608 / 1080; }
+.obra-movil figcaption {
+  margin-top: var(--e-3); font-size: var(--t-menor); color: var(--tinta-2);
+}
+@media (max-width: 860px) {
+  /* Apilado, el texto primero: el argumento antes que la pieza. */
+  .vertical-obra { grid-template-columns: 1fr; }
+  .obra-movil { justify-self: center; max-width: 320px; }
+}
 
 /* Vistas secundarias */
 .vistas-extra { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.2rem, 2.5vw, 2rem); }

@@ -141,7 +141,7 @@
 <link rel="preload" href="/fuentes/familjen-grotesk-600-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fuentes/familjen-grotesk-400-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/fuentes.css?v=1">
-<link rel="stylesheet" href="/estilo.css?v=33">
+<link rel="stylesheet" href="/estilo.css?v=35">
 </head>
 <body>
 <a class="saltar" href="#principal">Saltar al contenido</a>
@@ -448,6 +448,37 @@
           <figcaption>Estructura de planes y precios</figcaption>
         </figure>
       </div>
+    </article>
+
+    <!-- VÍDEO VERTICAL
+         Los tres proyectos de arriba son web. La otra mitad de lo que se
+         vende es vídeo, y hasta aquí solo estaba contada con palabras. -->
+    <article class="proyecto vertical-obra rev">
+      <div class="obra-texto">
+        <h3>Vídeo vertical</h3>
+        <p>Los tres casos de arriba son web. Esto es la otra mitad: grabación y
+        montaje de vídeo vertical, que es el formato con el que se construyeron
+        esos 41.000 seguidores.</p>
+        <p>Este plano es del canal de Maya, grabado y montado por nosotros. Una
+        persona, una cámara y el animal de verdad — el mismo formato que
+        publicamos para clientes en Instagram y TikTok.</p>
+        <ul class="tags">
+          <li>Grabación</li><li>Montaje</li><li>Color</li><li>Formato 9:16</li>
+        </ul>
+        <a class="btn btn-borde" href="https://www.instagram.com/olfatoestudio" target="_blank" rel="noopener">Ver más en Instagram</a>
+      </div>
+
+      <figure class="obra-movil">
+        <div class="marco-movil">
+          <video id="obraVideo" class="obra-media" playsinline muted loop
+                 preload="none" poster="/video/vertical-portada.jpg"
+                 aria-label="Maya, una rottweiler, en la orilla de un embalse al atardecer">
+            <source src="/video/vertical.mp4" type="video/mp4">
+            <source src="/video/vertical.webm" type="video/webm">
+          </video>
+        </div>
+        <figcaption>Canal de Maya · 9:16, tal y como sale publicado</figcaption>
+      </figure>
     </article>
 
     <p class="nota rev"><strong>WodBox está fuera del sector mascotas, y es a propósito que lo
@@ -886,6 +917,23 @@
     pausa.addEventListener('click', function () {
       if (vid.paused) { vid.play(); pintar(false); } else { vid.pause(); pintar(true); }
     });
+  }
+
+  // El vertical de trabajos solo se reproduce mientras está a la vista: con
+  // preload="none" no descarga nada hasta entonces, y al salir de pantalla se
+  // detiene en lugar de seguir decodificando de fondo.
+  var obra = document.getElementById('obraVideo');
+  if (obra && 'IntersectionObserver' in window) {
+    if (reduce) {
+      obra.setAttribute('controls', '');
+    } else {
+      new IntersectionObserver(function (es) {
+        es.forEach(function (e) {
+          if (e.isIntersecting) { obra.play().catch(function () {}); }
+          else { obra.pause(); }
+        });
+      }, { threshold: 0.35 }).observe(obra);
+    }
   }
 
   // Marca en la barra la sección que estás viendo. Sin librerías: un solo
