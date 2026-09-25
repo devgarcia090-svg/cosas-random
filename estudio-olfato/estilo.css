@@ -19,7 +19,10 @@
   --acento-osc:#8F3C09;
   --acento-luz:#FDF3EC;
 
-  --fuente: 'Instrument Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  /* Familjen Grotesk es la del logotipo: la marca y la web hablan la misma letra. */
+  --fuente: 'Familjen Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  /* Martian Mono es el 'ESTUDIO' del logotipo. Solo para etiquetas cortas. */
+  --fuente-mono: 'Martian Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 
   --caja: 1120px;
   --gutter: clamp(1.25rem, 5vw, 2.5rem);
@@ -57,8 +60,9 @@ p { color: var(--tinta-2); max-width: 64ch; }
 a { color: var(--acento); }
 
 .eyebrow {
-  display: block; font-size: 0.86rem; font-weight: 600;
-  color: var(--acento); margin-bottom: 0.85rem; letter-spacing: 0;
+  display: block; font-family: var(--fuente-mono); font-size: 0.72rem;
+  font-weight: 500; text-transform: uppercase; letter-spacing: 0.14em;
+  color: var(--acento); margin-bottom: 0.95rem;
 }
 .num { font-variant-numeric: tabular-nums; font-feature-settings: 'tnum' 1; }
 
