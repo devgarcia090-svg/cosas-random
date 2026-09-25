@@ -1107,3 +1107,21 @@ nada. Con movimiento reducido no se reproduce solo, se muestran los controles.
 En el servidor hay 4,37 MB de vídeo, pero por visita se piden como mucho dos
 ficheros: el MP4 de la banda y, al llegar a Trabajos, el vertical. Los WebM
 solo los pide un navegador sin H.264.
+
+## Horario
+
+**Lunes a viernes, 9:00–18:00. Sábado y domingo cerrado.**
+
+De corrido, sin partir: un horario partido vuelve a pintar «Cerrado» en rojo en
+la ficha de Google cada mediodía, que era justo el problema que se quería
+quitar.
+
+Está declarado en tres sitios y los tres tienen que decir lo mismo, porque la
+coherencia del dato es lo que valora el SEO local:
+
+1. Ficha de Google Business Profile.
+2. `openingHoursSpecification` dentro de `ProfessionalService` en el JSON-LD de
+   la portada.
+3. Visible en el pie de las once páginas.
+
+Si cambia, hay que cambiarlo en los tres.
