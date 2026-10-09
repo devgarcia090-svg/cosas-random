@@ -126,8 +126,25 @@ for (const [f, titulo] of [['aviso-legal.html','Aviso legal'],['privacidad.html'
   t(d.h2>=6, f+': '+d.h2+' apartados');
   t(errs.length===0, f+': sin errores de JS');
 }
-const rell = await p.goto(B+'/aviso-legal.html').then(()=>p.evaluate(()=>document.querySelectorAll('.rellenar').length));
-t(rell>=4, 'el aviso legal marca '+rell+' datos por rellenar');
+// Los datos del titular ya constan, así que la prueba se invierte: antes
+// vigilaba que los huecos siguieran señalados, y ahora que no quede ninguno.
+// El artículo 10 de la LSSI exige titular, NIF, domicilio y un medio de
+// contacto directo, de modo que se comprueban uno por uno: publicar el aviso
+// legal a medias es justo lo que esta prueba tiene que impedir.
+for (const f of ['aviso-legal.html', 'privacidad.html', 'cookies.html']) {
+  await p.goto(B + '/' + f, {waitUntil: 'load'});
+  const r = await p.evaluate(() => ({
+    huecos: document.querySelectorAll('.rellenar').length,
+    texto: document.body.innerText,
+    mailto: !!document.querySelector('a[href^="mailto:"]'),
+  }));
+  t(r.huecos === 0, f + ': sin datos por rellenar');
+  if (f !== 'cookies.html') {
+    t(/BACON BRIDGE EAR/.test(r.texto), f + ': consta el titular');
+    t(/E75615427/.test(r.texto), f + ': consta el NIF/CIF');
+    t(r.mailto, f + ': hay un correo de contacto enlazado');
+  }
+}
 // Enlaces legales desde el pie de la portada
 await p.goto(B+'/index.html', {waitUntil:'load'});
 for (const f of ['aviso-legal.html','privacidad.html','cookies.html'])
