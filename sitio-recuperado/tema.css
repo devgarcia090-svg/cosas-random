@@ -265,14 +265,21 @@ html.tjs [data-tr].tv { opacity: 1; transform: translateY(0); }
 
 /* Galeria de fotos del evento */
 .eh-card-ancha{grid-column:1/-1}
-.eh-fotos{display:grid;grid-template-columns:repeat(4,1fr);gap:.7rem;margin-top:1.5rem}
-.eh-fotos img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:10px;display:block;
+.eh-fotos{display:grid;grid-template-columns:repeat(2,1fr);gap:.9rem;margin-top:1.6rem}
+.eh-fotos img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:12px;display:block;
   border:1px solid rgba(242,237,230,.1);transition:transform .3s,border-color .3s}
-.eh-fotos img:hover{transform:scale(1.03);border-color:rgba(200,114,42,.55)}
-.eh-pie{margin-top:1.1rem!important;font-size:.85rem!important;font-style:italic;
-  color:rgba(242,237,230,.5)!important;text-align:center}
+.eh-fotos img:hover{transform:scale(1.02);border-color:rgba(200,114,42,.55)}
+/* Son fotos verticales de movil (9:16). Al recortarlas a 4:5 se corta
+   arriba y abajo, asi que cada una fija su punto de interes para que
+   las caras no se queden fuera. */
+.eh-fotos .f-grupo{object-position:center 42%}
+.eh-fotos .f-alfombra{object-position:center 38%}
+.eh-fotos .f-creadores{object-position:center 40%}
+.eh-fotos .f-pin{object-position:center 52%}
+.eh-pie{margin-top:1.3rem!important;font-size:.9rem!important;font-style:italic;
+  color:rgba(242,237,230,.55)!important;text-align:center}
 @media(prefers-reduced-motion:reduce){.eh-fotos img{transition:none}.eh-fotos img:hover{transform:none}}
-@media(max-width:700px){.eh-fotos{grid-template-columns:repeat(2,1fr);gap:.55rem}}
+@media(max-width:520px){.eh-fotos{gap:.6rem}}
 
 /* ===== Eventos del sector (/marcas) ===== */
 .eventos-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem;margin-top:3rem}
