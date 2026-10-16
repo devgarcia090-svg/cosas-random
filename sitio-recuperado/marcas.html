@@ -334,6 +334,10 @@
         .form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--fuego); }
         .form-group select option { background: var(--negro); }
         .form-group textarea { resize: vertical; min-height: 120px; }
+        .form-consent{display:flex;align-items:flex-start;gap:.6rem;font-size:.78rem;line-height:1.55;
+            color:rgba(242,237,230,.6);margin:1.2rem 0 1.4rem;cursor:pointer}
+        .form-consent input{margin-top:.2rem;flex-shrink:0;accent-color:var(--fuego)}
+        .form-consent a{color:var(--fuego)}
         .btn-submit {
             background: var(--fuego); color: var(--negro); border: none;
             padding: 1rem 2rem; border-radius: 4px; font-family: 'Montserrat', sans-serif;
@@ -749,6 +753,7 @@
             </div>
             <input type="hidden" name="_subject" value="Nueva propuesta de colaboración — Maya Rottweiler">
             <input type="text" name="_gotcha" style="display:none">
+            <label class="form-consent"><input type="checkbox" id="consent-marcas" required> He leído y acepto la <a href="privacidad" target="_blank" rel="noopener">política de privacidad</a>. Los datos de este formulario se usan solo para responder a tu propuesta.</label>
             <button type="submit" class="btn-submit" id="submit-btn">Enviar propuesta 🐾</button>
             <p id="form-success" style="display:none;text-align:center;color:#27ae60;font-weight:700;margin-top:1rem;"></p>
             <p id="form-error" style="display:none;text-align:center;color:#e74c3c;font-weight:700;margin-top:1rem;"></p>
@@ -808,6 +813,18 @@
             const btn = document.getElementById('submit-btn');
             const success = document.getElementById('form-success');
             const error = document.getElementById('form-error');
+            // preventDefault se salta la validacion nativa del "required",
+            // asi que el consentimiento hay que comprobarlo a mano.
+            const consent = document.getElementById('consent-marcas');
+            if (consent && !consent.checked) {
+                consent.focus();
+                error.textContent = currentLang === 'en'
+                    ? 'Please accept the privacy policy to send your message.'
+                    : 'Tienes que aceptar la política de privacidad para enviar el mensaje.';
+                error.style.display = 'block';
+                return;
+            }
+            error.style.display = 'none';
             btn.textContent = currentLang === 'en' ? 'Sending...' : 'Enviando...';
             btn.disabled = true;
             try {
