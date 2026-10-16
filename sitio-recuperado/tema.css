@@ -351,3 +351,15 @@ article img[src*="fotos/"]{
 }
 /* El logo de la protectora es una ficha, no una foto de articulo */
 article img[src*="zooasis"]{aspect-ratio:auto;object-fit:contain;max-height:none}
+
+/* Altura del nav igual en todas las paginas (movil).
+   Las guias llevan el boton "Volver", mas alto que el logo suelto de la
+   portada, y el nav salia a 72 px frente a 49. Se usa "body nav" para
+   ganar en especificidad al "nav" que cada pagina define en su <style>. */
+@media (max-width: 700px) {
+  body nav { padding-top: calc(120px + .7rem); padding-bottom: .7rem;
+    /* 120 px fuera de pantalla + 52 px visibles, iguales en todas las
+       paginas tengan logo suelto o boton de volver. */
+    min-height: 172px; }
+  nav .nav-back { font-size: .66rem; padding: .35rem .8rem; line-height: 1.4; }
+}
