@@ -635,10 +635,43 @@
                 <h3>Brott Dog</h3>
                 <p>Colaboración activa con la marca barcelonesa de accesorios para perros. Contenido auténtico mostrando los productos integrados en el día a día real de Maya.</p>
             </div>
+            <div class="collab-card fade-in">
+                <h3>Barkibu</h3>
+                <p>Colaboración de contenido con integración natural dentro del día a día de Maya, sin publicidad forzada y manteniendo el tono que funciona en el perfil.</p>
+            </div>
+            <div class="collab-card fade-in">
+                <h3>Balto</h3>
+                <p>Colaboración de contenido mostrando el producto en uso real con una Rottweiler de 40 kg, que es justo el caso exigente que las marcas quieren enseñar.</p>
+            </div>
+        </div>
 
+        <div class="fade-in" style="margin-top:4rem">
+            <span class="s-label">Presencia en el sector</span>
+            <h2 class="s-title">Dónde nos has visto</h2>
+            <p class="s-sub">Maya no vive solo en el feed. Estamos en los eventos donde se mueve el sector de las mascotas en España.</p>
+        </div>
+        <div class="eventos-grid">
+            <div class="evento-card fade-in">
+                <span class="evento-fecha">II Edición · 2026</span>
+                <h3>Celebrity Pets Awards</h3>
+                <p>Presencia en la alfombra roja de la segunda edición de los premios, junto a creadores del sector como El Refugio de Rubí, Ecojuanma o La Isla de Tali.</p>
+            </div>
+            <div class="evento-card fade-in" id="evento-pana">
+                <span class="evento-fecha">24 y 25 de octubre · 2026</span>
+                <h3>Feria Adopta un Pana</h3>
+                <p>Presencia en la feria de adopción, llevando el mensaje de siempre: adopta, no compres — y los PPP también encuentran casa.</p>
+            </div>
         </div>
     </div>
 </section>
+<script>
+// La feria pasa sola de futura a pasada
+(function(){
+    if (Date.now() < new Date('2026-10-26T00:00:00+02:00').getTime()) return;
+    var c = document.getElementById('evento-pana');
+    if (c) c.querySelector('.evento-fecha').textContent = 'Octubre 2026';
+})();
+</script>
 
 <!-- CTA CONTACTO -->
 <div class="contact-cta" id="contacto">

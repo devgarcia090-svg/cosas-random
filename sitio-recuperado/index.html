@@ -667,7 +667,37 @@
             </div>
         </div>
     </div>
+
+    <!-- EL HUMANO DETRAS DE LA CAMARA -->
+    <div class="dani fade-in">
+        <div class="dani-icono">🎬</div>
+        <div>
+            <span class="dani-label">El humano detrás de la cámara</span>
+            <h3 class="dani-nombre">Dani</h3>
+            <p class="dani-texto">Detrás de cada vídeo, cada entreno y cada viaje está Dani. <strong>Cinco años conviviendo con Maya desde Murcia</strong>, con un objetivo que no ha cambiado desde el primer día: demostrar con educación, humor y responsabilidad que un Rottweiler de 40 kg bien equilibrado es el mejor compañero de vida que puedes tener.</p>
+        </div>
+    </div>
 </section>
+
+<!-- PRUEBA SOCIAL -->
+<section class="prueba-social">
+    <span class="ps-label">Marcas y causas que ya han confiado en Maya</span>
+    <ul class="ps-lista">
+        <li>Brott Dog</li>
+        <li>Barkibu</li>
+        <li>Balto</li>
+        <li>Celebrity Pets</li>
+    </ul>
+    <p class="ps-evento" id="ps-evento">📍 <strong>24 y 25 de octubre</strong> · Nos vemos en la feria <strong>Adopta un Pana</strong></p>
+</section>
+<script>
+// El aviso de la feria pasa solo de "nos vemos" a "estuvimos" cuando acaba
+(function(){
+    if (Date.now() < new Date('2026-10-26T00:00:00+02:00').getTime()) return;
+    var el = document.getElementById('ps-evento');
+    if (el) el.innerHTML = '📍 Estuvimos en la feria <strong>Adopta un Pana</strong> · 24 y 25 de octubre de 2026';
+})();
+</script>
 
 <!-- VIDEOS -->
 <section class="videos" id="videos">
@@ -720,12 +750,12 @@
     <div class="growth-grid">
         <div class="growth-item fade-in">
             <span class="growth-icon">📅</span>
-            <span class="growth-num">Feb 2025</span>
+            <span class="growth-num">Feb 2026</span>
             <span class="growth-label" id="g1">Primer vídeo publicado en TikTok</span>
         </div>
         <div class="growth-item fade-in">
             <span class="growth-icon">📸</span>
-            <span class="growth-num">Mar 2025</span>
+            <span class="growth-num">Mar 2026</span>
             <span class="growth-label" id="g2">Apertura de cuenta en Instagram</span>
         </div>
         <div class="growth-item fade-in">

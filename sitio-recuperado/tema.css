@@ -230,3 +230,61 @@ html.tjs [data-tr].tv { opacity: 1; transform: translateY(0); }
 
 /* Nota bajo las metricas del hero */
 .stats-nota{text-align:center;margin:1.5rem auto 0;font-size:.68rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(242,237,230,.32)}
+
+/* ===== El humano detras de la camara ===== */
+.dani{max-width:1100px;margin:3.5rem auto 0;display:flex;gap:1.6rem;align-items:flex-start;
+  background:linear-gradient(135deg,rgba(200,114,42,.09),rgba(255,255,255,.02));
+  border:1px solid rgba(200,114,42,.22);border-radius:12px;padding:2rem 2.2rem}
+.dani-icono{font-size:2.4rem;line-height:1;flex-shrink:0}
+.dani-label{font-size:.65rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--fuego);display:block;margin-bottom:.4rem}
+.dani-nombre{font-size:1.5rem;font-weight:900;margin:0 0 .6rem;line-height:1.1}
+.dani-texto{font-size:.95rem;line-height:1.75;color:rgba(242,237,230,.72);margin:0}
+.dani-texto strong{color:var(--blanco);font-weight:700}
+@media(max-width:640px){.dani{flex-direction:column;gap:1rem;padding:1.6rem 1.4rem;margin-top:2.5rem}}
+
+/* ===== Prueba social: marcas y eventos ===== */
+.prueba-social{max-width:1100px;margin:0 auto;padding:3rem 2rem;text-align:center;
+  border-top:1px solid rgba(200,114,42,.12)}
+.ps-label{font-size:.66rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;
+  color:rgba(242,237,230,.4);display:block;margin-bottom:1.5rem}
+.ps-lista{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:.7rem;justify-content:center}
+.ps-lista li{font-family:'Montserrat',sans-serif;font-weight:800;font-size:.85rem;letter-spacing:.5px;
+  color:rgba(242,237,230,.78);border:1px solid rgba(242,237,230,.16);border-radius:50px;padding:.55rem 1.3rem;
+  transition:border-color .25s,color .25s}
+.ps-lista li:hover{border-color:rgba(200,114,42,.5);color:var(--blanco)}
+.ps-evento{margin:1.6rem 0 0;font-size:.85rem;color:rgba(242,237,230,.55)}
+.ps-evento strong{color:var(--fuego);font-weight:700}
+
+/* ===== Eventos del sector (/marcas) ===== */
+.eventos-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem;margin-top:3rem}
+.evento-card{background:var(--gris);border-radius:20px;padding:2.5rem;
+  border:1px solid rgba(200,114,42,.2);transition:border-color .3s}
+.evento-card:hover{border-color:var(--fuego)}
+.evento-fecha{font-size:.66rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;
+  color:var(--fuego);display:block;margin-bottom:.8rem}
+.evento-card h3{font-size:1.4rem;font-weight:800;color:var(--blanco);margin:0 0 .8rem}
+.evento-card p{font-size:.85rem;color:rgba(242,237,230,.65);line-height:1.7;margin:0}
+@media(max-width:860px){.eventos-grid{grid-template-columns:1fr}}
+
+/* ===== Encuesta de co-creacion de la tienda ===== */
+.encuesta-pregunta{font-size:.95rem;color:rgba(242,237,230,.75);margin:0 0 1.4rem}
+.encuesta-pregunta strong{color:var(--blanco)}
+.encuesta-ops{display:flex;flex-wrap:wrap;gap:.9rem;justify-content:center;margin-bottom:1.2rem}
+.encuesta-btn{display:flex;flex-direction:column;align-items:center;gap:.5rem;
+  background:rgba(255,255,255,.03);border:1px solid rgba(200,114,42,.3);border-radius:12px;
+  padding:1.3rem 1.5rem;min-width:155px;cursor:pointer;font-family:'Montserrat',sans-serif;
+  font-size:1.6rem;line-height:1;transition:border-color .22s,background .22s,transform .22s}
+.encuesta-btn span{font-size:.78rem;font-weight:800;letter-spacing:.4px;color:rgba(242,237,230,.8);text-align:center}
+.encuesta-btn:hover{border-color:var(--fuego);background:rgba(200,114,42,.1);transform:translateY(-3px)}
+.encuesta-btn:focus-visible{outline:2px solid var(--fuego);outline-offset:3px}
+.encuesta-saltar{margin:0;font-size:.78rem}
+.encuesta-saltar a{color:rgba(242,237,230,.45);text-decoration:none}
+.encuesta-saltar a:hover{color:var(--fuego);text-decoration:underline}
+.encuesta-gracias{font-size:.88rem;color:rgba(242,237,230,.75);margin:0 0 1.2rem}
+.encuesta-gracias strong{color:var(--fuego)}
+.lista-consent{display:flex;align-items:flex-start;gap:.6rem;max-width:460px;margin:1rem auto 0;
+  font-size:.74rem;line-height:1.55;color:rgba(242,237,230,.55);text-align:left;cursor:pointer}
+.lista-consent input{margin-top:.2rem;flex-shrink:0;accent-color:var(--fuego)}
+.lista-consent a{color:var(--fuego)}
+@media(prefers-reduced-motion:reduce){.encuesta-btn{transition:none}.encuesta-btn:hover{transform:none}}
+@media(max-width:560px){.encuesta-ops{flex-direction:column}.encuesta-btn{width:100%;flex-direction:row;justify-content:flex-start;gap:.9rem;padding:1rem 1.2rem}}
