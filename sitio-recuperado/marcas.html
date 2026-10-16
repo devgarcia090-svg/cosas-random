@@ -217,6 +217,21 @@
         .audience-block h3 {
             font-size: 1rem; font-weight: 700; margin-bottom: 1.2rem; color: var(--blanco);
         }
+        /* Genero: parte de un total, por eso una barra partida y no dos
+           barras de magnitud como las de edad y pais. */
+        .genero{margin-bottom:.4rem}
+        .genero-barra{display:flex;height:14px;border-radius:7px;overflow:hidden;gap:2px;
+            background:rgba(242,237,230,.08)}
+        .genero-barra span{display:block;height:100%}
+        .g-mujeres{background:var(--fuego);border-radius:7px 0 0 7px}
+        .g-hombres{background:rgba(242,237,230,.32);border-radius:0 7px 7px 0}
+        .genero-leyenda{display:flex;gap:1.4rem;flex-wrap:wrap;margin-top:.7rem;
+            font-size:.8rem;color:rgba(242,237,230,.6)}
+        .genero-leyenda strong{color:var(--blanco);font-weight:800}
+        .g-punto{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:.45rem}
+        .g-p-m{background:var(--fuego)}
+        .g-p-h{background:rgba(242,237,230,.32)}
+
         .bar-item { margin-bottom: .85rem; }
         .bar-label {
             display: flex; justify-content: space-between;
@@ -531,7 +546,19 @@
         </div>
         <div class="audience-grid">
             <div class="audience-block fade-in">
-                <h3>Edad de la audiencia</h3>
+                <h3>Género</h3>
+                <div class="genero">
+                    <div class="genero-barra" role="img" aria-label="61,6 % mujeres y 38,4 % hombres">
+                        <span class="g-mujeres" style="width:61.6%"></span>
+                        <span class="g-hombres" style="width:38.4%"></span>
+                    </div>
+                    <div class="genero-leyenda">
+                        <span><i class="g-punto g-p-m"></i>Mujeres <strong>61,6%</strong></span>
+                        <span><i class="g-punto g-p-h"></i>Hombres <strong>38,4%</strong></span>
+                    </div>
+                </div>
+
+                <h3 style="margin-top:2rem">Edad de la audiencia</h3>
                 <div class="bar-item">
                     <div class="bar-label"><span>13 – 17 años</span><span>4,2%</span></div>
                     <div class="bar-track"><div class="bar-fill" data-width="15.3"></div></div>
