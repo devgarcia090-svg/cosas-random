@@ -78,8 +78,11 @@
         .hero-tienda::after{content:'🐾';position:absolute;font-size:40vw;opacity:.03;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;line-height:1}
         .hero-content{position:relative;z-index:1;max-width:780px;margin:0 auto}
         .badge-tienda{display:inline-block;background:rgba(200,114,42,.15);border:1px solid rgba(200,114,42,.4);color:var(--fuego);font-size:.72rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:.45rem 1.2rem;border-radius:4px;margin-bottom:2rem}
-        .hero-tienda h1{font-size:clamp(2.8rem,8vw,5.5rem);font-weight:900;line-height:1;letter-spacing:-1px;margin-bottom:1.5rem;text-transform:uppercase}
+        .hero-tienda h1{font-family:'Bebas Neue','Montserrat',sans-serif;font-size:clamp(3.4rem,11vw,8rem);font-weight:400;line-height:.92;letter-spacing:.012em;margin-bottom:1.5rem;text-transform:uppercase}
         .hero-tienda h1 span{color:var(--fuego)}
+        /* El emoji hereda el tamano del titular (8rem) y queda gigantesco;
+           se fija a una fraccion para que acompane en vez de competir. */
+        .hero-tienda h1 .h1-emoji{font-size:.26em;vertical-align:.55em;margin-left:.22em;color:initial}
         .hero-tienda .sub{font-size:1.1rem;color:rgba(242,237,230,.65);max-width:480px;margin:0 auto 2.5rem;line-height:1.7}
         .btn-lista{display:inline-flex;align-items:center;gap:.6rem;background:var(--fuego);color:var(--negro);font-weight:800;font-size:.9rem;letter-spacing:1px;text-transform:uppercase;padding:1rem 2.2rem;border-radius:50px;text-decoration:none;border:none;cursor:pointer;transition:all .3s}
         .btn-lista:hover{background:#E0571A;transform:translateY(-2px);box-shadow:0 12px 40px rgba(200,114,42,.3)}
@@ -91,7 +94,7 @@
         .section{padding:5rem 2rem}
         .container{max-width:1100px;margin:0 auto}
         .s-label{font-size:.72rem;font-weight:700;color:var(--fuego);letter-spacing:3px;text-transform:uppercase;display:block;margin-bottom:.8rem;text-align:center}
-        .s-title{font-size:2.2rem;font-weight:900;text-align:center;margin-bottom:.8rem;line-height:1.2}
+        .s-title{font-family:'Bebas Neue','Montserrat',sans-serif;font-size:clamp(2.4rem,5vw,4rem);font-weight:400;letter-spacing:.012em;text-align:center;margin-bottom:.9rem;line-height:.98}
         .s-sub{font-size:.95rem;color:rgba(242,237,230,.5);text-align:center;max-width:500px;margin:0 auto 3rem;line-height:1.7}
 
         .productos-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem}
@@ -107,7 +110,7 @@
 
         /* LISTA DE ESPERA */
         .lista-section{background:linear-gradient(135deg,#1E1008 0%,#0D0B09 100%);padding:5rem 2rem;text-align:center;border-top:1px solid rgba(200,114,42,.15);border-bottom:1px solid rgba(200,114,42,.15)}
-        .lista-section h2{font-size:2rem;font-weight:900;margin-bottom:.8rem}
+        .lista-section h2{font-family:'Bebas Neue','Montserrat',sans-serif;font-size:clamp(2.4rem,5vw,4rem);font-weight:400;letter-spacing:.012em;margin-bottom:.9rem;line-height:.98}
         .lista-section h2 span{color:var(--fuego)}
         .lista-section p{font-size:.95rem;color:rgba(242,237,230,.55);max-width:480px;margin:0 auto 2.5rem;line-height:1.7}
         .form-lista{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;max-width:520px;margin:0 auto}
@@ -157,7 +160,7 @@
         @media(max-width:500px){
             .productos-grid{grid-template-columns:1fr 1fr;gap:.8rem}
             .hero-stats{gap:2rem}
-            .hero-tienda h1{font-size:2.5rem}
+            .hero-tienda h1{font-size:3.2rem}
             .nav-logo span{display:none}
             .producto-img{height:160px;font-size:3rem}
         }
@@ -252,8 +255,8 @@ document.addEventListener('DOMContentLoaded', function(){
     <canvas class="hero-canvas" id="heroCanvas"></canvas>
     <div class="hero-content">
         <span class="badge-tienda">🛍️ Maya Merch</span>
-        <h1>Muy<br><span>pronto</span> 🐾</h1>
-        <p class="sub">La tienda oficial de Maya está en camino. Apúntate y sé el primero en saberlo.</p>
+        <h1>Muy<br><span>pronto</span><span class="h1-emoji" aria-hidden="true">🐾</span></h1>
+        <p class="sub">Ropa y accesorios para quien ya sabe que un Rottweiler es, ante todo, familia.</p>
         <a href="tienda#lista-espera" class="btn-lista">🐾 &nbsp; Avísame</a>
         <div class="hero-stats">
             <div class="hero-stat"><span>+46K</span><p>en la comunidad</p></div>
@@ -266,9 +269,9 @@ document.addEventListener('DOMContentLoaded', function(){
 <!-- TEASER PÚBLICO (mientras el producto está en preparación) -->
 <section class="section" id="teaser-privado">
     <div class="container" style="max-width:640px;text-align:center">
-        <span class="s-label">Estamos preparando algo</span>
-        <h2 class="s-title">La colección está en camino 🐾</h2>
-        <p class="s-sub" style="margin-bottom:0">Diseño exclusivo, causa real. Déjanos tu email aquí abajo y serás de los primeros en verla.</p>
+        <span class="s-label">Por qué una tienda</span>
+        <h2 class="s-title">Llevarlo puesto también cuenta</h2>
+        <p class="s-sub" style="margin-bottom:0">Cada vez que alguien pregunta por tu camiseta, tienes treinta segundos para contarle que los PPP no son lo que le han contado. Esa conversación en la calle vale más que cualquier anuncio.</p>
     </div>
 </section>
 
@@ -537,7 +540,7 @@ document.addEventListener('DOMContentLoaded', function(){
 <section class="section">
     <div class="container">
         <span class="s-label">Próximamente</span>
-        <h2 class="s-title">Esto es lo que están preparando</h2>
+        <h2 class="s-title">Qué va a haber</h2>
         <p class="s-sub">Todavía no podemos desvelar todo, pero algo se está cocinando. 🐶</p>
         <div class="productos-grid">
 
@@ -589,8 +592,8 @@ document.addEventListener('DOMContentLoaded', function(){
 
 <!-- LISTA DE ESPERA -->
 <section class="lista-section" id="lista-espera">
-    <h2>Sé el <span>primero</span> en saber<br>cuándo abrimos</h2>
-    <p>Deja tu email y te avisamos el día del lanzamiento. Sin spam. Solo una notificación cuando llegue el momento.</p>
+    <h2>Avísame cuando <span>abra</span></h2>
+    <p>Un solo correo el día del lanzamiento. Sin spam, sin newsletter de relleno.</p>
 
     <!-- ENCUESTA DE CO-CREACION: micro-compromiso antes de pedir el email -->
     <div id="encuesta">
