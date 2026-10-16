@@ -276,11 +276,9 @@ html.tjs [data-tr].tv { opacity: 1; transform: translateY(0); }
   align-self:start;/* sin esto el grid estira la imagen y anula el aspect-ratio */
   border:1px solid rgba(242,237,230,.1);transition:transform .35s,border-color .35s}
 .eh-fotos img:hover{transform:scale(1.02);border-color:rgba(200,114,42,.5)}
-/* Cada foto apunta a su banda de interes dentro del original */
-.eh-fotos .f-grupo{object-position:center 58%}
-.eh-fotos .f-alfombra{object-position:62% 42%}
-.eh-fotos .f-creadores{object-position:center 47%}
-.eh-fotos .f-pin{object-position:center 50%}
+/* Las fotos ya se guardan recortadas a 3:2 en su franja util: antes se
+   servian a 1200 px de alto y solo se veian 450. El recorte por CSS
+   dejo de hacer falta. */
 .eh-pie{margin-top:1.3rem!important;font-size:.9rem!important;font-style:italic;
   color:rgba(242,237,230,.55)!important;text-align:center}
 @media(prefers-reduced-motion:reduce){.eh-fotos img{transition:none}.eh-fotos img:hover{transform:none}}
