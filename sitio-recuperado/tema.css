@@ -247,7 +247,7 @@ html.tjs [data-tr].tv { opacity: 1; transform: translateY(0); }
 .eh-label{font-size:.66rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--fuego);display:block;margin-bottom:.8rem}
 .eh-title{font-size:clamp(1.8rem,4.5vw,2.6rem);font-weight:900;line-height:1.1;margin:0 0 2.5rem}
 .eh-title span{color:var(--fuego)}
-.eh-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.6rem}
+.eh-grid{display:grid;grid-template-columns:1fr;gap:1.6rem}
 .eh-card{background:linear-gradient(145deg,rgba(200,114,42,.07),rgba(255,255,255,.015));
   border:1px solid rgba(200,114,42,.2);border-radius:14px;padding:2rem 2.1rem;
   transition:border-color .25s,transform .25s}
@@ -265,21 +265,23 @@ html.tjs [data-tr].tv { opacity: 1; transform: translateY(0); }
 
 /* Galeria de fotos del evento */
 .eh-card-ancha{grid-column:1/-1}
-.eh-fotos{display:grid;grid-template-columns:repeat(2,1fr);gap:.9rem;margin-top:1.6rem}
-.eh-fotos img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:12px;display:block;
-  border:1px solid rgba(242,237,230,.1);transition:transform .3s,border-color .3s}
-.eh-fotos img:hover{transform:scale(1.02);border-color:rgba(200,114,42,.55)}
-/* Son fotos verticales de movil (9:16). Al recortarlas a 4:5 se corta
-   arriba y abajo, asi que cada una fija su punto de interes para que
-   las caras no se queden fuera. */
-.eh-fotos .f-grupo{object-position:center 42%}
-.eh-fotos .f-alfombra{object-position:center 38%}
-.eh-fotos .f-creadores{object-position:center 40%}
-.eh-fotos .f-pin{object-position:center 52%}
+.eh-fotos{display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem;margin-top:1.6rem}
+/* Marco APAISADO a proposito: son fotos verticales de movil (9:16) donde
+   el sujeto ocupa solo la banda central. Con un marco vertical entra la
+   foto casi entera (techo y suelo incluidos) y no se ve a nadie. */
+.eh-fotos img{width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;border-radius:12px;display:block;
+  align-self:start;/* sin esto el grid estira la imagen y anula el aspect-ratio */
+  border:1px solid rgba(242,237,230,.1);transition:transform .35s,border-color .35s}
+.eh-fotos img:hover{transform:scale(1.02);border-color:rgba(200,114,42,.5)}
+/* Cada foto apunta a su banda de interes dentro del original */
+.eh-fotos .f-grupo{object-position:center 58%}
+.eh-fotos .f-alfombra{object-position:62% 42%}
+.eh-fotos .f-creadores{object-position:center 47%}
+.eh-fotos .f-pin{object-position:center 50%}
 .eh-pie{margin-top:1.3rem!important;font-size:.9rem!important;font-style:italic;
   color:rgba(242,237,230,.55)!important;text-align:center}
 @media(prefers-reduced-motion:reduce){.eh-fotos img{transition:none}.eh-fotos img:hover{transform:none}}
-@media(max-width:520px){.eh-fotos{gap:.6rem}}
+@media(max-width:520px){.eh-fotos{grid-template-columns:1fr;gap:.6rem}}
 
 /* ===== Eventos del sector (/marcas) ===== */
 .eventos-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem;margin-top:3rem}
