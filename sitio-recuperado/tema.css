@@ -242,37 +242,33 @@ html.tjs [data-tr].tv { opacity: 1; transform: translateY(0); }
 .dani-texto strong{color:var(--blanco);font-weight:700}
 @media(max-width:640px){.dani{flex-direction:column;gap:1rem;padding:1.6rem 1.4rem;margin-top:2.5rem}}
 
-/* ===== Prueba social: marcas y eventos ===== */
-.prueba-social{max-width:1100px;margin:0 auto;padding:0 2rem 4rem}
-.ps-card{background:linear-gradient(135deg,rgba(200,114,42,.07) 0%,rgba(255,255,255,.015) 55%,transparent 100%);
-  border:1px solid rgba(200,114,42,.2);border-radius:16px;padding:2.2rem 2.4rem;
-  display:grid;grid-template-columns:minmax(190px,auto) 1fr;gap:1rem 2.8rem;align-items:center}
-.ps-cab{border-left:3px solid var(--fuego);padding-left:1.1rem}
-.ps-label{font-size:.62rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;
-  color:var(--fuego);display:block;margin-bottom:.45rem}
-.ps-claim{font-size:1.02rem;font-weight:800;line-height:1.32;color:var(--blanco);margin:0}
+/* ===== Donde hemos estado (home) ===== */
+.eventos-home{max-width:1100px;margin:0 auto;padding:1rem 2rem 4.5rem}
+.eh-label{font-size:.66rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--fuego);display:block;margin-bottom:.8rem}
+.eh-title{font-size:clamp(1.8rem,4.5vw,2.6rem);font-weight:900;line-height:1.1;margin:0 0 2.5rem}
+.eh-title span{color:var(--fuego)}
+.eh-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.6rem}
+.eh-card{background:linear-gradient(145deg,rgba(200,114,42,.07),rgba(255,255,255,.015));
+  border:1px solid rgba(200,114,42,.2);border-radius:14px;padding:2rem 2.1rem;
+  transition:border-color .25s,transform .25s}
+.eh-card:hover{border-color:rgba(200,114,42,.55);transform:translateY(-3px)}
+.eh-fecha{display:inline-flex;align-items:center;gap:.5rem;font-size:.63rem;font-weight:800;
+  letter-spacing:2px;text-transform:uppercase;color:var(--fuego);margin-bottom:.9rem}
+.eh-card h3{font-size:1.35rem;font-weight:900;color:var(--blanco);margin:0 0 .7rem;line-height:1.15}
+.eh-card p{font-size:.9rem;line-height:1.75;color:rgba(242,237,230,.68);margin:0}
+.eh-card p strong{color:var(--blanco);font-weight:700}
+.eh-punto{width:7px;height:7px;border-radius:50%;background:var(--fuego);flex-shrink:0;display:none}
+.eh-card-live .eh-punto{display:block;box-shadow:0 0 0 0 rgba(200,114,42,.65);animation:ehLatido 2.2s infinite}
+@keyframes ehLatido{70%{box-shadow:0 0 0 9px rgba(200,114,42,0)}100%{box-shadow:0 0 0 0 rgba(200,114,42,0)}}
+@media(prefers-reduced-motion:reduce){.eh-card-live .eh-punto{animation:none}.eh-card{transition:none}.eh-card:hover{transform:none}}
+@media(max-width:860px){.eh-grid{grid-template-columns:1fr}.eventos-home{padding-bottom:3rem}}
 
-.ps-lista{list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:.7rem}
-.ps-lista li{display:flex;flex-direction:column;gap:.15rem;
-  background:rgba(13,11,9,.55);border:1px solid rgba(242,237,230,.1);border-radius:10px;
-  padding:.7rem 1.15rem;transition:border-color .25s,background .25s,transform .25s}
-.ps-lista li:hover{border-color:rgba(200,114,42,.55);background:rgba(200,114,42,.09);transform:translateY(-2px)}
-.ps-marca{font-family:'Montserrat',sans-serif;font-weight:800;font-size:.92rem;color:var(--blanco);letter-spacing:.2px}
-.ps-tipo{font-size:.58rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:rgba(242,237,230,.38)}
-
-.ps-evento{grid-column:1/-1;display:flex;align-items:center;gap:.65rem;
-  margin-top:.4rem;padding-top:1.3rem;border-top:1px solid rgba(242,237,230,.09);
-  font-size:.84rem;color:rgba(242,237,230,.6)}
-.ps-evento strong{color:var(--fuego);font-weight:700}
-.ps-punto{width:8px;height:8px;border-radius:50%;background:var(--fuego);flex-shrink:0;
-  box-shadow:0 0 0 0 rgba(200,114,42,.65);animation:psLatido 2.2s infinite}
-.ps-punto-off{background:rgba(242,237,230,.3);animation:none;box-shadow:none}
-@keyframes psLatido{70%{box-shadow:0 0 0 9px rgba(200,114,42,0)}100%{box-shadow:0 0 0 0 rgba(200,114,42,0)}}
-@media(prefers-reduced-motion:reduce){.ps-punto{animation:none}.ps-lista li{transition:none}.ps-lista li:hover{transform:none}}
-@media(max-width:860px){
-  .ps-card{grid-template-columns:1fr;gap:1.5rem;padding:1.8rem 1.5rem}
-  .ps-evento{margin-top:0}
-}
+/* Galeria de fotos del evento (se activa al subir las imagenes) */
+.eh-fotos{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.8rem;margin-top:1.4rem}
+.eh-fotos img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:10px;
+  border:1px solid rgba(242,237,230,.1);transition:transform .3s}
+.eh-fotos img:hover{transform:scale(1.03)}
+@media(prefers-reduced-motion:reduce){.eh-fotos img{transition:none}.eh-fotos img:hover{transform:none}}
 
 /* ===== Eventos del sector (/marcas) ===== */
 .eventos-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem;margin-top:3rem}

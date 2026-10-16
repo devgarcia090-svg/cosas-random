@@ -679,25 +679,37 @@
     </div>
 </section>
 
-<!-- PRUEBA SOCIAL -->
-<section class="prueba-social">
-    <div class="ps-card fade-in">
-        <div class="ps-cab">
-            <span class="ps-label">Confían en Maya</span>
-            <p class="ps-claim">Marcas y causas que ya han<br>trabajado con nosotros</p>
+<!-- DONDE HEMOS ESTADO — Maya fuera de la pantalla (las marcas van en /marcas) -->
+<section class="eventos-home">
+    <div class="fade-in" style="text-align:center">
+        <span class="eh-label">Fuera de la pantalla</span>
+        <h2 class="eh-title">Dónde hemos<br><span>estado</span></h2>
+    </div>
+    <div class="eh-grid">
+        <div class="eh-card fade-in">
+            <span class="eh-fecha">II Edición · 2026</span>
+            <h3>Celebrity Pets Awards</h3>
+            <p>Alfombra roja con los creadores que mueven el mundo animal en España — El Refugio de Rubí, Ecojuanma, La Isla de Tali y muchos más. Una Rottweiler de 40 kg, en una alfombra roja. Ahí es donde se rompe el estigma.</p>
         </div>
-        <ul class="ps-lista">
-            <li><span class="ps-marca">Brott Dog</span><span class="ps-tipo">Accesorios</span></li>
-            <li><span class="ps-marca">Barkibu</span><span class="ps-tipo">Salud</span></li>
-            <li><span class="ps-marca">Balto</span><span class="ps-tipo">Producto</span></li>
-            <li><span class="ps-marca">Celebrity Pets</span><span class="ps-tipo">Evento</span></li>
-        </ul>
-        <div class="ps-evento" id="ps-evento">
-            <span class="ps-punto" aria-hidden="true"></span>
-            <span class="ps-evento-txt"><strong>24 y 25 de octubre</strong> · Nos vemos en la feria <strong>Adopta un Pana</strong></span>
+        <div class="eh-card eh-card-live fade-in" id="eh-pana">
+            <span class="eh-fecha"><span class="eh-punto" aria-hidden="true"></span><span id="eh-pana-fecha">24 y 25 de octubre · 2026</span></span>
+            <h3>Feria Adopta un Pana</h3>
+            <p id="eh-pana-txt">Nos vemos allí, con el mensaje de siempre: <strong>adopta, no compres</strong>. Y que los PPP también encuentran casa.</p>
         </div>
     </div>
 </section>
+<script>
+// La feria pasa sola de futura a pasada cuando termina
+(function(){
+    if (Date.now() < new Date('2026-10-26T00:00:00+02:00').getTime()) return;
+    var f = document.getElementById('eh-pana-fecha');
+    if (f) f.textContent = 'Octubre 2026';
+    var t = document.getElementById('eh-pana-txt');
+    if (t) t.innerHTML = 'Estuvimos allí con el mensaje de siempre: <strong>adopta, no compres</strong>. Y que los PPP también encuentran casa.';
+    var c = document.getElementById('eh-pana');
+    if (c) c.classList.remove('eh-card-live');
+})();
+</script>
 <script>
 // El aviso de la feria pasa solo de "nos vemos" a "estuvimos" cuando acaba
 (function(){
