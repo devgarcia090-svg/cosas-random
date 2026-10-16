@@ -661,6 +661,7 @@
             <span class="eh-fecha"><span class="eh-punto" aria-hidden="true"></span><span id="eh-pana-fecha">24 y 25 de octubre · 2026</span></span>
             <h3>Feria Adopta un Pana</h3>
             <p id="eh-pana-txt">Nos vemos allí, con el mensaje de siempre: <strong>adopta, no compres</strong>. Y que los PPP también encuentran casa.</p>
+            <a href="https://zooasis.org/adopta-un-pana" target="_blank" rel="noopener" class="eh-entradas" id="eh-pana-cta">Conseguir entradas →</a>
         </div>
     </div>
 </section>
@@ -674,6 +675,8 @@
     if (t) t.innerHTML = 'Estuvimos allí con el mensaje de siempre: <strong>adopta, no compres</strong>. Y que los PPP también encuentran casa.';
     var c = document.getElementById('eh-pana');
     if (c) c.classList.remove('eh-card-live');
+    var cta = document.getElementById('eh-pana-cta');
+    if (cta) cta.remove();
 })();
 </script>
 <script>

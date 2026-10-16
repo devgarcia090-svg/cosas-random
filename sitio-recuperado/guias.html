@@ -105,7 +105,19 @@
             .s-title{font-size:1.5rem;margin-bottom:1.2rem}
             .section{padding:2.5rem 1.2rem}
         }
-    </style>
+            /* FILTROS POR TEMATICA */
+        .filtros{display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;margin:0 auto 3rem;max-width:860px}
+        .filtro{background:rgba(255,255,255,.03);border:1px solid rgba(242,237,230,.14);border-radius:50px;
+            color:rgba(242,237,230,.72);font-family:inherit;font-weight:700;font-size:.78rem;
+            padding:.6rem 1.25rem;cursor:pointer;transition:border-color .22s,background .22s,color .22s}
+        .filtro:hover{border-color:rgba(200,114,42,.55);color:var(--blanco)}
+        .filtro:focus-visible{outline:2px solid var(--fuego);outline-offset:2px}
+        .filtro.activo{background:var(--fuego);border-color:var(--fuego);color:#0D0B09}
+        .filtros-vacio{text-align:center;color:rgba(242,237,230,.45);font-size:.9rem;margin:2rem 0}
+        @media(prefers-reduced-motion:reduce){.filtro{transition:none}}
+        @media(max-width:600px){.filtros{gap:.45rem}.filtro{font-size:.72rem;padding:.5rem 1rem}}
+
+</style>
 <!-- Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-MM2BMHMG18"></script>
 <script>
@@ -134,10 +146,21 @@
 <section class="section">
     <div class="container">
 
+        <!-- FILTROS POR TEMATICA -->
+        <div class="filtros" role="group" aria-label="Filtrar guías por temática">
+            <button type="button" class="filtro activo" data-f="todas">Todas</button>
+            <button type="button" class="filtro" data-f="legislacion">⚖️ Legislación y PPP</button>
+            <button type="button" class="filtro" data-f="salud">🏥 Salud y nutrición</button>
+            <button type="button" class="filtro" data-f="educacion">🎓 Educación y convivencia</button>
+            <button type="button" class="filtro" data-f="viajar">🚆 Viajar con tu perro</button>
+            <button type="button" class="filtro" data-f="adoptar">🐾 Antes de adoptar</button>
+        </div>
+        <p class="filtros-vacio" id="filtros-vacio" hidden>No hay guías en esta categoría todavía.</p>
+
         <span class="s-label">Novedades</span>
         <h2 class="s-title">Lo último</h2>
         <div class="guides-grid">
-            <a href="murcia-perros-transporte-publico" class="guide-card">
+            <a href="murcia-perros-transporte-publico" class="guide-card" data-cat="viajar">
                 <img loading="lazy" src="img/guias/murcia-transporte.svg" width="480" height="220" alt="Perros en el transporte público de Murcia" class="guide-card-img">
                 <div class="guide-card-body">
                     <span class="guide-tag">⏳ Actualidad</span>
@@ -146,7 +169,7 @@
                 </div>
                 <div class="guide-card-footer">Cómo participar →</div>
             </a>
-            <a href="renfe-perros-40kg-ppp" class="guide-card">
+            <a href="renfe-perros-40kg-ppp" class="guide-card" data-cat="viajar">
                 <img loading="lazy" src="img/guias/renfe.svg" width="480" height="220" alt="RENFE perros 40 kg y el veto a los PPP" class="guide-card-img">
                 <div class="guide-card-body">
                     <span class="guide-tag">🚄 Actualidad</span>
@@ -160,7 +183,7 @@
         <span class="s-label" style="margin-top:3rem;display:block">Adopción responsable</span>
         <h2 class="s-title">El primer paso</h2>
         <div class="guides-grid">
-            <a href="protectoras-ppp-espana" class="guide-card">
+            <a href="protectoras-ppp-espana" class="guide-card" data-cat="adoptar">
                 <img loading="lazy" src="img/guias/adopcion.svg" width="480" height="220" alt="Adoptar Rottweiler protectora España" class="guide-card-img">
                 <div class="guide-card-body">
                     <span class="guide-tag">🏠 Adopción</span>
@@ -169,7 +192,7 @@
                 </div>
                 <div class="guide-card-footer">Ver protectoras →</div>
             </a>
-            <a href="requisitos-rottweiler-espana" class="guide-card">
+            <a href="requisitos-rottweiler-espana" class="guide-card" data-cat="legislacion">
                 <img loading="lazy" src="img/guias/requisitos.svg" width="480" height="220" alt="Requisitos Rottweiler España" class="guide-card-img">
                 <div class="guide-card-body">
                     <span class="guide-tag">📋 Legislación PPP</span>
@@ -178,7 +201,7 @@
                 </div>
                 <div class="guide-card-footer">Leer guía →</div>
             </a>
-            <a href="razas-perros-ppp" class="guide-card">
+            <a href="razas-perros-ppp" class="guide-card" data-cat="legislacion">
                 <img loading="lazy" src="img/guias/razas.svg" width="480" height="220" alt="Lista de razas PPP en España" class="guide-card-img">
                 <div class="guide-card-body">
                     <span class="guide-tag">📋 Legislación PPP</span>
@@ -187,7 +210,7 @@
                 </div>
                 <div class="guide-card-footer">Ver lista →</div>
             </a>
-            <a href="ley-bienestar-animal" class="guide-card">
+            <a href="ley-bienestar-animal" class="guide-card" data-cat="legislacion">
                 <img loading="lazy" src="img/guias/ley.svg" width="480" height="220" alt="Ley de Bienestar Animal 2023 perros PPP" class="guide-card-img">
                 <div class="guide-card-body">
                     <span class="guide-tag">📜 Nueva ley</span>
@@ -202,7 +225,7 @@
         <h2 class="s-title">Cría a un Rottweiler sano y feliz</h2>
         <div class="guides-grid">
 
-            <a href="alimentacion-rottweiler" class="guide-card">
+            <a href="alimentacion-rottweiler" class="guide-card" data-cat="salud">
                 <img loading="lazy" src="img/guias/alimentacion.svg" width="480" height="220" alt="Alimentación Rottweiler" class="guide-card-img">
                 <div class="guide-card-body">
                     <span class="guide-tag">🦴 Alimentación</span>
@@ -212,7 +235,7 @@
                 <div class="guide-card-footer">Leer guía →</div>
             </a>
 
-            <a href="displasia-rottweiler" class="guide-card">
+            <a href="displasia-rottweiler" class="guide-card" data-cat="salud">
                 <img loading="lazy" src="img/guias/displasia.svg" width="480" height="220" alt="Displasia en Rottweiler" class="guide-card-img">
                 <div class="guide-card-body">
                     <span class="guide-tag">🦴 Salud articular</span>
@@ -222,7 +245,7 @@
                 <div class="guide-card-footer">Leer guía →</div>
             </a>
 
-            <a href="enfermedades-rottweiler" class="guide-card">
+            <a href="enfermedades-rottweiler" class="guide-card" data-cat="salud">
                 <img loading="lazy" src="img/guias/enfermedades.svg" width="480" height="220" alt="Enfermedades Rottweiler" class="guide-card-img">
                 <div class="guide-card-body">
                     <span class="guide-tag">🏥 Salud</span>
@@ -232,7 +255,7 @@
                 <div class="guide-card-footer">Leer guía →</div>
             </a>
 
-            <a href="cuanto-cuesta-rottweiler" class="guide-card">
+            <a href="cuanto-cuesta-rottweiler" class="guide-card" data-cat="adoptar">
                 <img loading="lazy" src="img/guias/coste.svg" width="480" height="220" alt="Cuánto cuesta tener un Rottweiler en España" class="guide-card-img">
                 <div class="guide-card-body">
                     <span class="guide-tag">💸 Economía</span>
@@ -248,7 +271,7 @@
         <h2 class="s-title">Un Rottweiler equilibrado empieza aquí</h2>
         <div class="guides-grid">
 
-            <a href="educar-rottweiler" class="guide-card">
+            <a href="educar-rottweiler" class="guide-card" data-cat="educacion">
                 <img loading="lazy" src="img/guias/educar.svg" width="480" height="220" alt="Educar Rottweiler" class="guide-card-img">
                 <div class="guide-card-body">
                     <span class="guide-tag">🎓 Educación</span>
@@ -258,7 +281,7 @@
                 <div class="guide-card-footer">Leer guía →</div>
             </a>
 
-            <a href="rottweiler-con-ninos" class="guide-card">
+            <a href="rottweiler-con-ninos" class="guide-card" data-cat="educacion">
                 <img loading="lazy" src="img/guias/ninos.svg" width="480" height="220" alt="Rottweiler con niños" class="guide-card-img">
                 <div class="guide-card-body">
                     <span class="guide-tag">👶 Familia</span>
@@ -268,7 +291,7 @@
                 <div class="guide-card-footer">Leer guía →</div>
             </a>
 
-            <a href="historia" class="guide-card">
+            <a href="historia" class="guide-card" data-cat="adoptar">
                 <img loading="lazy" src="img/guias/historia-maya.svg" width="480" height="220" alt="Historia de Maya Rottweiler" class="guide-card-img">
                 <div class="guide-card-body">
                     <span class="guide-tag">❤️ Historia real</span>
@@ -284,7 +307,7 @@
         <h2 class="s-title">Conoce mejor a la raza</h2>
         <div class="guides-grid">
 
-            <a href="rottweiler-macho-vs-hembra" class="guide-card">
+            <a href="rottweiler-macho-vs-hembra" class="guide-card" data-cat="adoptar">
                 <img loading="lazy" src="img/guias/genero.svg" width="480" height="220" alt="Rottweiler macho vs hembra" class="guide-card-img">
                 <div class="guide-card-body">
                     <span class="guide-tag">⚖️ Comparativa</span>
@@ -294,7 +317,7 @@
                 <div class="guide-card-footer">Leer guía →</div>
             </a>
 
-            <a href="socializar-rottweiler" class="guide-card">
+            <a href="socializar-rottweiler" class="guide-card" data-cat="educacion">
                 <img loading="lazy" src="img/guias/socializar.svg" width="480" height="220" alt="Socializar Rottweiler adulto" class="guide-card-img">
                 <div class="guide-card-body">
                     <span class="guide-tag">🤝 Socialización</span>
@@ -304,7 +327,7 @@
                 <div class="guide-card-footer">Leer guía →</div>
             </a>
 
-            <a href="ejercicio-rottweiler" class="guide-card">
+            <a href="ejercicio-rottweiler" class="guide-card" data-cat="salud">
                 <img loading="lazy" src="img/guias/ejercicio.svg" width="480" height="220" alt="Ejercicio para Rottweiler" class="guide-card-img">
                 <div class="guide-card-body">
                     <span class="guide-tag">🏃 Actividad física</span>
@@ -314,7 +337,7 @@
                 <div class="guide-card-footer">Leer guía →</div>
             </a>
 
-            <a href="rottweiler-en-piso" class="guide-card">
+            <a href="rottweiler-en-piso" class="guide-card" data-cat="educacion">
                 <img loading="lazy" src="img/guias/piso.svg" width="480" height="220" alt="Rottweiler en piso" class="guide-card-img">
                 <div class="guide-card-body">
                     <span class="guide-tag">🏠 Vivienda</span>
@@ -324,7 +347,7 @@
                 <div class="guide-card-footer">Leer guía →</div>
             </a>
 
-            <a href="rottweiler-y-gatos" class="guide-card">
+            <a href="rottweiler-y-gatos" class="guide-card" data-cat="educacion">
                 <img loading="lazy" src="img/guias/gatos.svg" width="480" height="220" alt="Rottweiler y gatos convivencia" class="guide-card-img">
                 <div class="guide-card-body">
                     <span class="guide-tag">🐱 Convivencia</span>
@@ -334,7 +357,7 @@
                 <div class="guide-card-footer">Leer guía →</div>
             </a>
 
-            <a href="seguro-rc-rottweiler" class="guide-card">
+            <a href="seguro-rc-rottweiler" class="guide-card" data-cat="legislacion">
                 <img loading="lazy" src="img/guias/seguro.svg" width="480" height="220" alt="Seguro RC Rottweiler PPP" class="guide-card-img">
                 <div class="guide-card-body">
                     <span class="guide-tag">🛡️ Legislación</span>
@@ -344,7 +367,7 @@
                 <div class="guide-card-footer">Leer guía →</div>
             </a>
 
-            <a href="historia-rottweiler" class="guide-card">
+            <a href="historia-rottweiler" class="guide-card" data-cat="adoptar">
                 <img loading="lazy" src="img/guias/historia-raza.svg" width="480" height="220" alt="Historia origen Rottweiler" class="guide-card-img">
                 <div class="guide-card-body">
                     <span class="guide-tag">📜 Historia</span>
@@ -360,7 +383,7 @@
         <h2 class="s-title">Lo que todo dueño necesita saber</h2>
         <div class="guides-grid">
 
-            <a href="rottweiler-cachorro" class="guide-card">
+            <a href="rottweiler-cachorro" class="guide-card" data-cat="educacion">
                 <img loading="lazy" src="img/guias/cachorro.svg" width="480" height="220" alt="Rottweiler cachorro guía crianza" class="guide-card-img">
                 <div class="guide-card-body">
                     <span class="guide-tag">🐶 Cachorro</span>
@@ -370,7 +393,7 @@
                 <div class="guide-card-footer">Leer guía →</div>
             </a>
 
-            <a href="rottweiler-agresivo" class="guide-card">
+            <a href="rottweiler-agresivo" class="guide-card" data-cat="educacion">
                 <img loading="lazy" src="img/guias/comportamiento.svg" width="480" height="220" alt="Rottweiler agresivo causas y soluciones" class="guide-card-img">
                 <div class="guide-card-body">
                     <span class="guide-tag">🧠 Comportamiento</span>
@@ -380,7 +403,7 @@
                 <div class="guide-card-footer">Leer guía →</div>
             </a>
 
-            <a href="bozal-rottweiler" class="guide-card">
+            <a href="bozal-rottweiler" class="guide-card" data-cat="legislacion">
                 <img loading="lazy" src="img/guias/bozal.svg" width="480" height="220" alt="Bozal para Rottweiler guía completa" class="guide-card-img">
                 <div class="guide-card-body">
                     <span class="guide-tag">📋 Obligatorio</span>
@@ -390,7 +413,7 @@
                 <div class="guide-card-footer">Leer guía →</div>
             </a>
 
-            <a href="rottweiler-esperanza-vida" class="guide-card">
+            <a href="rottweiler-esperanza-vida" class="guide-card" data-cat="salud">
                 <img loading="lazy" src="img/guias/vida.svg" width="480" height="220" alt="Esperanza de vida del Rottweiler cuánto viven" class="guide-card-img">
                 <div class="guide-card-body">
                     <span class="guide-tag">SALUD</span>
@@ -400,7 +423,7 @@
                 <div class="guide-card-footer">Leer guía →</div>
             </a>
 
-            <a href="rottweiler-temperamento" class="guide-card">
+            <a href="rottweiler-temperamento" class="guide-card" data-cat="educacion">
                 <img loading="lazy" src="img/guias/temperamento.svg" width="480" height="220" alt="Temperamento y carácter del Rottweiler" class="guide-card-img">
                 <div class="guide-card-body">
                     <span class="guide-tag">CARÁCTER</span>
@@ -410,7 +433,7 @@
                 <div class="guide-card-footer">Leer guía →</div>
             </a>
 
-            <a href="microchip-rottweiler" class="guide-card">
+            <a href="microchip-rottweiler" class="guide-card" data-cat="legislacion">
                 <img loading="lazy" src="img/guias/microchip.svg" width="480" height="220" alt="Microchip obligatorio para Rottweiler PPP" class="guide-card-img">
                 <div class="guide-card-body">
                     <span class="guide-tag">LEGAL</span>
@@ -466,5 +489,46 @@
     <p>© 2026 <span>Maya | El Rottweiler Peluche</span> · Gestionado por <span>MTS23 Talent</span> · Hecho con <span>❤️</span><br><a href="mailto:hola@mayarottweiler.com" style="color:var(--fuego);text-decoration:none;font-size:.75rem;">hola@mayarottweiler.com</a><br><a href="privacidad" style="color:rgba(242,237,230,.4);font-size:.72rem;text-decoration:none;">Privacidad</a> · <a href="aviso-legal" style="color:rgba(242,237,230,.4);font-size:.72rem;text-decoration:none;">Aviso legal</a> · <a href="descargo-responsabilidad" style="color:rgba(242,237,230,.4);font-size:.72rem;text-decoration:none;">Descargo</a></p>
 </footer>
 
+
+<script>
+// Filtra las tarjetas por tematica. Si una seccion se queda sin
+// tarjetas visibles, se oculta entera (titulo incluido) para no dejar
+// encabezados huerfanos.
+(function(){
+    var botones = document.querySelectorAll('.filtro');
+    if(!botones.length) return;
+    var tarjetas = document.querySelectorAll('.guide-card[data-cat]');
+    var vacio = document.getElementById('filtros-vacio');
+
+    function aplicar(f){
+        var visibles = 0;
+        tarjetas.forEach(function(t){
+            var ok = (f === 'todas') || (t.dataset.cat === f);
+            t.hidden = !ok;
+            if(ok) visibles++;
+        });
+        // Oculta la rejilla y su encabezado si no queda nada dentro
+        document.querySelectorAll('.guides-grid').forEach(function(g){
+            var quedan = g.querySelectorAll('.guide-card:not([hidden])').length;
+            g.hidden = quedan === 0;
+            var n = g.previousElementSibling;
+            while(n && (n.classList.contains('s-title') || n.classList.contains('s-label'))){
+                n.hidden = quedan === 0;
+                n = n.previousElementSibling;
+            }
+        });
+        vacio.hidden = visibles > 0;
+    }
+
+    botones.forEach(function(b){
+        b.addEventListener('click', function(){
+            botones.forEach(function(x){ x.classList.remove('activo'); x.setAttribute('aria-pressed','false'); });
+            b.classList.add('activo'); b.setAttribute('aria-pressed','true');
+            aplicar(b.dataset.f);
+        });
+        b.setAttribute('aria-pressed', b.classList.contains('activo') ? 'true' : 'false');
+    });
+})();
+</script>
 </body>
 </html>

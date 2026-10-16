@@ -319,3 +319,21 @@ html.tjs [data-tr].tv { opacity: 1; transform: translateY(0); }
 .lista-consent a{color:var(--fuego)}
 @media(prefers-reduced-motion:reduce){.encuesta-btn{transition:none}.encuesta-btn:hover{transform:none}}
 @media(max-width:560px){.encuesta-ops{flex-direction:column}.encuesta-btn{width:100%;flex-direction:row;justify-content:flex-start;gap:.9rem;padding:1rem 1.2rem}}
+
+/* Enlace de entradas del evento */
+.eh-entradas{display:inline-block;margin-top:1.1rem;background:var(--fuego);color:#0D0B09;
+  padding:.65rem 1.4rem;border-radius:6px;text-decoration:none;font-weight:800;font-size:.75rem;
+  letter-spacing:1.3px;text-transform:uppercase;transition:background .25s}
+.eh-entradas:hover{background:#E0571A}
+
+/* Cierre de guia: no dejar al lector en un callejon sin salida */
+.sigue-maya{max-width:760px;margin:2.5rem auto 0;padding:1.6rem 1.8rem;text-align:center;
+  background:rgba(255,255,255,.025);border:1px solid rgba(242,237,230,.1);border-radius:12px}
+.sm-txt{margin:0 0 1.1rem;font-size:.92rem;line-height:1.6;color:rgba(242,237,230,.72)}
+.sm-btns{display:flex;gap:.7rem;justify-content:center;flex-wrap:wrap}
+.sm-btns a{background:rgba(200,114,42,.12);border:1px solid rgba(200,114,42,.38);border-radius:50px;
+  color:var(--blanco);text-decoration:none;font-weight:700;font-size:.82rem;padding:.6rem 1.4rem;
+  transition:background .22s,border-color .22s}
+.sm-btns a:hover{background:rgba(200,114,42,.25);border-color:var(--fuego)}
+@media(prefers-reduced-motion:reduce){.sm-btns a{transition:none}}
+@media print{.sigue-maya{display:none}}
