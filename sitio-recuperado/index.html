@@ -88,7 +88,7 @@
     <link rel="dns-prefetch" href="https://fonts.googleapis.com/">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Bebas+Neue&family=Montserrat:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="icon" id="favicon" type="image/png" href="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
     <script>
@@ -211,7 +211,10 @@
             padding: .38rem 1rem; border-radius: 4px; font-size: .62rem; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 2rem;
         }
         .hero h1 {
-            font-size: clamp(2.2rem, 4.8vw, 4.6rem);
+            font-family: 'Bebas Neue', 'Montserrat', sans-serif;
+            font-weight: 400; /* Bebas solo tiene un peso: pedir 900 produce negrita falsa */
+            letter-spacing: .012em;
+            font-size: clamp(3rem, 9vw, 8rem);
             font-weight: 900; line-height: .98; letter-spacing: -.03em;
             text-transform: uppercase; margin-bottom: 2rem;
         }
@@ -354,7 +357,7 @@
         .about-badge .small { font-size: .6rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; }
         .s-label { font-size: .6rem; font-weight: 800; color: var(--fuego); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 1rem; display: block; }
         .s-label::after { content: ''; display: inline-block; width: 46px; height: 1px; background: linear-gradient(90deg, var(--fuego), transparent); margin-left: .8rem; vertical-align: middle; }
-        .s-title { font-size: clamp(2rem, 3.2vw, 2.8rem); font-weight: 900; line-height: 1.08; margin-bottom: 1.2rem; letter-spacing: -.025em; }
+        .s-title { font-family: 'Bebas Neue','Montserrat',sans-serif; font-size: clamp(2.6rem, 6vw, 5.2rem); font-weight: 400; line-height: .94; margin-bottom: 1.4rem; letter-spacing: .012em; }
         .s-sub { font-size: .93rem; color: var(--ash); line-height: 1.8; max-width: 520px; }
         .mission-card {
             display: flex; gap: 1rem; align-items: flex-start; margin-top: 1.2rem; padding: 1.3rem;
@@ -464,7 +467,7 @@
             .hero-content { grid-template-columns: 1fr; text-align: center; gap: 3rem; }
             .hero-content > div:first-child { max-width: none; }
             .hero-content::before { font-size: 34vw; opacity: .7; }
-            .hero h1 { font-size: clamp(2.2rem, 8.5vw, 3.4rem); }
+            .hero h1 { font-size: clamp(2.8rem, 13vw, 4.6rem); }
             /* Móvil: la foto pasa a fondo completo con velo oscuro, texto encima */
             .hero-image { width: 100%; -webkit-mask-image: none; mask-image: none; }
             .hero-image::after { background: linear-gradient(to bottom, rgba(13,11,9,.5) 0%, rgba(13,11,9,.72) 50%, #0D0B09 100%); }
@@ -482,7 +485,7 @@
             .growth, .stats-bar { padding: 3.5rem 1.5rem; }
         }
         @media (max-width: 500px) {
-            .hero h1 { font-size: 2.2rem; }
+            .hero h1 { font-size: 2.9rem; }
             .stats-grid { grid-template-columns: 1fr 1fr; }
             .videos-grid { grid-template-columns: 1fr; }
             .growth-grid { grid-template-columns: 1fr 1fr; }

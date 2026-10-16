@@ -60,8 +60,11 @@ nav.scrolled {
 @keyframes floorGlowT { 0%,100% { opacity: .8; } 50% { opacity: 1.1; } }
 .hero-h-content { position: relative; z-index: 1; }
 .hero-h h1 {
-  font-size: clamp(2.4rem, 5vw, 4rem) !important;
-  font-weight: 900; line-height: 1.05; letter-spacing: -.025em;
+  /* Bebas solo en el titular grande. En los h2 del articulo se queda
+     Montserrat: veinte subtitulos en mayuscula condensada cansan la vista. */
+  font-family: 'Bebas Neue', 'Montserrat', sans-serif;
+  font-size: clamp(3rem, 7vw, 6rem) !important;
+  font-weight: 400; line-height: .95; letter-spacing: .012em;
   animation: riseInT .9s var(--ease) .15s backwards;
 }
 .hero-h p { color: var(--ash); animation: riseInT .9s var(--ease) .35s backwards; }
@@ -237,7 +240,7 @@ html.tjs [data-tr].tv { opacity: 1; transform: translateY(0); }
   border:1px solid rgba(200,114,42,.22);border-radius:12px;padding:2rem 2.2rem}
 .dani-icono{font-size:2.4rem;line-height:1;flex-shrink:0}
 .dani-label{font-size:.65rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--fuego);display:block;margin-bottom:.4rem}
-.dani-nombre{font-size:1.5rem;font-weight:900;margin:0 0 .6rem;line-height:1.1}
+.dani-nombre{font-family:'Bebas Neue','Montserrat',sans-serif;font-size:2.4rem;font-weight:400;letter-spacing:.015em;margin:0 0 .6rem;line-height:1}
 .dani-texto{font-size:.95rem;line-height:1.75;color:rgba(242,237,230,.72);margin:0}
 .dani-texto strong{color:var(--blanco);font-weight:700}
 @media(max-width:640px){.dani{flex-direction:column;gap:1rem;padding:1.6rem 1.4rem;margin-top:2.5rem}}
@@ -245,7 +248,7 @@ html.tjs [data-tr].tv { opacity: 1; transform: translateY(0); }
 /* ===== Donde hemos estado (home) ===== */
 .eventos-home{max-width:1100px;margin:0 auto;padding:1rem 2rem 4.5rem}
 .eh-label{font-size:.66rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--fuego);display:block;margin-bottom:.8rem}
-.eh-title{font-size:clamp(1.8rem,4.5vw,2.6rem);font-weight:900;line-height:1.1;margin:0 0 2.5rem}
+.eh-title{font-family:'Bebas Neue','Montserrat',sans-serif;font-size:clamp(2.6rem,6vw,5.2rem);font-weight:400;line-height:.94;letter-spacing:.012em;margin:0 0 2.8rem}
 .eh-title span{color:var(--fuego)}
 .eh-grid{display:grid;grid-template-columns:1fr;gap:1.6rem}
 .eh-card{background:linear-gradient(145deg,rgba(200,114,42,.07),rgba(255,255,255,.015));
@@ -254,7 +257,7 @@ html.tjs [data-tr].tv { opacity: 1; transform: translateY(0); }
 .eh-card:hover{border-color:rgba(200,114,42,.55);transform:translateY(-3px)}
 .eh-fecha{display:inline-flex;align-items:center;gap:.5rem;font-size:.63rem;font-weight:800;
   letter-spacing:2px;text-transform:uppercase;color:var(--fuego);margin-bottom:.9rem}
-.eh-card h3{font-size:1.35rem;font-weight:900;color:var(--blanco);margin:0 0 .7rem;line-height:1.15}
+.eh-card h3{font-family:'Bebas Neue','Montserrat',sans-serif;font-size:2.1rem;font-weight:400;letter-spacing:.015em;color:var(--blanco);margin:0 0 .7rem;line-height:1}
 .eh-card p{font-size:.9rem;line-height:1.75;color:rgba(242,237,230,.68);margin:0}
 .eh-card p strong{color:var(--blanco);font-weight:700}
 .eh-punto{width:7px;height:7px;border-radius:50%;background:var(--fuego);flex-shrink:0;display:none}
