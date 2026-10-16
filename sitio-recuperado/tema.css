@@ -222,3 +222,11 @@ html.tjs [data-tr].tv { opacity: 1; transform: translateY(0); }
   .checklist button{display:none!important}
   a{color:#000!important}
 }
+
+/* Enlace secundario bajo la newsletter (la tienda deja de competir como CTA) */
+.nl-secundario{text-align:center;margin:1.4rem auto 0;font-size:.82rem;color:rgba(242,237,230,.45)}
+.nl-secundario a{color:var(--fuego);text-decoration:none;font-weight:700}
+.nl-secundario a:hover{text-decoration:underline}
+
+/* Nota bajo las metricas del hero */
+.stats-nota{text-align:center;margin:1.5rem auto 0;font-size:.68rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(242,237,230,.32)}

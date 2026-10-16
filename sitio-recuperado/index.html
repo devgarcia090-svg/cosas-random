@@ -570,6 +570,7 @@
             <span class="stat-label" id="stat4">Me gusta TikTok</span>
         </div>
     </div>
+    <p class="stats-nota">Datos actualizados a octubre de 2026</p>
 </div>
 
 <!-- DOS CAMINOS -->
@@ -578,14 +579,27 @@
 <!-- NOVEDAD BANNER -->
 <a href="murcia-perros-transporte-publico" style="display:flex;max-width:1000px;margin:0 auto 1.5rem;background:linear-gradient(135deg,rgba(192,57,43,.18),var(--gris));border-radius:8px;padding:1.6rem 2rem;border:1px solid rgba(192,57,43,0.5);align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;text-decoration:none;color:var(--blanco);">
     <div style="display:flex;align-items:center;gap:1.3rem;flex-wrap:wrap;">
-        <span style="font-size:2.6rem;">⏳</span>
+        <span style="font-size:2.6rem;" id="murcia-icono">⏳</span>
         <div>
-            <div style="font-size:0.7rem;font-weight:700;color:#e0715f;letter-spacing:2px;text-transform:uppercase;margin-bottom:0.35rem;">Urgente · actúa antes del 16 de octubre</div>
-            <div style="font-size:1.2rem;font-weight:900;line-height:1.25;">Murcia decidirá si los perros suben al transporte público</div>
+            <div id="murcia-kicker" style="font-size:0.7rem;font-weight:700;color:#e0715f;letter-spacing:2px;text-transform:uppercase;margin-bottom:0.35rem;">Urgente · actúa antes del 16 de octubre</div>
+            <div id="murcia-titulo" style="font-size:1.2rem;font-weight:900;line-height:1.25;">Murcia decidirá si los perros suben al transporte público</div>
         </div>
     </div>
-    <span style="background:var(--fuego);color:var(--negro);padding:0.8rem 1.6rem;border-radius:4px;font-weight:800;font-size:0.75rem;letter-spacing:1.5px;text-transform:uppercase;white-space:nowrap;flex-shrink:0;">Cómo participar →</span>
+    <span id="murcia-cta" style="background:var(--fuego);color:var(--negro);padding:0.8rem 1.6rem;border-radius:4px;font-weight:800;font-size:0.75rem;letter-spacing:1.5px;text-transform:uppercase;white-space:nowrap;flex-shrink:0;">Cómo participar →</span>
 </a>
+
+<script>
+// El banner de Murcia pasa de "urgente / participa" a "seguimiento" por sí solo
+// cuando vence la consulta pública, para que no quede texto caducado en portada.
+(function(){
+    if (Date.now() < new Date('2026-10-16T23:59:59+02:00').getTime()) return;
+    var set = function(id, txt){ var el = document.getElementById(id); if (el) el.textContent = txt; };
+    set('murcia-icono', '🚍');
+    set('murcia-kicker', 'En seguimiento · transporte público');
+    set('murcia-titulo', 'Murcia prepara el decreto para viajar con perro: seguimos las alegaciones');
+    set('murcia-cta', 'Ver en qué punto está →');
+})();
+</script>
 
 <!-- QUIZ BANNER -->
 <div style="max-width:1000px;margin:0 auto 3rem;background:var(--gris);border-radius:8px;padding:2rem 2.5rem;border:1px solid rgba(200,114,42,0.3);display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;">
@@ -742,23 +756,14 @@
     </div>
 </section>
 
-<!-- TIENDA TEASER -->
-<section style="padding:4.5rem 2rem;background:linear-gradient(160deg,#1E1008 0%,#0D0B09 100%);text-align:center;border-top:1px solid rgba(200,114,42,.15);border-bottom:1px solid rgba(200,114,42,.1)">
-    <div style="max-width:680px;margin:0 auto">
-        <span style="font-size:.68rem;font-weight:700;color:var(--fuego);letter-spacing:3px;text-transform:uppercase;display:block;margin-bottom:1rem">🛍️ Maya Merch</span>
-        <h2 style="font-size:clamp(1.6rem,4vw,2.2rem);font-weight:900;line-height:1.15;margin-bottom:.8rem">La tienda oficial llega <span style="color:var(--fuego)">muy pronto</span></h2>
-        <p style="color:rgba(242,237,230,.5);font-size:.9rem;margin-bottom:2rem;line-height:1.7;max-width:480px;margin-left:auto;margin-right:auto">Merch exclusivo de Maya para los que entienden que un Rottweiler es ante todo familia. Apúntate y sé el primero en saber cuándo abrimos.</p>
-        <a href="tienda" style="background:var(--fuego);color:var(--negro);font-family:'Montserrat',sans-serif;font-weight:800;font-size:.78rem;letter-spacing:1.5px;text-transform:uppercase;padding:.9rem 2.2rem;border-radius:4px;text-decoration:none;display:inline-block;transition:all .25s">Ver qué viene 🐾</a>
-    </div>
-</section>
-
+<!-- CLUB DE LA MANADA — newsletter + merch unificados en un unico CTA -->
     <section class="ml-newsletter">
       <div id="mlb2-44050586" class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-44050586">
         <div class="ml-form-embedWrapper">
           <div class="ml-form-embedBody row-form">
             <div class="nl-head">
-              <h2>🐾 Únete a la manada</h2>
-              <p>Recibe las novedades de Maya, las guías nuevas y la lucha contra el estigma PPP directamente en tu correo. Sin spam, prometido.</p>
+              <h2>🐾 Únete al club de la manada</h2>
+              <p>Las guías nuevas, la lucha contra el estigma PPP y lo que vamos consiguiendo, directo a tu correo. Y cuando abra la tienda, los del club entran primero. Sin spam, prometido.</p>
             </div>
             <form class="ml-block-form" action="https://assets.mailerlite.com/jsonp/2528243/forms/193779753306555455/subscribe" data-code="" method="post" target="_blank">
               <div class="nl-row">
@@ -776,6 +781,7 @@
           </div>
         </div>
       </div>
+      <p class="nl-secundario">¿Solo venías por el merch? <a href="tienda">Mira por dónde va la tienda →</a></p>
     </section>
     <script>function ml_webform_success_44050586(){var $=ml_jQuery||jQuery;$('.ml-subscribe-form-44050586 .row-success').show();$('.ml-subscribe-form-44050586 .row-form').hide();}</script>
     <script src="https://groot.mailerlite.com/js/w/webforms.min.js?v83147fa8ce2d95cb73ece7f28b469519" type="text/javascript"></script>
