@@ -26,7 +26,7 @@ body::after {
 
 /* Barra de progreso de lectura */
 #scrollProgress {
-  position: fixed; top: 0; left: 0; height: 3px; width: 0; z-index: 1002;
+  position: fixed; top: env(safe-area-inset-top, 0px); left: 0; height: 3px; width: 0; z-index: 1002;
   background: linear-gradient(90deg, var(--fuego), var(--ember), var(--oro));
   box-shadow: 0 0 14px rgba(224,87,26,.7);
 }
