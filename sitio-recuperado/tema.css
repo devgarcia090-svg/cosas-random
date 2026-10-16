@@ -335,3 +335,19 @@ html.tjs [data-tr].tv { opacity: 1; transform: translateY(0); }
 .sm-btns a:hover{background:rgba(200,114,42,.25);border-color:var(--fuego)}
 @media(prefers-reduced-motion:reduce){.sm-btns a{transition:none}}
 @media print{.sigue-maya{display:none}}
+
+/* Fotos dentro de los articulos.
+   Son verticales de movil y article img{width:100%} las convertia en un
+   muro de mil pixeles de alto en mitad del texto. Se muestran como una
+   franja apaisada, que es como se lee una foto en un articulo.
+   No afecta a los SVG de las guias, que viven en img/ y ya son apaisados. */
+article img[src*="fotos/"]{
+  aspect-ratio:3/2;
+  /* Sin height:auto el atributo height del HTML actua como estilo y
+     anula el aspect-ratio. */
+  height:auto;
+  object-fit:cover;
+  object-position:center 30%;
+}
+/* El logo de la protectora es una ficha, no una foto de articulo */
+article img[src*="zooasis"]{aspect-ratio:auto;object-fit:contain;max-height:none}

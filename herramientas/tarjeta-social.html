@@ -1,0 +1,32 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{width:1200px;height:630px;overflow:hidden;font-family:'Montserrat',sans-serif;
+       background:#0D0B09;display:flex}
+  .texto{width:620px;padding:62px 0 58px 68px;display:flex;flex-direction:column;
+         justify-content:center;position:relative;z-index:2}
+  .kicker{font-size:17px;font-weight:800;letter-spacing:4.5px;text-transform:uppercase;
+          color:#C8722A;margin-bottom:22px;display:flex;align-items:center;gap:12px}
+  .kicker::before{content:'';width:46px;height:3px;background:#C8722A;display:block}
+  h1{font-family:'Bebas Neue',sans-serif;font-weight:400;font-size:97px;line-height:.9;
+     letter-spacing:.012em;color:#F2EDE6;margin-bottom:24px}
+  h1 em{font-style:normal;color:#C8722A;display:block}
+  p{font-size:21px;line-height:1.5;color:rgba(242,237,230,.72);max-width:470px}
+  .pie{position:absolute;left:68px;bottom:52px;font-size:16px;font-weight:800;
+       letter-spacing:2.6px;text-transform:uppercase;color:rgba(242,237,230,.42)}
+  .foto{position:absolute;inset:0 0 0 520px;background:url('http://127.0.0.1:8099/fotos/maya-paseo.webp') 38% 26%/cover no-repeat}
+  .velo{position:absolute;inset:0 0 0 460px;
+        background:linear-gradient(90deg,#0D0B09 0%,rgba(13,11,9,.94) 20%,rgba(13,11,9,.35) 58%,rgba(13,11,9,0) 100%)}
+  .borde{position:absolute;inset:auto 0 0 0;height:8px;background:#C8722A;z-index:5}
+</style></head><body>
+  <div class="foto"></div><div class="velo"></div>
+  <div class="texto">
+    <span class="kicker">Maya · El Rottweiler Peluche</span>
+    <h1>40 kg de<br>puro amor<em>con mala fama</em></h1>
+    <p>Rompiendo el estigma de los perros PPP en España, un vídeo a la vez.</p>
+    <span class="pie">mayarottweiler.com</span>
+  </div>
+  <div class="borde"></div>
+</body></html>
