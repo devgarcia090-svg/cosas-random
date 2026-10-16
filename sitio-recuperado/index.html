@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Sin esto, Safari en iPhone tiñe la barra de estado muestreando
          la pagina y aparece una franja lavada encima del nav. -->
     <meta name="theme-color" content="#0D0B09">
@@ -489,8 +489,13 @@
             .growth, .stats-bar { padding: 3.5rem 1.5rem; }
         }
         .nav-logo { white-space: nowrap; }
+        /* El titulo completo se mantiene en movil, solo se reduce para que
+           entre en una linea en vez de partirse. */
         @media (max-width: 700px) {
-            .nav-logo span { display: none; }
+            .nav-logo { font-size: .66rem; letter-spacing: 1px; }
+        }
+        @media (max-width: 380px) {
+            .nav-logo { font-size: .58rem; letter-spacing: .5px; }
         }
         @media (max-width: 500px) {
             .hero h1 { font-size: 2.9rem; }
