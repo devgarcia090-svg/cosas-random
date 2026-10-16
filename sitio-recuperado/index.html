@@ -140,8 +140,8 @@
 
         /* ── NAV ─────────────────────────────────────────────── */
         nav {
-            position: fixed; top: 0; width: 100%; z-index: 1000;
-            padding: calc(1.2rem + env(safe-area-inset-top, 0px)) calc(2.5rem + env(safe-area-inset-right, 0px)) 1.2rem calc(2.5rem + env(safe-area-inset-left, 0px));
+            position: fixed; top:-120px; width: 100%; z-index: 1000;
+            padding: calc(120px + 1.2rem + env(safe-area-inset-top, 0px)) calc(2.5rem + env(safe-area-inset-right, 0px)) 1.2rem calc(2.5rem + env(safe-area-inset-left, 0px));
             display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
             background: transparent; backdrop-filter: blur(0);
             border-bottom: 1px solid transparent;
@@ -462,9 +462,9 @@
 
         /* ── RESPONSIVE ──────────────────────────────────────── */
         @media (max-width: 900px) {
-            nav { display: flex; justify-content: space-between; padding: calc(1rem + env(safe-area-inset-top, 0px)) calc(1.5rem + env(safe-area-inset-right, 0px)) 1rem calc(1.5rem + env(safe-area-inset-left, 0px)); }
+            nav { display: flex; justify-content: space-between; padding: calc(120px + 1rem + env(safe-area-inset-top, 0px)) calc(1.5rem + env(safe-area-inset-right, 0px)) 1rem calc(1.5rem + env(safe-area-inset-left, 0px)); }
             .nav-links { display: none; }
-            .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 60px; left: 0; width: 100%; background: rgba(13,11,9,.98); padding: 1.5rem 2rem; gap: 1.2rem; border-bottom: 1px solid rgba(200,114,42,.18); backdrop-filter: blur(16px); }
+            .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: rgba(13,11,9,.98); padding: 1.5rem 2rem; gap: 1.2rem; border-bottom: 1px solid rgba(200,114,42,.18); backdrop-filter: blur(16px); }
             .nav-links.open .mobile-lang { display: flex; gap: .5rem; padding-top: .5rem; border-top: 1px solid rgba(200,114,42,.15); }
             .hamburger { display: flex; }
             .lang-switcher { display: none; }
