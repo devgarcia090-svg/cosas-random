@@ -1,0 +1,23 @@
+{
+  // Configuración del Worker que sirve mayarottweiler.com
+  //
+  // IMPORTANTE: "name" tiene que coincidir EXACTAMENTE con el nombre del
+  // Worker en el panel de Cloudflare (Workers & Pages -> lo verás en la
+  // lista). Si no coincide, la build falla y te avisa; la web NO se rompe.
+  "name": "mayarottweiler",
+
+  "compatibility_date": "2026-10-16",
+
+  // Carpeta con la web. Todo lo que hay dentro se publica tal cual.
+  // Los archivos _headers y _redirects viven ahí y Cloudflare los procesa
+  // (no se sirven como páginas).
+  "assets": {
+    "directory": "./sitio-recuperado"
+  }
+
+  // No se define "html_handling" ni "not_found_handling" a propósito:
+  // los valores por defecto (html_handling = "auto-trailing-slash") son
+  // justo el comportamiento que la web tiene ahora mismo, con /guias
+  // sirviendo guias.html y /guias.html redirigiendo a /guias. Tocarlos
+  // cambiaría las URLs y tiraría el SEO.
+}
