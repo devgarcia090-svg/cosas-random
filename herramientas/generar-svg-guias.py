@@ -250,6 +250,27 @@ ICONS["historia-maya"] = ('La historia de Maya',
     heart(240, 104, 3.1, "none", FUEGO, 8) + paw(240, 104, 0.66, CREMA))
 
 
+# Criaderos ilegales: jaula con la puerta abierta y un rastro de huellas
+# saliendo en diagonal hacia arriba, lejos de la marca de agua de la esquina.
+ICONS["criaderos"] = ('Criaderos ilegales de perros en Espana',
+    # jaula, desplazada a la izquierda para dejar sitio al rastro
+    f'<rect x="104" y="80" width="150" height="92" rx="4" fill="none" '
+    f'stroke="{CREMA}" stroke-width="7" stroke-linejoin="round"/>'
+    f'<g stroke="{CREMA}" stroke-width="5" stroke-linecap="round" opacity="0.8">'
+    f'<path d="M134 86 V166"/><path d="M164 86 V166"/>'
+    f'<path d="M194 86 V166"/><path d="M224 86 V166"/></g>'
+    # puerta abierta hacia fuera, con bisagra en la esquina superior derecha
+    f'<g transform="translate(254 84) rotate(-32)" fill="none" stroke="{FUEGO}" '
+    f'stroke-width="7" stroke-linejoin="round">'
+    f'<rect x="0" y="0" width="54" height="88" rx="4"/>'
+    f'<path d="M18 6 V82" stroke-width="4" opacity="0.75"/>'
+    f'<path d="M36 6 V82" stroke-width="4" opacity="0.75"/></g>'
+    # rastro de huellas alejandose, cada vez mas tenue
+    + paw(356, 174, 0.48, FUEGO, 0.95)
+    + paw(400, 140, 0.38, FUEGO, 0.6)
+    + paw(434, 110, 0.29, FUEGO, 0.32))
+
+
 def main():
     for slug, (label, icon) in ICONS.items():
         svg = TEMPLATE.format(label=label, icon=icon)
