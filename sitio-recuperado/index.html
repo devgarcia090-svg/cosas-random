@@ -593,27 +593,29 @@
 <section class="two-paths">
 
 <!-- NOVEDAD BANNER -->
-<a href="murcia-perros-transporte-publico" style="display:flex;max-width:1000px;margin:0 auto 1.5rem;background:linear-gradient(135deg,rgba(192,57,43,.18),var(--gris));border-radius:8px;padding:1.6rem 2rem;border:1px solid rgba(192,57,43,0.5);align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;text-decoration:none;color:var(--blanco);">
+<a id="novedad-banner" href="halloween-con-perro" style="display:flex;max-width:1000px;margin:0 auto 1.5rem;background:linear-gradient(135deg,rgba(192,57,43,.18),var(--gris));border-radius:8px;padding:1.6rem 2rem;border:1px solid rgba(192,57,43,0.5);align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;text-decoration:none;color:var(--blanco);">
     <div style="display:flex;align-items:center;gap:1.3rem;flex-wrap:wrap;">
-        <span style="font-size:2.6rem;" id="murcia-icono">⏳</span>
+        <span style="font-size:2.6rem;" id="nov-icono">🎃</span>
         <div>
-            <div id="murcia-kicker" style="font-size:0.7rem;font-weight:700;color:#e0715f;letter-spacing:2px;text-transform:uppercase;margin-bottom:0.35rem;">Urgente · actúa antes del 16 de octubre</div>
-            <div id="murcia-titulo" style="font-size:1.2rem;font-weight:900;line-height:1.25;">Murcia decidirá si los perros suben al transporte público</div>
+            <div id="nov-kicker" style="font-size:0.7rem;font-weight:700;color:#e0715f;letter-spacing:2px;text-transform:uppercase;margin-bottom:0.35rem;">Guía de temporada · antes del 31 de octubre</div>
+            <div id="nov-titulo" style="font-size:1.2rem;font-weight:900;line-height:1.25;">Halloween es una de las peores noches del año para tu perro</div>
         </div>
     </div>
-    <span id="murcia-cta" style="background:var(--fuego);color:var(--negro);padding:0.8rem 1.6rem;border-radius:4px;font-weight:800;font-size:0.75rem;letter-spacing:1.5px;text-transform:uppercase;white-space:nowrap;flex-shrink:0;">Cómo participar →</span>
+    <span id="nov-cta" style="background:var(--fuego);color:var(--negro);padding:0.8rem 1.6rem;border-radius:4px;font-weight:800;font-size:0.75rem;letter-spacing:1.5px;text-transform:uppercase;white-space:nowrap;flex-shrink:0;">Leer la guía →</span>
 </a>
 
 <script>
-// El banner de Murcia pasa de "urgente / participa" a "seguimiento" por sí solo
-// cuando vence la consulta pública, para que no quede texto caducado en portada.
+// Pasado Halloween, el hueco de novedades no se queda con una guia de
+// temporada caducada: cambia solo a la actualidad de los criaderos.
 (function(){
-    if (Date.now() < new Date('2026-10-16T23:59:59+02:00').getTime()) return;
+    if (Date.now() < new Date('2026-11-01T06:00:00+01:00').getTime()) return;
+    var b = document.getElementById('novedad-banner');
+    if (b) b.setAttribute('href', 'criaderos-ilegales-espana');
     var set = function(id, txt){ var el = document.getElementById(id); if (el) el.textContent = txt; };
-    set('murcia-icono', '🚍');
-    set('murcia-kicker', 'En seguimiento · transporte público');
-    set('murcia-titulo', 'Murcia prepara el decreto para viajar con perro: seguimos las alegaciones');
-    set('murcia-cta', 'Ver en qué punto está →');
+    set('nov-icono', '🚨');
+    set('nov-kicker', 'Actualidad · adopta, no compres');
+    set('nov-titulo', '41 perros hacinados en Cuenca: ninguno era "potencialmente peligroso"');
+    set('nov-cta', 'Leer la novedad →');
 })();
 </script>
 

@@ -270,6 +270,23 @@ ICONS["criaderos"] = ('Criaderos ilegales de perros en Espana',
     + paw(400, 140, 0.38, FUEGO, 0.6)
     + paw(434, 110, 0.29, FUEGO, 0.32))
 
+# Halloween: sabana de fantasma con orejas de perro asomando
+ICONS["halloween"] = ('Halloween con perro: petardos, disfraces y estres',
+    # sabana
+    f'<path d="M240 58 C196 58 170 92 170 134 V186 l18-16 18 16 18-16 18 16 '
+    f'18-16 18 16 18-16 18 16 18-16 18 16 V134 C310 92 284 58 240 58 Z" '
+    f'fill="{CREMA}" opacity="0.95"/>'
+    # agujeros de los ojos
+    f'<ellipse cx="218" cy="118" rx="13" ry="16" fill="#0D0B09"/>'
+    f'<ellipse cx="262" cy="118" rx="13" ry="16" fill="#0D0B09"/>'
+    # orejas asomando por encima
+    f'<path d="M188 86 q-16 -22 4 -30 q16 -6 20 16 Z" fill="{FUEGO}"/>'
+    f'<path d="M292 86 q16 -22 -4 -30 q-16 -6 -20 16 Z" fill="{FUEGO}"/>'
+    # hocico asomando por debajo del borde de los ojos
+    f'<ellipse cx="240" cy="152" rx="16" ry="11" fill="{FUEGO}" opacity="0.9"/>'
+    # destellos / ruido alrededor
+    + paw(104, 92, 0.42, FUEGO, 0.5) + paw(372, 104, 0.36, FUEGO, 0.38))
+
 
 def main():
     for slug, (label, icon) in ICONS.items():
