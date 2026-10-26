@@ -1,0 +1,60 @@
+{
+  "usuario": "@maya.rottweiler13",
+  "fecha_nacimiento": "2021-03-10",
+  "fecha_publicacion": null,
+  "seguidores": 24000,
+  "seguidores_final": "24K+",
+
+  "textos": {
+    "s01": "Dicen que los rottweilers dan miedo.",
+    "s02_cabecera": "TRADUCE ESTA FRASE",
+    "s02_fila1": ["ROTTWEILER", "="],
+    "s02_falsa": "PELIGROSA",
+    "s02_correcta": ["PAYASA", "DE", "38 KG"],
+    "s03_etiqueta": "DÍAS DE MAYA",
+    "s03_sub": "rompiendo el mito",
+    "s04_sub": "personas mirando",
+    "s06_pilares": ["HUMOR", "AVENTURA", "MITOS ROTOS", "VIDA EN FURGO"],
+    "s07_a": ["UNA SOLA", "CORREA."],
+    "s07_b": ["TODAS LAS", "AVENTURAS."]
+  },
+
+  "clips": {
+    "01_gancho": {"inicio": 0.0, "momento_frenazo": null, "punto_frenazo": [540, 1180]},
+    "02_payasa": {"inicio": 0.0},
+    "05_humano": {"inicio": 0.0, "momento_respuesta": null},
+    "06_humor": {"inicio": 0.0},
+    "06_aventura": {"inicio": 0.0},
+    "06_mitos": {"inicio": 0.0},
+    "06_furgo": {"inicio": 0.0},
+    "08_salto_furgo": {"inicio": 0.0, "momento_aterrizaje": null, "punto_aterrizaje": [540, 1250]}
+  },
+
+  "tiempos": {
+    "escenas": [0.0, 2.0, 5.0, 8.0, 11.0, 13.0, 16.0, 18.0, 20.0, 22.0],
+    "frenazo": 1.2,
+    "respuesta_05": 0.75,
+    "aterrizaje_08": 0.3
+  },
+
+  "locucion": {
+    "archivo": "audio/locucion.wav",
+    "offset": 0.0,
+    "anclas": [0.3, 2.2, 5.2, 8.3, 16.1, 18.4],
+    "silencio_min": 0.3
+  },
+
+  "musica": {
+    "archivo": "audio/musica.wav",
+    "bpm": 100,
+    "primer_tiempo_fuerte": 0.0
+  },
+
+  "render": {
+    "fps": null,
+    "video_bitrate": "18M",
+    "audio_bitrate": "320k",
+    "lufs": -14.0,
+    "true_peak": -1.5
+  }
+}
