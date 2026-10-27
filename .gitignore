@@ -3,3 +3,6 @@
 .wrangler/
 
 # Datos del skill de UI/UX (se reinstala con: npx ui-ux-pro-max-cli init --ai claude)
+
+# Fuentes que descarga herramientas/generar-identidad.py
+herramientas/.fuentes/
