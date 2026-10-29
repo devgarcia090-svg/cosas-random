@@ -159,8 +159,66 @@ document.documentElement.classList.add('tjs');
   b.setAttribute('style', 'position:fixed;bottom:0;left:0;width:100%;z-index:9999;background:#0D0B09;border-top:1px solid rgba(200,114,42,0.35);padding:1.2rem 2rem;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;box-shadow:0 -4px 20px rgba(0,0,0,0.5);');
   b.innerHTML = '<p style="margin:0;font-size:.82rem;color:rgba(242,237,230,.75);max-width:700px;line-height:1.6;font-family:inherit;">🍪 Usamos cookies propias y de terceros (Google Analytics) para analizar el tráfico y mejorar la web. Puedes aceptarlas o rechazarlas libremente. <a href="privacidad.html" style="color:#C8722A;font-weight:700;">Más información</a></p>' +
     '<div style="display:flex;gap:.8rem;flex-shrink:0;">' +
-    '<button type="button" onclick="acceptCookies()" style="background:#C8722A;color:#0D0B09;border:none;padding:.6rem 1.4rem;border-radius:4px;font-family:inherit;font-weight:800;font-size:.72rem;cursor:pointer;letter-spacing:1px;text-transform:uppercase;">Aceptar</button>' +
-    '<button type="button" onclick="rejectCookies()" style="background:transparent;color:rgba(242,237,230,.55);border:1px solid rgba(242,237,230,.18);padding:.6rem 1.4rem;border-radius:4px;font-family:inherit;font-weight:700;font-size:.72rem;cursor:pointer;letter-spacing:1px;text-transform:uppercase;">Rechazar</button>' +
+    '<button type="button" onclick="acceptCookies()" style="background:#C8722A;color:#0D0B09;border:none;padding:.6rem 1.4rem;border-radius:10px;font-family:inherit;font-weight:800;font-size:.72rem;cursor:pointer;letter-spacing:1px;text-transform:uppercase;">Aceptar</button>' +
+    '<button type="button" onclick="rejectCookies()" style="background:transparent;color:rgba(242,237,230,.55);border:1px solid rgba(242,237,230,.18);padding:.6rem 1.4rem;border-radius:10px;font-family:inherit;font-weight:700;font-size:.72rem;cursor:pointer;letter-spacing:1px;text-transform:uppercase;">Rechazar</button>' +
     '</div>';
   if (document.body) document.body.appendChild(b);
+})();
+
+/* ══ CAPA DE HALLOWEEN ════════════════════════════════
+   Fantasmas que caen desde el nav. Temporal.
+   Se apaga sola al pasar FIN: no hay que quitar nada a mano.
+   Para matarla antes, pon APAGADA = true.               */
+(function () {
+  var APAGADA = false;
+  var FIN = new Date('2026-11-02T23:59:59');
+
+  if (APAGADA || new Date() > FIN) return;
+  // Respeta a quien ha pedido no ver animaciones.
+  if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var CSS = [
+    '.hw-capa{position:fixed;inset:0;pointer-events:none;z-index:900;overflow:hidden}',
+    '.hw-f{position:absolute;top:-60px;opacity:0;will-change:transform,opacity;',
+      'animation:hwCae linear infinite}',
+    '@keyframes hwCae{',
+      '0%{transform:translateY(0) rotate(-8deg);opacity:0}',
+      '12%{opacity:.3}',
+      '85%{opacity:.22}',
+      '100%{transform:translateY(105vh) rotate(8deg);opacity:0}}',
+    '@media (max-width:700px){.hw-f{transform:scale(.55);opacity:.7}}'
+  ].join('');
+
+  // Fantasmita: cuerpo redondeado, bajo ondulado, dos ojos.
+  var SVG = '<svg width="26" height="32" viewBox="0 0 26 32" fill="none" aria-hidden="true">' +
+    '<path d="M13 1C6.9 1 2 5.9 2 12v17.2c0 1.3 1.5 2 2.5 1.2L7 28.4l2.6 2a1.5 1.5 0 0 0 1.8 0l2.6-2 2.6 2a1.5 1.5 0 0 0 1.8 0l2.5-1.9 2.6 2c1 .8 2.5.1 2.5-1.2V12C24 5.9 19.1 1 13 1z" ' +
+      'fill="#F2EDE6" fill-opacity=".92"/>' +
+    '<ellipse cx="9.3" cy="12.5" rx="1.7" ry="2.2" fill="#231D18"/>' +
+    '<ellipse cx="16.7" cy="12.5" rx="1.7" ry="2.2" fill="#231D18"/>' +
+    '</svg>';
+
+  function arranca() {
+    var e = document.createElement('style'); e.textContent = CSS;
+    document.head.appendChild(e);
+
+    var capa = document.createElement('div');
+    capa.className = 'hw-capa';
+    capa.setAttribute('aria-hidden', 'true');
+
+    var cuantos = window.innerWidth < 700 ? 4 : 8;
+    for (var i = 0; i < cuantos; i++) {
+      var f = document.createElement('div');
+      f.className = 'hw-f';
+      f.innerHTML = SVG;
+      f.style.left = (4 + Math.random() * 92).toFixed(1) + '%';
+      f.style.animationDuration = (13 + Math.random() * 11).toFixed(1) + 's';
+      f.style.animationDelay = (-Math.random() * 22).toFixed(1) + 's';
+      capa.appendChild(f);
+    }
+    document.body.appendChild(capa);
+  }
+
+  if (document.readyState === 'loading')
+    document.addEventListener('DOMContentLoaded', arranca);
+  else arranca();
 })();

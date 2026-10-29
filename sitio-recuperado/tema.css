@@ -73,7 +73,7 @@ nav.scrolled {
 
 /* ── BOTONES: estilo editorial sharp con destello ── */
 .btn, .btn-cta, .nav-back, .btn-lista, .btn-quiz, .btn-start, .btn-share, .btn-retry {
-  border-radius: 4px !important;
+  border-radius:var(--r-xs)!important;
   font-weight: 800; letter-spacing: 1.5px;
   transition: all 0.25s var(--ease);
   position: relative; overflow: hidden;
@@ -101,27 +101,28 @@ article h2 {
   letter-spacing: -.015em; line-height: 1.15;
 }
 article h3 { letter-spacing: -.01em; }
-article img { border-radius: 8px !important; border-color: rgba(200,114,42,.2) !important; }
+article img { border-radius: var(--r-md) !important; border-color: rgba(200,114,42,.2) !important; }
 
-/* ── CARDS: esquinas afiladas + hover con vida ── */
-.path-card    { border-radius: 8px; }
-.video-card   { border-radius: 6px; }
-.growth-item  { border-radius: 8px; }
-.social-btn   { border-radius: 4px; }
-.about-frame  { border-radius: 8px; }
-.about-badge  { border-radius: 6px; }
-.mission-card { border-radius: 4px; }
-.hero-badge   { border-radius: 4px; }
-.lang-btn     { border-radius: 4px; }
-.badge-tienda { border-radius: 4px; }
-.quiz-option  { border-radius: 6px; }
-.why-card     { border-radius: 8px; }
-.stat-card    { border-radius: 8px; }
-.colaboracion-card { border-radius: 8px; }
-.guia-card    { border-radius: 8px; }
-.faq-item     { border-radius: 6px; }
-.guide-card   { border-radius: 8px; }
-.etapa-card, .info-box, .warning-box { border-radius: 8px; }
+/* ══ ESCALA DE RADIOS ═════════════════════════════════
+   El logotipo (Lilita One) no tiene un solo ángulo recto.
+   La web estaba construida a 4-8px, o sea esquina viva.
+   Esta escala cierra ese salto. Un solo sitio la gobierna. */
+:root{
+  --r-xs: 10px;   /* controles pequeños: botones, badges  */
+  --r-sm: 14px;   /* elementos medios: faq, opciones       */
+  --r-md: 20px;   /* tarjetas                              */
+  --r-lg: 26px;   /* marcos de foto grandes                */
+}
+@media (max-width:700px){
+  :root{ --r-md: 18px; --r-lg: 22px; }
+}
+
+.social-btn, .lang-btn, .badge-tienda, .hero-badge { border-radius: var(--r-xs) !important; }
+.about-badge, .faq-item, .quiz-option, .video-card { border-radius: var(--r-sm) !important; }
+.path-card, .growth-item, .mission-card, .why-card, .stat-card,
+.colaboracion-card, .guia-card, .guide-card,
+.etapa-card, .info-box, .warning-box { border-radius: var(--r-md) !important; }
+.about-frame  { border-radius: var(--r-lg) !important; }
 
 .guide-card {
   transition: transform .3s var(--ease), border-color .3s, box-shadow .3s;
@@ -160,7 +161,7 @@ html.tjs [data-tr].tv { opacity: 1; transform: translateY(0); }
 }
 
 /* Guías relacionadas (enlaces internos) */
-.relacionadas{background:var(--gris);border-radius:8px;padding:2rem;margin:3rem auto;max-width:760px}
+.relacionadas{background:var(--gris);border-radius:var(--r-md);padding:2rem;margin:3rem auto;max-width:760px}
 .relacionadas h3{color:var(--fuego);font-size:1rem;font-weight:800;margin-bottom:1rem;text-transform:uppercase;letter-spacing:1px}
 .relacionadas ul{list-style:none;margin:0;padding:0}
 .relacionadas li{padding:.4rem 0;border-bottom:1px solid rgba(242,237,230,.06)}
@@ -172,13 +173,13 @@ html.tjs [data-tr].tv { opacity: 1; transform: translateY(0); }
 .adopta-band{background:linear-gradient(135deg,rgba(200,114,42,.14),#0D0B09);border-top:1px solid rgba(200,114,42,.25);border-bottom:1px solid rgba(200,114,42,.15);padding:2rem;display:flex;align-items:center;justify-content:center;gap:1.5rem;flex-wrap:wrap;text-align:center}
 .adopta-band p{margin:0;font-size:.95rem;color:rgba(242,237,230,.85);max-width:600px;line-height:1.6}
 .adopta-band strong{color:var(--fuego)}
-.adopta-btn{background:var(--fuego);color:var(--negro);padding:.75rem 1.6rem;border-radius:4px;text-decoration:none;font-weight:800;font-size:.78rem;letter-spacing:1.5px;text-transform:uppercase;white-space:nowrap;transition:all .3s}
+.adopta-btn{background:var(--fuego);color:var(--negro);padding:.75rem 1.6rem;border-radius:var(--r-xs);text-decoration:none;font-weight:800;font-size:.78rem;letter-spacing:1.5px;text-transform:uppercase;white-space:nowrap;transition:all .3s}
 .adopta-btn:hover{background:transparent;color:var(--fuego);box-shadow:inset 0 0 0 2px var(--fuego)}
 
 /* FAQ visible (acordeón) */
 .faqv{max-width:760px;margin:2.5rem auto;padding:0 2rem}
 .faqv h2{color:var(--fuego);font-size:1.7rem;font-weight:800;margin:0 0 1.2rem}
-.faqv-item{background:var(--gris);border:1px solid rgba(200,114,42,.15);border-radius:8px;margin-bottom:.8rem;overflow:hidden}
+.faqv-item{background:var(--gris);border:1px solid rgba(200,114,42,.15);border-radius:var(--r-md);margin-bottom:.8rem;overflow:hidden}
 .faqv-item summary{padding:1.1rem 1.4rem;font-weight:700;cursor:pointer;font-size:.95rem;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem;color:var(--blanco)}
 .faqv-item summary::-webkit-details-marker{display:none}
 .faqv-item summary::after{content:'+';color:var(--fuego);font-size:1.4rem;font-weight:400;flex-shrink:0}
@@ -186,19 +187,19 @@ html.tjs [data-tr].tv { opacity: 1; transform: translateY(0); }
 .faqv-item .faqv-a{padding:0 1.4rem 1.2rem;color:rgba(242,237,230,.72);font-size:.9rem;line-height:1.7}
 
 /* Aviso divulgativo (E-E-A-T salud) */
-.aviso-medico{max-width:760px;margin:2.5rem auto 0;padding:1.2rem 1.5rem;background:rgba(200,114,42,.06);border:1px solid rgba(200,114,42,.2);border-radius:8px;font-size:.83rem;color:rgba(242,237,230,.62);line-height:1.65}
+.aviso-medico{max-width:760px;margin:2.5rem auto 0;padding:1.2rem 1.5rem;background:rgba(200,114,42,.06);border:1px solid rgba(200,114,42,.2);border-radius:var(--r-md);font-size:.83rem;color:rgba(242,237,230,.62);line-height:1.65}
 .aviso-medico strong{color:rgba(242,237,230,.82)}
 
 /* Newsletter (MailerLite, estilo Maya) */
 .ml-newsletter{max-width:760px;margin:2.5rem auto;padding:0 2rem}
-.ml-newsletter .ml-form-embedWrapper{background:linear-gradient(135deg,#1E1008,var(--gris));border:1px solid rgba(200,114,42,.3);border-radius:12px;padding:2rem}
+.ml-newsletter .ml-form-embedWrapper{background:linear-gradient(135deg,#1E1008,var(--gris));border:1px solid rgba(200,114,42,.3);border-radius:var(--r-md);padding:2rem}
 .ml-newsletter .nl-head h2{color:var(--fuego);font-size:1.5rem;font-weight:900;margin:0 0 .5rem}
 .ml-newsletter .nl-head p{color:rgba(242,237,230,.72);font-size:.9rem;margin:0 0 1.2rem;line-height:1.6}
 .ml-newsletter .nl-row{display:flex;gap:.7rem;flex-wrap:wrap}
-.ml-newsletter input[type=email]{flex:1;min-width:200px;background:#0D0B09;border:1px solid rgba(200,114,42,.3);border-radius:6px;color:var(--blanco);padding:.85rem 1rem;font-size:.95rem;font-family:inherit}
+.ml-newsletter input[type=email]{flex:1;min-width:200px;background:#0D0B09;border:1px solid rgba(200,114,42,.3);border-radius:var(--r-xs);color:var(--blanco);padding:.85rem 1rem;font-size:.95rem;font-family:inherit}
 .ml-newsletter input[type=email]::placeholder{color:rgba(242,237,230,.4)}
 .ml-newsletter input[type=email]:focus{outline:none;border-color:var(--fuego)}
-.ml-newsletter button[type=submit]{background:var(--fuego);color:var(--negro);border:none;border-radius:6px;padding:.85rem 1.6rem;font-weight:800;font-size:.8rem;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:background .25s;font-family:inherit;white-space:nowrap}
+.ml-newsletter button[type=submit]{background:var(--fuego);color:var(--negro);border:none;border-radius:var(--r-xs);padding:.85rem 1.6rem;font-weight:800;font-size:.8rem;letter-spacing:1px;text-transform:uppercase;cursor:pointer;transition:background .25s;font-family:inherit;white-space:nowrap}
 .ml-newsletter button[type=submit]:hover{background:#E0571A}
 .ml-newsletter .nl-legal{font-size:.72rem;color:rgba(242,237,230,.4);margin:.9rem 0 0;line-height:1.5}
 .ml-newsletter .nl-legal a{color:rgba(242,237,230,.6)}
@@ -212,11 +213,11 @@ html.tjs [data-tr].tv { opacity: 1; transform: translateY(0); }
 .ml-newsletter .nl-consent a{color:rgba(242,237,230,.75)}
 
 /* Checklist imprimible */
-.checklist{background:var(--gris);border:1px solid rgba(200,114,42,.25);border-radius:8px;padding:1.5rem 1.8rem;margin:2rem 0}
+.checklist{background:var(--gris);border:1px solid rgba(200,114,42,.25);border-radius:var(--r-md);padding:1.5rem 1.8rem;margin:2rem 0}
 .checklist h3{color:var(--fuego);font-size:1.1rem;font-weight:800;margin:0 0 1rem}
 .checklist label{display:flex;align-items:flex-start;gap:.6rem;font-size:.92rem;color:rgba(242,237,230,.85);margin-bottom:.7rem;cursor:pointer;line-height:1.5}
 .checklist input{margin-top:.2rem;accent-color:var(--fuego);width:18px;height:18px;flex-shrink:0}
-.checklist button{margin-top:.6rem;background:transparent;color:var(--fuego);border:1px solid var(--fuego);border-radius:4px;padding:.6rem 1.2rem;font-weight:700;font-size:.8rem;cursor:pointer;font-family:inherit;transition:all .2s}
+.checklist button{margin-top:.6rem;background:transparent;color:var(--fuego);border:1px solid var(--fuego);border-radius:var(--r-xs);padding:.6rem 1.2rem;font-weight:700;font-size:.8rem;cursor:pointer;font-family:inherit;transition:all .2s}
 .checklist button:hover{background:var(--fuego);color:var(--negro)}
 @media print{
   nav,footer,.cta-quiz,.adopta-band,.ml-newsletter,#cookie-banner,#scrollProgress,.relacionadas,.faqv{display:none!important}
@@ -237,7 +238,7 @@ html.tjs [data-tr].tv { opacity: 1; transform: translateY(0); }
 /* ===== El humano detras de la camara ===== */
 .dani{max-width:1100px;margin:3.5rem auto 0;display:flex;gap:1.6rem;align-items:flex-start;
   background:linear-gradient(135deg,rgba(200,114,42,.09),rgba(255,255,255,.02));
-  border:1px solid rgba(200,114,42,.22);border-radius:12px;padding:2rem 2.2rem}
+  border:1px solid rgba(200,114,42,.22);border-radius:var(--r-md);padding:2rem 2.2rem}
 .dani-icono{font-size:2.4rem;line-height:1;flex-shrink:0}
 .dani-label{font-size:.65rem;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--fuego);display:block;margin-bottom:.4rem}
 .dani-nombre{font-family:'Bebas Neue','Montserrat',sans-serif;font-size:2.4rem;font-weight:400;letter-spacing:.015em;margin:0 0 .6rem;line-height:1}
@@ -252,7 +253,7 @@ html.tjs [data-tr].tv { opacity: 1; transform: translateY(0); }
 .eh-title span{color:var(--fuego)}
 .eh-grid{display:grid;grid-template-columns:1fr;gap:1.6rem}
 .eh-card{background:linear-gradient(145deg,rgba(200,114,42,.07),rgba(255,255,255,.015));
-  border:1px solid rgba(200,114,42,.2);border-radius:14px;padding:2rem 2.1rem;
+  border:1px solid rgba(200,114,42,.2);border-radius:var(--r-md);padding:2rem 2.1rem;
   transition:border-color .25s,transform .25s}
 .eh-card:hover{border-color:rgba(200,114,42,.55);transform:translateY(-3px)}
 .eh-fecha{display:inline-flex;align-items:center;gap:.5rem;font-size:.63rem;font-weight:800;
@@ -272,7 +273,7 @@ html.tjs [data-tr].tv { opacity: 1; transform: translateY(0); }
 /* Marco APAISADO a proposito: son fotos verticales de movil (9:16) donde
    el sujeto ocupa solo la banda central. Con un marco vertical entra la
    foto casi entera (techo y suelo incluidos) y no se ve a nadie. */
-.eh-fotos img{width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;border-radius:12px;display:block;
+.eh-fotos img{width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;border-radius:var(--r-md);display:block;
   align-self:start;/* sin esto el grid estira la imagen y anula el aspect-ratio */
   border:1px solid rgba(242,237,230,.1);transition:transform .35s,border-color .35s}
 .eh-fotos img:hover{transform:scale(1.02);border-color:rgba(200,114,42,.5)}
@@ -300,7 +301,7 @@ html.tjs [data-tr].tv { opacity: 1; transform: translateY(0); }
 .encuesta-pregunta strong{color:var(--blanco)}
 .encuesta-ops{display:flex;flex-wrap:wrap;gap:.9rem;justify-content:center;margin-bottom:1.2rem}
 .encuesta-btn{display:flex;flex-direction:column;align-items:center;gap:.5rem;
-  background:rgba(255,255,255,.03);border:1px solid rgba(200,114,42,.3);border-radius:12px;
+  background:rgba(255,255,255,.03);border:1px solid rgba(200,114,42,.3);border-radius:var(--r-md);
   padding:1.3rem 1.5rem;min-width:155px;cursor:pointer;font-family:'Montserrat',sans-serif;
   font-size:1.6rem;line-height:1;transition:border-color .22s,background .22s,transform .22s}
 .encuesta-btn span{font-size:.78rem;font-weight:800;letter-spacing:.4px;color:rgba(242,237,230,.8);text-align:center}
@@ -320,13 +321,13 @@ html.tjs [data-tr].tv { opacity: 1; transform: translateY(0); }
 
 /* Enlace de entradas del evento */
 .eh-entradas{display:inline-block;margin-top:1.1rem;background:var(--fuego);color:#0D0B09;
-  padding:.65rem 1.4rem;border-radius:6px;text-decoration:none;font-weight:800;font-size:.75rem;
+  padding:.65rem 1.4rem;border-radius:var(--r-xs);text-decoration:none;font-weight:800;font-size:.75rem;
   letter-spacing:1.3px;text-transform:uppercase;transition:background .25s}
 .eh-entradas:hover{background:#E0571A}
 
 /* Cierre de guia: no dejar al lector en un callejon sin salida */
 .sigue-maya{max-width:760px;margin:2.5rem auto 0;padding:1.6rem 1.8rem;text-align:center;
-  background:rgba(255,255,255,.025);border:1px solid rgba(242,237,230,.1);border-radius:12px}
+  background:rgba(255,255,255,.025);border:1px solid rgba(242,237,230,.1);border-radius:var(--r-md)}
 .sm-txt{margin:0 0 1.1rem;font-size:.92rem;line-height:1.6;color:rgba(242,237,230,.72)}
 .sm-btns{display:flex;gap:.7rem;justify-content:center;flex-wrap:wrap}
 .sm-btns a{background:rgba(200,114,42,.12);border:1px solid rgba(200,114,42,.38);border-radius:50px;

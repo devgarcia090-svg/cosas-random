@@ -34,7 +34,7 @@ if(localStorage.getItem('cookieConsent') === 'rejected' || !localStorage.getItem
         nav{position:fixed;top:-120px;width:100%;z-index:1000;padding: calc(120px + 1rem + env(safe-area-inset-top, 0px)) calc(2rem + env(safe-area-inset-right, 0px)) 1rem calc(2rem + env(safe-area-inset-left, 0px));display:flex;justify-content:space-between;align-items:center;background:rgba(13,11,9,0.96);backdrop-filter:blur(10px);border-bottom:1px solid rgba(200,114,42,0.2)}
         .nav-logo{font-size:.9rem;font-weight:900;color:var(--fuego);text-decoration:none;letter-spacing:1px;text-transform:uppercase}
         .nav-logo span{color:var(--blanco);font-weight:400}
-        .nav-back{color:var(--blanco);text-decoration:none;font-weight:600;font-size:.78rem;letter-spacing:1px;text-transform:uppercase;border:1px solid rgba(200,114,42,0.4);padding:.5rem 1.2rem;border-radius:4px;transition:all .3s}
+        .nav-back{color:var(--blanco);text-decoration:none;font-weight:600;font-size:.78rem;letter-spacing:1px;text-transform:uppercase;border:1px solid rgba(200,114,42,0.4);padding:.5rem 1.2rem;border-radius:var(--r-xs);transition:all .3s}
         .nav-back:hover{background:var(--fuego);color:var(--negro)}
         .hero-h{padding:9rem 2rem 3rem;text-align:center;background:linear-gradient(160deg,#0D0B09 0%,#1E1008 50%,#0D0B09 100%)}
         .hero-h h1{font-size:2rem;font-weight:900;margin-bottom:.8rem}
@@ -48,15 +48,15 @@ if(localStorage.getItem('cookieConsent') === 'rejected' || !localStorage.getItem
         article a{color:var(--fuego)}
         article ul{margin:0 0 1rem 1.2rem;color:rgba(242,237,230,.75)}
         article li{margin-bottom:.5rem;font-size:.95rem}
-        .update-date{background:var(--gris);padding:1rem 1.5rem;border-radius:6px;font-size:.82rem;color:rgba(242,237,230,.5);margin-bottom:2rem}
+        .update-date{background:var(--gris);padding:1rem 1.5rem;border-radius:var(--r-xs);font-size:.82rem;color:rgba(242,237,230,.5);margin-bottom:2rem}
         footer{background:#090705;padding:2rem;text-align:center;border-top:1px solid rgba(200,114,42,.15);margin-top:4rem}
         footer p{font-size:.78rem;color:rgba(242,237,230,.35)}
         footer span{color:var(--fuego)}
         footer a{color:var(--fuego);text-decoration:none}
         @media(max-width:600px){.hero-h h1{font-size:1.5rem}.nav-logo span{display:none}}
     </style>
-    <link rel="stylesheet" href="tema.css?v=2">
-    <script src="tema.js?v=2" defer></script>
+    <link rel="stylesheet" href="tema.css?v=3">
+    <script src="tema.js?v=5" defer></script>
 </head>
 <body>
 <nav>

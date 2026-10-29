@@ -75,7 +75,7 @@
         nav{position:fixed;top:-120px;width:100%;z-index:1000;padding: calc(120px + 1rem + env(safe-area-inset-top, 0px)) calc(2rem + env(safe-area-inset-right, 0px)) 1rem calc(2rem + env(safe-area-inset-left, 0px));display:flex;justify-content:space-between;align-items:center;background:rgba(13,11,9,0.96);backdrop-filter:blur(10px);border-bottom:1px solid rgba(200,114,42,0.2)}
         .nav-logo{font-size:.9rem;font-weight:900;color:var(--fuego);text-decoration:none;letter-spacing:1px;text-transform:uppercase}
         .nav-logo span{color:var(--blanco);font-weight:400}
-        .nav-back{color:var(--blanco);text-decoration:none;font-weight:600;font-size:.78rem;letter-spacing:1px;text-transform:uppercase;border:1px solid rgba(200,114,42,0.4);padding:.5rem 1.2rem;border-radius:4px;transition:all .3s}
+        .nav-back{color:var(--blanco);text-decoration:none;font-weight:600;font-size:.78rem;letter-spacing:1px;text-transform:uppercase;border:1px solid rgba(200,114,42,0.4);padding:.5rem 1.2rem;border-radius:var(--r-xs);transition:all .3s}
         .nav-back:hover{background:var(--fuego);color:var(--negro);border-color:var(--fuego)}
 
         /* HERO */
@@ -83,7 +83,7 @@
         .hero-tienda::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,rgba(200,114,42,.15) 0%,transparent 65%)}
         .hero-tienda::after{content:'🐾';position:absolute;font-size:40vw;opacity:.03;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;line-height:1}
         .hero-content{position:relative;z-index:1;max-width:780px;margin:0 auto}
-        .badge-tienda{display:inline-block;background:rgba(200,114,42,.15);border:1px solid rgba(200,114,42,.4);color:var(--fuego);font-size:.72rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:.45rem 1.2rem;border-radius:4px;margin-bottom:2rem}
+        .badge-tienda{display:inline-block;background:rgba(200,114,42,.15);border:1px solid rgba(200,114,42,.4);color:var(--fuego);font-size:.72rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:.45rem 1.2rem;border-radius:var(--r-xs);margin-bottom:2rem}
         .hero-tienda h1{font-family:'Bebas Neue','Montserrat',sans-serif;font-size:clamp(3.4rem,11vw,8rem);font-weight:400;line-height:.92;letter-spacing:.012em;margin-bottom:1.5rem;text-transform:uppercase}
         .hero-tienda h1 span{color:var(--fuego)}
         /* El emoji hereda el tamano del titular (8rem) y queda gigantesco;
@@ -133,15 +133,15 @@
         .producto-imagen img{width:100%;border-radius:20px;border:2px solid rgba(200,114,42,.25);display:block}
         .producto-badge-img{position:absolute;top:1.2rem;left:1.2rem;background:var(--fuego);color:var(--negro);font-size:.65rem;font-weight:900;letter-spacing:2px;text-transform:uppercase;padding:.4rem 1rem;border-radius:20px}
         .producto-info{display:flex;flex-direction:column;gap:1.2rem}
-        .features-list{display:flex;flex-direction:column;gap:.6rem;background:var(--gris);border-radius:6px;padding:1.2rem 1.4rem;border:1px solid rgba(200,114,42,.15)}
+        .features-list{display:flex;flex-direction:column;gap:.6rem;background:var(--gris);border-radius:var(--r-xs);padding:1.2rem 1.4rem;border:1px solid rgba(200,114,42,.15)}
         .feature-item{font-size:.88rem;color:rgba(242,237,230,.8);font-weight:600}
-        .urgencia-box{background:rgba(200,114,42,.1);border:1px solid rgba(200,114,42,.4);border-radius:6px;padding:.9rem 1.2rem;font-size:.85rem;color:var(--fuego);font-weight:800;text-align:center;letter-spacing:.5px}
+        .urgencia-box{background:rgba(200,114,42,.1);border:1px solid rgba(200,114,42,.4);border-radius:var(--r-xs);padding:.9rem 1.2rem;font-size:.85rem;color:var(--fuego);font-weight:800;text-align:center;letter-spacing:.5px}
         .trust-badges{display:flex;gap:1.5rem;flex-wrap:wrap;padding:.8rem 0;border-top:1px solid rgba(242,237,230,.06)}
         .trust-badges span{font-size:.75rem;color:rgba(242,237,230,.4);font-weight:600}
         @media(max-width:800px){.producto-layout{grid-template-columns:1fr;gap:2rem}.producto-imagen img{max-height:380px;object-fit:cover}}
 
         /* GRACIAS STATE */
-        .gracias-msg{display:none;background:rgba(200,114,42,.12);border:1px solid rgba(200,114,42,.3);border-radius:8px;padding:1.5rem 2rem;max-width:440px;margin:0 auto;text-align:center}
+        .gracias-msg{display:none;background:rgba(200,114,42,.12);border:1px solid rgba(200,114,42,.3);border-radius:var(--r-md);padding:1.5rem 2rem;max-width:440px;margin:0 auto;text-align:center}
         .gracias-msg.visible{display:block}
         .gracias-msg .icon{font-size:2.5rem;margin-bottom:.8rem;display:block}
         .gracias-msg h3{font-size:1.1rem;font-weight:800;color:var(--fuego);margin-bottom:.4rem}
@@ -171,8 +171,8 @@
             .producto-img{height:160px;font-size:3rem}
         }
     </style>
-    <link rel="stylesheet" href="tema.css?v=2">
-    <script src="tema.js?v=2" defer></script>
+    <link rel="stylesheet" href="tema.css?v=3">
+    <script src="tema.js?v=5" defer></script>
 </head>
 <body>
 
@@ -192,7 +192,7 @@
             width:100%;padding:1rem 1.2rem;
             background:rgba(255,255,255,.06);
             border:1px solid rgba(200,114,42,.35);
-            border-radius:6px;color:#F2EDE6;
+            border-radius:var(--r-xs);color:#F2EDE6;
             font-family:'Montserrat',sans-serif;
             font-size:.95rem;outline:none;
             margin-bottom:.8rem;
@@ -202,7 +202,7 @@
         <button onclick="checkPwd()" style="
             width:100%;padding:1rem;
             background:#C8722A;color:#0D0B09;
-            border:none;border-radius:6px;
+            border:none;border-radius:var(--r-xs);
             font-family:'Montserrat',sans-serif;
             font-size:.9rem;font-weight:800;
             letter-spacing:2px;text-transform:uppercase;

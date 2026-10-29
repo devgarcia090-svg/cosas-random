@@ -131,7 +131,7 @@
         .nav-back {
             color: var(--blanco); text-decoration: none; font-weight: 600;
             font-size: 0.78rem; letter-spacing: 1px; text-transform: uppercase;
-            border: 1px solid rgba(200,114,42,0.4); padding: 0.5rem 1.2rem; border-radius: 4px;
+            border: 1px solid rgba(200,114,42,0.4); padding: 0.5rem 1.2rem; border-radius: var(--r-xs);
             transition: all 0.3s;
         }
         .nav-back:hover { background: var(--fuego); color: var(--negro); border-color: var(--fuego); }
@@ -164,12 +164,12 @@
         article ul { margin: 0 0 1.5rem 1.2rem; color: rgba(242,237,230,0.8); }
         article li { margin-bottom: 0.7rem; }
         article img {
-            width: 100%; border-radius: 8px; margin: 2rem 0;
+            width: 100%; border-radius: var(--r-md); margin: 2rem 0;
             border: 2px solid rgba(200,114,42,0.25);
         }
         .req-card {
             background: var(--gris); border: 1px solid rgba(200,114,42,0.2);
-            border-radius: 14px; padding: 1.5rem 1.8rem; margin-bottom: 1.2rem;
+            border-radius: var(--r-md); padding: 1.5rem 1.8rem; margin-bottom: 1.2rem;
             display: flex; gap: 1.2rem; align-items: flex-start;
         }
         .req-num {
@@ -181,11 +181,11 @@
         .req-card p { margin: 0; font-size: 0.92rem; }
         .warning-box {
             background: rgba(192,57,43,0.12); border-left: 4px solid var(--rojo);
-            padding: 1.5rem 1.8rem; border-radius: 6px; margin: 2rem 0;
+            padding: 1.5rem 1.8rem; border-radius: var(--r-xs); margin: 2rem 0;
         }
         .warning-box p { margin: 0; color: rgba(242,237,230,0.9); }
         .faq-item {
-            background: var(--gris); border-radius: 6px; padding: 1.3rem 1.6rem; margin-bottom: 1rem;
+            background: var(--gris); border-radius: var(--r-xs); padding: 1.3rem 1.6rem; margin-bottom: 1rem;
         }
         .faq-item h3 { margin: 0 0 0.6rem; color: var(--fuego); font-size: 1.05rem; }
         .faq-item p { margin: 0; font-size: 0.92rem; }
@@ -197,7 +197,7 @@
         .cta-section p { color: rgba(242,237,230,0.7); max-width: 600px; margin: 0 auto 2rem; }
         .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
         .btn {
-            padding: 0.85rem 2rem; border-radius: 4px; text-decoration: none;
+            padding: 0.85rem 2rem; border-radius: var(--r-xs); text-decoration: none;
             font-weight: 700; font-size: 0.85rem; letter-spacing: 1px; text-transform: uppercase; transition: all 0.3s;
         }
         .btn-primary { background: var(--fuego); color: var(--negro); border: 2px solid var(--fuego); }
@@ -227,8 +227,8 @@
   gtag('js', new Date());
   gtag('config', 'G-MM2BMHMG18');
 </script>
-    <link rel="stylesheet" href="tema.css?v=2">
-    <script src="tema.js?v=2" defer></script>
+    <link rel="stylesheet" href="tema.css?v=3">
+    <script src="tema.js?v=5" defer></script>
 </head>
 <body>
 
@@ -390,7 +390,7 @@
     <p style="font-size:0.72rem;font-weight:700;color:var(--fuego);letter-spacing:2px;text-transform:uppercase;margin-bottom:0.8rem;">Test viral</p>
     <h2 style="font-size:1.6rem;font-weight:900;margin-bottom:0.8rem;">¿Ya sabes los requisitos? ¿Pero estás listo de verdad?</h2>
     <p style="font-size:0.92rem;color:rgba(242,237,230,0.65);max-width:500px;margin:0 auto 1.5rem;line-height:1.7;">Conocer la ley es el primer paso. El segundo es saber si estás realmente preparado para tener un perro. Maya te lo dice en 8 preguntas.</p>
-    <a href="quiz" style="background:var(--fuego);color:var(--negro);padding:0.9rem 2rem;border-radius:4px;text-decoration:none;font-weight:800;font-size:0.85rem;letter-spacing:1px;text-transform:uppercase;display:inline-block;transition:all 0.3s;">Hacer el test → 🐾</a>
+    <a href="quiz" style="background:var(--fuego);color:var(--negro);padding:0.9rem 2rem;border-radius:var(--r-xs);text-decoration:none;font-weight:800;font-size:0.85rem;letter-spacing:1px;text-transform:uppercase;display:inline-block;transition:all 0.3s;">Hacer el test → 🐾</a>
 </div>
 
 <div class="sigue-maya">

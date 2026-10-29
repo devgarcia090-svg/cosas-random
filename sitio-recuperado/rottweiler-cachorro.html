@@ -101,7 +101,7 @@
         nav{position:fixed;top:-120px;width:100%;z-index:1000;padding: calc(120px + 1rem + env(safe-area-inset-top, 0px)) calc(2rem + env(safe-area-inset-right, 0px)) 1rem calc(2rem + env(safe-area-inset-left, 0px));display:flex;justify-content:space-between;align-items:center;background:rgba(13,11,9,0.96);backdrop-filter:blur(10px);border-bottom:1px solid rgba(200,114,42,0.2)}
         .nav-logo{font-size:.9rem;font-weight:900;color:var(--fuego);text-decoration:none;letter-spacing:1px;text-transform:uppercase}
         .nav-logo span{color:var(--blanco);font-weight:400}
-        .nav-back{color:var(--blanco);text-decoration:none;font-weight:600;font-size:.78rem;letter-spacing:1px;text-transform:uppercase;border:1px solid rgba(200,114,42,0.4);padding:.5rem 1.2rem;border-radius:4px;transition:all .3s}
+        .nav-back{color:var(--blanco);text-decoration:none;font-weight:600;font-size:.78rem;letter-spacing:1px;text-transform:uppercase;border:1px solid rgba(200,114,42,0.4);padding:.5rem 1.2rem;border-radius:var(--r-xs);transition:all .3s}
         .nav-back:hover{background:var(--fuego);color:var(--negro);border-color:var(--fuego)}
         .hero-h{padding:9rem 2rem 4rem;text-align:center;background:linear-gradient(160deg,#0D0B09 0%,#1E1008 50%,#0D0B09 100%);position:relative;overflow:hidden}
         .hero-h::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,rgba(200,114,42,.18) 0%,transparent 65%)}
@@ -116,24 +116,24 @@
         article strong{color:var(--blanco)}
         article ul,article ol{margin:0 0 1.5rem 1.2rem;color:rgba(242,237,230,.8)}
         article li{margin-bottom:.7rem}
-        article img{width:100%;border-radius:8px;margin:2rem 0;border:2px solid rgba(200,114,42,.25)}
+        article img{width:100%;border-radius:var(--r-md);margin:2rem 0;border:2px solid rgba(200,114,42,.25)}
         .semana-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin:2rem 0}
-        .semana-card{background:var(--gris);border-radius:8px;padding:1.5rem;border:1px solid rgba(200,114,42,.15);text-align:center}
+        .semana-card{background:var(--gris);border-radius:var(--r-md);padding:1.5rem;border:1px solid rgba(200,114,42,.15);text-align:center}
         .semana-card .num{font-size:1.6rem;font-weight:900;color:var(--fuego);display:block;margin-bottom:.4rem}
         .semana-card h3{font-size:.85rem;font-weight:800;text-transform:uppercase;letter-spacing:.5px;margin-bottom:.5rem}
         .semana-card p{font-size:.78rem;color:rgba(242,237,230,.6);line-height:1.5;margin:0}
-        .paso-card{background:var(--gris);border-radius:8px;padding:1.5rem;margin-bottom:1rem;display:flex;gap:1.2rem;align-items:flex-start;border:1px solid rgba(200,114,42,.15)}
+        .paso-card{background:var(--gris);border-radius:var(--r-md);padding:1.5rem;margin-bottom:1rem;display:flex;gap:1.2rem;align-items:flex-start;border:1px solid rgba(200,114,42,.15)}
         .paso-num{background:var(--fuego);color:var(--negro);font-weight:900;width:36px;height:36px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1rem}
         .paso-card h3{color:var(--fuego);font-size:.9rem;font-weight:800;margin-bottom:.3rem}
         .paso-card p{font-size:.85rem;color:rgba(242,237,230,.7);margin:0;line-height:1.6}
-        .error-card{background:rgba(192,57,43,.08);border-left:4px solid #e74c3c;border-radius:6px;padding:1.2rem 1.5rem;margin-bottom:.8rem}
+        .error-card{background:rgba(192,57,43,.08);border-left:4px solid #e74c3c;border-radius:var(--r-xs);padding:1.2rem 1.5rem;margin-bottom:.8rem}
         .error-card h3{font-size:.9rem;font-weight:800;color:#e74c3c;margin-bottom:.3rem}
         .error-card p{font-size:.85rem;color:rgba(242,237,230,.7);margin:0;line-height:1.6}
-        .info-box{background:var(--gris);border-left:4px solid var(--fuego);padding:1.5rem 1.8rem;border-radius:6px;margin:2rem 0}
+        .info-box{background:var(--gris);border-left:4px solid var(--fuego);padding:1.5rem 1.8rem;border-radius:var(--r-xs);margin:2rem 0}
         .info-box p{margin:0;color:rgba(242,237,230,.9)}
-        .warning-box{background:rgba(192,57,43,.12);border-left:4px solid #c0392b;padding:1.5rem 1.8rem;border-radius:6px;margin:2rem 0}
+        .warning-box{background:rgba(192,57,43,.12);border-left:4px solid #c0392b;padding:1.5rem 1.8rem;border-radius:var(--r-xs);margin:2rem 0}
         .warning-box p{margin:0;color:rgba(242,237,230,.9)}
-        .relacionadas{background:var(--gris);border-radius:8px;padding:2rem;margin:3rem 0}
+        .relacionadas{background:var(--gris);border-radius:var(--r-md);padding:2rem;margin:3rem 0}
         .relacionadas h3{color:var(--fuego);font-size:1rem;font-weight:800;margin-bottom:1rem;text-transform:uppercase;letter-spacing:1px}
         .relacionadas ul{list-style:none;margin:0;padding:0}
         .relacionadas li{padding:.4rem 0;border-bottom:1px solid rgba(242,237,230,.06)}
@@ -143,15 +143,15 @@
         .cta-quiz{background:var(--negro);padding:3rem 2rem;text-align:center;border-top:1px solid rgba(200,114,42,.15)}
         .cta-quiz h2{color:var(--fuego);font-size:1.6rem;margin-bottom:.8rem}
         .cta-quiz p{font-size:.92rem;color:rgba(242,237,230,.65);max-width:500px;margin:0 auto 1.5rem;line-height:1.7}
-        .btn-cta{background:var(--fuego);color:var(--negro);padding:.9rem 2rem;border-radius:4px;text-decoration:none;font-weight:800;font-size:.85rem;letter-spacing:1px;text-transform:uppercase;display:inline-block;transition:all .3s}
+        .btn-cta{background:var(--fuego);color:var(--negro);padding:.9rem 2rem;border-radius:var(--r-xs);text-decoration:none;font-weight:800;font-size:.85rem;letter-spacing:1px;text-transform:uppercase;display:inline-block;transition:all .3s}
         .btn-cta:hover{background:#E0571A}
         footer{background:#090705;padding:2rem;text-align:center;border-top:1px solid rgba(200,114,42,.15)}
         footer p{font-size:.78rem;color:rgba(242,237,230,.35)}
         footer span{color:var(--fuego)}
         @media(max-width:600px){.hero-h h1{font-size:1.8rem}.semana-grid{grid-template-columns:1fr}.nav-logo span{display:none}}
     </style>
-    <link rel="stylesheet" href="tema.css?v=2">
-    <script src="tema.js?v=2" defer></script>
+    <link rel="stylesheet" href="tema.css?v=3">
+    <script src="tema.js?v=5" defer></script>
 </head>
 <body>
 <nav>
@@ -293,19 +293,19 @@
 
     <h2>Preguntas frecuentes</h2>
 
-    <div style="background:var(--gris);border-radius:6px;padding:1.3rem 1.6rem;margin-bottom:1rem">
+    <div style="background:var(--gris);border-radius:var(--r-xs);padding:1.3rem 1.6rem;margin-bottom:1rem">
         <h3 style="margin:0 0 .6rem;color:var(--fuego);font-size:1.05rem">¿A qué edad se puede llevar un Rottweiler cachorro a casa?</h3>
         <p style="margin:0;font-size:.92rem">Lo ideal es entre las 8 y las 10 semanas. Antes de las 8 semanas necesita seguir con su madre para aprender conductas sociales básicas que ningún humano puede enseñarle igual de bien.</p>
     </div>
-    <div style="background:var(--gris);border-radius:6px;padding:1.3rem 1.6rem;margin-bottom:1rem">
+    <div style="background:var(--gris);border-radius:var(--r-xs);padding:1.3rem 1.6rem;margin-bottom:1rem">
         <h3 style="margin:0 0 .6rem;color:var(--fuego);font-size:1.05rem">¿Cuándo empieza el período de socialización?</h3>
         <p style="margin:0;font-size:.92rem">El período crítico va de las 3 a las 12 semanas. Es la ventana donde el cerebro del cachorro es más receptivo a nuevas experiencias. Aprovéchala con exposición gradual y positiva a todo tipo de personas, sonidos y entornos.</p>
     </div>
-    <div style="background:var(--gris);border-radius:6px;padding:1.3rem 1.6rem;margin-bottom:1rem">
+    <div style="background:var(--gris);border-radius:var(--r-xs);padding:1.3rem 1.6rem;margin-bottom:1rem">
         <h3 style="margin:0 0 .6rem;color:var(--fuego);font-size:1.05rem">¿Cuánto duerme un Rottweiler cachorro?</h3>
         <p style="margin:0;font-size:.92rem">Entre 16 y 20 horas diarias en las primeras semanas. El sueño es fundamental para su desarrollo. No interrumpas su descanso — un cachorro que no duerme suficiente es un cachorro irritable y con más tendencia a problemas de comportamiento.</p>
     </div>
-    <div style="background:var(--gris);border-radius:6px;padding:1.3rem 1.6rem;margin-bottom:1rem">
+    <div style="background:var(--gris);border-radius:var(--r-xs);padding:1.3rem 1.6rem;margin-bottom:1rem">
         <h3 style="margin:0 0 .6rem;color:var(--fuego);font-size:1.05rem">¿A qué edad se puede pasear a un Rottweiler cachorro?</h3>
         <p style="margin:0;font-size:.92rem">Una semana después de completar su primera pauta vacunal, aproximadamente a las 12-14 semanas. Antes se puede hacer exposición gradual en brazos o en zonas seguras. Consulta siempre con tu veterinario.</p>
     </div>

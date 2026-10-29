@@ -63,7 +63,7 @@
         nav{position:fixed;top:-120px;width:100%;z-index:1000;padding: calc(120px + 1rem + env(safe-area-inset-top, 0px)) calc(2rem + env(safe-area-inset-right, 0px)) 1rem calc(2rem + env(safe-area-inset-left, 0px));display:flex;justify-content:space-between;align-items:center;background:rgba(13,11,9,0.96);backdrop-filter:blur(10px);border-bottom:1px solid rgba(200,114,42,0.2)}
         .nav-logo{font-size:.9rem;font-weight:900;color:var(--fuego);text-decoration:none;letter-spacing:1px;text-transform:uppercase}
         .nav-logo span{color:var(--blanco);font-weight:400}
-        .nav-back{color:var(--blanco);text-decoration:none;font-weight:600;font-size:.78rem;letter-spacing:1px;text-transform:uppercase;border:1px solid rgba(200,114,42,0.4);padding:.5rem 1.2rem;border-radius:4px;transition:all .3s}
+        .nav-back{color:var(--blanco);text-decoration:none;font-weight:600;font-size:.78rem;letter-spacing:1px;text-transform:uppercase;border:1px solid rgba(200,114,42,0.4);padding:.5rem 1.2rem;border-radius:var(--r-xs);transition:all .3s}
         .nav-back:hover{background:var(--fuego);color:var(--negro)}
         .hero-h{padding:9rem 2rem 4rem;text-align:center;background:linear-gradient(160deg,#0D0B09 0%,#1E1008 50%,#0D0B09 100%);position:relative;overflow:hidden}
         .hero-h::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,rgba(200,114,42,.18) 0%,transparent 65%)}
@@ -92,7 +92,7 @@
         .quiz-banner{background:linear-gradient(135deg,#1E1008,#0D0B09);border:2px solid rgba(200,114,42,.3);border-radius:20px;padding:2.5rem;display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap;margin-top:2rem}
         .quiz-banner-text h3{font-size:1.4rem;font-weight:900;margin-bottom:.5rem}
         .quiz-banner-text p{font-size:.9rem;color:rgba(242,237,230,.65)}
-        .btn{padding:.85rem 2rem;border-radius:4px;text-decoration:none;font-weight:700;font-size:.85rem;letter-spacing:1px;text-transform:uppercase;transition:all .3s;display:inline-block}
+        .btn{padding:.85rem 2rem;border-radius:var(--r-xs);text-decoration:none;font-weight:700;font-size:.85rem;letter-spacing:1px;text-transform:uppercase;transition:all .3s;display:inline-block}
         .btn-primary{background:var(--fuego);color:var(--negro);border:2px solid var(--fuego)}
         .btn-primary:hover{background:transparent;color:var(--fuego)}
         footer{background:#090705;padding:2rem;text-align:center;border-top:1px solid rgba(200,114,42,.15)}
@@ -133,8 +133,8 @@
   gtag('js', new Date());
   gtag('config', 'G-MM2BMHMG18');
 </script>
-    <link rel="stylesheet" href="tema.css?v=2">
-    <script src="tema.js?v=2" defer></script>
+    <link rel="stylesheet" href="tema.css?v=3">
+    <script src="tema.js?v=5" defer></script>
 </head>
 <body>
 <nav>

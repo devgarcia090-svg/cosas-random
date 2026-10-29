@@ -141,7 +141,7 @@
         nav{position:fixed;top:-120px;width:100%;z-index:1000;padding: calc(120px + 1rem + env(safe-area-inset-top, 0px)) calc(2rem + env(safe-area-inset-right, 0px)) 1rem calc(2rem + env(safe-area-inset-left, 0px));display:flex;justify-content:space-between;align-items:center;background:rgba(13,11,9,0.96);backdrop-filter:blur(10px);border-bottom:1px solid rgba(200,114,42,0.2)}
         .nav-logo{font-size:.9rem;font-weight:900;color:var(--fuego);text-decoration:none;letter-spacing:1px;text-transform:uppercase}
         .nav-logo span{color:var(--blanco);font-weight:400}
-        .nav-back{color:var(--blanco);text-decoration:none;font-weight:600;font-size:.78rem;letter-spacing:1px;text-transform:uppercase;border:1px solid rgba(200,114,42,0.4);padding:.5rem 1.2rem;border-radius:4px;transition:all .3s}
+        .nav-back{color:var(--blanco);text-decoration:none;font-weight:600;font-size:.78rem;letter-spacing:1px;text-transform:uppercase;border:1px solid rgba(200,114,42,0.4);padding:.5rem 1.2rem;border-radius:var(--r-xs);transition:all .3s}
         .nav-back:hover{background:var(--fuego);color:var(--negro)}
         .hero-h{padding:9rem 2rem 4rem;text-align:center;background:linear-gradient(160deg,#0D0B09 0%,#1E1008 50%,#0D0B09 100%);position:relative;overflow:hidden}
         .hero-h::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,rgba(200,114,42,.18) 0%,transparent 65%)}
@@ -156,9 +156,9 @@
         article strong{color:var(--blanco)}
         article ul,article ol{margin:0 0 1.5rem 1.2rem;color:rgba(242,237,230,.8)}
         article li{margin-bottom:.7rem}
-        article img{width:100%;border-radius:8px;margin:2rem 0;border:2px solid rgba(200,114,42,.25)}
+        article img{width:100%;border-radius:var(--r-md);margin:2rem 0;border:2px solid rgba(200,114,42,.25)}
         .tipo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin:2rem 0}
-        .tipo-card{background:var(--gris);border-radius:8px;padding:1.5rem;border:1px solid rgba(200,114,42,.15)}
+        .tipo-card{background:var(--gris);border-radius:var(--r-md);padding:1.5rem;border:1px solid rgba(200,114,42,.15)}
         .tipo-card .icono{font-size:2.5rem;display:block;margin-bottom:.8rem;text-align:center}
         .tipo-card h3{color:var(--fuego);font-size:.9rem;font-weight:800;text-transform:uppercase;margin-bottom:.6rem;text-align:center}
         .tipo-card .veredicto{font-size:.72rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;text-align:center;display:block;margin-bottom:.8rem;padding:.3rem .8rem;border-radius:20px}
@@ -173,21 +173,21 @@
         .medidas-table th{background:var(--fuego);color:var(--negro);padding:.8rem 1rem;text-align:left;font-weight:800;text-transform:uppercase;letter-spacing:.5px}
         .medidas-table td{padding:.8rem 1rem;border-bottom:1px solid rgba(242,237,230,.08);color:rgba(242,237,230,.8)}
         .medidas-table tr:hover td{background:rgba(200,114,42,.05)}
-        .paso-card{background:var(--gris);border-radius:8px;padding:1.5rem;margin-bottom:1rem;display:flex;gap:1.2rem;align-items:flex-start;border:1px solid rgba(200,114,42,.15)}
+        .paso-card{background:var(--gris);border-radius:var(--r-md);padding:1.5rem;margin-bottom:1rem;display:flex;gap:1.2rem;align-items:flex-start;border:1px solid rgba(200,114,42,.15)}
         .paso-num{background:var(--fuego);color:var(--negro);font-weight:900;width:36px;height:36px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1rem}
         .paso-card h3{color:var(--fuego);font-size:.9rem;font-weight:800;margin-bottom:.3rem}
         .paso-card p{font-size:.85rem;color:rgba(242,237,230,.7);margin:0;line-height:1.6}
-        .info-box{background:var(--gris);border-left:4px solid var(--fuego);padding:1.5rem 1.8rem;border-radius:6px;margin:2rem 0}
+        .info-box{background:var(--gris);border-left:4px solid var(--fuego);padding:1.5rem 1.8rem;border-radius:var(--r-xs);margin:2rem 0}
         .info-box p{margin:0}
-        .warning-box{background:rgba(192,57,43,.12);border-left:4px solid #c0392b;padding:1.5rem 1.8rem;border-radius:6px;margin:2rem 0}
+        .warning-box{background:rgba(192,57,43,.12);border-left:4px solid #c0392b;padding:1.5rem 1.8rem;border-radius:var(--r-xs);margin:2rem 0}
         .warning-box p{margin:0}
-        .tienda-cta{background:linear-gradient(135deg,#1E1008,#0D0B09);border:1px solid rgba(200,114,42,.3);border-radius:8px;padding:2rem;margin:2.5rem 0;text-align:center}
+        .tienda-cta{background:linear-gradient(135deg,#1E1008,#0D0B09);border:1px solid rgba(200,114,42,.3);border-radius:var(--r-md);padding:2rem;margin:2.5rem 0;text-align:center}
         .tienda-cta span{font-size:.68rem;font-weight:700;color:var(--fuego);letter-spacing:3px;text-transform:uppercase;display:block;margin-bottom:.8rem}
         .tienda-cta h3{font-size:1.3rem;font-weight:900;margin-bottom:.6rem}
         .tienda-cta p{font-size:.88rem;color:rgba(242,237,230,.55);margin-bottom:1.5rem;line-height:1.6}
-        .tienda-cta a{background:var(--fuego);color:var(--negro);font-weight:800;font-size:.82rem;letter-spacing:1px;text-transform:uppercase;padding:.8rem 1.8rem;border-radius:4px;text-decoration:none;display:inline-block;transition:all .3s}
+        .tienda-cta a{background:var(--fuego);color:var(--negro);font-weight:800;font-size:.82rem;letter-spacing:1px;text-transform:uppercase;padding:.8rem 1.8rem;border-radius:var(--r-xs);text-decoration:none;display:inline-block;transition:all .3s}
         .tienda-cta a:hover{background:#E0571A}
-        .relacionadas{background:var(--gris);border-radius:8px;padding:2rem;margin:3rem 0}
+        .relacionadas{background:var(--gris);border-radius:var(--r-md);padding:2rem;margin:3rem 0}
         .relacionadas h3{color:var(--fuego);font-size:1rem;font-weight:800;margin-bottom:1rem;text-transform:uppercase;letter-spacing:1px}
         .relacionadas ul{list-style:none;margin:0;padding:0}
         .relacionadas li{padding:.4rem 0;border-bottom:1px solid rgba(242,237,230,.06)}
@@ -197,15 +197,15 @@
         .cta-quiz{background:var(--negro);padding:3rem 2rem;text-align:center;border-top:1px solid rgba(200,114,42,.15)}
         .cta-quiz h2{color:var(--fuego);font-size:1.6rem;margin-bottom:.8rem}
         .cta-quiz p{font-size:.92rem;color:rgba(242,237,230,.65);max-width:500px;margin:0 auto 1.5rem;line-height:1.7}
-        .btn-cta{background:var(--fuego);color:var(--negro);padding:.9rem 2rem;border-radius:4px;text-decoration:none;font-weight:800;font-size:.85rem;letter-spacing:1px;text-transform:uppercase;display:inline-block;transition:all .3s}
+        .btn-cta{background:var(--fuego);color:var(--negro);padding:.9rem 2rem;border-radius:var(--r-xs);text-decoration:none;font-weight:800;font-size:.85rem;letter-spacing:1px;text-transform:uppercase;display:inline-block;transition:all .3s}
         .btn-cta:hover{background:#E0571A}
         footer{background:#090705;padding:2rem;text-align:center;border-top:1px solid rgba(200,114,42,.15)}
         footer p{font-size:.78rem;color:rgba(242,237,230,.35)}
         footer span{color:var(--fuego)}
         @media(max-width:700px){.tipo-grid{grid-template-columns:1fr}.hero-h h1{font-size:1.8rem}.nav-logo span{display:none}}
     </style>
-    <link rel="stylesheet" href="tema.css?v=2">
-    <script src="tema.js?v=2" defer></script>
+    <link rel="stylesheet" href="tema.css?v=3">
+    <script src="tema.js?v=5" defer></script>
 </head>
 <body>
 <nav>
@@ -352,19 +352,19 @@
     </div>
 
     <h2>Preguntas frecuentes</h2>
-    <div style="background:var(--gris);border-radius:6px;padding:1.3rem 1.6rem;margin-bottom:1rem">
+    <div style="background:var(--gris);border-radius:var(--r-xs);padding:1.3rem 1.6rem;margin-bottom:1rem">
         <h3 style="margin:0 0 .6rem;color:var(--fuego);font-size:1.05rem">¿Es obligatorio el bozal para un Rottweiler en España?</h3>
         <p style="margin:0;font-size:.92rem">Sí, en la vía pública a partir de los 6 meses de edad. Regulado por la Ley 50/1999 y el RD 287/2002. No llevarlo puede suponer multas de 2.400 a 15.000€.</p>
     </div>
-    <div style="background:var(--gris);border-radius:6px;padding:1.3rem 1.6rem;margin-bottom:1rem">
+    <div style="background:var(--gris);border-radius:var(--r-xs);padding:1.3rem 1.6rem;margin-bottom:1rem">
         <h3 style="margin:0 0 .6rem;color:var(--fuego);font-size:1.05rem">¿Qué tipo de bozal es mejor para un Rottweiler?</h3>
         <p style="margin:0;font-size:.92rem">El bozal de cesta tipo Baskerville es el más recomendado para uso cotidiano: permite abrir la boca, jadear y recibir premios. El bozal de tela solo es adecuado para momentos muy cortos (veterinario) y nunca para paseos.</p>
     </div>
-    <div style="background:var(--gris);border-radius:6px;padding:1.3rem 1.6rem;margin-bottom:1rem">
+    <div style="background:var(--gris);border-radius:var(--r-xs);padding:1.3rem 1.6rem;margin-bottom:1rem">
         <h3 style="margin:0 0 .6rem;color:var(--fuego);font-size:1.05rem">¿Cómo mido a mi Rottweiler para el bozal?</h3>
         <p style="margin:0;font-size:.92rem">Necesitas el contorno del hocico (alrededor de la parte más ancha con la boca cerrada) y la longitud (desde la punta de la nariz hasta los ojos). Un Rottweiler adulto necesita habitualmente talla XL-XXL (hembra) o XXL-XXXL (macho). Consulta siempre la tabla del fabricante.</p>
     </div>
-    <div style="background:var(--gris);border-radius:6px;padding:1.3rem 1.6rem;margin-bottom:1rem">
+    <div style="background:var(--gris);border-radius:var(--r-xs);padding:1.3rem 1.6rem;margin-bottom:1rem">
         <h3 style="margin:0 0 .6rem;color:var(--fuego);font-size:1.05rem">¿A partir de qué edad es obligatorio el bozal?</h3>
         <p style="margin:0;font-size:.92rem">Obligatorio en la vía pública a partir de los 6 meses. Se recomienda empezar a acostumbrar al cachorro antes de esa edad para que de adulto no lo rechace.</p>
     </div>

@@ -93,7 +93,7 @@
         nav{position:fixed;top:-120px;width:100%;z-index:1000;padding: calc(120px + 1rem + env(safe-area-inset-top, 0px)) calc(2rem + env(safe-area-inset-right, 0px)) 1rem calc(2rem + env(safe-area-inset-left, 0px));display:flex;justify-content:space-between;align-items:center;background:rgba(13,11,9,0.96);backdrop-filter:blur(10px);border-bottom:1px solid rgba(200,114,42,0.2)}
         .nav-logo{font-size:.9rem;font-weight:900;color:var(--fuego);text-decoration:none;letter-spacing:1px;text-transform:uppercase}
         .nav-logo span{color:var(--blanco);font-weight:400}
-        .nav-back{color:var(--blanco);text-decoration:none;font-weight:600;font-size:.78rem;letter-spacing:1px;text-transform:uppercase;border:1px solid rgba(200,114,42,0.4);padding:.5rem 1.2rem;border-radius:4px;transition:all .3s}
+        .nav-back{color:var(--blanco);text-decoration:none;font-weight:600;font-size:.78rem;letter-spacing:1px;text-transform:uppercase;border:1px solid rgba(200,114,42,0.4);padding:.5rem 1.2rem;border-radius:var(--r-xs);transition:all .3s}
         .nav-back:hover{background:var(--fuego);color:var(--negro)}
         .hero-h{padding:9rem 2rem 4rem;text-align:center;background:linear-gradient(160deg,#0D0B09 0%,#1E1008 50%,#0D0B09 100%);position:relative;overflow:hidden}
         .hero-h::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,rgba(200,114,42,.18) 0%,transparent 65%)}
@@ -105,10 +105,10 @@
         article h2{font-size:1.8rem;font-weight:800;color:var(--fuego);margin:2.5rem 0 1rem}
         article p{font-size:1rem;color:rgba(242,237,230,.8);margin-bottom:1.2rem}
         article strong{color:var(--blanco)}
-        article img{width:100%;border-radius:8px;margin:2rem 0;border:2px solid rgba(200,114,42,.25)}
-        .info-box{background:var(--gris);border-left:4px solid var(--fuego);padding:1.5rem 1.8rem;border-radius:6px;margin:2rem 0}
+        article img{width:100%;border-radius:var(--r-md);margin:2rem 0;border:2px solid rgba(200,114,42,.25)}
+        .info-box{background:var(--gris);border-left:4px solid var(--fuego);padding:1.5rem 1.8rem;border-radius:var(--r-xs);margin:2rem 0}
         .info-box p{margin:0}
-        .protectora-card{background:var(--gris);border-radius:8px;padding:1.8rem;margin-bottom:1.2rem;border:1px solid rgba(200,114,42,.15);transition:border-color .3s}
+        .protectora-card{background:var(--gris);border-radius:var(--r-md);padding:1.8rem;margin-bottom:1.2rem;border:1px solid rgba(200,114,42,.15);transition:border-color .3s}
         .protectora-card:hover{border-color:var(--fuego)}
         .protectora-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.8rem;flex-wrap:wrap;gap:.5rem}
         .protectora-header h3{color:var(--fuego);font-size:1.1rem;font-weight:800}
@@ -118,17 +118,17 @@
         .tag-barcelona{background:rgba(155,89,182,.15);color:#9b59b6;border:1px solid rgba(155,89,182,.3)}
         .tag-difunde{background:rgba(200,114,42,.15);color:var(--fuego);border:1px solid rgba(200,114,42,.3)}
         .protectora-card p{font-size:.9rem;color:rgba(242,237,230,.7);margin-bottom:.8rem;line-height:1.6}
-        .protectora-card a.btn-visit{display:inline-block;background:var(--fuego);color:var(--negro);padding:.55rem 1.4rem;border-radius:4px;text-decoration:none;font-weight:700;font-size:.75rem;letter-spacing:.5px;text-transform:uppercase;transition:all .3s}
+        .protectora-card a.btn-visit{display:inline-block;background:var(--fuego);color:var(--negro);padding:.55rem 1.4rem;border-radius:var(--r-xs);text-decoration:none;font-weight:700;font-size:.75rem;letter-spacing:.5px;text-transform:uppercase;transition:all .3s}
         .protectora-card a.btn-visit:hover{background:#E0571A}
         .adopcion-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin:2rem 0}
-        .step{background:var(--gris);border-radius:8px;padding:1.5rem;text-align:center;border:1px solid rgba(200,114,42,.15)}
+        .step{background:var(--gris);border-radius:var(--r-md);padding:1.5rem;text-align:center;border:1px solid rgba(200,114,42,.15)}
         .step .num{font-size:2rem;font-weight:900;color:var(--fuego);display:block;margin-bottom:.5rem}
         .step h3{font-size:.85rem;font-weight:800;text-transform:uppercase;margin-bottom:.4rem}
         .step p{font-size:.78rem;color:rgba(242,237,230,.6);margin:0;line-height:1.5}
         .cta-quiz{background:var(--negro);padding:3rem 2rem;text-align:center;border-top:1px solid rgba(200,114,42,.15)}
         .cta-quiz h2{color:var(--fuego);font-size:1.6rem;margin-bottom:.8rem}
         .cta-quiz p{font-size:.92rem;color:rgba(242,237,230,.65);max-width:500px;margin:0 auto 1.5rem;line-height:1.7}
-        .btn-cta{background:var(--fuego);color:var(--negro);padding:.9rem 2rem;border-radius:4px;text-decoration:none;font-weight:800;font-size:.85rem;letter-spacing:1px;text-transform:uppercase;display:inline-block;transition:all .3s}
+        .btn-cta{background:var(--fuego);color:var(--negro);padding:.9rem 2rem;border-radius:var(--r-xs);text-decoration:none;font-weight:800;font-size:.85rem;letter-spacing:1px;text-transform:uppercase;display:inline-block;transition:all .3s}
         .btn-cta:hover{background:#E0571A}
         footer{background:#090705;padding:2rem;text-align:center;border-top:1px solid rgba(200,114,42,.15)}
         footer p{font-size:.78rem;color:rgba(242,237,230,.35)}
@@ -136,8 +136,8 @@
         footer a{color:var(--fuego);text-decoration:none}
         @media(max-width:600px){.hero-h h1{font-size:1.8rem}.adopcion-steps{grid-template-columns:1fr}.nav-logo span{display:none}}
     </style>
-    <link rel="stylesheet" href="tema.css?v=2">
-    <script src="tema.js?v=2" defer></script>
+    <link rel="stylesheet" href="tema.css?v=3">
+    <script src="tema.js?v=5" defer></script>
 </head>
 <body>
 <nav>
