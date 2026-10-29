@@ -379,23 +379,27 @@ article img[src*="zooasis"]{aspect-ratio:auto;object-fit:contain;max-height:none
   .nav-logo img { height: 19px; }
 }
 
-/* ══ NAV: PANEL ANCLADO ARRIBA ══════════════════
-   Pegado al borde superior, con margen a los lados y solo las
-   esquinas de abajo redondeadas.
+/* ══ NAV PEGAJOSO (sticky) ════════════════════════
+   position:sticky en vez de fixed, que es lo que hace zooasis.org.
 
-   Esto deja obsoleto el apaño del notch que lleva cada página en su
-   <style> (nav{top:-120px} con un padding-top equivalente para tapar
-   la franja de la barra de estado en iOS). Aquí el panel llega al
-   borde de arriba y es su propio padding-top el que absorbe la barra
-   de estado con env(safe-area-inset-top), así que se adapta solo a
-   cualquier iPhone en vez de dar por buena una altura fija.
+   Es la diferencia de fondo: un sticky forma parte del flujo del
+   documento y se pega arriba al llegar. Un fixed sale del flujo y se
+   ancla al viewport de maquetacion, que en iOS no coincide con la
+   pantalla cuando la barra de Safari se repliega: de ahi la franja por
+   la que se veia pasar el contenido. Con sticky ese desajuste no
+   existe, porque lo que hay encima ya se ha ido con el scroll.
 
-   Va con !important porque ese apaño vive en el <style> de cada
-   página, que gana por orden de carga a este archivo. */
+   El margen inferior negativo lo saca del flujo visualmente, para que
+   el relleno superior que ya tienen las paginas siga sirviendo de
+   separacion y no haya que tocarlas una a una. */
+:root{ --alto-nav: calc(76px + env(safe-area-inset-top, 0px)); }
+@media (max-width:700px){ :root{ --alto-nav: calc(70px + env(safe-area-inset-top, 0px)); } }
+
 nav{
-  position:fixed !important;
-  top:0 !important; left:10px !important; right:10px !important;
-  width:auto !important; max-width:1280px !important; margin-inline:auto !important;
+  position:sticky !important;
+  top:0 !important; left:auto !important; right:auto !important; bottom:auto !important;
+  width:calc(100% - 20px) !important; max-width:1280px !important;
+  margin:0 auto calc(-1 * var(--alto-nav)) !important;
   padding:calc(15px + env(safe-area-inset-top, 0px)) 20px 15px !important;
   border-radius:0 0 24px 24px !important;
   background:#231D18 !important;
@@ -403,18 +407,13 @@ nav{
   backdrop-filter:none !important; -webkit-backdrop-filter:none !important;
   box-shadow:0 8px 26px rgba(0,0,0,.5) !important;
   min-height:0 !important;
+  z-index:1000 !important;
 }
 @media (min-width:901px){ nav{ padding-left:26px !important; padding-right:26px !important } }
-/* Con viewport-fit=cover el viewport incluye el area de la barra de
-   estado, asi que env(safe-area-inset-top) deja de ser 0 y el panel se
-   pinta a si mismo por detras de la hora. Sin cover, esa franja queda
-   fuera del viewport de maquetacion y ningun elemento fijo puede
-   cubrirla: se ve la pagina pasar por detras. */
 .nav-logo img{ height:46px !important }
 @media (max-width:700px){ .nav-logo img{ height:40px !important } }
 
-/* "Menú" escrito junto al icono. Se pone con ::before para no tocar
-   el HTML ni el toggleMenu() de las 4 páginas que lo llevan. */
+/* "Menú" escrito junto al icono, con ::before para no tocar el HTML. */
 .hamburger{ position:relative !important; padding-left:70px !important; gap:6px !important; }
 .hamburger::before{
   content:"Menú"; position:absolute; left:0; top:50%; transform:translateY(-50%);
