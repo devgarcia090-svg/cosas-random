@@ -443,3 +443,18 @@ nav{
   text-transform:uppercase; color:rgba(242,237,230,.78); line-height:1.6 }
 .pie-mision{ font-size:.78rem; color:rgba(242,237,230,.42); line-height:1.6; max-width:34ch }
 footer{ padding-top:3.2rem !important }
+
+/* ══ ARREGLO DE position:fixed EN iOS ═══════════════════
+   Las paginas llevan body{overflow-x:hidden} para evitar el scroll
+   horizontal. En Safari de iOS eso convierte el documento en un
+   contenedor de scroll y rompe position:fixed: el nav deja de
+   anclarse al viewport y se desplaza con la pagina, dejando ver el
+   contenido por encima de la cabecera.
+
+   overflow-x:clip recorta igual pero NO crea contenedor de scroll,
+   asi que position:fixed vuelve a funcionar. Va dentro de @supports
+   para no romper navegadores que no lo entiendan: esos se quedan con
+   el hidden de siempre. */
+@supports (overflow-x: clip) {
+  body { overflow-x: clip !important; }
+}

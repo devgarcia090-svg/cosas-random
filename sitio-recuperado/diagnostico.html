@@ -1,0 +1,44 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow"><title>Diagnóstico</title>
+<style>
+ :root{--s:env(safe-area-inset-top,0px)}
+ *{margin:0;box-sizing:border-box}
+ body{background:#111;color:#eee;font:14px/1.6 ui-monospace,monospace;padding:0 14px 50vh;overflow-x:hidden}
+ #fijo{position:fixed;top:0;left:0;right:0;height:60px;background:#C8722A;color:#000;
+   display:flex;align-items:center;justify-content:center;font-weight:700;z-index:9}
+ #medida{position:fixed;top:0;left:0;width:1px;height:1px}
+ table{border-collapse:collapse;width:100%;margin-top:120px;font-size:13px}
+ td{border-bottom:1px solid #333;padding:7px 4px;vertical-align:top}
+ td:first-child{color:#999;width:52%}
+ b{color:#C8722A}
+ .alto{height:220vh;background:linear-gradient(#222,#444)}
+</style></head><body>
+<div id="fijo">ELEMENTO FIJO · top:0</div><div id="medida"></div>
+<table id="t"></table>
+<div class="alto"></div>
+<script>
+function pinta(){
+ const m=document.getElementById('medida').getBoundingClientRect();
+ const f=document.getElementById('fijo').getBoundingClientRect();
+ const v=window.visualViewport||{};
+ const filas=[
+  ['¿El fijo está en el borde? (top)', Math.round(f.top)+'px  '+(Math.round(f.top)===0?'✅':'❌ DESPLAZADO')],
+  ['element fixed top:0 → rect.top', m.top.toFixed(1)+'px'],
+  ['env(safe-area-inset-top)', getComputedStyle(document.documentElement).getPropertyValue('--s')],
+  ['scrollY', Math.round(window.scrollY)],
+  ['innerHeight', window.innerHeight],
+  ['documentElement.clientHeight', document.documentElement.clientHeight],
+  ['visualViewport.height', v.height?Math.round(v.height):'—'],
+  ['visualViewport.offsetTop', v.offsetTop!==undefined?v.offsetTop.toFixed(1):'—'],
+  ['visualViewport.pageTop', v.pageTop!==undefined?v.pageTop.toFixed(1):'—'],
+  ['body overflow-x (usado)', getComputedStyle(document.body).overflowX],
+  ['screen.height', screen.height],
+  ['devicePixelRatio', devicePixelRatio],
+  ['navegador', navigator.userAgent.slice(0,70)]
+ ];
+ document.getElementById('t').innerHTML=filas.map(r=>`<tr><td>${r[0]}</td><td><b>${r[1]}</b></td></tr>`).join('');
+}
+pinta(); addEventListener('scroll',pinta,{passive:true}); addEventListener('resize',pinta);
+if(window.visualViewport){visualViewport.addEventListener('scroll',pinta);visualViewport.addEventListener('resize',pinta);}
+</script></body></html>
