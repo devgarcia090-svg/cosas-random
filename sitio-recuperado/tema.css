@@ -363,3 +363,18 @@ article img[src*="zooasis"]{aspect-ratio:auto;object-fit:contain;max-height:none
     min-height: 172px; }
   nav .nav-back { font-size: .66rem; padding: .35rem .8rem; line-height: 1.4; }
 }
+
+/* ── MARCA EN EL NAV ──────────────────────────────────
+   El logotipo pasa de texto a SVG. La imagen lleva alt=""
+   porque el enlace ya tiene aria-label: si no, el lector
+   de pantalla leeria el nombre dos veces. */
+.nav-logo { display: flex; align-items: center; gap: .55rem; }
+.nav-logo img { height: 26px; width: auto; display: block; flex: none; }
+.nav-logo:hover img { filter: drop-shadow(0 0 14px rgba(200,114,42,.55)); }
+@media (max-width: 700px) {
+  .nav-logo { gap: .4rem; }
+  .nav-logo img { height: 22px; }
+}
+@media (max-width: 380px) {
+  .nav-logo img { height: 19px; }
+}
