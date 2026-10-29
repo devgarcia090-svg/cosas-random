@@ -443,3 +443,17 @@ nav{
   text-transform:uppercase; color:rgba(242,237,230,.78); line-height:1.6 }
 .pie-mision{ font-size:.78rem; color:rgba(242,237,230,.42); line-height:1.6; max-width:34ch }
 footer{ padding-top:3.2rem !important }
+
+/* ══ FRANJA DE LA BARRA DE ESTADO EN iOS ═══════════════
+   Safari decide el color de esa franja de dos formas segun la recarga:
+   unas veces usa theme-color y otras muestrea el fondo del lienzo, que
+   es el de <html>. Si no coinciden, la franja sale a veces del color
+   del panel y a veces del de la pagina, y se ve un escalon.
+
+   Dandole a <html> el mismo color que al panel, las dos vias dan el
+   mismo resultado y deja de depender de cual gane.
+
+   El fondo de <body> sigue siendo el negro de la pagina: el de <html>
+   solo se ve donde no llega el body, es decir esa franja y el rebote
+   del scroll. */
+html { background: #231D18 !important; }
