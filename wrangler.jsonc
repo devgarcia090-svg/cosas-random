@@ -8,11 +8,30 @@
 
   "compatibility_date": "2026-10-16",
 
+  // Portón de la tienda. Solo se ejecuta en las rutas listadas en
+  // "run_worker_first"; el resto de la web la sirve Cloudflare
+  // directamente, sin pasar por este código.
+  "main": "src/gate.js",
+
   // Carpeta con la web. Todo lo que hay dentro se publica tal cual.
   // Los archivos _headers y _redirects viven ahí y Cloudflare los procesa
   // (no se sirven como páginas).
   "assets": {
-    "directory": "./sitio-recuperado"
+    "directory": "./sitio-recuperado",
+    "binding": "ASSETS",
+
+    // Sin esto el Worker ni se llamaría: Cloudflare serviría el HTML
+    // directamente desde los assets y la contraseña no pintaría nada.
+    "run_worker_first": [
+      "/tienda",
+      "/tienda.html",
+      "/condiciones-venta",
+      "/condiciones-venta.html",
+      "/envios-devoluciones",
+      "/envios-devoluciones.html",
+      "/transparencia",
+      "/transparencia.html"
+    ]
   }
 
   // No se define "html_handling" ni "not_found_handling" a propósito:

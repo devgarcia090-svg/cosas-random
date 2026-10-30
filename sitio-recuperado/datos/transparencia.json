@@ -1,0 +1,10 @@
+{
+  "_comentario": "Actualiza este archivo cada mes. Es la unica fuente de los numeros que salen en /transparencia y en la tienda. Si un numero no es cierto, borra el archivo antes que publicarlo mal.",
+  "actualizado": "2026-10-30",
+  "euros_por_camiseta": 3,
+  "abierta": false,
+  "camisetas_vendidas": 0,
+  "recaudado_total": 0,
+  "entregado_total": 0,
+  "entregas": []
+}
