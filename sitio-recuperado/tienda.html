@@ -140,6 +140,40 @@
         .garantias b{color:var(--blanco);font-weight:700}
         @media(max-width:420px){.garantias{grid-template-columns:1fr}}
 
+        .tanda{display:flex;align-items:center;gap:.55rem;font-size:.85rem;
+               color:var(--blanco);font-weight:600;background:rgba(200,114,42,.09);
+               border:1px solid rgba(200,114,42,.3);border-radius:var(--r-xs);
+               padding:.7rem 1rem;margin:-.4rem 0 0}
+        .tanda .punto{width:8px;height:8px;border-radius:50%;background:#5BBE7F;
+                      flex-shrink:0;box-shadow:0 0 0 3px rgba(91,190,127,.22)}
+        .pend-i{color:#E0806F;font-weight:800}
+
+        .pago{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;
+              font-size:.72rem;color:rgba(242,237,230,.45);font-weight:600}
+        .pago b{color:rgba(242,237,230,.7);font-weight:700}
+
+        /* ── PRUEBA SOCIAL ────────────────────────────────── */
+        .comunidad{border-top:1px solid rgba(200,114,42,.14);
+                   border-bottom:1px solid rgba(200,114,42,.14);
+                   background:linear-gradient(135deg,#15100B,#0D0B09)}
+        .cifras-com{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+                    background:rgba(200,114,42,.15);border:1px solid rgba(200,114,42,.15);
+                    border-radius:var(--r-md);overflow:hidden;margin-top:1.6rem}
+        .cifras-com div{background:#0D0B09;padding:1.3rem .8rem;text-align:center}
+        .cifras-com b{display:block;font-size:1.9rem;font-weight:900;color:var(--fuego);
+                      line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+        .cifras-com span{display:block;font-size:.66rem;font-weight:700;letter-spacing:.1em;
+                         text-transform:uppercase;color:var(--apagado);margin-top:.45rem}
+        @media(max-width:520px){.cifras-com{grid-template-columns:1fr}
+                                .cifras-com b{font-size:1.6rem}}
+        .hueco-opiniones{background:rgba(224,128,111,.08);border:1px dashed rgba(224,128,111,.45);
+                         border-radius:var(--r-md);padding:1.3rem 1.5rem;margin-top:1.5rem;
+                         font-size:.86rem;color:#E0806F;font-weight:600;line-height:1.65}
+
+        .cierre{text-align:center;margin-top:2.5rem;padding-top:2rem;
+                border-top:1px solid rgba(242,237,230,.08)}
+        .cierre p{font-size:1.02rem;font-weight:600;margin-bottom:1.1rem}
+
         /* ── POR QUÉ ──────────────────────────────────────── */
         .porque{background:linear-gradient(135deg,#1E1008,#0D0B09);
                 border-top:1px solid rgba(200,114,42,.15);border-bottom:1px solid rgba(200,114,42,.15)}
@@ -249,7 +283,7 @@
 
 <!-- ══ FICHA DE PRODUCTO ════════════════════════════════ -->
 <main class="envoltorio">
-<section class="ficha">
+<section class="ficha" id="producto">
 
     <div class="galeria">
         <div class="foto-principal falta-foto" id="foto-producto">
@@ -272,6 +306,12 @@
             <span class="precio" id="precio">24,95 €</span>
             <span class="precio-nota">IVA incluido · envío 4,95 € · gratis desde 2 unidades</span>
         </div>
+
+        <!-- Escasez REAL, no inventada: la primera tanda es la que
+             compréis en Roly. Pon el numero de verdad y, cuando se
+             agote, cambia el texto. Fingir stock bajo es practica
+             comercial desleal (art. 5 Ley 3/1991). -->
+        <p class="tanda"><span class="punto"></span>Primera tanda de <strong><span class="pend-i">[Nº]</span> camisetas</strong>. Cuando se agoten, la siguiente tarda unas tres semanas.</p>
 
         <div class="bloque-talla">
             <div class="fila-label">
@@ -301,10 +341,34 @@
             <div><span aria-hidden="true">📏</span><span><b>Cambio de talla</b> si no acierta</span></div>
             <div><span aria-hidden="true">🐾</span><span><b>Hecha en España</b>, género de Roly</span></div>
         </div>
+
+        <p class="pago"><span aria-hidden="true">🔒</span> <b>Pago seguro.</b> No guardamos los datos de tu tarjeta. Atiende <a href="mailto:hola@mayarottweiler.com" style="color:var(--fuego)">una persona</a>, no un formulario.</p>
     </div>
 
 </section>
 </main>
+
+<!-- ══ PRUEBA SOCIAL ════════════════════════════════════ -->
+<section class="seccion comunidad">
+    <div class="envoltorio" style="max-width:760px;text-align:center">
+        <span class="et">No compras a un desconocido</span>
+        <h2 class="tit">Detrás hay una comunidad</h2>
+        <p style="color:var(--apagado);font-size:.98rem;max-width:560px;margin:0 auto">Maya lleva años enseñando en público lo que es vivir con una Rottweiler de 40 kilos. Esto no es una marca que ha salido de la nada para venderte una camiseta.</p>
+
+        <div class="cifras-com">
+            <div><b>27.600</b><span>en Instagram</span></div>
+            <div><b>18.600</b><span>en TikTok</span></div>
+            <div><b>4,5 M</b><span>vistas al mes</span></div>
+        </div>
+
+        <!-- Opiniones reales cuando las tengas. NO inventes ninguna:
+             las resenas falsas son infraccion grave de la Ley de
+             Consumidores desde la reforma de 2022, con multa. -->
+        <div class="hueco-opiniones">
+            <strong>Pendiente:</strong> aquí van tres comentarios reales de gente de la comunidad, con su nombre de usuario y pidiéndoles permiso antes. Nada inventado: las reseñas falsas están tipificadas como infracción grave en la Ley de Consumidores y se multan.
+        </div>
+    </div>
+</section>
 
 <!-- ══ POR QUÉ ══════════════════════════════════════════ -->
 <section class="seccion porque">
@@ -379,6 +443,13 @@
             </details>
 
         </div>
+
+        <!-- Cierre: quien llega hasta aqui ya tiene interes. No lo
+             dejamos sin nada que pulsar. -->
+        <div class="cierre">
+            <p>¿Resuelto? Entonces solo queda elegir talla.</p>
+            <a href="#producto" class="btn-comprar" id="btn-cierre" style="max-width:320px;margin:0 auto">Ir a la camiseta ↑</a>
+        </div>
     </div>
 </section>
 
@@ -416,12 +487,13 @@
     <div class="gracias-msg" id="gracias-msg">
         <span class="icon">🐾</span>
         <h3>¡Apuntado!</h3>
-        <p>Te avisaremos cuando la tienda abra. Mientras tanto, sigue el día a día de Maya en Instagram y TikTok.</p>
-    </div>
-
-    <div class="social-btns">
-        <a href="https://www.instagram.com/maya.rottweiler13" target="_blank" rel="noopener" class="btn-social btn-ig">📸 &nbsp; Instagram</a>
-        <a href="https://www.tiktok.com/@maya.rottweiler13" target="_blank" rel="noopener" class="btn-social btn-tk">🎵 &nbsp; TikTok</a>
+        <p>Te avisaremos cuando la tienda abra. Mientras tanto, el día a día de Maya está aquí:</p>
+        <!-- Las redes SOLO despues de convertir. Antes son una fuga:
+             mandan fuera de la web justo donde queremos que compre. -->
+        <div class="social-btns">
+            <a href="https://www.instagram.com/maya.rottweiler13" target="_blank" rel="noopener" class="btn-social btn-ig">📸 &nbsp; Instagram</a>
+            <a href="https://www.tiktok.com/@maya.rottweiler13" target="_blank" rel="noopener" class="btn-social btn-tk">🎵 &nbsp; TikTok</a>
+        </div>
     </div>
 </section>
 
