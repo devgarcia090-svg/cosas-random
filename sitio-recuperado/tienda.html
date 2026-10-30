@@ -8,14 +8,16 @@
     <meta name="theme-color" content="#231D18">
     <meta name="color-scheme" content="dark">
 
-    <title>Tienda Maya Rottweiler — Merch PPP | Próximamente</title>
-    <meta name="description" content="La tienda oficial de Maya llega pronto. Merch exclusivo de la Rottweiler que rompe el estigma PPP. Apúntate a la lista de espera.">
-    <meta name="robots" content="noindex, nofollow">
+    <title>Camiseta Maya — Tienda oficial | Maya Rottweiler</title>
+    <meta name="description" content="La camiseta de Maya, la Rottweiler que rompe el estigma PPP. Algodón, tallas S a XXL, envío a toda España. Cada camiseta es una conversación sobre los perros PPP.">
+    <!-- QUITAR EL noindex EL DIA QUE ABRAS DE VERDAD: mientras no haya
+         producto real a la venta, no queremos que Google indexe esto. -->
+    <meta name="robots" content="noindex, follow">
     <meta name="author" content="Maya | El Rottweiler Peluche">
     <link rel="canonical" href="https://mayarottweiler.com/tienda">
 
-    <meta property="og:title" content="Tienda Maya Rottweiler — Próximamente">
-    <meta property="og:description" content="El merch oficial de Maya llega pronto. Únete a la lista de espera y sé el primero.">
+    <meta property="og:title" content="Camiseta Maya — Tienda oficial">
+    <meta property="og:description" content="Llévalo puesto. Cada vez que alguien pregunta por tu camiseta tienes treinta segundos para cambiar lo que piensa de los PPP.">
     <meta property="og:image" content="https://mayarottweiler.com/fotos/maya-social.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630"><meta property="og:image:type" content="image/jpeg">
@@ -24,24 +26,10 @@
     <meta property="og:locale" content="es_ES">
     <meta property="og:site_name" content="Maya | El Rottweiler Peluche">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Tienda Maya Rottweiler — Próximamente">
-    <meta name="twitter:description" content="El merch oficial de Maya llega pronto. Únete a la lista de espera.">
+    <meta name="twitter:title" content="Camiseta Maya — Tienda oficial">
+    <meta name="twitter:description" content="La camiseta de la Rottweiler que rompe el estigma PPP.">
     <meta name="twitter:image" content="https://mayarottweiler.com/fotos/maya-social.jpg">
 
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Store",
-        "name": "Tienda Maya Rottweiler",
-        "description": "Tienda oficial de merch de Maya, la Rottweiler que rompe el estigma PPP en España. Próximamente.",
-        "url": "https://mayarottweiler.com/tienda",
-        "image": "https://mayarottweiler.com/fotos/maya-social.jpg",
-        "currenciesAccepted": "EUR",
-        "priceRange": "€€",
-        "openingHoursSpecification": {"@type": "OpeningHoursSpecification", "description": "Abierta"},
-        "parentOrganization": {"@type": "Organization", "name": "Maya | El Rottweiler Peluche", "url": "https://mayarottweiler.com"}
-    }
-    </script>
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -52,14 +40,15 @@
         ]
     }
     </script>
+    <!-- El schema de Product se añade solo cuando la tienda esté activa
+         (lo inyecta el script del final). Declarar un producto a la venta
+         que todavía no se puede comprar es motivo de aviso en Search Console. -->
 
     <link rel="dns-prefetch" href="https://www.googletagmanager.com/">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="icon" id="favicon" type="image/png" href="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
-    <script>const c=document.createElement('canvas');c.width=64;c.height=64;const x=c.getContext('2d');x.font='52px serif';x.textAlign='center';x.textBaseline='middle';x.fillText('🐕',32,36);window.addEventListener('DOMContentLoaded',()=>{document.getElementById('favicon').href=c.toDataURL('image/png');});</script>
 
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-MM2BMHMG18"></script>
@@ -67,541 +56,337 @@
 
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
-        :root{--negro:#0D0B09;--fuego:#C8722A;--blanco:#F2EDE6;--gris:#171310}
+        :root{--negro:#0D0B09;--fuego:#C8722A;--blanco:#F2EDE6;--gris:#171310;
+              --apagado:rgba(242,237,230,.62)}
         html{scroll-behavior:smooth}
-        body{font-family:'Montserrat',sans-serif;background:var(--negro);color:var(--blanco);overflow-x:hidden}
+        body{font-family:'Montserrat',sans-serif;background:var(--negro);
+             color:var(--blanco);overflow-x:hidden;line-height:1.6}
 
-        /* NAV */
-        nav{position:fixed;top:-120px;width:100%;z-index:1000;padding: calc(120px + 1rem + env(safe-area-inset-top, 0px)) calc(2rem + env(safe-area-inset-right, 0px)) 1rem calc(2rem + env(safe-area-inset-left, 0px));display:flex;justify-content:space-between;align-items:center;background:rgba(13,11,9,0.96);backdrop-filter:blur(10px);border-bottom:1px solid rgba(200,114,42,0.2)}
-        .nav-logo{font-size:.9rem;font-weight:900;color:var(--fuego);text-decoration:none;letter-spacing:1px;text-transform:uppercase}
-        .nav-logo span{color:var(--blanco);font-weight:400}
-        .nav-back{color:var(--blanco);text-decoration:none;font-weight:600;font-size:.78rem;letter-spacing:1px;text-transform:uppercase;border:1px solid rgba(200,114,42,0.4);padding:.5rem 1.2rem;border-radius:var(--r-xs);transition:all .3s}
+        .nav-back{color:var(--blanco);text-decoration:none;font-weight:600;font-size:.78rem;
+                  letter-spacing:1px;text-transform:uppercase;border:1px solid rgba(200,114,42,.4);
+                  padding:.5rem 1.2rem;border-radius:var(--r-xs);transition:all .3s}
         .nav-back:hover{background:var(--fuego);color:var(--negro);border-color:var(--fuego)}
 
-        /* HERO */
-        .hero-tienda{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:8rem 2rem 4rem;position:relative;overflow:hidden;background:linear-gradient(160deg,#0D0B09 0%,#1E1008 45%,#0D0B09 100%)}
-        .hero-tienda::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 40%,rgba(200,114,42,.15) 0%,transparent 65%)}
-        .hero-tienda::after{content:'🐾';position:absolute;font-size:40vw;opacity:.03;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;line-height:1}
-        .hero-content{position:relative;z-index:1;max-width:780px;margin:0 auto}
-        .badge-tienda{display:inline-block;background:rgba(200,114,42,.15);border:1px solid rgba(200,114,42,.4);color:var(--fuego);font-size:.72rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;padding:.45rem 1.2rem;border-radius:var(--r-xs);margin-bottom:2rem}
-        .hero-tienda h1{font-family:'Bebas Neue','Montserrat',sans-serif;font-size:clamp(3.4rem,11vw,8rem);font-weight:400;line-height:.92;letter-spacing:.012em;margin-bottom:1.5rem;text-transform:uppercase}
-        .hero-tienda h1 span{color:var(--fuego)}
-        /* El emoji hereda el tamano del titular (8rem) y queda gigantesco;
-           se fija a una fraccion para que acompane en vez de competir. */
-        .hero-tienda h1 .h1-emoji{font-size:.26em;vertical-align:.55em;margin-left:.22em;color:initial}
-        .hero-tienda .sub{font-size:1.1rem;color:rgba(242,237,230,.65);max-width:480px;margin:0 auto 2.5rem;line-height:1.7}
-        .btn-lista{display:inline-flex;align-items:center;gap:.6rem;background:var(--fuego);color:var(--negro);font-weight:800;font-size:.9rem;letter-spacing:1px;text-transform:uppercase;padding:1rem 2.2rem;border-radius:50px;text-decoration:none;border:none;cursor:pointer;transition:all .3s}
-        .btn-lista:hover{background:#E0571A;transform:translateY(-2px);box-shadow:0 12px 40px rgba(200,114,42,.3)}
-        .hero-stats{display:flex;gap:3rem;justify-content:center;margin-top:3.5rem;flex-wrap:wrap}
-        .hero-stat span{display:block;font-size:2rem;font-weight:900;color:var(--fuego)}
-        .hero-stat p{font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:rgba(242,237,230,.4);margin-top:.2rem}
+        .envoltorio{max-width:1080px;margin:0 auto;padding:0 1.25rem}
+        .seccion{padding:3.5rem 0}
+        .et{font-size:.7rem;font-weight:800;color:var(--fuego);letter-spacing:.2em;
+            text-transform:uppercase;display:block;margin-bottom:.7rem}
+        h2.tit{font-family:'Bebas Neue','Montserrat',sans-serif;font-weight:400;
+               font-size:clamp(2rem,5vw,3rem);letter-spacing:.012em;line-height:1;margin-bottom:.8rem}
 
-        /* QUÉ VIENE */
-        .section{padding:5rem 2rem}
-        .container{max-width:1100px;margin:0 auto}
-        .s-label{font-size:.72rem;font-weight:700;color:var(--fuego);letter-spacing:3px;text-transform:uppercase;display:block;margin-bottom:.8rem;text-align:center}
-        .s-title{font-family:'Bebas Neue','Montserrat',sans-serif;font-size:clamp(2.4rem,5vw,4rem);font-weight:400;letter-spacing:.012em;text-align:center;margin-bottom:.9rem;line-height:.98}
-        .s-sub{font-size:.95rem;color:rgba(242,237,230,.5);text-align:center;max-width:500px;margin:0 auto 3rem;line-height:1.7}
+        /* ── FICHA DE PRODUCTO ─────────────────────────────── */
+        .ficha{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;
+               padding:2.5rem 0 3.5rem}
+        @media(max-width:860px){.ficha{grid-template-columns:1fr;gap:1.8rem;padding-top:1.5rem}}
 
-        .productos-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem}
-        .producto-card{background:var(--gris);border-radius:20px;overflow:hidden;border:1px solid rgba(200,114,42,.12);transition:transform .3s,border-color .3s;position:relative}
-        .producto-card:hover{transform:translateY(-6px);border-color:rgba(200,114,42,.4)}
-        .producto-img{height:220px;display:flex;align-items:center;justify-content:center;font-size:4rem;position:relative;background:linear-gradient(135deg,#1E1008,#0D0B09)}
-        .producto-img::after{content:'🔒';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:2rem;background:rgba(13,11,9,.65);backdrop-filter:blur(4px)}
-        .prox-badge{position:absolute;top:1rem;right:1rem;background:var(--fuego);color:var(--negro);font-size:.6rem;font-weight:900;letter-spacing:2px;text-transform:uppercase;padding:.3rem .7rem;border-radius:20px;z-index:1}
-        .producto-body{padding:1.4rem}
-        .producto-cat{font-size:.65rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--fuego);margin-bottom:.5rem;display:block}
-        .producto-nombre{font-size:1rem;font-weight:800;margin-bottom:.4rem}
-        .producto-desc{font-size:.8rem;color:rgba(242,237,230,.5);line-height:1.6;margin:0}
+        .galeria{position:relative}
+        .foto-principal{width:100%;aspect-ratio:1/1;border-radius:var(--r-lg);
+            border:1px solid rgba(200,114,42,.22);overflow:hidden;background:linear-gradient(135deg,#1E1008,#0D0B09);
+            display:flex;flex-direction:column;align-items:center;justify-content:center;
+            gap:.9rem;text-align:center;padding:2rem}
+        .foto-principal img{width:100%;height:100%;object-fit:cover;display:block}
+        .falta-foto span.ico{font-size:3.2rem;line-height:1}
+        .falta-foto .q{color:var(--fuego);font-size:.72rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase}
+        .falta-foto .d{color:var(--apagado);font-size:.86rem;max-width:300px}
+        /* En movil la foto no puede comerse la pantalla: el nombre y el
+           precio tienen que asomar sin hacer scroll. */
+        @media(max-width:860px){
+            .foto-principal{max-height:46vh;aspect-ratio:4/5;padding:1.2rem;gap:.5rem}
+            .falta-foto span.ico{font-size:2.2rem}
+            .falta-foto .d{font-size:.78rem;max-width:250px}
+        }
+        .cinta{position:absolute;top:1rem;left:1rem;background:var(--fuego);color:var(--negro);
+               font-size:.63rem;font-weight:900;letter-spacing:.14em;text-transform:uppercase;
+               padding:.38rem .9rem;border-radius:var(--r-xs)}
 
-        /* LISTA DE ESPERA */
-        .lista-section{background:linear-gradient(135deg,#1E1008 0%,#0D0B09 100%);padding:5rem 2rem;text-align:center;border-top:1px solid rgba(200,114,42,.15);border-bottom:1px solid rgba(200,114,42,.15)}
-        .lista-section h2{font-family:'Bebas Neue','Montserrat',sans-serif;font-size:clamp(2.4rem,5vw,4rem);font-weight:400;letter-spacing:.012em;margin-bottom:.9rem;line-height:.98}
+        .datos{display:flex;flex-direction:column;gap:1.3rem}
+        .datos h1{font-size:clamp(1.9rem,4.5vw,2.6rem);font-weight:900;line-height:1.08;
+                  letter-spacing:-.02em}
+        .datos h1 em{font-style:normal;color:var(--fuego)}
+        .entradilla{font-size:1rem;color:var(--apagado);line-height:1.7}
+
+        .precio-fila{display:flex;align-items:baseline;gap:.7rem;flex-wrap:wrap}
+        .precio{font-size:2.2rem;font-weight:900;letter-spacing:-.02em;
+                font-variant-numeric:tabular-nums}
+        .precio-nota{font-size:.78rem;color:var(--apagado)}
+
+        /* tallas */
+        .bloque-talla{display:flex;flex-direction:column;gap:.6rem}
+        .fila-label{display:flex;justify-content:space-between;align-items:center;gap:1rem}
+        .fila-label strong{font-size:.76rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+        .fila-label a{font-size:.76rem;color:var(--fuego);text-decoration:underline;text-underline-offset:3px}
+        .tallas{display:flex;gap:.5rem;flex-wrap:wrap}
+        .talla{min-width:52px;padding:.65rem .5rem;text-align:center;background:transparent;
+               border:1px solid rgba(242,237,230,.22);color:var(--blanco);border-radius:var(--r-xs);
+               font-family:inherit;font-weight:800;font-size:.86rem;cursor:pointer;transition:all .18s}
+        .talla:hover{border-color:var(--fuego)}
+        .talla[aria-pressed="true"]{background:var(--fuego);color:var(--negro);border-color:var(--fuego)}
+        .talla:disabled{opacity:.3;cursor:not-allowed;text-decoration:line-through}
+
+        /* zona de compra */
+        .zona-compra{display:flex;flex-direction:column;gap:.7rem}
+        .btn-comprar{display:flex;align-items:center;justify-content:center;gap:.6rem;
+            width:100%;background:var(--fuego);color:var(--negro);font-family:inherit;
+            font-weight:900;font-size:.95rem;letter-spacing:.06em;text-transform:uppercase;
+            padding:1.1rem 1.6rem;border:none;border-radius:var(--r-xs);cursor:pointer;
+            transition:background .25s,transform .25s;text-decoration:none}
+        .btn-comprar:hover{background:#E0571A;transform:translateY(-2px)}
+        .aviso-talla{font-size:.78rem;color:#E0806F;font-weight:700;display:none}
+        .aviso-talla.ver{display:block}
+
+        .garantias{display:grid;grid-template-columns:1fr 1fr;gap:.5rem .9rem;
+                   padding-top:1rem;border-top:1px solid rgba(242,237,230,.09)}
+        .garantias div{font-size:.8rem;color:var(--apagado);display:flex;gap:.45rem;align-items:flex-start}
+        .garantias b{color:var(--blanco);font-weight:700}
+        @media(max-width:420px){.garantias{grid-template-columns:1fr}}
+
+        /* ── POR QUÉ ──────────────────────────────────────── */
+        .porque{background:linear-gradient(135deg,#1E1008,#0D0B09);
+                border-top:1px solid rgba(200,114,42,.15);border-bottom:1px solid rgba(200,114,42,.15)}
+        .porque .envoltorio{max-width:680px;text-align:center}
+        .porque p{font-size:1.05rem;color:var(--apagado);line-height:1.8;margin-bottom:1rem}
+        .porque p.fuerte{color:var(--blanco);font-weight:600;font-size:1.12rem}
+
+        /* ── TALLAS ───────────────────────────────────────── */
+        .tabla-env{overflow-x:auto;border:1px solid rgba(200,114,42,.18);border-radius:var(--r-md);margin-top:1.2rem}
+        table{border-collapse:collapse;width:100%;font-size:.88rem}
+        th{background:var(--gris);text-align:left;padding:.75rem 1rem;font-size:.68rem;
+           font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--fuego);white-space:nowrap}
+        td{padding:.7rem 1rem;border-top:1px solid rgba(242,237,230,.08);
+           font-variant-numeric:tabular-nums;white-space:nowrap}
+        .pendiente{background:rgba(224,128,111,.1);border:1px solid rgba(224,128,111,.35);
+                   border-radius:var(--r-xs);padding:.9rem 1.1rem;font-size:.85rem;
+                   color:#E0806F;font-weight:600;margin-top:1rem}
+
+        /* ── FAQ ──────────────────────────────────────────── */
+        .faq{max-width:760px;margin:0 auto}
+        .faq details{background:var(--gris);border:1px solid rgba(200,114,42,.14);
+                     border-radius:var(--r-sm);margin-bottom:.7rem;overflow:hidden}
+        .faq summary{padding:1rem 1.3rem;font-weight:700;font-size:.93rem;cursor:pointer;
+                     list-style:none;display:flex;justify-content:space-between;gap:1rem;align-items:center}
+        .faq summary::-webkit-details-marker{display:none}
+        .faq summary::after{content:'+';color:var(--fuego);font-size:1.3rem;font-weight:400;flex-shrink:0}
+        .faq details[open] summary::after{content:'−'}
+        .faq .resp{padding:0 1.3rem 1.2rem;font-size:.9rem;color:var(--apagado);line-height:1.75}
+        .faq .resp a{color:var(--fuego)}
+
+        /* ── BARRA FIJA MÓVIL ─────────────────────────────── */
+        .barra-movil{position:fixed;left:0;right:0;bottom:0;z-index:900;display:none;
+            gap:.8rem;align-items:center;background:rgba(13,11,9,.97);
+            backdrop-filter:blur(12px);border-top:1px solid rgba(200,114,42,.28);
+            padding:.75rem max(1rem,env(safe-area-inset-right,0px))
+                    calc(.75rem + env(safe-area-inset-bottom,0px))
+                    max(1rem,env(safe-area-inset-left,0px))}
+        .barra-movil .bm-precio{font-weight:900;font-size:1.15rem;white-space:nowrap;
+                                font-variant-numeric:tabular-nums}
+        .barra-movil .btn-comprar{padding:.85rem 1.2rem;font-size:.84rem}
+        @media(max-width:860px){.barra-movil{display:flex}
+            body{padding-bottom:5.5rem}}
+
+        /* ── LISTA DE ESPERA (se mantiene) ────────────────── */
+        .lista-section{background:linear-gradient(135deg,#1E1008 0%,#0D0B09 100%);
+            padding:4rem 1.25rem;text-align:center;border-top:1px solid rgba(200,114,42,.15)}
+        .lista-section h2{font-family:'Bebas Neue','Montserrat',sans-serif;font-weight:400;
+            font-size:clamp(2rem,5vw,3.2rem);letter-spacing:.012em;margin-bottom:.8rem;line-height:1}
         .lista-section h2 span{color:var(--fuego)}
-        .lista-section p{font-size:.95rem;color:rgba(242,237,230,.55);max-width:480px;margin:0 auto 2.5rem;line-height:1.7}
-        .form-lista{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;max-width:520px;margin:0 auto}
-        .form-lista input[type="email"]{flex:1;min-width:220px;background:rgba(242,237,230,.07);border:1px solid rgba(200,114,42,.3);color:var(--blanco);font-family:'Montserrat',sans-serif;font-size:.9rem;padding:.9rem 1.4rem;border-radius:50px;outline:none;transition:border-color .3s}
+        .lista-section > p{font-size:.95rem;color:var(--apagado);max-width:470px;
+            margin:0 auto 2.2rem;line-height:1.7}
+        .form-lista{display:flex;gap:.7rem;justify-content:center;flex-wrap:wrap;max-width:520px;margin:0 auto}
+        .form-lista input[type="email"]{flex:1;min-width:210px;background:rgba(242,237,230,.07);
+            border:1px solid rgba(200,114,42,.3);color:var(--blanco);font-family:inherit;
+            font-size:.9rem;padding:.9rem 1.3rem;border-radius:var(--r-xs);outline:none}
         .form-lista input[type="email"]:focus{border-color:var(--fuego)}
-        .form-lista input[type="email"]::placeholder{color:rgba(242,237,230,.3)}
-        .form-lista button{background:var(--fuego);color:var(--negro);font-family:'Montserrat',sans-serif;font-weight:800;font-size:.85rem;letter-spacing:1px;text-transform:uppercase;padding:.9rem 2rem;border:none;border-radius:50px;cursor:pointer;transition:all .3s;white-space:nowrap}
-        .form-lista button:hover{background:#E0571A;transform:translateY(-2px)}
-        .form-nota{font-size:.7rem;color:rgba(242,237,230,.3);margin-top:1rem}
-
-        /* PRODUCTO LAYOUT */
-        .producto-layout{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;padding:1rem 0}
-        .producto-imagen{position:relative}
-        .producto-imagen img{width:100%;border-radius:20px;border:2px solid rgba(200,114,42,.25);display:block}
-        .producto-badge-img{position:absolute;top:1.2rem;left:1.2rem;background:var(--fuego);color:var(--negro);font-size:.65rem;font-weight:900;letter-spacing:2px;text-transform:uppercase;padding:.4rem 1rem;border-radius:20px}
-        .producto-info{display:flex;flex-direction:column;gap:1.2rem}
-        .features-list{display:flex;flex-direction:column;gap:.6rem;background:var(--gris);border-radius:var(--r-xs);padding:1.2rem 1.4rem;border:1px solid rgba(200,114,42,.15)}
-        .feature-item{font-size:.88rem;color:rgba(242,237,230,.8);font-weight:600}
-        .urgencia-box{background:rgba(200,114,42,.1);border:1px solid rgba(200,114,42,.4);border-radius:var(--r-xs);padding:.9rem 1.2rem;font-size:.85rem;color:var(--fuego);font-weight:800;text-align:center;letter-spacing:.5px}
-        .trust-badges{display:flex;gap:1.5rem;flex-wrap:wrap;padding:.8rem 0;border-top:1px solid rgba(242,237,230,.06)}
-        .trust-badges span{font-size:.75rem;color:rgba(242,237,230,.4);font-weight:600}
-        @media(max-width:800px){.producto-layout{grid-template-columns:1fr;gap:2rem}.producto-imagen img{max-height:380px;object-fit:cover}}
-
-        /* GRACIAS STATE */
-        .gracias-msg{display:none;background:rgba(200,114,42,.12);border:1px solid rgba(200,114,42,.3);border-radius:var(--r-md);padding:1.5rem 2rem;max-width:440px;margin:0 auto;text-align:center}
+        .form-lista button{background:var(--fuego);color:var(--negro);font-family:inherit;
+            font-weight:800;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;
+            padding:.9rem 1.9rem;border:none;border-radius:var(--r-xs);cursor:pointer;white-space:nowrap}
+        .form-lista button:hover{background:#E0571A}
+        .form-nota{font-size:.72rem;color:rgba(242,237,230,.34);margin-top:.9rem}
+        .lista-consent{display:block;max-width:470px;margin:1rem auto 0;font-size:.76rem;
+            color:var(--apagado);text-align:left;line-height:1.6}
+        .lista-consent a{color:var(--fuego)}
+        .gracias-msg{display:none;background:rgba(200,114,42,.12);border:1px solid rgba(200,114,42,.3);
+            border-radius:var(--r-md);padding:1.5rem 2rem;max-width:440px;margin:0 auto;text-align:center}
         .gracias-msg.visible{display:block}
-        .gracias-msg .icon{font-size:2.5rem;margin-bottom:.8rem;display:block}
+        .gracias-msg .icon{font-size:2.4rem;margin-bottom:.7rem;display:block}
         .gracias-msg h3{font-size:1.1rem;font-weight:800;color:var(--fuego);margin-bottom:.4rem}
-        .gracias-msg p{font-size:.85rem;color:rgba(242,237,230,.65);margin:0}
+        .gracias-msg p{font-size:.86rem;color:var(--apagado);margin:0}
+        .encuesta-pregunta{font-size:.95rem;color:var(--apagado);margin-bottom:1.1rem}
+        .encuesta-ops{display:flex;gap:.7rem;justify-content:center;flex-wrap:wrap;max-width:620px;margin:0 auto}
+        .encuesta-btn{background:var(--gris);border:1px solid rgba(200,114,42,.25);color:var(--blanco);
+            border-radius:var(--r-sm);padding:1rem 1.2rem;font-family:inherit;font-size:.85rem;
+            font-weight:700;cursor:pointer;display:flex;flex-direction:column;gap:.4rem;
+            align-items:center;min-width:150px;transition:all .25s}
+        .encuesta-btn:hover{border-color:var(--fuego);transform:translateY(-2px)}
+        .encuesta-saltar{margin-top:1.2rem;font-size:.8rem}
+        .encuesta-saltar a{color:var(--apagado)}
+        .encuesta-gracias{color:var(--fuego);font-size:.9rem;margin-bottom:1rem}
 
-        /* MIENTRAS TANTO */
-        .mientras-section{padding:4rem 2rem;text-align:center}
-        .mientras-section h3{font-size:1.4rem;font-weight:900;margin-bottom:.6rem}
-        .mientras-section p{color:rgba(242,237,230,.5);font-size:.9rem;margin-bottom:2rem}
-        .social-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
-        .btn-social{display:inline-flex;align-items:center;gap:.6rem;padding:.85rem 1.8rem;border-radius:50px;text-decoration:none;font-weight:700;font-size:.82rem;letter-spacing:.5px;text-transform:uppercase;transition:all .3s}
-        .btn-ig{background:linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:#fff}
-        .btn-ig:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(220,39,67,.3)}
+        .social-btns{display:flex;gap:.9rem;justify-content:center;flex-wrap:wrap;margin-top:1.6rem}
+        .btn-social{display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 1.7rem;
+            border-radius:var(--r-xs);text-decoration:none;font-weight:700;font-size:.8rem;
+            letter-spacing:.04em;text-transform:uppercase;transition:transform .25s}
+        .btn-ig{background:linear-gradient(135deg,#f09433,#dc2743,#bc1888);color:#fff}
         .btn-tk{background:#010101;color:#fff;border:1px solid rgba(255,255,255,.15)}
-        .btn-tk:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.4)}
+        .btn-social:hover{transform:translateY(-2px)}
 
-        footer{background:#090705;padding:2rem;text-align:center;border-top:1px solid rgba(200,114,42,.15)}
+        footer{background:#090705;padding:2rem 1.25rem;text-align:center;
+               border-top:1px solid rgba(200,114,42,.15)}
         footer p{font-size:.78rem;color:rgba(242,237,230,.35)}
         footer span{color:var(--fuego)}
-
-        @media(max-width:900px){.productos-grid{grid-template-columns:repeat(2,1fr)}}
-        @media(max-width:500px){
-            .productos-grid{grid-template-columns:1fr 1fr;gap:.8rem}
-            .hero-stats{gap:2rem}
-            .hero-tienda h1{font-size:3.2rem}
-            .nav-logo span{display:none}
-            .producto-img{height:160px;font-size:3rem}
-        }
+        .pie-legal{margin-top:.9rem;display:flex;gap:.5rem 1.1rem;justify-content:center;flex-wrap:wrap}
+        .pie-legal a{color:rgba(242,237,230,.5);font-size:.74rem;text-decoration:none}
+        .pie-legal a:hover{color:var(--fuego)}
     </style>
-    <link rel="stylesheet" href="tema.css?v=3">
+    <link rel="stylesheet" href="tema.css?v=5">
     <script src="tema.js?v=5" defer></script>
 </head>
 <body>
-
-<!-- ===== VISTA PREVIA DEL EQUIPO (añade ?preview a la URL) ===== -->
-<div id="pwd-overlay" style="
-    position:fixed;inset:0;z-index:99999;
-    background:#0D0B09;
-    display:none;align-items:center;justify-content:center;
-    font-family:'Montserrat',sans-serif;
-">
-    <div style="text-align:center;padding:2rem;max-width:420px;width:90%;">
-        <div style="font-size:4rem;margin-bottom:1.5rem;">🐾</div>
-        <p style="color:#C8722A;font-size:.75rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:.8rem;">Acceso restringido</p>
-        <h2 style="color:#F2EDE6;font-size:1.6rem;font-weight:900;text-transform:uppercase;letter-spacing:-0.5px;margin-bottom:.6rem;">Tienda en preparación</h2>
-        <p style="color:rgba(242,237,230,.55);font-size:.88rem;line-height:1.6;margin-bottom:2rem;">Estamos preparando algo especial para ti. Si tienes el código de acceso, introdúcelo aquí.</p>
-        <input id="pwd-input" type="password" placeholder="Código de acceso..." style="
-            width:100%;padding:1rem 1.2rem;
-            background:rgba(255,255,255,.06);
-            border:1px solid rgba(200,114,42,.35);
-            border-radius:var(--r-xs);color:#F2EDE6;
-            font-family:'Montserrat',sans-serif;
-            font-size:.95rem;outline:none;
-            margin-bottom:.8rem;
-            transition:border .3s;
-        " onkeydown="if(event.key==='Enter')checkPwd()">
-        <p id="pwd-error" style="color:#e05252;font-size:.8rem;font-weight:600;min-height:1.2rem;margin-bottom:.8rem;display:none;">Código incorrecto. Inténtalo de nuevo.</p>
-        <button onclick="checkPwd()" style="
-            width:100%;padding:1rem;
-            background:#C8722A;color:#0D0B09;
-            border:none;border-radius:var(--r-xs);
-            font-family:'Montserrat',sans-serif;
-            font-size:.9rem;font-weight:800;
-            letter-spacing:2px;text-transform:uppercase;
-            cursor:pointer;transition:opacity .3s;
-        " onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">Entrar</button>
-        <p style="margin-top:1.5rem;color:rgba(242,237,230,.3);font-size:.75rem;">¿No tienes código? <a href="/" style="color:#C8722A;text-decoration:none;">Volver al inicio</a></p>
-    </div>
-</div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function(){
-    // Cambia 'MAYAPPP' por la contraseña que quieras.
-    // La ficha de producto y el roadmap solo se muestran si ya se desbloqueó
-    // antes, o si se visita con ?preview en la URL (para el equipo).
-    var PASSWORD = 'MAYAPPP';
-    var isPreview = window.location.search.indexOf('preview') !== -1;
-    var unlocked = sessionStorage.getItem('tienda_ok') === '1';
-
-    function reveal(){
-        document.getElementById('tienda-privada').style.display = 'block';
-        document.getElementById('teaser-privado').style.display = 'none';
-        document.getElementById('pwd-overlay').style.display = 'none';
-    }
-
-    if(unlocked){
-        reveal();
-    } else if(isPreview){
-        document.getElementById('pwd-overlay').style.display = 'flex';
-    }
-    // Visitante normal (sin ?preview y sin desbloquear): se queda con el
-    // teaser público visible y la zona privada oculta. Sin overlay.
-
-    window.checkPwd = function(){
-        var val = document.getElementById('pwd-input').value;
-        var err = document.getElementById('pwd-error');
-        if(val === PASSWORD){
-            sessionStorage.setItem('tienda_ok','1');
-            reveal();
-        } else {
-            err.style.display='block';
-            document.getElementById('pwd-input').value='';
-            document.getElementById('pwd-input').focus();
-        }
-    };
-});
-</script>
-<!-- ===== FIN VISTA PREVIA ===== -->
 
 <nav>
     <a href="/" class="nav-logo" aria-label="Maya, el Rottweiler Peluche — ir al inicio"><img src="img/marca/maya-crema.svg" alt="" width="63" height="26"></a>
     <a href="/" class="nav-back">← Inicio</a>
 </nav>
 
-<!-- HERO -->
-<header class="hero-tienda">
-    <canvas class="hero-canvas" id="heroCanvas"></canvas>
-    <div class="hero-content">
-        <span class="badge-tienda">🛍️ Maya Merch</span>
-        <h1>Muy<br><span>pronto</span><span class="h1-emoji" aria-hidden="true">🐾</span></h1>
-        <p class="sub">Ropa y accesorios para quien ya sabe que un Rottweiler es, ante todo, familia.</p>
-        <a href="tienda#lista-espera" class="btn-lista">🐾 &nbsp; Avísame</a>
-        <div class="hero-stats">
-            <div class="hero-stat"><span>+46K</span><p>en la comunidad</p></div>
-            <div class="hero-stat"><span>+4.5M</span><p>views al mes</p></div>
-            <div class="hero-stat"><span>100%</span><p>auténtico</p></div>
+<!-- ══ FICHA DE PRODUCTO ════════════════════════════════ -->
+<main class="envoltorio">
+<section class="ficha">
+
+    <div class="galeria">
+        <div class="foto-principal falta-foto" id="foto-producto">
+            <span class="ico" aria-hidden="true">👕</span>
+            <span class="q">Falta la foto real</span>
+            <span class="d">Una foto de la camiseta puesta, a ser posible con Maya al lado. Es lo que más va a mover la venta.</span>
+        </div>
+        <div class="cinta">Edición limitada</div>
+    </div>
+
+    <div class="datos">
+        <div>
+            <span class="et">Tienda oficial</span>
+            <h1>Camiseta <em>Maya</em></h1>
+        </div>
+
+        <p class="entradilla">Para quien ya sabe que un Rottweiler es, antes que nada, familia. El logo de Maya en el pecho y el mensaje en la espalda.</p>
+
+        <div class="precio-fila">
+            <span class="precio" id="precio">24,95 €</span>
+            <span class="precio-nota">IVA incluido · envío 4,95 € · gratis desde 2 unidades</span>
+        </div>
+
+        <div class="bloque-talla">
+            <div class="fila-label">
+                <strong>Talla</strong>
+                <a href="#tallas">Ver guía de tallas</a>
+            </div>
+            <div class="tallas" id="tallas-botones" role="group" aria-label="Elige tu talla">
+                <button type="button" class="talla" aria-pressed="false" data-talla="S">S</button>
+                <button type="button" class="talla" aria-pressed="false" data-talla="M">M</button>
+                <button type="button" class="talla" aria-pressed="false" data-talla="L">L</button>
+                <button type="button" class="talla" aria-pressed="false" data-talla="XL">XL</button>
+                <button type="button" class="talla" aria-pressed="false" data-talla="XXL">XXL</button>
+            </div>
+        </div>
+
+        <div class="zona-compra">
+            <!-- Aquí entra el botón de Shopify cuando la tienda esté activa.
+                 Mientras TIENDA.activa sea false, se muestra el botón de aviso. -->
+            <div id="ranura-shopify"></div>
+            <p class="aviso-talla" id="aviso-talla">Elige una talla antes de continuar.</p>
+            <a href="#lista-espera" class="btn-comprar" id="btn-fallback">🐾 &nbsp; Avísame cuando abra</a>
+        </div>
+
+        <div class="garantias">
+            <div><span aria-hidden="true">📦</span><span><b>Envío en 3–5 días</b> laborables a península</span></div>
+            <div><span aria-hidden="true">↩️</span><span><b>14 días</b> para devolverla</span></div>
+            <div><span aria-hidden="true">📏</span><span><b>Cambio de talla</b> si no acierta</span></div>
+            <div><span aria-hidden="true">🐾</span><span><b>Hecha en España</b>, género de Roly</span></div>
         </div>
     </div>
-</header>
 
-<!-- TEASER PÚBLICO (mientras el producto está en preparación) -->
-<section class="section" id="teaser-privado">
-    <div class="container" style="max-width:640px;text-align:center">
-        <span class="s-label">Por qué una tienda</span>
-        <h2 class="s-title">Llevarlo puesto también cuenta</h2>
-        <p class="s-sub" style="margin-bottom:0">Cada vez que alguien pregunta por tu camiseta, tienes treinta segundos para contarle que los PPP no son lo que le han contado. Esa conversación en la calle vale más que cualquier anuncio.</p>
+</section>
+</main>
+
+<!-- ══ POR QUÉ ══════════════════════════════════════════ -->
+<section class="seccion porque">
+    <div class="envoltorio">
+        <span class="et">Por qué una camiseta</span>
+        <h2 class="tit">Llevarlo puesto también cuenta</h2>
+        <p>Cada vez que alguien pregunta por tu camiseta, tienes treinta segundos para contarle que los PPP no son lo que le han contado.</p>
+        <p class="fuerte">Esa conversación en la calle vale más que cualquier anuncio.</p>
+        <p>No vendemos merchandising de una cuenta de Instagram. Vendemos una excusa para hablar del tema con alguien que todavía cree que un Rottweiler es un perro peligroso.</p>
     </div>
 </section>
 
-<!-- ZONA PRIVADA (equipo): añade ?preview a la URL para desbloquear -->
-<div id="tienda-privada" style="display:none">
-<!-- PRODUCTO DISPONIBLE AHORA -->
-<section class="section" id="producto" style="border-bottom:1px solid rgba(200,114,42,.15)">
-    <div class="container" style="max-width:1100px">
-        <div class="producto-layout">
+<!-- ══ GUÍA DE TALLAS ═══════════════════════════════════ -->
+<section class="seccion" id="tallas">
+    <div class="envoltorio" style="max-width:760px">
+        <span class="et">Antes de pedir</span>
+        <h2 class="tit">Guía de tallas</h2>
+        <p style="color:var(--apagado);font-size:.95rem">Medidas de la prenda en centímetros, no de la persona. Mide una camiseta que te quede bien y compárala.</p>
 
-            <!-- IMAGEN (placeholder hasta tener el diseño final) -->
-            <div class="producto-imagen">
-                <div style="width:100%;aspect-ratio:1/1;border-radius:20px;border:2px solid rgba(200,114,42,.25);background:linear-gradient(135deg,#1E1008,#0D0B09);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.8rem;text-align:center;padding:2rem;">
-                    <span style="font-size:3.5rem;">👕</span>
-                    <span style="color:var(--fuego);font-size:.72rem;font-weight:800;letter-spacing:2px;text-transform:uppercase;">Diseño en camino</span>
-                    <span style="color:rgba(242,237,230,.5);font-size:.85rem;max-width:280px;">Estamos terminando el diseño exclusivo. Foto real muy pronto 🐾</span>
-                </div>
-                <div class="producto-badge-img">🐾 Edición limitada</div>
-            </div>
-
-            <!-- INFO + WIDGET -->
-            <div class="producto-info">
-                <div>
-                    <span class="s-label" style="text-align:left;margin-bottom:.5rem">🛍️ Ya disponible</span>
-                    <h2 style="font-size:2.2rem;font-weight:900;line-height:1.15;margin-bottom:.6rem">Camiseta <span style="color:var(--fuego)">Exclusiva PPP</span></h2>
-                    <p style="font-size:.98rem;color:rgba(242,237,230,.65);line-height:1.75">Para los que saben que un Rottweiler no es un perro peligroso — es familia. Lleva el mensaje puesto y únete a la manada.</p>
-                </div>
-
-                <div class="features-list">
-                    <div class="feature-item">✅ &nbsp;100% algodón premium de calidad</div>
-                    <div class="feature-item">✅ &nbsp;Tallas S – XXL disponibles</div>
-                    <div class="feature-item">✅ &nbsp;Envío a toda España</div>
-                    <div class="feature-item">✅ &nbsp;Diseño exclusivo de la marca Maya</div>
-                </div>
-
-                <div class="urgencia-box">🔥 &nbsp;Edición limitada — stock reducido</div>
-
-                <div id='product-component-1780604925144'></div>
-
-                <div class="trust-badges">
-                    <span>🔒 Pago seguro</span>
-                    <span>📦 Envío 3–5 días</span>
-                    <span>↩️ Cambio de talla</span>
-                    <span>✅ Shopify Checkout</span>
-                </div>
-            </div>
-
+        <div class="tabla-env">
+            <table>
+                <thead><tr><th>Talla</th><th>Ancho pecho</th><th>Largo total</th><th>Equivale a</th></tr></thead>
+                <tbody>
+                    <tr><td>S</td><td>—</td><td>—</td><td>—</td></tr>
+                    <tr><td>M</td><td>—</td><td>—</td><td>—</td></tr>
+                    <tr><td>L</td><td>—</td><td>—</td><td>—</td></tr>
+                    <tr><td>XL</td><td>—</td><td>—</td><td>—</td></tr>
+                    <tr><td>XXL</td><td>—</td><td>—</td><td>—</td></tr>
+                </tbody>
+            </table>
         </div>
+
+        <p class="pendiente"><strong>Pendiente:</strong> rellena esta tabla con la ficha técnica del modelo exacto de Roly que compréis. No me invento las medidas: en ropa, una tabla de tallas inventada es la primera causa de devoluciones.</p>
     </div>
 </section>
 
-<script type="text/javascript">
-/*<![CDATA[*/
-(function () {
-  var scriptURL = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
-  if (window.ShopifyBuy) {
-    if (window.ShopifyBuy.UI) {
-      ShopifyBuyInit();
-    } else {
-      loadScript();
-    }
-  } else {
-    loadScript();
-  }
-  function loadScript() {
-    var script = document.createElement('script');
-    script.async = true;
-    script.src = scriptURL;
-    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(script);
-    script.onload = ShopifyBuyInit;
-  }
-  function ShopifyBuyInit() {
-    var client = ShopifyBuy.buildClient({
-      domain: '4sibej-ik.myshopify.com',
-      storefrontAccessToken: 'f82c6e9e3e7d52a449bcaee022af1a79',
-    });
-    ShopifyBuy.UI.onReady(client).then(function (ui) {
-      ui.createComponent('product', {
-        id: '10837501509959',
-        node: document.getElementById('product-component-1780604925144'),
-        moneyFormat: '%E2%82%AC%7B%7Bamount_with_comma_separator%7D%7D',
-        options: {
-          "product": {
-            "styles": {
-              "product": {
-                "@media (min-width: 601px)": {
-                  "max-width": "calc(25% - 20px)",
-                  "margin-left": "20px",
-                  "margin-bottom": "50px"
-                }
-              },
-              "button": {
-                "font-family": "Montserrat, sans-serif",
-                "font-weight": "800",
-                "font-size": "14px",
-                "letter-spacing": "1px",
-                "text-transform": "uppercase",
-                "padding-top": "14px",
-                "padding-bottom": "14px",
-                "background-color": "#C8722A",
-                ":hover": {
-                  "background-color": "#E0571A"
-                },
-                "border-radius": "30px",
-                ":focus": {
-                  "background-color": "#E0571A"
-                }
-              }
-            },
-            "text": {
-              "button": "Añadir al carrito"
-            }
-          },
-          "productSet": {
-            "styles": {
-              "products": {
-                "@media (min-width: 601px)": {
-                  "margin-left": "-20px"
-                }
-              }
-            }
-          },
-          "modalProduct": {
-            "contents": {
-              "img": false,
-              "imgWithCarousel": true,
-              "button": false,
-              "buttonWithQuantity": true
-            },
-            "styles": {
-              "product": {
-                "@media (min-width: 601px)": {
-                  "max-width": "100%",
-                  "margin-left": "0px",
-                  "margin-bottom": "0px"
-                }
-              },
-              "button": {
-                "font-family": "Montserrat, sans-serif",
-                "font-weight": "800",
-                "background-color": "#C8722A",
-                ":hover": {
-                  "background-color": "#E0571A"
-                },
-                "border-radius": "30px"
-              }
-            },
-            "text": {
-              "button": "Añadir al carrito"
-            }
-          },
-          "option": {},
-          "cart": {
-            "text": {
-              "total": "Subtotal",
-              "button": "Finalizar compra"
-            },
-            "styles": {
-              "button": {
-                "font-family": "Montserrat, sans-serif",
-                "font-weight": "800",
-                "background-color": "#C8722A",
-                ":hover": { "background-color": "#E0571A" },
-                "border-radius": "30px"
-              },
-              "cart": {
-                "background-color": "#0D0B09",
-                "color": "#F2EDE6"
-              },
-              "header": {
-                "background-color": "#0D0B09",
-                "color": "#F2EDE6",
-                "border-bottom": "1px solid rgba(200,114,42,0.3)"
-              },
-              "title": {
-                "color": "#F2EDE6",
-                "font-family": "Montserrat, sans-serif",
-                "font-weight": "800"
-              },
-              "lineItems": {
-                "background-color": "#0D0B09"
-              },
-              "lineItem": {
-                "color": "#F2EDE6",
-                "background-color": "#171310",
-                "border-bottom": "1px solid rgba(200,114,42,0.15)"
-              },
-              "lineItemTitle": {
-                "color": "#F2EDE6",
-                "font-family": "Montserrat, sans-serif",
-                "font-weight": "700"
-              },
-              "price": {
-                "color": "#C8722A",
-                "font-weight": "800"
-              },
-              "quantity": {
-                "color": "#F2EDE6"
-              },
-              "quantityInput": {
-                "color": "#0D0B09",
-                "background-color": "#F2EDE6",
-                "border-color": "#C8722A",
-                "font-weight": "800",
-                "font-family": "Montserrat, sans-serif"
-              },
-              "quantityButton": {
-                "color": "#F2EDE6",
-                "background-color": "#171310",
-                ":hover": {
-                  "background-color": "#C8722A",
-                  "color": "#0D0B09"
-                }
-              },
-              "subtotalText": {
-                "color": "#F2EDE6",
-                "font-family": "Montserrat, sans-serif",
-                "font-weight": "700"
-              },
-              "subtotal": {
-                "color": "#C8722A",
-                "font-family": "Montserrat, sans-serif",
-                "font-weight": "900"
-              },
-              "notice": {
-                "color": "#C8722A"
-              },
-              "currency": {
-                "color": "#F2EDE6"
-              },
-              "close": {
-                "color": "#F2EDE6",
-                ":hover": { "color": "#C8722A" }
-              },
-              "empty": {
-                "color": "rgba(242,237,230,0.5)",
-                "font-family": "Montserrat, sans-serif"
-              },
-              "footer": {
-                "background-color": "#171310"
-              }
-            }
-          },
-          "toggle": {
-            "styles": {
-              "toggle": {
-                "background-color": "#C8722A",
-                ":hover": { "background-color": "#E0571A" }
-              },
-              "count": {
-                "font-family": "Montserrat, sans-serif",
-                "font-weight": "800",
-                "color": "#0D0B09"
-              }
-            }
-          }
-        }
-      });
-    });
-  }
-})();
-/*]]>*/
-</script>
+<!-- ══ FAQ ══════════════════════════════════════════════ -->
+<section class="seccion" style="border-top:1px solid rgba(200,114,42,.12)">
+    <div class="envoltorio">
+        <span class="et" style="text-align:center">Dudas razonables</span>
+        <h2 class="tit" style="text-align:center">Preguntas frecuentes</h2>
+        <div class="faq" style="margin-top:2rem">
 
-<!-- QUÉ VIENE -->
-<section class="section">
-    <div class="container">
-        <span class="s-label">Próximamente</span>
-        <h2 class="s-title">Qué va a haber</h2>
-        <p class="s-sub">Todavía no podemos desvelar todo, pero algo se está cocinando. 🐶</p>
-        <div class="productos-grid">
+            <details>
+                <summary>¿A dónde va el dinero?</summary>
+                <div class="resp">A sostener el proyecto: el género, la impresión, los envíos y el tiempo que lleva hacer el contenido. Maya no es una ONG y no queremos decir que lo sea. Si en algún momento destinamos una parte a protectoras, lo diremos con la cifra exacta y la protectora con nombre, no con un «parte de los beneficios».</div>
+            </details>
 
-            <div class="producto-card">
-                <div class="producto-img">👕</div>
-                <span class="prox-badge">PRONTO</span>
-                <div class="producto-body">
-                    <span class="producto-cat">Ropa</span>
-                    <h3 class="producto-nombre">Colección Maya</h3>
-                    <p class="producto-desc">Lleva el mensaje a todas partes. Camisetas y sudaderas con el carácter de Maya.</p>
-                </div>
-            </div>
+            <details>
+                <summary>¿Cuánto tarda en llegar?</summary>
+                <div class="resp">Entre 3 y 5 días laborables a península una vez sale el pedido. Baleares, Canarias, Ceuta y Melilla tienen plazos y costes distintos: los tienes en <a href="envios-devoluciones">envíos y devoluciones</a>.</div>
+            </details>
 
-            <div class="producto-card">
-                <div class="producto-img">🦮</div>
-                <span class="prox-badge">PRONTO</span>
-                <div class="producto-body">
-                    <span class="producto-cat">Accesorios PPP</span>
-                    <h3 class="producto-nombre">Para tu Rottweiler</h3>
-                    <p class="producto-desc">Seleccionados para razas PPP. Resistentes, seguros y con estilo.</p>
-                </div>
-            </div>
+            <details>
+                <summary>¿Y si no me queda bien la talla?</summary>
+                <div class="resp">Te la cambiamos. Escríbenos a <a href="mailto:hola@mayarottweiler.com">hola@mayarottweiler.com</a> dentro de los 14 días siguientes a recibirla, sin estrenar y con su etiqueta. Tienes además el derecho de desistimiento de 14 días que marca la ley, explicado en las <a href="condiciones-venta">condiciones de venta</a>.</div>
+            </details>
 
-            <div class="producto-card">
-                <div class="producto-img">☕</div>
-                <span class="prox-badge">PRONTO</span>
-                <div class="producto-body">
-                    <span class="producto-cat">Lifestyle</span>
-                    <h3 class="producto-nombre">Objetos Maya</h3>
-                    <p class="producto-desc">Para los que llevan a Maya en el corazón incluso fuera de casa.</p>
-                </div>
-            </div>
+            <details>
+                <summary>¿De qué está hecha?</summary>
+                <div class="resp">Género de <strong>Roly</strong>, un fabricante textil español que trabaja con marcas y clubes. No es una camiseta de imprenta rápida: es la misma base que usan en equipaciones. La composición exacta y el gramaje dependen del modelo final, y los pondremos aquí antes de abrir.</div>
+            </details>
 
-            <div class="producto-card">
-                <div class="producto-img">🎁</div>
-                <span class="prox-badge">EXCLUSIVO</span>
-                <div class="producto-body">
-                    <span class="producto-cat">Pack especial</span>
-                    <h3 class="producto-nombre">Pack Fundadores</h3>
-                    <p class="producto-desc">Solo para los que se apuntan antes de que abramos. Algo especial para los primeros.</p>
-                </div>
-            </div>
+            <details>
+                <summary>¿Puedo comprar desde fuera de España?</summary>
+                <div class="resp">De momento enviamos solo dentro de España. Si estás fuera y la quieres, apúntate a la lista de abajo y dinos desde dónde escribes: si sale un grupo suficiente, abrimos envío internacional.</div>
+            </details>
+
+            <details>
+                <summary>¿Esto significa que vendéis perros?</summary>
+                <div class="resp">No, y nunca lo vamos a hacer. Maya existe para que la gente <strong>adopte en lugar de comprar</strong>. Esta camiseta financia ese mensaje; no es un paso hacia vender animales. Si buscas un Rottweiler, empieza por las <a href="protectoras-ppp-espana">protectoras de PPP en España</a>.</div>
+            </details>
 
         </div>
     </div>
 </section>
-</div>
 
-
-<!-- LISTA DE ESPERA -->
+<!-- ══ LISTA DE ESPERA ══════════════════════════════════ -->
 <section class="lista-section" id="lista-espera">
     <h2>Avísame cuando <span>abra</span></h2>
     <p>Un solo correo el día del lanzamiento. Sin spam, sin newsletter de relleno.</p>
 
-    <!-- ENCUESTA DE CO-CREACION: micro-compromiso antes de pedir el email -->
     <div id="encuesta">
         <p class="encuesta-pregunta">Antes de nada: <strong>¿qué te gustaría ver primero?</strong></p>
         <div class="encuesta-ops">
@@ -633,8 +418,186 @@ document.addEventListener('DOMContentLoaded', function(){
         <h3>¡Apuntado!</h3>
         <p>Te avisaremos cuando la tienda abra. Mientras tanto, sigue el día a día de Maya en Instagram y TikTok.</p>
     </div>
+
+    <div class="social-btns">
+        <a href="https://www.instagram.com/maya.rottweiler13" target="_blank" rel="noopener" class="btn-social btn-ig">📸 &nbsp; Instagram</a>
+        <a href="https://www.tiktok.com/@maya.rottweiler13" target="_blank" rel="noopener" class="btn-social btn-tk">🎵 &nbsp; TikTok</a>
+    </div>
 </section>
+
+<!-- ══ BARRA FIJA MÓVIL ═════════════════════════════════ -->
+<div class="barra-movil" id="barra-movil">
+    <span class="bm-precio">24,95 €</span>
+    <a href="#lista-espera" class="btn-comprar" id="bm-boton" style="flex:1">Avísame</a>
+</div>
+
+<footer>
+    <div class="pie-marca"><img src="img/marca/maya-crema.svg" alt="Maya" width="112" height="46"><p class="pie-claim">El Rottweiler Peluche</p><p class="pie-mision">Rompiendo el estigma de los perros potencialmente peligrosos en España.</p></div>
+    <p>© 2026 Gestionado por <span>MTS23 Talent</span> · Hecho con <span>❤️</span><br>
+    <a href="mailto:hola@mayarottweiler.com" style="color:var(--fuego);text-decoration:none;font-size:.75rem;">hola@mayarottweiler.com</a></p>
+    <div class="pie-legal">
+        <a href="condiciones-venta">Condiciones de venta</a>
+        <a href="envios-devoluciones">Envíos y devoluciones</a>
+        <a href="privacidad">Privacidad</a>
+        <a href="aviso-legal">Aviso legal</a>
+    </div>
+</footer>
+
 <script>
+/* ══════════════════════════════════════════════════════════
+   INTERRUPTOR DE LA TIENDA
+
+   Para encender la venta de verdad solo hay que tocar esto:
+     1. activa  -> true
+     2. dominio -> el de tu tienda Shopify (acaba en .myshopify.com)
+     3. token   -> Storefront access token (es público, va en el
+                   navegador; NO es la clave de administrador)
+     4. producto-> el ID numérico del producto en Shopify
+
+   Mientras activa sea false, la página enseña el botón de
+   "Avísame" y la lista de espera. No hace falta tocar nada más.
+   ══════════════════════════════════════════════════════════ */
+var TIENDA = {
+  activa:   false,
+  dominio:  '',           // p. ej. 'maya-rottweiler.myshopify.com'
+  token:    '',           // Storefront access token
+  producto: '',           // ID numérico del producto
+  precio:   '24,95 €'
+};
+
+(function(){
+  'use strict';
+
+  /* ── Selector de talla ───────────────────────────────── */
+  var tallaElegida = null;
+  var botones = document.querySelectorAll('.talla');
+  var aviso   = document.getElementById('aviso-talla');
+
+  Array.prototype.forEach.call(botones, function(b){
+    b.addEventListener('click', function(){
+      Array.prototype.forEach.call(botones, function(o){ o.setAttribute('aria-pressed','false'); });
+      b.setAttribute('aria-pressed','true');
+      tallaElegida = b.dataset.talla;
+      aviso.classList.remove('ver');
+      try { sessionStorage.setItem('maya_talla', tallaElegida); } catch(e){}
+    });
+  });
+  // Si ya eligió talla antes en esta sesión, la recordamos.
+  try {
+    var previa = sessionStorage.getItem('maya_talla');
+    if (previa) {
+      var b = document.querySelector('.talla[data-talla="' + previa + '"]');
+      if (b) b.click();
+    }
+  } catch(e){}
+
+  /* ── Botón de compra: exige talla ────────────────────── */
+  function exigeTalla(e){
+    if (!tallaElegida) {
+      e.preventDefault();
+      aviso.classList.add('ver');
+      document.getElementById('tallas-botones').scrollIntoView({behavior:'smooth', block:'center'});
+      return false;
+    }
+    return true;
+  }
+
+  /* ── Tienda apagada: todo apunta a la lista de espera ── */
+  if (!TIENDA.activa || !TIENDA.dominio || !TIENDA.token || !TIENDA.producto) {
+    // El selector de talla no sirve de nada todavía, pero lo dejamos
+    // visible porque enseña que habrá tallas. Solo quitamos la exigencia.
+    document.getElementById('btn-fallback').textContent = '🐾  Avísame cuando abra';
+    return;
+  }
+
+  /* ── Tienda encendida: carga el botón de Shopify ─────── */
+  document.getElementById('btn-fallback').style.display = 'none';
+  document.getElementById('bm-boton').addEventListener('click', exigeTalla);
+
+  // Schema de producto: solo cuando se puede comprar de verdad.
+  var ld = document.createElement('script');
+  ld.type = 'application/ld+json';
+  ld.textContent = JSON.stringify({
+    "@context":"https://schema.org", "@type":"Product",
+    "name":"Camiseta Maya — Rottweiler Peluche",
+    "description":"Camiseta de algodón con el logo de Maya. Rompiendo el estigma de los perros potencialmente peligrosos en España.",
+    "brand":{"@type":"Brand","name":"Maya | El Rottweiler Peluche"},
+    "offers":{"@type":"Offer","priceCurrency":"EUR","price":"24.95",
+              "availability":"https://schema.org/InStock",
+              "url":"https://mayarottweiler.com/tienda"}
+  });
+  document.head.appendChild(ld);
+
+  var URL_SDK = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
+  function arranca(){
+    var cliente = ShopifyBuy.buildClient({
+      domain: TIENDA.dominio,
+      storefrontAccessToken: TIENDA.token
+    });
+    ShopifyBuy.UI.onReady(cliente).then(function(ui){
+      ui.createComponent('product', {
+        id: TIENDA.producto,
+        node: document.getElementById('ranura-shopify'),
+        moneyFormat: '%E2%82%AC%7B%7Bamount_with_comma_separator%7D%7D',
+        options: {
+          product: {
+            // La foto, el nombre y el precio ya los pone nuestra ficha.
+            // De Shopify solo queremos el selector de variante y el botón.
+            contents: { img:false, title:false, price:false, options:true, button:true },
+            text: { button: 'Añadir al carrito' },
+            styles: {
+              product: { "@media (min-width: 601px)": { "max-width":"100%", "margin-left":"0", "margin-bottom":"0" } },
+              button: {
+                "font-family":"Montserrat, sans-serif", "font-weight":"900",
+                "font-size":"15px", "letter-spacing":"1px", "text-transform":"uppercase",
+                "padding-top":"17px", "padding-bottom":"17px", "width":"100%",
+                "background-color":"#C8722A", "border-radius":"10px",
+                ":hover": {"background-color":"#E0571A"},
+                ":focus": {"background-color":"#E0571A"}
+              }
+            }
+          },
+          cart: {
+            text: { total:'Subtotal', button:'Finalizar compra',
+                    notice:'Los gastos de envío se calculan en el paso siguiente.' },
+            styles: {
+              button: { "font-family":"Montserrat, sans-serif", "font-weight":"900",
+                        "background-color":"#C8722A", "border-radius":"10px",
+                        ":hover":{"background-color":"#E0571A"} },
+              cart:      { "background-color":"#0D0B09", "color":"#F2EDE6" },
+              header:    { "background-color":"#0D0B09", "color":"#F2EDE6" },
+              title:     { "color":"#F2EDE6", "font-weight":"800" },
+              lineItems: { "background-color":"#0D0B09" },
+              lineItem:  { "color":"#F2EDE6", "background-color":"#171310" },
+              lineItemTitle: { "color":"#F2EDE6", "font-weight":"700" },
+              price:     { "color":"#C8722A", "font-weight":"800" },
+              quantity:  { "color":"#F2EDE6" },
+              subtotal:  { "color":"#C8722A", "font-weight":"900" },
+              subtotalText: { "color":"#F2EDE6", "font-weight":"700" },
+              close:     { "color":"#F2EDE6", ":hover":{"color":"#C8722A"} },
+              empty:     { "color":"rgba(242,237,230,.5)" },
+              footer:    { "background-color":"#171310" }
+            }
+          },
+          toggle: {
+            styles: { toggle: { "background-color":"#C8722A", ":hover":{"background-color":"#E0571A"} },
+                      count:  { "font-weight":"900", "color":"#0D0B09" } }
+          }
+        }
+      });
+    });
+  }
+  if (window.ShopifyBuy && window.ShopifyBuy.UI) { arranca(); }
+  else {
+    var s = document.createElement('script');
+    s.async = true; s.src = URL_SDK; s.onload = arranca;
+    document.head.appendChild(s);
+  }
+})();
+</script>
+
+<script>
+/* ── Lista de espera + encuesta de co-creación ─────────── */
 (function(){
     var form = document.getElementById('form-espera');
     if(!form) return;
@@ -643,7 +606,6 @@ document.addEventListener('DOMContentLoaded', function(){
     var encuesta = document.getElementById('encuesta');
     var campo = document.getElementById('campo-interes');
 
-    // --- Encuesta de co-creacion ---
     function abrirForm(voto){
         if(voto){
             campo.value = voto;
@@ -661,14 +623,13 @@ document.addEventListener('DOMContentLoaded', function(){
     document.getElementById('saltar-voto').addEventListener('click', function(e){
         e.preventDefault(); abrirForm(null);
     });
-    // Si ya voto en otra visita, no se lo preguntamos otra vez
     try {
         var previo = localStorage.getItem('tienda_voto');
         if(previo){ campo.value = previo; encuesta.style.display='none'; wrapper.style.display='block'; }
     } catch(e){}
 
     form.addEventListener('submit', function(e){
-        e.preventDefault();               // no abrimos pestaña nueva
+        e.preventDefault();
         var consent = document.getElementById('consent-espera');
         if(consent && !consent.checked){
             consent.focus();
@@ -679,9 +640,6 @@ document.addEventListener('DOMContentLoaded', function(){
         var data = new FormData(form);
         btn.disabled = true;
         btn.textContent = 'Enviando...';
-
-        // Envío directo al endpoint de MailerLite. Con no-cors no podemos leer
-        // la respuesta, pero la suscripción se registra igualmente.
         fetch(form.action, { method: 'POST', body: data, mode: 'no-cors' })
             .then(function(){
                 document.getElementById('form-wrapper').style.display = 'none';
@@ -695,26 +653,6 @@ document.addEventListener('DOMContentLoaded', function(){
     });
 })();
 </script>
-
-<!-- MIENTRAS TANTO -->
-<section class="mientras-section">
-    <h3>Mientras tanto, síguenos</h3>
-    <p>Cada día de Maya, en directo.</p>
-    <div class="social-btns">
-        <a href="https://www.instagram.com/maya.rottweiler13" target="_blank" rel="noopener" class="btn-social btn-ig">
-            📸 &nbsp; Instagram
-        </a>
-        <a href="https://www.tiktok.com/@maya.rottweiler13" target="_blank" rel="noopener" class="btn-social btn-tk">
-            🎵 &nbsp; TikTok
-        </a>
-    </div>
-</section>
-
-<footer>
-    <div class="pie-marca"><img src="img/marca/maya-crema.svg" alt="Maya" width="112" height="46"><p class="pie-claim">El Rottweiler Peluche</p><p class="pie-mision">Rompiendo el estigma de los perros potencialmente peligrosos en España.</p></div>
-    <p>© 2026 Gestionado por <span>MTS23 Talent</span> · Hecho con <span>❤️</span><br>
-    <a href="mailto:hola@mayarottweiler.com" style="color:var(--fuego);text-decoration:none;font-size:.75rem;">hola@mayarottweiler.com</a></p>
-</footer>
 
 </body>
 </html>
