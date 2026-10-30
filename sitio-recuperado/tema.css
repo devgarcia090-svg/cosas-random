@@ -410,6 +410,26 @@ nav{
   min-height:0 !important;
   z-index:1000 !important;
 }
+
+/* TAPON SUPERIOR.
+   En Safari de iPhone, al encoger su barra, queda visible una franja
+   por encima del nav con contenido de la pagina colandose por ella.
+   No se reproduce en navegador de escritorio, asi que en vez de
+   perseguir la causa se cubre: una banda opaca del color de la marca
+   pegada al nav y que se extiende hacia arriba. Fuera de iOS cae
+   fuera de la pantalla y no se ve nunca. */
+nav::before{
+  content:"" !important;
+  position:absolute !important;
+  /* Exactamente los 10px de margen que tiene el nav a cada lado.
+     Ni 100vw (en escritorio suma la barra de scroll) ni mas de 10,
+     que se sale por la derecha y mete desborde horizontal. */
+  left:-10px !important; right:-10px !important;
+  bottom:100% !important;
+  height:300px !important;
+  background:#231D18 !important;
+  pointer-events:none !important;
+}
 @media (min-width:901px){ nav{ padding-left:26px !important; padding-right:26px !important } }
 .nav-logo img{ height:46px !important }
 @media (max-width:700px){ .nav-logo img{ height:40px !important } }
