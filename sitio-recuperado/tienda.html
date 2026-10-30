@@ -3,15 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Sin esto, Safari en iPhone tiñe la barra de estado muestreando
-         la pagina y aparece una franja lavada encima del nav. -->
     <meta name="theme-color" content="#231D18">
     <meta name="color-scheme" content="dark">
 
     <title>Camiseta Maya — Tienda oficial | Maya Rottweiler</title>
-    <meta name="description" content="La camiseta de Maya, la Rottweiler que rompe el estigma PPP. Algodón, tallas S a XXL, envío a toda España. Cada camiseta es una conversación sobre los perros PPP.">
-    <!-- QUITAR EL noindex EL DIA QUE ABRAS DE VERDAD: mientras no haya
-         producto real a la venta, no queremos que Google indexe esto. -->
+    <meta name="description" content="La camiseta de Maya, la Rottweiler que rompe el estigma PPP. Algodón, tallas S a XXL, envío a toda España. 3 € de cada camiseta van a una protectora de perros PPP.">
+    <!-- QUITAR EL noindex EL DIA QUE ABRAS DE VERDAD. -->
     <meta name="robots" content="noindex, follow">
     <meta name="author" content="Maya | El Rottweiler Peluche">
     <link rel="canonical" href="https://mayarottweiler.com/tienda">
@@ -40,9 +37,6 @@
         ]
     }
     </script>
-    <!-- El schema de Product se añade solo cuando la tienda esté activa
-         (lo inyecta el script del final). Declarar un producto a la venta
-         que todavía no se puede comprar es motivo de aviso en Search Console. -->
 
     <link rel="dns-prefetch" href="https://www.googletagmanager.com/">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -50,239 +44,264 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
 
-    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-MM2BMHMG18"></script>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied'});gtag('js',new Date());gtag('config','G-MM2BMHMG18');</script>
 
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
-        :root{--negro:#0D0B09;--fuego:#C8722A;--blanco:#F2EDE6;--gris:#171310;
-              --apagado:rgba(242,237,230,.62)}
+        :root{
+            --negro:#0D0B09; --fuego:#C8722A; --fuego-vivo:#E0571A;
+            --blanco:#F2EDE6; --gris:#171310; --gris-alto:#1E1A15;
+            --apagado:rgba(242,237,230,.64); --tenue:rgba(242,237,230,.40);
+            --verde:#5BBE7F; --linea:rgba(200,114,42,.18);
+            --t:200ms cubic-bezier(.2,.8,.3,1);
+        }
         html{scroll-behavior:smooth}
+        @media(prefers-reduced-motion:reduce){
+            html{scroll-behavior:auto}
+            *,*::before,*::after{animation-duration:.01ms !important;
+                animation-iteration-count:1 !important;transition-duration:.01ms !important}
+        }
         body{font-family:'Montserrat',sans-serif;background:var(--negro);
-             color:var(--blanco);overflow-x:hidden;line-height:1.6}
+             color:var(--blanco);overflow-x:hidden;line-height:1.6;
+             -webkit-font-smoothing:antialiased}
 
-        .nav-back{color:var(--blanco);text-decoration:none;font-weight:600;font-size:.78rem;
-                  letter-spacing:1px;text-transform:uppercase;border:1px solid rgba(200,114,42,.4);
-                  padding:.5rem 1.2rem;border-radius:var(--r-xs);transition:all .3s}
+        /* Foco visible en todo lo que se puede pulsar o tabular. */
+        a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible{
+            outline:3px solid var(--fuego); outline-offset:3px; border-radius:4px}
+        a,button,summary{cursor:pointer}
+
+        .nav-back{color:var(--blanco);text-decoration:none;font-weight:700;font-size:.74rem;
+            letter-spacing:.09em;text-transform:uppercase;border:1px solid rgba(200,114,42,.4);
+            padding:.6rem 1.1rem;border-radius:var(--r-xs);transition:background var(--t),color var(--t);
+            min-height:40px;display:inline-flex;align-items:center}
         .nav-back:hover{background:var(--fuego);color:var(--negro);border-color:var(--fuego)}
 
-        .envoltorio{max-width:1080px;margin:0 auto;padding:0 1.25rem}
-        .seccion{padding:3.5rem 0}
-        .et{font-size:.7rem;font-weight:800;color:var(--fuego);letter-spacing:.2em;
+        .env{max-width:1060px;margin:0 auto;
+             padding-left:max(1.15rem,env(safe-area-inset-left,0px));
+             padding-right:max(1.15rem,env(safe-area-inset-right,0px))}
+        .bloque{padding-block:3.5rem}
+        .et{font-size:.69rem;font-weight:800;color:var(--fuego);letter-spacing:.2em;
             text-transform:uppercase;display:block;margin-bottom:.7rem}
-        h2.tit{font-family:'Bebas Neue','Montserrat',sans-serif;font-weight:400;
-               font-size:clamp(2rem,5vw,3rem);letter-spacing:.012em;line-height:1;margin-bottom:.8rem}
+        .tit{font-family:'Bebas Neue','Montserrat',sans-serif;font-weight:400;
+             font-size:clamp(1.9rem,5.2vw,2.9rem);letter-spacing:.012em;
+             line-height:1;margin-bottom:.7rem;text-wrap:balance}
 
-        /* ── FICHA DE PRODUCTO ─────────────────────────────── */
-        /* El nav de tema.css se saca del flujo con un margen inferior
-           negativo, asi que el contenido sube por debajo de el. Hay que
-           devolverle esa altura o el texto acaba en la barra de estado
-           del movil, encima del nav. */
+        .ico{width:22px;height:22px;flex-shrink:0;stroke:currentColor;
+             fill:none;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}
+
+        /* ══ FICHA ══════════════════════════════════════════ */
         .ficha{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start;
-               padding:calc(var(--alto-nav) + 1.5rem) 0 3.5rem}
-        @media(max-width:860px){.ficha{grid-template-columns:1fr;gap:1.8rem;
-               padding-top:calc(var(--alto-nav) + 1rem)}}
+               padding-top:calc(var(--alto-nav) + 1.6rem);padding-bottom:3rem}
+        @media(max-width:880px){.ficha{grid-template-columns:1fr;gap:1.7rem;
+               padding-top:calc(var(--alto-nav) + .9rem)}}
 
-        .galeria{position:relative}
-        .foto-principal{width:100%;aspect-ratio:1/1;border-radius:var(--r-lg);
-            border:1px solid rgba(200,114,42,.22);overflow:hidden;background:linear-gradient(135deg,#1E1008,#0D0B09);
-            display:flex;flex-direction:column;align-items:center;justify-content:center;
-            gap:.9rem;text-align:center;padding:2rem}
-        .foto-principal img{width:100%;height:100%;object-fit:cover;display:block}
-        .falta-foto span.ico{font-size:3.2rem;line-height:1}
-        .falta-foto .q{color:var(--fuego);font-size:.72rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase}
-        .falta-foto .d{color:var(--apagado);font-size:.86rem;max-width:300px}
-        /* En movil la foto no puede comerse la pantalla: el nombre y el
-           precio tienen que asomar sin hacer scroll. */
-        @media(max-width:860px){
-            .foto-principal{max-height:46vh;aspect-ratio:4/5;padding:1.2rem;gap:.5rem}
-            .falta-foto span.ico{font-size:2.2rem}
-            .falta-foto .d{font-size:.78rem;max-width:250px}
-        }
-        .cinta{position:absolute;top:1rem;left:1rem;background:var(--fuego);color:var(--negro);
-               font-size:.63rem;font-weight:900;letter-spacing:.14em;text-transform:uppercase;
-               padding:.38rem .9rem;border-radius:var(--r-xs)}
+        .galeria{position:sticky;top:calc(var(--alto-nav) + 1rem)}
+        @media(max-width:880px){.galeria{position:static}}
+        .foto{width:100%;aspect-ratio:1/1;border-radius:var(--r-lg);overflow:hidden;
+              border:1px solid var(--linea);background:linear-gradient(140deg,#1E1008,#0D0B09);
+              display:flex;flex-direction:column;align-items:center;justify-content:center;
+              gap:.7rem;text-align:center;padding:1.6rem;position:relative}
+        .foto img{width:100%;height:100%;object-fit:cover;display:block}
+        @media(max-width:880px){.foto{aspect-ratio:4/5;max-height:44vh;padding:1.1rem}}
+        .foto .ico-grande{width:40px;height:40px;stroke:var(--fuego);stroke-width:1.5;fill:none}
+        .foto .q{color:var(--fuego);font-size:.69rem;font-weight:800;
+                 letter-spacing:.15em;text-transform:uppercase}
+        .foto .d{color:var(--apagado);font-size:.8rem;max-width:260px;line-height:1.55}
+        .cinta{position:absolute;top:.9rem;left:.9rem;background:var(--fuego);color:var(--negro);
+               font-size:.6rem;font-weight:900;letter-spacing:.13em;text-transform:uppercase;
+               padding:.35rem .8rem;border-radius:var(--r-xs)}
+        .miniaturas{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;margin-top:.5rem}
+        .mini{aspect-ratio:1/1;border-radius:var(--r-sm);border:1px dashed rgba(200,114,42,.3);
+              background:var(--gris);display:flex;align-items:center;justify-content:center;
+              color:var(--tenue);font-size:.6rem;font-weight:700;text-align:center;padding:.3rem}
 
-        .datos{display:flex;flex-direction:column;gap:1.3rem}
-        .datos h1{font-size:clamp(1.9rem,4.5vw,2.6rem);font-weight:900;line-height:1.08;
-                  letter-spacing:-.02em}
+        .datos{display:flex;flex-direction:column;gap:1.25rem}
+        .datos h1{font-size:clamp(1.85rem,4.6vw,2.5rem);font-weight:900;
+                  line-height:1.07;letter-spacing:-.022em;text-wrap:balance}
         .datos h1 em{font-style:normal;color:var(--fuego)}
-        .entradilla{font-size:1rem;color:var(--apagado);line-height:1.7}
+        .lema{font-size:1rem;color:var(--apagado);line-height:1.7}
 
-        .precio-fila{display:flex;align-items:baseline;gap:.7rem;flex-wrap:wrap}
-        .precio{font-size:2.2rem;font-weight:900;letter-spacing:-.02em;
+        .precio-fila{display:flex;align-items:baseline;gap:.65rem;flex-wrap:wrap}
+        .precio{font-size:2.1rem;font-weight:900;letter-spacing:-.02em;
                 font-variant-numeric:tabular-nums}
-        .precio-nota{font-size:.78rem;color:var(--apagado)}
+        .precio-nota{font-size:.77rem;color:var(--apagado)}
 
-        /* tallas */
-        .bloque-talla{display:flex;flex-direction:column;gap:.6rem}
-        .fila-label{display:flex;justify-content:space-between;align-items:center;gap:1rem}
-        .fila-label strong{font-size:.76rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
-        .fila-label a{font-size:.76rem;color:var(--fuego);text-decoration:underline;text-underline-offset:3px}
-        .tallas{display:flex;gap:.5rem;flex-wrap:wrap}
-        .talla{min-width:52px;padding:.65rem .5rem;text-align:center;background:transparent;
-               border:1px solid rgba(242,237,230,.22);color:var(--blanco);border-radius:var(--r-xs);
-               font-family:inherit;font-weight:800;font-size:.86rem;cursor:pointer;transition:all .18s}
-        .talla:hover{border-color:var(--fuego)}
-        .talla[aria-pressed="true"]{background:var(--fuego);color:var(--negro);border-color:var(--fuego)}
-        .talla:disabled{opacity:.3;cursor:not-allowed;text-decoration:line-through}
+        .tira-mini{display:flex;gap:.5rem;flex-wrap:wrap}
+        .chip{display:inline-flex;align-items:center;gap:.4rem;font-size:.73rem;
+              font-weight:700;color:var(--apagado);background:var(--gris);
+              border:1px solid var(--linea);border-radius:999px;padding:.4rem .8rem}
+        .chip .ico{width:15px;height:15px;stroke:var(--fuego)}
 
-        /* zona de compra */
-        .zona-compra{display:flex;flex-direction:column;gap:.7rem}
-        .btn-comprar{display:flex;align-items:center;justify-content:center;gap:.6rem;
-            width:100%;background:var(--fuego);color:var(--negro);font-family:inherit;
-            font-weight:900;font-size:.95rem;letter-spacing:.06em;text-transform:uppercase;
-            padding:1.1rem 1.6rem;border:none;border-radius:var(--r-xs);cursor:pointer;
-            transition:background .25s,transform .25s;text-decoration:none}
-        .btn-comprar:hover{background:#E0571A;transform:translateY(-2px)}
-        .aviso-talla{font-size:.78rem;color:#E0806F;font-weight:700;display:none}
-        .aviso-talla.ver{display:block}
-
-        .garantias{display:grid;grid-template-columns:1fr 1fr;gap:.5rem .9rem;
-                   padding-top:1rem;border-top:1px solid rgba(242,237,230,.09)}
-        .garantias div{font-size:.8rem;color:var(--apagado);display:flex;gap:.45rem;align-items:flex-start}
-        .garantias b{color:var(--blanco);font-weight:700}
-        @media(max-width:420px){.garantias{grid-template-columns:1fr}}
-
-        .tanda{display:flex;align-items:center;gap:.55rem;font-size:.85rem;
-               color:var(--blanco);font-weight:600;background:rgba(200,114,42,.09);
-               border:1px solid rgba(200,114,42,.3);border-radius:var(--r-xs);
-               padding:.7rem 1rem;margin:-.4rem 0 0}
-        .tanda .punto{width:8px;height:8px;border-radius:50%;background:#5BBE7F;
-                      flex-shrink:0;box-shadow:0 0 0 3px rgba(91,190,127,.22)}
-        .pend-i{color:#E0806F;font-weight:800}
-
-        .dona{display:flex;gap:.6rem;align-items:flex-start;font-size:.85rem;
+        .dona{display:flex;gap:.65rem;align-items:flex-start;font-size:.85rem;
               color:var(--apagado);line-height:1.6;background:rgba(91,190,127,.07);
-              border:1px solid rgba(91,190,127,.28);border-radius:var(--r-xs);
-              padding:.8rem 1rem;margin:0}
-        .dona strong{color:#5BBE7F;font-weight:800}
+              border:1px solid rgba(91,190,127,.3);border-radius:var(--r-sm);
+              padding:.85rem 1rem}
+        .dona .ico{stroke:var(--verde);width:20px;height:20px;margin-top:.1rem}
+        .dona b{color:var(--verde);font-weight:800}
         .dona a{color:var(--fuego)}
 
-        .pago{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;
-              font-size:.72rem;color:rgba(242,237,230,.45);font-weight:600}
-        .pago b{color:rgba(242,237,230,.7);font-weight:700}
+        .tanda{display:flex;align-items:center;gap:.55rem;font-size:.84rem;
+               color:var(--blanco);font-weight:600;background:rgba(200,114,42,.08);
+               border:1px solid rgba(200,114,42,.3);border-radius:var(--r-sm);
+               padding:.7rem 1rem;line-height:1.5}
+        .tanda .punto{width:8px;height:8px;border-radius:50%;background:var(--verde);
+                      flex-shrink:0;box-shadow:0 0 0 3px rgba(91,190,127,.22)}
+        .pend{color:#E0806F;font-weight:800}
 
-        /* ── PRUEBA SOCIAL ────────────────────────────────── */
-        .comunidad{border-top:1px solid rgba(200,114,42,.14);
-                   border-bottom:1px solid rgba(200,114,42,.14);
-                   background:linear-gradient(135deg,#15100B,#0D0B09)}
-        .cifras-com{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
-                    background:rgba(200,114,42,.15);border:1px solid rgba(200,114,42,.15);
-                    border-radius:var(--r-md);overflow:hidden;margin-top:1.6rem}
-        .cifras-com div{background:#0D0B09;padding:1.3rem .8rem;text-align:center}
-        .cifras-com b{display:block;font-size:1.9rem;font-weight:900;color:var(--fuego);
-                      line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
-        .cifras-com span{display:block;font-size:.66rem;font-weight:700;letter-spacing:.1em;
-                         text-transform:uppercase;color:var(--apagado);margin-top:.45rem}
-        @media(max-width:520px){.cifras-com{grid-template-columns:1fr}
-                                .cifras-com b{font-size:1.6rem}}
-        .hueco-opiniones{background:rgba(224,128,111,.08);border:1px dashed rgba(224,128,111,.45);
-                         border-radius:var(--r-md);padding:1.3rem 1.5rem;margin-top:1.5rem;
-                         font-size:.86rem;color:#E0806F;font-weight:600;line-height:1.65}
+        .bloque-talla{display:flex;flex-direction:column;gap:.6rem}
+        .fila-label{display:flex;justify-content:space-between;align-items:center;gap:1rem}
+        .fila-label strong{font-size:.74rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+        .fila-label a{font-size:.76rem;color:var(--fuego);text-underline-offset:3px}
+        .tallas{display:flex;gap:.5rem;flex-wrap:wrap}
+        .talla{min-width:56px;min-height:46px;padding:.6rem .5rem;text-align:center;
+               background:transparent;border:1.5px solid rgba(242,237,230,.22);
+               color:var(--blanco);border-radius:var(--r-xs);font-family:inherit;
+               font-weight:800;font-size:.87rem;transition:border-color var(--t),background var(--t),color var(--t)}
+        .talla:hover{border-color:var(--fuego)}
+        .talla[aria-pressed="true"]{background:var(--fuego);color:var(--negro);border-color:var(--fuego)}
 
-        .cierre{text-align:center;margin-top:2.5rem;padding-top:2rem;
-                border-top:1px solid rgba(242,237,230,.08)}
-        .cierre p{font-size:1.02rem;font-weight:600;margin-bottom:1.1rem}
+        .btn{display:inline-flex;align-items:center;justify-content:center;gap:.55rem;
+            width:100%;min-height:54px;background:var(--fuego);color:var(--negro);
+            font-family:inherit;font-weight:900;font-size:.94rem;letter-spacing:.055em;
+            text-transform:uppercase;padding:1rem 1.5rem;border:none;
+            border-radius:var(--r-xs);text-decoration:none;
+            transition:background var(--t),transform var(--t)}
+        .btn:hover{background:var(--fuego-vivo);transform:translateY(-2px)}
+        .btn .ico{stroke:currentColor;width:19px;height:19px}
+        .btn-fino{background:transparent;color:var(--blanco);
+                  border:1.5px solid rgba(200,114,42,.45)}
+        .btn-fino:hover{background:rgba(200,114,42,.12);border-color:var(--fuego)}
 
-        /* ── POR QUÉ ──────────────────────────────────────── */
-        .porque{background:linear-gradient(135deg,#1E1008,#0D0B09);
-                border-top:1px solid rgba(200,114,42,.15);border-bottom:1px solid rgba(200,114,42,.15)}
-        .porque .envoltorio{max-width:680px;text-align:center}
-        .porque p{font-size:1.05rem;color:var(--apagado);line-height:1.8;margin-bottom:1rem}
-        .porque p.fuerte{color:var(--blanco);font-weight:600;font-size:1.12rem}
+        .garantias{display:grid;grid-template-columns:1fr 1fr;gap:.6rem .9rem;
+                   padding-top:1rem;border-top:1px solid rgba(242,237,230,.09)}
+        .garantias div{font-size:.8rem;color:var(--apagado);display:flex;gap:.5rem;align-items:flex-start}
+        .garantias .ico{width:18px;height:18px;stroke:var(--fuego);margin-top:.1rem}
+        .garantias b{color:var(--blanco);font-weight:700}
+        @media(max-width:430px){.garantias{grid-template-columns:1fr}}
 
-        /* ── TALLAS ───────────────────────────────────────── */
-        .tabla-env{overflow-x:auto;border:1px solid rgba(200,114,42,.18);border-radius:var(--r-md);margin-top:1.2rem}
+        /* ══ TIRA DE BENEFICIOS ═════════════════════════════ */
+        .ventajas{background:linear-gradient(135deg,#15100B,#0D0B09);
+                  border-block:1px solid var(--linea)}
+        .rejilla-v{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+                   background:var(--linea);border:1px solid var(--linea);
+                   border-radius:var(--r-md);overflow:hidden;margin-top:1.8rem}
+        .rejilla-v > div{background:var(--negro);padding:1.4rem 1.2rem}
+        .rejilla-v .ico{stroke:var(--fuego);width:26px;height:26px;margin-bottom:.7rem}
+        .rejilla-v h3{font-size:.92rem;font-weight:800;margin-bottom:.3rem}
+        .rejilla-v p{font-size:.82rem;color:var(--apagado);line-height:1.6}
+        @media(max-width:780px){.rejilla-v{grid-template-columns:repeat(2,1fr)}}
+        @media(max-width:460px){.rejilla-v{grid-template-columns:1fr}}
+
+        /* ══ IMPACTO ════════════════════════════════════════ */
+        .impacto{text-align:center}
+        .impacto .env{max-width:680px}
+        .cifra-grande{font-family:'Bebas Neue',sans-serif;font-size:clamp(4rem,16vw,7rem);
+                      line-height:.85;color:var(--verde);letter-spacing:.01em;
+                      font-variant-numeric:tabular-nums}
+        .impacto p{color:var(--apagado);font-size:1rem;line-height:1.75;margin-bottom:1rem}
+        .impacto p.fuerte{color:var(--blanco);font-weight:600;font-size:1.1rem}
+
+        /* ══ HISTORIA ═══════════════════════════════════════ */
+        .historia .env{max-width:720px}
+        .historia p{color:var(--apagado);font-size:1rem;line-height:1.8;margin-bottom:1rem}
+        .historia p.fuerte{color:var(--blanco);font-weight:600;font-size:1.12rem}
+
+        /* ══ COMUNIDAD ══════════════════════════════════════ */
+        .comunidad{background:linear-gradient(135deg,#15100B,#0D0B09);border-block:1px solid var(--linea)}
+        .comunidad .env{max-width:760px;text-align:center}
+        .cifras{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--linea);
+                border:1px solid var(--linea);border-radius:var(--r-md);overflow:hidden;margin-top:1.6rem}
+        .cifras div{background:var(--negro);padding:1.3rem .8rem}
+        .cifras b{display:block;font-size:1.8rem;font-weight:900;color:var(--fuego);
+                  line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+        .cifras span{display:block;font-size:.65rem;font-weight:700;letter-spacing:.1em;
+                     text-transform:uppercase;color:var(--apagado);margin-top:.45rem}
+        @media(max-width:520px){.cifras{grid-template-columns:1fr}}
+        .hueco{background:rgba(224,128,111,.08);border:1px dashed rgba(224,128,111,.45);
+               border-radius:var(--r-md);padding:1.2rem 1.4rem;margin-top:1.4rem;
+               font-size:.85rem;color:#E0806F;font-weight:600;line-height:1.65;text-align:left}
+
+        /* ══ TALLAS ═════════════════════════════════════════ */
+        .tabla-env{overflow-x:auto;border:1px solid var(--linea);border-radius:var(--r-md);margin-top:1.2rem}
         table{border-collapse:collapse;width:100%;font-size:.88rem}
-        th{background:var(--gris);text-align:left;padding:.75rem 1rem;font-size:.68rem;
+        th{background:var(--gris);text-align:left;padding:.75rem 1rem;font-size:.66rem;
            font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--fuego);white-space:nowrap}
         td{padding:.7rem 1rem;border-top:1px solid rgba(242,237,230,.08);
-           font-variant-numeric:tabular-nums;white-space:nowrap}
+           font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--apagado)}
         .pendiente{background:rgba(224,128,111,.1);border:1px solid rgba(224,128,111,.35);
-                   border-radius:var(--r-xs);padding:.9rem 1.1rem;font-size:.85rem;
-                   color:#E0806F;font-weight:600;margin-top:1rem}
+                   border-radius:var(--r-sm);padding:.9rem 1.1rem;font-size:.85rem;
+                   color:#E0806F;font-weight:600;margin-top:1rem;line-height:1.6}
 
-        /* ── FAQ ──────────────────────────────────────────── */
-        .faq{max-width:760px;margin:0 auto}
+        /* ══ FAQ ════════════════════════════════════════════ */
+        .faq{max-width:740px;margin:1.8rem auto 0}
         .faq details{background:var(--gris);border:1px solid rgba(200,114,42,.14);
-                     border-radius:var(--r-sm);margin-bottom:.7rem;overflow:hidden}
-        .faq summary{padding:1rem 1.3rem;font-weight:700;font-size:.93rem;cursor:pointer;
-                     list-style:none;display:flex;justify-content:space-between;gap:1rem;align-items:center}
+                     border-radius:var(--r-sm);margin-bottom:.65rem;overflow:hidden}
+        .faq summary{padding:1rem 1.25rem;font-weight:700;font-size:.92rem;min-height:52px;
+                     list-style:none;display:flex;justify-content:space-between;
+                     gap:1rem;align-items:center}
         .faq summary::-webkit-details-marker{display:none}
-        .faq summary::after{content:'+';color:var(--fuego);font-size:1.3rem;font-weight:400;flex-shrink:0}
-        .faq details[open] summary::after{content:'−'}
-        .faq .resp{padding:0 1.3rem 1.2rem;font-size:.9rem;color:var(--apagado);line-height:1.75}
+        .faq summary .mas{color:var(--fuego);font-size:1.4rem;font-weight:300;
+                          line-height:1;flex-shrink:0;transition:transform var(--t)}
+        .faq details[open] summary .mas{transform:rotate(45deg)}
+        .faq .resp{padding:0 1.25rem 1.15rem;font-size:.89rem;color:var(--apagado);line-height:1.75}
         .faq .resp a{color:var(--fuego)}
 
-        /* ── BARRA DE COMPRA MÓVIL ────────────────────────────
-           sticky, NO fixed. En iOS un elemento fixed se ancla al
-           viewport de maquetacion, que deja de coincidir con la
-           pantalla cuando Safari encoge su barra inferior: por eso
-           asomaba contenido por debajo. Sticky va en el flujo y no
-           puede despegarse. Es lo mismo que arreglo el nav. */
-        /* Aqui habia una barra de compra fija en movil. Se quitó: en
-           Safari de iPhone se quedaba por encima del borde real y
-           asomaba contenido por debajo, y ninguna de las tres
-           soluciones probadas (sticky, prolongar con ::after, hundir
-           el fondo del propio elemento) lo resolvio. El fallo no se
-           reproduce en escritorio, asi que no se podia depurar.
-           No hace falta: la ficha es corta, el boton principal se ve
-           casi sin scroll y hay otro al cerrar las preguntas. */
+        /* ══ CIERRE ═════════════════════════════════════════ */
+        .cierre{background:linear-gradient(135deg,#1E1008,#0D0B09);
+                border-block:1px solid var(--linea);text-align:center}
+        .cierre .env{max-width:520px}
+        .cierre p{color:var(--apagado);margin-bottom:1.5rem}
+        .cierre .btn{max-width:340px;margin:0 auto}
 
-        /* ── LISTA DE ESPERA (se mantiene) ────────────────── */
-        .lista-section{background:linear-gradient(135deg,#1E1008 0%,#0D0B09 100%);
-            padding:4rem 1.25rem;text-align:center;border-top:1px solid rgba(200,114,42,.15)}
-        .lista-section h2{font-family:'Bebas Neue','Montserrat',sans-serif;font-weight:400;
-            font-size:clamp(2rem,5vw,3.2rem);letter-spacing:.012em;margin-bottom:.8rem;line-height:1}
-        .lista-section h2 span{color:var(--fuego)}
-        .lista-section > p{font-size:.95rem;color:var(--apagado);max-width:470px;
-            margin:0 auto 2.2rem;line-height:1.7}
-        .form-lista{display:flex;gap:.7rem;justify-content:center;flex-wrap:wrap;max-width:520px;margin:0 auto}
-        .form-lista input[type="email"]{flex:1;min-width:210px;background:rgba(242,237,230,.07);
-            border:1px solid rgba(200,114,42,.3);color:var(--blanco);font-family:inherit;
-            font-size:.9rem;padding:.9rem 1.3rem;border-radius:var(--r-xs);outline:none}
+        /* ══ LISTA DE ESPERA ════════════════════════════════ */
+        .espera{text-align:center}
+        .espera .env{max-width:620px}
+        .form-lista{display:flex;gap:.7rem;justify-content:center;flex-wrap:wrap;
+                    max-width:520px;margin:0 auto}
+        .form-lista input[type="email"]{flex:1;min-width:210px;min-height:50px;
+            background:rgba(242,237,230,.07);border:1px solid rgba(200,114,42,.3);
+            color:var(--blanco);font-family:inherit;font-size:1rem;
+            padding:.85rem 1.2rem;border-radius:var(--r-xs);outline:none}
         .form-lista input[type="email"]:focus{border-color:var(--fuego)}
         .form-lista button{background:var(--fuego);color:var(--negro);font-family:inherit;
-            font-weight:800;font-size:.85rem;letter-spacing:.06em;text-transform:uppercase;
-            padding:.9rem 1.9rem;border:none;border-radius:var(--r-xs);cursor:pointer;white-space:nowrap}
-        .form-lista button:hover{background:#E0571A}
-        .form-nota{font-size:.72rem;color:rgba(242,237,230,.34);margin-top:.9rem}
+            font-weight:800;font-size:.84rem;letter-spacing:.06em;text-transform:uppercase;
+            padding:.85rem 1.8rem;min-height:50px;border:none;border-radius:var(--r-xs);white-space:nowrap;
+            transition:background var(--t)}
+        .form-lista button:hover{background:var(--fuego-vivo)}
+        .form-nota{font-size:.72rem;color:var(--tenue);margin-top:.9rem}
         .lista-consent{display:block;max-width:470px;margin:1rem auto 0;font-size:.76rem;
             color:var(--apagado);text-align:left;line-height:1.6}
         .lista-consent a{color:var(--fuego)}
-        .gracias-msg{display:none;background:rgba(200,114,42,.12);border:1px solid rgba(200,114,42,.3);
-            border-radius:var(--r-md);padding:1.5rem 2rem;max-width:440px;margin:0 auto;text-align:center}
-        .gracias-msg.visible{display:block}
-        .gracias-msg .icon{font-size:2.4rem;margin-bottom:.7rem;display:block}
-        .gracias-msg h3{font-size:1.1rem;font-weight:800;color:var(--fuego);margin-bottom:.4rem}
-        .gracias-msg p{font-size:.86rem;color:var(--apagado);margin:0}
-        .encuesta-pregunta{font-size:.95rem;color:var(--apagado);margin-bottom:1.1rem}
-        .encuesta-ops{display:flex;gap:.7rem;justify-content:center;flex-wrap:wrap;max-width:620px;margin:0 auto}
-        .encuesta-btn{background:var(--gris);border:1px solid rgba(200,114,42,.25);color:var(--blanco);
-            border-radius:var(--r-sm);padding:1rem 1.2rem;font-family:inherit;font-size:.85rem;
-            font-weight:700;cursor:pointer;display:flex;flex-direction:column;gap:.4rem;
-            align-items:center;min-width:150px;transition:all .25s}
+        .gracias{display:none;background:rgba(200,114,42,.12);border:1px solid rgba(200,114,42,.3);
+            border-radius:var(--r-md);padding:1.5rem 1.8rem;max-width:440px;margin:0 auto;text-align:center}
+        .gracias.ver{display:block}
+        .gracias h3{font-size:1.1rem;font-weight:800;color:var(--fuego);margin-bottom:.4rem}
+        .gracias p{font-size:.86rem;color:var(--apagado);margin:0}
+        .encuesta-pregunta{font-size:.94rem;color:var(--apagado);margin-bottom:1.1rem}
+        .encuesta-ops{display:flex;gap:.7rem;justify-content:center;flex-wrap:wrap}
+        .encuesta-btn{background:var(--gris);border:1px solid rgba(200,114,42,.25);
+            color:var(--blanco);border-radius:var(--r-sm);padding:1rem 1.1rem;font-family:inherit;
+            font-size:.84rem;font-weight:700;display:flex;flex-direction:column;gap:.5rem;
+            align-items:center;min-width:148px;min-height:86px;justify-content:center;
+            transition:border-color var(--t),transform var(--t)}
         .encuesta-btn:hover{border-color:var(--fuego);transform:translateY(-2px)}
-        .encuesta-saltar{margin-top:1.2rem;font-size:.8rem}
+        .encuesta-btn .ico{stroke:var(--fuego);width:24px;height:24px}
+        .encuesta-saltar{margin-top:1.1rem;font-size:.8rem}
         .encuesta-saltar a{color:var(--apagado)}
         .encuesta-gracias{color:var(--fuego);font-size:.9rem;margin-bottom:1rem}
-
-        .social-btns{display:flex;gap:.9rem;justify-content:center;flex-wrap:wrap;margin-top:1.6rem}
-        .btn-social{display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 1.7rem;
+        .redes{display:flex;gap:.8rem;justify-content:center;flex-wrap:wrap;margin-top:1.3rem}
+        .btn-red{display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 1.6rem;
             border-radius:var(--r-xs);text-decoration:none;font-weight:700;font-size:.8rem;
-            letter-spacing:.04em;text-transform:uppercase;transition:transform .25s}
+            letter-spacing:.04em;text-transform:uppercase;min-height:46px}
         .btn-ig{background:linear-gradient(135deg,#f09433,#dc2743,#bc1888);color:#fff}
-        .btn-tk{background:#010101;color:#fff;border:1px solid rgba(255,255,255,.15)}
-        .btn-social:hover{transform:translateY(-2px)}
+        .btn-tk{background:#010101;color:#fff;border:1px solid rgba(255,255,255,.18)}
 
-        footer{background:#090705;padding:2rem 1.25rem;text-align:center;
-               border-top:1px solid rgba(200,114,42,.15)}
-        footer p{font-size:.78rem;color:rgba(242,237,230,.35)}
+        footer{background:#090705;padding:2rem 1.15rem;text-align:center;border-top:1px solid var(--linea)}
+        footer p{font-size:.78rem;color:var(--tenue)}
         footer span{color:var(--fuego)}
         .pie-legal{margin-top:.9rem;display:flex;gap:.5rem 1.1rem;justify-content:center;flex-wrap:wrap}
-        .pie-legal a{color:rgba(242,237,230,.5);font-size:.74rem;text-decoration:none}
+        .pie-legal a{color:rgba(242,237,230,.55);font-size:.74rem;text-decoration:none;padding:.3rem 0}
         .pie-legal a:hover{color:var(--fuego)}
     </style>
     <link rel="stylesheet" href="tema.css?v=7">
@@ -290,47 +309,74 @@
 </head>
 <body>
 
+<!-- Iconos SVG (Lucide). Nada de emoji: cambian de dibujo en cada
+     sistema operativo y no se pueden tenir con el color de marca. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+  <g id="i-camiseta"><path d="M15 3h1.5L21 6l-2 4-2-1v12H7V9L5 10 3 6l4.5-3H9a3 3 0 0 0 6 0Z"/></g>
+  <g id="i-regla"><path d="M3 9h18v6H3z"/><path d="M7 9v3M11 9v3M15 9v3M19 9v3"/></g>
+  <g id="i-camion"><path d="M2 7h11v9H2zM13 10h4l3 3v3h-7z"/><circle cx="6" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></g>
+  <!-- Huella en vez de cabeza de perro: con circulos sale limpia,
+       y una silueta animal dibujada a mano acaba en un borron. -->
+  <g id="i-perro"><circle cx="6.4" cy="9.6" r="1.9"/><circle cx="10.6" cy="6.6" r="2"/><circle cx="15.6" cy="7.4" r="1.9"/><circle cx="18.6" cy="11.4" r="1.7"/><path d="M12.2 12.4c2.9 0 5.2 2.3 5.2 4.5 0 1.7-1.3 2.9-3 2.9-1 0-1.6-.4-2.2-.4s-1.2.4-2.2.4c-1.7 0-3-1.2-3-2.9 0-2.2 2.3-4.5 5.2-4.5Z"/></g>
+  <g id="i-escudo"><path d="M12 2.5 4 6v6c0 5 3.4 8.5 8 9.5 4.6-1 8-4.5 8-9.5V6Z"/><path d="m9 12 2 2 4-4"/></g>
+  <g id="i-vuelta"><path d="M3 11a9 9 0 1 1 3 6.7"/><path d="M3 5v6h6"/></g>
+  <g id="i-chispa"><path d="m12 3 2.1 5.9L20 11l-5.9 2.1L12 19l-2.1-5.9L4 11l5.9-2.1Z"/></g>
+  <g id="i-corazon"><path d="M12 20s-7-4.4-7-9.3A4 4 0 0 1 12 8a4 4 0 0 1 7 2.7C19 15.6 12 20 12 20Z"/></g>
+  <g id="i-flecha"><path d="M5 12h14M13 6l6 6-6 6"/></g>
+  <g id="i-arriba"><path d="M12 19V5M6 11l6-6 6 6"/></g>
+  <g id="i-etiqueta"><path d="M3 12V4h8l9 9-8 8z"/><circle cx="7.5" cy="7.5" r="1.3"/></g>
+  <g id="i-bolsa"><path d="M5 7h14l-1 14H6Z"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/></g>
+</defs></svg>
+
 <nav>
     <a href="/" class="nav-logo" aria-label="Maya, el Rottweiler Peluche — ir al inicio"><img src="img/marca/maya-crema.svg" alt="" width="63" height="26"></a>
     <a href="/" class="nav-back">← Inicio</a>
 </nav>
 
 <!-- ══ FICHA DE PRODUCTO ════════════════════════════════ -->
-<main class="envoltorio">
-<section class="ficha" id="producto">
+<main>
+<section class="env ficha" id="producto">
 
     <div class="galeria">
-        <div class="foto-principal falta-foto" id="foto-producto">
-            <span class="ico" aria-hidden="true">👕</span>
+        <div class="foto">
+            <svg class="ico-grande" aria-hidden="true"><use href="#i-camiseta"/></svg>
             <span class="q">Falta la foto real</span>
             <span class="d">Una foto de la camiseta puesta, a ser posible con Maya al lado. Es lo que más va a mover la venta.</span>
+            <div class="cinta">Edición limitada</div>
         </div>
-        <div class="cinta">Edición limitada</div>
+        <div class="miniaturas" aria-hidden="true">
+            <div class="mini">Puesta</div>
+            <div class="mini">Espalda</div>
+            <div class="mini">Detalle</div>
+            <div class="mini">Con Maya</div>
+        </div>
     </div>
 
     <div class="datos">
         <div>
             <span class="et">Tienda oficial</span>
-            <h1>Camiseta <em>Maya</em></h1>
+            <h1>Una camiseta que <em>empieza conversaciones</em></h1>
         </div>
 
-        <p class="entradilla">Para quien ya sabe que un Rottweiler es, antes que nada, familia. El logo de Maya en el pecho y el mensaje en la espalda.</p>
+        <p class="lema">El logo de Maya en el pecho y el mensaje en la espalda. Para quien ya sabe que un Rottweiler es, antes que nada, familia.</p>
 
         <div class="precio-fila">
-            <span class="precio" id="precio">24,95 €</span>
+            <span class="precio">24,95 €</span>
             <span class="precio-nota">IVA incluido · envío 4,95 € · gratis desde 2 unidades</span>
         </div>
 
-        <!-- Escasez REAL, no inventada: la primera tanda es la que
-             compréis en Roly. Pon el numero de verdad y, cuando se
-             agote, cambia el texto. Fingir stock bajo es practica
-             comercial desleal (art. 5 Ley 3/1991). -->
-        <p class="tanda"><span class="punto"></span>Primera tanda de <strong><span class="pend-i">[Nº]</span> camisetas</strong>. Cuando se agoten, la siguiente tarda unas tres semanas.</p>
+        <div class="tira-mini">
+            <span class="chip"><svg class="ico" aria-hidden="true"><use href="#i-camiseta"/></svg>Algodón</span>
+            <span class="chip"><svg class="ico" aria-hidden="true"><use href="#i-regla"/></svg>S a XXL</span>
+            <span class="chip"><svg class="ico" aria-hidden="true"><use href="#i-etiqueta"/></svg>Corte unisex</span>
+        </div>
 
-        <!-- Importe FIJO y protectora con nombre. Decir "parte de los
-             beneficios" seria practica desleal (art. 5 Ley 3/1991)
-             porque el comprador no puede comprobarlo. -->
-        <p class="dona"><span aria-hidden="true">🐕</span><span><strong>3 € de esta camiseta</strong> van a una protectora de perros PPP. Importe fijo, protectora con nombre y justificante publicado — <a href="transparencia">mira las cuentas</a>.</span></p>
+        <p class="dona">
+            <svg class="ico" aria-hidden="true"><use href="#i-perro"/></svg>
+            <span><b>3 € de esta camiseta</b> van a una protectora de perros PPP. Importe fijo, protectora con nombre y justificante publicado — <a href="transparencia">mira las cuentas</a>.</span>
+        </p>
+
+        <p class="tanda"><span class="punto"></span><span>Primera tanda de <strong><span class="pend">[Nº]</span> camisetas</strong>. Cuando se agoten, la siguiente tarda unas tres semanas.</span></p>
 
         <div class="bloque-talla">
             <div class="fila-label">
@@ -346,66 +392,118 @@
             </div>
         </div>
 
-        <div class="zona-compra">
-            <!-- Aquí entra el botón de Shopify cuando la tienda esté activa.
-                 Mientras TIENDA.activa sea false, se muestra el botón de aviso. -->
+        <div>
             <div id="ranura-shopify"></div>
-            <p class="aviso-talla" id="aviso-talla">Elige una talla antes de continuar.</p>
-            <a href="#lista-espera" class="btn-comprar" id="btn-fallback">🐾 &nbsp; Avísame cuando abra</a>
+            <a href="#lista-espera" class="btn" id="btn-fallback">
+                <svg class="ico" aria-hidden="true"><use href="#i-corazon"/></svg>
+                Avísame cuando abra
+            </a>
         </div>
 
         <div class="garantias">
-            <div><span aria-hidden="true">📦</span><span><b>Envío en 3–5 días</b> laborables a península</span></div>
-            <div><span aria-hidden="true">↩️</span><span><b>14 días</b> para devolverla</span></div>
-            <div><span aria-hidden="true">📏</span><span><b>Cambio de talla</b> si no acierta</span></div>
-            <div><span aria-hidden="true">🐾</span><span><b>Hecha en España</b>, género de Roly</span></div>
+            <div><svg class="ico" aria-hidden="true"><use href="#i-camion"/></svg><span><b>Envío en 3–5 días</b> laborables a península</span></div>
+            <div><svg class="ico" aria-hidden="true"><use href="#i-vuelta"/></svg><span><b>14 días</b> para devolverla</span></div>
+            <div><svg class="ico" aria-hidden="true"><use href="#i-regla"/></svg><span><b>Cambio de talla</b> si no acierta</span></div>
+            <div><svg class="ico" aria-hidden="true"><use href="#i-escudo"/></svg><span><b>Pago seguro.</b> No guardamos tu tarjeta</span></div>
         </div>
-
-        <p class="pago"><span aria-hidden="true">🔒</span> <b>Pago seguro.</b> No guardamos los datos de tu tarjeta. Atiende <a href="mailto:hola@mayarottweiler.com" style="color:var(--fuego)">una persona</a>, no un formulario.</p>
     </div>
 
 </section>
-</main>
 
-<!-- ══ PRUEBA SOCIAL ════════════════════════════════════ -->
-<section class="seccion comunidad">
-    <div class="envoltorio" style="max-width:760px;text-align:center">
+<!-- ══ POR QUÉ ESTA CAMISETA ════════════════════════════ -->
+<section class="bloque ventajas">
+    <div class="env" style="text-align:center">
+        <span class="et">Por qué esta y no otra</span>
+        <h2 class="tit">Llevarlo puesto también cuenta</h2>
+        <p style="color:var(--apagado);max-width:540px;margin:0 auto;font-size:.98rem">Cada vez que alguien pregunta por tu camiseta tienes treinta segundos para contarle que los PPP no son lo que le han contado.</p>
+
+        <div class="rejilla-v" style="text-align:left">
+            <div>
+                <svg class="ico" aria-hidden="true"><use href="#i-perro"/></svg>
+                <h3>3 € a una protectora</h3>
+                <p>Importe fijo por camiseta, con nombre y justificante. No «parte de los beneficios».</p>
+            </div>
+            <div>
+                <svg class="ico" aria-hidden="true"><use href="#i-camiseta"/></svg>
+                <h3>Género de Roly</h3>
+                <p>Fabricante textil español. La misma base que se usa en equipaciones, no de imprenta rápida.</p>
+            </div>
+            <div>
+                <svg class="ico" aria-hidden="true"><use href="#i-regla"/></svg>
+                <h3>De la S a la XXL</h3>
+                <p>Corte unisex. Y si no aciertas con la talla, te la cambiamos.</p>
+            </div>
+            <div>
+                <svg class="ico" aria-hidden="true"><use href="#i-chispa"/></svg>
+                <h3>Edición limitada</h3>
+                <p>Tirada corta de verdad. Cuando se agota, la siguiente tarda unas tres semanas.</p>
+            </div>
+            <div>
+                <svg class="ico" aria-hidden="true"><use href="#i-camion"/></svg>
+                <h3>Envío a toda España</h3>
+                <p>3 a 5 días laborables a península. Gratis a partir de dos unidades.</p>
+            </div>
+            <div>
+                <svg class="ico" aria-hidden="true"><use href="#i-vuelta"/></svg>
+                <h3>14 días para pensarlo</h3>
+                <p>Devolución sin dar explicaciones, como marca la ley. Y cambio de talla aparte.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══ COMPRA CON IMPACTO ═══════════════════════════════ -->
+<section class="bloque impacto">
+    <div class="env">
+        <span class="et">Compra con impacto</span>
+        <div class="cifra-grande">3 €</div>
+        <p class="fuerte" style="margin-top:1rem">De cada camiseta, a una protectora de perros potencialmente peligrosos.</p>
+        <p>Un Rottweiler o un American Staffordshire pasan meses, a veces años, en una protectora mientras un perro pequeño sale en semanas. La ley exige licencia, seguro y bozal al adoptante, y eso espanta a la gente antes de conocer al perro.</p>
+        <p>Mandar dinero a quien los está cuidando mientras tanto es la parte menos simbólica que podemos hacer.</p>
+        <a href="transparencia" class="btn btn-fino" style="max-width:300px;margin:.8rem auto 0">
+            Ver las cuentas
+            <svg class="ico" aria-hidden="true"><use href="#i-flecha"/></svg>
+        </a>
+    </div>
+</section>
+
+<!-- ══ LA HISTORIA ══════════════════════════════════════ -->
+<section class="bloque historia">
+    <div class="env">
+        <span class="et">De dónde sale esto</span>
+        <h2 class="tit">No es merchandising de una cuenta de Instagram</h2>
+        <p>Maya es una Rottweiler de 40 kilos y cinco años. En la calle, la gente cambia de acera. En los parques, hay quien recoge a su perro al verla llegar. Nada de eso tiene que ver con cómo es ella: tiene que ver con lo que la gente ha oído sobre su raza.</p>
+        <p class="fuerte">Esa camiseta es una excusa para tener esa conversación con alguien que todavía cree que un Rottweiler es un perro peligroso.</p>
+        <p>No vendemos ropa para financiar una cuenta. Vendemos una forma de llevar el argumento puesto, y de que una parte llegue a los perros que están esperando en una protectora precisamente por esto.</p>
+    </div>
+</section>
+
+<!-- ══ COMUNIDAD ════════════════════════════════════════ -->
+<section class="bloque comunidad">
+    <div class="env">
         <span class="et">No compras a un desconocido</span>
         <h2 class="tit">Detrás hay una comunidad</h2>
-        <p style="color:var(--apagado);font-size:.98rem;max-width:560px;margin:0 auto">Maya lleva años enseñando en público lo que es vivir con una Rottweiler de 40 kilos. Esto no es una marca que ha salido de la nada para venderte una camiseta.</p>
+        <p style="color:var(--apagado);max-width:540px;margin:0 auto;font-size:.98rem">Maya lleva años enseñando en público lo que es convivir con una Rottweiler. Esto no es una marca que ha salido de la nada para venderte una camiseta.</p>
 
-        <div class="cifras-com">
+        <div class="cifras">
             <div><b>27.600</b><span>en Instagram</span></div>
             <div><b>18.600</b><span>en TikTok</span></div>
             <div><b>4,5 M</b><span>vistas al mes</span></div>
         </div>
 
-        <!-- Opiniones reales cuando las tengas. NO inventes ninguna:
+        <!-- Opiniones reales cuando las haya. NO inventar ninguna:
              las resenas falsas son infraccion grave de la Ley de
              Consumidores desde la reforma de 2022, con multa. -->
-        <div class="hueco-opiniones">
-            <strong>Pendiente:</strong> aquí van tres comentarios reales de gente de la comunidad, con su nombre de usuario y pidiéndoles permiso antes. Nada inventado: las reseñas falsas están tipificadas como infracción grave en la Ley de Consumidores y se multan.
-        </div>
-    </div>
-</section>
-
-<!-- ══ POR QUÉ ══════════════════════════════════════════ -->
-<section class="seccion porque">
-    <div class="envoltorio">
-        <span class="et">Por qué una camiseta</span>
-        <h2 class="tit">Llevarlo puesto también cuenta</h2>
-        <p>Cada vez que alguien pregunta por tu camiseta, tienes treinta segundos para contarle que los PPP no son lo que le han contado.</p>
-        <p class="fuerte">Esa conversación en la calle vale más que cualquier anuncio.</p>
-        <p>No vendemos merchandising de una cuenta de Instagram. Vendemos una excusa para hablar del tema con alguien que todavía cree que un Rottweiler es un perro peligroso.</p>
+        <div class="hueco"><strong>Pendiente:</strong> aquí van tres comentarios reales de la comunidad, con su nombre de usuario y pidiéndoles permiso antes. Nada inventado: las reseñas falsas están tipificadas como infracción grave en la Ley de Consumidores y se multan.</div>
     </div>
 </section>
 
 <!-- ══ GUÍA DE TALLAS ═══════════════════════════════════ -->
-<section class="seccion" id="tallas">
-    <div class="envoltorio" style="max-width:760px">
+<section class="bloque" id="tallas">
+    <div class="env" style="max-width:740px">
         <span class="et">Antes de pedir</span>
         <h2 class="tit">Guía de tallas</h2>
-        <p style="color:var(--apagado);font-size:.95rem">Medidas de la prenda en centímetros, no de la persona. Mide una camiseta que te quede bien y compárala.</p>
+        <p style="color:var(--apagado);font-size:.94rem">Medidas de la prenda en centímetros, no de la persona. Mide una camiseta que te quede bien y compárala.</p>
 
         <div class="tabla-env">
             <table>
@@ -419,108 +517,106 @@
                 </tbody>
             </table>
         </div>
-
         <p class="pendiente"><strong>Pendiente:</strong> rellena esta tabla con la ficha técnica del modelo exacto de Roly que compréis. No me invento las medidas: en ropa, una tabla de tallas inventada es la primera causa de devoluciones.</p>
     </div>
 </section>
 
 <!-- ══ FAQ ══════════════════════════════════════════════ -->
-<section class="seccion" style="border-top:1px solid rgba(200,114,42,.12)">
-    <div class="envoltorio">
+<section class="bloque" style="border-top:1px solid var(--linea)">
+    <div class="env">
         <span class="et" style="text-align:center">Dudas razonables</span>
         <h2 class="tit" style="text-align:center">Preguntas frecuentes</h2>
-        <div class="faq" style="margin-top:2rem">
-
+        <div class="faq">
             <details>
-                <summary>¿A dónde va el dinero?</summary>
+                <summary>¿A dónde va el dinero?<span class="mas" aria-hidden="true">+</span></summary>
                 <div class="resp"><strong>3 € de cada camiseta van a una protectora de perros PPP.</strong> Es un importe fijo, no un porcentaje de beneficios: sale igual vendamos una o doscientas, y lo puedes comprobar. Cada mes publicamos a qué protectora ha ido, cuánto y con qué justificante en la <a href="transparencia">página de cuentas</a>.<br><br>El resto sostiene el proyecto: el género, la impresión, los envíos y el tiempo de hacer el contenido. Maya no es una ONG y no vamos a decir que lo sea.</div>
             </details>
-
             <details>
-                <summary>¿Cuánto tarda en llegar?</summary>
+                <summary>¿Cuánto tarda en llegar?<span class="mas" aria-hidden="true">+</span></summary>
                 <div class="resp">Entre 3 y 5 días laborables a península una vez sale el pedido. Baleares, Canarias, Ceuta y Melilla tienen plazos y costes distintos: los tienes en <a href="envios-devoluciones">envíos y devoluciones</a>.</div>
             </details>
-
             <details>
-                <summary>¿Y si no me queda bien la talla?</summary>
+                <summary>¿Y si no me queda bien la talla?<span class="mas" aria-hidden="true">+</span></summary>
                 <div class="resp">Te la cambiamos. Escríbenos a <a href="mailto:hola@mayarottweiler.com">hola@mayarottweiler.com</a> dentro de los 14 días siguientes a recibirla, sin estrenar y con su etiqueta. Tienes además el derecho de desistimiento de 14 días que marca la ley, explicado en las <a href="condiciones-venta">condiciones de venta</a>.</div>
             </details>
-
             <details>
-                <summary>¿De qué está hecha?</summary>
+                <summary>¿De qué está hecha?<span class="mas" aria-hidden="true">+</span></summary>
                 <div class="resp">Género de <strong>Roly</strong>, un fabricante textil español que trabaja con marcas y clubes. No es una camiseta de imprenta rápida: es la misma base que usan en equipaciones. La composición exacta y el gramaje dependen del modelo final, y los pondremos aquí antes de abrir.</div>
             </details>
-
             <details>
-                <summary>¿Puedo comprar desde fuera de España?</summary>
+                <summary>¿Puedo comprar desde fuera de España?<span class="mas" aria-hidden="true">+</span></summary>
                 <div class="resp">De momento enviamos solo dentro de España. Si estás fuera y la quieres, apúntate a la lista de abajo y dinos desde dónde escribes: si sale un grupo suficiente, abrimos envío internacional.</div>
             </details>
-
             <details>
-                <summary>¿Esto significa que vendéis perros?</summary>
+                <summary>¿Esto significa que vendéis perros?<span class="mas" aria-hidden="true">+</span></summary>
                 <div class="resp">No, y nunca lo vamos a hacer. Maya existe para que la gente <strong>adopte en lugar de comprar</strong>. Esta camiseta financia ese mensaje; no es un paso hacia vender animales. Si buscas un Rottweiler, empieza por las <a href="protectoras-ppp-espana">protectoras de PPP en España</a>.</div>
             </details>
-
         </div>
+    </div>
+</section>
 
-        <!-- Cierre: quien llega hasta aqui ya tiene interes. No lo
-             dejamos sin nada que pulsar. -->
-        <div class="cierre">
-            <p>¿Resuelto? Entonces solo queda elegir talla.</p>
-            <a href="#producto" class="btn-comprar" id="btn-cierre" style="max-width:320px;margin:0 auto">Ir a la camiseta ↑</a>
-        </div>
+<!-- ══ CIERRE ═══════════════════════════════════════════ -->
+<section class="bloque cierre">
+    <div class="env">
+        <h2 class="tit">¿Resuelto?</h2>
+        <p>Entonces solo queda elegir talla.</p>
+        <a href="#producto" class="btn">
+            <svg class="ico" aria-hidden="true"><use href="#i-arriba"/></svg>
+            Ir a la camiseta
+        </a>
     </div>
 </section>
 
 <!-- ══ LISTA DE ESPERA ══════════════════════════════════ -->
-<section class="lista-section" id="lista-espera">
-    <h2>Avísame cuando <span>abra</span></h2>
-    <p>Un solo correo el día del lanzamiento. Sin spam, sin newsletter de relleno.</p>
+<section class="bloque espera" id="lista-espera">
+    <div class="env">
+        <h2 class="tit">Avísame cuando abra</h2>
+        <p style="color:var(--apagado);max-width:440px;margin:0 auto 2rem">Un solo correo el día del lanzamiento. Sin spam, sin newsletter de relleno.</p>
 
-    <div id="encuesta">
-        <p class="encuesta-pregunta">Antes de nada: <strong>¿qué te gustaría ver primero?</strong></p>
-        <div class="encuesta-ops">
-            <button type="button" class="encuesta-btn" data-voto="camisetas">👕<span>Camisetas y sudaderas</span></button>
-            <button type="button" class="encuesta-btn" data-voto="accesorios">🦮<span>Accesorios para PPP</span></button>
-            <button type="button" class="encuesta-btn" data-voto="pegatinas">🏷️<span>Pegatinas y totebags</span></button>
+        <div id="encuesta">
+            <p class="encuesta-pregunta">Antes de nada: <strong>¿qué te gustaría ver primero?</strong></p>
+            <div class="encuesta-ops">
+                <button type="button" class="encuesta-btn" data-voto="camisetas"><svg class="ico" aria-hidden="true"><use href="#i-camiseta"/></svg><span>Camisetas y sudaderas</span></button>
+                <button type="button" class="encuesta-btn" data-voto="accesorios"><svg class="ico" aria-hidden="true"><use href="#i-perro"/></svg><span>Accesorios para PPP</span></button>
+                <button type="button" class="encuesta-btn" data-voto="pegatinas"><svg class="ico" aria-hidden="true"><use href="#i-etiqueta"/></svg><span>Pegatinas y totebags</span></button>
+            </div>
+            <p class="encuesta-saltar"><a href="#" id="saltar-voto">Prefiero solo que me aviséis →</a></p>
         </div>
-        <p class="encuesta-saltar"><a href="#" id="saltar-voto">Prefiero solo que me aviséis →</a></p>
-    </div>
 
-    <div id="form-wrapper" style="display:none">
-        <p class="encuesta-gracias" id="voto-ok" style="display:none">✅ <strong>¡Voto registrado!</strong> Déjanos tu correo y te avisamos el día que abramos.</p>
-        <form class="form-lista" id="form-espera"
-              action="https://assets.mailerlite.com/jsonp/2528243/forms/194057809673848120/subscribe"
-              method="post" target="_blank">
-            <input aria-label="email" type="email" name="fields[email]" placeholder="tu@email.com" autocomplete="email" required>
-            <button type="submit" id="btn-espera">Avísame 🐾</button>
-            <input type="hidden" name="ml-submit" value="1">
-            <input type="hidden" name="anticsrf" value="true">
-            <input type="hidden" name="fields[interes]" id="campo-interes" value="">
-        </form>
-        <label class="lista-consent"><input type="checkbox" id="consent-espera" required> He leído y acepto la <a href="privacidad">política de privacidad</a> y doy mi consentimiento para recibir el aviso de lanzamiento por email.</label>
-        <p class="form-nota">Sin spam. Solo un aviso cuando abramos. Puedes darte de baja cuando quieras.</p>
-        <p class="form-nota" id="form-error" style="display:none;color:#e05252">No hemos podido apuntarte. Inténtalo de nuevo o escríbenos a hola@mayarottweiler.com</p>
-    </div>
+        <div id="form-wrapper" style="display:none">
+            <p class="encuesta-gracias" id="voto-ok" style="display:none"><strong>¡Voto registrado!</strong> Déjanos tu correo y te avisamos el día que abramos.</p>
+            <form class="form-lista" id="form-espera"
+                  action="https://assets.mailerlite.com/jsonp/2528243/forms/194057809673848120/subscribe"
+                  method="post" target="_blank">
+                <input aria-label="Tu correo electrónico" type="email" name="fields[email]" placeholder="tu@email.com" autocomplete="email" required>
+                <button type="submit" id="btn-espera">Avísame</button>
+                <input type="hidden" name="ml-submit" value="1">
+                <input type="hidden" name="anticsrf" value="true">
+                <input type="hidden" name="fields[interes]" id="campo-interes" value="">
+            </form>
+            <label class="lista-consent"><input type="checkbox" id="consent-espera" required> He leído y acepto la <a href="privacidad">política de privacidad</a> y doy mi consentimiento para recibir el aviso de lanzamiento por email.</label>
+            <p class="form-nota">Sin spam. Solo un aviso cuando abramos. Puedes darte de baja cuando quieras.</p>
+            <p class="form-nota" id="form-error" style="display:none;color:#e05252" role="alert">No hemos podido apuntarte. Inténtalo de nuevo o escríbenos a hola@mayarottweiler.com</p>
+        </div>
 
-    <div class="gracias-msg" id="gracias-msg">
-        <span class="icon">🐾</span>
-        <h3>¡Apuntado!</h3>
-        <p>Te avisaremos cuando la tienda abra. Mientras tanto, el día a día de Maya está aquí:</p>
-        <!-- Las redes SOLO despues de convertir. Antes son una fuga:
-             mandan fuera de la web justo donde queremos que compre. -->
-        <div class="social-btns">
-            <a href="https://www.instagram.com/maya.rottweiler13" target="_blank" rel="noopener" class="btn-social btn-ig">📸 &nbsp; Instagram</a>
-            <a href="https://www.tiktok.com/@maya.rottweiler13" target="_blank" rel="noopener" class="btn-social btn-tk">🎵 &nbsp; TikTok</a>
+        <div class="gracias" id="gracias-msg">
+            <h3>¡Apuntado!</h3>
+            <p>Te avisaremos cuando la tienda abra. Mientras tanto, el día a día de Maya está aquí:</p>
+            <!-- Las redes SOLO despues de convertir: antes son una fuga. -->
+            <div class="redes">
+                <a href="https://www.instagram.com/maya.rottweiler13" target="_blank" rel="noopener" class="btn-red btn-ig">Instagram</a>
+                <a href="https://www.tiktok.com/@maya.rottweiler13" target="_blank" rel="noopener" class="btn-red btn-tk">TikTok</a>
+            </div>
         </div>
     </div>
 </section>
+</main>
 
 <footer>
     <div class="pie-marca"><img src="img/marca/maya-crema.svg" alt="Maya" width="112" height="46"><p class="pie-claim">El Rottweiler Peluche</p><p class="pie-mision">Rompiendo el estigma de los perros potencialmente peligrosos en España.</p></div>
-    <p>© 2026 Gestionado por <span>MTS23 Talent</span> · Hecho con <span>❤️</span><br>
-    <a href="mailto:hola@mayarottweiler.com" style="color:var(--fuego);text-decoration:none;font-size:.75rem;">hola@mayarottweiler.com</a></p>
+    <p>© 2026 Gestionado por <span>MTS23 Talent</span> · <a href="mailto:hola@mayarottweiler.com" style="color:var(--fuego);text-decoration:none">hola@mayarottweiler.com</a></p>
     <div class="pie-legal">
+        <a href="transparencia">Transparencia</a>
         <a href="condiciones-venta">Condiciones de venta</a>
         <a href="envios-devoluciones">Envíos y devoluciones</a>
         <a href="privacidad">Privacidad</a>
@@ -531,68 +627,47 @@
 <script>
 /* ══════════════════════════════════════════════════════════
    INTERRUPTOR DE LA TIENDA
-
-   Para encender la venta de verdad solo hay que tocar esto:
+   Para vender de verdad solo hay que tocar esto:
      1. activa  -> true
      2. dominio -> el de tu tienda Shopify (acaba en .myshopify.com)
-     3. token   -> Storefront access token (es público, va en el
+     3. token   -> Storefront access token (es publico, va en el
                    navegador; NO es la clave de administrador)
-     4. producto-> el ID numérico del producto en Shopify
-
-   Mientras activa sea false, la página enseña el botón de
-   "Avísame" y la lista de espera. No hace falta tocar nada más.
+     4. producto-> el ID numerico del producto en Shopify
+   Mientras activa sea false, la pagina ensena el boton de
+   "Avisame" y la lista de espera.
    ══════════════════════════════════════════════════════════ */
-var TIENDA = {
-  activa:   false,
-  dominio:  '',           // p. ej. 'maya-rottweiler.myshopify.com'
-  token:    '',           // Storefront access token
-  producto: '',           // ID numérico del producto
-  precio:   '24,95 €'
-};
+var TIENDA = { activa:false, dominio:'', token:'', producto:'' };
 
 (function(){
   'use strict';
 
   /* ── Selector de talla ───────────────────────────────── */
-  var tallaElegida = null;
   var botones = document.querySelectorAll('.talla');
-  var aviso   = document.getElementById('aviso-talla');
-
   Array.prototype.forEach.call(botones, function(b){
     b.addEventListener('click', function(){
       Array.prototype.forEach.call(botones, function(o){ o.setAttribute('aria-pressed','false'); });
       b.setAttribute('aria-pressed','true');
-      tallaElegida = b.dataset.talla;
-      aviso.classList.remove('ver');
-      try { sessionStorage.setItem('maya_talla', tallaElegida); } catch(e){}
+      try { sessionStorage.setItem('maya_talla', b.dataset.talla); } catch(e){}
     });
   });
-  // Si ya eligió talla antes en esta sesión, la recordamos.
   try {
     var previa = sessionStorage.getItem('maya_talla');
     if (previa) {
       var b = document.querySelector('.talla[data-talla="' + previa + '"]');
-      if (b) b.click();
+      if (b) b.setAttribute('aria-pressed','true');
     }
   } catch(e){}
 
   /* ── Tienda apagada: todo apunta a la lista de espera ── */
-  if (!TIENDA.activa || !TIENDA.dominio || !TIENDA.token || !TIENDA.producto) {
-    // El selector de talla no sirve de nada todavía, pero lo dejamos
-    // visible porque enseña que habrá tallas. Solo quitamos la exigencia.
-    document.getElementById('btn-fallback').textContent = '🐾  Avísame cuando abra';
-    return;
-  }
+  if (!TIENDA.activa || !TIENDA.dominio || !TIENDA.token || !TIENDA.producto) return;
 
-  /* ── Tienda encendida: carga el botón de Shopify ───────
-     OJO el dia que la enciendas: Shopify pinta su propio selector
-     de variante, asi que quedarian dos selectores de talla, el
-     nuestro y el suyo. Decide cual se queda — lo normal es ocultar
-     el nuestro y dejar el de Shopify, que es el que manda sobre el
+  /* ── Tienda encendida ─────────────────────────────────
+     OJO ese dia: Shopify pinta su propio selector de variante,
+     asi que quedarian dos selectores de talla. Lo normal es
+     ocultar el nuestro y dejar el suyo, que es el que conoce el
      stock real de cada talla. */
   document.getElementById('btn-fallback').style.display = 'none';
 
-  // Schema de producto: solo cuando se puede comprar de verdad.
   var ld = document.createElement('script');
   ld.type = 'application/ld+json';
   ld.textContent = JSON.stringify({
@@ -606,12 +681,8 @@ var TIENDA = {
   });
   document.head.appendChild(ld);
 
-  var URL_SDK = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
   function arranca(){
-    var cliente = ShopifyBuy.buildClient({
-      domain: TIENDA.dominio,
-      storefrontAccessToken: TIENDA.token
-    });
+    var cliente = ShopifyBuy.buildClient({ domain:TIENDA.dominio, storefrontAccessToken:TIENDA.token });
     ShopifyBuy.UI.onReady(cliente).then(function(ui){
       ui.createComponent('product', {
         id: TIENDA.producto,
@@ -619,48 +690,41 @@ var TIENDA = {
         moneyFormat: '%E2%82%AC%7B%7Bamount_with_comma_separator%7D%7D',
         options: {
           product: {
-            // La foto, el nombre y el precio ya los pone nuestra ficha.
-            // De Shopify solo queremos el selector de variante y el botón.
             contents: { img:false, title:false, price:false, options:true, button:true },
-            text: { button: 'Añadir al carrito' },
+            text: { button:'Añadir al carrito' },
             styles: {
               product: { "@media (min-width: 601px)": { "max-width":"100%", "margin-left":"0", "margin-bottom":"0" } },
-              button: {
-                "font-family":"Montserrat, sans-serif", "font-weight":"900",
-                "font-size":"15px", "letter-spacing":"1px", "text-transform":"uppercase",
-                "padding-top":"17px", "padding-bottom":"17px", "width":"100%",
-                "background-color":"#C8722A", "border-radius":"10px",
-                ":hover": {"background-color":"#E0571A"},
-                ":focus": {"background-color":"#E0571A"}
-              }
+              button: { "font-family":"Montserrat, sans-serif","font-weight":"900","font-size":"15px",
+                        "letter-spacing":"1px","text-transform":"uppercase","padding-top":"18px",
+                        "padding-bottom":"18px","width":"100%","background-color":"#C8722A",
+                        "border-radius":"10px", ":hover":{"background-color":"#E0571A"},
+                        ":focus":{"background-color":"#E0571A"} }
             }
           },
           cart: {
             text: { total:'Subtotal', button:'Finalizar compra',
                     notice:'Los gastos de envío se calculan en el paso siguiente.' },
             styles: {
-              button: { "font-family":"Montserrat, sans-serif", "font-weight":"900",
-                        "background-color":"#C8722A", "border-radius":"10px",
+              button: { "font-family":"Montserrat, sans-serif","font-weight":"900",
+                        "background-color":"#C8722A","border-radius":"10px",
                         ":hover":{"background-color":"#E0571A"} },
-              cart:      { "background-color":"#0D0B09", "color":"#F2EDE6" },
-              header:    { "background-color":"#0D0B09", "color":"#F2EDE6" },
-              title:     { "color":"#F2EDE6", "font-weight":"800" },
-              lineItems: { "background-color":"#0D0B09" },
-              lineItem:  { "color":"#F2EDE6", "background-color":"#171310" },
-              lineItemTitle: { "color":"#F2EDE6", "font-weight":"700" },
-              price:     { "color":"#C8722A", "font-weight":"800" },
-              quantity:  { "color":"#F2EDE6" },
-              subtotal:  { "color":"#C8722A", "font-weight":"900" },
-              subtotalText: { "color":"#F2EDE6", "font-weight":"700" },
-              close:     { "color":"#F2EDE6", ":hover":{"color":"#C8722A"} },
-              empty:     { "color":"rgba(242,237,230,.5)" },
-              footer:    { "background-color":"#171310" }
+              cart:{"background-color":"#0D0B09","color":"#F2EDE6"},
+              header:{"background-color":"#0D0B09","color":"#F2EDE6"},
+              title:{"color":"#F2EDE6","font-weight":"800"},
+              lineItems:{"background-color":"#0D0B09"},
+              lineItem:{"color":"#F2EDE6","background-color":"#171310"},
+              lineItemTitle:{"color":"#F2EDE6","font-weight":"700"},
+              price:{"color":"#C8722A","font-weight":"800"},
+              quantity:{"color":"#F2EDE6"},
+              subtotal:{"color":"#C8722A","font-weight":"900"},
+              subtotalText:{"color":"#F2EDE6","font-weight":"700"},
+              close:{"color":"#F2EDE6",":hover":{"color":"#C8722A"}},
+              empty:{"color":"rgba(242,237,230,.5)"},
+              footer:{"background-color":"#171310"}
             }
           },
-          toggle: {
-            styles: { toggle: { "background-color":"#C8722A", ":hover":{"background-color":"#E0571A"} },
-                      count:  { "font-weight":"900", "color":"#0D0B09" } }
-          }
+          toggle: { styles:{ toggle:{"background-color":"#C8722A",":hover":{"background-color":"#E0571A"}},
+                             count:{"font-weight":"900","color":"#0D0B09"} } }
         }
       });
     });
@@ -668,8 +732,8 @@ var TIENDA = {
   if (window.ShopifyBuy && window.ShopifyBuy.UI) { arranca(); }
   else {
     var s = document.createElement('script');
-    s.async = true; s.src = URL_SDK; s.onload = arranca;
-    document.head.appendChild(s);
+    s.async = true; s.src = 'https://sdks.shopifycdn.com/buy-button/latest/buy-button-storefront.min.js';
+    s.onload = arranca; document.head.appendChild(s);
   }
 })();
 </script>
@@ -718,14 +782,14 @@ var TIENDA = {
         var data = new FormData(form);
         btn.disabled = true;
         btn.textContent = 'Enviando...';
-        fetch(form.action, { method: 'POST', body: data, mode: 'no-cors' })
+        fetch(form.action, { method:'POST', body:data, mode:'no-cors' })
             .then(function(){
-                document.getElementById('form-wrapper').style.display = 'none';
-                document.getElementById('gracias-msg').classList.add('visible');
+                wrapper.style.display = 'none';
+                document.getElementById('gracias-msg').classList.add('ver');
             })
             .catch(function(){
                 btn.disabled = false;
-                btn.textContent = 'Avísame 🐾';
+                btn.textContent = 'Avísame';
                 document.getElementById('form-error').style.display = 'block';
             });
     });
