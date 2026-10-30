@@ -398,6 +398,14 @@ article img[src*="zooasis"]{aspect-ratio:auto;object-fit:contain;max-height:none
 
 nav{
   position:sticky !important;
+  /* Sin esto el nav es un bloque y el logo y el boton se apilan uno
+     encima de otro. Antes lo ponia cada pagina en su CSS propio, asi
+     que bastaba con que una no lo copiase para romperlo. Aqui ya no
+     puede perderse. */
+  display:flex !important;
+  justify-content:space-between !important;
+  align-items:center !important;
+  gap:1rem !important;
   top:0 !important; left:auto !important; right:auto !important; bottom:auto !important;
   width:calc(100% - 20px) !important; max-width:1280px !important;
   margin:0 auto calc(-1 * var(--alto-nav)) !important;

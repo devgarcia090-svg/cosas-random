@@ -304,8 +304,8 @@
         .pie-legal a{color:rgba(242,237,230,.55);font-size:.74rem;text-decoration:none;padding:.3rem 0}
         .pie-legal a:hover{color:var(--fuego)}
     </style>
-    <link rel="stylesheet" href="tema.css?v=7">
-    <script src="tema.js?v=6" defer></script>
+    <link rel="stylesheet" href="tema.css?v=8">
+    <script src="tema.js?v=8" defer></script>
 </head>
 <body>
 
@@ -641,6 +641,23 @@ var TIENDA = { activa:false, dominio:'', token:'', producto:'' };
 (function(){
   'use strict';
 
+  /* ── Medición ────────────────────────────────────────────
+     medir() lo define tema.js, que lleva defer y por tanto carga
+     DESPUES de este script. Si llamamos sin mas, los eventos de
+     carga de pagina se pierden. Por eso, mientras no exista, se
+     encolan en el mismo buzon que usa tema.js y este los vacia
+     cuando el visitante acepta las cookies. */
+  function medir(n, d){
+    if (window.medir) { window.medir(n, d); return; }
+    window._colaMedicion = window._colaMedicion || [];
+    window._colaMedicion.push([n, d || {}]);
+  }
+
+  medir('ver_producto', {
+    items: [{ item_id:'camiseta-maya', item_name:'Camiseta Maya', price:24.95, quantity:1 }],
+    currency:'EUR', value:24.95
+  });
+
   /* ── Selector de talla ───────────────────────────────── */
   var botones = document.querySelectorAll('.talla');
   Array.prototype.forEach.call(botones, function(b){
@@ -648,7 +665,14 @@ var TIENDA = { activa:false, dominio:'', token:'', producto:'' };
       Array.prototype.forEach.call(botones, function(o){ o.setAttribute('aria-pressed','false'); });
       b.setAttribute('aria-pressed','true');
       try { sessionStorage.setItem('maya_talla', b.dataset.talla); } catch(e){}
+      medir('talla_elegida', { talla: b.dataset.talla });
     });
+  });
+
+  /* Clics a la pagina de cuentas: dice si el argumento de la
+     donacion esta funcionando o si nadie lo mira. */
+  Array.prototype.forEach.call(document.querySelectorAll('a[href="transparencia"]'), function(a){
+    a.addEventListener('click', function(){ medir('clic_transparencia', {}); });
   });
   try {
     var previa = sessionStorage.getItem('maya_talla');
@@ -753,6 +777,7 @@ var TIENDA = { activa:false, dominio:'', token:'', producto:'' };
             campo.value = voto;
             document.getElementById('voto-ok').style.display = 'block';
             try { localStorage.setItem('tienda_voto', voto); } catch(e){}
+            if (window.medir) window.medir('voto_encuesta', { opcion: voto });
         }
         encuesta.style.display = 'none';
         wrapper.style.display = 'block';
@@ -786,6 +811,7 @@ var TIENDA = { activa:false, dominio:'', token:'', producto:'' };
             .then(function(){
                 wrapper.style.display = 'none';
                 document.getElementById('gracias-msg').classList.add('ver');
+                if (window.medir) window.medir('apuntado_lista', { interes: campo.value || 'sin_voto' });
             })
             .catch(function(){
                 btn.disabled = false;

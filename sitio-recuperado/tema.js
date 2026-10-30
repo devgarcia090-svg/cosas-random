@@ -144,13 +144,89 @@ document.documentElement.classList.add('tjs');
       'ad_personalization': 'granted', 'analytics_storage': 'granted'
     });
   }
+  /* ══ PIXELES DE PUBLICIDAD ══════════════════════════════════════
+     Pega aqui los identificadores cuando vayas a anunciarte. Si se
+     quedan vacios no se carga nada: la web no pide a Meta ni a
+     TikTok ningun script que no haga falta.
+
+     Van en todas las paginas a proposito, no solo en la tienda:
+     asi puedes volver a impactar a quien leyo una guia sobre
+     bozales, que es tu publico mas numeroso.
+
+     IMPORTANTE: solo se cargan si el visitante ACEPTA las cookies.
+     Cargarlos antes seria incumplir el RGPD y dejaria el banner de
+     adorno. No muevas esta llamada fuera de aqui.                */
+  var PIXELES = {
+    meta:   '',   // ID del pixel de Meta (solo numeros)
+    tiktok: ''    // ID del pixel de TikTok
+  };
+
+  var pixelesPuestos = false;
+  function cargarPixeles() {
+    if (pixelesPuestos) return;
+    pixelesPuestos = true;
+
+    if (PIXELES.meta) {
+      !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+      n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
+      (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+      window.fbq('init', PIXELES.meta);
+      window.fbq('track', 'PageView');
+    }
+
+    if (PIXELES.tiktok) {
+      !function(w,d,t){w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];
+      ttq.methods=['page','track','identify','instances','debug','on','off','once','ready','alias','group','enableCookie','disableCookie'];
+      ttq.setAndDefer=function(e,n){e[n]=function(){e.push([n].concat(Array.prototype.slice.call(arguments,0)))}};
+      for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);
+      ttq.instance=function(e){for(var n=ttq._i[e]||[],i=0;i<ttq.methods.length;i++)ttq.setAndDefer(n,ttq.methods[i]);return n};
+      ttq.load=function(e,n){var r='https://analytics.tiktok.com/i18n/pixel/events.js';
+      ttq._i=ttq._i||{};ttq._i[e]=[];ttq._i[e]._u=r;ttq._t=ttq._t||{};ttq._t[e]=+new Date;
+      ttq._o=ttq._o||{};ttq._o[e]=n||{};var o=d.createElement('script');o.type='text/javascript';
+      o.async=!0;o.src=r+'?sdkid='+e+'&lib='+t;var a=d.getElementsByTagName('script')[0];
+      a.parentNode.insertBefore(o,a)};
+      ttq.load(PIXELES.tiktok);ttq.page()}(window,document,'ttq');
+    }
+
+    // Eventos que ocurrieron antes de aceptar: se reenvian ahora.
+    while (window._colaMedicion && window._colaMedicion.length) {
+      var ev = window._colaMedicion.shift();
+      window.medir(ev[0], ev[1]);
+    }
+  }
+
+  /* ══ MEDIR UN EVENTO ════════════════════════════════════════════
+     Una sola llamada que reparte a Google, Meta y TikTok:
+         medir('apuntado_lista', { metodo:'encuesta' })
+     Si el visitante no ha aceptado cookies, el evento se guarda en
+     una cola y se envia si acepta despues. Si rechaza, se descarta. */
+  window._colaMedicion = window._colaMedicion || [];
+  window.medir = function (nombre, datos) {
+    datos = datos || {};
+    var ok = false;
+    try { ok = localStorage.getItem('cookieConsent') === 'accepted'; } catch (e) {}
+    if (!ok) { window._colaMedicion.push([nombre, datos]); return; }
+
+    if (window.gtag) window.gtag('event', nombre, datos);
+
+    // Meta y TikTok usan nombres propios para los eventos estandar.
+    var meta   = { ver_producto:'ViewContent', apuntado_lista:'Lead',
+                   anadido_carrito:'AddToCart', compra_iniciada:'InitiateCheckout' };
+    var tiktok = { ver_producto:'ViewContent', apuntado_lista:'SubmitForm',
+                   anadido_carrito:'AddToCart', compra_iniciada:'InitiateCheckout' };
+    if (window.fbq && meta[nombre])   window.fbq('track', meta[nombre], datos);
+    if (window.ttq && tiktok[nombre]) window.ttq.track(tiktok[nombre], datos);
+  };
+
   function hide() { var b = document.getElementById('cookie-banner'); if (b) b.parentNode.removeChild(b); }
-  window.acceptCookies = function () { try { localStorage.setItem('cookieConsent', 'accepted'); } catch (e) {} grant(); hide(); };
+  window.acceptCookies = function () { try { localStorage.setItem('cookieConsent', 'accepted'); } catch (e) {} grant(); cargarPixeles(); hide(); };
   window.rejectCookies = function () { try { localStorage.setItem('cookieConsent', 'rejected'); } catch (e) {} hide(); };
 
   var consent = null;
   try { consent = localStorage.getItem('cookieConsent'); } catch (e) {}
-  if (consent === 'accepted') { grant(); return; }
+  if (consent === 'accepted') { grant(); cargarPixeles(); return; }
   if (consent === 'rejected') { return; }
 
   // Sin decisión previa: mostramos el banner (GA sigue "denegado" mientras tanto)
