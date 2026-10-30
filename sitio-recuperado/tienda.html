@@ -222,29 +222,14 @@
            pantalla cuando Safari encoge su barra inferior: por eso
            asomaba contenido por debajo. Sticky va en el flujo y no
            puede despegarse. Es lo mismo que arreglo el nav. */
-        /* En iOS, al encoger Safari sus barras, el viewport visual crece
-           y el de maquetacion no: un bottom:0 se queda corto y asoma
-           contenido por debajo. Prolongarla con un ::after no sirve,
-           porque Safari recorta la capa del elemento fijo y se lleva
-           justo lo que sobresale.
-           Lo que si aguanta es el fondo del PROPIO elemento: se hunde
-           240px por debajo y se le devuelven esos 240px como relleno,
-           de modo que la fila visible queda donde estaria con bottom:0
-           pero el fondo llega mucho mas abajo. */
-        .barra-movil{position:fixed;left:0;right:0;bottom:-240px;z-index:900;display:none;
-            gap:.8rem;align-items:center;background:#0D0B09;
-            border-top:1px solid rgba(200,114,42,.28);
-            box-shadow:0 -10px 28px rgba(0,0,0,.55);
-            padding:.75rem max(1rem,env(safe-area-inset-right,0px))
-                    calc(.75rem + 240px + env(safe-area-inset-bottom,0px))
-                    max(1rem,env(safe-area-inset-left,0px))}
-        .barra-movil .bm-precio{font-weight:900;font-size:1.15rem;white-space:nowrap;
-                                font-variant-numeric:tabular-nums}
-        .barra-movil .btn-comprar{padding:.85rem 1.2rem;font-size:.84rem}
-        @media(max-width:860px){.barra-movil{display:flex}
-            /* Hueco al final para que la barra no tape el ultimo
-               contenido ni los enlaces legales del pie. */
-            body{padding-bottom:6rem}}
+        /* Aqui habia una barra de compra fija en movil. Se quitó: en
+           Safari de iPhone se quedaba por encima del borde real y
+           asomaba contenido por debajo, y ninguna de las tres
+           soluciones probadas (sticky, prolongar con ::after, hundir
+           el fondo del propio elemento) lo resolvio. El fallo no se
+           reproduce en escritorio, asi que no se podia depurar.
+           No hace falta: la ficha es corta, el boton principal se ve
+           casi sin scroll y hay otro al cerrar las preguntas. */
 
         /* ── LISTA DE ESPERA (se mantiene) ────────────────── */
         .lista-section{background:linear-gradient(135deg,#1E1008 0%,#0D0B09 100%);
@@ -531,12 +516,6 @@
     </div>
 </section>
 
-<!-- ══ BARRA FIJA MÓVIL ═════════════════════════════════ -->
-<div class="barra-movil" id="barra-movil">
-    <span class="bm-precio">24,95 €</span>
-    <a href="#lista-espera" class="btn-comprar" id="bm-boton" style="flex:1">Avísame</a>
-</div>
-
 <footer>
     <div class="pie-marca"><img src="img/marca/maya-crema.svg" alt="Maya" width="112" height="46"><p class="pie-claim">El Rottweiler Peluche</p><p class="pie-mision">Rompiendo el estigma de los perros potencialmente peligrosos en España.</p></div>
     <p>© 2026 Gestionado por <span>MTS23 Talent</span> · Hecho con <span>❤️</span><br>
@@ -597,17 +576,6 @@ var TIENDA = {
     }
   } catch(e){}
 
-  /* ── Botón de compra: exige talla ────────────────────── */
-  function exigeTalla(e){
-    if (!tallaElegida) {
-      e.preventDefault();
-      aviso.classList.add('ver');
-      document.getElementById('tallas-botones').scrollIntoView({behavior:'smooth', block:'center'});
-      return false;
-    }
-    return true;
-  }
-
   /* ── Tienda apagada: todo apunta a la lista de espera ── */
   if (!TIENDA.activa || !TIENDA.dominio || !TIENDA.token || !TIENDA.producto) {
     // El selector de talla no sirve de nada todavía, pero lo dejamos
@@ -616,9 +584,13 @@ var TIENDA = {
     return;
   }
 
-  /* ── Tienda encendida: carga el botón de Shopify ─────── */
+  /* ── Tienda encendida: carga el botón de Shopify ───────
+     OJO el dia que la enciendas: Shopify pinta su propio selector
+     de variante, asi que quedarian dos selectores de talla, el
+     nuestro y el suyo. Decide cual se queda — lo normal es ocultar
+     el nuestro y dejar el de Shopify, que es el que manda sobre el
+     stock real de cada talla. */
   document.getElementById('btn-fallback').style.display = 'none';
-  document.getElementById('bm-boton').addEventListener('click', exigeTalla);
 
   // Schema de producto: solo cuando se puede comprar de verdad.
   var ld = document.createElement('script');
