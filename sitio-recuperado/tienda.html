@@ -104,17 +104,27 @@
               gap:.7rem;text-align:center;padding:1.6rem;position:relative}
         .foto img{width:100%;height:100%;object-fit:cover;display:block}
         @media(max-width:880px){.foto{aspect-ratio:4/5;max-height:44vh;padding:1.1rem}}
+        .sin-foto{display:flex;flex-direction:column;align-items:center;
+                  justify-content:center;gap:.7rem;text-align:center}
         .foto .ico-grande{width:40px;height:40px;stroke:var(--fuego);stroke-width:1.5;fill:none}
         .foto .q{color:var(--fuego);font-size:.69rem;font-weight:800;
                  letter-spacing:.15em;text-transform:uppercase}
         .foto .d{color:var(--apagado);font-size:.8rem;max-width:260px;line-height:1.55}
+        .foto .d code{background:rgba(200,114,42,.14);padding:.1rem .35rem;border-radius:4px}
         .cinta{position:absolute;top:.9rem;left:.9rem;background:var(--fuego);color:var(--negro);
                font-size:.6rem;font-weight:900;letter-spacing:.13em;text-transform:uppercase;
-               padding:.35rem .8rem;border-radius:var(--r-xs)}
+               padding:.35rem .8rem;border-radius:var(--r-xs);z-index:2}
         .miniaturas{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;margin-top:.5rem}
-        .mini{aspect-ratio:1/1;border-radius:var(--r-sm);border:1px dashed rgba(200,114,42,.3);
-              background:var(--gris);display:flex;align-items:center;justify-content:center;
-              color:var(--tenue);font-size:.6rem;font-weight:700;text-align:center;padding:.3rem}
+        .miniaturas:empty{display:none}
+        .mini{padding:0;border-radius:var(--r-sm);overflow:hidden;position:relative;
+              border:1.5px solid var(--linea);background:var(--gris);
+              transition:border-color var(--t);display:block;aspect-ratio:1/1}
+        .mini img{width:100%;height:100%;object-fit:cover;display:block}
+        .mini span{position:absolute;left:0;right:0;bottom:0;background:rgba(13,11,9,.8);
+                   color:var(--blanco);font-size:.58rem;font-weight:700;letter-spacing:.05em;
+                   text-transform:uppercase;padding:.25rem .2rem;text-align:center}
+        .mini:hover{border-color:var(--fuego)}
+        .mini[aria-current="true"]{border-color:var(--fuego)}
 
         .datos{display:flex;flex-direction:column;gap:1.25rem}
         .datos h1{font-size:clamp(1.85rem,4.6vw,2.5rem);font-weight:900;
@@ -337,18 +347,30 @@
 <main>
 <section class="env ficha" id="producto">
 
+    <!-- GALERIA.
+         Sube los archivos a fotos/ con estos nombres exactos y
+         aparecen solos. Los que falten se ocultan sin dejar hueco
+         ni icono roto; si no hay ninguno se ve el aviso de abajo.
+             fotos/camiseta-frente.webp
+             fotos/camiseta-espalda.webp
+             fotos/camiseta-detalle.webp
+             fotos/camiseta-maya.webp                            -->
     <div class="galeria">
-        <div class="foto">
-            <svg class="ico-grande" aria-hidden="true"><use href="#i-camiseta"/></svg>
-            <span class="q">Falta la foto real</span>
-            <span class="d">Una foto de la camiseta puesta, a ser posible con Maya al lado. Es lo que más va a mover la venta.</span>
+        <div class="foto" id="foto-marco">
+            <img id="foto-grande" src="fotos/camiseta-frente.webp"
+                 alt="Camiseta Maya vista de frente" width="800" height="800">
+            <div class="sin-foto" id="sin-foto" hidden>
+                <svg class="ico-grande" aria-hidden="true"><use href="#i-camiseta"/></svg>
+                <span class="q">Falta la foto real</span>
+                <span class="d">Sube los archivos a la carpeta <code>fotos/</code> y la galería se monta sola.</span>
+            </div>
             <div class="cinta">Edición limitada</div>
         </div>
-        <div class="miniaturas" aria-hidden="true">
-            <div class="mini">Puesta</div>
-            <div class="mini">Espalda</div>
-            <div class="mini">Detalle</div>
-            <div class="mini">Con Maya</div>
+        <div class="miniaturas" id="miniaturas">
+            <button type="button" class="mini" data-src="fotos/camiseta-frente.webp"  data-alt="Camiseta Maya vista de frente"><img src="fotos/camiseta-frente.webp" alt="" width="120" height="120"><span>Frente</span></button>
+            <button type="button" class="mini" data-src="fotos/camiseta-espalda.webp" data-alt="Espalda de la camiseta con Maya en grande"><img src="fotos/camiseta-espalda.webp" alt="" width="120" height="120"><span>Espalda</span></button>
+            <button type="button" class="mini" data-src="fotos/camiseta-detalle.webp" data-alt="Detalle del logo bordado en el pecho"><img src="fotos/camiseta-detalle.webp" alt="" width="120" height="120"><span>Detalle</span></button>
+            <button type="button" class="mini" data-src="fotos/camiseta-maya.webp"    data-alt="La camiseta puesta, con Maya al lado"><img src="fotos/camiseta-maya.webp" alt="" width="120" height="120"><span>Con Maya</span></button>
         </div>
     </div>
 
@@ -657,6 +679,60 @@ var TIENDA = { activa:false, dominio:'', token:'', producto:'' };
     items: [{ item_id:'camiseta-maya', item_name:'Camiseta Maya', price:24.95, quantity:1 }],
     currency:'EUR', value:24.95
   });
+
+  /* ── Galería ─────────────────────────────────────────────
+     Las fotos aun no estan subidas. En vez de dejar iconos de
+     imagen rota, cada miniatura que no cargue se quita sola, y
+     si no queda ninguna se ensena el aviso. Asi la pagina esta
+     presentable hoy y completa en cuanto subas los archivos. */
+  (function(){
+    var grande  = document.getElementById('foto-grande');
+    var aviso   = document.getElementById('sin-foto');
+    var tira    = document.getElementById('miniaturas');
+    if (!grande || !tira) return;
+
+    function rota(img){ return img.complete && img.naturalWidth === 0; }
+
+    function revisar(){
+      var vivas = [];
+      Array.prototype.forEach.call(tira.querySelectorAll('.mini'), function(m){
+        var img = m.querySelector('img');
+        if (rota(img)) { m.remove(); } else { vivas.push(m); }
+      });
+      if (!vivas.length || rota(grande)) {
+        grande.hidden = true;
+        aviso.hidden = false;
+        tira.innerHTML = '';
+        return;
+      }
+      aviso.hidden = true;
+      grande.hidden = false;
+      // Si la principal fallo pero hay miniaturas, usamos la primera.
+      if (rota(grande)) poner(vivas[0]);
+      else marcar(grande.getAttribute('src'));
+    }
+
+    function marcar(src){
+      Array.prototype.forEach.call(tira.querySelectorAll('.mini'), function(m){
+        m.setAttribute('aria-current', m.dataset.src === src ? 'true' : 'false');
+      });
+    }
+    function poner(m){
+      grande.src = m.dataset.src;
+      grande.alt = m.dataset.alt || '';
+      marcar(m.dataset.src);
+    }
+
+    tira.addEventListener('click', function(e){
+      var m = e.target.closest('.mini');
+      if (m) poner(m);
+    });
+
+    // Las imagenes pueden fallar antes o despues de que corra esto.
+    if (document.readyState === 'complete') revisar();
+    else window.addEventListener('load', revisar);
+    setTimeout(revisar, 1200);
+  })();
 
   /* ── Selector de talla ───────────────────────────────── */
   var botones = document.querySelectorAll('.talla');
