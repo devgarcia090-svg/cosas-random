@@ -39,7 +39,7 @@ streetwear el tacto y el grosor son parte del producto. Pide al distribuidor
 la versión más gruesa que tengan en negro (180 g o más, mejor si tiene corte
 recto o ligeramente oversize).
 
-### Margen con la opción premium (incluye 1 € de donación y la comisión de pago)
+### Margen con la opción premium (incluye 1 € de aportación al Club y la comisión de pago; con 2 €, resta 1 € más)
 
 | Precio de venta (IVA incl.) | Margen por camiseta | Con 100 vendidas |
 |---|---|---|
@@ -144,6 +144,7 @@ mismo paquete (300 g, península) y quédate con la más barata.
 ### Fase 0 — Preparar (2-3 semanas antes)
 - **Muestra física:** pide 1-2 camisetas reales estampadas antes del pedido
   grande. Sirven para comprobar calidad y para las fotos y vídeos.
+- **Elegir el primer perro del Club** con la protectora (ver sección 5).
 - **Abrir la lista de espera** (ver sección 7) y moverla en redes: «el
   día que abra, la lista entra 24 h antes y a precio Fundador».
 - **Votación del diseño** si tienes 2-3: Stories con «¿1, 2 o 3?». Es contenido
@@ -156,7 +157,7 @@ mismo paquete (300 g, península) y quédate con la más barata.
 |---|---|
 | -10 | Teaser: «Llevamos meses con esto» + enlace a la lista |
 | -7 | Detrás de cámaras: la muestra llega, Dani la abre, Maya la huele |
-| -5 | Presentar el Club PPP: «cada camiseta = una donación a una protectora PPP» |
+| -5 | Presentar el Club PPP con el primer perro: «Este es Rocky. Lleva 4 años esperando. Vamos a sacarlo de ahí» |
 | -3 | Detalle del diseño sin enseñarlo entero |
 | -1 | «Mañana abre. La lista entra 24 h antes» (email + Stories) |
 
@@ -179,34 +180,93 @@ mismo paquete (300 g, península) y quédate con la más barata.
 
 ### Fase 4 — Después
 - Repostear las fotos de compradores con Maya.
-- **Primer informe del Club:** vídeo entregando la donación a la protectora,
-  con cifra y justificante. Es la prueba de que el Club existe, y el mejor
+- **Primer informe del Club:** vídeo entregando la aportación al perro del
+  mes, con cifra y justificante. Es la prueba de que el Club existe, y el mejor
   anuncio del Drop 002.
 
 ---
 
-## 5. Club PPP y Pack Fundadores
+## 5. Club PPP
 
-**Qué es el Club PPP:** todo el que compra entra. Cada mes Maya dona a una
-protectora de perros PPP, y el Club ve a cuál y cuánto.
+### La idea
+**«Los que nadie elige, los elige la manada.»**
 
-**Recomendación: donación fija por prenda (1 € por camiseta)** en lugar de
-un porcentaje o «una cantidad cada mes».
-- Es fácil de entender y de comprobar: «este mes 312 camisetas = 312 € para X».
-- Una frase como «donamos parte de los beneficios» genera desconfianza y, en
-  España, la publicidad con causa debe ser concreta y verdadera. Di siempre
-  la cantidad real y enseña el justificante.
+Los perros PPP son los que más tiempo pasan en las protectoras: a la mala fama
+se suma que quien adopta necesita licencia, seguro y bozal. Les falta dinero,
+pero sobre todo les falta **que alguien los vea**. Y eso es lo que Maya tiene de
+sobra: 4,5 millones de visualizaciones al mes.
 
-**Pack Fundadores (solo el Drop 001):**
-- Número de Fundador (de 001 al que llegue) en una tarjeta dentro de la bolsa.
-- Precio Fundador (25 € frente a 29 €).
+*(«Rocky» es un nombre de ejemplo en todo este documento.)*
+
+El Club no dona «a protectoras» en abstracto. **Cada mes adopta como padrino a
+un perro concreto**, con nombre, cara e historia:
+- **Tu compra paga** sus gastos (comida, veterinario, lo que necesite).
+- **Maya pone la voz:** Dani y Maya lo visitan, lo graban y lo enseñan a toda
+  la comunidad para que le salga familia.
+- **Cuando lo adoptan, se «gradúa»**: vídeo de despedida con los miembros del
+  Club en los créditos, y entra el siguiente.
+
+> «Tu camiseta paga. Maya pone la voz.»
+
+### Por qué la gente va a querer entrar
+| Lo que mueve a la gente | Cómo lo usa el Club |
+|---|---|
+| **Pertenencia e identidad** | Ser del Club dice «yo no cruzo de acera». Es la tribu de quien tiene o defiende un PPP. |
+| **Un perro con nombre, no una causa abstracta** | «Ayuda a Rocky, 4 años esperando» mueve mucho más que «ayuda a las protectoras». |
+| **Ver el progreso** | Barra del mes en la web y en Stories: «Rocky: 312 / 500 € para su operación de cadera». Cada compra la mueve. |
+| **Participar** | Los miembros votan en Stories al perro del mes siguiente entre 3 candidatos. Lo que eliges lo sientes tuyo. |
+| **Un final que se recuerda** | El vídeo de la graduación cuando lo adoptan. Es el momento que la gente comparte. |
+| **Ver que otros ya están** | Contador público de miembros y de perros graduados. |
+
+**Lo que NO se hace** (rompe el tono de la marca): música triste, fotos de
+perros en jaula para dar pena, «si no compras, este perro sigue solo». El
+tono es el de siempre: orgullo y humor. Son **veteranos con mala fama**, no
+víctimas.
+
+### La Licencia del Club
+Dentro de cada pedido va una **tarjeta con aspecto de licencia PPP**, en broma:
+«Licencia de Peluche Potencialmente Precioso — Club PPP nº 0137». Juega con la
+burocracia que todos los dueños de PPP conocen, se guarda en la cartera y se
+enseña en vídeo. Los del Drop 001 llevan además el sello **Fundador**.
+
+### Cómo se entra y cuánto se aporta
+- **Se entra comprando cualquier producto**, y se es miembro para siempre. Sin
+  cuotas ni registros.
+- **Aportación por prenda: 2 € recomendado** (o 1 € como mínimo). Con 2 € el
+  titular suena a ayuda real («312 camisetas = 624 € para Rocky»), y el margen
+  baja solo de ~13,75 € a ~12,75 €.
+- **Para quien quiera ayudar sin comprar:** enlazar el Teaming o la página de
+  donaciones **de la propia protectora**, para que el dinero vaya directo y
+  Maya no tenga que recoger donativos. Comprobar antes que la protectora tiene
+  uno activo.
+
+### Transparencia (no negociable)
+- **Informe del Club cada mes**, en la web y en Stories: cuántas prendas, cuánto
+  dinero, a qué protectora y para qué, con el justificante de la transferencia.
+- Acuerdo previo con cada protectora: que acepta, qué necesita el perro y
+  permiso para grabarlo.
+- Nunca prometer una adopción, solo hacer todo lo posible por darle visibilidad.
+
+### El ciclo que hace crecer el Club
+Compras → dinero y vídeos del perro → le sale familia → vídeo de graduación →
+más gente quiere entrar → más compras.
+
+**La cifra que importa:** perros del Club adoptados. Va en grande en la web:
+«Graduados: 3».
+
+### Pack Fundadores (solo el Drop 001)
+- Licencia del Club con número de Fundador y sello especial.
+- Precio Fundador: 25 € en vez de 29 €.
 - Acceso 24 h antes a cada drop futuro.
-- Pegatina «Fundador del Club PPP».
-- Opcional y barato: su nombre o el de su perro en un «Muro de la manada»
-  en la web.
+- Voto doble al elegir el perro del mes.
+- Su nombre o el de su perro en el **Muro de la manada** de la web.
 
-Nada de esto requiere stock extra caro: es una tarjeta, una pegatina y una
-lista.
+### Para arrancar
+1. Hablar con 1-2 protectoras de la Región de Murcia que tengan PPP con
+   estancias largas (las visitas tienen que ser viables).
+2. Elegir al primer perro **antes** del drop. Su vídeo es el contenido del
+   día −5 del calendario.
+3. Diseñar la Licencia del Club (cabe en el mismo encargo que la camiseta).
 
 ---
 
