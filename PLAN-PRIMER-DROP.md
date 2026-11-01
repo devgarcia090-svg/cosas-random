@@ -102,7 +102,7 @@ salir 3 o 4 veces más cara.
   Correos Express. **Empieza por aquí.**
 - **Con más de 500 envíos al mes** merece la pena pedir contrato directo a Correos.
 
-**Cotización real en Packlink PRO, plan Free (1-nov-2026, 0,3 kg, 30×25×3 cm, a Madrid):**
+**Cotización real en Packlink PRO, plan Free (1-nov-2026, Murcia 30006 → Barcelona 08001, 0,3 kg, 30×30×3 cm):**
 
 | Transportista y modalidad | Plazo | Sin IVA | Con IVA |
 |---|---|---|---|
@@ -126,10 +126,11 @@ Pones de tu bolsillo unos 0,75-1 € por pedido, asumible con ~13 € de margen
 por camiseta. Llevas los paquetes a la oficina de Correos (es más barato que la
 recogida en casa).
 
-**Plan Plus (25 €/mes) para el mes del drop:** anuncia Correos «desde 2,47 €»
-frente a los 4,03 € más baratos del plan Free. Aunque la cifra «desde» sea de
-otra modalidad, con 100 envíos un ahorro de solo 0,25 € por paquete ya paga la
-cuota. Contrátalo cuando cierre la preventa y cancélalo después. Antes de
+**Plan Plus (25 €/mes) para el mes del drop:** Packlink anuncia Correos
+«desde 2,47 €» (+ IVA) para paquetes de hasta 1 kg, frente a 4,03 € en el plan
+Free: unos 1,56 € menos por envío. **Plus se paga solo a partir de ~16 envíos
+en el mes**, y con 100 envíos ahorrarías unos 130 € netos. Con Plus, el envío
+a oficina pasaría de costarte más de lo que cobras a dejarte margen. Contrátalo cuando cierre la preventa y cancélalo después. Antes de
 pagar, comprueba en el resumen del pedido si el plan Free añade gastos de
 gestión por envío.
 
