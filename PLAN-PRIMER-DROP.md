@@ -102,6 +102,37 @@ salir 3 o 4 veces más cara.
   Correos Express. **Empieza por aquí.**
 - **Con más de 500 envíos al mes** merece la pena pedir contrato directo a Correos.
 
+**Cotización real en Packlink PRO, plan Free (1-nov-2026, 0,3 kg, 30×25×3 cm, a Madrid):**
+
+| Transportista y modalidad | Plazo | Sin IVA | Con IVA |
+|---|---|---|---|
+| **Correos: dejas en oficina/taquilla → recoge en oficina/taquilla** | 3 días | **4,03 €** | 4,88 € |
+| InPost: taquilla → taquilla | 3 días | 4,47 € | 5,41 € |
+| **Correos: dejas en oficina → entrega a domicilio** (recomendado por Packlink) | 3 días | **4,82 €** | 5,83 € |
+| SEUR Pickup: punto → punto | 24 h | 5,19 € | 6,28 € |
+| CTT Express: punto → domicilio | 48 h | 5,39 € | 6,52 € |
+| Correos: recogida en casa → domicilio | 3 días | 5,51 € | 6,67 € |
+| Zeleris: recogida en casa → domicilio | 24 h | 5,77 € | 6,98 € |
+| Correos: oficina → domicilio | 48 h | 5,81 € | 7,03 € |
+| SEUR Pickup: punto → domicilio | 24 h | 5,86 € | 7,09 € |
+| Correos Express: recogida en casa → domicilio | 24 h | 5,97 € | 7,22 € |
+
+**Decisión propuesta:** Correos para todo, con dos opciones en el checkout de Shopify:
+- **Recoger en oficina o taquilla Correos: 3,95 €** (te cuesta 4,03 € + IVA).
+- **A domicilio: 4,95 €** (te cuesta 4,82 € + IVA).
+- **Gratis a partir de 2 prendas.**
+
+Pones de tu bolsillo unos 0,75-1 € por pedido, asumible con ~13 € de margen
+por camiseta. Llevas los paquetes a la oficina de Correos (es más barato que la
+recogida en casa).
+
+**Plan Plus (25 €/mes) para el mes del drop:** anuncia Correos «desde 2,47 €»
+frente a los 4,03 € más baratos del plan Free. Aunque la cifra «desde» sea de
+otra modalidad, con 100 envíos un ahorro de solo 0,25 € por paquete ya paga la
+cuota. Contrátalo cuando cierre la preventa y cancélalo después. Antes de
+pagar, comprueba en el resumen del pedido si el plan Free añade gastos de
+gestión por envío.
+
 **Antes de elegir:** crea cuenta gratis en las dos, pide precio para el
 mismo paquete (300 g, península) y quédate con la más barata.
 
