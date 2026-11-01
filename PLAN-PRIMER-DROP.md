@@ -80,6 +80,28 @@ Packlink PRO**, las dos gratis y con app para Shopify.
 **Usa bolsa, no caja.** La ropa en caja grande se cobra por volumen y puede
 salir 3 o 4 veces más cara.
 
+**Precios encontrados (península, noviembre 2026):**
+
+| Opción | Precio | Fuente |
+|---|---|---|
+| Correos Paq Ligero en ventanilla, hasta 250 g | 5,01 € + IVA (6,06 € con IVA) | Tarifa oficial 2026 |
+| Correos Paq Ligero en ventanilla, hasta 500 g | 7,56 € con IVA | Tarifa oficial 2026 |
+| SEUR Shop2Shop (punto a punto, 48 h) | 5,40 € + IVA | Tarifa pública 2026 |
+| SEUR Shop2Home (a domicilio, 48 h) | 6,30 € + IVA | Tarifa pública 2026 |
+| Correos a través de Packlink / Genei | «desde» ~3-4,50 € + IVA | Webs de las plataformas (cifras antiguas) |
+
+- **Coste estimado real por pedido de 1 camiseta: ~4-5,50 € con IVA** si se
+  envía con una plataforma. Cobrar 3,95 € de envío supone poner como mucho
+  1-1,50 € de tu bolsillo, que compensa porque la gente abandona menos la compra.
+- **Intenta no pasar de 250 g** con la camiseta y la bolsa: por encima se salta
+  de tramo (de 6,06 € a 7,56 € en tarifa oficial). Una camiseta gruesa de
+  talla L o XL puede rozarlo, así que pesa la muestra.
+- **Sendcloud:** el plan gratis solo permite sus tarifas negociadas y no
+  publica precios sin cuenta.
+- **Packlink PRO:** gratis, sin cuota mensual, con Correos, SEUR, InPost y
+  Correos Express. **Empieza por aquí.**
+- **Con más de 500 envíos al mes** merece la pena pedir contrato directo a Correos.
+
 **Antes de elegir:** crea cuenta gratis en las dos, pide precio para el
 mismo paquete (300 g, península) y quédate con la más barata.
 
