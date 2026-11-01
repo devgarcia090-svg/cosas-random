@@ -1,6 +1,6 @@
 # Product Marketing Context — Maya | El Rottweiler Peluche
 
-**Document version:** v3
+**Document version:** v4
 **Last updated:** 2026-11-01
 
 > Ficha de marca de **Maya** (web en `sitio-recuperado/`, tienda en
@@ -15,7 +15,7 @@
 **What it does:** Convierte la comunidad de Maya en una marca que se lleva puesta. Cada camiseta es una conversación en la calle sobre lo que los PPP son de verdad («Cada vez que alguien pregunta por tu camiseta, tienes treinta segundos para contarle que los PPP no son lo que le han contado»).
 **Product category:** Merch de creador / ropa streetwear con causa (cómo buscan: "camiseta rottweiler", "camiseta PPP", "merch Maya rottweiler").
 **Product type:** E-commerce (Shopify). Prendas Roly estampadas en pedido grande; el primer drop se vende en preventa y se fabrica lo vendido + colchón (ver `PLAN-PRIMER-DROP.md`).
-**Business model:** Venta directa por drops. Drop 001 «Fundadores»: preventa de 7 días. Precio propuesto **29 €**, **25 € precio Fundador** en la preventa; envío 3,95 €, gratis desde 2 prendas [PENDIENTE: confirmar con presupuestos reales]. Cada compra da entrada al **Club PPP**, que cada mes apadrina a un perro PPP de larga estancia: la compra paga sus gastos y Maya le da visibilidad hasta que lo adoptan. Roadmap: colección de ropa (camisetas y sudaderas), accesorios PPP, objetos lifestyle, **Pack Fundadores** (solo para la lista de espera).
+**Business model:** Venta directa por drops. Drop 001 «Fundadores»: preventa de 7 días. Precio **21,99 € con envío incluido para Fundadores** (solo la preventa del Drop 001) y **26,99 € con envío incluido** después. **3 € por prenda al perro del mes del Club PPP.** Cada compra da entrada al **Club PPP**, que cada mes apadrina a un perro PPP de larga estancia: la compra paga sus gastos y Maya le da visibilidad hasta que lo adoptan. Roadmap: colección de ropa (camisetas y sudaderas), accesorios PPP, objetos lifestyle, **Pack Fundadores** (solo para la lista de espera).
 
 ## Target Audience
 **Target:** Personas en España, sobre todo dueños y futuros dueños de perros PPP (Rottweiler, Pit Bull, Staffordshire, AmStaff, Dogo Argentino, Akita…).
@@ -61,7 +61,7 @@
 ## Objections
 | Objection | Response |
 |-----------|----------|
-| «Es caro para una camiseta» | Algodón grueso, diseño exclusivo, tanda numerada que no se repite, y 1 € de cada camiseta va a una protectora de perros PPP (con justificante cada mes). |
+| «Es caro para una camiseta» | Algodón grueso, diseño exclusivo, tanda numerada que no se repite, y 3 € de cada camiseta van al perro PPP que apadrina el Club ese mes (con justificante). Envío incluido. |
 | «¿Y si no me queda bien la talla?» | Cambio de talla incluido (S-XXL). |
 | «Es preventa, ¿cuánto tarda?» | [PENDIENTE: fecha estimada de envío según el plazo de Roly y del taller] — y se cuenta el proceso en redes mientras tanto. |
 | «¿No glorifica a los perros "peligrosos"?» | Al contrario: el mensaje es educación y responsabilidad, nunca «mi perro puede contigo». |
@@ -89,8 +89,8 @@
 | PPP | Perro Potencialmente Peligroso (Ley 50/1999, RD 287/2002). 8 razas en la lista oficial. |
 | La manada | La comunidad de Maya (seguidores y suscriptores). |
 | Rottweiler Peluche | El apodo de Maya: 40 kg con alma de peluche. |
-| Pack Fundadores | Compradores del Drop 001: número de Fundador, precio 25 €, acceso 24 h antes a futuros drops, pegatina. |
-| Club PPP | Todos los compradores, para siempre. Cada mes apadrina a un perro PPP concreto de larga estancia: la compra paga sus gastos (2 € por prenda recomendado) y Maya le da visibilidad hasta que lo adoptan («se gradúa»). Informe mensual con justificante. |
+| Pack Fundadores | Compradores del Drop 001: número de Fundador, precio 21,99 € con envío incluido, acceso 24 h antes a futuros drops, pegatina. |
+| Club PPP | Todos los compradores, para siempre. Cada mes apadrina a un perro PPP concreto de larga estancia: la compra paga sus gastos (3 € por prenda) y Maya le da visibilidad hasta que lo adoptan («se gradúa»). Informe mensual con justificante. |
 | Licencia del Club | Tarjeta en cada pedido que parodia la licencia PPP: «Licencia de Peluche Potencialmente Precioso — Club PPP nº 0137». |
 | Graduado | Perro del Club que ha sido adoptado. Es la cifra principal del Club. |
 
@@ -134,12 +134,14 @@
 *Decisions and tested lessons. Newest first. Keep it to about 20 active entries.*
 | Date | Learning | Evidence | Applies to | Status |
 |------|----------|----------|------------|--------|
+| 2026-11-01 | Precio Fundador 21,99 € y normal 26,99 €, ambos con envío incluido; 3 € por prenda al Club. El Drop 001 es para hacer comunidad, no para ganar margen | Decisión de Dani | launch, copywriting, emails, ads | active |
 | 2026-11-01 | El Club apadrina un perro concreto al mes (nombre, cara, historia) en lugar de donar «a protectoras»; tono de orgullo, nunca lástima | Decisión | social, emails, copywriting, launch | active |
-| 2026-11-01 | Donación fija por prenda (1 €) en lugar de % o cantidad mensual vaga: más creíble y comprobable | Decisión | copywriting, social, emails | active |
+| 2026-11-01 | Aportación fija por prenda en lugar de % o cantidad mensual vaga: más creíble y comprobable | Decisión | copywriting, social, emails | active |
 | 2026-11-01 | Lanzar con 2-3 diseños y preventa en lugar de 1 diseño con stock | Decisión de estrategia (`ESTRATEGIA-LANZAMIENTO-TIENDA.md`) | launch, social, emails | active |
 
 ## Changelog
 *Newest first. One line per revision: what changed and why.*
+- v4 (2026-11-01) — Precios decididos: 21,99 € Fundador y 26,99 € normal, envío incluido; 3 € por prenda al Club.
 - v3 (2026-11-01) — Club PPP redefinido: perro apadrinado cada mes, visibilidad de Maya, graduaciones, Licencia del Club.
 - v2 (2026-11-01) — Cambio de print on demand a pedido Roly con preventa; añadidos precio propuesto, Club PPP y Pack Fundadores.
 - v1 (2026-11-01) — Initial context, redactado a partir del brief de la camiseta, la estrategia de lanzamiento y los textos de la web.

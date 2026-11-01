@@ -39,22 +39,28 @@ streetwear el tacto y el grosor son parte del producto. Pide al distribuidor
 la versión más gruesa que tengan en negro (180 g o más, mejor si tiene corte
 recto o ligeramente oversize).
 
-### Margen con la opción premium (incluye 1 € de aportación al Club y la comisión de pago; con 2 €, resta 1 € más)
+### Precio decidido (1-nov-2026)
 
-| Precio de venta (IVA incl.) | Margen por camiseta | Con 100 vendidas |
-|---|---|---|
-| 25 € | ~10,50 € | ~1.050 € |
-| 27 € | ~12,15 € | ~1.215 € |
-| **29 €** | **~13,75 €** | **~1.375 €** |
-| 32 € | ~16,20 € | ~1.620 € |
+- **Precio Fundador: 21,99 € con envío incluido**, solo durante la preventa
+  del Drop 001. Es el gancho del lanzamiento.
+- **Precio normal después: 26,99 € con envío incluido.**
+- **3 € de cada prenda van al perro del mes del Club PPP.** Siempre.
+- Mensaje: *«21,99 € con envío incluido solo para Fundadores. Después, 26,99 €.»*
 
-**Propuesta:**
-- **Precio normal: 29 €.** Está en la franja del merch de creador y deja
-  margen para financiar la donación, anuncios y el siguiente drop.
-- **Precio Fundador: 25 €**, solo durante la preventa. Es la recompensa real
-  por llegar primero, y crea urgencia sin mentir.
-- **Envío: 3,95 €, y gratis a partir de 2 prendas.** Así no pierdes dinero en
-  pedidos de una camiseta y empujas a comprar dos (para regalar).
+### Lo que te queda por camiseta (opción premium, ya descontados IVA, comisión de pago, 3 € al Club y el envío)
+
+| Precio, envío incluido | Plus, oficina (~2,47 €) | Free, oficina (4,03 €) | Free, domicilio (4,82 €) |
+|---|---|---|---|
+| **21,99 € Fundador** | **~3,65 €** | ~2,10 € | ~1,30 € |
+| **26,99 € normal** | **~7,65 €** | ~6,10 € | ~5,30 € |
+
+- A 21,99 € el margen es mínimo: el Drop 001 es para coger impulso y hacer
+  comunidad, no para ganar dinero. **Durante sus envíos, el plan Plus de
+  Packlink es imprescindible.**
+- Un cambio de talla son dos envíos (~8 €): se come lo que ganas con 2-3
+  camisetas Fundador. Una buena tabla de medidas en la ficha ahorra dinero.
+- Si un pedido lleva 2 o más camisetas, el envío se paga una vez y el margen
+  sube.
 
 No he podido confirmar la comisión exacta de Shopify Payments para tarjetas
 españolas en el plan Basic. He calculado con ~2,1 % + 0,30 €; míralo en
@@ -91,8 +97,7 @@ salir 3 o 4 veces más cara.
 | Correos a través de Packlink / Genei | «desde» ~3-4,50 € + IVA | Webs de las plataformas (cifras antiguas) |
 
 - **Coste estimado real por pedido de 1 camiseta: ~4-5,50 € con IVA** si se
-  envía con una plataforma. Cobrar 3,95 € de envío supone poner como mucho
-  1-1,50 € de tu bolsillo, que compensa porque la gente abandona menos la compra.
+  envía con una plataforma. Va incluido en el precio (ver sección 2).
 - **Intenta no pasar de 250 g** con la camiseta y la bolsa: por encima se salta
   de tramo (de 6,06 € a 7,56 € en tarifa oficial). Una camiseta gruesa de
   talla L o XL puede rozarlo, así que pesa la muestra.
@@ -117,20 +122,19 @@ salir 3 o 4 veces más cara.
 | SEUR Pickup: punto → domicilio | 24 h | 5,86 € | 7,09 € |
 | Correos Express: recogida en casa → domicilio | 24 h | 5,97 € | 7,22 € |
 
-**Decisión propuesta:** Correos para todo, con dos opciones en el checkout de Shopify:
-- **Recoger en oficina o taquilla Correos: 3,95 €** (te cuesta 4,03 € + IVA).
-- **A domicilio: 4,95 €** (te cuesta 4,82 € + IVA).
-- **Gratis a partir de 2 prendas.**
+**Decisión:** Correos para todo, **envío incluido en el precio**. En el checkout
+de Shopify, dos opciones a 0 €:
+- **Recoger en oficina o taquilla Correos** (te cuesta 4,03 € + IVA en Free).
+- **A domicilio** (te cuesta 4,82 € + IVA en Free).
 
-Pones de tu bolsillo unos 0,75-1 € por pedido, asumible con ~13 € de margen
-por camiseta. Llevas los paquetes a la oficina de Correos (es más barato que la
-recogida en casa).
+Pon primero la de oficina o taquilla: es la más barata para ti. Llevas los
+paquetes a la oficina de Correos (es más barato que la recogida en casa).
 
 **Plan Plus (25 €/mes) para el mes del drop:** Packlink anuncia Correos
 «desde 2,47 €» (+ IVA) para paquetes de hasta 1 kg, frente a 4,03 € en el plan
 Free: unos 1,56 € menos por envío. **Plus se paga solo a partir de ~16 envíos
 en el mes**, y con 100 envíos ahorrarías unos 130 € netos. Con Plus, el envío
-a oficina pasaría de costarte más de lo que cobras a dejarte margen. Contrátalo cuando cierre la preventa y cancélalo después. Antes de
+a oficina pasaría de costarte más de lo que cobras a dejarte margen. Con el precio Fundador a 21,99 € es imprescindible: contrátalo cuando cierre la preventa, antes de enviar, y cancélalo después. Antes de
 pagar, comprueba en el resumen del pedido si el plan Free añade gastos de
 gestión por envío.
 
@@ -162,7 +166,7 @@ mismo paquete (300 g, península) y quédate con la más barata.
 | -1 | «Mañana abre. La lista entra 24 h antes» (email + Stories) |
 
 ### Fase 2 — Preventa (7 días)
-- **Día 0, solo para la lista:** email con acceso 24 h antes a 25 €.
+- **Día 0, solo para la lista:** email con acceso 24 h antes a 21,99 € con envío incluido.
 - **Día 1, para todo el mundo:** Reel con el diseño completo y Maya puesta.
   El precio Fundador sigue hasta el día 7.
 - **Contador de Fundadores en la web:** «Fundadores: 137». Prueba social y
@@ -176,7 +180,7 @@ mismo paquete (300 g, península) y quédate con la más barata.
   ajústalo con las ventas reales de la preventa).
 - Cuenta el proceso: llega el pedido, estampado, empaquetado con Maya.
   El que ha pagado y espera necesita ver que avanza.
-- Las sobras del colchón se venden después a 29 € como «últimas del Drop 001».
+- Las sobras del colchón se venden después a 26,99 € como «últimas del Drop 001».
 
 ### Fase 4 — Después
 - Repostear las fotos de compradores con Maya.
@@ -213,7 +217,7 @@ un perro concreto**, con nombre, cara e historia:
 |---|---|
 | **Pertenencia e identidad** | Ser del Club dice «yo no cruzo de acera». Es la tribu de quien tiene o defiende un PPP. |
 | **Un perro con nombre, no una causa abstracta** | «Ayuda a Rocky, 4 años esperando» mueve mucho más que «ayuda a las protectoras». |
-| **Ver el progreso** | Barra del mes en la web y en Stories: «Rocky: 312 / 500 € para su operación de cadera». Cada compra la mueve. |
+| **Ver el progreso** | Barra del mes en la web y en Stories: «Rocky: 936 / 1.200 € para su operación de cadera». Cada compra la mueve. |
 | **Participar** | Los miembros votan en Stories al perro del mes siguiente entre 3 candidatos. Lo que eliges lo sientes tuyo. |
 | **Un final que se recuerda** | El vídeo de la graduación cuando lo adoptan. Es el momento que la gente comparte. |
 | **Ver que otros ya están** | Contador público de miembros y de perros graduados. |
@@ -232,9 +236,7 @@ enseña en vídeo. Los del Drop 001 llevan además el sello **Fundador**.
 ### Cómo se entra y cuánto se aporta
 - **Se entra comprando cualquier producto**, y se es miembro para siempre. Sin
   cuotas ni registros.
-- **Aportación por prenda: 2 € recomendado** (o 1 € como mínimo). Con 2 € el
-  titular suena a ayuda real («312 camisetas = 624 € para Rocky»), y el margen
-  baja solo de ~13,75 € a ~12,75 €.
+- **Aportación por prenda: 3 €** (decidido): «312 camisetas = 936 € para Rocky».
 - **Para quien quiera ayudar sin comprar:** enlazar el Teaming o la página de
   donaciones **de la propia protectora**, para que el dinero vaya directo y
   Maya no tenga que recoger donativos. Comprobar antes que la protectora tiene
@@ -256,7 +258,7 @@ más gente quiere entrar → más compras.
 
 ### Pack Fundadores (solo el Drop 001)
 - Licencia del Club con número de Fundador y sello especial.
-- Precio Fundador: 25 € en vez de 29 €.
+- Precio Fundador: 21,99 € con envío incluido en vez de 26,99 €.
 - Acceso 24 h antes a cada drop futuro.
 - Voto doble al elegir el perro del mes.
 - Su nombre o el de su perro en el **Muro de la manada** de la web.
