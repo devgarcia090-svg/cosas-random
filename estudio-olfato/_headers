@@ -28,10 +28,32 @@
 # cabecera aparece dos veces, la respuesta lleva las dos. Por eso
 # `Cache-Control` no está en el bloque `/*` de arriba.
 
-/*.html
-  Cache-Control: no-cache
-
+# Las paginas se sirven sin extension (/para-veterinarias), y /pagina.html
+# redirige a esa. La regla estaba escrita como /*.html, asi que solo casaba
+# con la URL que redirige y las paginas reales caian al valor por defecto de
+# Cloudflare. Se listan las rutas canonicas, que son las que recibe el
+# navegador.
 /
+  Cache-Control: no-cache
+/index.html
+  Cache-Control: no-cache
+/para-veterinarias
+  Cache-Control: no-cache
+/para-tiendas-de-animales
+  Cache-Control: no-cache
+/para-adiestradores
+  Cache-Control: no-cache
+/para-marcas-de-mascotas
+  Cache-Control: no-cache
+/diseno-web-murcia
+  Cache-Control: no-cache
+/cuanto-cuesta-web-clinica-veterinaria
+  Cache-Control: no-cache
+/privacidad
+  Cache-Control: no-cache
+/aviso-legal
+  Cache-Control: no-cache
+/gracias
   Cache-Control: no-cache
 
 /estilo.css
