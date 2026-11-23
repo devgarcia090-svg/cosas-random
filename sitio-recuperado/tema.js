@@ -280,16 +280,21 @@ document.documentElement.classList.add('tjs');
       'to{opacity:.42;box-shadow:0 0 3px 0 var(--c)}}',
 
     /* ── Esquinas ────────────────────────────────────── */
-    '.nv-esq{position:fixed;z-index:1001;pointer-events:none;user-select:none}',
-    '.nv-si{top:0;left:0;width:132px}',
-    '.nv-sd{top:0;right:0;width:118px;transform:scaleX(-1)}',
-    '.nv-id{bottom:0;right:0;width:124px}',
-    '@media (max-width:900px){.nv-si{width:92px}.nv-sd{width:82px}.nv-id{width:86px}}',
+    /* Los SVG estan dibujados para la esquina INFERIOR IZQUIERDA.
+       Para las demas hay que voltearlos, o el borde recto del
+       dibujo queda a la vista en mitad de la pagina.
+       Y van POR DEBAJO del nav (z 900 < 1000): asi asoman por
+       detras en vez de flotar encima del contenido. */
+    '.nv-esq{position:fixed;z-index:900;pointer-events:none;user-select:none;',
+      'width:clamp(56px,8vw,150px);height:auto}',
+    '.nv-si{top:0;left:0;transform:scaleY(-1)}',
+    '.nv-sd{top:0;right:0;transform:scale(-1)}',
+    '.nv-id{bottom:0;right:0;transform:scaleX(-1)}',
     /* En movil los adornos de arriba tapaban la "m" del logo y el
        boton del menu. El movil es el 88% del trafico: el nav tiene
        que estar limpio. Abajo no hay nada que tapar, asi que ahi se
        queda el muneco. */
-    '@media (max-width:700px){.nv-si,.nv-sd{display:none}.nv-id{width:92px}}',
+    '@media (max-width:700px){.nv-si,.nv-sd{display:none}}',
 
     /* ── Nieve ───────────────────────────────────────── */
     '.nv-capa{position:fixed;inset:0;pointer-events:none;z-index:898;overflow:hidden}',
