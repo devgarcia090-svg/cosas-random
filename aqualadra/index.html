@@ -200,9 +200,16 @@
 
     <div class="hero__art reveal reveal-d1">
       <div class="hero__photo">
+        <!-- Foto de temporada. En enero se vuelve a labrador.webp /
+             labrador.jpg (la misma escena sin el gorro, ya está en img/)
+             y se quita "con gorro de Papá Noel" del texto alternativo.
+             Va con nombre propio y no sobrescribiendo labrador.*: las
+             imágenes se sirven con cache-control immutable de un año, así
+             que reutilizar el nombre dejaba a medio mundo viendo la foto
+             vieja hasta 2027. -->
         <picture>
-          <source srcset="img/labrador.webp" type="image/webp">
-          <img src="img/labrador.jpg" alt="Un labrador feliz con gorro de Papá Noel en el local de AquaLadra, junto a la bañera de autolavado" width="772" height="1000" fetchpriority="high">
+          <source srcset="img/labrador-navidad.webp" type="image/webp">
+          <img src="img/labrador-navidad.jpg" alt="Un labrador feliz con gorro de Papá Noel en el local de AquaLadra, junto a la bañera de autolavado" width="772" height="1000" fetchpriority="high">
         </picture>
       </div>
       <div class="hero__badge hero__badge--price">
