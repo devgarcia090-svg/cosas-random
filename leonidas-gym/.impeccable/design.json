@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-11-23T22:50:19+00:00",
+  "generatedAt": "2026-11-23T22:51:40+00:00",
   "title": "Design System: Leonidas Sport Center",
   "extensions": {
     "colorMeta": {
@@ -113,7 +113,7 @@
     "typographyMeta": {
       "display": {
         "displayName": "Woodtype Display",
-        "purpose": "The stacked discipline list of the hero only; lines step down in size and alternate black and red text ink."
+        "purpose": "The stacked discipline bill of the hero only; each line sized in cqi to fill its column exactly (49.4 / 31.3 / 26.2 / 18.5cqi), alternating black and red text ink."
       },
       "headline": {
         "displayName": "Woodtype Headline",
@@ -125,7 +125,7 @@
       },
       "numeral": {
         "displayName": "Slab Numeral",
-        "purpose": "Class times, age ranges, the 2011 year and the presenta billing line."
+        "purpose": "Class times, age ranges, the Desde 2011 block and the hero dateline footer."
       },
       "body": {
         "displayName": "Archivo Body",
@@ -149,11 +149,6 @@
         "name": "double-rule",
         "value": "0 -7px 0 -4px #16110e, 0 7px 0 -4px #16110e",
         "purpose": "Draws the second thin rule of the ribbon double rule; not a depth shadow."
-      },
-      {
-        "name": "stamp-ring",
-        "value": "inset 0 0 0 2px #f3c21c, inset 0 0 0 4px #c8161d",
-        "purpose": "Inner ring of the HOY rubber stamp."
       },
       {
         "name": "lifted-ticket",
@@ -209,7 +204,7 @@
       "refersTo": "ticket",
       "description": "The perforated red ticket for booking a trial class on WhatsApp; the one primary action.",
       "html": "<a class=\"ds-ticket\" href=\"#\"><b>Pide tu clase de prueba</b><small>Escríbenos por WhatsApp y te decimos qué clase te encaja</small><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path fill=\"currentColor\" d=\"M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Z\"/></svg></a>",
-      "css": ".ds-ticket { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 8px 18px; max-width: 520px; padding: 16px 20px; background: var(--rojo); color: var(--crema); text-decoration: none; border: 2px dashed var(--crema); outline: 5px solid var(--rojo); border-radius: 0; transition: background .15s, outline-color .15s, transform .15s; } .ds-ticket b { font: 900 clamp(1.7rem, 5vw, 2.3rem)/.95 var(--madera); text-transform: uppercase; letter-spacing: .01em; } .ds-ticket small { grid-column: 1; font: 600 1rem/1.2 var(--texto); } .ds-ticket svg { grid-row: 1 / 3; grid-column: 2; width: 44px; height: 44px; } .ds-ticket:hover { background: var(--rojo-osc); outline-color: var(--rojo-osc); } .ds-ticket:active { transform: translateY(1px); } .ds-ticket:focus-visible { outline: 3px solid var(--tinta); outline-offset: 3px; }"
+      "css": ".ds-ticket { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 8px 18px; max-width: 520px; padding: 16px 20px; background: var(--rojo); color: var(--crema); text-decoration: none; border: 2px dashed var(--crema); outline: 5px solid var(--rojo); border-radius: 0; transition: background .15s, outline-color .15s, transform .15s; } .ds-ticket b { font: 900 clamp(1.7rem, 3vw, 2.3rem)/.95 var(--madera); text-transform: uppercase; letter-spacing: .01em; } .ds-ticket small { grid-column: 1; font: 600 1rem/1.3 var(--texto); } .ds-ticket svg { grid-row: 1 / 3; grid-column: 2; width: 44px; height: 44px; } .ds-ticket:hover { background: var(--rojo-osc); outline-color: var(--rojo-osc); } .ds-ticket:active { transform: translateY(1px); } .ds-ticket:focus-visible { outline: 3px solid var(--tinta); outline-offset: 3px; }"
     },
     {
       "name": "Outline Button",
@@ -241,13 +236,20 @@
       "refersTo": "programme-header",
       "description": "A timetable programme: ruled frame, black header, folded-yellow sub-band, class rows, and the rubber stamp on today.",
       "html": "<article class=\"ds-prog\"><h3>Lunes y miércoles</h3><div class=\"ds-tramo\">Tarde</div><div class=\"ds-row\"><time>17:30 – 18:30</time><b>Jiu-Jitsu Infantil</b><span class=\"ds-tag ds-tag-ninos\">Niños</span></div><div class=\"ds-row\"><time>21:00 – 22:00</time><b>Boxeo Senior</b><span class=\"ds-tag\">Adultos</span></div><span class=\"ds-sello\">Hoy</span></article>",
-      "css": ".ds-prog { position: relative; max-width: 560px; border: 3px solid var(--tinta); background: var(--papel); color: var(--tinta); } .ds-prog h3 { margin: 0; background: var(--tinta); color: var(--papel); padding: 12px 18px 10px; font: 900 clamp(1.6rem, 4vw, 2.2rem)/1 var(--madera); text-transform: uppercase; letter-spacing: .04em; } .ds-tramo { padding: 8px 18px 6px; background: var(--papel-osc); font: 800 .85rem/1 var(--madera); letter-spacing: .2em; text-transform: uppercase; } .ds-row { display: grid; grid-template-columns: auto 1fr auto; align-items: baseline; gap: 4px 16px; padding: 14px 18px; border-top: 2px solid var(--tinta); } .ds-row time { font: 400 1.2rem/1 var(--slab); font-variant-numeric: tabular-nums; white-space: nowrap; } .ds-row b { font: 800 1.6rem/1 var(--madera); text-transform: uppercase; letter-spacing: .01em; } .ds-tag { font: 800 .82rem/1 var(--madera); letter-spacing: .14em; text-transform: uppercase; padding: 6px 8px 5px; border: 2px solid var(--tinta); white-space: nowrap; } .ds-tag-ninos { background: var(--rojo); border-color: var(--rojo); color: var(--crema); } .ds-sello { position: absolute; top: -18px; right: 14px; font: 900 2.2rem/1 var(--madera); letter-spacing: .1em; text-transform: uppercase; color: var(--rojo); border: 4px solid var(--rojo); padding: 6px 12px 4px; background: rgba(243,194,28,.85); transform: rotate(-9deg); box-shadow: inset 0 0 0 2px var(--papel), inset 0 0 0 4px var(--rojo); animation: ds-golpe .42s cubic-bezier(.16, 1, .3, 1) both; } @keyframes ds-golpe { from { transform: rotate(-16deg) scale(2.4); opacity: 0; filter: blur(6px); } 60% { opacity: 1; } to { transform: rotate(-9deg) scale(1); opacity: 1; filter: blur(0); } } @media (prefers-reduced-motion: reduce) { .ds-sello { animation: none; } }"
+      "css": ".ds-prog { position: relative; max-width: 560px; border: 3px solid var(--tinta); background: var(--papel); color: var(--tinta); } .ds-prog h3 { margin: 0; background: var(--tinta); color: var(--papel); padding: 12px 18px 10px; font: 900 clamp(1.6rem, 4vw, 2.2rem)/1 var(--madera); text-transform: uppercase; letter-spacing: .04em; } .ds-tramo { padding: 8px 18px 6px; background: var(--papel-osc); font: 800 .85rem/1 var(--madera); letter-spacing: .2em; text-transform: uppercase; } .ds-row { display: grid; grid-template-columns: auto 1fr auto; align-items: baseline; gap: 4px 16px; padding: 14px 18px; border-top: 2px solid var(--tinta); } .ds-row time { font: 400 1.2rem/1 var(--slab); font-variant-numeric: tabular-nums; white-space: nowrap; } .ds-row b { font: 800 1.6rem/1 var(--madera); text-transform: uppercase; letter-spacing: .01em; } .ds-tag { font: 800 .82rem/1 var(--madera); letter-spacing: .14em; text-transform: uppercase; padding: 6px 8px 5px; border: 2px solid var(--tinta); white-space: nowrap; } .ds-tag-ninos { background: var(--rojo); border-color: var(--rojo); color: var(--crema); } .ds-sello { position: absolute; top: -20px; right: 14px; font: 900 2.4rem/1 var(--madera); letter-spacing: .12em; text-transform: uppercase; color: var(--rojo); border: 5px solid var(--rojo); padding: 4px 12px 2px; mix-blend-mode: multiply; transform: rotate(-9deg); animation: ds-golpe .42s cubic-bezier(.16, 1, .3, 1) both; } @keyframes ds-golpe { from { transform: rotate(-16deg) scale(2.4); opacity: 0; filter: blur(6px); } 60% { opacity: 1; } to { transform: rotate(-9deg) scale(1); opacity: 1; filter: blur(0); } } @media (prefers-reduced-motion: reduce) { .ds-sello { animation: none; } }"
+    },
+    {
+      "name": "Audience List",
+      "kind": "custom",
+      "description": "Hero side-column list of who the club is for: woodtype caps, red star, 3px ink rules.",
+      "html": "<ul class=\"ds-publico\"><li><svg class=\"ds-star\" viewBox=\"0 0 24 24\"><path d=\"M12 1.5l3.1 7 7.4.6-5.6 4.9 1.7 7.4L12 17.5l-6.6 3.9 1.7-7.4L1.5 9.1l7.4-.6z\"/></svg> Adultos</li><li><svg class=\"ds-star\" viewBox=\"0 0 24 24\"><path d=\"M12 1.5l3.1 7 7.4.6-5.6 4.9 1.7 7.4L12 17.5l-6.6 3.9 1.7-7.4L1.5 9.1l7.4-.6z\"/></svg> Niños por edades</li><li><svg class=\"ds-star\" viewBox=\"0 0 24 24\"><path d=\"M12 1.5l3.1 7 7.4.6-5.6 4.9 1.7 7.4L12 17.5l-6.6 3.9 1.7-7.4L1.5 9.1l7.4-.6z\"/></svg> Todos los niveles</li></ul><p class=\"ds-pie-cartel\"><span>Santomera</span> <em>·</em> <span>De lunes a viernes</span> <em>·</em> <span>Desde 2011</span></p>",
+      "css": ".ds-publico { list-style: none; margin: 0; padding: 0; max-width: 420px; color: var(--tinta); border-top: 3px solid var(--tinta); font: 800 clamp(1.2rem, 2.4vw, 1.6rem)/1 var(--madera); text-transform: uppercase; letter-spacing: .06em; } .ds-publico li { display: flex; align-items: center; gap: .5em; padding: 10px 0; border-bottom: 3px solid var(--tinta); } .ds-star { width: .8em; height: .8em; fill: var(--rojo); flex: none; } .ds-pie-cartel { margin: 22px 0 0; font: 400 clamp(1rem, 2vw, 1.2rem)/1.3 var(--slab); color: var(--tinta); } .ds-pie-cartel em { font-style: normal; color: var(--rojo-texto); } .ds-pie-cartel span { white-space: nowrap; }"
     },
     {
       "name": "Ribbon (cinta)",
       "kind": "custom",
-      "description": "Full-width tracked woodtype band between printed double rules, with red stars between phrases.",
-      "html": "<div class=\"ds-cinta\"><svg class=\"ds-star\" viewBox=\"0 0 24 24\"><path d=\"M12 1.5l3.1 7 7.4.6-5.6 4.9 1.7 7.4L12 17.5l-6.6 3.9 1.7-7.4L1.5 9.1l7.4-.6z\"/></svg> Santomera <svg class=\"ds-star\" viewBox=\"0 0 24 24\"><path d=\"M12 1.5l3.1 7 7.4.6-5.6 4.9 1.7 7.4L12 17.5l-6.6 3.9 1.7-7.4L1.5 9.1l7.4-.6z\"/></svg> Desde 2011 <svg class=\"ds-star\" viewBox=\"0 0 24 24\"><path d=\"M12 1.5l3.1 7 7.4.6-5.6 4.9 1.7 7.4L12 17.5l-6.6 3.9 1.7-7.4L1.5 9.1l7.4-.6z\"/></svg> Fuerza y respeto <svg class=\"ds-star\" viewBox=\"0 0 24 24\"><path d=\"M12 1.5l3.1 7 7.4.6-5.6 4.9 1.7 7.4L12 17.5l-6.6 3.9 1.7-7.4L1.5 9.1l7.4-.6z\"/></svg></div>",
+      "description": "Full-width tracked woodtype band between printed double rules, with red stars; it carries the billing line that opens the sheet.",
+      "html": "<div class=\"ds-cinta\"><svg class=\"ds-star\" viewBox=\"0 0 24 24\"><path d=\"M12 1.5l3.1 7 7.4.6-5.6 4.9 1.7 7.4L12 17.5l-6.6 3.9 1.7-7.4L1.5 9.1l7.4-.6z\"/></svg> Leonidas Sport Center presenta <svg class=\"ds-star\" viewBox=\"0 0 24 24\"><path d=\"M12 1.5l3.1 7 7.4.6-5.6 4.9 1.7 7.4L12 17.5l-6.6 3.9 1.7-7.4L1.5 9.1l7.4-.6z\"/></svg></div>",
       "css": ".ds-cinta { display: flex; align-items: center; justify-content: center; gap: .9em; flex-wrap: wrap; padding: 9px 0; margin: 14px 0; color: var(--tinta); border-top: 3px solid var(--tinta); border-bottom: 3px solid var(--tinta); box-shadow: 0 -7px 0 -4px var(--tinta), 0 7px 0 -4px var(--tinta); font: 800 1.1rem/1 var(--madera); letter-spacing: .2em; text-transform: uppercase; } .ds-star { width: .8em; height: .8em; fill: var(--rojo); flex: none; }"
     },
     {
@@ -255,16 +257,16 @@
       "kind": "custom",
       "description": "Box-office facts as ruled term/value rows; missing facts carry the dashed pending marker.",
       "html": "<dl class=\"ds-datos\"><div><dt>Teléfono</dt><dd><span class=\"ds-falta\">Teléfono pendiente</span></dd></div><div><dt>Prueba</dt><dd>Pregúntanos por la clase de prueba</dd></div></dl>",
-      "css": ".ds-datos { margin: 0; max-width: 520px; border-top: 3px solid var(--tinta); color: var(--tinta); } .ds-datos div { display: grid; grid-template-columns: 120px 1fr; gap: 12px; padding: 14px 0; border-bottom: 3px solid var(--tinta); align-items: baseline; } .ds-datos dt { font: 800 .95rem/1 var(--madera); letter-spacing: .16em; text-transform: uppercase; } .ds-datos dd { margin: 0; font: 400 1.1rem/1.55 var(--texto); } .ds-falta { outline: 2px dashed currentColor; outline-offset: 2px; padding: 0 .25em; }"
+      "css": ".ds-datos { margin: 0; max-width: 520px; border-top: 3px solid var(--tinta); color: var(--tinta); } .ds-datos div { display: grid; grid-template-columns: 120px 1fr; gap: 12px; padding: 14px 0; border-bottom: 3px solid var(--tinta); align-items: baseline; } .ds-datos dt { font: 800 .95rem/1 var(--madera); letter-spacing: .16em; text-transform: uppercase; } .ds-datos dd { margin: 0; font: 400 1.1rem/1.55 var(--texto); } .ds-falta { border: 2px dashed currentColor; padding: 0 .3em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }"
     }
   ],
   "narrative": {
     "northStar": "The Fight Bill",
-    "overview": "**Creative North Star: \"The Fight Bill\"**\n\nThe whole site is one printed cartel de velada, read top to bottom like a bill: who presents, the main event, the undercard, the venue, the box office. The ground is saturated yellow poster stock and everything on it is ink: black and red, letterpress-flat, with no gradients, no glass and no glow. Full-width colour bands (black, red) cut the sheet the way a printer splits a poster into tiers, and heavy condensed woodtype fills the width edge to edge.\n\nDensity is poster density: very large type, few words per line, rules and borders doing the structural work that cards and shadows do elsewhere. Photography appears only as a one-ink halftone sitting on a red band. Ornament is limited to five-point stars and double printed rules, both drawn as vector ink. The world deliberately rejects the dark-gym template: a black ground with a red accent, gritty texture, and a hero photo under a dark overlay.",
+    "overview": "**Creative North Star: \"The Fight Bill\"**\n\nThe whole site is one printed cartel de velada, read top to bottom like a bill: who presents, the main event, the undercard, the venue, the box office. The ground is saturated yellow poster stock and everything on it is ink: black and red, letterpress-flat, with no gradients, no glass and no glow. Full-width colour bands (black, red) cut the sheet the way a printer splits a poster into tiers, and heavy condensed woodtype fills the width edge to edge.\n\nDensity is poster density: very large type, few words per line, rules and borders doing the structural work that cards and shadows do elsewhere. Photography appears only as a one-ink halftone printed on a full-bleed red band that runs under the sheet. Ornament is limited to five-point stars and double printed rules, both drawn as vector ink. The world deliberately rejects the dark-gym template: a black ground with a red accent, gritty texture, and a hero photo under a dark overlay.",
     "keyCharacteristics": [
       "Yellow paper field (`papel`) as the dominant surface; black and red as the only inks.",
-      "Condensed woodtype (Big Shoulders Display, 900) set uppercase and stacked at full width.",
-      "Slab numerals (Alfa Slab One) for times, years and age ranges.",
+      "Condensed woodtype (Big Shoulders Display, 900) set uppercase, one discipline per line, each line fitted to the column width.",
+      "Slab numerals (Alfa Slab One) for times, years, age ranges and the bill's dateline.",
       "Square corners everywhere; structure comes from 2-6px ink rules and solid colour bands.",
       "One-ink halftone photography; no colour photos.",
       "A single animated moment: the red \"HOY\" stamp landing on today's programme."
@@ -287,12 +289,12 @@
       },
       {
         "name": "The Numbers Are Slab Rule",
-        "body": "Times, years and ages are set in Alfa Slab One. Slab is not used for words except the one \"presenta\" billing line.",
+        "body": "Times, years, ages and the bill's dateline are set in Alfa Slab One. Slab never carries a heading or a paragraph.",
         "section": "typography"
       },
       {
         "name": "The Printed Plane Rule",
-        "body": "Nothing on the sheet casts a shadow. The only lifted object is the fixed mobile ticket, because it is literally above the page.",
+        "body": "Nothing on the sheet casts a shadow. Overprinted ink (the HOY stamp, the map) uses `mix-blend-mode: multiply` so it sits in the paper, not on it. The only lifted object is the fixed mobile ticket, because it is literally above the page.",
         "section": "elevation"
       }
     ],

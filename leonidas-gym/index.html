@@ -14,6 +14,7 @@
   "name": "Leonidas Sport Center",
   "description": "Club de boxeo, jiu-jitsu, kickboxing y full contact en Santomera desde 2011.",
   "foundingDate": "2011",
+  "telephone": "+34 652 97 65 44",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "C. Fernando el Católico, 2",
@@ -144,7 +145,10 @@
   .foto-pie .wrap { display: flex; justify-content: space-between; gap: 12px; padding-top: 12px; padding-bottom: 12px; }
   .foto-pie span:last-child { color: var(--oro); }
   @media (max-width: 900px) {
-    .cartel-grid { grid-template-columns: 1fr; gap: 22px; }
+    .cartel-grid { grid-template-columns: 1fr; gap: 16px; padding-bottom: 22px; }
+    .publico { display: flex; flex-wrap: wrap; gap: .3em 1em; border: 0; font-size: 1.15rem; }
+    .publico li { padding: 0; border: 0; gap: .35em; }
+    .pie-cartel { font-size: .95rem; }
     .foto-banda { height: auto; aspect-ratio: 4 / 4.4; }
     .foto-banda img { object-position: 72% 22%; }
   }
@@ -180,8 +184,9 @@
 
   /* Sello HOY: tinta roja que sobreimprime el cartel; el único momento animado */
   .sello {
-    position: absolute; top: -20px; right: 14px; z-index: 2;
+    position: absolute; top: -46px; right: 14px; z-index: 2; /* sobre el papel, encima de la caja */
     font: 900 2.4rem/1 var(--madera); letter-spacing: .12em; color: var(--rojo);
+    text-transform: uppercase;
     border: 5px solid var(--rojo); padding: 4px 12px 2px;
     mix-blend-mode: multiply; transform: rotate(-9deg);
   }
@@ -391,8 +396,8 @@
 <script>
   // ── Datos del club: rellenar cuando los tengamos ──
   const CONTACTO = {
-    whatsapp: "",   // solo números con prefijo, p. ej. "34600123456"
-    telefono: "",   // como se muestra, p. ej. "600 123 456"
+    whatsapp: "34652976544",   // solo números con prefijo
+    telefono: "652 97 65 44",  // como se muestra
     instagram: ""   // usuario sin @, p. ej. "leonidassportcenter"
   };
 
