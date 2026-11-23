@@ -242,12 +242,16 @@ document.documentElement.classList.add('tjs');
 })();
 
 /* ══ CAPA DE NAVIDAD ══════════════════════════════════
-   Guirnalda de luces colgando bajo el nav y nieve cayendo.
-   Se apaga sola al pasar FIN. Para matarla antes: APAGADA = true.
+   Guirnalda de luces bajo el nav, adornos en las esquinas y
+   nieve cayendo. Se apaga sola al pasar FIN.
+   Para matarla antes: APAGADA = true.
 
-   La guirnalda va FIJA pero por debajo del nav en z-index y sin
-   tocarlo: el nav sigue siendo el mismo sticky de siempre, que es
-   donde estaban todos los problemas en Safari de iPhone.       */
+   Los SVG de las esquinas son de zooasis.org, cedidos por la
+   agencia que lleva esa web (permiso de 23-nov-2026).
+
+   El nav NO se toca: la guirnalda es un elemento aparte y los
+   adornos van por encima solo en las esquinas. Toda la historia
+   de fallos en Safari de iPhone venia de tocar el nav.        */
 (function () {
   var APAGADA = false;
   var FIN = new Date('2027-01-07T23:59:59');
@@ -257,38 +261,41 @@ document.documentElement.classList.add('tjs');
                matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   var CSS = [
-    /* ── Guirnalda ── */
-    '.nv-g{position:fixed;left:0;right:0;top:var(--alto-nav,76px);height:34px;',
-      'z-index:899;pointer-events:none;display:flex;justify-content:space-between;',
-      'align-items:flex-start;padding:0 14px}',
-    '.nv-g::before{content:"";position:absolute;left:0;right:0;top:3px;height:2px;',
-      'background:linear-gradient(90deg,#4A3A2A,#6B5540,#4A3A2A);opacity:.85}',
-    '.nv-b{position:relative;width:11px;height:11px;border-radius:50%;',
-      'background:var(--c);margin-top:var(--cuelga);flex:0 0 auto;',
-      'box-shadow:0 0 10px 2px var(--c),0 0 22px 6px var(--c)}',
-    /* cordoncito que une la bombilla con el cable */
-    '.nv-b::before{content:"";position:absolute;left:50%;bottom:100%;',
-      'width:2px;height:var(--cuelga);background:#6B5540;transform:translateX(-50%)}',
+    /* ── Guirnalda ───────────────────────────────────── */
+    '.nv-g{position:fixed;left:0;right:0;top:var(--alto-nav,76px);height:52px;',
+      'z-index:899;pointer-events:none}',
+    '.nv-g .cable{position:absolute;inset:0 0 auto 0;width:100%;height:30px;overflow:visible}',
+    /* Bombilla: ovalo con el culo mas ancho, brillo arriba a la
+       izquierda y casquillo dorado. El giro cuelga del casquillo,
+       no del centro, para que parezca colgada del cable. */
+    '.nv-luz{position:absolute;top:var(--y);left:var(--x);width:13px;height:19px;',
+      'margin-left:-6.5px;border-radius:50% 50% 50% 50% / 58% 58% 42% 42%;',
+      'background:radial-gradient(circle at 34% 28%,rgba(255,255,255,.8),transparent 46%),var(--c);',
+      'box-shadow:0 0 12px 3px var(--c);transform:rotate(var(--g));transform-origin:50% -5px}',
+    '.nv-luz::before{content:"";position:absolute;left:3px;top:-5px;width:7px;height:6px;',
+      'border-radius:2px;background:linear-gradient(#E9C46A,#A0761C)}',
     quieto ? '' :
-      '.nv-b{animation:nvLuz 3.4s ease-in-out infinite;animation-delay:var(--t)}',
-    '@keyframes nvLuz{0%,100%{opacity:1}50%{opacity:.38}}',
-    '@media (max-width:700px){.nv-g{height:26px;padding:0 8px}',
-      '.nv-b{width:9px;height:9px}}',
+      '.nv-luz{animation:nvLuz var(--dur) ease-in-out var(--r) infinite alternate}',
+    '@keyframes nvLuz{from{opacity:1;box-shadow:0 0 15px 4px var(--c)}',
+      'to{opacity:.42;box-shadow:0 0 3px 0 var(--c)}}',
 
-    /* ── Nieve ── */
+    /* ── Esquinas ────────────────────────────────────── */
+    '.nv-esq{position:fixed;z-index:1001;pointer-events:none;user-select:none}',
+    '.nv-si{top:0;left:0;width:132px}',
+    '.nv-sd{top:0;right:0;width:118px;transform:scaleX(-1)}',
+    '.nv-id{bottom:0;right:0;width:124px}',
+    '@media (max-width:900px){.nv-si{width:88px}.nv-sd{width:78px}.nv-id{width:84px}}',
+    '@media (max-width:480px){.nv-si{width:70px}.nv-sd{width:62px}.nv-id{display:none}}',
+
+    /* ── Nieve ───────────────────────────────────────── */
     '.nv-capa{position:fixed;inset:0;pointer-events:none;z-index:898;overflow:hidden}',
     '.nv-c{position:absolute;top:-30px;will-change:transform,opacity;opacity:0}',
-    quieto ? '.nv-c{display:none}' :
-      '.nv-c{animation:nvCae linear infinite}',
-    '@keyframes nvCae{',
-      '0%{transform:translate(0,0) rotate(0deg);opacity:0}',
-      '8%{opacity:var(--op)}',
-      '92%{opacity:var(--op)}',
+    quieto ? '.nv-c{display:none}' : '.nv-c{animation:nvCae linear infinite}',
+    '@keyframes nvCae{0%{transform:translate(0,0) rotate(0deg);opacity:0}',
+      '8%{opacity:var(--op)}92%{opacity:var(--op)}',
       '100%{transform:translate(var(--deriva),104vh) rotate(260deg);opacity:0}}'
   ].join('');
 
-  // Copo de nieve: tres ejes cruzados con sus ramitas. Geometria
-  // simple a proposito, que es lo que me sale bien.
   function copo(px) {
     var r = '';
     for (var a = 0; a < 180; a += 60) {
@@ -297,15 +304,42 @@ document.documentElement.classList.add('tjs');
              '<line x1="12" y1="6"  x2="8.5"  y2="9"/>' +
              '<line x1="12" y1="6"  x2="15.5" y2="9"/>' +
              '<line x1="12" y1="18" x2="8.5"  y2="15"/>' +
-             '<line x1="12" y1="18" x2="15.5" y2="15"/>' +
-           '</g>';
+             '<line x1="12" y1="18" x2="15.5" y2="15"/></g>';
     }
-    return '<svg width="' + px + '" height="' + px + '" viewBox="0 0 24 24" ' +
-           'fill="none" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round" ' +
-           'aria-hidden="true">' + r + '</svg>';
+    return '<svg width="' + px + '" height="' + px + '" viewBox="0 0 24 24" fill="none" ' +
+           'stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">' +
+           r + '</svg>';
   }
 
-  var COLORES = ['#E8B04B', '#C0392B', '#F2EDE6', '#C8722A'];
+  // Rojo, dorado, crema, fuego y verde: los de la marca mas los dos
+  // clasicos que pegan con el acebo de las esquinas.
+  var COLORES = ['#D33A2C', '#E8B04B', '#F2EDE6', '#C8722A', '#2E8B57'];
+
+  function pintaGuirnalda(g) {
+    var w = g.clientWidth || window.innerWidth;
+    var paso = window.innerWidth < 900 ? 54 : 72;
+    var curvas = Math.max(4, Math.round(w / paso));
+    var ancho = w / curvas;
+    var d = 'M0 3';
+    g.innerHTML = '';
+    for (var i = 0; i < curvas; i++) {
+      var x0 = i * ancho;
+      // Cada tramo hace una curva que baja y vuelve a subir.
+      d += 'Q' + (x0 + ancho / 2).toFixed(1) + ' 27 ' + (x0 + ancho).toFixed(1) + ' 3';
+      var b = document.createElement('span');
+      b.className = 'nv-luz';
+      b.style.cssText =
+        '--x:' + (x0 + ancho / 2).toFixed(1) + 'px;--y:19px;' +
+        '--c:' + COLORES[i % COLORES.length] + ';' +
+        '--r:' + (-(Math.random() * 2.2)).toFixed(2) + 's;' +
+        '--dur:' + (1.1 + Math.random() * 1.1).toFixed(2) + 's;' +
+        '--g:' + (Math.random() * 18 - 9).toFixed(0) + 'deg';
+      g.appendChild(b);
+    }
+    g.insertAdjacentHTML('afterbegin',
+      '<svg class="cable" viewBox="0 0 ' + w + ' 30" preserveAspectRatio="none">' +
+      '<path d="' + d + '" fill="none" stroke="#1E5C3A" stroke-width="2.5" stroke-linecap="round"/></svg>');
+  }
 
   function arranca() {
     var e = document.createElement('style'); e.textContent = CSS;
@@ -315,31 +349,34 @@ document.documentElement.classList.add('tjs');
     var g = document.createElement('div');
     g.className = 'nv-g';
     g.setAttribute('aria-hidden', 'true');
-    var ancho = window.innerWidth;
-    var cuantasLuces = Math.max(8, Math.round(ancho / 46));
-    for (var j = 0; j < cuantasLuces; j++) {
-      var b = document.createElement('span');
-      b.className = 'nv-b';
-      b.style.setProperty('--c', COLORES[j % COLORES.length]);
-      // Las bombillas cuelgan a distinta altura: hace el efecto de
-      // cable descolgado sin tener que dibujar una curva.
-      b.style.setProperty('--cuelga', (j % 2 ? 15 : 7) + 'px');
-      b.style.setProperty('--t', (j * 0.17).toFixed(2) + 's');
-      g.appendChild(b);
-    }
     document.body.appendChild(g);
+    pintaGuirnalda(g);
+    var t;
+    window.addEventListener('resize', function () {
+      clearTimeout(t); t = setTimeout(function () { pintaGuirnalda(g); }, 200);
+    });
+
+    // ── Esquinas ──
+    [['nv-si', 'corner-13'], ['nv-sd', 'corner-10'], ['nv-id', 'decoration-25']]
+      .forEach(function (par) {
+        var img = document.createElement('img');
+        img.className = 'nv-esq ' + par[0];
+        img.src = 'img/navidad/' + par[1] + '.svg';
+        img.alt = '';
+        img.setAttribute('aria-hidden', 'true');
+        document.body.appendChild(img);
+      });
 
     // ── Nieve ──
     if (quieto) return;
     var capa = document.createElement('div');
     capa.className = 'nv-capa';
     capa.setAttribute('aria-hidden', 'true');
-    var cuantos = ancho < 700 ? 18 : 34;
+    var cuantos = window.innerWidth < 700 ? 18 : 34;
     for (var i = 0; i < cuantos; i++) {
       var c = document.createElement('div');
       c.className = 'nv-c';
-      var px = (9 + Math.random() * 11).toFixed(0);   // 9 a 20 px
-      c.innerHTML = copo(px);
+      c.innerHTML = copo((9 + Math.random() * 11).toFixed(0));
       c.style.left = (Math.random() * 100).toFixed(1) + '%';
       c.style.setProperty('--deriva', (Math.random() * 140 - 70).toFixed(0) + 'px');
       c.style.setProperty('--op', (0.45 + Math.random() * 0.45).toFixed(2));
