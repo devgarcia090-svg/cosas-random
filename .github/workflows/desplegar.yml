@@ -1,0 +1,65 @@
+# Despliega mayarottweiler.com en Cloudflare al subir cambios.
+#
+# Por qué esto y no que Claude despliegue desde su sesión: el token
+# vive solo aquí, en los secretos del repositorio, y no pasa por
+# ninguna conversación. Además así se despliega aunque no haya nadie
+# delante.
+#
+# PARA ACTIVARLO (una vez):
+#   1. En Cloudflare, My Profile -> API Tokens -> Create Token,
+#      plantilla "Edit Cloudflare Workers".
+#   2. En GitHub: Settings -> Secrets and variables -> Actions ->
+#      New repository secret, con nombre CLOUDFLARE_API_TOKEN.
+#   3. Listo. Cada push que toque la web la publica.
+#
+# Si falta el secreto, el trabajo se salta con un aviso en vez de
+# fallar, para no llenarte el correo de errores rojos.
+
+name: Desplegar la web
+
+on:
+  push:
+    branches:
+      - claude/cloudflare-deploy-recovery-8suhww
+    paths:
+      - 'sitio-recuperado/**'
+      - 'src/**'
+      - 'wrangler.jsonc'
+      - '.github/workflows/desplegar.yml'
+  workflow_dispatch:          # botón para lanzarlo a mano
+
+jobs:
+  desplegar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Comprobar que hay token
+        id: token
+        run: |
+          if [ -z "${{ secrets.CLOUDFLARE_API_TOKEN }}" ]; then
+            echo "hay=no" >> "$GITHUB_OUTPUT"
+            echo "::warning::Falta el secreto CLOUDFLARE_API_TOKEN. Mira las instrucciones al principio de este archivo."
+          else
+            echo "hay=si" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Publicar en Cloudflare
+        if: steps.token.outputs.hay == 'si'
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+
+      - name: Comprobar que la web responde
+        if: steps.token.outputs.hay == 'si'
+        run: |
+          sleep 15
+          for url in "" guias requisitos-rottweiler-espana; do
+            codigo=$(curl -s -o /dev/null -w "%{http_code}" "https://mayarottweiler.com/$url")
+            echo "/$url -> $codigo"
+            [ "$codigo" = "200" ] || exit 1
+          done
+          # La tienda debe seguir pidiendo contraseña.
+          codigo=$(curl -s -o /dev/null -w "%{http_code}" "https://mayarottweiler.com/tienda")
+          echo "/tienda -> $codigo (debe ser 401)"
+          [ "$codigo" = "401" ] || exit 1
