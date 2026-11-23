@@ -1,0 +1,317 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-23T22:50:19+00:00",
+  "title": "Design System: Leonidas Sport Center",
+  "extensions": {
+    "colorMeta": {
+      "papel": {
+        "role": "neutral",
+        "displayName": "Poster Yellow",
+        "canonical": "oklch(83.4% 0.166 89.6)",
+        "tonalRamp": [
+          "#100a00",
+          "#312501",
+          "#554204",
+          "#7d6209",
+          "#a78410",
+          "#d3a817",
+          "#facb38",
+          "#f9eed1"
+        ]
+      },
+      "papel-osc": {
+        "role": "neutral",
+        "displayName": "Folded Yellow",
+        "canonical": "oklch(77.7% 0.157 86.6)",
+        "tonalRamp": [
+          "#120900",
+          "#332400",
+          "#594100",
+          "#816100",
+          "#ab8200",
+          "#d8a609",
+          "#f9ca56",
+          "#faedd1"
+        ]
+      },
+      "tinta": {
+        "role": "neutral",
+        "displayName": "Woodtype Black",
+        "canonical": "oklch(18.3% 0.010 52.8)",
+        "tonalRamp": [
+          "#0f0a08",
+          "#2a2522",
+          "#494441",
+          "#696563",
+          "#8c8886",
+          "#b0adac",
+          "#d2d0d0",
+          "#efeeed"
+        ]
+      },
+      "rojo": {
+        "role": "primary",
+        "displayName": "Bill Red",
+        "canonical": "oklch(53.1% 0.206 26.9)",
+        "tonalRamp": [
+          "#190403",
+          "#590000",
+          "#8a0000",
+          "#bf0f19",
+          "#e25149",
+          "#ff8478",
+          "#ffb0a5",
+          "#ffe5e0"
+        ]
+      },
+      "rojo-osc": {
+        "role": "primary",
+        "displayName": "Pressed Red",
+        "canonical": "oklch(44.6% 0.173 26.8)",
+        "tonalRamp": [
+          "#190403",
+          "#570000",
+          "#870008",
+          "#af342f",
+          "#ce655c",
+          "#ec9288",
+          "#ffbbb2",
+          "#ffe5e0"
+        ]
+      },
+      "rojo-texto": {
+        "role": "primary",
+        "displayName": "Red Text Ink",
+        "canonical": "oklch(45.5% 0.178 26.9)",
+        "tonalRamp": [
+          "#190403",
+          "#580000",
+          "#880006",
+          "#b2312c",
+          "#d16359",
+          "#ee9186",
+          "#ffbab1",
+          "#ffe5e0"
+        ]
+      },
+      "crema": {
+        "role": "neutral",
+        "displayName": "Paper Cream",
+        "canonical": "oklch(96.8% 0.043 91.3)",
+        "tonalRamp": [
+          "#0c0b08",
+          "#282623",
+          "#48453d",
+          "#6a665a",
+          "#8f8978",
+          "#b5ae97",
+          "#dad1b6",
+          "#f8eed1"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Woodtype Display",
+        "purpose": "The stacked discipline list of the hero only; lines step down in size and alternate black and red text ink."
+      },
+      "headline": {
+        "displayName": "Woodtype Headline",
+        "purpose": "Section titles, second word in red text ink."
+      },
+      "title": {
+        "displayName": "Woodtype Title",
+        "purpose": "Programme headers and kids group names."
+      },
+      "numeral": {
+        "displayName": "Slab Numeral",
+        "purpose": "Class times, age ranges, the 2011 year and the presenta billing line."
+      },
+      "body": {
+        "displayName": "Archivo Body",
+        "purpose": "Explanatory sentences, 52-58ch."
+      },
+      "body-lead": {
+        "displayName": "Archivo Lead",
+        "purpose": "Section intros, club paragraphs, data-list values."
+      },
+      "body-small": {
+        "displayName": "Archivo Small",
+        "purpose": "Ticket subline (at 600) and kids group schedules."
+      },
+      "label": {
+        "displayName": "Woodtype Label",
+        "purpose": "Tags, sub-bands, nav, ribbon, data terms, footer; uppercase and tracked."
+      }
+    },
+    "shadows": [
+      {
+        "name": "double-rule",
+        "value": "0 -7px 0 -4px #16110e, 0 7px 0 -4px #16110e",
+        "purpose": "Draws the second thin rule of the ribbon double rule; not a depth shadow."
+      },
+      {
+        "name": "stamp-ring",
+        "value": "inset 0 0 0 2px #f3c21c, inset 0 0 0 4px #c8161d",
+        "purpose": "Inner ring of the HOY rubber stamp."
+      },
+      {
+        "name": "lifted-ticket",
+        "value": "0 10px 28px rgba(22,17,14,.45)",
+        "purpose": "Only true shadow; the fixed mobile ticket floating over content."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ink-impact",
+        "value": "cubic-bezier(.16, 1, .3, 1)",
+        "purpose": "Easing for the HOY stamp landing and the fixed ticket slide-in."
+      },
+      {
+        "name": "stamp-landing",
+        "value": "420ms",
+        "purpose": "HOY stamp: scale 2.4 to 1, rotate -16deg to -9deg, blur 6px clearing; once, when the timetable enters view."
+      },
+      {
+        "name": "ticket-slide",
+        "value": "350ms",
+        "purpose": "Fixed mobile ticket entering from below."
+      },
+      {
+        "name": "state",
+        "value": "150ms",
+        "purpose": "Hover colour and outline changes on tickets and buttons."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "xs",
+        "value": "380px"
+      },
+      {
+        "name": "sm",
+        "value": "760px"
+      },
+      {
+        "name": "md",
+        "value": "860px"
+      },
+      {
+        "name": "lg",
+        "value": "900px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Ticket (primary action)",
+      "kind": "button",
+      "refersTo": "ticket",
+      "description": "The perforated red ticket for booking a trial class on WhatsApp; the one primary action.",
+      "html": "<a class=\"ds-ticket\" href=\"#\"><b>Pide tu clase de prueba</b><small>Escríbenos por WhatsApp y te decimos qué clase te encaja</small><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path fill=\"currentColor\" d=\"M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Z\"/></svg></a>",
+      "css": ".ds-ticket { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 8px 18px; max-width: 520px; padding: 16px 20px; background: var(--rojo); color: var(--crema); text-decoration: none; border: 2px dashed var(--crema); outline: 5px solid var(--rojo); border-radius: 0; transition: background .15s, outline-color .15s, transform .15s; } .ds-ticket b { font: 900 clamp(1.7rem, 5vw, 2.3rem)/.95 var(--madera); text-transform: uppercase; letter-spacing: .01em; } .ds-ticket small { grid-column: 1; font: 600 1rem/1.2 var(--texto); } .ds-ticket svg { grid-row: 1 / 3; grid-column: 2; width: 44px; height: 44px; } .ds-ticket:hover { background: var(--rojo-osc); outline-color: var(--rojo-osc); } .ds-ticket:active { transform: translateY(1px); } .ds-ticket:focus-visible { outline: 3px solid var(--tinta); outline-offset: 3px; }"
+    },
+    {
+      "name": "Outline Button",
+      "kind": "button",
+      "refersTo": "button-outline",
+      "description": "Secondary actions on yellow (directions, Instagram): black-ruled box that inverts on hover.",
+      "html": "<a class=\"ds-btn-outline\" href=\"#\">Cómo llegar</a>",
+      "css": ".ds-btn-outline { display: inline-flex; align-items: center; min-height: 48px; padding: 0 18px; font: 800 1.1rem/1 var(--madera); letter-spacing: .1em; text-transform: uppercase; text-decoration: none; color: var(--tinta); background: var(--papel); border: 3px solid var(--tinta); border-radius: 0; transition: background .15s, color .15s; } .ds-btn-outline:hover { background: var(--tinta); color: var(--papel); } .ds-btn-outline:focus-visible { outline: 3px solid var(--tinta); outline-offset: 3px; }"
+    },
+    {
+      "name": "Top Band",
+      "kind": "nav",
+      "refersTo": "top-band",
+      "description": "Sticky black band with the woodtype wordmark, tracked nav links and the header ticket.",
+      "html": "<header class=\"ds-band\"><a class=\"ds-mark\" href=\"#\"><b>LEONIDAS</b><span>Sport Center</span></a><nav class=\"ds-nav\"><a href=\"#\">Horario</a><a href=\"#\">Niños</a><a href=\"#\">El club</a><a href=\"#\">Contacto</a></nav><a class=\"ds-ticket-mini\" href=\"#\">Clase de prueba</a></header>",
+      "css": ".ds-band { display: flex; align-items: center; justify-content: space-between; gap: 16px; height: 60px; padding: 0 24px; background: var(--tinta); color: var(--crema); } .ds-mark { display: flex; align-items: baseline; gap: .5em; text-decoration: none; color: inherit; } .ds-mark b { font: 900 1.9rem/1 var(--madera); color: var(--papel); letter-spacing: .02em; } .ds-mark span { font: 700 .8rem/1 var(--madera); letter-spacing: .22em; text-transform: uppercase; } .ds-nav { display: flex; gap: 28px; } .ds-nav a { font: 700 1.05rem/1 var(--madera); letter-spacing: .12em; text-transform: uppercase; text-decoration: none; color: var(--crema); opacity: .8; } .ds-nav a:hover { opacity: 1; color: var(--papel); } .ds-nav a:focus-visible, .ds-ticket-mini:focus-visible { outline: 3px solid var(--papel); outline-offset: 3px; } .ds-ticket-mini { font: 800 1.05rem/1 var(--madera); letter-spacing: .1em; text-transform: uppercase; text-decoration: none; background: var(--rojo); color: var(--crema); padding: 11px 16px; border: 2px dashed var(--crema); outline: 3px solid var(--rojo); } .ds-ticket-mini:hover { background: var(--rojo-osc); outline-color: var(--rojo-osc); }"
+    },
+    {
+      "name": "Audience Tags",
+      "kind": "chip",
+      "refersTo": "tag-ninos",
+      "description": "Square woodtype tags marking who a class is for: adults (outline), kids (red), everyone (black).",
+      "html": "<span class=\"ds-tag\">Adultos</span> <span class=\"ds-tag ds-tag-ninos\">Niños</span> <span class=\"ds-tag ds-tag-todos\">Todos</span>",
+      "css": ".ds-tag { display: inline-block; font: 800 .82rem/1 var(--madera); letter-spacing: .14em; text-transform: uppercase; padding: 6px 8px 5px; border: 2px solid var(--tinta); color: var(--tinta); white-space: nowrap; } .ds-tag-ninos { background: var(--rojo); border-color: var(--rojo); color: var(--crema); } .ds-tag-todos { background: var(--tinta); color: var(--papel); }"
+    },
+    {
+      "name": "Programme Card with HOY Stamp",
+      "kind": "card",
+      "refersTo": "programme-header",
+      "description": "A timetable programme: ruled frame, black header, folded-yellow sub-band, class rows, and the rubber stamp on today.",
+      "html": "<article class=\"ds-prog\"><h3>Lunes y miércoles</h3><div class=\"ds-tramo\">Tarde</div><div class=\"ds-row\"><time>17:30 – 18:30</time><b>Jiu-Jitsu Infantil</b><span class=\"ds-tag ds-tag-ninos\">Niños</span></div><div class=\"ds-row\"><time>21:00 – 22:00</time><b>Boxeo Senior</b><span class=\"ds-tag\">Adultos</span></div><span class=\"ds-sello\">Hoy</span></article>",
+      "css": ".ds-prog { position: relative; max-width: 560px; border: 3px solid var(--tinta); background: var(--papel); color: var(--tinta); } .ds-prog h3 { margin: 0; background: var(--tinta); color: var(--papel); padding: 12px 18px 10px; font: 900 clamp(1.6rem, 4vw, 2.2rem)/1 var(--madera); text-transform: uppercase; letter-spacing: .04em; } .ds-tramo { padding: 8px 18px 6px; background: var(--papel-osc); font: 800 .85rem/1 var(--madera); letter-spacing: .2em; text-transform: uppercase; } .ds-row { display: grid; grid-template-columns: auto 1fr auto; align-items: baseline; gap: 4px 16px; padding: 14px 18px; border-top: 2px solid var(--tinta); } .ds-row time { font: 400 1.2rem/1 var(--slab); font-variant-numeric: tabular-nums; white-space: nowrap; } .ds-row b { font: 800 1.6rem/1 var(--madera); text-transform: uppercase; letter-spacing: .01em; } .ds-tag { font: 800 .82rem/1 var(--madera); letter-spacing: .14em; text-transform: uppercase; padding: 6px 8px 5px; border: 2px solid var(--tinta); white-space: nowrap; } .ds-tag-ninos { background: var(--rojo); border-color: var(--rojo); color: var(--crema); } .ds-sello { position: absolute; top: -18px; right: 14px; font: 900 2.2rem/1 var(--madera); letter-spacing: .1em; text-transform: uppercase; color: var(--rojo); border: 4px solid var(--rojo); padding: 6px 12px 4px; background: rgba(243,194,28,.85); transform: rotate(-9deg); box-shadow: inset 0 0 0 2px var(--papel), inset 0 0 0 4px var(--rojo); animation: ds-golpe .42s cubic-bezier(.16, 1, .3, 1) both; } @keyframes ds-golpe { from { transform: rotate(-16deg) scale(2.4); opacity: 0; filter: blur(6px); } 60% { opacity: 1; } to { transform: rotate(-9deg) scale(1); opacity: 1; filter: blur(0); } } @media (prefers-reduced-motion: reduce) { .ds-sello { animation: none; } }"
+    },
+    {
+      "name": "Ribbon (cinta)",
+      "kind": "custom",
+      "description": "Full-width tracked woodtype band between printed double rules, with red stars between phrases.",
+      "html": "<div class=\"ds-cinta\"><svg class=\"ds-star\" viewBox=\"0 0 24 24\"><path d=\"M12 1.5l3.1 7 7.4.6-5.6 4.9 1.7 7.4L12 17.5l-6.6 3.9 1.7-7.4L1.5 9.1l7.4-.6z\"/></svg> Santomera <svg class=\"ds-star\" viewBox=\"0 0 24 24\"><path d=\"M12 1.5l3.1 7 7.4.6-5.6 4.9 1.7 7.4L12 17.5l-6.6 3.9 1.7-7.4L1.5 9.1l7.4-.6z\"/></svg> Desde 2011 <svg class=\"ds-star\" viewBox=\"0 0 24 24\"><path d=\"M12 1.5l3.1 7 7.4.6-5.6 4.9 1.7 7.4L12 17.5l-6.6 3.9 1.7-7.4L1.5 9.1l7.4-.6z\"/></svg> Fuerza y respeto <svg class=\"ds-star\" viewBox=\"0 0 24 24\"><path d=\"M12 1.5l3.1 7 7.4.6-5.6 4.9 1.7 7.4L12 17.5l-6.6 3.9 1.7-7.4L1.5 9.1l7.4-.6z\"/></svg></div>",
+      "css": ".ds-cinta { display: flex; align-items: center; justify-content: center; gap: .9em; flex-wrap: wrap; padding: 9px 0; margin: 14px 0; color: var(--tinta); border-top: 3px solid var(--tinta); border-bottom: 3px solid var(--tinta); box-shadow: 0 -7px 0 -4px var(--tinta), 0 7px 0 -4px var(--tinta); font: 800 1.1rem/1 var(--madera); letter-spacing: .2em; text-transform: uppercase; } .ds-star { width: .8em; height: .8em; fill: var(--rojo); flex: none; }"
+    },
+    {
+      "name": "Data List",
+      "kind": "custom",
+      "description": "Box-office facts as ruled term/value rows; missing facts carry the dashed pending marker.",
+      "html": "<dl class=\"ds-datos\"><div><dt>Teléfono</dt><dd><span class=\"ds-falta\">Teléfono pendiente</span></dd></div><div><dt>Prueba</dt><dd>Pregúntanos por la clase de prueba</dd></div></dl>",
+      "css": ".ds-datos { margin: 0; max-width: 520px; border-top: 3px solid var(--tinta); color: var(--tinta); } .ds-datos div { display: grid; grid-template-columns: 120px 1fr; gap: 12px; padding: 14px 0; border-bottom: 3px solid var(--tinta); align-items: baseline; } .ds-datos dt { font: 800 .95rem/1 var(--madera); letter-spacing: .16em; text-transform: uppercase; } .ds-datos dd { margin: 0; font: 400 1.1rem/1.55 var(--texto); } .ds-falta { outline: 2px dashed currentColor; outline-offset: 2px; padding: 0 .25em; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Fight Bill",
+    "overview": "**Creative North Star: \"The Fight Bill\"**\n\nThe whole site is one printed cartel de velada, read top to bottom like a bill: who presents, the main event, the undercard, the venue, the box office. The ground is saturated yellow poster stock and everything on it is ink: black and red, letterpress-flat, with no gradients, no glass and no glow. Full-width colour bands (black, red) cut the sheet the way a printer splits a poster into tiers, and heavy condensed woodtype fills the width edge to edge.\n\nDensity is poster density: very large type, few words per line, rules and borders doing the structural work that cards and shadows do elsewhere. Photography appears only as a one-ink halftone sitting on a red band. Ornament is limited to five-point stars and double printed rules, both drawn as vector ink. The world deliberately rejects the dark-gym template: a black ground with a red accent, gritty texture, and a hero photo under a dark overlay.",
+    "keyCharacteristics": [
+      "Yellow paper field (`papel`) as the dominant surface; black and red as the only inks.",
+      "Condensed woodtype (Big Shoulders Display, 900) set uppercase and stacked at full width.",
+      "Slab numerals (Alfa Slab One) for times, years and age ranges.",
+      "Square corners everywhere; structure comes from 2-6px ink rules and solid colour bands.",
+      "One-ink halftone photography; no colour photos.",
+      "A single animated moment: the red \"HOY\" stamp landing on today's programme."
+    ],
+    "rules": [
+      {
+        "name": "The Two Inks Rule",
+        "body": "Everything printed is either black or red. A third hue (blue links, green success, grey UI) breaks the poster. Yellow is the paper, cream is the paper showing through; neither is an ink on the yellow sheet.",
+        "section": "colors"
+      },
+      {
+        "name": "The Red Has Two Weights Rule",
+        "body": "Fill red (`rojo`) is for surfaces, stamps and ornaments; text red (`rojo-texto`) is for words on yellow. Do not swap them.",
+        "section": "colors"
+      },
+      {
+        "name": "The Woodtype Caps Rule",
+        "body": "Every heading, label, button and nav item is Big Shoulders Display in uppercase. Archivo never appears in caps and never carries a heading.",
+        "section": "typography"
+      },
+      {
+        "name": "The Numbers Are Slab Rule",
+        "body": "Times, years and ages are set in Alfa Slab One. Slab is not used for words except the one \"presenta\" billing line.",
+        "section": "typography"
+      },
+      {
+        "name": "The Printed Plane Rule",
+        "body": "Nothing on the sheet casts a shadow. The only lifted object is the fixed mobile ticket, because it is literally above the page.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** keep yellow `papel` as the dominant field and print only in `tinta` and red.",
+      "**Do** use `rojo-texto` for red words on yellow and `rojo` for red fills, stamps and stars.",
+      "**Do** set headings, labels and buttons in uppercase Big Shoulders Display, and numbers in Alfa Slab One.",
+      "**Do** separate content with full-width ink rules (2px, 3px, 6px) and full-bleed colour bands.",
+      "**Do** make every booking action the perforated red ticket: red fill, dashed cream inset, red outline, square corners.",
+      "**Do** render photography as a single-ink halftone on a colour band.",
+      "**Do** keep motion to one ink-impact moment per page, honouring `prefers-reduced-motion`.",
+      "**Do** mark missing facts with the dashed pending-data outline instead of inventing them."
+    ],
+    "donts": [
+      "**Don't** use a black page ground with a red accent, gritty texture, or a hero photo under a dark overlay; that is the dark-gym template this world rejects.",
+      "**Don't** round corners or add soft shadows to anything that sits on the sheet.",
+      "**Don't** introduce a third ink colour or colour photography.",
+      "**Don't** set body text in Bill Red on yellow (3.5:1).",
+      "**Don't** set headings in Archivo or in sentence case."
+    ]
+  }
+}
