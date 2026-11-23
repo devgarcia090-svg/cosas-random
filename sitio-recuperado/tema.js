@@ -241,55 +241,54 @@ document.documentElement.classList.add('tjs');
   if (document.body) document.body.appendChild(b);
 })();
 
-/* ══ CAPA DE HALLOWEEN ════════════════════════════════
-   Fantasmas que caen desde el nav. Temporal.
-   Se apaga sola al pasar FIN: no hay que quitar nada a mano.
+/* ══ CAPA DE NAVIDAD ══════════════════════════════════
+   Nieve cayendo. Sustituye a la capa de Halloween, que ya
+   habia caducado (esta en el historial de git por si se
+   quiere recuperar en octubre).
+   Se apaga sola al pasar FIN, no hay que acordarse de nada.
    Para matarla antes, pon APAGADA = true.               */
 (function () {
   var APAGADA = false;
-  var FIN = new Date('2026-11-02T23:59:59');
+  var FIN = new Date('2027-01-07T23:59:59');
 
   if (APAGADA || new Date() > FIN) return;
   // Respeta a quien ha pedido no ver animaciones.
   if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   var CSS = [
-    '.hw-capa{position:fixed;inset:0;pointer-events:none;z-index:900;overflow:hidden}',
-    '.hw-f{position:absolute;top:-60px;opacity:0;will-change:transform,opacity;',
-      'animation:hwCae linear infinite}',
-    '@keyframes hwCae{',
-      '0%{transform:translateY(0) rotate(-8deg);opacity:0}',
-      '12%{opacity:.3}',
-      '85%{opacity:.22}',
-      '100%{transform:translateY(105vh) rotate(8deg);opacity:0}}',
-    '@media (max-width:700px){.hw-f{transform:scale(.55);opacity:.7}}'
+    '.nv-capa{position:fixed;inset:0;pointer-events:none;z-index:900;overflow:hidden}',
+    '.nv-c{position:absolute;top:-20px;border-radius:50%;background:#F2EDE6;',
+      'opacity:0;will-change:transform,opacity;animation:nvCae linear infinite}',
+    '@keyframes nvCae{',
+      '0%{transform:translate(0,0);opacity:0}',
+      '10%{opacity:.75}',
+      '90%{opacity:.5}',
+      '100%{transform:translate(var(--deriva),104vh);opacity:0}}',
+    '@media (max-width:700px){.nv-c{opacity:.8}}'
   ].join('');
-
-  // Fantasmita: cuerpo redondeado, bajo ondulado, dos ojos.
-  var SVG = '<svg width="26" height="32" viewBox="0 0 26 32" fill="none" aria-hidden="true">' +
-    '<path d="M13 1C6.9 1 2 5.9 2 12v17.2c0 1.3 1.5 2 2.5 1.2L7 28.4l2.6 2a1.5 1.5 0 0 0 1.8 0l2.6-2 2.6 2a1.5 1.5 0 0 0 1.8 0l2.5-1.9 2.6 2c1 .8 2.5.1 2.5-1.2V12C24 5.9 19.1 1 13 1z" ' +
-      'fill="#F2EDE6" fill-opacity=".92"/>' +
-    '<ellipse cx="9.3" cy="12.5" rx="1.7" ry="2.2" fill="#231D18"/>' +
-    '<ellipse cx="16.7" cy="12.5" rx="1.7" ry="2.2" fill="#231D18"/>' +
-    '</svg>';
 
   function arranca() {
     var e = document.createElement('style'); e.textContent = CSS;
     document.head.appendChild(e);
 
     var capa = document.createElement('div');
-    capa.className = 'hw-capa';
+    capa.className = 'nv-capa';
     capa.setAttribute('aria-hidden', 'true');
 
-    var cuantos = window.innerWidth < 700 ? 4 : 8;
+    // Pocos y pequenos: tiene que acompanar, no tapar el contenido.
+    var cuantos = window.innerWidth < 700 ? 14 : 26;
     for (var i = 0; i < cuantos; i++) {
-      var f = document.createElement('div');
-      f.className = 'hw-f';
-      f.innerHTML = SVG;
-      f.style.left = (4 + Math.random() * 92).toFixed(1) + '%';
-      f.style.animationDuration = (13 + Math.random() * 11).toFixed(1) + 's';
-      f.style.animationDelay = (-Math.random() * 22).toFixed(1) + 's';
-      capa.appendChild(f);
+      var c = document.createElement('div');
+      c.className = 'nv-c';
+      var d = (2 + Math.random() * 4).toFixed(1);          // 2 a 6 px
+      c.style.width = d + 'px';
+      c.style.height = d + 'px';
+      c.style.left = (Math.random() * 100).toFixed(1) + '%';
+      // Cada copo cae un poco en diagonal, como con viento flojo.
+      c.style.setProperty('--deriva', (Math.random() * 90 - 45).toFixed(0) + 'px');
+      c.style.animationDuration = (9 + Math.random() * 13).toFixed(1) + 's';
+      c.style.animationDelay = (-Math.random() * 22).toFixed(1) + 's';
+      capa.appendChild(c);
     }
     document.body.appendChild(capa);
   }
