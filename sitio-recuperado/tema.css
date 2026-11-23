@@ -507,3 +507,40 @@ html { background: #231D18 !important; }
   }
   .hamburger { display:flex !important; }
 }
+
+/* ── CURSOR DE MARCA ──────────────────────────────────
+   Huella de perro todo el año; mientras la capa de Navidad
+   esté viva (tema.js pone .es-navidad en <html>) pasa a ser un
+   gorro de Papá Noel y vuelve sola a la huella el 7 de enero.
+
+   Solo en ratón: en táctil no hay cursor que cambiar, y en un
+   trackpad grueso un puntero sin punta se nota. El punto activo
+   va en el centro del dibujo (14 14), que es donde la gente
+   apunta cuando el cursor no tiene pico.
+
+   Relleno crema con contorno negro para que se vea tanto sobre
+   el fondo oscuro del sitio como sobre las tarjetas claras.
+   Los campos de texto conservan su cursor: ahí la barra vertical
+   dice dónde vas a escribir y quitarla sería un estorbo. */
+@media (hover: hover) and (pointer: fine) {
+  body {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Cg fill='%23F2EDE6' stroke='%230D0B09' stroke-width='1.6'%3E%3Cellipse cx='14' cy='19.4' rx='6.4' ry='5'/%3E%3Cellipse cx='7.6' cy='11.6' rx='2.6' ry='3.3' transform='rotate(-20 7.6 11.6)'/%3E%3Cellipse cx='12.2' cy='8.4' rx='2.6' ry='3.5'/%3E%3Cellipse cx='17.2' cy='8.6' rx='2.6' ry='3.5' transform='rotate(10 17.2 8.6)'/%3E%3Cellipse cx='21.4' cy='12' rx='2.6' ry='3.3' transform='rotate(22 21.4 12)'/%3E%3C/g%3E%3C/svg%3E") 14 14, auto;
+  }
+  /* En lo pulsable la huella se enciende en naranja: si todo
+     llevara el mismo dibujo se perdería la señal de «aquí se hace clic». */
+  a, button, summary, label, [role="button"], input[type="submit"], input[type="button"] {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Cg fill='%23E0571A' stroke='%230D0B09' stroke-width='1.6'%3E%3Cellipse cx='14' cy='19.4' rx='6.4' ry='5'/%3E%3Cellipse cx='7.6' cy='11.6' rx='2.6' ry='3.3' transform='rotate(-20 7.6 11.6)'/%3E%3Cellipse cx='12.2' cy='8.4' rx='2.6' ry='3.5'/%3E%3Cellipse cx='17.2' cy='8.6' rx='2.6' ry='3.5' transform='rotate(10 17.2 8.6)'/%3E%3Cellipse cx='21.4' cy='12' rx='2.6' ry='3.3' transform='rotate(22 21.4 12)'/%3E%3C/g%3E%3C/svg%3E") 14 14, pointer;
+  }
+  input:not([type="submit"]):not([type="button"]):not([type="checkbox"]):not([type="radio"]),
+  textarea { cursor: text; }
+  select { cursor: pointer; }
+
+  /* Navidad: gorro. La borla hace de punta visible arriba a la derecha. */
+  .es-navidad body {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Cg stroke='%230D0B09' stroke-width='1.5' stroke-linejoin='round'%3E%3Cpath d='M5 17.6C5 9 10 4 16 4c4.4 0 7.2 3 7.2 6.6 0 2-1.2 3.8-2.8 4.8L5 17.6Z' fill='%23D33A2C'/%3E%3Crect x='3' y='16.2' width='18' height='6.4' rx='3.2' fill='%23F2EDE6'/%3E%3Ccircle cx='23.2' cy='10.7' r='3.1' fill='%23F2EDE6'/%3E%3C/g%3E%3C/svg%3E") 14 14, auto;
+  }
+  .es-navidad a, .es-navidad button, .es-navidad summary, .es-navidad label,
+  .es-navidad [role="button"] {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Cg stroke='%230D0B09' stroke-width='1.5' stroke-linejoin='round'%3E%3Cpath d='M5 17.6C5 9 10 4 16 4c4.4 0 7.2 3 7.2 6.6 0 2-1.2 3.8-2.8 4.8L5 17.6Z' fill='%23E0571A'/%3E%3Crect x='3' y='16.2' width='18' height='6.4' rx='3.2' fill='%23F2EDE6'/%3E%3Ccircle cx='23.2' cy='10.7' r='3.1' fill='%23F2A65A'/%3E%3C/g%3E%3C/svg%3E") 14 14, pointer;
+  }
+}

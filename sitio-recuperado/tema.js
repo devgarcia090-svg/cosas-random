@@ -257,6 +257,10 @@ document.documentElement.classList.add('tjs');
   var FIN = new Date('2027-01-07T23:59:59');
   if (APAGADA || new Date() > FIN) return;
 
+  /* El cursor navideno vive en tema.css colgado de esta clase: asi se
+     apaga con el resto de la capa sin tocar nada mas. */
+  document.documentElement.classList.add('es-navidad');
+
   var quieto = window.matchMedia &&
                matchMedia('(prefers-reduced-motion: reduce)').matches;
 
