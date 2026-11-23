@@ -242,51 +242,108 @@ document.documentElement.classList.add('tjs');
 })();
 
 /* ══ CAPA DE NAVIDAD ══════════════════════════════════
-   Nieve cayendo. Sustituye a la capa de Halloween, que ya
-   habia caducado (esta en el historial de git por si se
-   quiere recuperar en octubre).
-   Se apaga sola al pasar FIN, no hay que acordarse de nada.
-   Para matarla antes, pon APAGADA = true.               */
+   Guirnalda de luces colgando bajo el nav y nieve cayendo.
+   Se apaga sola al pasar FIN. Para matarla antes: APAGADA = true.
+
+   La guirnalda va FIJA pero por debajo del nav en z-index y sin
+   tocarlo: el nav sigue siendo el mismo sticky de siempre, que es
+   donde estaban todos los problemas en Safari de iPhone.       */
 (function () {
   var APAGADA = false;
   var FIN = new Date('2027-01-07T23:59:59');
-
   if (APAGADA || new Date() > FIN) return;
-  // Respeta a quien ha pedido no ver animaciones.
-  if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var quieto = window.matchMedia &&
+               matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   var CSS = [
-    '.nv-capa{position:fixed;inset:0;pointer-events:none;z-index:900;overflow:hidden}',
-    '.nv-c{position:absolute;top:-20px;border-radius:50%;background:#F2EDE6;',
-      'opacity:0;will-change:transform,opacity;animation:nvCae linear infinite}',
+    /* ── Guirnalda ── */
+    '.nv-g{position:fixed;left:0;right:0;top:var(--alto-nav,76px);height:34px;',
+      'z-index:899;pointer-events:none;display:flex;justify-content:space-between;',
+      'align-items:flex-start;padding:0 14px}',
+    '.nv-g::before{content:"";position:absolute;left:0;right:0;top:3px;height:2px;',
+      'background:linear-gradient(90deg,#4A3A2A,#6B5540,#4A3A2A);opacity:.85}',
+    '.nv-b{position:relative;width:11px;height:11px;border-radius:50%;',
+      'background:var(--c);margin-top:var(--cuelga);flex:0 0 auto;',
+      'box-shadow:0 0 10px 2px var(--c),0 0 22px 6px var(--c)}',
+    /* cordoncito que une la bombilla con el cable */
+    '.nv-b::before{content:"";position:absolute;left:50%;bottom:100%;',
+      'width:2px;height:var(--cuelga);background:#6B5540;transform:translateX(-50%)}',
+    quieto ? '' :
+      '.nv-b{animation:nvLuz 3.4s ease-in-out infinite;animation-delay:var(--t)}',
+    '@keyframes nvLuz{0%,100%{opacity:1}50%{opacity:.38}}',
+    '@media (max-width:700px){.nv-g{height:26px;padding:0 8px}',
+      '.nv-b{width:9px;height:9px}}',
+
+    /* ── Nieve ── */
+    '.nv-capa{position:fixed;inset:0;pointer-events:none;z-index:898;overflow:hidden}',
+    '.nv-c{position:absolute;top:-30px;will-change:transform,opacity;opacity:0}',
+    quieto ? '.nv-c{display:none}' :
+      '.nv-c{animation:nvCae linear infinite}',
     '@keyframes nvCae{',
-      '0%{transform:translate(0,0);opacity:0}',
-      '10%{opacity:.75}',
-      '90%{opacity:.5}',
-      '100%{transform:translate(var(--deriva),104vh);opacity:0}}',
-    '@media (max-width:700px){.nv-c{opacity:.8}}'
+      '0%{transform:translate(0,0) rotate(0deg);opacity:0}',
+      '8%{opacity:var(--op)}',
+      '92%{opacity:var(--op)}',
+      '100%{transform:translate(var(--deriva),104vh) rotate(260deg);opacity:0}}'
   ].join('');
+
+  // Copo de nieve: tres ejes cruzados con sus ramitas. Geometria
+  // simple a proposito, que es lo que me sale bien.
+  function copo(px) {
+    var r = '';
+    for (var a = 0; a < 180; a += 60) {
+      r += '<g transform="rotate(' + a + ' 12 12)">' +
+             '<line x1="12" y1="2" x2="12" y2="22"/>' +
+             '<line x1="12" y1="6"  x2="8.5"  y2="9"/>' +
+             '<line x1="12" y1="6"  x2="15.5" y2="9"/>' +
+             '<line x1="12" y1="18" x2="8.5"  y2="15"/>' +
+             '<line x1="12" y1="18" x2="15.5" y2="15"/>' +
+           '</g>';
+    }
+    return '<svg width="' + px + '" height="' + px + '" viewBox="0 0 24 24" ' +
+           'fill="none" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round" ' +
+           'aria-hidden="true">' + r + '</svg>';
+  }
+
+  var COLORES = ['#E8B04B', '#C0392B', '#F2EDE6', '#C8722A'];
 
   function arranca() {
     var e = document.createElement('style'); e.textContent = CSS;
     document.head.appendChild(e);
 
+    // ── Guirnalda ──
+    var g = document.createElement('div');
+    g.className = 'nv-g';
+    g.setAttribute('aria-hidden', 'true');
+    var ancho = window.innerWidth;
+    var cuantasLuces = Math.max(8, Math.round(ancho / 46));
+    for (var j = 0; j < cuantasLuces; j++) {
+      var b = document.createElement('span');
+      b.className = 'nv-b';
+      b.style.setProperty('--c', COLORES[j % COLORES.length]);
+      // Las bombillas cuelgan a distinta altura: hace el efecto de
+      // cable descolgado sin tener que dibujar una curva.
+      b.style.setProperty('--cuelga', (j % 2 ? 15 : 7) + 'px');
+      b.style.setProperty('--t', (j * 0.17).toFixed(2) + 's');
+      g.appendChild(b);
+    }
+    document.body.appendChild(g);
+
+    // ── Nieve ──
+    if (quieto) return;
     var capa = document.createElement('div');
     capa.className = 'nv-capa';
     capa.setAttribute('aria-hidden', 'true');
-
-    // Pocos y pequenos: tiene que acompanar, no tapar el contenido.
-    var cuantos = window.innerWidth < 700 ? 14 : 26;
+    var cuantos = ancho < 700 ? 18 : 34;
     for (var i = 0; i < cuantos; i++) {
       var c = document.createElement('div');
       c.className = 'nv-c';
-      var d = (2 + Math.random() * 4).toFixed(1);          // 2 a 6 px
-      c.style.width = d + 'px';
-      c.style.height = d + 'px';
+      var px = (9 + Math.random() * 11).toFixed(0);   // 9 a 20 px
+      c.innerHTML = copo(px);
       c.style.left = (Math.random() * 100).toFixed(1) + '%';
-      // Cada copo cae un poco en diagonal, como con viento flojo.
-      c.style.setProperty('--deriva', (Math.random() * 90 - 45).toFixed(0) + 'px');
-      c.style.animationDuration = (9 + Math.random() * 13).toFixed(1) + 's';
+      c.style.setProperty('--deriva', (Math.random() * 140 - 70).toFixed(0) + 'px');
+      c.style.setProperty('--op', (0.45 + Math.random() * 0.45).toFixed(2));
+      c.style.animationDuration = (10 + Math.random() * 12).toFixed(1) + 's';
       c.style.animationDelay = (-Math.random() * 22).toFixed(1) + 's';
       capa.appendChild(c);
     }
