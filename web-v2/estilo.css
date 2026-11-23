@@ -1,0 +1,315 @@
+/* ═══════════════════════════════════════════════════════════
+   MAYA V2 — hoja de estilo
+   Identidad nueva, nada que ver con la web actual: fondo claro,
+   tipografia de ancho variable y dos acentos electricos.
+   Los unicos recursos heredados son el logo y las fotos.
+   ═══════════════════════════════════════════════════════════ */
+
+:root{
+  /* Lienzo claro con un punto de calidez, tinta casi negra y dos
+     acentos que pelean entre si a proposito. */
+  --papel:#EFEDE7;
+  --papel-2:#E4E1D8;
+  --tinta:#141319;
+  --tinta-50:rgba(20,19,25,.56);
+  --azul:#2B2BE8;
+  --fuego:#FF4322;
+  --blanco:#FFFFFF;
+
+  --display:'Bricolage Grotesque',system-ui,sans-serif;
+  --texto:'Figtree',system-ui,sans-serif;
+
+  --borde:1.5px solid var(--tinta);
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{background:var(--papel)}
+body{
+  font-family:var(--texto);
+  background:var(--papel);
+  color:var(--tinta);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+body.cargando{overflow:hidden;height:100vh}
+
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+
+:focus-visible{outline:3px solid var(--azul);outline-offset:4px}
+
+/* Grano encima de todo: le quita el aspecto de plantilla limpia. */
+.grano{
+  position:fixed;inset:0;z-index:9998;pointer-events:none;
+  opacity:.055;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Indicador de progreso: el patrón de narración por scroll lo pide,
+   porque si no el lector no sabe cuánto queda de historia. */
+.progreso{
+  position:fixed;top:0;left:0;right:0;height:3px;z-index:9996;
+  background:var(--azul);transform:scaleX(0);transform-origin:left;
+}
+
+/* ── CURSOR ─────────────────────────────────────────────── */
+.cursor{
+  position:fixed;top:0;left:0;width:14px;height:14px;border-radius:50%;
+  background:var(--fuego);z-index:9999;pointer-events:none;
+  transform:translate(-50%,-50%);mix-blend-mode:difference;
+}
+.cursor-anillo{
+  position:fixed;top:0;left:0;width:42px;height:42px;border-radius:50%;
+  border:1.5px solid var(--tinta);z-index:9999;pointer-events:none;
+  transform:translate(-50%,-50%);
+}
+@media (hover:none),(max-width:900px){.cursor,.cursor-anillo{display:none}}
+
+/* ── PRELOADER ──────────────────────────────────────────── */
+.pre{
+  position:fixed;inset:0;z-index:9997;background:var(--tinta);
+  color:var(--papel);display:grid;place-items:center;
+}
+.pre-num{
+  font-family:var(--display);font-size:clamp(5rem,22vw,16rem);
+  font-weight:800;line-height:.8;font-variant-numeric:tabular-nums;
+}
+.pre-txt{
+  position:absolute;bottom:8vh;left:0;right:0;text-align:center;
+  font-size:.74rem;letter-spacing:.3em;text-transform:uppercase;
+  color:rgba(239,237,231,.5);
+}
+.pre-barra{
+  position:absolute;bottom:0;left:0;height:3px;width:0;background:var(--fuego);
+}
+
+/* ── NAV ────────────────────────────────────────────────── */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:900;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.3rem clamp(1rem,4vw,3rem);
+  mix-blend-mode:difference;
+}
+/* El logo NO lleva invert: con mix-blend-mode:difference, el logo crema
+   sale casi negro sobre el papel y crema sobre la foto oscura del hero.
+   Con invert salía crema sobre crema, es decir, invisible. */
+.nav img{height:30px;transition:filter .3s linear}
+/* Pasado el hero, el nav deja de ir en «difference»: sobre las fotos claras
+   de la galería el logo y los enlaces se volvían ilegibles. */
+.nav.solido{
+  mix-blend-mode:normal;background:rgba(239,237,231,.88);
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(20,19,25,.1);
+}
+.nav.solido img{filter:brightness(0)}
+.nav.solido .nav-links a{color:var(--tinta)}
+.nav-links{display:flex;gap:1.8rem;align-items:center}
+.nav-links a{
+  font-size:.76rem;font-weight:600;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--papel);position:relative;
+}
+.nav-links a::after{
+  content:'';position:absolute;left:0;bottom:-5px;width:0;height:1.5px;
+  background:var(--fuego);transition:width .4s var(--ease);
+}
+.nav-links a:hover::after{width:100%}
+@media(max-width:820px){.nav-links{display:none}}
+
+/* ── CONTENEDOR ─────────────────────────────────────────── */
+.env{
+  max-width:1360px;margin:0 auto;
+  padding-left:max(1.2rem,env(safe-area-inset-left,0px));
+  padding-right:max(1.2rem,env(safe-area-inset-right,0px));
+}
+.seccion{padding-block:clamp(5rem,13vh,11rem)}
+
+.et{
+  font-size:.7rem;font-weight:700;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--fuego);display:flex;align-items:center;gap:.7rem;margin-bottom:1.4rem;
+}
+.et::before{content:'';width:34px;height:1.5px;background:var(--fuego)}
+
+.tit{
+  font-family:var(--display);font-weight:800;
+  font-size:clamp(2.4rem,7.5vw,6.5rem);
+  line-height:.92;letter-spacing:-.035em;text-wrap:balance;
+  font-variation-settings:'wdth' 100;
+}
+.tit em{font-style:normal;color:var(--azul)}
+
+/* ── HERO ───────────────────────────────────────────────── */
+.hero{min-height:100svh;position:relative;display:flex;align-items:flex-end;
+      padding-bottom:clamp(2rem,6vh,5rem);overflow:hidden}
+.hero-fondo{
+  position:absolute;inset:0;z-index:0;
+  background:var(--papel-2);
+  clip-path:inset(100% 0 0 0);
+}
+.hero-fondo img{width:100%;height:100%;object-fit:cover;
+  filter:grayscale(1) contrast(1.05) brightness(.6)}
+/* Velo para que el titular se lea: la foto de Maya es oscura y la tinta
+   negra encima era ilegible. Ahora el hero es bloque oscuro y el texto crema. */
+.hero-fondo::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(20,19,25,.45) 0%,rgba(20,19,25,.7) 55%,rgba(20,19,25,.9) 100%);
+}
+.hero .env{position:relative;z-index:2;width:100%}
+.hero h1{
+  font-family:var(--display);font-weight:800;
+  font-size:clamp(3.4rem,15.5vw,16rem);
+  line-height:.82;letter-spacing:-.045em;text-transform:uppercase;
+  color:var(--papel);
+}
+.hero h1 .ln{display:block;overflow:hidden}
+.hero h1 .ln > span{display:block}
+.hero h1 .az{color:var(--fuego)}
+.hero-pie{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  gap:2rem;flex-wrap:wrap;margin-top:2.4rem;
+  border-top:1.5px solid rgba(239,237,231,.32);padding-top:1.3rem;
+  color:var(--papel);
+}
+.hero-pie p{max-width:34ch;font-size:1.02rem;line-height:1.55;color:rgba(239,237,231,.72)}
+.hero-baja{font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;
+  display:flex;align-items:center;gap:.6rem}
+.hero-baja i{display:block;width:1px;height:40px;background:var(--papel);
+  transform-origin:top;animation:baja 1.8s var(--ease) infinite}
+@keyframes baja{0%{transform:scaleY(0)}50%{transform:scaleY(1)}100%{transform:scaleY(0);transform-origin:bottom}}
+
+/* ── MARQUESINA ─────────────────────────────────────────── */
+.marq{
+  border-block:var(--borde);overflow:hidden;background:var(--fuego);
+  color:var(--papel);padding-block:.75rem;
+}
+.marq-pista{display:flex;gap:3rem;width:max-content;will-change:transform}
+.marq span{
+  font-family:var(--display);font-weight:800;
+  font-size:clamp(1.5rem,4vw,3rem);letter-spacing:-.02em;
+  text-transform:uppercase;white-space:nowrap;
+}
+.marq span::after{content:'◆';margin-left:3rem;font-size:.5em;vertical-align:middle}
+
+/* ── CIFRAS ─────────────────────────────────────────────── */
+.cifras{display:grid;grid-template-columns:repeat(4,1fr);border-top:var(--borde)}
+.cifra{padding:2.4rem 1.4rem;border-right:var(--borde);position:relative;overflow:hidden}
+.cifra:last-child{border-right:0}
+.cifra b{
+  display:block;font-family:var(--display);font-weight:800;
+  font-size:clamp(2.2rem,6vw,4.6rem);line-height:.9;letter-spacing:-.04em;
+  font-variant-numeric:tabular-nums;
+}
+.cifra span{display:block;margin-top:.7rem;font-size:.72rem;font-weight:600;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--tinta-50)}
+.cifra::before{
+  content:'';position:absolute;inset:0;background:var(--azul);
+  transform:translateY(101%);transition:transform .55s var(--ease);z-index:-1;
+}
+.cifra:hover::before{transform:translateY(0)}
+.cifra:hover,.cifra:hover span{color:var(--papel)}
+@media(max-width:860px){.cifras{grid-template-columns:repeat(2,1fr)}
+  .cifra:nth-child(2n){border-right:0}
+  .cifra:nth-child(-n+2){border-bottom:var(--borde)}}
+
+/* ── ESTIGMA: panel horizontal ──────────────────────────── */
+.estigma{overflow:hidden}
+.estigma-pista{display:flex;height:100svh;align-items:center;width:max-content}
+.panel{
+  width:min(92vw,760px);flex:0 0 auto;padding:0 clamp(1.5rem,5vw,5rem);
+  position:relative;
+}
+/* Número fantasma detrás: los paneles iban muy vacíos de aire arriba y abajo. */
+.panel::before{
+  content:attr(data-n);position:absolute;right:clamp(1rem,4vw,4rem);top:calc(100% + 1.5rem);
+  font-family:var(--display);font-weight:800;font-size:clamp(9rem,22vw,20rem);
+  line-height:.7;color:var(--tinta);opacity:.055;pointer-events:none;z-index:-1;
+}
+.panel .n{
+  font-family:var(--display);font-size:.9rem;font-weight:800;
+  color:var(--fuego);letter-spacing:.2em;margin-bottom:1rem;display:block;
+}
+.panel h3{
+  font-family:var(--display);font-weight:800;
+  font-size:clamp(2rem,5.6vw,4.4rem);line-height:.95;letter-spacing:-.035em;
+  margin-bottom:1.2rem;text-wrap:balance;
+}
+.panel p{font-size:clamp(1rem,1.5vw,1.25rem);line-height:1.6;color:var(--tinta-50);max-width:46ch}
+.panel.rebate h3{color:var(--azul)}
+
+/* ── FICHAS APILADAS ────────────────────────────────────── */
+.apila{position:relative}
+/* Cada ficha se queda pegada un poco más abajo que la anterior (--i), así
+   la pila deja ver el borde de las de debajo en vez de taparlas del todo.
+   El hueco de scroll va en margin-bottom: sin él las tres se solapan de golpe. */
+.ficha{
+  position:sticky;top:calc(11vh + var(--i,0) * 26px);
+  height:min(70vh,620px);border:var(--borde);
+  background:var(--papel);display:grid;grid-template-columns:1.1fr 1fr;
+  overflow:hidden;margin-bottom:14vh;
+  /* Sin z-index explícito la ficha de arriba se dibujaba ENCIMA de la
+     siguiente (opacity la saca de su contexto) y se transparentaba el texto. */
+  z-index:calc(var(--i,0) + 1);
+}
+.ficha:last-child{margin-bottom:0}
+.ficha-txt{padding:clamp(1.6rem,4vw,3.4rem);display:flex;flex-direction:column;justify-content:flex-start}
+/* El número se va al fondo con margin-top:auto; con space-between el
+   título y el párrafo quedaban separados por un hueco raro. */
+.f-n{font-family:var(--display);font-weight:800;font-size:clamp(3rem,7vw,6rem);
+  line-height:.8;letter-spacing:-.05em;color:var(--tinta);opacity:.12;margin-top:auto;padding-top:2rem}
+.ficha:nth-child(even) .f-n{color:var(--papel);opacity:.22}
+.ficha-txt h3{font-family:var(--display);font-weight:800;
+  font-size:clamp(1.7rem,3.6vw,3.2rem);line-height:.98;letter-spacing:-.03em;margin-bottom:1rem}
+.ficha-txt p{color:var(--tinta-50);line-height:1.6;max-width:42ch}
+.ficha-img{overflow:hidden;background:var(--papel-2)}
+.ficha-img img{width:100%;height:100%;object-fit:cover}
+.ficha:nth-child(even){background:var(--tinta);color:var(--papel)}
+.ficha:nth-child(even) p{color:rgba(239,237,231,.6)}
+.ficha:nth-child(even) h3{color:var(--papel)}
+@media(max-width:860px){.ficha{grid-template-columns:1fr;height:auto;position:relative;top:0}
+  .ficha-img{height:46vh;order:-1}}
+
+/* ── GALERIA ────────────────────────────────────────────── */
+/* El paralaje sube las columnas, así que necesita aire por arriba: sin él
+   la columna central se montaba encima del titular. El titular, además,
+   va por delante (z-index) por si el recorrido se queda corto. */
+.galeria{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;
+  padding-top:clamp(3rem,9vh,7rem);position:relative;z-index:1}
+#galeria .et,#galeria .tit{position:relative;z-index:3}
+.gal-col:nth-child(2){margin-top:clamp(2rem,7vh,6rem)}
+.gal-col:nth-child(3){margin-top:clamp(1rem,3vh,3rem)}
+.gal-col{display:flex;flex-direction:column;gap:1.2rem}
+/* Proporción fija: con fotos verticales y apaisadas mezcladas las columnas
+   acababan a alturas muy distintas y quedaban huecos enormes. El desnivel
+   del mosaico lo dan los margin-top, no el alto de cada foto. */
+.gal-col img{width:100%;border:var(--borde);aspect-ratio:3/4;object-fit:cover}
+@media(max-width:760px){.galeria{grid-template-columns:repeat(2,1fr)}
+  .gal-col:nth-child(3){display:none}}
+
+/* ── CIERRE ─────────────────────────────────────────────── */
+.cierre{background:var(--tinta);color:var(--papel);text-align:center}
+.cierre .tit em{color:var(--fuego)}
+.cierre p{max-width:48ch;margin:1.6rem auto 2.6rem;color:rgba(239,237,231,.62);
+  font-size:1.05rem;line-height:1.6}
+.boton{
+  display:inline-flex;align-items:center;gap:.9rem;
+  background:var(--fuego);color:var(--papel);
+  font-family:var(--display);font-weight:800;font-size:1.05rem;
+  letter-spacing:-.01em;padding:1.15rem 2.4rem;
+  border-radius:100px;position:relative;overflow:hidden;will-change:transform;
+}
+.boton span{position:relative;z-index:1}
+.boton::before{
+  content:'';position:absolute;inset:0;background:var(--azul);
+  transform:translateY(101%);transition:transform .45s var(--ease);
+}
+.boton:hover::before{transform:translateY(0)}
+
+footer{background:var(--tinta);color:rgba(239,237,231,.5);
+  padding:2.5rem 1.2rem;text-align:center;font-size:.8rem;border-top:1px solid rgba(239,237,231,.12)}
+footer img{height:34px;margin:0 auto 1.2rem;filter:invert(1) brightness(1.6)}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  .hero-fondo{clip-path:none!important}
+}
