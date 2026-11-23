@@ -8,6 +8,20 @@
 
   "compatibility_date": "2026-10-16",
 
+  // Sin esto, wrangler llama a /memberships para averiguar que cuenta
+  // usar, y un token creado con la plantilla "Edit Cloudflare Workers"
+  // no tiene permiso para esa llamada: falla con "Authentication
+  // failed (code 9106)" aunque el token sea perfectamente valido.
+  // No es una credencial: sin token no sirve de nada, y Cloudflare lo
+  // documenta como parte normal de este archivo.
+  "account_id": "c21d634c54dbb741978cf0efd1135bc8",
+
+  // La web se sirve SOLO desde mayarottweiler.com. Si no se declara,
+  // wrangler asume true en cada despliegue y reactiva la direccion
+  // .workers.dev, dejando el sitio accesible en dos dominios: justo
+  // el contenido duplicado que costo cinco semanas sacar de Google.
+  "workers_dev": false,
+
   // Portón de la tienda. Solo se ejecuta en las rutas listadas en
   // "run_worker_first"; el resto de la web la sirve Cloudflare
   // directamente, sin pasar por este código.
