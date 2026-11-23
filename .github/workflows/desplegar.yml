@@ -53,11 +53,21 @@ jobs:
             echo "::warning::No hay ningun CLOUDFLARE_API_TOKEN. Comprueba: (1) que esta en Settings -> Secrets and variables -> Actions, pestana Secrets; (2) que es un secreto de REPOSITORIO y no de Environment; (3) que el nombre es exactamente CLOUDFLARE_API_TOKEN."
           fi
 
+      # NPM_CONFIG_YES: sin esto npx pide confirmacion para instalar
+      # wrangler, no la recibe, y acaba corriendo una version antigua
+      # que no entiende wrangler.jsonc: falla diciendo que falta el
+      # punto de entrada aunque si este declarado.
+      # wranglerVersion: fijada para que un cambio de "latest" no
+      # rompa el despliegue un dia cualquiera sin haber tocado nada.
       - name: Publicar en Cloudflare
         if: steps.token.outputs.hay == 'si'
         uses: cloudflare/wrangler-action@v3
+        env:
+          NPM_CONFIG_YES: true
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          wranglerVersion: '4.42.0'
+          command: deploy
 
       - name: Comprobar que la web responde
         if: steps.token.outputs.hay == 'si'
