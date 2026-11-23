@@ -34,14 +34,23 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # La pagina de GitHub tiene dos pestanas, "Secrets" y "Variables".
+      # Si el token acaba en Variables no se puede desplegar Y ADEMAS
+      # queda a la vista de cualquiera, porque las variables no se
+      # cifran y este repositorio es publico. Por eso se distingue.
       - name: Comprobar que hay token
         id: token
         run: |
-          if [ -z "${{ secrets.CLOUDFLARE_API_TOKEN }}" ]; then
-            echo "hay=no" >> "$GITHUB_OUTPUT"
-            echo "::warning::Falta el secreto CLOUDFLARE_API_TOKEN. Mira las instrucciones al principio de este archivo."
-          else
+          if [ -n "${{ secrets.CLOUDFLARE_API_TOKEN }}" ]; then
             echo "hay=si" >> "$GITHUB_OUTPUT"
+            echo "Token encontrado en Secrets. Correcto."
+          elif [ -n "${{ vars.CLOUDFLARE_API_TOKEN }}" ]; then
+            echo "hay=no" >> "$GITHUB_OUTPUT"
+            echo "::error::El token esta en la pestana VARIABLES, no en SECRETS. Las variables NO se cifran y este repositorio es publico: ese token hay que REVOCARLO en Cloudflare y crear uno nuevo en Secrets."
+            exit 1
+          else
+            echo "hay=no" >> "$GITHUB_OUTPUT"
+            echo "::warning::No hay ningun CLOUDFLARE_API_TOKEN. Comprueba: (1) que esta en Settings -> Secrets and variables -> Actions, pestana Secrets; (2) que es un secreto de REPOSITORIO y no de Environment; (3) que el nombre es exactamente CLOUDFLARE_API_TOKEN."
           fi
 
       - name: Publicar en Cloudflare
