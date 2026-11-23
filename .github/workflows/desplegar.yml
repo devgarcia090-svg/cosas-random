@@ -83,10 +83,11 @@ jobs:
         uses: cloudflare/wrangler-action@v3
         env:
           NPM_CONFIG_YES: true
-          # CLOUDFLARE_API_TOKEN ya viene del paso anterior, limpio de
-          # espacios. Por eso no se pasa apiToken aqui: wrangler lee
-          # esta variable por su cuenta.
         with:
+          # Hay que pasarlo por aqui: la accion define su propia
+          # CLOUDFLARE_API_TOKEN a partir de este parametro, asi que
+          # si se deja vacio pisa la que exporte el paso anterior.
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           wranglerVersion: '4.42.0'
           command: deploy
 
