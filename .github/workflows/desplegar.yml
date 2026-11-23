@@ -53,6 +53,25 @@ jobs:
             echo "::warning::No hay ningun CLOUDFLARE_API_TOKEN. Comprueba: (1) que esta en Settings -> Secrets and variables -> Actions, pestana Secrets; (2) que es un secreto de REPOSITORIO y no de Environment; (3) que el nombre es exactamente CLOUDFLARE_API_TOKEN."
           fi
 
+          # Diagnostico sin revelar el token: solo su longitud y si
+          # traia espacios. Un token de Cloudflare son 40 caracteres;
+          # el Token ID que aparece en la lista son 32, y es el que
+          # se copia por error la mayoria de las veces.
+          crudo='${{ secrets.CLOUDFLARE_API_TOKEN }}'
+          limpio=$(printf '%s' "$crudo" | tr -d '[:space:]')
+          echo "Longitud tal cual se guardo: ${#crudo}"
+          echo "Longitud sin espacios:       ${#limpio}"
+          if [ "${#crudo}" != "${#limpio}" ]; then
+            echo "::warning::El valor guardado traia espacios o un salto de linea. Se limpian antes de usarlo."
+          fi
+          if [ "${#limpio}" = "32" ]; then
+            echo "::error::Son 32 caracteres: eso es el Token ID de la lista, no el token. El token son 40 y solo se ve una vez, al crearlo, en la caja con el boton Copy."
+          elif [ "${#limpio}" != "40" ] && [ -n "$limpio" ]; then
+            echo "::warning::Un token de Cloudflare suele tener 40 caracteres y este tiene ${#limpio}. Puede que se haya copiado de mas o de menos."
+          fi
+          # Se exporta limpio: wrangler lee esta variable directamente.
+          echo "CLOUDFLARE_API_TOKEN=$limpio" >> "$GITHUB_ENV"
+
       # NPM_CONFIG_YES: sin esto npx pide confirmacion para instalar
       # wrangler, no la recibe, y acaba corriendo una version antigua
       # que no entiende wrangler.jsonc: falla diciendo que falta el
@@ -64,8 +83,10 @@ jobs:
         uses: cloudflare/wrangler-action@v3
         env:
           NPM_CONFIG_YES: true
+          # CLOUDFLARE_API_TOKEN ya viene del paso anterior, limpio de
+          # espacios. Por eso no se pasa apiToken aqui: wrangler lee
+          # esta variable por su cuenta.
         with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           wranglerVersion: '4.42.0'
           command: deploy
 
