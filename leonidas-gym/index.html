@@ -130,6 +130,7 @@
     transition: background .15s, outline-color .15s, transform .15s;
   }
   .entrada:hover { background: var(--rojo-osc); outline-color: var(--rojo-osc); }
+  .datos + .entrada { margin-top: 32px; }
   .entrada:active { transform: translateY(1px); }
   .entrada b { font: 900 clamp(1.7rem, 3vw, 2.3rem)/.95 var(--madera); text-transform: uppercase; letter-spacing: .01em; }
   .entrada small { grid-column: 1; font: 600 1rem/1.3 var(--texto); }
@@ -229,14 +230,24 @@
   .datos dt { font: 800 .95rem/1 var(--madera); letter-spacing: .16em; text-transform: uppercase; }
   .datos dd { font-size: 1.1rem; }
   .enlaces { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+  .enlaces:has(> [hidden]:only-child) { display: none; }
   .boton {
     display: inline-flex; align-items: center; min-height: 48px; padding: 0 18px;
     font: 800 1.1rem/1 var(--madera); letter-spacing: .1em; text-transform: uppercase; text-decoration: none;
     border: 3px solid var(--tinta); transition: background .15s, color .15s;
   }
   .boton:hover { background: var(--tinta); color: var(--oro); }
-  .mapa { border: 3px solid var(--tinta); min-height: 360px; background: var(--papel-osc); }
-  .mapa iframe { display: block; width: 100%; height: 100%; min-height: 360px; border: 0; filter: grayscale(1) contrast(1.1) sepia(.35); mix-blend-mode: multiply; }
+  /* Cómo llegar: bloque que abre Google Maps (un mapa incrustado no carga en todos los navegadores) */
+  .mapa {
+    display: flex; flex-direction: column; justify-content: space-between; gap: 28px; min-height: 340px; padding: clamp(24px, 4vw, 40px);
+    background: var(--tinta); color: var(--crema); text-decoration: none; transition: background .15s;
+  }
+  .mapa:hover { background: #2a221d; }
+  .mapa svg { width: 64px; height: 64px; color: var(--rojo); }
+  .mapa b { display: block; font: 900 clamp(2.6rem, 7vw, 4.2rem)/.9 var(--madera); text-transform: uppercase; color: var(--oro); }
+  .mapa span { display: block; margin-top: 12px; font-size: 1.15rem; }
+  .mapa .abrir { display: inline-flex; align-items: center; gap: .5em; align-self: flex-start; padding: 12px 16px; border: 3px solid var(--oro); color: var(--oro); font: 800 1.1rem/1 var(--madera); letter-spacing: .1em; text-transform: uppercase; }
+  .mapa:hover .abrir { background: var(--oro); color: var(--tinta); }
   @media (max-width: 860px) { .taquilla-grid { grid-template-columns: 1fr; } }
 
   .pie { background: var(--tinta); color: var(--crema); padding: 22px 0 110px; font: 700 .95rem/1.3 var(--madera); letter-spacing: .14em; text-transform: uppercase; }
@@ -371,14 +382,17 @@
             <svg aria-hidden="true"><use href="#wa"/></svg>
           </a>
           <div class="enlaces">
-            <a class="boton" href="https://maps.app.goo.gl/418SsRxA7UcToVQo8" target="_blank" rel="noopener">Cómo llegar</a>
-            <a class="boton" id="btn-ig" href="#taquilla">Instagram</a>
+            <a class="boton" id="btn-ig" href="#taquilla" hidden>Instagram</a>
           </div>
         </div>
-        <div class="mapa">
-          <iframe title="Mapa: Leonidas Sport Center en Santomera" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-            src="https://www.google.com/maps?q=Leonidas+sport+center,+C.+Fernando+el+Cat%C3%B3lico+2,+30140+Santomera,+Murcia&output=embed"></iframe>
-        </div>
+        <a class="mapa" href="https://maps.app.goo.gl/418SsRxA7UcToVQo8" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 1.5a7.5 7.5 0 0 0-7.5 7.5c0 5.6 7.5 13.5 7.5 13.5s7.5-7.9 7.5-13.5A7.5 7.5 0 0 0 12 1.5Zm0 10.2a2.7 2.7 0 1 1 0-5.4 2.7 2.7 0 0 1 0 5.4Z"/></svg>
+          <div>
+            <b>Cómo llegar</b>
+            <span>Toca para ver la ruta hasta el club</span>
+          </div>
+          <span class="abrir">Abrir en Google Maps</span>
+        </a>
       </div>
     </div>
   </section>
@@ -474,7 +488,7 @@
   if (CONTACTO.instagram) {
     const ig = document.getElementById("btn-ig");
     ig.href = `https://instagram.com/${CONTACTO.instagram}`;
-    ig.target = "_blank"; ig.rel = "noopener";
+    ig.target = "_blank"; ig.rel = "noopener"; ig.hidden = false;
   }
 </script>
 </body>
