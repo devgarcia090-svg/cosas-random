@@ -907,8 +907,8 @@
         const t = setInterval(() => {
             cur += step;
             if (cur >= target) { cur = target; clearInterval(t); }
-            if (target >= 1000000) el.textContent = (cur / 1000000).toFixed(1) + 'M';
-            else if (target >= 1000) el.textContent = (cur / 1000).toFixed(1) + 'K';
+            if (target >= 1000000) el.textContent = (cur / 1000000).toFixed(1).replace('.', ',') + 'M';
+            else if (target >= 1000) el.textContent = (cur / 1000).toFixed(1).replace('.', ',') + 'K';
             else el.textContent = Math.round(cur);
         }, 16);
     }
